@@ -5,13 +5,13 @@ class CreateClients < ActiveRecord::Migration
       t.string :romaji_name
       t.string :tel
       t.string :department_name
-      t.string :person_charge
-      t.string :person_sale
       t.integer :contract_flg
       t.integer :contract_type
       t.integer :del_flg, default: 0
       t.integer :create_user_id
       t.integer :update_user_id
+      t.string :person_charge
+      t.string :person_sale
 
       t.timestamps
     end
