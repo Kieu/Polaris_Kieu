@@ -1,0 +1,32 @@
+<h1>Listing users</h1>
+<%= link_to 'New User', new_user_path %>
+<table>
+  <tr>
+    <th>Username</th>
+    <th>Role</th>
+  </tr>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= link_to user.username, user_path(user) %></td>
+      <td><%= Role.find(user.role_id).role_name %></td>
+    </tr>
+  <% end %>
+</table>
+<table id="flex1" style="display:none"></table>
+<script type="text/javascript">
+	$("#flex1").flexigrid({
+		url: "<%= get_users_list_users_path %>",
+		dataType: 'json',
+		colModel : [
+			{display: 'User Name', name : 'username', width : 140, sortable : false, align: 'center'},
+			{display: 'Role ID', name : 'role_id', width : 180, sortable : false, align: 'left'},
+			],
+		usepager: true,
+		title: 'Countries',
+		useRp: true,
+		rp: 1,
+		showTableToggleBtn: true,
+		width: 700,
+		height: 200
+	});
+</script>

@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>PolarisManage</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-<%= yield %>
-
-</body>
+	<head>
+		<title>CanPass</title>
+		<%= stylesheet_link_tag "application", media: "all" %>
+		<%= javascript_include_tag "application" %>
+		<%= csrf_meta_tags %>
+		<!--[if lt IE 9]>
+		<script src = "http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<%= yield :stylesheet_includes %>
+  		<%= yield :javascript_includes %>
+	</head>
+	<body>
+		<%= render "layouts/header" %>
+		<div class = "container">
+			<%= yield %>
+			<%= render "layouts/footer" %>
+			<%= debug(params) if Rails.env.development? %>
+		</div>
+	</body>
 </html>
