@@ -7,5 +7,6 @@ class CreateClientUsers < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :client_users, [:client_id, :user_id], unique: true
   end
 end
