@@ -11,6 +11,6 @@ namespace :master do
   task create_super_user: :environment do
     User.find_by_id(1).destroy if User.find_by_id(1)
     User.create!({id: 1, email: "example@septeni.com", username: "example",
-			password: "123456789", role_id: 1, status: 0}, without_protection: true)
+      password: "123456789", role_id: 1, status: 0}, without_protection: true)
   end
 end
