@@ -2,14 +2,15 @@ class CreateUsers < ActiveRecord::Migration
   def change
     create_table :users do |t|
       t.string :username
-      t.string :fullname
+      t.string :roman_name
       t.string :password_digest
       t.string :email
+      t.string :company
       t.integer :role_id
-      t.datetime :last_login
-      t.string :language
-      t.integer :status, default: 0
       t.integer :password_flg
+      t.string :language
+      t.datetime :last_login
+      t.integer :status, default: 0
       t.integer :create_user_id
       t.integer :update_user_id
 

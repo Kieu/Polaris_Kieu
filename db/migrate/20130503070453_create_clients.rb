@@ -2,7 +2,7 @@ class CreateClients < ActiveRecord::Migration
   def change
     create_table :clients do |t|
       t.string :client_name
-      t.string :romaji_name
+      t.string :roman_name
       t.string :tel
       t.string :department_name
       t.integer :contract_flg
@@ -16,6 +16,5 @@ class CreateClients < ActiveRecord::Migration
       t.timestamps
     end
     add_index :clients, :client_name, unique: true
-    add_index :clients, :romaji_name, unique: true
   end
 end
