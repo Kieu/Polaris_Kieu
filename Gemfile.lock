@@ -103,6 +103,7 @@ GEM
     mysql2 (0.3.11)
     nokogiri (1.5.9)
     polyglot (0.3.3)
+    pr_geohash (1.0.0)
     pry (0.9.12)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
@@ -147,6 +148,8 @@ GEM
       json (~> 1.4)
     recaptcha (0.3.5)
     ref (1.0.4)
+    rsolr (1.0.9)
+      builder (>= 2.1.2)
     rspec-core (2.13.1)
     rspec-expectations (2.13.0)
       diff-lcs (>= 1.1.3, < 2.0)
@@ -171,6 +174,13 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    sunspot (2.0.0)
+      pr_geohash (~> 1.0)
+      rsolr (~> 1.0.7)
+    sunspot_rails (2.0.0)
+      nokogiri
+      sunspot (= 2.0.0)
+    sunspot_solr (2.0.0)
     therubyracer (0.11.4)
       libv8 (~> 3.11.8.12)
       ref
@@ -213,5 +223,7 @@ DEPENDENCIES
   recaptcha
   rspec-rails
   sass-rails (~> 3.2.3)
+  sunspot_rails
+  sunspot_solr
   therubyracer
   uglifier (>= 1.0.3)
