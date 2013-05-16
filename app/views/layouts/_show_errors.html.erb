@@ -1,0 +1,19 @@
+<div id="errors">
+	<% objects.each do |error| %>
+		<div><%= error %></div>
+	<% end %>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$.colorbox({
+		width: "30%",
+		inline: true,
+		escKey: false,
+		overlayClose: false,
+		href: "#errors",
+		onClosed: function(){
+			$("#errors").css("display","none");
+		}
+	});
+});
+</script>
