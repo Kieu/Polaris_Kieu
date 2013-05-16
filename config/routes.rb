@@ -1,5 +1,13 @@
 PolarisManage::Application.routes.draw do
   resources :clients
+  resources :sessions, only: [:new, :create, :destroy] do
+    post "resend_password", on: :collection
+  end
+  match '/signup',  to: 'users#new'
+  match '/signin',  to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy', via: :delete
+  root to: "sessions#new"
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
