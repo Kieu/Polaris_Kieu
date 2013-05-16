@@ -13,3 +13,39 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+(function() {
+  window.User = {
+    completeProjectLine: function(data) {
+      var html, watchs;
+
+      html = "";
+      html += "<div class='info' id ='solr_result'><a href=/promotions/" + data[1] + ">" + data[0] + "</a>" + "</div>";
+      
+      return html;
+    },
+    completeProjects: function(el) {
+      var hash;
+
+      hash = {
+        minChars: 1,
+        delay: 50,
+        width: 350,
+        scroll: false,
+        formatItem: function(data, i, total) {
+          return User.completeProjectLine(data);
+        }
+        
+      };
+      //console.log(hash);
+      return $(el).autocomplete("/users/search", hash).result(function(e, data, formatted) {
+        //location.href = "/promotions/" + data[1];
+        return false;
+      });
+    }
+  };
+
+  $(document).ready(function() {
+    return User.completeProjects(".searchbox input.query");
+  });
+
+}).call(this);
