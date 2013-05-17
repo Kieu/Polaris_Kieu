@@ -8,7 +8,12 @@ gem 'rails', '3.2.13'
 gem "rails_config"
 gem "mysql2"
 gem "bcrypt-ruby"
-gem 'bootstrap-sass', '2.1'
+gem "feedzirra"
+gem "highcharts-rails", "3.0.1.5"
+gem "lazy_high_charts"
+gem "recaptcha", :require => "recaptcha/rails"
+gem "sunspot_rails"
+gem "sunspot_solr"
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -1,0 +1,5 @@
+mailer:
+  default_from: info@septeni.jp
+  send_password_subject: Polaris password
+login:
+  login_block_number: 3

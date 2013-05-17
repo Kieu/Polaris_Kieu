@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
 
   belongs_to :role
   has_many :client_users
+  has_one :block_login_user
 
   validates :username, presence: true
   validates :roman_name, presence: true
@@ -18,4 +19,46 @@ class User < ActiveRecord::Base
   validates :password_flg, presence: true
 
   before_save {|user| user.email = email.downcase}
+  
+  searchable do
+    text :roman_name, :stored => true 
+  end
+  
+  def can_login?
+    if self.block_login_user && self.block_login_user.login_fail_num >=
+      Settings.login.login_block_number
+      if self.block_login_user.block_at_time > 5.minutes.ago
+        return false
+      else
+        return self.remove_block_login
+      end
+    else
+      return true
+    end
+  end
+  
+  def update_login_fail
+    block = self.block_login_user
+    if block
+      if block.login_fail_num < Settings.login.login_block_number
+        block.login_fail_num += 1
+        block.block_at_time = Time.now if block.login_fail_num >=
+          Settings.login.login_block_number
+        block.save!
+      end
+    else
+      BlockLoginUser.create(user_id: self.id, login_fail_num: 1)
+    end
+  end
+  
+  def remove_block_login
+    self.block_login_user.login_fail_num = 0
+    self.block_login_user.block_at_time = nil
+    self.block_login_user.save
+  end
+  
+  def valid_attribute?(attribute_name)
+    self.valid?
+    self.errors[attribute_name].blank?
+  end
 end
