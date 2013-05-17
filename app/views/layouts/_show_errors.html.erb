@@ -1,6 +1,12 @@
 <div id="errors">
 	<% objects.each do |error| %>
-		<div><%= error %></div>
+		<% if error.class == Array %>
+			<% error.each do |msg| %>
+				<div><%= msg %></div>
+			<% end %>
+		<% else %>
+			<div><%= error %></div>
+		<% end %>
 	<% end %>
 </div>
 <script type="text/javascript">

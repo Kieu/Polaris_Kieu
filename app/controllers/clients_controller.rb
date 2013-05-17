@@ -1,72 +1,147 @@
 class ClientsController < ApplicationController
   before_filter :signed_in_user
   before_filter :must_super_agency, except: [:show]
+  before_filter :must_deleteable, only: [:show, :edit, :update, :destroy]
   
   #get all clients sorted by romaji name
   def index
     if(current_user.role_id == Settings.role.SUPER)
-	  @clients = Client.find(:all, :order => 'roman_name', :conditions => ['del_flg = 0'])
-	elsif(current_user.role_id == Settings.role.AGENCY)
-	  @clients = Array.new
-	  aryClientUser = current_user.client_users.where(' del_flg = 0 ')
-	  aryClientUser.each do |client_user|
-		  @clients << client_user.client
-		end
-	end
+	    @clients = Client.find(:all, :order => 'roman_name', :conditions => ['del_flg = 0'])
+	  elsif(current_user.role_id == Settings.role.AGENCY)
+	    @clients = Array.new
+	    aryClientUser = current_user.client_users.where(' del_flg = 0 ')
+	    aryClientUser.each do |client_user|
+		    @clients << client_user.client
+		  end
+	  end
   end
   
   #get list promotion and paging
   def get_promotions_list
     #get list clients
     if(current_user.role_id == Settings.role.SUPER)
-	  @clients = Client.find(:all, :order => 'roman_name', :conditions => ['del_flg = 0'])
-	elsif(current_user.role_id == Settings.role.AGENCY)
-	  @clients = Array.new
-	  aryClientUser = current_user.client_users.where(' del_flg = 0 ')
-	  aryClientUser.each do |client_user|
-		  @clients << client_user.client
-		end
-	end
+	    @clients = Client.find(:all, :order => 'roman_name', :conditions => ['del_flg = 0'])
+	  elsif(current_user.role_id == Settings.role.AGENCY)
+	    @clients = Array.new
+	    aryClientUser = current_user.client_users.where(' del_flg = 0 ')
+	    aryClientUser.each do |client_user|
+		    @clients << client_user.client
+		  end
+	  end
     
-	#get params for paging
-	# row per page
-	rp = (params[:rp]).to_i
-	if(!rp)
+	  # get params for paging
+	  # row per page
+	  rp = (params[:rp]).to_i
+	  if(!rp)
       rp = 10
     end
 	
-	#current page
-	page = (params[:page]).to_i
-	if (!page)
+	  #current page
+	  page = (params[:page]).to_i
+	  if (!page)
       page = 1
     end
-	start = ((page-1) * rp).to_i
+	  start = ((page-1) * rp).to_i
 	
-	@promotions = Array.new
-	#get promotion for each client
-	@clients.each do |client|
-	  aryPromotion = Promotion.where("client_id = #{client.id} ").order('promotion_name').limit(rp).offset(start)
-	  aryPromotion.each do |promotion|
-	    @promotions << {'id' => promotion.id, 'cell' => {'promotion_name' => promotion.promotion_name}}
+	  @promotions = Array.new
+	  #get promotion for each client
+	  @clients.each do |client|
+	    aryPromotion = Promotion.where("client_id = #{client.id} ").order('promotion_name').limit(rp).offset(start)
+	    aryPromotion.each do |promotion|
+	      @promotions << {'id' => promotion.id, 'cell' => {'promotion_name' => promotion.promotion_name}}
+	    end
 	  end
-	end
 	
-	@data = {"page" => 1, "total" => 1, "rows" => @promotions}
+	  @data = {"page" => 1, "total" => 1, "rows" => @promotions}
     render json: @data.to_json
   end
   
   def show
     #get list clients
     if(current_user.role_id == Settings.role.SUPER)
-	  @clients = Client.find(:all, :order => 'roman_name', :conditions => ['del_flg = 0'])
-	elsif(current_user.role_id == Settings.role.AGENCY)
-	  @clients = Array.new
-	  aryClientUser = current_user.client_users.where(' del_flg = 0 ')
-	  aryClientUser.each do |client_user|
-		  @clients << client_user.client
-		end
-	end
+	    @clients = Client.find(:all, :order => 'roman_name', :conditions => ['del_flg = 0'])
+	  elsif(current_user.role_id == Settings.role.AGENCY)
+	    @clients = Array.new
+	    aryClientUser = current_user.client_users.where(' del_flg = 0 ')
+	    aryClientUser.each do |client_user|
+		    @clients << client_user.client
+		  end
+	  end
+  end
+
+  def new
+    @client = Client.new
+  end
+
+  def create
+    @errors = Array.new
+    @client = Client.new(params[:client])
+    @client.create_user_id = current_user.id
+    if @client.save
+			if params[:users_id]
+		    params[:users_id].each do |user_id|
+		      unless params["del_user_" + user_id] == "on"
+		        @client.client_users.create(user_id: user_id)
+		      end
+		    end
+			end
+      flash[:success] = "Client was successfully created"
+      redirect_to new_client_path
+    else
+      @errors << @client.errors.full_messages
+      render :new
+    end
+  end
+
+  def edit
+    @client = Client.find(params[:id])
+  end
+
+  def update
+    @errors = Array.new
+    @client = Client.find(params[:id])
+    @client.attributes = params[:client]
+    if @client.valid?
+      @client.save!
+			if params[:users_id]
+		    params[:users_id].each do |user_id|
+		      if params["del_user_" + user_id] == "on"
+		        if client_user = @client.client_users.find_by_user_id(user_id)
+		          client_user.update_attributes(del_flg: 1)
+		        end
+		      else
+		        if client_user = @client.client_users.find_by_user_id(user_id)
+		          client_user.update_attributes(del_flg: 0)
+		        else
+		          @client.client_users.create(user_id: user_id)
+		        end
+		      end
+		    end
+			end
+      flash[:error] = "Edit successfull"
+      redirect_to clients_path
+    else
+      @errors << @client.errors.full_messages
+      render "edit"
+    end
+  end
+
+  def destroy
+    @client = Client.find(params[:id])
+    @client.destroy
+    redirect_to clients_path
+  end
+
+  def del_client
+    @client = Client.find_by_id(params[:client_id])
+    @client.del_flg = 1
+    @client.save
+    render text: "ok"
+  end
+
+  private
+  def must_deleteable
+    client = Client.find_by_id(params[:id])
+    redirect_to clients_path if client.nil? || client.del_flg == 1
   end
 end
-
-
