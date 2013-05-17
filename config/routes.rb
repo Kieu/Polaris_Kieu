@@ -18,6 +18,10 @@ PolarisManage::Application.routes.draw do
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
   root to: "sessions#new"
+  resources :users do
+    get "search", on: :collection
+  end
+  resources :promotions
   
   match "/signin",  to: "sessions#new"
   match "/signout", to: "sessions#destroy", via: :delete

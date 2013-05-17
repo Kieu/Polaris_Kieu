@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
 
   before_save {|user| user.email = email.downcase}
   
+  searchable do
+    text :roman_name, :stored => true 
+  end
+  
   def can_login?
     if self.block_login_user && self.block_login_user.login_fail_num >=
       Settings.login.login_block_number
