@@ -85,7 +85,7 @@
   };
 
   $(document).ready(function() {
-    return Client.completeProjects(".searchbox input#search_user");
+    return Client.completeProjects(".searchbox input#search_client");
   });
 
 }).call(this);
