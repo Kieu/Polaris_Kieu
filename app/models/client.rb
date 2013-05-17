@@ -4,6 +4,10 @@ class Client < ActiveRecord::Base
   attr_accessible :client_name, :roman_name, :tel, :department_name,
     :contract_flg, :contract_type, :person_charge, :person_sale,
     :create_user_id, :update_user_id, :del_flg
+    
+  searchable do
+    text :client_name, :stored => true 
+  end
 
   has_many :client_users
   has_many :promotions
