@@ -14,8 +14,8 @@
 				<%= f.password_field :password %>
 				<%= f.label "Language" %>
 				<select name="language">
-					<option value="en">English</option>
 					<option value="ja">Japanese</option>
+					<option value="en">English</option>
 				</select>
 				<%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
       		<% end %>
@@ -42,6 +42,7 @@
 			$("#resend_password_form").show();
 		</script>
 	<% end %>
+	<%= flash[:success]%>
 </div>
 </div>
 <div id="rss">

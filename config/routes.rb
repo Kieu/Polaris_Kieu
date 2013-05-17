@@ -12,6 +12,7 @@ PolarisManage::Application.routes.draw do
     get "search", on: :collection
     get "get_users_list", on: :collection
   end
+  resources :promotions
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
