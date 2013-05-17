@@ -1,0 +1,109 @@
+<% if @errors && @errors.count > 0 %>
+	<%= render partial: "layouts/show_errors", locals: {objects: @errors } %>
+<% end %>
+<h1>Editing client</h1>
+
+<%= form_for(@client) do |f| %>
+  <div class="field">
+    <%= f.label "Client name" %><br />
+    <%= f.text_field :client_name %>
+  </div>
+  <div class="field">
+    <%= f.label "Roman name" %><br />
+    <%= f.text_field :roman_name %>
+  </div>
+  <div class="field">
+    <%= f.label "Tel" %><br />
+    <%= f.text_field :tel %>
+  </div>
+  <div class="field">
+    <%= f.label "person_charge:" %><br />
+    <%= f.text_field :person_charge %>
+  </div>
+  <div class="field">
+    <%= f.label "person_sale" %><br />
+    <%= f.text_field :person_sale %>
+  </div>
+  <div class="field">
+    <%= f.label "Contract type" %><br />
+    <%= f.radio_button :contract_type, 0 %> 0
+    <%= f.radio_button :contract_type, 1 %> 1
+  </div>
+  <div class="field">
+    <%= f.label "Contract flg" %><br />
+    <%= f.radio_button :contract_flg, 0 %> 0
+    <%= f.radio_button :contract_flg, 1 %> 1
+  </div>
+
+List uers Added: <br>
+	<div id="user_list">
+	<% @client.client_users.each do |client_user| %>
+		<% if client_user.del_flg == 0 %>
+			<%= client_user.user.username %>
+			<%= client_user.user.email %>
+			<%= client_user.user.role.role_name %>
+			<input type="checkbox" name = "del_user_<%= client_user.user_id %>">
+			<input type = "hidden" name = "users_id[]" value = "<%= client_user.user_id %>">
+		<% end %>
+	<% end %>
+	<br>
+	</div>
+<%= render "layouts/user_list" %>
+<button><%= link_to "Delete", "#inline_content", class: "inline" %></button>
+<button><%= link_to 'Cancel', clients_path %></button>
+<div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+<div style='display:none'>
+	<div id='inline_content' style='padding:10px; background:#fff;'>
+		<div>Username: <%= @client.client_name %></div>
+		<div> Are you sure to delete? </div>
+		<button id="del_cli">Delete</button>
+		<button id="cancel_del">Cancel</button>
+	</div>
+	<div id="del_success">
+		<div>Delete ok</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		list_user = []
+		<% @client.client_users.each do |client_user|%>	
+			<% if client_user.del_flg == 0 %>
+				list_user.push("<%= client_user.user_id %>");
+			<% end %>
+		<% end %>
+		return User.completeProjects(".searchbox input#search_user").result(function(e, data, formatted) {
+        //location.href = "/promotions/" + data[1];
+        if ($.inArray(data[1], list_user) >= 0){
+        	alert("User was added");
+        }else{
+          $("#user_list").append(data[0] + " " + data[2] + " " + data[3]);
+          $("#user_list").append("<input type = 'hidden' name='users_id[]' value ='" + data[1] + "'>");
+          $("#user_list").append("<input type = 'checkbox' name='del_user_" + data[1] + "'>");
+        }
+        return false;
+      });
+	})
+	$(".inline").colorbox({
+					width: "30%",
+					inline: true,
+					escKey: false,
+					overlayClose: false,
+				});
+	$("#del_cli").click(function(){
+		$.ajax({
+			url: "<%= del_client_clients_path %>",
+			method: "POST",
+			data: "client_id=" + "<%= @client.id %>",
+			success: function(data){
+				location.href = "/clients"
+			}
+		})
+	})
+
+	$("#cancel_del").click(function(){
+		$(".inline").colorbox.close();
+	})
+</script>

@@ -23,7 +23,7 @@ describe SessionsController do
       it "makes user login" do
         action
         session[:user_id].should eq user.id
-        response.should redirect_to signin_path
+        response.should redirect_to clients_path
       end
       
       describe "when user is blocked less than 5 minutes" do
@@ -46,7 +46,7 @@ describe SessionsController do
         it "not makes user login" do
           action
           session[:user_id].should eq user.id
-          response.should redirect_to signin_path
+          response.should redirect_to clients_path
         end
       end
     end

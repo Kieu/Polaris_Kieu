@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
           flash[:success] = "Welcome to Canpass"
           sign_in user
           cookies[:locale] = params[:language]
-          if user.role_id == "1" || user.role_id == "2"
+          if user.role_id == 1 || user.role_id == 2
             redirect_to clients_path
           else
             redirect_to promotions_path
