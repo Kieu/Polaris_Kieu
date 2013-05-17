@@ -6,7 +6,7 @@
 <div>Romaji name</div>
 <div id="clients_list">
 <% @clients.each do |client| %>
-	<div><%= link_to client.roman_name, client_path(client) %></div>
+	<div><%= link_to "(edit)", edit_client_path(client) %><%= link_to client.roman_name, client_path(client) %></div>
 <% end %>
 </div>
 <%= link_to 'New Client', new_client_path %>
