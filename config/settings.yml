@@ -3,3 +3,7 @@ mailer:
   send_password_subject: Polaris password
 login:
   login_block_number: 3
+role:
+  SUPER: 1
+  AGENCY: 2
+  CLIENT: 3

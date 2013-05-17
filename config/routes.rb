@@ -1,5 +1,16 @@
 PolarisManage::Application.routes.draw do
-  resources :clients
+  resources :promotions do
+    get "search", on: :collection
+  end
+  resources :dashboard
+  resources :clients do
+    post "get_promotions_list", on: :collection
+  end
+  resources :users do
+    get "change_lang", on: :collection
+    post "get_users_list", on: :collection
+  end
+  resources :roles
   resources :sessions, only: [:new, :create, :destroy] do
     post "resend_password", on: :collection
   end
@@ -12,6 +23,10 @@ PolarisManage::Application.routes.draw do
   end
   resources :promotions
   
+  match "/signin",  to: "sessions#new"
+  match "/signout", to: "sessions#destroy", via: :delete
+
+  root to: "dashboard#index"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
