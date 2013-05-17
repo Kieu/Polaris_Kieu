@@ -48,7 +48,7 @@ class UsersController < ApplicationController
     end
     lines = @search.results.collect do |item|
       puts item
-      "#{escape_javascript(item['username'])}#!##{item['id']}#!##{item['username']}#!##{item['username']}#!##{escape_javascript(item['username'])}"
+      "#{escape_javascript(item['username'])}#!##{item['id']}#!##{item['email']}#!##{item.role.role_name}#!##{escape_javascript(item['username'])}"
     end
     if @search.results.count > 0
       render :text => lines.join("\n")

@@ -1,0 +1,75 @@
+<% if @errors && @errors.count > 0 %>
+  <%= render partial: "layouts/show_errors", locals: {objects: @errors } %>
+<% end %>
+
+<% if flash[:success] %>
+  <div><%= flash[:success] %></div>
+<% end %>
+
+<h1>Create client</h1>
+
+<%= form_for(@client) do |f| %>
+  <div class="field">
+    <%= f.label "Client name" %><br />
+    <%= f.text_field :client_name %>
+  </div>
+  <div class="field">
+    <%= f.label "Roman name" %><br />
+    <%= f.text_field :roman_name %>
+  </div>
+  <div class="field">
+    <%= f.label "Contact" %><br />
+    <%= f.text_field :tel %>
+  </div>
+  <div class="field">
+    <%= f.label "Person in charge" %><br />
+    <%= f.text_field :person_charge %>
+  </div>
+  <div class="field">
+    <%= f.label "Sale representative" %><br />
+    <%= f.text_field :person_sale %>
+  </div>
+  <div class="field">
+    <%= f.label "Use policy" %><br />
+    <%= f.radio_button :contract_flg, 0, {checked: true} %> No contract
+    <%= f.radio_button :contract_flg, 1 %> Have contract
+  </div>
+  <div class="field">
+    <%= f.label "Plan type" %><br />
+    <%= f.radio_button :contract_type, 0, {checked: true} %> Standard
+    <%= f.radio_button :contract_type, 1 %> Premium
+  </div>
+
+  List users Added: <br />
+  <div id="user_list">
+    <br />
+  </div>
+  <%= render "layouts/user_list" %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  <button><%= link_to 'Cancel', clients_path %></button>
+<% end %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    list_user = []
+    return User.completeProjects(".searchbox input#search_user").result(function(e, data, formatted) {
+      if ($.inArray(data[1], list_user) >= 0){
+        alert("User was added");
+      }else{
+        $("#user_list").append(data[0] + " " + data[2] + " " + data[3]);
+        $("#user_list").append("<input type = 'hidden' name='users_id[]' value ='" + data[1] + "'>");
+        $("#user_list").append("<input type = 'checkbox' name='del_user_" + data[1] + "'>");
+      }
+      return false;
+    });
+  });
+
+  $(".inline").colorbox({
+    width: "30%",
+    inline: true,
+    escKey: false,
+    overlayClose: false,
+  });
+</script>

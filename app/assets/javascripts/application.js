@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
-(function() {
+
   window.User = {
     completeProjectLine: function(data) {
       var html, watchs;
@@ -37,21 +37,9 @@
         
       };
       //console.log(hash);
-      return $(el).autocomplete("/users/search", hash).result(function(e, data, formatted) {
-        //location.href = "/promotions/" + data[1];
-        if ($.inArray(data[1], list_user) > 0){
-        	alert("User was added");
-        }
-        return false;
-      });
+      return $(el).autocomplete("/users/search", hash);
     }
   };
-
-  $(document).ready(function() {
-    return User.completeProjects(".searchbox input#search_user");
-  });
-
-}).call(this);
 
 (function() {
   window.Client = {
