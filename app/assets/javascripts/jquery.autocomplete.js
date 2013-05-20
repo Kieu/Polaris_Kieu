@@ -251,7 +251,6 @@ $.Autocompleter = function(input, options) {
 		/*}*/
 		
 		var currentValue = $input.val();
-		console.log(options.default_list);
 		if (options.search_type == "client" && currentValue == ""){
 			$("#clients_list").html(options.default_list);
 		}
@@ -728,7 +727,9 @@ $.Autocompleter.Select = function (options, input, select, config) {
 				client_html += formatted;
 			}
 	      }
-	      $("#clients_list").html(client_html);
+	      if (options.search_type == "client"){
+	      	$("#clients_list").html(client_html);
+	      }
 	      listItems = list.find("li");
 	      if ( options.selectFirst ) {
 	        listItems.slice(0, 1).addClass(CLASSES.ACTIVE);

@@ -6,7 +6,7 @@
         <ul class="nav pull-right">
           <li><%= link_to "Home", root_path %></li>
           <% if signed_in? %>
-            <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
+            <li><%= current_user.username%> <%= link_to "Sign out", signout_path, method: "delete" %></li>
 		  <% else %>
 		    <li><%= link_to "Sign in", signin_path %></li>
           <% end %>
@@ -15,3 +15,6 @@
     </div>
   </div>
 </header>
+<button><%= link_to "Client List", clients_path %></button>
+<button><%= link_to "User List", users_path %></button>
+<button><%= link_to "Agency List", "#" %></button>

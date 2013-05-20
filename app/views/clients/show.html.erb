@@ -1,15 +1,12 @@
 <h1>Listing clients</h1>
-<div style="float: left">
-<table border="1">
-  <tr>
-    <th>Romaji name</th>
-  </tr>
-  <% @clients.each do |client| %>
-    <tr>
-      <td><%= link_to client.roman_name, client_path(client) %></td>
-    </tr>
-  <% end %>
-</table>
+<%= render "layouts/clients_list"%>
+<h1>Listing clients</h1>
+<div>Romaji name</div>
+<div id="clients_list">
+<% @clients.each do |client| %>
+	<div><%= link_to "(edit)", edit_client_path(client) %><%= link_to client.roman_name, client_path(client) %></div>
+<% end %>
+</div>
 
 <%= link_to 'New Client', new_client_path %>
 </div>
