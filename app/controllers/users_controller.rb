@@ -23,12 +23,13 @@ class UsersController < ApplicationController
     @users = User.where(status: 0).order('roman_name').limit(rp).offset(start)
     @rows = Array.new
     @users.each do |user|
-      @rows << {"id" => user.id, "cell" => {"link" => "<a href='users/#{user.id}/edit'>Edit</a>","roman_name" => user.roman_name, 
+      link = "<a href='users/#{user.id}/edit'>Edit</a>"
+      @rows << {"id" => user.id, "cell" => {"link" => link,"roman_name" => user.roman_name, 
                 "username" => user.username, "company" => user.company,
-                "email" => user.email, "role_id" =>Role.find( user.role_id).role_name}}
+                "email" => user.email, "role_id" => Role.find( user.role_id).role_name}}
     end
-    @data = {"page" => page, "total" => total_pages, "rows" =>@rows}
-      render json: @data.to_json
+    @data = {"page" => page, "total" => total_pages, "rows" => @rows}
+    render json: @data.to_json
   end
   
   def search
