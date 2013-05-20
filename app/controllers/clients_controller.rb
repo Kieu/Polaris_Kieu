@@ -176,13 +176,13 @@ class ClientsController < ApplicationController
   end
   
   def search
-    if params[:q].blank?
+    if params[:client_search].blank?
       render :text => ""
       return
     end
-    params[:q].gsub!(/'/,'')
+    params[:client_search].gsub!(/'/,'')
     @search = Client.search do
-      fulltext params[:q]
+      fulltext params[:client_search]
     end
     lines = @search.results.collect do |item|
       puts item

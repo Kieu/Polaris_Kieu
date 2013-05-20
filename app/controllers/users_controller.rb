@@ -33,13 +33,13 @@ class UsersController < ApplicationController
   end
   
   def search
-    if params[:q].blank?
+    if params[:user_search].blank?
       render :text => ""
       return
     end
-    params[:q].gsub!(/'/,'')
+    params[:user_search].gsub!(/'/,'')
     @search = User.search do
-      fulltext params[:q]
+      fulltext params[:user_search]
     end
     lines = @search.results.collect do |item|
       puts item
