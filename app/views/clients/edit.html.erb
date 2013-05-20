@@ -2,6 +2,16 @@
 	<%= render partial: "layouts/show_errors", locals: {objects: @errors } %>
 <% end %>
 <h1>Editing client</h1>
+<table border="1">
+  <tr>
+    <th>Romaji name</th>
+  </tr>
+  <% @clients.each do |client| %>
+    <tr>
+      <td><%= link_to client.roman_name, client_path(client) %></td>
+    </tr>
+  <% end %>
+</table>
 
 <%= form_for(@client) do |f| %>
   <div class="field">
@@ -49,7 +59,6 @@ List uers Added: <br>
 	<br>
 	</div>
 <%= render "layouts/user_list" %>
-<button><%= link_to "Delete", "#inline_content", class: "inline" %></button>
 <button><%= link_to 'Cancel', clients_path %></button>
 <div class="actions">
     <%= f.submit %>
@@ -107,3 +116,4 @@ List uers Added: <br>
 		$(".inline").colorbox.close();
 	})
 </script>
+<%= link_to 'New Client', new_client_path %>

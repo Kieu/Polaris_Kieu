@@ -71,9 +71,27 @@ class ClientsController < ApplicationController
 
   def new
     @client = Client.new
+    if(current_user.role_id == Settings.role.SUPER)
+      @clients = Client.find(:all, :order => 'roman_name', :conditions => ['del_flg = 0'])
+    elsif(current_user.role_id == Settings.role.AGENCY)
+      @clients = Array.new
+      aryClientUser = current_user.client_users.where(' del_flg = 0 ')
+      aryClientUser.each do |client_user|
+        @clients << client_user.client
+      end
+    end
   end
 
   def create
+    if(current_user.role_id == Settings.role.SUPER)
+      @clients = Client.find(:all, :order => 'roman_name', :conditions => ['del_flg = 0'])
+    elsif(current_user.role_id == Settings.role.AGENCY)
+      @clients = Array.new
+      aryClientUser = current_user.client_users.where(' del_flg = 0 ')
+      aryClientUser.each do |client_user|
+        @clients << client_user.client
+      end
+    end
     @errors = Array.new
     @client = Client.new(params[:client])
     @client.create_user_id = current_user.id
@@ -95,12 +113,30 @@ class ClientsController < ApplicationController
 
   def edit
     @client = Client.find(params[:id])
+    if(current_user.role_id == Settings.role.SUPER)
+      @clients = Client.find(:all, :order => 'roman_name', :conditions => ['del_flg = 0'])
+    elsif(current_user.role_id == Settings.role.AGENCY)
+      @clients = Array.new
+      aryClientUser = current_user.client_users.where(' del_flg = 0 ')
+      aryClientUser.each do |client_user|
+        @clients << client_user.client
+      end
+    end
   end
 
   def update
     @errors = Array.new
     @client = Client.find(params[:id])
     @client.attributes = params[:client]
+    if(current_user.role_id == Settings.role.SUPER)
+      @clients = Client.find(:all, :order => 'roman_name', :conditions => ['del_flg = 0'])
+    elsif(current_user.role_id == Settings.role.AGENCY)
+      @clients = Array.new
+      aryClientUser = current_user.client_users.where(' del_flg = 0 ')
+      aryClientUser.each do |client_user|
+        @clients << client_user.client
+      end
+    end
     if @client.valid?
       @client.save!
 			if params[:users_id]
@@ -137,6 +173,26 @@ class ClientsController < ApplicationController
     @client.del_flg = 1
     @client.save
     render text: "ok"
+  end
+  
+  def search
+    if params[:q].blank?
+      render :text => ""
+      return
+    end
+    params[:q].gsub!(/'/,'')
+    @search = Client.search do
+      fulltext params[:q]
+    end
+    lines = @search.results.collect do |item|
+      puts item
+      "#{escape_javascript(item['client_name'])}#!##{item['id']}#!##{item['client_name']}#!##{item['client_name']}#!##{escape_javascript(item['client_name'])}"
+    end
+    if @search.results.count > 0
+      render :text => lines.join("\n")
+    else
+      render text: "test#!#0#!#test#!#test#!#test"
+    end
   end
 
   private

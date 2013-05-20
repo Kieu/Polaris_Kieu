@@ -48,7 +48,6 @@
 
       html = "";
       html += "<div class='info'><a href=/clients/edit/" + data[1] + ">" + data[0] + "</a>" + "</div>";
-      
       return html;
     },
     completeProjects: function(el) {
