@@ -26,10 +26,10 @@ class UsersController < ApplicationController
                 "username" => user.username, "company" => user.company,
                 "email" => user.email, "role_id" => Role.find( user.role_id).role_name}}
     end
-    @data = {page => page, total => count, rows => @rows}
-    render json: @data.to_json
+    @data = {page: page, total: count, rows: @rows}
+    render json: @data
   end
-  
+
   def search
     if params[:q].blank?
       render :text => ""
