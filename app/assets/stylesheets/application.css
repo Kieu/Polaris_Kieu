@@ -76,7 +76,7 @@ h2 {font:18px "Trebuchet MS", Arial, sans-serif;}
 #sidebar h2 {display:block; color:#069; font:16px "Trebuchet MS", Arial, sans-serif; padding:5px; border-bottom: solid 1px #bbb; text-transform:uppercase;}
 #sidebar ul {list-style:none; margin-bottom:15px;}
 #sidebar li {display:block; height:26px; border-bottom:solid 1px #ddd;}
-#sidebar a, #sidebar a:visited {display:block; height:21px; padding:5px 5px 0 5px; color:#333; text-decoration:none;}
+#sidebar a, #sidebar a:visited {height:21px; padding:5px 5px 0 5px; color:#333; text-decoration:none;}
 #sidebar a:hover { color:#069;}
 h3.subhead {
 	font-size:12px; text-transform:uppercase;
@@ -114,3 +114,10 @@ code {background:#ccc; white-space:pre; display:block; margin:5px; padding:5px;}
 .pagenav span {display:block; width:250px;}
 .pagenav .leftalign {float:left;}
 .pagenav .rightalign { margin-left:300px; text-align:right;}
+#clients_list{
+	height: 80px;
+	overflow-y: scroll;
+}
+.edit_client{
+	background: url("/assets/pencil.png") no-repeat center	
+}
