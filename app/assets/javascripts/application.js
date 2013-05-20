@@ -74,6 +74,6 @@
   };
   $(document).ready(function(){
   	default_list = $("#clients_list").html();
-  	return Client.completeProjects(".searchbox input#search_client");
+  	return Client.completeProjects(".searchbox input#keyword");
   })
 }).call(this);
