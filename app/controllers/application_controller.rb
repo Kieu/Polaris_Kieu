@@ -15,7 +15,6 @@ class ApplicationController < ActionController::Base
   def must_super_agency
     if(current_user.role_id != 1 && current_user.role_id != 2)
       redirect_to(root_path)
-      escape_javascriptnd
     end
   end
   
