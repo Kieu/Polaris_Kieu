@@ -176,17 +176,19 @@ class ClientsController < ApplicationController
   end
   
   def search
-    if params[:client_search].blank?
+    if params[:q].blank?
       render :text => ""
       return
     end
-    params[:client_search].gsub!(/'/,'')
+    params[:q].gsub!(/'/,'')
     @search = Client.search do
-      fulltext params[:client_search]
+      fulltext params[:q]
     end
     lines = @search.results.collect do |item|
       puts item
-      "#{escape_javascript(item['client_name'])}#!##{item['id']}#!##{item['client_name']}#!##{item['client_name']}#!##{escape_javascript(item['client_name'])}"
+      "#{escape_javascript(item['client_name'])}#!##{item['id']}#!" +
+      "##{item['client_name']}#!##{item['client_name']}#!" +
+      "##{escape_javascript(item['client_name'])}"
     end
     if @search.results.count > 0
       render :text => lines.join("\n")

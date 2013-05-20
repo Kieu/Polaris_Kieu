@@ -33,17 +33,19 @@ class UsersController < ApplicationController
   end
   
   def search
-    if params[:user_search].blank?
+    if params[:q].blank?
       render :text => ""
       return
     end
-    params[:user_search].gsub!(/'/,'')
+    params[:q].gsub!(/'/,'')
     @search = User.search do
-      fulltext params[:user_search]
+      fulltext params[:q]
     end
     lines = @search.results.collect do |item|
       puts item
-      "#{escape_javascript(item['username'])}#!##{item['id']}#!##{item['email']}#!##{item.role.role_name}#!##{escape_javascript(item['username'])}"
+      "#{escape_javascript(item['username'])}#!##{item['id']}#!" +
+        "##{item['email']}#!##{item.role.role_name}#!#" +
+        "#{escape_javascript(item['username'])}"
     end
     if @search.results.count > 0
       render :text => lines.join("\n")
