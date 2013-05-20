@@ -48,7 +48,7 @@
       var html, watchs;
       html = "";
 
-      html += "<div><a href='/clients/" + data[1] + "/edit'>(edit)</a>" + "<a href='/clients/" + data[1] + "'>" + data[0] + "</div>";
+      html += "<div><a class = 'edit_client' href='/clients/" + data[1] + "/edit'></a>" + "<a href='/clients/" + data[1] + "'>" + data[0] + "</div>";
       return html;
     },
     completeProjects: function(el) {
