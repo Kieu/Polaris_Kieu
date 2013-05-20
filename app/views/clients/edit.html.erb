@@ -2,14 +2,6 @@
 	<%= render partial: "layouts/show_errors", locals: {objects: @errors } %>
 <% end %>
 <h1>Editing client</h1>
-<%= render "layouts/clients_list"%>
-<h1>Listing clients</h1>
-<div>Romaji name</div>
-<div id="clients_list">
-<% @clients.each do |client| %>
-	<div><%= link_to "(edit)", edit_client_path(client) %><%= link_to client.roman_name, client_path(client) %></div>
-<% end %>
-</div>
 <%= form_for(@client) do |f| %>
   <div class="field">
     <%= f.label "Client name" %><br />
