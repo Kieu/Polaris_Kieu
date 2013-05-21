@@ -7,10 +7,7 @@ class AgenciesController < ApplicationController
   end
 
   def get_agencies_list
-    start = ((params[:page].to_i - 1) * params[:rp].to_i)
-    params[:rp] = ["10", "20", "30", "40", "50"]
-      .include?(params[:rp]) ? params[:pr] : "10"
-    rows = get_rows(Agency.limit(params[:rp]).offset(start))
+    rows = get_rows(Agency.order_by_roman_name.page(params[:page]).per(params[:rp]))
     render json: {page: params[:page], total: Agency.count, rows: rows}
   end
   
