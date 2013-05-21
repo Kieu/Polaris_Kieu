@@ -1,0 +1,30 @@
+<% if flash[:error] %>
+	<div><%= flash[:error] %></div>
+<% end %>
+<h1>Agencies list</h1>
+<div id="agencies_list">
+</div>
+<%= link_to 'New Agency', new_agency_path %>
+</div>
+<table id="paging" style="display:none"></table>
+<script type="text/javascript">
+	$("#paging").flexigrid({
+		url: "<%= get_agencies_list_agencies_path %>",
+		dataType: 'json',
+		colModel : [
+			{display: '', name : 'link', width : 100, sortable : false, align: 'center'},
+			{display: 'agency_name', name : 'agency_name', width : 250, sortable : false, align: 'center'},
+			{display: 'roman_name', name : 'roman_name', width : 250, sortable : false, align: 'center'}
+			],
+	    sortname: "roman_name",
+        sortorder: "desc",
+		usepager: true,
+		title: 'Agency list',
+		useRp: true,
+		rp: 15,
+		showTableToggleBtn: true,
+		width: 600,
+		height: 200
+	});
+</script>
+<div style="clear:both"></div>

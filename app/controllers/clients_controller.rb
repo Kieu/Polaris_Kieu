@@ -128,6 +128,7 @@ class ClientsController < ApplicationController
     @errors = Array.new
     @client = Client.find(params[:id])
     @client.attributes = params[:client]
+    @client.update_user_id = current_user.id
     if(current_user.role_id == Settings.role.SUPER)
       @clients = Client.find(:all, :order => 'roman_name', :conditions => ['del_flg = 0'])
     elsif(current_user.role_id == Settings.role.AGENCY)
