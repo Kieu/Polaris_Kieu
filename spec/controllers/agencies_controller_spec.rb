@@ -10,6 +10,13 @@ describe AgenciesController do
       it {should redirect_to signin_path}
     end
 
+    describe "GET new" do
+      it "renders signin_path" do
+        get :new
+        response.should redirect_to(signin_path)
+      end
+    end
+
     describe "PUT update" do
       let(:name_to_change) {"change"}
       let(:action) do
