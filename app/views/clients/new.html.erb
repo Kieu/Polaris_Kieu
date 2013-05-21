@@ -18,7 +18,7 @@
   </div>
   <div class="field">
     <%= f.label "Contact" %><br />
-    <%= f.text_field :tel %>
+    <%= f.text_field :tel, maxlength: 15 %>
   </div>
   <div class="field">
     <%= f.label "Person in charge" %><br />
@@ -47,7 +47,7 @@
   <div class="actions">
     <%= f.submit %>
   </div>
-  <button><%= link_to 'Cancel', clients_path %></button>
+  <%= link_to 'Cancel', clients_path %>
 <% end %>
 
 <script type="text/javascript">
@@ -60,6 +60,7 @@
         $("#user_list").append(data[0] + " " + data[2] + " " + data[3]);
         $("#user_list").append("<input type = 'hidden' name='users_id[]' value ='" + data[1] + "'>");
         $("#user_list").append("<input type = 'checkbox' name='del_user_" + data[1] + "'>");
+        list_user.push(data[1]);
       }
       return false;
     });

@@ -13,6 +13,7 @@ PolarisManage::Application.routes.draw do
     post "del_client", to: "clients#del_client", on: :collection
     post "get_promotions_list", on: :collection
   end
+  resources :agencies
   resources :sessions, only: [:new, :create, :destroy] do
     post "resend_password", on: :collection
   end
