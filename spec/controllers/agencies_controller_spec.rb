@@ -4,6 +4,12 @@ describe AgenciesController do
   let(:agency) {FactoryGirl.create(:agency)}
 
   context "when user not login" do
+    describe "GET index" do
+      before {get :index}
+      subject {response}
+      it {should redirect_to signin_path}
+    end
+
     describe "GET edit" do
       before {get :edit, id: agency.id}
       subject {response}
@@ -31,6 +37,15 @@ describe AgenciesController do
   context "when user logged in" do
     let(:user) {FactoryGirl.create(:user, role_id: 1)}
     before {session[:user_id] = user.id}
+
+    describe "GET index" do
+      let(:users) do
+        3.times {|num| FactoryGirl.create(:agency, agency_name: "agency_name#{num}")}
+      end
+      before {get :index}
+      subject {response}
+      it {should render_template :index}
+    end
 
     describe "GET edit" do
       before {get :edit, id: agency.id}
