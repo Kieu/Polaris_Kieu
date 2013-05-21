@@ -7,3 +7,6 @@ role:
   SUPER: 1
   AGENCY: 2
   CLIENT: 3
+user:
+  deactive: 1
+  active: 0
