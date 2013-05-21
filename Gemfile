@@ -14,7 +14,7 @@ gem "lazy_high_charts"
 gem "recaptcha", :require => "recaptcha/rails"
 gem "sunspot_rails"
 gem "sunspot_solr"
-
+gem "kaminari"
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

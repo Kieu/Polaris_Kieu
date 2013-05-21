@@ -80,6 +80,7 @@ List uers Added: <br>
           $("#user_list").append(data[0] + " " + data[2] + " " + data[3]);
           $("#user_list").append("<input type = 'hidden' name='users_id[]' value ='" + data[1] + "'>");
           $("#user_list").append("<input type = 'checkbox' name='del_user_" + data[1] + "'>");
+          list_user.push(data[1])
         }
         return false;
       });
