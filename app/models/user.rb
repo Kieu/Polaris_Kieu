@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
   end
   
   def can_login?
+    return false if self.status == Settings.user.deactive
     if self.block_login_user && self.block_login_user.login_fail_num >=
       Settings.login.login_block_number
       if self.block_login_user.block_at_time > 5.minutes.ago

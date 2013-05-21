@@ -28,7 +28,11 @@ class SessionsController < ApplicationController
           render :new
         end
       else
-        @errors << "You are blocked for 5 minutes. Please try again later"
+        if user.status == Settings.user.deactive 
+          @errors << "You are deactive"
+        else
+          @errors << "You are blocked for 5 minutes. Please try again later"
+        end
         render :new
       end
     else
