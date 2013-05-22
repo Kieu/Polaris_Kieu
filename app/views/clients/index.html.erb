@@ -1,7 +1,8 @@
 <% if flash[:error] %>
 	<div><%= flash[:error] %></div>
 <% end %>
-<%= link_to 'New Client', new_client_path %>
+<h2><%= @clientName %></h2>
+<br />
 <table class="flexme4" style="display: none"></table>
 <script type="text/javascript">
 	$(".flexme4").flexigrid({
@@ -15,9 +16,16 @@
 		usepager: true,
 		title: 'Promotion Name',
 		useRp: true,
+		id: "<%= @clientId %>",
 		rp: 10,
+		rpOptions: [10, 30, 50, 100],
 		showTableToggleBtn: true,
-		width: 600,
-		height: 200
+		width: 250,
+		height: 250
 	});
 </script>
+<br />
+<br />
+<div>
+<%= link_to 'New Client', new_client_path %>
+</div>
