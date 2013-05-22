@@ -203,8 +203,9 @@ class ClientsController < ApplicationController
 
   def get_rows promotions
     rows = Array.new
-    promotions.each do |promotion|
-      rows << {'id' => promotion.id, 'cell' => {'promotion_name' => promotion.promotion_name}}
+    romotions.each do |promotion|
+      promotionName = "<a href='promotions/id'>#{promotion.promotion_name}</a>"
+      rows << {'id' => promotion.id, 'cell' => {'promotion_name' => promotionName}}
     end
     rows
   end
