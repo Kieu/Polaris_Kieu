@@ -7,6 +7,50 @@ class UsersController < ApplicationController
 
   def show
   end
+  
+  def new
+    @user = User.new
+  end
+  
+  def create
+    @user = User.new(params[:user])
+    @user.password = SecureRandom.urlsafe_base64(6)
+    @user.create_user_id = current_user.id
+    if @user.valid?
+      @user.save!
+      if @user.role_id == 2
+        ClientUser.create(client_id: @user.company_id, user_id: @user.id)
+      end
+      flash[:success] = "User was successfully created"
+      if @user.password_flg == 0
+        UserMailer.send_password(@user, @user.password).deliver
+      end
+      redirect_to new_user_path
+    else
+      render :new
+    end
+  end
+  
+  def edit
+    @user = User.find(params[:id])
+  end
+  
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(params[:user])
+      flash[:success] = "Update successfull"
+      redirect_to users_path
+    else
+      render :edit
+    end
+  end
+  
+  def enable_disable_user
+    user = User.find_by_id(params[:id])
+    user.status = user.status == 0 ? "1" : "0"
+    user.save
+    render text: "ok"
+  end
 
   def get_users_list
     rows = get_rows(User.order_by_roman_name.page(params[:page]).per(params[:rp]))
@@ -32,6 +76,10 @@ class UsersController < ApplicationController
     else
       render text: "test#!#0#!#test#!#test#!#test"
     end
+  end
+  
+  def change_company_list
+    render json: params[:model].constantize.all
   end
 
   private

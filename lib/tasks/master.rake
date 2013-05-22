@@ -14,4 +14,10 @@ namespace :master do
       password: "123456789", role_id: 1, status: 0, roman_name: "example",
       company: "Septeni", password_flg: 0}, without_protection: true)
   end
+  task create_agency: :environment do
+    for num in 1..100 do
+    Agency.create!({agency_name: "Agency_"+num.to_s, roman_name: "Agency_"+num.to_s,
+      create_user_id: 1}, without_protection: true)
+    end
+  end
 end

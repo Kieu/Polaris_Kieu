@@ -6,6 +6,8 @@ PolarisManage::Application.routes.draw do
     get "change_lang", on: :collection
     post "get_users_list", on: :collection
     get "search", on: :collection
+    post "enable_disable_user", on: :collection
+    post "change_company_list", on: :collection
   end
   resources :roles
   resources :clients do
