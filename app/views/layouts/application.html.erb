@@ -28,7 +28,7 @@
 					
 						<div id="clients_list" style="margin-top: 15px;">
 							<% @clients.each do |client| %>
-								<div><%= link_to "", edit_client_path(client), class: "edit_client" %><%= link_to client.roman_name, client_path(client) %></div>
+								<div><%= link_to "", edit_client_path(client), class: "edit_client" %><%= link_to client.client_name, client_path(client) %></div>
 							<% end %>
 						</div>
 					
