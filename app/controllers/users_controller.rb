@@ -86,9 +86,14 @@ class UsersController < ApplicationController
   def get_rows users
     rows = Array.new
     users.each do |user|
+      if user.role_id == Settings.role.CLIENT
+        company = Client.find_by_id(user.company_id).client_name
+      else
+        company = Agency.find_by_id(user.company_id).agency_name
+      end
       link = "<a href='users/#{user.id}/edit'>Edit</a>"
       rows << {"id" => user.id, "cell" => {"link" => link,"roman_name" => user.roman_name, 
-                "username" => user.username, "company" => user.company,
+                "username" => user.username, "company" => company,
                 "email" => user.email, "role_id" => user.role.role_name}}
     end
     rows
