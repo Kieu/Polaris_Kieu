@@ -46,7 +46,7 @@ class ClientsController < ApplicationController
 	  @promotions = Array.new
 	  #get promotion for each client
 	  @clients.each do |client|
-	    aryPromotion = Promotion.where("client_id = #{client.id} ").order('promotion_name').limit(rp).offset(start)
+	    aryPromotion = Promotion.where("client_id = ? ", client.id).order('promotion_name').limit(rp).offset(start)
 	    aryPromotion.each do |promotion|
 	      @promotions << {'id' => promotion.id, 'cell' => {'promotion_name' => promotion.promotion_name}}
 	    end
