@@ -104,4 +104,8 @@ List uers Added: <br>
 		$(".inline").colorbox.close();
 	})
 </script>
-<%= link_to 'New Client', new_client_path %>
+<%= 
+if(current_user.role_id == Settings.role.SUPER) 
+  link_to 'New Client', new_client_path
+end 
+%>
