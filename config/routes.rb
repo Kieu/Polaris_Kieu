@@ -11,7 +11,6 @@ PolarisManage::Application.routes.draw do
   end
   resources :roles
   resources :clients do
-    get "search", on: :collection
     post "del_client", to: "clients#del_client", on: :collection
     post "get_promotions_list", on: :collection
   end

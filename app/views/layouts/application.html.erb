@@ -22,13 +22,19 @@
 			<div id="searchbar">
 				<div id="padding_search">
 					<div class="searchbox">
- 						<input type="text" name="client_search" class="query" id="keyword" placeholder="Search"/>
+ 						<form>
+							<input type="text" id="search" maxlength="255">
+						</form>
  						<div class="clear"></div>
 					</div>
 					
 						<div id="clients_list" style="margin-top: 15px;">
 							<% @clients.each do |client| %>
-								<div><%= link_to "", edit_client_path(client), class: "edit_client" %><%= link_to client.client_name, client_path(client) %></div>
+								<% if @clientId && client.id == @clientId.to_i %>
+									<div><%= link_to "", edit_client_path(client), class: "edit_client" %><%= link_to client.client_name, client_path(client), class: "client_name active" %></div>
+								<% else %>
+									<div><%= link_to "", edit_client_path(client), class: "edit_client" %><%= link_to client.client_name, client_path(client), class: "client_name" %></div>
+								<% end %>
 							<% end %>
 						</div>
 					
@@ -38,6 +44,11 @@
 		<% end %>
 		<div class="clear"></div>
 	</div>
+<script type="text/javascript">
+    $('input#search').quicksearch('div#clients_list div',{
+    	"selector" : "a.client_name" 
+    });
+</script>
 	<%= render "layouts/footer" %>
 </div>
 </body>
