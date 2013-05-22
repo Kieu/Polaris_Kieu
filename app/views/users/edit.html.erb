@@ -1,0 +1,109 @@
+<%= flash[:success] if flash[:success] %>
+<%= form_for(@user) do |f| %>
+  <div class="field">
+    <%= f.label "User name" %><br />
+    <%= f.text_field :username, maxlength: "256" %>
+  </div>
+  <div class="field">
+    <%= f.label "Roman name" %><br />
+    <%= f.text_field :roman_name, maxlength: "256" %>
+  </div>
+  <div class="field">
+    <%= f.label "Email" %><br />
+    <%= f.text_field :email, maxlength: "256" %>
+  </div>
+  <div class="field">
+    <%= f.label "Role" %><br />
+    <%= text_field_tag :role_id, @user.role.role_name, disabled: true %>
+  </div>
+  <div class="field">
+    <%= f.label "Company" %><br />
+    <% if @user.role_id == 2 %>
+    	<%= text_field_tag :company_id, Client.find(@user.company_id).client_name, disabled: true %>
+    <% else %>
+    	<%= text_field_tag :company_id, Agency.find(@user.company_id).agency_name, disabled: true %>
+    <% end %>
+  </div>
+  <div class="field">
+    <%= f.label "Password" %><br />
+    *******************
+  </div>
+  <div class="field">
+    <%= f.radio_button :password_flg, "0", disabled: true %>
+    <%= f.label "Send Password" %>
+    <%= f.radio_button :password_flg, "1", disabled: true %>
+    <%= f.label "Dont Send Password" %>
+  </div>
+  <div class="field">
+    <%= f.label "Disable User" %><br />
+    <% if @user.status == 1 %>
+    	<input type="checkbox" id = "disable_button" checked="checked">
+	<% else %>
+		<input type="checkbox" id = "disable_button">
+	<% end %>
+  </div>
+  <%= f.submit %>
+  <button id="cancel">Cancel</button>
+<% end %>
+<div style='display:none'>
+	<div id="disabled" style='padding:10px; background:#fff;'>
+		<div>User can not login again</div>
+		<div>Username: <%= @user.username %></div>
+		<div>Email: <%= @user.email %></div>
+		<div>Role: <%= @user.role.role_name %></div>
+		<button class="ok_popup">Ok</button>
+		<button class="cancel_popup">Cancel</button>
+	</div>
+	<div id="enabled" style='padding:10px; background:#fff;'>
+		<div>User can login again</div>
+		<div>Username: <%= @user.username %></div>
+		<div>Email: <%= @user.email %></div>
+		<div>Role: <%= @user.role.role_name %></div>
+		<button class="ok_popup">Ok</button>
+		<button class="cancel_popup">Cancel</button>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		check = $("#disable_button").is(':checked')? true : false;
+		$("#disable_button").click(function(e){
+			if (check){
+				enable = $.colorbox({
+					width: "30%",
+					inline: true,
+					escKey: false,
+					href: "#enabled",
+					overlayClose: false,
+					onClosed: function(){
+						$("#disable_button").attr("checked",check);
+					}
+				});
+			}else{
+				disable = $.colorbox({
+					width: "30%",
+					inline: true,
+					escKey: false,
+					href: "#disabled",
+					overlayClose: false,
+					onClosed: function(){
+						$("#disable_button").attr("checked",check);
+					}
+				});
+			}
+		})
+		$(".cancel_popup").click(function(){
+			$("#enabled").colorbox.close();
+			$("#disabled").colorbox.close();
+		})
+		$(".ok_popup").click(function(){
+			$.ajax({
+				type: "POST",
+				url: "<%= enable_disable_user_users_path %>",
+				data: "id=<%= @user.id%>",
+				success: function(data){
+					location.href = "<%= users_path %>";
+				}
+			});
+		})
+	})
+</script>

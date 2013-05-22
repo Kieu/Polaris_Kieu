@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   end
 
   def must_super_agency
-    if(current_user.role_id != 1 && current_user.role_id != 2)
+    if(current_user.role_id != 1 && current_user.role_id != 3)
       redirect_to(root_path)
     end
   end

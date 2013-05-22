@@ -5,8 +5,8 @@ login:
   login_block_number: 3
 role:
   SUPER: 1
-  AGENCY: 2
-  CLIENT: 3
+  AGENCY: 3
+  CLIENT: 2
 user:
   deactive: 1
   active: 0

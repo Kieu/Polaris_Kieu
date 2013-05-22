@@ -11,6 +11,12 @@
  *= require_self
  *= require_tree .
  */
+input[type=text]{
+	width: 255px;
+}
+.text-validationError{
+	color: red;
+}
 * {padding:0; margin:0;}
 a, a:visited {color: #930;}
 a:hover {color:#09c; text-decoration:none;}
