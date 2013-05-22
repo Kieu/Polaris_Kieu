@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
   validates :company, presence: true
   validates :role_id, presence: true
   validates :password_flg, presence: true
+  
+  scope :order_by_roman_name, ->{order :roman_name}
 
   before_save {|user| user.email = email.downcase}
   
