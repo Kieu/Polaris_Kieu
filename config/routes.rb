@@ -19,11 +19,6 @@ PolarisManage::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy] do
     post "resend_password", on: :collection
   end
-  resources :users do
-    get "search", on: :collection
-    get "get_users_list", on: :collection
-  end
-  resources :promotions
   
   match "/signin",  to: "sessions#new"
   match "/signout", to: "sessions#destroy", via: :delete
