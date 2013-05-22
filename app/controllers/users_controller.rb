@@ -9,25 +9,8 @@ class UsersController < ApplicationController
   end
 
   def get_users_list
-    rp = (params[:rp]).to_i
-    rp = 10 if !rp
-    #current page
-    page = (params[:page]).to_i
-    page = 1 if !page
-    start = ((page-1) * rp).to_i
-    #get total records
-    count = User.where(status: 0).count
-    #get all Users
-    @users = User.where(status: 0).order('roman_name').limit(rp).offset(start)
-    @rows = Array.new
-    @users.each do |user|
-      link = "<a href='users/#{user.id}/edit'>Edit</a>"
-      @rows << {"id" => user.id, "cell" => {"link" => link,"roman_name" => user.roman_name, 
-                "username" => user.username, "company" => user.company,
-                "email" => user.email, "role_id" => Role.find( user.role_id).role_name}}
-    end
-    @data = {page: page, total: count, rows: @rows}
-    render json: @data
+    rows = get_rows(User.order_by_roman_name.page(params[:page]).per(params[:rp]))
+    render json: {page: params[:page], total: User.where(status: 0).count, rows: rows}
   end
 
   def search
@@ -49,5 +32,17 @@ class UsersController < ApplicationController
     else
       render text: "test#!#0#!#test#!#test#!#test"
     end
+  end
+
+  private
+  def get_rows users
+    rows = Array.new
+    users.each do |user|
+      link = "<a href='users/#{user.id}/edit'>Edit</a>"
+      rows << {"id" => user.id, "cell" => {"link" => link,"roman_name" => user.roman_name, 
+                "username" => user.username, "company" => user.company,
+                "email" => user.email, "role_id" => user.role.role_name}}
+    end
+    rows
   end
 end
