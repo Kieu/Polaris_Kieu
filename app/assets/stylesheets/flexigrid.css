@@ -556,6 +556,7 @@ div.pGroup {
 	position: relative;
 	top: -5px;
 	margin: 3px;
+	width: 40px;
 }
 
 .flexigrid div.pDiv select {
