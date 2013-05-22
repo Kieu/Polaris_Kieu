@@ -200,4 +200,12 @@ class ClientsController < ApplicationController
     client = Client.find_by_id(params[:id])
     redirect_to clients_path if client.nil? || client.del_flg == 1
   end
+
+  def get_rows promotions
+    rows = Array.new
+    promotions.each do |promotion|
+      rows << {'id' => promotion.id, 'cell' => {'promotion_name' => promotion.promotion_name}}
+    end
+    rows
+  end
 end
