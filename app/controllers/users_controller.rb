@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     @user.create_user_id = current_user.id
     if @user.valid?
       @user.save!
-      if @user.role_id == 2
+      if @user.role_id == Settings.role.CLIENT
         ClientUser.create(client_id: @user.company_id, user_id: @user.id)
       end
       flash[:success] = "User was successfully created"
