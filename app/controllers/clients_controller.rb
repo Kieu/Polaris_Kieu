@@ -92,7 +92,6 @@ class ClientsController < ApplicationController
         @clients << client_user.client
       end
     end
-    @errors = Array.new
     @client = Client.new(params[:client])
     @client.create_user_id = current_user.id
     if @client.save
@@ -103,10 +102,9 @@ class ClientsController < ApplicationController
 		      end
 		    end
 			end
-      flash[:success] = "Client was successfully created"
+      flash[:error] = "Client was successfully created"
       redirect_to new_client_path
     else
-      @errors << @client.errors.full_messages
       render :new
     end
   end

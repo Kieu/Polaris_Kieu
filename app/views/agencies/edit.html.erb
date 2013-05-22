@@ -1,18 +1,10 @@
-<% if @errors && @errors.count > 0 %>
-	<%= render partial: "layouts/show_errors", locals: {objects: @errors } %>
-<% end %>
-
-<h1>Editing Agency</h1>
+Editing Agency
 
 <%= form_for(@agency) do |f| %>
-  <div class="field">
-    <%= f.label "Agency name" %><br />
-    <%= f.text_field :agency_name %>
-  </div>
-  <div class="field">
-    <%= f.label "Roman name" %><br />
-    <%= f.text_field :roman_name %>
-  </div>
+  <%= f.label "Agency name" %>
+  <%= f.text_field :agency_name, maxlength: 256, style: "width: 250px" %><br />
+  <%= f.label "Roman name" %>
+  <%= f.text_field :roman_name, maxlength: 256, style: "width: 250px" %><br />
   <%= f.submit %>
   <%= link_to 'Cancel', agencies_path %>
 <% end %>
