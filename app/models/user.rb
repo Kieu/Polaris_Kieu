@@ -10,8 +10,8 @@ class User < ActiveRecord::Base
   has_many :client_users
   has_one :block_login_user
 
-  validates :username, presence: true
-  validates :roman_name, presence: true
+  validates :username, presence: true, uniqueness: {case_sensitive: false}
+  validates :roman_name, presence: true, uniqueness: {case_sensitive: false}
   validates :email, presence: true, uniqueness: {case_sensitive: false},
     format: {with: VALID_EMAIL_REGEX}, length: {maximum: 100}
   validates :company_id, presence: true
