@@ -41,39 +41,3 @@
       return $(el).autocomplete("/users/search", hash);
     }
   };
-
-(function() {
-  window.Client = {
-    completeProjectLine: function(data) {
-      var html, watchs;
-      html = "";
-
-      html += "<div><a class = 'edit_client' href='/clients/" + data[1] + "/edit'></a>" + "<a href='/clients/" + data[1] + "'>" + data[0] + "</div>";
-      return html;
-    },
-    completeProjects: function(el) {
-      var hash;
-
-      hash = {
-        minChars: 1,
-        delay: 50,
-        width: 350,
-        scroll: true,
-        search_type: "client",
-        default_list: default_list,
-        formatItem: function(data, i, total) {
-          return Client.completeProjectLine(data);
-        }
-        
-      };
-      return $(el).autocomplete("/clients/search", hash).result(function(e, data, formatted) {
-        location.href = "/clients/" + data[1];
-        return false;
-      });
-    }
-  };
-  $(document).ready(function(){
-  	default_list = $("#clients_list").html();
-  	return Client.completeProjects(".searchbox input#keyword");
-  })
-}).call(this);
