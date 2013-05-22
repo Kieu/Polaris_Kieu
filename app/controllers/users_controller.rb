@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     @user.create_user_id = current_user.id
     if @user.valid?
       @user.save!
-      if @user.role_id == 2
+      if @user.role_id == Settings.role.CLIENT
         ClientUser.create(client_id: @user.company_id, user_id: @user.id)
       end
       flash[:success] = "User was successfully created"
@@ -37,7 +37,10 @@ class UsersController < ApplicationController
   
   def update
     @user = User.find(params[:id])
-    if @user.update_attributes(params[:user])
+    @user.update_user_id = current_user.id
+    @user.attributes = params[:user]
+    if @user.valid?
+      @user.save!
       flash[:success] = "Update successfull"
       redirect_to users_path
     else
@@ -86,15 +89,21 @@ class UsersController < ApplicationController
   def get_rows users
     rows = Array.new
     users.each do |user|
+      company = ""
       if user.role_id == Settings.role.CLIENT
-        company = Client.find_by_id(user.company_id).client_name
+        if client = Client.find_by_id(user.company_id)
+          company = client.client_name
+        end
       else
-        company = Agency.find_by_id(user.company_id).agency_name
+        if agency = Agency.find_by_id(user.company_id)
+          company = agency.agency_name
+        end
       end
       link = "<a href='users/#{user.id}/edit'>Edit</a>"
-      rows << {"id" => user.id, "cell" => {"link" => link,"roman_name" => user.roman_name, 
-                "username" => user.username, "company" => company,
-                "email" => user.email, "role_id" => user.role.role_name}}
+      rows << {"id" => user.id, "cell" => {"link" => link,
+        "roman_name" => user.roman_name, 
+        "username" => user.username, "company" => company,
+        "email" => user.email, "role_id" => user.role.role_name}}
     end
     rows
   end
