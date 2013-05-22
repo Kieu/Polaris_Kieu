@@ -123,7 +123,6 @@ class ClientsController < ApplicationController
   end
 
   def update
-    @errors = Array.new
     @client = Client.find(params[:id])
     @client.attributes = params[:client]
     @client.update_user_id = current_user.id
@@ -156,7 +155,6 @@ class ClientsController < ApplicationController
       flash[:error] = "Edit successfull"
       redirect_to clients_path
     else
-      @errors << @client.errors.full_messages
       render "edit"
     end
   end
