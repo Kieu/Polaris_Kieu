@@ -39,31 +39,11 @@ class ClientsController < ApplicationController
       clientId = @clients[0].id
     end
 
-	  # row per page
-	  rp = (params[:rp]).to_i
-	  if(!rp || rp != 10 || rp != 30 || rp != 50 || rp != 100)
-      rp = 10
-    end
-	
-	  #current page
-	  page = params[:page].to_i
-	  if (!page)
-      page = 1
-    end
-	  start = ((page-1) * rp).to_i
-	
-	  @promotions = Array.new
-
+    rows = Array.new
+    rows = get_rows(Promotion.where("client_id = ? ", clientId).order_by_promotion_name.page(params[:page]).per(params[:rp]))
     count = Promotion.where("client_id = ? ", clientId).order('promotion_name').count
-
-	  #get promotion for each client
-	  aryPromotion = Promotion.where("client_id = ? ", clientId).order('promotion_name').limit(rp).offset(start)
-    aryPromotion.each do |promotion|
-      @promotions << {'id' => promotion.id, 'cell' => {'promotion_name' => promotion.promotion_name}}
-    end
 	
-	  @data = {page: page, total: count, rows: @promotions}
-    render json: @data
+    render json: {page: params[:page], total: count, rows: rows}
   end
   
   def show

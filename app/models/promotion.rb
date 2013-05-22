@@ -9,4 +9,6 @@ class Promotion < ActiveRecord::Base
     string :status
     time :created_at
   end
+
+  scope :order_by_promotion_name, ->{order :promotion_name}
 end
