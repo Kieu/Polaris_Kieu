@@ -1,0 +1,37 @@
+<% if @errors && @errors.count > 0 %>
+	<%= render partial: "layouts/show_errors", locals: {objects: @errors } %>
+<% end %>
+
+<h1>Add Agency</h1>
+
+<%= form_for(@agency) do |f| %>
+  <br/>
+  <div class="field">
+    <div style="float:left">
+      <%= f.label "Agency name:" %><br />
+    </div>
+    <div style="float:left">
+      <%= f.text_field :agency_name %>
+    </div>
+    <div style="clear:both"></div>
+  </div>
+  <br/>
+  <div class="field">
+    <div style="float: left">
+      <%= f.label "Roman name:" %><br />
+    </div>
+    <div style="float: left">
+    <%= f.text_field :roman_name %>
+    </div>
+    <div style="clear:both"></div>
+  </div>
+  <br/>
+  <br/>
+  <div class="float:left">
+    <%= f.submit %>
+  </div>
+  <div class="float:left">
+    <%= link_to 'Cancel', agencies_path %>
+  </div>
+  <div style="clear:both"></div>
+<% end %>
