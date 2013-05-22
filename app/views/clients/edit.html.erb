@@ -1,27 +1,25 @@
-<% if @errors && @errors.count > 0 %>
-	<%= render partial: "layouts/show_errors", locals: {objects: @errors } %>
-<% end %>
-<h1>Editing client</h1>
+Editing client
+
 <%= form_for(@client) do |f| %>
   <div class="field">
     <%= f.label "Client name" %><br />
-    <%= f.text_field :client_name %>
+    <%= f.text_field :client_name, maxlength: 256, style: "width: 250px" %>
   </div>
   <div class="field">
     <%= f.label "Roman name" %><br />
-    <%= f.text_field :roman_name %>
+    <%= f.text_field :roman_name, maxlength: 256, style: "width: 250px" %>
   </div>
   <div class="field">
     <%= f.label "Tel" %><br />
-    <%= f.text_field :tel %>
+    <%= f.text_field :tel, maxlength: 256, style: "width: 250px" %>
   </div>
   <div class="field">
     <%= f.label "person_charge:" %><br />
-    <%= f.text_field :person_charge %>
+    <%= f.text_field :person_charge, maxlength: 256, style: "width: 250px" %>
   </div>
   <div class="field">
     <%= f.label "person_sale" %><br />
-    <%= f.text_field :person_sale %>
+    <%= f.text_field :person_sale, maxlength: 256, style: "width: 250px" %>
   </div>
   <div class="field">
     <%= f.label "Contract type" %><br />
