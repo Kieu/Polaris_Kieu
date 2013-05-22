@@ -642,6 +642,9 @@
 					name: 'query',
 					value: p.query
 				}, {
+					name: 'id',
+					value: p.id
+				}, {
 					name: 'qtype',
 					value: p.qtype
 				}];

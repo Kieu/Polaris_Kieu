@@ -14,6 +14,9 @@ class ClientsController < ApplicationController
 		    @clients << client_user.client
 		  end
 	  end
+
+    # get client name of 1st client
+    @clientName = @clients[0].client_name
   end
   
   #get list promotion and paging
@@ -30,43 +33,41 @@ class ClientsController < ApplicationController
 	  end
     
 	  # get params for paging
-	  # row per page
-	  rp = (params[:rp]).to_i
-	  if(!rp)
-      rp = 10
+    if(params[:id] != '')
+      clientId = params[:id]
+    else
+      clientId = @clients[0].id
     end
+
+    rows = Array.new
+    rows = get_rows(Promotion.where("client_id = ? ", clientId).order_by_promotion_name.page(params[:page]).per(params[:rp]))
+    count = Promotion.where("client_id = ? ", clientId).order('promotion_name').count
 	
-	  #current page
-	  page = (params[:page]).to_i
-	  if (!page)
-      page = 1
-    end
-	  start = ((page-1) * rp).to_i
-	
-	  @promotions = Array.new
-	  #get promotion for each client
-	  @clients.each do |client|
-	    aryPromotion = Promotion.where("client_id = ? ", client.id).order('promotion_name').limit(rp).offset(start)
-	    aryPromotion.each do |promotion|
-	      @promotions << {'id' => promotion.id, 'cell' => {'promotion_name' => promotion.promotion_name}}
-	    end
-	  end
-	
-	  @data = {"page" => 1, "total" => 1, "rows" => @promotions}
-    render json: @data.to_json
+    render json: {page: params[:page], total: count, rows: rows}
   end
   
   def show
-    #get list clients
+    # get client list
     if(current_user.role_id == Settings.role.SUPER)
-	    @clients = Client.find(:all, :order => 'roman_name', :conditions => ['del_flg = 0'])
-	  elsif(current_user.role_id == Settings.role.AGENCY)
-	    @clients = Array.new
-	    aryClientUser = current_user.client_users.where(' del_flg = 0 ')
-	    aryClientUser.each do |client_user|
-		    @clients << client_user.client
-		  end
-	  end
+      @clients = Client.find(:all, :order => 'roman_name', :conditions => ['del_flg = 0'])
+    elsif(current_user.role_id == Settings.role.AGENCY)
+      @clients = Array.new
+      aryClientUser = current_user.client_users.where(' del_flg = 0 ')
+      aryClientUser.each do |client_user|
+        @clients << client_user.client
+      end
+    end
+
+    # get current client name
+    @clients.each do |client|
+      if(client.id == params[:id].to_i)
+        @clientName = client.client_name
+      end
+    end
+
+    @clientId = params[:id]
+    render :index
+
   end
 
   def new
@@ -198,5 +199,13 @@ class ClientsController < ApplicationController
   def must_deleteable
     client = Client.find_by_id(params[:id])
     redirect_to clients_path if client.nil? || client.del_flg == 1
+  end
+
+  def get_rows promotions
+    rows = Array.new
+    promotions.each do |promotion|
+      rows << {'id' => promotion.id, 'cell' => {'promotion_name' => promotion.promotion_name}}
+    end
+    rows
   end
 end
