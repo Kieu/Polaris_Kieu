@@ -251,6 +251,9 @@ $.Autocompleter = function(input, options) {
 		/*}*/
 		
 		var currentValue = $input.val();
+		if (options.search_type == "client" && currentValue == ""){
+			$("#clients_list").html(options.default_list);
+		}
     if(currentValue.length == 0){
       // TODO show default tip
       select.display("default", "");
@@ -710,20 +713,32 @@ $.Autocompleter.Select = function (options, input, select, config) {
 	  if (data[0].data[1] != "0")
       {
 	      var max = limitNumberOfItems(data.length);
+	      client_html = "";
 	      for (var i=0; i < max; i++) {
 	        if (!data[i])
 	          continue;
 	        var formatted = options.formatItem(data[i].data, i+1, max, data[i].value, term);
 	        if ( formatted === false )
 	          continue;
-	        var li = $("<li/>").html( options.highlight(formatted, term) ).addClass(i%2 == 0 ? "ac_even" : "ac_odd").appendTo(list)[0];
-	        $.data(li, "ac_data", data[i]);
+	        if (options.search_type == "user"){
+		        var li = $("<li/>").html( options.highlight(formatted, term) ).addClass(i%2 == 0 ? "ac_even" : "ac_odd").appendTo(list)[0];
+		        $.data(li, "ac_data", data[i]);
+			}else{
+				client_html += formatted;
+			}
+	      }
+	      if (options.search_type == "client"){
+	      	$("#clients_list").html(client_html);
 	      }
 	      listItems = list.find("li");
 	      if ( options.selectFirst ) {
 	        listItems.slice(0, 1).addClass(CLASSES.ACTIVE);
 	        active = 0;
 	      }
+		}else{
+			if (options.search_type == "client"){
+				$("#clients_list").empty();
+			}
 		}
     }
     // apply bgiframe if available
@@ -783,7 +798,7 @@ $.Autocompleter.Select = function (options, input, select, config) {
 					overflow: 'auto'
 				});
 				
-                if($.browser.msie && typeof document.body.style.maxHeight === "undefined") {
+                if(/msie/.test(navigator.userAgent.toLowerCase()) && typeof document.body.style.maxHeight === "undefined") {
 					var listHeight = 0;
 					listItems.each(function() {
 						listHeight += this.offsetHeight;

@@ -1,20 +1,10 @@
 <% if flash[:error] %>
 	<div><%= flash[:error] %></div>
 <% end %>
-<%= render "layouts/clients_list"%>
-<h1>Listing clients</h1>
-<div>Romaji name</div>
-<div id="clients_list">
-<% @clients.each do |client| %>
-	<div><%= link_to "(edit)", edit_client_path(client) %><%= link_to client.roman_name, client_path(client) %></div>
-<% end %>
-</div>
 <%= link_to 'New Client', new_client_path %>
-</div>
-<div style="float:left">
-<table id="paging" style="display:none"></table>
+<table class="flexme4" style="display: none"></table>
 <script type="text/javascript">
-	$("#paging").flexigrid({
+	$(".flexme4").flexigrid({
 		url: "<%= get_promotions_list_clients_path %>",
 		dataType: 'json',
 		colModel : [
@@ -25,11 +15,9 @@
 		usepager: true,
 		title: 'Promotion Name',
 		useRp: true,
-		rp: 15,
+		rp: 10,
 		showTableToggleBtn: true,
-		width: 700,
+		width: 600,
 		height: 200
 	});
 </script>
-</div>
-<div style="clear:both"></div>

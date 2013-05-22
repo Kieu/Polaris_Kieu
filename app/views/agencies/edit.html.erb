@@ -1,0 +1,10 @@
+Editing Agency
+
+<%= form_for(@agency) do |f| %>
+  <%= f.label "Agency name" %>
+  <%= f.text_field :agency_name, maxlength: 256, style: "width: 250px" %><br />
+  <%= f.label "Roman name" %>
+  <%= f.text_field :roman_name, maxlength: 256, style: "width: 250px" %><br />
+  <%= f.submit %>
+  <%= link_to 'Cancel', agencies_path %>
+<% end %>

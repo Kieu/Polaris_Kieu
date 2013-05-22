@@ -30,7 +30,8 @@
         minChars: 1,
         delay: 50,
         width: 350,
-        scroll: false,
+        scroll: true,
+        search_type: "user",
         formatItem: function(data, i, total) {
           return User.completeProjectLine(data);
         }
@@ -45,9 +46,9 @@
   window.Client = {
     completeProjectLine: function(data) {
       var html, watchs;
-
       html = "";
-      html += "<div class='info'><a href=/clients/edit/" + data[1] + ">" + data[0] + "</a>" + "</div>";
+
+      html += "<div><a class = 'edit_client' href='/clients/" + data[1] + "/edit'></a>" + "<a href='/clients/" + data[1] + "'>" + data[0] + "</div>";
       return html;
     },
     completeProjects: function(el) {
@@ -57,22 +58,22 @@
         minChars: 1,
         delay: 50,
         width: 350,
-        scroll: false,
+        scroll: true,
+        search_type: "client",
+        default_list: default_list,
         formatItem: function(data, i, total) {
           return Client.completeProjectLine(data);
         }
         
       };
-      //console.log(hash);
       return $(el).autocomplete("/clients/search", hash).result(function(e, data, formatted) {
         location.href = "/clients/" + data[1];
         return false;
       });
     }
   };
-
-  $(document).ready(function() {
-    return Client.completeProjects(".searchbox input#search_client");
-  });
-
+  $(document).ready(function(){
+  	default_list = $("#clients_list").html();
+  	return Client.completeProjects(".searchbox input#keyword");
+  })
 }).call(this);

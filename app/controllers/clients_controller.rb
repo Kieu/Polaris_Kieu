@@ -46,7 +46,7 @@ class ClientsController < ApplicationController
 	  @promotions = Array.new
 	  #get promotion for each client
 	  @clients.each do |client|
-	    aryPromotion = Promotion.where("client_id = #{client.id} ").order('promotion_name').limit(rp).offset(start)
+	    aryPromotion = Promotion.where("client_id = ? ", client.id).order('promotion_name').limit(rp).offset(start)
 	    aryPromotion.each do |promotion|
 	      @promotions << {'id' => promotion.id, 'cell' => {'promotion_name' => promotion.promotion_name}}
 	    end
@@ -92,7 +92,6 @@ class ClientsController < ApplicationController
         @clients << client_user.client
       end
     end
-    @errors = Array.new
     @client = Client.new(params[:client])
     @client.create_user_id = current_user.id
     if @client.save
@@ -103,10 +102,9 @@ class ClientsController < ApplicationController
 		      end
 		    end
 			end
-      flash[:success] = "Client was successfully created"
+      flash[:error] = "Client was successfully created"
       redirect_to new_client_path
     else
-      @errors << @client.errors.full_messages
       render :new
     end
   end
@@ -128,6 +126,7 @@ class ClientsController < ApplicationController
     @errors = Array.new
     @client = Client.find(params[:id])
     @client.attributes = params[:client]
+    @client.update_user_id = current_user.id
     if(current_user.role_id == Settings.role.SUPER)
       @clients = Client.find(:all, :order => 'roman_name', :conditions => ['del_flg = 0'])
     elsif(current_user.role_id == Settings.role.AGENCY)
@@ -186,7 +185,9 @@ class ClientsController < ApplicationController
     end
     lines = @search.results.collect do |item|
       puts item
-      "#{escape_javascript(item['client_name'])}#!##{item['id']}#!##{item['client_name']}#!##{item['client_name']}#!##{escape_javascript(item['client_name'])}"
+      "#{escape_javascript(item['client_name'])}#!##{item['id']}#!" +
+      "##{item['client_name']}#!##{item['client_name']}#!" +
+      "##{escape_javascript(item['client_name'])}"
     end
     if @search.results.count > 0
       render :text => lines.join("\n")

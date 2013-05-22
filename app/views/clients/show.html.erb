@@ -1,19 +1,5 @@
 <h1>Listing clients</h1>
-<div style="float: left">
-<table border="1">
-  <tr>
-    <th>Romaji name</th>
-  </tr>
-  <% @clients.each do |client| %>
-    <tr>
-      <td><%= link_to client.roman_name, client_path(client) %></td>
-    </tr>
-  <% end %>
-</table>
-
 <%= link_to 'New Client', new_client_path %>
-</div>
-<div style="float:left">
 <table id="paging" style="display:none"></table>
 <script type="text/javascript">
 	$("#paging").flexigrid({
@@ -33,5 +19,3 @@
 		height: 200
 	});
 </script>
-</div>
-<div style="clear:both"></div>

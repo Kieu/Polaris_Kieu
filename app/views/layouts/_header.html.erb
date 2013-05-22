@@ -1,17 +1,25 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
-  <div class="navbar-inner">
-    <div class="container">
-      <%= link_to "Polaris", root_path, id: "logo" %>
-      <nav>
-        <ul class="nav pull-right">
-          <li><%= link_to "Home", root_path %></li>
-          <% if signed_in? %>
-            <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
-		  <% else %>
-		    <li><%= link_to "Sign in", signin_path %></li>
-          <% end %>
-        </ul>
-      </nav>
-    </div>
-  </div>
-</header>
+<div id="header">
+	<div id="topbar">
+		<div id="subnav">
+			<div id="logo"></div>
+			<div id="profile">
+				<% if signed_in? %>
+					<%= current_user.username%> <%= link_to "Sign out", signout_path, method: "delete" %>
+				<% else %>
+					<a href="#">Language</a> | <%= link_to "Login", signin_path %> | <a href="#">Sitemap</a> | <a href="#">Contact</a>
+				<% end %>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<% if signed_in? %>
+		<div id="navigation">
+			<ul>
+				<li><%= link_to "Client List", clients_path %></li>
+				<li><%= link_to "User List", users_path %></li>
+				<li><a href="#">Agency</a></li>
+				<li></li>
+			</ul>
+		</div>
+		<% end %>
+	</div>
+</div>

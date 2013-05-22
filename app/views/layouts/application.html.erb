@@ -7,12 +7,38 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= render "layouts/header" %>
-<div class = "container">
-	<%= yield %>
-	<%= debug(params) if Rails.env.development? %>
+<div id = "wrap">
+	<%= render "layouts/header" %>
+	<div id = "content">
+		<div id="right">
+			<div class="post">
+				<div class="clear"></div>
+				<%= yield %>
+			</div>
+			<div class = "clear2"></div>
+		</div>
+		<% if signed_in? && @clients %>
+		<div id="sidebar">
+			<div id="searchbar">
+				<div id="padding_search">
+					<div class="searchbox">
+ 						<input type="text" name="client_search" class="query" id="keyword" placeholder="Search"/>
+ 						<div class="clear"></div>
+					</div>
+					
+						<div id="clients_list" style="margin-top: 15px;">
+							<% @clients.each do |client| %>
+								<div><%= link_to "", edit_client_path(client), class: "edit_client" %><%= link_to client.roman_name, client_path(client) %></div>
+							<% end %>
+						</div>
+					
+				</div>
+			</div>
+		</div>
+		<% end %>
+		<div class="clear"></div>
+	</div>
+	<%= render "layouts/footer" %>
 </div>
-
 </body>
 </html>

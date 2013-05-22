@@ -13,14 +13,12 @@ PolarisManage::Application.routes.draw do
     post "del_client", to: "clients#del_client", on: :collection
     post "get_promotions_list", on: :collection
   end
+  resources :agencies do
+    post "get_agencies_list", on: :collection
+  end
   resources :sessions, only: [:new, :create, :destroy] do
     post "resend_password", on: :collection
   end
-  resources :users do
-    get "search", on: :collection
-    get "get_users_list", on: :collection
-  end
-  resources :promotions
   
   match "/signin",  to: "sessions#new"
   match "/signout", to: "sessions#destroy", via: :delete
