@@ -2,16 +2,26 @@ require 'spec_helper'
 
 describe User do
   let(:user){FactoryGirl.create(:user)}
-  it { should respond_to(:username) }
-  it { should respond_to(:roman_name) }
-  it { should respond_to(:email) }
-  it { should respond_to(:role_id) }
-  it { should respond_to(:company) }
-  it { should respond_to(:password_flg) }
+  it {should respond_to(:username)}
+  it {should respond_to(:roman_name)}
+  it {should respond_to(:email)}
+  it {should respond_to(:role_id)}
+  it {should respond_to(:company_id)}
+  it {should respond_to(:password_flg)}
     
   describe "when username is not present" do
-    before { user.username = " " }
-    it { should_not be_valid }
+    before {user.username = " "}
+    it {should_not be_valid}
+  end
+  
+  describe "when username is already taken" do
+    before do
+      user_with_same_name = user.dup
+      user_with_same_name.email = "test@test.com"
+      user_with_same_name.roman_name = "test"
+      user_with_same_name.save
+    end
+    it {should_not be_valid}
   end
     
   describe "when roman name is not present" do

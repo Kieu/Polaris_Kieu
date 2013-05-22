@@ -15,13 +15,11 @@ class AgenciesController < ApplicationController
   end
 
   def update
-    @errors = Array.new
     @agency.update_user_id = current_user.id
     if @agency.update_attributes(params[:agency])
       flash[:error] = "Agency info updated"
       redirect_to agencies_path
     else
-      @errors << @agency.errors.full_messages
       render :edit
     end
   end

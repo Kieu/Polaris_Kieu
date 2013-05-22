@@ -1,54 +1,45 @@
-<% if @errors && @errors.count > 0 %>
-  <%= render partial: "layouts/show_errors", locals: {objects: @errors } %>
+Client Registration
+
+<% if flash[:error] %>
+  <div><%= flash[:error] %></div>
 <% end %>
 
-<% if flash[:success] %>
-  <div><%= flash[:success] %></div>
-<% end %>
-
-<h1>Create client</h1>
 <%= form_for(@client) do |f| %>
-  <div class="field">
-    <%= f.label "Client name" %><br />
-    <%= f.text_field :client_name %>
-  </div>
-  <div class="field">
-    <%= f.label "Roman name" %><br />
-    <%= f.text_field :roman_name %>
-  </div>
-  <div class="field">
-    <%= f.label "Contact" %><br />
-    <%= f.text_field :tel, maxlength: 15 %>
-  </div>
-  <div class="field">
-    <%= f.label "Person in charge" %><br />
-    <%= f.text_field :person_charge %>
-  </div>
-  <div class="field">
-    <%= f.label "Sale representative" %><br />
-    <%= f.text_field :person_sale %>
-  </div>
-  <div class="field">
-    <%= f.label "Use policy" %><br />
-    <%= f.radio_button :contract_flg, 0, {checked: true} %> No contract
-    <%= f.radio_button :contract_flg, 1 %> Have contract
-  </div>
-  <div class="field">
-    <%= f.label "Plan type" %><br />
-    <%= f.radio_button :contract_type, 0, {checked: true} %> Standard
-    <%= f.radio_button :contract_type, 1 %> Premium
-  </div>
+  <%= f.label "Client name" %>
+  <%= f.text_field :client_name, maxlength: 256, style: "width: 250px"%><br />
+
+  <%= f.label "Roman name" %>
+  <%= f.text_field :roman_name, maxlength: 256, style: "width: 250px" %><br />
+
+  <%= f.label "Contact" %>
+  <%= f.text_field :tel, maxlength: 15, style: "width: 250px" %><br />
+
+  <%= f.label "Person in charge" %>
+  <%= f.text_field :person_charge, maxlength: 256, style: "width: 250px" %><br />
+
+  <%= f.label "Sale representative" %>
+  <%= f.text_field :person_sale, maxlength: 256, style: "width: 250px" %><br />
+
+  <%= f.label "Use policy" %>
+  <%= f.radio_button :contract_flg, 0, {checked: true} %> No contract
+  <%= f.radio_button :contract_flg, 1 %> Have contract<br />
+
+  <%= f.label "Plan type" %>
+  <%= f.radio_button :contract_type, 0, {checked: true} %> Standard
+  <%= f.radio_button :contract_type, 1 %> Premium<br />
 
   List users Added: <br />
   <div id="user_list">
     <br />
   </div>
   <%= render "layouts/user_list" %>
+
   <div class="actions">
     <%= f.submit %>
+    <%= link_to 'Cancel', clients_path %>
   </div>
-  <%= link_to 'Cancel', clients_path %>
 <% end %>
+<%= link_to 'New Client', new_client_path %>
 
 <script type="text/javascript">
   $(document).ready(function(){
@@ -65,12 +56,4 @@
       return false;
     });
   });
-
-  $(".inline").colorbox({
-    width: "30%",
-    inline: true,
-    escKey: false,
-    overlayClose: false,
-  });
 </script>
-<%= link_to 'New Client', new_client_path %>

@@ -7,27 +7,54 @@ class UsersController < ApplicationController
 
   def show
   end
+  
+  def new
+    @user = User.new
+  end
+  
+  def create
+    @user = User.new(params[:user])
+    @user.password = SecureRandom.urlsafe_base64(6)
+    @user.create_user_id = current_user.id
+    if @user.valid?
+      @user.save!
+      if @user.role_id == 2
+        ClientUser.create(client_id: @user.company_id, user_id: @user.id)
+      end
+      flash[:success] = "User was successfully created"
+      if @user.password_flg == 0
+        UserMailer.send_password(@user, @user.password).deliver
+      end
+      redirect_to new_user_path
+    else
+      render :new
+    end
+  end
+  
+  def edit
+    @user = User.find(params[:id])
+  end
+  
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(params[:user])
+      flash[:success] = "Update successfull"
+      redirect_to users_path
+    else
+      render :edit
+    end
+  end
+  
+  def enable_disable_user
+    user = User.find_by_id(params[:id])
+    user.status = user.status == 0 ? "1" : "0"
+    user.save
+    render text: "ok"
+  end
 
   def get_users_list
-    rp = (params[:rp]).to_i
-    rp = 10 if !rp
-    #current page
-    page = (params[:page]).to_i
-    page = 1 if !page
-    start = ((page-1) * rp).to_i
-    #get total records
-    count = User.where(status: 0).count
-    #get all Users
-    @users = User.where(status: 0).order('roman_name').limit(rp).offset(start)
-    @rows = Array.new
-    @users.each do |user|
-      link = "<a href='users/#{user.id}/edit'>Edit</a>"
-      @rows << {"id" => user.id, "cell" => {"link" => link,"roman_name" => user.roman_name, 
-                "username" => user.username, "company" => user.company,
-                "email" => user.email, "role_id" => Role.find( user.role_id).role_name}}
-    end
-    @data = {page: page, total: count, rows: @rows}
-    render json: @data
+    rows = get_rows(User.order_by_roman_name.page(params[:page]).per(params[:rp]))
+    render json: {page: params[:page], total: User.where(status: 0).count, rows: rows}
   end
 
   def search
@@ -49,5 +76,26 @@ class UsersController < ApplicationController
     else
       render text: "test#!#0#!#test#!#test#!#test"
     end
+  end
+  
+  def change_company_list
+    render json: params[:model].constantize.all
+  end
+
+  private
+  def get_rows users
+    rows = Array.new
+    users.each do |user|
+      if user.role_id == Settings.role.CLIENT
+        company = Client.find_by_id(user.company_id).client_name
+      else
+        company = Agency.find_by_id(user.company_id).agency_name
+      end
+      link = "<a href='users/#{user.id}/edit'>Edit</a>"
+      rows << {"id" => user.id, "cell" => {"link" => link,"roman_name" => user.roman_name, 
+                "username" => user.username, "company" => company,
+                "email" => user.email, "role_id" => user.role.role_name}}
+    end
+    rows
   end
 end

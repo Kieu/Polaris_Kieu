@@ -92,7 +92,6 @@ class ClientsController < ApplicationController
         @clients << client_user.client
       end
     end
-    @errors = Array.new
     @client = Client.new(params[:client])
     @client.create_user_id = current_user.id
     if @client.save
@@ -103,10 +102,9 @@ class ClientsController < ApplicationController
 		      end
 		    end
 			end
-      flash[:success] = "Client was successfully created"
+      flash[:error] = "Client was successfully created"
       redirect_to new_client_path
     else
-      @errors << @client.errors.full_messages
       render :new
     end
   end
@@ -125,7 +123,6 @@ class ClientsController < ApplicationController
   end
 
   def update
-    @errors = Array.new
     @client = Client.find(params[:id])
     @client.attributes = params[:client]
     @client.update_user_id = current_user.id
@@ -158,7 +155,6 @@ class ClientsController < ApplicationController
       flash[:error] = "Edit successfull"
       redirect_to clients_path
     else
-      @errors << @client.errors.full_messages
       render "edit"
     end
   end
