@@ -40,13 +40,13 @@ List uers Added: <br>
 			<%= client_user.user.email %>
 			<%= client_user.user.role.role_name %>
 			<input type="checkbox" name = "del_user_<%= client_user.user_id %>">
-			<input type = "hidden" name = "users_id[]" value = "<%= client_user.user_id %>">
+			<input type = "hidden" name = "users_id[]" value = "<%= client_user.user_id %>"> <br>
 		<% end %>
 	<% end %>
 	<br>
 	</div>
 <%= render "layouts/user_list" %>
-<button><%= link_to 'Cancel', clients_path %></button>
+<%= link_to 'Cancel', clients_path %>
 <div class="actions">
     <%= f.submit %>
   </div>
@@ -75,9 +75,9 @@ List uers Added: <br>
         if ($.inArray(data[1], list_user) >= 0){
         	alert("User was added");
         }else{
-          $("#user_list").append(data[0] + " " + data[2] + " " + data[3]);
+          $("#user_list").append(data[0] + " " + data[2] + " " + data[3] + " ");
           $("#user_list").append("<input type = 'hidden' name='users_id[]' value ='" + data[1] + "'>");
-          $("#user_list").append("<input type = 'checkbox' name='del_user_" + data[1] + "'>");
+          $("#user_list").append("<input type = 'checkbox' name='del_user_" + data[1] + "'><br>");
           list_user.push(data[1])
         }
         return false;
