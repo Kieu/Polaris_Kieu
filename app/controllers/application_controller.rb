@@ -9,12 +9,12 @@ class ApplicationController < ActionController::Base
   end
   
   def must_super
-    redirect_to(root_path) unless current_user.role_id == 1  
+    redirect_to root_path unless current_user.role_id == Settings.role.SUPER
   end
 
   def must_super_agency
-    if(current_user.role_id != 1 && current_user.role_id != 3)
-      redirect_to(root_path)
+    if current_user.role_id == Settings.role.CLIENT
+      redirect_to promotions_path
     end
   end
   
