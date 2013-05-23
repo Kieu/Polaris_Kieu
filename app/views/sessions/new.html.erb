@@ -32,7 +32,6 @@
 <% end %>
 <%= link_to "Resend password", "javascript:void(0)", id: "resend_password" %>
 <% if flash[:send_success] %>
-<% binding.pry %>
 <div id="resend_password_form" class="row">
 <% else %>
 <div id="resend_password_form" style="display: none" class="row">

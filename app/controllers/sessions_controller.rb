@@ -56,7 +56,6 @@ class SessionsController < ApplicationController
         user.password = SecureRandom.urlsafe_base64(6)
         user.save
         UserMailer.send_password(user, user.password).deliver
-        binding.pry
         flash[:send_success] = "Send password ok"
         redirect_to signin_path
       else
