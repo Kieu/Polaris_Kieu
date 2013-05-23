@@ -44,7 +44,6 @@ List uers Added: <br>
 	<% end %>
 	<br>
 	</div>
-<input id="tags" />
 <%= link_to 'Cancel', clients_path %>
 <div class="actions">
     <%= f.submit %>
@@ -75,9 +74,6 @@ List uers Added: <br>
 				list_user.push("<%= user.username %>");
 			<% end %>
 		<% end %>
-		$( "#tags" ).autocomplete({
-			source: list_user
-		});
 	})
 	$(".inline").colorbox({
 					width: "30%",
@@ -103,5 +99,5 @@ List uers Added: <br>
 <%= 
 if(current_user.role_id == Settings.role.SUPER) 
   link_to 'New Client', new_client_path
-end 
+end
 %>
