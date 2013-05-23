@@ -32,17 +32,17 @@
 							<% if current_user.role_id == Settings.role.SUPER %>
 								<% @clients.each_with_index do |client, index| %>
 									<% if (params[:id] && client.id == params[:id].to_i) || (!params[:id] && index == 0) %>
-										<div><%= link_to "", edit_client_path(client), class: "edit_client" %><%= link_to client.client_name, "#{client_path(client)}##{index}", class: "client_name active", id: index %></div>
+										<div><%= link_to "", "#{edit_client_path(client)}##{index}", class: "edit_client" %><%= link_to client.client_name, "#{client_path(client)}##{index}", class: "client_name active", id: index %></div>
 									<% else %>
-										<div><%= link_to "", edit_client_path(client), class: "edit_client" %><%= link_to client.client_name, "#{client_path(client)}##{index}", class: "client_name", id: index %></div>
+										<div><%= link_to "", "#{edit_client_path(client)}##{index}", class: "edit_client" %><%= link_to client.client_name, "#{client_path(client)}##{index}", class: "client_name", id: index %></div>
 									<% end %>
 								<% end %>
 							<% else %>
 								<% @clients.each_with_index do |client, index| %>
 									<% if (params[:id] && client.id == params[:id].to_i) || (!params[:id] && index == 0) %>
-										<div><%= link_to client.client_name, "#{client_path(client)}##{index}", class: "client_name active", id: index %></div>
+										<div><%= link_to "#{edit_client_path(client)}##{index}", "#{client_path(client)}##{index}", class: "client_name active", id: index %></div>
 									<% else %>
-										<div><%= link_to client.client_name, "#{client_path(client)}##{index}", class: "client_name", id: index %></div>
+										<div><%= link_to "#{edit_client_path(client)}##{index}", "#{client_path(client)}##{index}", class: "client_name", id: index %></div>
 									<% end %>
 								<% end %>
 							<% end %>

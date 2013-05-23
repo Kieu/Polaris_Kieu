@@ -13,31 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
-
-  window.User = {
-    completeProjectLine: function(data) {
-      var html, watchs;
-
-      html = "";
-      html += "<div class='user_info'><a href=/users/" + data[1] + ">" + data[0] + "</a>" + "</div>";
-      
-      return html;
-    },
-    completeProjects: function(el) {
-      var hash;
-
-      hash = {
-        minChars: 1,
-        delay: 50,
-        width: 350,
-        scroll: true,
-        search_type: "user",
-        formatItem: function(data, i, total) {
-          return User.completeProjectLine(data);
+function index_of(haystack, needle) {
+    for (var i = 0, l = haystack.length; i < l; ++i) {
+        if( haystack[i].value === needle ) {
+           return i;   
         }
-        
-      };
-      //console.log(hash);
-      return $(el).autocomplete("/users/search", hash);
     }
-  };
+    return -1;
+}
