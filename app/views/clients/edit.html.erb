@@ -1,4 +1,5 @@
-<%= @client.client_name %>
+<%= render "layouts/prevent_change_page" %>
+Edit Client
 <%= form_for(@client) do |f| %>
   <div class="field">
     <%= f.label "Client name" %><br />
@@ -44,7 +45,7 @@
     <% end %>
     <br>
 	</div>
-  <%= render "layouts/user_list" %>
+	<input id="tags" placeholder="search"/>
   <%= link_to 'Cancel', clients_path %>
   <div class="actions">
     <%= f.submit %>
@@ -53,17 +54,35 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		list_ignore_user = [];
-		list_user = []
+		list_user = [];
 		<% @client.client_users.each do |client_user|%>	
 			<% if client_user.del_flg == 0 %>
-				list_user.push("<%= client_user.user.username %>");
+				list_ignore_user.push({"value": "<%= client_user.user.id %>"});
 			<% end %>
 		<% end %>
 		<% User.all.each do |user|%>	
 			<% if user.status == 0 %>
-				list_user.push("<%= user.username %>");
+				list_user.push({"label": "<%= user.username %>", "value": "<%= user.id %>", "email": "<%= user.email %>", "role": "<%= user.role.role_name %>"});
 			<% end %>
 		<% end %>
-	})
+		$(list_ignore_user).each(function(i,data){
+			list_user.splice(index_of(list_user,data.value),1);
+		});
+		$( "#tags" ).autocomplete({
+			source: list_user,
+			select: function( event, ui ) {
+				$("#tags").val(ui.item.label);
+				list_user.splice(list_user.indexOf(ui.item),1);
+				data = ui.item;
+				$("#user_list").append(data.label + " " + data.email + " " + data.role + " ");
+				$("#user_list").append("<input type = 'hidden' name='users_id[]' value ='" + data.value + "'>");
+				$("#user_list").append("<input type = 'checkbox' name='del_user_" + data.value + "'><br>");
+				return false;
+			},
+			minLength: 0
+		}).focus(function () {
+    			$(this).autocomplete("search");
+			});
+	});
 </script>
 <%= link_to 'New Client', new_client_path %>

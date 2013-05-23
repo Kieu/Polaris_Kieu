@@ -32,7 +32,7 @@ Client Registration
   <div id="user_list">
     <br />
   </div>
-  <%= render "layouts/user_list" %>
+  <input id="tags" placeholder="search" />
 
   <div class="actions">
     <%= f.submit %>
@@ -43,17 +43,26 @@ Client Registration
 
 <script type="text/javascript">
   $(document).ready(function(){
-    list_user = []
-    return User.completeProjects(".searchbox input#search_user").result(function(e, data, formatted) {
-      if ($.inArray(data[1], list_user) >= 0){
-        alert("User was added");
-      }else{
-        $("#user_list").append(data[0] + " " + data[2] + " " + data[3]);
-        $("#user_list").append("<input type = 'hidden' name='users_id[]' value ='" + data[1] + "'>");
-        $("#user_list").append("<input type = 'checkbox' name='del_user_" + data[1] + "'>");
-        list_user.push(data[1]);
-      }
-      return false;
-    });
+  	list_user = [];
+	<% User.all.each do |user|%>	
+		<% if user.status == Settings.user.active %>
+			list_user.push({"label": "<%= user.username %>", "value": "<%= user.id %>", "email": "<%= user.email %>", "role": "<%= user.role.role_name %>"});
+		<% end %>
+	<% end %>
+	$( "#tags" ).autocomplete({
+		source: list_user,
+		select: function( event, ui ) {
+			$("#tags").val(ui.item.label);
+			list_user.splice(list_user.indexOf(ui.item),1);
+			data = ui.item;
+			$("#user_list").append(data.label + " " + data.email + " " + data.role + " ");
+			$("#user_list").append("<input type = 'hidden' name='users_id[]' value ='" + data.value + "'>");
+			$("#user_list").append("<input type = 'checkbox' name='del_user_" + data.value + "'><br>");
+			return false;
+		},
+		minLength: 0
+	}).focus(function () {
+    	$(this).autocomplete("search");
+		});
   });
 </script>

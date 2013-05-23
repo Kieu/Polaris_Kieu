@@ -1,3 +1,5 @@
+<%= render "layouts/prevent_change_page" %>
+<%= flash[:success] if flash[:success] %>
 <%= form_for(@user) do |f| %>
   <div class="field">
     <%= f.label "User name" %><br />
@@ -35,7 +37,7 @@
   </div>
   <div class="field">
     <%= f.label "Disable User" %><br />
-    <% if @user.status == 1 %>
+    <% if @user.status == Settings.user.deactive %>
     	<input type="checkbox" id = "disable_button" checked="checked">
 	<% else %>
 		<input type="checkbox" id = "disable_button">
@@ -63,7 +65,7 @@
 	</div>
 </div>
 <script type="text/javascript">
-	$(document).ready(function(){
+	$(function(){
 		check = $("#disable_button").is(':checked')? true : false;
 		$("#disable_button").click(function(e){
 			if (check){
