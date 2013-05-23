@@ -29,7 +29,8 @@ class AgenciesController < ApplicationController
   end
 
   def create
-    @agency = Agency.new(params[:agency], create_user_id: current_user.id)
+    @agency = Agency.new(params[:agency])
+    @agency.create_user_id = current_user.id
     if @agency.save
       flash[:error] = "Agency created"
       redirect_to new_agency_path
