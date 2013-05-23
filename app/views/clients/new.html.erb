@@ -45,7 +45,7 @@ Client Registration
   $(document).ready(function(){
   	list_user = [];
 	<% User.all.each do |user|%>	
-		<% if user.status == 0 %>
+		<% if user.status == Settings.user.active %>
 			list_user.push({"label": "<%= user.username %>", "value": "<%= user.id %>", "email": "<%= user.email %>", "role": "<%= user.role.role_name %>"});
 		<% end %>
 	<% end %>
