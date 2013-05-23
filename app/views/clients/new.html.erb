@@ -6,19 +6,19 @@ Client Registration
 
 <%= form_for(@client) do |f| %>
   <%= f.label "Client name" %>
-  <%= f.text_field :client_name, maxlength: 256, style: "width: 250px"%><br />
+  <%= f.text_field :client_name, maxlength: 255, style: "width: 250px"%><br />
 
   <%= f.label "Roman name" %>
-  <%= f.text_field :roman_name, maxlength: 256, style: "width: 250px" %><br />
+  <%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %><br />
 
   <%= f.label "Contact" %>
   <%= f.text_field :tel, maxlength: 15, style: "width: 250px" %><br />
 
   <%= f.label "Person in charge" %>
-  <%= f.text_field :person_charge, maxlength: 256, style: "width: 250px" %><br />
+  <%= f.text_field :person_charge, maxlength: 255, style: "width: 250px" %><br />
 
   <%= f.label "Sale representative" %>
-  <%= f.text_field :person_sale, maxlength: 256, style: "width: 250px" %><br />
+  <%= f.text_field :person_sale, maxlength: 255, style: "width: 250px" %><br />
 
   <%= f.label "Use policy" %>
   <%= f.radio_button :contract_flg, 0, {checked: true} %> No contract

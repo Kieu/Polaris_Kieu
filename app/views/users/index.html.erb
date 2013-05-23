@@ -1,3 +1,6 @@
+<% if flash[:success] %>
+  <div><%= flash[:success] %></div>
+<% end %>
 <h1>Listing users</h1>
 <%= link_to 'New User', new_user_path %>
 <table id="flex1" style="display:none"></table>

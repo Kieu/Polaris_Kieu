@@ -1,8 +1,8 @@
-<% if @errors && @errors.count > 0 %>
-	<%= render partial: "layouts/show_errors", locals: {objects: @errors } %>
-<% end %>
+Add Agency
 
-<h1>Add Agency</h1>
+<% if flash[:error] %>
+  <div><%= flash[:error] %></div>
+<% end %>
 
 <%= form_for(@agency) do |f| %>
   <br/>
@@ -11,7 +11,7 @@
       <%= f.label "Agency name:" %><br />
     </div>
     <div style="float:left">
-      <%= f.text_field :agency_name %>
+      <%= f.text_field :agency_name, maxlength: 255, style: "width: 250px" %>
     </div>
     <div style="clear:both"></div>
   </div>
@@ -21,7 +21,7 @@
       <%= f.label "Roman name:" %><br />
     </div>
     <div style="float: left">
-    <%= f.text_field :roman_name %>
+    <%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %>
     </div>
     <div style="clear:both"></div>
   </div>

@@ -6,18 +6,48 @@ namespace :master do
     Role.create!({id: 2, role_name: "Client", status: 0}, without_protection: true)
     Role.create!({id: 3, role_name: "Agency", status: 0}, without_protection: true)
   end
+
+  desc "Create Agency"
+  task create_agency: :environment do
+    Agency.destroy_all
+    (1..100).each do |num|
+      Agency.create!({id: num, agency_name: "agency_#{num}", roman_name: "agency_#{num}"},
+        without_protection: true)
+    end
+  end
+
+  desc "Create Client"
+  task create_client: :environment do
+    Client.destroy_all
+    (1..100).each do |num|
+      Client.create!({id: num, client_name: "client_#{num}", roman_name: "client_#{num}",
+        tel: "#{num}#{num}#{num}#{num}", contract_flg: 1, contract_type: 1,
+        person_charge: "person_#{num}", person_sale: "person_#{num}"},
+        without_protection: true)
+    end
+  end
   
   desc "Create super user"
   task create_super_user: :environment do
     User.find_by_id(1).destroy if User.find_by_id(1)
-    User.create!({id: 1, email: "example@septeni.com", username: "example",
-      password: "123456789", role_id: 1, status: 0, roman_name: "example",
-      company: "Septeni", password_flg: 0}, without_protection: true)
+    User.create!({id: 1, email: "super@septeni.com", username: "super",
+      password: "123456789", role_id: 1, status: 0, roman_name: "super",
+      company_id: 1, password_flg: 0}, without_protection: true)
   end
-  task create_agency: :environment do
-    for num in 1..100 do
-    Agency.create!({agency_name: "Agency_"+num.to_s, roman_name: "Agency_"+num.to_s,
-      create_user_id: 1}, without_protection: true)
-    end
+
+  desc "Create agency user"
+  task create_agency_user: :environment do
+    User.find_by_id(2).destroy if User.find_by_id(2)
+    User.create!({id: 2, email: "agency@septeni.com", username: "agency",
+      password: "123456789", role_id: 3, status: 0, roman_name: "agency",
+      company_id: 1, password_flg: 0}, without_protection: true)
+  end
+
+  desc "Create client user"
+  task create_client_user: :environment do
+    User.find_by_id(3).destroy if User.find_by_id(3)
+    User.create!({id: 3, email: "client@septeni.com", username: "client",
+      password: "123456789", role_id: 2, status: 0, roman_name: "client",
+      company_id: 1, password_flg: 0}, without_protection: true)
   end
 end

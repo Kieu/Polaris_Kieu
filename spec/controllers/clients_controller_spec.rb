@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ClientsController do
   let(:clients) do
     20.times {|num| FactoryGirl.create(:client, client_name: "Client#{num}",
-     department_name: "Client#{num}123")}
+      roman_name: "Client#{num}", tel: "123#{num}")}
   end
 
   context "when user not login" do
