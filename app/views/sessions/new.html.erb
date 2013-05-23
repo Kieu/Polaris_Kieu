@@ -17,9 +17,9 @@
 		<div class="span6 offset3">
 			<%= form_for(:session, url: sessions_path) do |f| %>
 				<%= f.label "Email" %>
-				<%= f.text_field :email, maxlength: "255" %>
+				<%= f.text_field :email, maxlength: 255, style: "width: 200px" %>
 				<%= f.label "Password" %>
-				<%= f.password_field :password %>
+				<%= f.password_field :password, maxlength: 255, style: "width: 200px" %>
 				<%= f.label "Language" %>
 				<select name="language">
 					<option value="ja">Japanese</option>
@@ -39,7 +39,7 @@
 	<div class="span6 offset3">
 	<%= form_tag(resend_password_sessions_path, method: :post) do %>
 		<%= label_tag "Email" %>
-		<%= text_field_tag "email"%>
+		<%= text_field_tag "email", maxlength: 255, style: "width: 200px" %>
 		<%= label_tag "Captcha" %>
 		<%= recaptcha_tags %>
 		<%= submit_tag "Send" %>

@@ -1,16 +1,15 @@
-<%= flash[:success] if flash[:success] %>
 <%= form_for(@user) do |f| %>
   <div class="field">
     <%= f.label "User name" %><br />
-    <%= f.text_field :username, maxlength: "256" %>
+    <%= f.text_field :username, maxlength: 255, style: "width: 200px" %>
   </div>
   <div class="field">
     <%= f.label "Roman name" %><br />
-    <%= f.text_field :roman_name, maxlength: "256" %>
+    <%= f.text_field :roman_name, maxlength: 255, style: "width: 200px" %>
   </div>
   <div class="field">
     <%= f.label "Email" %><br />
-    <%= f.text_field :email, maxlength: "256" %>
+    <%= f.text_field :email, maxlength: 255, style: "width: 200px" %>
   </div>
   <div class="field">
     <%= f.label "Role" %><br />

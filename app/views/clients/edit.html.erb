@@ -2,23 +2,23 @@
 <%= form_for(@client) do |f| %>
   <div class="field">
     <%= f.label "Client name" %><br />
-    <%= f.text_field :client_name, maxlength: 256, style: "width: 250px" %>
+    <%= f.text_field :client_name, maxlength: 255, style: "width: 250px" %>
   </div>
   <div class="field">
     <%= f.label "Roman name" %><br />
-    <%= f.text_field :roman_name, maxlength: 256, style: "width: 250px" %>
+    <%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %>
   </div>
   <div class="field">
     <%= f.label "Tel" %><br />
-    <%= f.text_field :tel, maxlength: 256, style: "width: 250px" %>
+    <%= f.text_field :tel, maxlength: 15, style: "width: 250px" %>
   </div>
   <div class="field">
     <%= f.label "person_charge:" %><br />
-    <%= f.text_field :person_charge, maxlength: 256, style: "width: 250px" %>
+    <%= f.text_field :person_charge, maxlength: 255, style: "width: 250px" %>
   </div>
   <div class="field">
     <%= f.label "person_sale" %><br />
-    <%= f.text_field :person_sale, maxlength: 256, style: "width: 250px" %>
+    <%= f.text_field :person_sale, maxlength: 255, style: "width: 250px" %>
   </div>
   <div class="field">
     <%= f.label "Contract type" %><br />
@@ -31,35 +31,25 @@
     <%= f.radio_button :contract_flg, 1 %> 1
   </div>
 
-List uers Added: <br>
+  List users Added: <br>
 	<div id="user_list">
-	<% @client.client_users.each do |client_user| %>
-		<% if client_user.del_flg == 0 %>
-			<%= client_user.user.username %>
-			<%= client_user.user.email %>
-			<%= client_user.user.role.role_name %>
-			<input type="checkbox" name = "del_user_<%= client_user.user_id %>">
-			<input type = "hidden" name = "users_id[]" value = "<%= client_user.user_id %>"> <br>
-		<% end %>
-	<% end %>
-	<br>
+    <% @client.client_users.each do |client_user| %>
+      <% if client_user.del_flg == 0 %>
+        <%= client_user.user.username %>
+        <%= client_user.user.email %>
+        <%= client_user.user.role.role_name %>
+        <input type="checkbox" name = "del_user_<%= client_user.user_id %>">
+        <input type = "hidden" name = "users_id[]" value = "<%= client_user.user_id %>"> <br>
+      <% end %>
+    <% end %>
+    <br>
 	</div>
-<%= link_to 'Cancel', clients_path %>
-<div class="actions">
+  <%= render "layouts/user_list" %>
+  <%= link_to 'Cancel', clients_path %>
+  <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
-<div style='display:none'>
-	<div id='inline_content' style='padding:10px; background:#fff;'>
-		<div>Username: <%= @client.client_name %></div>
-		<div> Are you sure to delete? </div>
-		<button id="del_cli">Delete</button>
-		<button id="cancel_del">Cancel</button>
-	</div>
-	<div id="del_success">
-		<div>Delete ok</div>
-	</div>
-</div>
 <script type="text/javascript">
 	$(document).ready(function(){
 		list_ignore_user = [];
@@ -75,29 +65,5 @@ List uers Added: <br>
 			<% end %>
 		<% end %>
 	})
-	$(".inline").colorbox({
-					width: "30%",
-					inline: true,
-					escKey: false,
-					overlayClose: false,
-				});
-	$("#del_cli").click(function(){
-		$.ajax({
-			url: "<%= del_client_clients_path %>",
-			method: "POST",
-			data: "client_id=" + "<%= @client.id %>",
-			success: function(data){
-				location.href = "/clients"
-			}
-		})
-	})
-
-	$("#cancel_del").click(function(){
-		$(".inline").colorbox.close();
-	})
 </script>
-<%= 
-if(current_user.role_id == Settings.role.SUPER) 
-  link_to 'New Client', new_client_path
-end
-%>
+<%= link_to 'New Client', new_client_path %>

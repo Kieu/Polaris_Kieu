@@ -29,14 +29,12 @@ class AgenciesController < ApplicationController
   end
 
   def create
-    @errors = Array.new
     @agency = Agency.new(params[:agency], create_user_id: current_user.id)
     if @agency.save
-      redirect_to agencies_path
+      flash[:error] = "Agency created"
+      redirect_to new_agency_path
     else
-      @errors << @agency.errors.full_messages
       render :new
-      return
     end
   end
 

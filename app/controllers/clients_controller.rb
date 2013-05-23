@@ -158,7 +158,7 @@ class ClientsController < ApplicationController
       flash[:error] = "Edit successfull"
       redirect_to clients_path
     else
-      render "edit"
+      render :edit
     end
   end
 
