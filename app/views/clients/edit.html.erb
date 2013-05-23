@@ -71,7 +71,7 @@ Edit Client
 		$( "#tags" ).autocomplete({
 			source: list_user,
 			select: function( event, ui ) {
-				$("#tags").val(ui.item.label);
+				$("#tags").val("");
 				list_user.splice(list_user.indexOf(ui.item),1);
 				data = ui.item;
 				$("#user_list").append(data.label + " " + data.email + " " + data.role + " ");
@@ -79,10 +79,16 @@ Edit Client
 				$("#user_list").append("<input type = 'checkbox' name='del_user_" + data.value + "'><br>");
 				return false;
 			},
-			minLength: 0
-		}).focus(function () {
+			minLength: 0,
+			focus: function(e,ui){
+				e.preventDefault();
+				this.value = ui.item.label;
+			}
+		}).focus(function (event) {
     			$(this).autocomplete("search");
-			});
+    			$("#tags").val("");
+    			event.preventDefault();
+		});
 	});
 </script>
 <%= link_to 'New Client', new_client_path %>

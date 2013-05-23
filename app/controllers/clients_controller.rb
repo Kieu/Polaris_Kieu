@@ -97,16 +97,23 @@ class ClientsController < ApplicationController
     end
     @client = Client.new(params[:client])
     @client.create_user_id = current_user.id
-    if @client.save
-			if params[:users_id]
-		    params[:users_id].each do |user_id|
-		      unless params["del_user_" + user_id] == "on"
-		        @client.client_users.create(user_id: user_id)
-		      end
-		    end
-			end
-      flash[:error] = "Client was successfully created"
-      redirect_to new_client_path
+    
+    if @client.valid?
+  		ActiveRecord::Base.transaction do
+  		  @client.save!
+  		  if params[:users_id]
+          if !@client.update_client_users(params)
+            flash[:error] = "Can not create user for client"
+            raise ActiveRecord::Rollback
+          end
+        end
+  		end
+  		if flash[:error]
+        render :new
+      else
+        flash[:error] = "Client was successfully created"
+        redirect_to new_client_path
+  		end 
     else
       render :new
     end
@@ -139,24 +146,21 @@ class ClientsController < ApplicationController
       end
     end
     if @client.valid?
-      @client.save!
-			if params[:users_id]
-		    params[:users_id].each do |user_id|
-		      if params["del_user_" + user_id] == "on"
-		        if client_user = @client.client_users.find_by_user_id(user_id)
-		          client_user.update_attributes(del_flg: 1)
-		        end
-		      else
-		        if client_user = @client.client_users.find_by_user_id(user_id)
-		          client_user.update_attributes(del_flg: 0)
-		        else
-		          @client.client_users.create(user_id: user_id)
-		        end
-		      end
-		    end
-			end
-      flash[:error] = "Edit successfull"
-      redirect_to clients_path
+      ActiveRecord::Base.transaction do
+        @client.save!
+        if params[:users_id]
+          if !@client.update_client_users(params)
+            flash[:error] = "Can not update user for client"
+            raise ActiveRecord::Rollback
+          end
+        end
+      end
+      if flash[:error]
+        render :edit
+      else
+        flash[:error] = "Edit successfull"
+        redirect_to new_client_path
+      end
     else
       render :edit
     end

@@ -50,4 +50,11 @@ namespace :master do
       password: "123456789", role_id: 2, status: 0, roman_name: "client",
       company_id: 1, password_flg: 0}, without_protection: true)
   end
+  
+  desc "Create Press Release"
+  task create_press_release: :environment do
+    (1..100).each do |num|
+      PressRelease.create!(content: "test_#{num}", release_time: Time.now, create_user_id: 1)
+    end
+  end
 end
