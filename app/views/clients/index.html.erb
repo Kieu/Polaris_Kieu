@@ -18,7 +18,6 @@
 		useRp: true,
 		id: "<%= @clientId %>",
 		rp: 10,
-		rpOptions: [10, 30, 50, 100],
 		showTableToggleBtn: true,
 		width: 250,
 		height: 250
@@ -27,5 +26,9 @@
 <br />
 <br />
 <div>
-<%= link_to 'New Client', new_client_path %>
+<%= 
+if(current_user.role_id == Settings.role.SUPER)
+  link_to 'New Client', new_client_path
+end 
+%>
 </div>

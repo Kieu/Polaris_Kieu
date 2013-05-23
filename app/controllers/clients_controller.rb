@@ -1,6 +1,8 @@
 class ClientsController < ApplicationController
   before_filter :signed_in_user
-  before_filter :must_super_agency, except: [:show]
+  before_filter :must_super_agency, only: [:index,:show]
+  before_filter :must_super, only: [:new, :create, :edit, :update, :destroy,
+    :del_client]
   before_filter :must_deleteable, only: [:show, :edit, :update, :destroy]
   
   #get all clients sorted by romaji name
@@ -182,7 +184,8 @@ class ClientsController < ApplicationController
   def get_rows promotions
     rows = Array.new
     promotions.each do |promotion|
-      rows << {'id' => promotion.id, 'cell' => {'promotion_name' => promotion.promotion_name}}
+      promotionName = "<a href='promotions/id'>#{promotion.promotion_name}</a>"
+      rows << {'id' => promotion.id, 'cell' => {'promotion_name' => promotionName}}
     end
     rows
   end
