@@ -1,5 +1,4 @@
 <%= @client.client_name %>
-
 <%= form_for(@client) do |f| %>
   <div class="field">
     <%= f.label "Client name" %><br />
@@ -45,7 +44,6 @@ List uers Added: <br>
 	<% end %>
 	<br>
 	</div>
-<%= render "layouts/user_list" %>
 <%= link_to 'Cancel', clients_path %>
 <div class="actions">
     <%= f.submit %>
@@ -64,24 +62,18 @@ List uers Added: <br>
 </div>
 <script type="text/javascript">
 	$(document).ready(function(){
+		list_ignore_user = [];
 		list_user = []
 		<% @client.client_users.each do |client_user|%>	
 			<% if client_user.del_flg == 0 %>
-				list_user.push("<%= client_user.user_id %>");
+				list_user.push("<%= client_user.user.username %>");
 			<% end %>
 		<% end %>
-		return User.completeProjects(".searchbox input#search_user").result(function(e, data, formatted) {
-        //location.href = "/promotions/" + data[1];
-        if ($.inArray(data[1], list_user) >= 0){
-        	alert("User was added");
-        }else{
-          $("#user_list").append(data[0] + " " + data[2] + " " + data[3] + " ");
-          $("#user_list").append("<input type = 'hidden' name='users_id[]' value ='" + data[1] + "'>");
-          $("#user_list").append("<input type = 'checkbox' name='del_user_" + data[1] + "'><br>");
-          list_user.push(data[1])
-        }
-        return false;
-      });
+		<% User.all.each do |user|%>	
+			<% if user.status == 0 %>
+				list_user.push("<%= user.username %>");
+			<% end %>
+		<% end %>
 	})
 	$(".inline").colorbox({
 					width: "30%",
@@ -107,5 +99,5 @@ List uers Added: <br>
 <%= 
 if(current_user.role_id == Settings.role.SUPER) 
   link_to 'New Client', new_client_path
-end 
+end
 %>

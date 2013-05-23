@@ -1,7 +1,8 @@
 class ClientsController < ApplicationController
   before_filter :signed_in_user
   before_filter :must_super_agency, only: [:index,:show]
-  before_filter :must_super, only: [:new, :create, :edit, :update, :destroy, :del_client]
+  before_filter :must_super, only: [:new, :create, :edit, :update, :destroy,
+    :del_client]
   before_filter :must_deleteable, only: [:show, :edit, :update, :destroy]
   
   #get all clients sorted by romaji name

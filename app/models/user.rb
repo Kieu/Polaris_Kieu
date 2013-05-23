@@ -22,10 +22,6 @@ class User < ActiveRecord::Base
 
   before_save {|user| user.email = email.downcase}
   
-  searchable do
-    text :username, :stored => true 
-  end
-  
   def can_login?
     return false if self.status == Settings.user.deactive
     if self.block_login_user && self.block_login_user.login_fail_num >=

@@ -1,6 +1,14 @@
 <% if @errors && @errors.count > 0 %>
-	<%= render partial: "layouts/show_errors", locals: {objects: @errors } %>
-<% end %>
+		<% @errors.each do |error| %>
+			<div>
+				<span class="text-validationError"><%= error %></span>
+			</div>
+		<% end %>
+		<script type="text/javascript">
+			$("#resend_password_form").show();
+		</script>
+	<% end %>
+<%= flash[:success]%>
 <% if signed_in? %>
 	Welcome to Canpass
 <% else %>
@@ -23,7 +31,11 @@
 	</div>
 <% end %>
 <%= link_to "Resend password", "javascript:void(0)", id: "resend_password" %>
+<% if flash[:send_success] %>
+<div id="resend_password_form" class="row">
+<% else %>
 <div id="resend_password_form" style="display: none" class="row">
+<% end %>
 	<div class="span6 offset3">
 	<%= form_tag(resend_password_sessions_path, method: :post) do %>
 		<%= label_tag "Email" %>
@@ -35,14 +47,14 @@
 	<% if @form_errors && @form_errors.count > 0 %>
 		<% @form_errors.each do |error| %>
 			<div>
-				<%= error %>
+				<div><span class="text-validationError"><%= error %></span></div>
 			</div>
 		<% end %>
 		<script type="text/javascript">
 			$("#resend_password_form").show();
 		</script>
 	<% end %>
-	<%= flash[:success]%>
+	<div><span class="text-validationError"><%= flash[:send_success]%></span></div>
 </div>
 </div>
 <div id="rss">
