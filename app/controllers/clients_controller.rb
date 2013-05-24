@@ -4,38 +4,17 @@ class ClientsController < ApplicationController
   before_filter :must_super, only: [:new, :create, :edit, :update, :destroy,
     :del_client]
   before_filter :must_deleteable, only: [:show, :edit, :update, :destroy]
+  before_filter :load_list_clients, except: [:destroy, :del_client]
   
   #get all clients sorted by romaji name
   def index
-    if(current_user.role_id == Settings.role.SUPER)
-	    @clients = Client.find(:all, :order => 'roman_name', :conditions => ['del_flg = 0'])
-	  elsif(current_user.role_id == Settings.role.AGENCY)
-	    @clients = Array.new
-	    aryClientUser = current_user.client_users.where(' del_flg = 0 ')
-	    aryClientUser.each do |client_user|
-		    @clients << client_user.client
-		  end
-	  end
-
-    # get client name of 1st client
     @clientName = @clients[0].client_name
   end
   
   #get list promotion and paging
   def get_promotions_list
-    #get list clients
-    if(current_user.role_id == Settings.role.SUPER)
-	    @clients = Client.find(:all, :order => 'roman_name', :conditions => ['del_flg = 0'])
-	  elsif(current_user.role_id == Settings.role.AGENCY)
-	    @clients = Array.new
-	    aryClientUser = current_user.client_users.where(' del_flg = 0 ')
-	    aryClientUser.each do |client_user|
-		    @clients << client_user.client
-		  end
-	  end
-    
 	  # get params for paging
-    if(params[:id] != '')
+    if(params[:id] != "")
       clientId = params[:id]
     else
       clientId = @clients[0].id
@@ -43,23 +22,12 @@ class ClientsController < ApplicationController
 
     rows = Array.new
     rows = get_rows(Promotion.where("client_id = ? ", clientId).order_by_promotion_name.page(params[:page]).per(params[:rp]), clientId)
-    count = Promotion.where("client_id = ? ", clientId).order('promotion_name').count
+    count = Promotion.where("client_id = ? ", clientId).order_by_promotion_name.count
 	
     render json: {page: params[:page], total: count, rows: rows}
   end
   
   def show
-    # get client list
-    if(current_user.role_id == Settings.role.SUPER)
-      @clients = Client.find(:all, :order => 'roman_name', :conditions => ['del_flg = 0'])
-    elsif(current_user.role_id == Settings.role.AGENCY)
-      @clients = Array.new
-      aryClientUser = current_user.client_users.where(' del_flg = 0 ')
-      aryClientUser.each do |client_user|
-        @clients << client_user.client
-      end
-    end
-
     # get current client name
     @clients.each do |client|
       if(client.id == params[:id].to_i)
@@ -69,32 +37,13 @@ class ClientsController < ApplicationController
 
     @clientId = params[:id]
     render :index
-
   end
 
   def new
     @client = Client.new
-    if(current_user.role_id == Settings.role.SUPER)
-      @clients = Client.find(:all, :order => 'roman_name', :conditions => ['del_flg = 0'])
-    elsif(current_user.role_id == Settings.role.AGENCY)
-      @clients = Array.new
-      aryClientUser = current_user.client_users.where(' del_flg = 0 ')
-      aryClientUser.each do |client_user|
-        @clients << client_user.client
-      end
-    end
   end
 
   def create
-    if(current_user.role_id == Settings.role.SUPER)
-      @clients = Client.find(:all, :order => 'roman_name', :conditions => ['del_flg = 0'])
-    elsif(current_user.role_id == Settings.role.AGENCY)
-      @clients = Array.new
-      aryClientUser = current_user.client_users.where(' del_flg = 0 ')
-      aryClientUser.each do |client_user|
-        @clients << client_user.client
-      end
-    end
     @client = Client.new(params[:client])
     @client.create_user_id = current_user.id
     
@@ -120,31 +69,11 @@ class ClientsController < ApplicationController
   end
 
   def edit
-    @client = Client.find(params[:id])
-    if(current_user.role_id == Settings.role.SUPER)
-      @clients = Client.find(:all, :order => 'roman_name', :conditions => ['del_flg = 0'])
-    elsif(current_user.role_id == Settings.role.AGENCY)
-      @clients = Array.new
-      aryClientUser = current_user.client_users.where(' del_flg = 0 ')
-      aryClientUser.each do |client_user|
-        @clients << client_user.client
-      end
-    end
   end
 
   def update
-    @client = Client.find(params[:id])
     @client.attributes = params[:client]
     @client.update_user_id = current_user.id
-    if(current_user.role_id == Settings.role.SUPER)
-      @clients = Client.find(:all, :order => 'roman_name', :conditions => ['del_flg = 0'])
-    elsif(current_user.role_id == Settings.role.AGENCY)
-      @clients = Array.new
-      aryClientUser = current_user.client_users.where(' del_flg = 0 ')
-      aryClientUser.each do |client_user|
-        @clients << client_user.client
-      end
-    end
     if @client.valid?
       ActiveRecord::Base.transaction do
         @client.save!
@@ -167,7 +96,6 @@ class ClientsController < ApplicationController
   end
 
   def destroy
-    @client = Client.find(params[:id])
     @client.destroy
     redirect_to clients_path
   end
@@ -181,8 +109,8 @@ class ClientsController < ApplicationController
 
   private
   def must_deleteable
-    client = Client.find_by_id(params[:id])
-    redirect_to clients_path if client.nil? || client.del_flg == 1
+    @client = Client.find(params[:id])
+    redirect_to clients_path if @client.nil? || @client.del_flg == 1
   end
 
   def get_rows(promotions, clientId)
@@ -192,5 +120,17 @@ class ClientsController < ApplicationController
       rows << {'id' => promotion.id, 'cell' => {'promotion_name' => promotionName}}
     end
     rows
+  end
+  
+  def load_list_clients
+    if current_user.super?
+      @clients = Client.active.order_by_roman_name
+    elsif(current_user.agency?)
+      @clients = Array.new
+      aryClientUser = current_user.client_users.active
+      aryClientUser.each do |client_user|
+        @clients << client_user.client
+      end
+    end
   end
 end
