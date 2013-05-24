@@ -1,3 +1,7 @@
+<% if flash[:error] %>
+  <div><%= flash[:error] %></div>
+<% end %>
 <div id="container" style="height: 120px; min-width: 600px"></div>
 <%= high_chart("container", @chart) %>
 <div style="height: 350px;"></div>
+<%= link_to "Create promotion", new_promotion_path(client_id: params[:client_id]) %>

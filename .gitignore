@@ -16,6 +16,7 @@
 /public/assets/*
 db/schema.rb
 config/database.yml
+coverage/*
 solr/*
 *~
 .project

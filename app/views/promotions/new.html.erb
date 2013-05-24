@@ -1,0 +1,21 @@
+<%= link_to Client.find(@client_id).client_name, client_path(@client_id) %> > Promotion Registration
+
+<% if flash[:error] %>
+  <div><%= flash[:error] %></div>
+<% end %>
+
+<%= form_for(@promotion) do |f| %>
+  <%= hidden_field_tag :client_id, params[:client_id] %>
+  <%= f.label "Promotion name" %>
+  <%= f.text_field :promotion_name, maxlength: 255, style: "width: 250px" %><br />
+  <%= f.label "Roman name" %>
+  <%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %><br />
+  <%= f.label "Category" %>
+  <%= f.text_field :promotion_category_id, maxlength: 255, style: "width: 250px" %><br />
+  <%= f.label "Tracking period" %>
+  <%= f.text_field :tracking_period, maxlength: 255, style: "width: 250px" %><br />
+  <%= f.submit %>
+  <%= link_to 'Cancel', promotions_path(client_id: @client_id) %>
+<% end %>
+
+<%= link_to "Promotion registration", new_promotion_path(client_id: @client_id) %>

@@ -6,7 +6,7 @@ class CreatePromotions < ActiveRecord::Migration
       t.integer :client_id
       t.integer :create_user_id
       t.integer :update_user_id
-      t.integer :del_flg
+      t.integer :del_flg, default: 0
       t.integer :agency_id
 
       t.timestamps

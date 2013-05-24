@@ -1,0 +1,53 @@
+<%= link_to @promotion.client.client_name, client_path(@promotion.client_id) %> > <%= link_to @promotion.promotion_name, promotion_path(@promotion) %> > Promotion Edit
+
+<%= form_for(@promotion) do |f| %>
+  <%= f.label "Promotion name" %>
+  <%= f.text_field :promotion_name, maxlength: 255, style: "width: 250px" %><br />
+  <%= f.label "Roman name" %>
+  <%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %><br />
+  <%= f.label "Category" %>
+  <%= f.text_field :promotion_category_id, maxlength: 255, style: "width: 250px" %><br />
+  <%= f.label "Tracking period" %>
+  <%= f.text_field :tracking_period, maxlength: 255, style: "width: 250px" %><br />
+  <%= f.submit %>
+  <%= link_to "Cancel", promotions_path(client_id: @promotion.client_id) %>
+  <%= link_to "Delete", "#inline_content", class: "inline" %>
+<% end %>
+
+<div style='display:none'>
+  <div id='inline_content' style='padding:10px; background:#fff;'>
+    <div>Promotion name: <%= @promotion.promotion_name %></div>
+    <div>You want to delete?</div>
+    <button id="del_ok">Delete</button>
+    <button id="del_cancel">Cancel</button>
+  </div>
+  <div id="del_success">
+    <div>Deleted!</div>
+  </div>
+</div>
+
+<%= link_to "Promotion registration", new_promotion_path(client_id: @promotion.client_id) %>
+
+<script type="text/javascript">
+  $(".inline").colorbox({
+    width: "30%",
+    inline: true,
+    escKey: false,
+    overlayClose: false,
+  });
+
+  $("#del_ok").click(function(){
+    $.ajax({
+      url: "<%= delete_promotion_promotions_path %>",
+      method: "POST",
+      data: "id=" + "<%= @promotion.id %>",
+      success: function(data){
+        location.href = "/promotions"
+      }
+    })
+  })
+
+  $("#del_cancel").click(function(){
+    $(".inline").colorbox.close();
+  })
+</script>
