@@ -23,7 +23,7 @@ function index_of(haystack, needle) {
     return -1;
 }
 
-function reloadFlex(obj, urlAction, id, current_active, cname) {
+function reloadFlex(obj, urlAction, id, current_active, cname, maxlength) {
 	$(obj)
     .flexOptions({
         url: urlAction,
@@ -31,6 +31,11 @@ function reloadFlex(obj, urlAction, id, current_active, cname) {
     }).flexReload();
     $(current_active).removeClass('active');
     $(id).addClass('active');
-    $(cname).text($(id).text());
+    var txt = '';
+    if ($(id).text().length > maxlength)
+    	txt = $(id).text().substring(0, maxlength) + '...';
+    else
+    	txt = $(id).text();
+    $(cname).text(txt);
     
 }

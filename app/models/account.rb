@@ -12,10 +12,10 @@ class Account < ActiveRecord::Base
             format: {with: VALID_NUMBER_REGEX}, length: {maximum: 3}
   validates :sync_flg, presence: true,
             format: {with: VALID_NUMBER_REGEX}, length: {maximum: 1}
-  validates :account_name, presence: true, length: {maximum: 255}     
-  validates :roman_name, presence: true, length: {maximum: 255}                 
-  validates :sync_account_id, presence: true, length: {maximum: 255}, if: :check_sync      
-  validates :sync_account_pw, presence: true, length: {maximum: 255}, if: :check_sync
+  validates :account_name, presence: true, length: {maximum: 255}, uniqueness: {case_sensitive: false}
+  validates :roman_name, presence: true, length: {maximum: 255}, uniqueness: {case_sensitive: false}              
+  validates :sync_account_id, presence: true, length: {maximum: 255}, uniqueness: {case_sensitive: false}, if: :check_sync      
+  validates :sync_account_pw, presence: true, length: {maximum: 255}, uniqueness: {case_sensitive: false}, if: :check_sync
   
   private
   def check_sync
