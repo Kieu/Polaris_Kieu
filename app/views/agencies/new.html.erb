@@ -1,7 +1,8 @@
 Add Agency
-
 <% if flash[:error] %>
   <div><%= flash[:error] %></div>
+<% else%>
+  @message_success
 <% end %>
 
 <%= form_for(@agency) do |f| %>
