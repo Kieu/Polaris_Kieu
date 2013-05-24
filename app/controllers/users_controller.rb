@@ -52,7 +52,7 @@ class UsersController < ApplicationController
   def enable_disable_user
     user = User.find_by_id(params[:id])
     user.status = user.status == 0 ? "1" : "0"
-    user.save
+    user.status == 1 ? user.del_client_user : user.save
     render text: "ok"
   end
 

@@ -31,6 +31,19 @@
     <%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %>
   </div>
   <div id="sync_box">
+  	<div class="field">
+    	<label for="account_Account synchronize1">Account synchronize1</label>
+      	<%= f.radio_button :sync_flg, 1, {checked: true}%>
+    	<label for="account_Yes">Yes</label>
+    	<%= f.radio_button :sync_flg, 0%>
+    	<label for="account_No">No</label>
+    </div>
+    <div id="sync" class="field">
+      	<label for="account_Account Sycn ID1">Account sycn id</label><br />
+      	<%= f.text_field :sync_account_id, maxlength: 255, style: "width: 250px" %>
+      	<label for="account_Account Sycn PW">Account sycn pw</label><br />
+      	<%= f.text_field :sync_account_pw, maxlength: 255, style: "width: 250px" %>
+    </div>
   </div>
   <div class="field">
     <%= f.label "Cost" %><br />
@@ -47,7 +60,12 @@
       	<select disabled="disabled"></select>
     </div>
   </div>
-	<div id="sync_box_c">
+	
+  	
+  <%= f.submit %>
+  <%= link_to 'Cancel', promotions_path %>
+<% end %>
+<div id="sync_box_c" style="display: none">
 		<div class="field">
 	    	<label for="account_Account synchronize">Account synchronize</label>
 	      	<input type="radio" value="1" name="account[sync_flg]" id="account_sync_flg_1" checked="checked">
@@ -62,10 +80,6 @@
 	      	<input type="text" style="width: 250px" size="255" name="account[sync_account_pw]" maxlength="255" id="account_sync_account_pw">
 	    </div>
 	</div>	
-  	
-  <%= f.submit %>
-  <%= link_to 'Cancel', promotions_path %>
-<% end %>
 <script type="text/javascript">
   $(document).ready(function()
   {
@@ -79,7 +93,8 @@
           var html = "<option value=1>Google Adwords</option>";
           html += "<option value=2>Yahoo sponsered search</option> "; 
           html += "<option value=3>Others</option>"; 
-          $("#sync_box").append($('#sync_box_c'));
+          $("#sync_box").html('');
+          $("#sync_box").append($('#sync_box_c').html());
           $("#sdk_box").hide();
           break;
         case 2:
@@ -104,8 +119,8 @@
     });
       
     $("#media_id").change(function(){
-      if($("#media_cateogry").val() == 1 || $(this).val()<7)  
-        $("#sync_box").append($('#sync_box_c'));
+      if($("#media_cateogry").val() == 1 || $(this).val()<7)
+        $("#sync_box").append($('#sync_box_c').html());
       else 
         $("#sync_box").html('');
       if($("#media_id").val() == 8)  
@@ -126,6 +141,15 @@
       }
 
     });
+	var sync = $("#account_sync_flg_0").val();
+      //$("div.desc").hide();
+      if ($("#account_sync_flg_0").is(':checked')) {
+      	$('#account_sync_account_id').attr('readonly', true);
+        $('#account_sync_account_pw').attr('readonly', true);
+      } else {
+        $('#account_sync_account_id').attr('readonly', false);
+        $('#account_sync_account_pw').attr('readonly', false);
+      }
 
   });
 </script>
