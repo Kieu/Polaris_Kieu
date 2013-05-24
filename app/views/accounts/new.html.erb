@@ -1,3 +1,4 @@
+<div><%= link_to @promotion.client.client_name, clients_path %> > <%= link_to @promotion.promotion_name, promotions_path %> > Account Register</div>
 <% if flash[:success] %>
   <div><%= flash[:success] %></div>
 <% end %>
