@@ -21,3 +21,15 @@ function index_of(haystack, needle) {
     }
     return -1;
 }
+
+function reloadFlex(obj, urlAction, id, current_active, cname) {
+	$(obj)
+    .flexOptions({
+        url: urlAction,
+        newp: 1
+    }).flexReload();
+    $(current_active).removeClass('active');
+    $(id).addClass('active');
+    $(cname).text($(id).text());
+    
+}
