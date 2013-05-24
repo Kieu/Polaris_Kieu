@@ -124,6 +124,10 @@ code {background:#ccc; white-space:pre; display:block; margin:5px; padding:5px;}
 	height: 250px;
 	overflow-y: scroll;
 }
+#promotions_list{
+	height: 250px;
+	overflow-y: scroll;
+}
 a.edit_client{
 	background: url("/assets/pencil.png") no-repeat center	
 }
@@ -133,4 +137,8 @@ a.edit_client{
 }
 #search{
 	width: 150px;
+}
+ul.ui-autocomplete{
+	max-height: 200px !important;
+	overflow-y: scroll;
 }

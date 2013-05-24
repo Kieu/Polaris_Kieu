@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_filter :signed_in_user
   before_filter :must_super
+  before_filter :must_not_himself, only: [:edit, :update]
   
   def index
   end
@@ -60,27 +61,6 @@ class UsersController < ApplicationController
     render json: {page: params[:page], total: User.where(status: 0).count, rows: rows}
   end
 
-  def search
-    if params[:q].blank?
-      render :text => ""
-      return
-    end
-    params[:q].gsub!(/'/,'')
-    @search = User.search do
-      fulltext params[:q]
-    end
-    lines = @search.results.collect do |item|
-      "#{escape_javascript(item['username'])}#!##{item['id']}#!" +
-        "##{item['email']}#!##{item.role.role_name}#!#" +
-        "#{escape_javascript(item['username'])}"
-    end
-    if @search.results.count > 0
-      render :text => lines.join("\n")
-    else
-      render text: "test#!#0#!#test#!#test#!#test"
-    end
-  end
-  
   def change_company_list
     render json: params[:model].constantize.all
   end
@@ -99,12 +79,17 @@ class UsersController < ApplicationController
           company = agency.agency_name
         end
       end
-      link = "<a href='users/#{user.id}/edit'>Edit</a>"
+      link = user.id == current_user.id ?
+         "" : "<a href='users/#{user.id}/edit'>Edit</a>"
       rows << {"id" => user.id, "cell" => {"link" => link,
         "roman_name" => user.roman_name, 
         "username" => user.username, "company" => company,
         "email" => user.email, "role_id" => user.role.role_name}}
     end
     rows
+  end
+  
+  def must_not_himself
+    redirect_to users_path if current_user.id == params[:id].to_i
   end
 end

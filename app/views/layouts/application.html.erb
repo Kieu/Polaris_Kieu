@@ -17,7 +17,7 @@
 			</div>
 			<div class = "clear2"></div>
 		</div>
-		<% if signed_in? && @clients %>
+		<% if signed_in? && (@clients || @aryPromotion) %>
 		<div id="sidebar">
 			<div id="searchbar">
 				<div id="padding_search">
@@ -27,7 +27,7 @@
 						</form>
  						<div class="clear"></div>
 					</div>
-					
+					<% if @clients %>
 						<div id="clients_list" style="margin-top: 15px;">
 							<% if current_user.role_id == Settings.role.SUPER %>
 								<% @clients.each_with_index do |client, index| %>
@@ -47,6 +47,27 @@
 								<% end %>
 							<% end %>
 						</div>
+					<% elsif @aryPromotion %>
+					    <div id="promotions_list" style="margin-top: 15px;">
+							<% if current_user.role_id == Settings.role.SUPER  || current_user.role_id == Settings.role.AGENCY%>
+								<% @aryPromotion.each_with_index do |promotion, index| %>
+									<% if (params[:id] && promotion.id == params[:id].to_i) || (!params[:id] && index == 0) %>
+										<div><%= link_to "", "#{edit_promotion_path(promotion)}##{index}", class: "edit_promotion" %><%= link_to promotion.promotion_name, "#{promotion_path(promotion)}##{index}", class: "promotion_name active", id: index %></div>
+									<% else %>
+										<div><%= link_to "", "#{edit_promotion_path(promotion)}##{index}", class: "edit_promotion" %><%= link_to promotion.promotion_name, "#{promotion_path(promotion)}##{index}", class: "promotion_name", id: index %></div>
+									<% end %>
+								<% end %>
+							<% else %>
+								<% @promotions.each_with_index do |promotion, index| %>
+									<% if (params[:id] && promotion.id == params[:id].to_i) || (!params[:id] && index == 0) %>
+										<div><%= link_to "#{edit_promotion_path(promotion)}##{index}", "#{promotion_path(promotion)}##{index}", class: "promotion_name active", id: index %></div>
+									<% else %>
+										<div><%= link_to "#{edit_promotion_path(promotion)}##{index}", "#{promotion_path(promotion)}##{index}", class: "promotion_name", id: index %></div>
+									<% end %>
+								<% end %>
+							<% end %>
+						</div>
+					<% end %>
 					
 				</div>
 			</div>
