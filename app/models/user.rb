@@ -75,4 +75,11 @@ class User < ActiveRecord::Base
   def agency?
     self.role_id == Settings.role.AGENCY
   end
+  
+  def del_client_user
+    self.client_users.each do |client_user|
+      client_user.update_attributes!(del_flg: 1)
+    end
+    self.save!
+  end
 end
