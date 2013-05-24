@@ -21,15 +21,15 @@ class ClientsController < ApplicationController
   #get list promotion and paging
   def get_promotions_list
 	  # get params for paging
-    if(params[:id] != "")
-      clientId = params[:id]
+    if params[:id] != ""
+      @clientId = params[:id]
     else
-      clientId = @clients[0].id
+      @clientId = @clients[0].id
     end
 
     rows = Array.new
-    rows = get_rows(Promotion.where("client_id = ? ", clientId).order_by_promotion_name.page(params[:page]).per(params[:rp]), clientId)
-    count = Promotion.where("client_id = ? ", clientId).order_by_promotion_name.count
+    rows = get_rows(Promotion.where("client_id = ? ", @clientId).order_by_promotion_name.page(params[:page]).per(params[:rp]), @clientId)
+    count = Promotion.where("client_id = ? ", @clientId).order('promotion_name').count
 	
     render json: {page: params[:page], total: count, rows: rows}
   end
@@ -123,7 +123,7 @@ class ClientsController < ApplicationController
   def get_rows(promotions, clientId)
     rows = Array.new
     promotions.each do |promotion|
-      promotionName = "<a href='promotions?promotionId=#{promotion.id}&clientId=#{clientId}'>#{promotion.promotion_name}</a>"
+      promotionName = "<a href='promotions?promotion_id=#{promotion.id}&client_id=#{clientId}'>#{promotion.promotion_name}</a>"
       rows << {'id' => promotion.id, 'cell' => {'promotion_name' => promotionName}}
     end
     rows

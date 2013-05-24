@@ -53,7 +53,8 @@ describe ClientsController do
         clients
         Client.all.each do |client|
           5.times {|num| FactoryGirl.create(:promotion, client_id: client.id,
-          promotion_name: "#{client.id}testPro#{num}")}
+            promotion_name: "#{client.id}testPro#{num}",
+            roman_name: "#{client.id}testPro#{num}")}
         end
 
         clientss = Client.all
@@ -93,7 +94,7 @@ describe ClientsController do
       context "with valid params" do
           before(:each) {action}
           subject {response}
-          it {should redirect_to new_client_path}
+          it {should redirect_to action: :index}
           subject {Client.last.reload.client_name}
           it{should eq name_to_change}
       end

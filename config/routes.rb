@@ -1,6 +1,7 @@
 PolarisManage::Application.routes.draw do
   resources :promotions do
     get "search", on: :collection
+    post "delete_promotion", to: "promotions#delete_promotion", on: :collection
   end
   resources :users do
     get "change_lang", on: :collection
