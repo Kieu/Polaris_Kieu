@@ -10,8 +10,10 @@ class User < ActiveRecord::Base
   has_many :client_users
   has_one :block_login_user
 
-  validates :username, presence: true, uniqueness: {case_sensitive: false}
-  validates :roman_name, presence: true, uniqueness: {case_sensitive: false}
+  validates :username, presence: true, uniqueness: {case_sensitive: false},
+    length: {maximum: 255}
+  validates :roman_name, presence: true, uniqueness: {case_sensitive: false},
+    length: {maximum: 255}
   validates :email, presence: true, uniqueness: {case_sensitive: false},
     format: {with: VALID_EMAIL_REGEX}, length: {maximum: 100}
   validates :company_id, presence: true
@@ -19,6 +21,7 @@ class User < ActiveRecord::Base
   validates :password_flg, presence: true
   
   scope :order_by_roman_name, ->{order :roman_name}
+  scope :active, where(del_flg: 0)
 
   before_save {|user| user.email = email.downcase}
   
@@ -59,5 +62,17 @@ class User < ActiveRecord::Base
   def valid_attribute?(attribute_name)
     self.valid?
     self.errors[attribute_name].blank?
+  end
+  
+  def super?
+    self.role_id == Settings.role.SUPER
+  end
+  
+  def client?
+    self.role_id == Settings.role.CLIENT
+  end
+  
+  def agency?
+    self.role_id == Settings.role.AGENCY
   end
 end

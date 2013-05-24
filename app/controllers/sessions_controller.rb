@@ -4,12 +4,14 @@ class SessionsController < ApplicationController
   def new
     @feed = Feedzirra::Feed.
     fetch_and_parse("http://rss.asahi.com/rss/asahi/newsheadlines.rdf")
+    @press_release = PressRelease.all
   end
 
   def create
     @errors = Array.new
     @feed = Feedzirra::Feed.
     fetch_and_parse("http://rss.asahi.com/rss/asahi/newsheadlines.rdf")
+    @press_release = PressRelease.all
     user = User.find_by_email(params[:session][:email])
     if user
       if user.can_login?
@@ -49,6 +51,7 @@ class SessionsController < ApplicationController
   def resend_password
     @feed = Feedzirra::Feed.
     fetch_and_parse("http://rss.asahi.com/rss/asahi/newsheadlines.rdf")
+    @press_release = PressRelease.all
     @form_errors = Array.new
     user = User.find_by_email(params[:email])
     if verify_recaptcha

@@ -1,0 +1,131 @@
+<div><%= link_to @promotion.client.client_name, clients_path %> > <%= link_to @promotion.promotion_name, promotions_path %> > Account Register</div>
+<% if flash[:success] %>
+  <div><%= flash[:success] %></div>
+<% end %>
+
+<h1>Create Account</h1>
+<%= form_for(@account) do |f| %>
+  <input type="hidden" name="account[promotion_id]" value="<%= @promotion_id%>">
+  <div class="field">
+    <%= f.label "Media Category"%>
+    <select name="media_category" id="media_category">
+      <option value=1>Listing ad</option> 
+      <option value=2>Display ad</option> 
+      <option value=3>Affiliate</option> 
+    </select>
+  </div>
+<div class="field">
+    <%= f.label "Media"%>
+    <select name="account[media_id]" id="media_id">
+      <option value=1>Google Adwords</option> 
+      <option value=2>Yahoo sponsered search</option> 
+      <option value=3>Others</option>
+    </select>
+  </div>
+  <div class="field">
+    <%= f.label "Account name" %><br />
+    <%= f.text_field :account_name, maxlength: 255, style: "width: 250px" %>
+  </div>
+  <div class="field">
+    <%= f.label "Roman name" %><br />
+    <%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %>
+  </div>
+  <div id="sync_box">
+  </div>
+  <div class="field">
+    <%= f.label "Cost" %><br />
+    <%= f.text_field :cost, maxlength: 3, value: 100, style: "width: 50px" %> %
+  </div>
+  <div id="sdk_box">
+    <div class="field">
+      	<%= f.label "SDK" %>
+      	<input type="radio" name="sdk_flg" checked="checked" value="1"  />Yes
+      	<input type="radio" name="sdk_flg" value="0" />No
+    </div>
+    <div class="field" id="sync">
+      	<%= f.label "SDK"%>
+      	<select disabled="disabled"></select>
+    </div>
+  </div>
+	<div id="sync_box_c">
+		<div class="field">
+	    	<label for="account_Account synchronize">Account synchronize</label>
+	      	<input type="radio" value="1" name="account[sync_flg]" id="account_sync_flg_1" checked="checked">
+	    	<label for="account_Yes">Yes</label>
+	    	<input type="radio" value="0" name="account[sync_flg]" id="account_sync_flg_0">
+	    	<label for="account_No">No</label>
+	    </div>
+	    <div id="sync" class="field">
+	      	<label for="account_Account Sycn ID">Account sycn id</label><br />
+	      	<input type="text" style="width: 250px" size="255" name="account[sync_account_id]" maxlength="255" id="account_sync_account_id"><br />
+	      	<label for="account_Account Sycn PW">Account sycn pw</label><br />
+	      	<input type="text" style="width: 250px" size="255" name="account[sync_account_pw]" maxlength="255" id="account_sync_account_pw">
+	    </div>
+	</div>	
+  	
+  <%= f.submit %>
+  <%= link_to 'Cancel', promotions_path %>
+<% end %>
+<script type="text/javascript">
+  $(document).ready(function()
+  {
+    $("#sdk_box").hide();
+    $("#media_category").change(function()
+    {
+      var id=parseInt($(this).val());
+      switch(id)
+      {
+        case 1: 
+          var html = "<option value=1>Google Adwords</option>";
+          html += "<option value=2>Yahoo sponsered search</option> "; 
+          html += "<option value=3>Others</option>"; 
+          $("#sync_box").append($('#sync_box_c'));
+          $("#sdk_box").hide();
+          break;
+        case 2:
+          var html = "<option value=4>Google</option>";
+          html += "<option value=5>Yahoo</option> "; 
+          html += "<option value=6>Facebook(APP)</option>"; 
+          html += "<option value=7>Others(WEB)</option>";
+          html += "<option value=8>Others(APP)</option>";
+          $("#sync_box").append($('#sync_box_c'));
+          $("#sdk_box").hide();
+          break;
+        default:
+          var html = "<option value=9>Google Adwords</option>";
+          html += "<option value=11>Yahoo sponsered search</option> "; 
+          html += "<option value=12>Others</option>"; 
+          $("#sync_box").html('');
+          $("#sdk_box").hide();
+          break;
+      }
+      $("#media_id").html(html);
+
+    });
+      
+    $("#media_id").change(function(){
+      if($("#media_cateogry").val() == 1 || $(this).val()<7)  
+        $("#sync_box").append($('#sync_box_c'));
+      else 
+        $("#sync_box").html('');
+      if($("#media_id").val() == 8)  
+        $("#sdk_box").show();
+      else
+        $("#sdk_box").hide();
+  })  
+
+ 	$("input[name$='account[sync_flg]']").click(function() {
+      var sync = $(this).val();
+      //$("div.desc").hide();
+      if (sync==1) {
+      	$('#account_sync_account_id').attr('readonly', false);
+        $('#account_sync_account_pw').attr('readonly', false);
+      } else {
+        $('#account_sync_account_id').attr('readonly', true);
+        $('#account_sync_account_pw').attr('readonly', true);
+      }
+
+    });
+
+  });
+</script>

@@ -138,3 +138,7 @@ a.edit_client{
 #search{
 	width: 150px;
 }
+ul.ui-autocomplete{
+	max-height: 200px !important;
+	overflow-y: scroll;
+}

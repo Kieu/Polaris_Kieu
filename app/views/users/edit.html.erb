@@ -66,6 +66,16 @@
 </div>
 <script type="text/javascript">
 	$(function(){
+		$("#cancel").click(function(e){
+			e.preventDefault();
+			$.colorbox({
+				width: "30%",
+				inline: true,
+				escKey: false,
+				overlayClose: false,
+				href: "#prevent_change",
+			})
+		})
 		check = $("#disable_button").is(':checked')? true : false;
 		$("#disable_button").click(function(e){
 			if (check){
