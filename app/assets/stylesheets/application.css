@@ -125,11 +125,11 @@ code {background:#ccc; white-space:pre; display:block; margin:5px; padding:5px;}
 	overflow-y: scroll;
 }
 #promotions_list{
-	height: 250px;
+	height: 350px;
 	overflow-y: scroll;
 }
 a.edit_client{
-	background: url("/assets/pencil.png") no-repeat center	
+	background: url("/assets/pencil.png") no-repeat center
 }
 #sidebar a.active{
 	font-weight:bold;
