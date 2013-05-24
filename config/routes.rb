@@ -23,8 +23,10 @@ PolarisManage::Application.routes.draw do
   
   match "/signin",  to: "sessions#new"
   match "/signout", to: "sessions#destroy", via: :delete
-
+  
   root to: "clients#index"
+  
+  resources :accounts, only: [:new, :create, :edit, :update]
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
