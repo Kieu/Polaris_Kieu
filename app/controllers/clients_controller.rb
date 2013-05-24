@@ -42,7 +42,7 @@ class ClientsController < ApplicationController
     end
 
     rows = Array.new
-    rows = get_rows(Promotion.where("client_id = ? ", clientId).order_by_promotion_name.page(params[:page]).per(params[:rp]))
+    rows = get_rows(Promotion.where("client_id = ? ", clientId).order_by_promotion_name.page(params[:page]).per(params[:rp]), clientId)
     count = Promotion.where("client_id = ? ", clientId).order('promotion_name').count
 	
     render json: {page: params[:page], total: count, rows: rows}
@@ -181,10 +181,10 @@ class ClientsController < ApplicationController
     redirect_to clients_path if client.nil? || client.del_flg == 1
   end
 
-  def get_rows promotions
+  def get_rows(promotions, clientId)
     rows = Array.new
     promotions.each do |promotion|
-      promotionName = "<a href='promotions/id'>#{promotion.promotion_name}</a>"
+      promotionName = "<a href='promotions?promotionId=#{promotion.id}&clientId=#{clientId}'>#{promotion.promotion_name}</a>"
       rows << {'id' => promotion.id, 'cell' => {'promotion_name' => promotionName}}
     end
     rows
