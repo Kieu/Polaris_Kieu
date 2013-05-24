@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     @user.create_user_id = current_user.id
     if @user.valid?
       @user.save!
-      if @user.role_id == Settings.role.CLIENT
+      if @user.client?
         ClientUser.create(client_id: @user.company_id, user_id: @user.id)
       end
       flash[:success] = "User was successfully created"
@@ -70,7 +70,7 @@ class UsersController < ApplicationController
     rows = Array.new
     users.each do |user|
       company = ""
-      if user.role_id == Settings.role.CLIENT
+      if user.client?
         if client = Client.find_by_id(user.company_id)
           company = client.client_name
         end

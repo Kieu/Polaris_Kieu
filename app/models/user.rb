@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   validates :password_flg, presence: true
   
   scope :order_by_roman_name, ->{order :roman_name}
+  scope :active, where(del_flg: 0)
 
   before_save {|user| user.email = email.downcase}
   
@@ -61,5 +62,17 @@ class User < ActiveRecord::Base
   def valid_attribute?(attribute_name)
     self.valid?
     self.errors[attribute_name].blank?
+  end
+  
+  def super?
+    self.role_id == Settings.role.SUPER
+  end
+  
+  def client?
+    self.role_id == Settings.role.CLIENT
+  end
+  
+  def agency?
+    self.role_id == Settings.role.AGENCY
   end
 end

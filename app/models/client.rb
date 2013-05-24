@@ -19,6 +19,9 @@ class Client < ActiveRecord::Base
   validates :person_charge, presence: true, length: {maximum: 255}
   validates :person_sale, presence: true, length: {maximum: 255}
   
+  scope :active, where(del_flg: 0)
+  scope :order_by_roman_name, ->{order :roman_name}
+  
   def update_client_users params
     params[:users_id].each do |user_id|
       return false unless User.find_by_id(user_id) 
