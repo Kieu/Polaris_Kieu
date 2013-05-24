@@ -8,9 +8,13 @@ class ClientsController < ApplicationController
   
   #get all clients sorted by romaji name
   def index
-    @clientName = @clients[0].client_name
-    if(@clientName.length > Settings.MAX_LENGTH_CLIENT_NAME)
-      @clientName = @clientName.first(Settings.MAX_LENGTH_CLIENT_NAME) + "..."
+    if(@clients[0] != [])
+      @clientName = @clients[0].client_name
+      if(@clientName.length > Settings.MAX_LENGTH_CLIENT_NAME)
+        @clientName = @clientName.first(Settings.MAX_LENGTH_CLIENT_NAME) + "..."
+      end
+    else
+      @clients = Array.new
     end
   end
   
