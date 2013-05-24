@@ -1,29 +1,25 @@
-Add Agency
-
 <% if flash[:error] %>
   <div><%= flash[:error] %></div>
 <% end %>
 
+<script>
+$(document).ready(function(){
+  $('#agency_agency_name').val('');
+  $('#agency_roman_name').val('');
+
+})
+
+</script>
 <%= form_for(@agency) do |f| %>
   <br/>
   <div class="field">
-    <div style="float:left">
-      <%= f.label "Agency name:" %><br />
-    </div>
-    <div style="float:left">
-      <%= f.text_field :agency_name, maxlength: 255, style: "width: 250px" %>
-    </div>
-    <div style="clear:both"></div>
+      <%= f.label "Agency name:" %>
+      <%= f.text_field :agency_name, maxlength: 255, style: "width: 250px" %><br />
   </div>
   <br/>
   <div class="field">
-    <div style="float: left">
-      <%= f.label "Roman name:" %><br />
-    </div>
-    <div style="float: left">
-    <%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %>
-    </div>
-    <div style="clear:both"></div>
+      <%= f.label "Roman name:" %>
+      <%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %>
   </div>
   <br/>
   <br/>
