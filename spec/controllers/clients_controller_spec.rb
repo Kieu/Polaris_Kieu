@@ -93,7 +93,7 @@ describe ClientsController do
       context "with valid params" do
           before(:each) {action}
           subject {response}
-          it {should redirect_to action: :index}
+          it {should redirect_to new_client_path}
           subject {Client.last.reload.client_name}
           it{should eq name_to_change}
       end
