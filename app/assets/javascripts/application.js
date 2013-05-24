@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require highcharts
 function index_of(haystack, needle) {
     for (var i = 0, l = haystack.length; i < l; ++i) {
         if( haystack[i].value === needle ) {
