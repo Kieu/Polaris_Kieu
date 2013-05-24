@@ -32,11 +32,10 @@ class AgenciesController < ApplicationController
     @agency = Agency.new(params[:agency])
     @agency.create_user_id = current_user.id
     if @agency.save
-      flash[:error] = "Agency created"
-      redirect_to new_agency_path
-    else
-      render :new
+      flash[:error] = 'Agency is created successful'
     end
+
+    render :new
   end
 
   private
