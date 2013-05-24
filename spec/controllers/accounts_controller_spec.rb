@@ -44,10 +44,10 @@ describe AccountsController do
           it {expect {action}.to change(Account, :count).by 1}
         end
 
-        describe "redirect to new action" do
+        describe "redirect to promotions" do
           before {action}
           subject {response}
-          it {should redirect_to action: :new}
+          it {should redirect_to promotions_path}
         end
       end
 
