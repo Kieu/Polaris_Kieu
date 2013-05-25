@@ -15,7 +15,7 @@
 		<div id="navigation">
 			<ul>
 				<li><%= link_to "Client List", clients_path %></li>
-				<% if(current_user.role_id == Settings.role.SUPER) %>
+				<% if current_user.super? %>
 				<li><%= link_to "User List", users_path %></li>
 				<li><%= link_to "Agency List", agencies_path %></li>
 				<% end %>

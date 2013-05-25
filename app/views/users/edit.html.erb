@@ -19,7 +19,7 @@
   </div>
   <div class="field">
     <%= f.label "Company" %><br />
-    <% if @user.role_id == 2 %>
+    <% if @user.client? %>
     	<%= text_field_tag :company_id, Client.find(@user.company_id).client_name, disabled: true %>
     <% else %>
     	<%= text_field_tag :company_id, Agency.find(@user.company_id).agency_name, disabled: true %>

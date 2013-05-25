@@ -11,7 +11,8 @@
   <%= f.label "Roman name" %>
   <%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %><br />
   <%= f.label "Category" %>
-  <%= f.text_field :promotion_category_id, maxlength: 255, style: "width: 250px" %><br />
+  <%= f.select :promotion_category_id,
+    t(".category").each_with_index.map {|name, index| [name,index]} %><br />
   <%= f.label "Tracking period" %>
   <%= f.text_field :tracking_period, maxlength: 255, style: "width: 250px" %><br />
   <%= f.submit %>

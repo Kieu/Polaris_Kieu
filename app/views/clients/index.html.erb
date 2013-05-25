@@ -1,7 +1,7 @@
 <% if flash[:error] %>
 	<div><%= flash[:error] %></div>
 <% end %>
-<h2 id="client_name"><%= @clientName %></h2>
+<h2 id="client_name"><%= @client_name %></h2>
 <br />
 <table class="flexme4" style="display: none"></table>
 <script type="text/javascript">
@@ -16,7 +16,7 @@
 		usepager: true,
 		title: 'Promotion Name',
 		useRp: true,
-		id: "<%= @clientId %>",
+		id: "<%= @client_id %>",
 		rp: 10,
 		showTableToggleBtn: true,
 		width: 250,
@@ -26,7 +26,7 @@
 <br />
 <br />
 <div>
-<% if current_user.role_id == Settings.role.SUPER %>
+<% if current_user.super? %>
   <%= link_to 'New Client', new_client_path %>
 <% end %>
 </div>

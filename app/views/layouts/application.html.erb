@@ -17,7 +17,7 @@
 			</div>
 			<div class = "clear2"></div>
 		</div>
-		<% if signed_in? && (@clients || @aryPromotion) %>
+		<% if signed_in? && (@clients || @array_promotion) %>
 		<div id="sidebar">
 			<div id="searchbar">
 				<div id="padding_search">
@@ -29,7 +29,7 @@
 					</div>
 					<% if @clients %>
 						<div id="clients_list" style="margin-top: 15px;">
-							<% if current_user.role_id == Settings.role.SUPER %>
+							<% if current_user.super? %>
 								<% @clients.each_with_index do |client, index| %>
 									<% if (params[:id] && client.id == params[:id].to_i) || (!params[:id] && index == 0) %>
 										<div><%= link_to "", "#{edit_client_path(client)}##{index}", class: "edit_client" %><%= link_to client.client_name, "#", class: "client_name active", id: "#{index}", onclick: "reloadFlex('.flexme4', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{index}', '.client_name', '#client_name', #{Settings.MAX_LENGTH_CLIENT_NAME})" %></div>
@@ -47,10 +47,10 @@
 								<% end %>
 							<% end %>
 						</div>
-					<% elsif @aryPromotion %>
+					<% elsif @array_promotion %>
 					    <div id="promotions_list" style="margin-top: 15px;">
-							<% if current_user.role_id == Settings.role.SUPER  || current_user.role_id == Settings.role.AGENCY%>
-								<% @aryPromotion.each_with_index do |promotion, index| %>
+							<% if current_user.super?  || current_user.agency? %>
+								<% @array_promotion.each_with_index do |promotion, index| %>
 									<% if (params[:id] && promotion.id == params[:id].to_i) || (!params[:id] && index == 0) %>
 										<div><%= link_to "", "#{edit_promotion_path(promotion)}##{index}", class: "edit_promotion" %><%= link_to promotion.promotion_name, "#{promotion_path(promotion)}##{index}", class: "promotion_name active", id: index %></div>
 									<% else %>
@@ -78,6 +78,9 @@
 <script type="text/javascript">
     $('input#search').quicksearch('div#clients_list div',{
     	"selector" : "a.client_name" 
+    });
+    $('input#search').quicksearch('div#promotions_list div',{
+    	"selector" : "a.promotion_name" 
     });
 </script>
 	<%= render "layouts/footer" %>

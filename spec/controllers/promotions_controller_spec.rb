@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe PromotionsController do
-  let!(:user) {FactoryGirl.create(:user, role_id: 1)}
+  let!(:user) {FactoryGirl.create(:user)}
   let!(:client) {FactoryGirl.create(:client)}
   let!(:promotion) {FactoryGirl.create(:promotion)}
   let(:promotion_name) {"promotion01"}
@@ -18,7 +18,7 @@ describe PromotionsController do
     put :update, id: promotion.id, promotion: {promotion_name: name_to_change}
   end
 
-  context "when user not login" do
+  context "when user don't login" do
     describe "GET new" do
       before {get :new}
       subject {response}
@@ -93,28 +93,46 @@ describe PromotionsController do
     describe "PUT update" do
       context "with valid params" do
         before {action_update}
-        subject {response}
-        it {should redirect_to action: :index, client_id: promotion.client_id}
-        subject {promotion.reload.promotion_name}
-        it {should eq name_to_change}
+
+        describe "redirect to action index" do
+          subject {response}
+          it {should redirect_to action: :index, client_id: promotion.client_id}
+        end
+
+        describe "update promotion param" do
+          subject {promotion.reload.promotion_name}
+          it {should eq name_to_change}
+        end
       end
 
       context "with invalid params" do
         before {Promotion.any_instance.stub(:valid?).and_return false}
         before {action_update}
-        subject {response}
-        it {should render_template :edit}
-        subject {promotion.reload.promotion_name}
-        it {should_not eq name_to_change}
+
+        describe "render edit" do
+          subject {response}
+          it {should render_template :edit}
+        end
+
+        describe "don't update promotion params" do
+          subject {promotion.reload.promotion_name}
+          it {should_not eq name_to_change}
+        end
       end
     end
 
-    describe "DELETE destroy" do
+    describe "delete logically" do
       before {post :delete_promotion, id: promotion.id}
-      subject {response}
-      it {should redirect_to action: :index, client_id: promotion.client_id}
-      subject {promotion.reload.del_flg}
-      it {should eq 1}
+
+      describe "redirect to action index" do
+        subject {response}
+        it {should redirect_to action: :index, client_id: promotion.client_id}
+      end
+
+      describe "set del_flg to deleted" do
+        subject {promotion.reload.del_flg}
+        it {should eq Settings.promotion.deleted}
+      end
     end
   end
 end
