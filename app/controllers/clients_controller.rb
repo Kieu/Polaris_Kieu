@@ -8,10 +8,10 @@ class ClientsController < ApplicationController
   
   #get all clients sorted by romaji name
   def index
-    if(@clients[0] != [])
-      @clientName = @clients[0].client_name
-      if(@clientName.length > Settings.MAX_LENGTH_CLIENT_NAME)
-        @clientName = @clientName.first(Settings.MAX_LENGTH_CLIENT_NAME) + "..."
+    if @clients[0].present?
+      @client_name = @clients[0].client_name
+      if @client_name.length > Settings.MAX_LENGTH_CLIENT_NAME
+        @client_name = @client_name.first(Settings.MAX_LENGTH_CLIENT_NAME) + "..."
       end
     else
       @clients = Array.new
@@ -22,14 +22,14 @@ class ClientsController < ApplicationController
   def get_promotions_list
 	  # get params for paging
     if params[:id] != ""
-      @clientId = params[:id]
+      @client_id = params[:id]
     else
-      @clientId = @clients[0].id
+      @client_id = @clients[0].id
     end
 
     rows = Array.new
-    rows = get_rows(Promotion.where("client_id = ? ", @clientId).order_by_promotion_name.page(params[:page]).per(params[:rp]), @clientId)
-    count = Promotion.where("client_id = ? ", @clientId).order('promotion_name').count
+    rows = get_rows(Promotion.get_by_client(@client_id).order_by_promotion_name.page(params[:page]).per(params[:rp]), @client_id)
+    count = Promotion.get_by_client(@client_id).order_by_promotion_name.count
 	
     render json: {page: params[:page], total: count, rows: rows}
   end
@@ -37,12 +37,12 @@ class ClientsController < ApplicationController
   def show
     # get current client name
     @clients.each do |client|
-      if(client.id == params[:id].to_i)
-        @clientName = client.client_name
+      if client.id == params[:id].to_i
+        @client_name = client.client_name
       end
     end
 
-    @clientId = params[:id]
+    @client_id = params[:id]
     render :index
   end
 
@@ -120,11 +120,12 @@ class ClientsController < ApplicationController
     redirect_to clients_path if @client.nil? || @client.del_flg == 1
   end
 
-  def get_rows(promotions, clientId)
+  def get_rows(promotions, client_id)
     rows = Array.new
     promotions.each do |promotion|
-      promotionName = "<a href='promotions?promotion_id=#{promotion.id}&client_id=#{clientId}'>#{promotion.promotion_name}</a>"
-      rows << {'id' => promotion.id, 'cell' => {'promotion_name' => promotionName}}
+      promotion_name = view_context.link_to(promotion.promotion_name,
+        promotions_path(promotion_id: promotion.id, client_id: client_id))
+      rows << {id: promotion.id, cell: {promotion_name: promotion_name}}
     end
     rows
   end
@@ -132,10 +133,10 @@ class ClientsController < ApplicationController
   def load_list_clients
     if current_user.super?
       @clients = Client.active.order_by_roman_name
-    elsif(current_user.agency?)
+    elsif current_user.agency?
       @clients = Array.new
-      aryClientUser = current_user.client_users.active
-      aryClientUser.each do |client_user|
+      array_client_user = current_user.client_users.active
+      array_client_user.each do |client_user|
         @clients << client_user.client
       end
     end

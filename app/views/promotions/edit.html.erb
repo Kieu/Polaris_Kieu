@@ -1,3 +1,4 @@
+<%= render "layouts/prevent_change_page" %>
 <%= link_to @promotion.client.client_name, client_path(@promotion.client_id) %> > <%= link_to @promotion.promotion_name, promotion_path(@promotion) %> > Promotion Edit
 
 <%= form_for(@promotion) do |f| %>
@@ -6,7 +7,9 @@
   <%= f.label "Roman name" %>
   <%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %><br />
   <%= f.label "Category" %>
-  <%= f.text_field :promotion_category_id, maxlength: 255, style: "width: 250px" %><br />
+  <%= f.select :promotion_category_id,
+    t(".category").each_with_index.map {|name, index| [name,index]},
+    selected: @promotion.promotion_category_id %><br />
   <%= f.label "Tracking period" %>
   <%= f.text_field :tracking_period, maxlength: 255, style: "width: 250px" %><br />
   <%= f.submit %>

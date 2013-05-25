@@ -13,4 +13,13 @@ class Promotion < ActiveRecord::Base
   validates :agency_id, presence: true
 
   scope :order_by_promotion_name, ->{order :promotion_name}
+  scope :get_by_client, lambda {|client_id| where(client_id: client_id)}
+
+  def delete
+    self.update_attribute(:del_flg, Settings.promotion.deleted)
+  end
+
+  def deleted?
+    self.del_flg == Settings.promotion.deleted
+  end
 end

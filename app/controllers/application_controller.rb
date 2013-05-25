@@ -9,13 +9,11 @@ class ApplicationController < ActionController::Base
   end
   
   def must_super
-    redirect_to root_path unless current_user.role_id == Settings.role.SUPER
+    redirect_to root_path unless current_user.super?
   end
 
   def must_super_agency
-    if current_user.role_id == Settings.role.CLIENT
-      redirect_to promotions_path
-    end
+    redirect_to promotions_path if current_user.client?
   end
   
   private
