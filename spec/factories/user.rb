@@ -1,11 +1,31 @@
 FactoryGirl.define do
-  factory :user, class: User do
-    username "user_test"
+  factory :user_super, class: User do
+    username "user_super"
     password "123456"
-    email "user@example.com"
-    roman_name "user_test"
+    email "user_super@example.com"
+    roman_name "user_super"
     company_id 1
-    role_id 1
-    password_flg 1
+    role_id Settings.role.SUPER
+    password_flg 0
+  end
+
+  factory :user_agency, class: User do
+    username "user_agency"
+    password "123456"
+    email "user_agency@example.com"
+    roman_name "user_agency"
+    company_id 1
+    role_id Settings.role.AGENCY
+    password_flg 0
+  end
+
+  factory :user_client, class: User do
+    username "user_client"
+    password "123456"
+    email "user_client@example.com"
+    roman_name "user_client"
+    company_id 1
+    role_id Settings.role.CLIENT
+    password_flg 0
   end
 end

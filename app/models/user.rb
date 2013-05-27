@@ -52,6 +52,12 @@ class User < ActiveRecord::Base
       BlockLoginUser.create(user_id: self.id, login_fail_num: 1)
     end
   end
+
+  def toggle_enabled
+    self.status = self.active? ? Settings.user.deactive : Settings.user.active
+    self.del_client_user if self.deactive?
+    self.save!
+  end
   
   def remove_block_login
     self.block_login_user.login_fail_num = 0
@@ -62,6 +68,14 @@ class User < ActiveRecord::Base
   def valid_attribute?(attribute_name)
     self.valid?
     self.errors[attribute_name].blank?
+  end
+
+  def active?
+    self.status == Settings.user.active
+  end
+
+  def deactive?
+    self.status == Settings.user.deactive
   end
   
   def super?
@@ -78,8 +92,7 @@ class User < ActiveRecord::Base
   
   def del_client_user
     self.client_users.each do |client_user|
-      client_user.update_attributes!(del_flg: 1)
+      client_user.update_attributes!(del_flg: Settings.client_user.deleted)
     end
-    self.save!
   end
 end

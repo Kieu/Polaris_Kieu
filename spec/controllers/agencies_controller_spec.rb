@@ -1,11 +1,36 @@
 require 'spec_helper'
 
 describe AgenciesController do
-  let(:agency) {FactoryGirl.create(:agency)}
+  let!(:user_super) {FactoryGirl.create(:user_super)}
+  let!(:user_agency) {FactoryGirl.create(:user_agency)}
+  let!(:agency) {FactoryGirl.create(:agency)}
 
-  context "when user not login" do
+  let(:agency_name) {"agency_name"}
+  let(:roman_name) {"roman_name"}
+  let(:name_to_change) {"change"}
+
+  let(:action_create) do
+    post :create, agency: {agency_name: agency_name, roman_name: roman_name}
+  end
+  let(:action_update) do
+    put :update, id: agency.id, agency: {agency_name: name_to_change}
+  end
+
+  context "when user don't login" do
     describe "GET index" do
       before {get :index}
+      subject {response}
+      it {should redirect_to signin_path}
+    end
+
+    describe "GET new" do
+      before {get :new}
+      subject {response}
+      it {should redirect_to signin_path}
+    end
+
+    describe "POST create" do
+      before {action_create}
       subject {response}
       it {should redirect_to signin_path}
     end
@@ -16,63 +41,124 @@ describe AgenciesController do
       it {should redirect_to signin_path}
     end
 
-    describe "GET new" do
-      it "renders signin_path" do
-        get :new
-        response.should redirect_to(signin_path)
-      end
-    end
-
     describe "PUT update" do
-      let(:name_to_change) {"change"}
-      let(:action) do
-        put :update, id: agency.id, agency: {agency_name: name_to_change}
-      end
-      before {action}
+      before {action_update}
       subject {response}
       it {should redirect_to signin_path}
     end
   end
 
   context "when user logged in" do
-    let(:user) {FactoryGirl.create(:user, role_id: 1)}
-    before {session[:user_id] = user.id}
+    context "with role not super" do
+      before {session[:user_id] = user_agency.id}
 
-    describe "GET index" do
-      let(:users) do
-        3.times {|num| FactoryGirl.create(:agency, agency_name: "agency_name#{num}")}
-      end
-      before {get :index}
-      subject {response}
-      it {should render_template :index}
-    end
-
-    describe "GET edit" do
-      before {get :edit, id: agency.id}
-      subject {response}
-      it {should render_template :edit}
-    end
-
-    describe "PUT update" do
-      let(:name_to_change) {"change"}
-      let(:action) do
-        put :update, id: agency.id, agency: {agency_name: name_to_change}
-      end
-
-      context "with valid params" do
-        before {action}
+      describe "GET index" do
+        before {get :index}
         subject {response}
-        it {should redirect_to action: :index}
-        subject {Agency.last.reload.agency_name}
-        it {should eq name_to_change}
+        it {should redirect_to root_path}
       end
 
-      context "with invalid params" do
-        before {put :update, id: agency.id, agency: {agency_name: nil}}
+      describe "GET new" do
+        before {get :new}
+        subject {response}
+        it {should redirect_to root_path}
+      end
+
+      describe "POST create" do
+        before {action_create}
+        subject {response}
+        it {should redirect_to root_path}
+      end
+
+      describe "GET edit" do
+        before {get :edit, id: agency.id}
+        subject {response}
+        it {should redirect_to root_path}
+      end
+
+      describe "PUT update" do
+        before {action_update}
+        subject {response}
+        it {should redirect_to root_path}
+      end
+    end
+
+    context "with role super" do
+      before {session[:user_id] = user_super.id}
+
+      describe "GET index" do
+        before {get :index}
+        subject {response}
+        it {should render_template :index}
+      end
+
+      describe "GET new" do
+        before {get :new}
+        subject {response}
+        it {should render_template :new}
+      end
+
+      describe "POST create" do
+        context "with valid params" do
+          it "create new agency" do
+            expect {action_create}.to change(Agency, :count).by 1
+          end
+
+          it "redirect to action new" do
+            action_create
+            response.should redirect_to action: :new
+          end
+        end
+
+        context "with invalid params" do
+          before {Agency.any_instance.stub(:valid?).and_return false}
+
+          it "don't create new agency" do
+            expect {action_create}.not_to change(Agency, :count)
+          end
+
+          it "render template new" do
+            action_create
+            response.should render_template :new
+          end
+        end
+      end
+
+      describe "GET edit" do
+        before {get :edit, id: agency.id}
         subject {response}
         it {should render_template :edit}
-        subject {Agency.last.reload.agency_name}
-        it {should_not be_nil}
+      end
+
+      describe "PUT update" do
+        context "with valid params" do
+          before {action_update}
+
+          describe "update agency params" do
+            subject {agency.reload.agency_name}
+            it {should eq name_to_change}
+          end
+
+          describe "redirect to action index" do
+            subject {response}
+            it {should redirect_to action: :index}
+          end
+        end
+
+        context "with invalid params" do
+          before {Agency.any_instance.stub(:valid?).and_return false}
+          before {action_update}
+
+          describe "don't update agency params" do
+            subject {agency.reload.agency_name}
+            it {should_not eq name_to_change}
+          end
+
+          describe "render template edit" do
+            subject {response}
+            it {should render_template :edit}
+          end
+        end
       end
     end
   end
