@@ -33,9 +33,10 @@ class AgenciesController < ApplicationController
     @agency.create_user_id = current_user.id
     if @agency.save
       flash[:error] = 'Agency is created successful'
+      redirect_to new_agency_path
+    else
+      render :new
     end
-
-    render :new
   end
 
   private
@@ -46,7 +47,7 @@ class AgenciesController < ApplicationController
   def get_rows agencies
     rows = Array.new
     agencies.each do |agency|
-      link = "<a href='agencies/#{agency.id}/edit'>Edit</a>"
+      link = view_context.link_to("Edit", edit_agency_path(agency))
       rows << {id: agency.id, cell: {link: link,agency_name: agency.agency_name,
                 roman_name: agency.roman_name}}
     end

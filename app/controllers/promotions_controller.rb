@@ -33,6 +33,7 @@ class PromotionsController < ApplicationController
   end
 
   def show
+    render :index
   end
 
   def new
@@ -71,7 +72,7 @@ class PromotionsController < ApplicationController
   end
 
   def delete_promotion
-    @promotion.deleted
+    @promotion.delete
     flash[:error] = "Promotion deleted"
     redirect_to promotions_path(client_id: @promotion.client_id)
   end

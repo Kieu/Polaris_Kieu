@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe User do
-  let(:user){FactoryGirl.create(:user)}
+  let(:user) {FactoryGirl.create(:user_super)}
   it {should respond_to(:username)}
   it {should respond_to(:roman_name)}
   it {should respond_to(:email)}

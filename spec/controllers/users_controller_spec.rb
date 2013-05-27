@@ -1,51 +1,206 @@
 require 'spec_helper'
 
 describe UsersController do
-  before(:all) do
-    Role.destroy_all
-    FactoryGirl.create(:role_with_super)
-    FactoryGirl.create(:role_with_no_super)
+  let!(:user_super) {FactoryGirl.create(:user_super)}
+  let!(:user_agency) {FactoryGirl.create(:user_agency)}
+  let!(:client) {FactoryGirl.create(:client)}
+  let!(:user_client) {FactoryGirl.create(:user_client)}
+  let!(:client_user) {FactoryGirl.create(:client_user,
+    client_id: client.id, user_id: user_client.id)}
+
+  let(:username) {"username"}
+  let(:roman_name) {"roman_name"}
+  let(:email) {"email@example.com"}
+  let(:company_id) {client.id}
+  let(:role_id) {Settings.role.CLIENT}
+  let(:password_flg) {0}
+  let(:name_to_change) {"change"}
+
+  let(:action_create) do
+    post :create, user: {username: username, roman_name: roman_name, email: email,
+      company_id: company_id, role_id: role_id, password_flg: password_flg}
   end
-  let(:users) do
-    20.times {|num| FactoryGirl.create(:user, username: "name#{num}",
-                                       email: "name#{num}@polaris.com")}
+  let(:action_update) do
+    put :update, id: user_client.id, user: {username: name_to_change}
   end
 
-  context "when user not login" do
-    
+  context "when user don't login" do
     describe "GET index" do
-      before(:each) {get :index}
+      before {get :index}
       subject {response}
-      it {should redirect_to(signin_path)}
+      it {should redirect_to signin_path}
+    end
+
+    describe "GET new" do
+      before {get :new}
+      subject {response}
+      it {should redirect_to signin_path}
+    end
+
+    describe "POST create" do
+      before {action_create}
+      subject {response}
+      it {should redirect_to signin_path}
+    end
+
+    describe "GET edit" do
+      before {get :edit, id: user_client.id}
+      subject {response}
+      it {should redirect_to signin_path}
+    end
+
+    describe "PUT update" do
+      before {action_update}
+      subject {response}
+      it {should redirect_to signin_path}
+    end
+
+    describe "enabe disable user" do
+      before {post :enable_disable_user, id: user_client.id}
+      subject {response}
+      it {should redirect_to signin_path}
     end
   end
 
-  context "when user not login" do
-    context "user with super role" do
-      let(:user) do
-        FactoryGirl.create(:user, role_id: 1)
-      end
-      before(:each) do
-        session[:user_id] = user.id
-      end
+  context "when user logged in" do
+    context "with role not super" do
+      before {session[:user_id] = user_agency.id}
+
       describe "GET index" do
-        before(:each) {get :index}
+        before {get :index}
+        subject {response}
+        it {should redirect_to root_path}
+      end
+
+      describe "GET new" do
+        before {get :new}
+        subject {response}
+        it {should redirect_to root_path}
+      end
+
+      describe "POST create" do
+        before {action_create}
+        subject {response}
+        it {should redirect_to root_path}
+      end
+
+      describe "GET edit" do
+        before {get :edit, id: user_client.id}
+        subject {response}
+        it {should redirect_to root_path}
+      end
+
+      describe "PUT update" do
+        before {action_update}
+        subject {response}
+        it {should redirect_to root_path}
+      end
+
+      describe "enabe disable user" do
+        before {post :enable_disable_user, id: user_client.id}
+        subject {response}
+        it {should redirect_to root_path}
+      end
+    end
+
+    context "with role super" do
+      before {session[:user_id] = user_super.id}
+
+      describe "GET index" do
+        before {get :index}
         subject {response}
         it {should render_template :index}
       end
-    end
 
-    context "user with not super role" do
-      let(:user) do
-        FactoryGirl.create(:user, role_id: 2)
-      end
-      before(:each) do
-        session[:user_id] = user.id
-      end
-      describe "GET index" do
-        before(:each) {get :index}
+      describe "GET new" do
+        before {get :new}
         subject {response}
-        it {should redirect_to(root_path)}
+        it {should render_template :new}
+      end
+
+      describe "POST create" do
+        context "with valid params" do
+          it "create new user" do
+            expect {action_create}.to change(User, :count).by 1
+          end
+
+          it "create new client_user" do
+            expect {action_create}.to change(ClientUser, :count).by 1
+          end
+
+          it "redirect to action new" do
+            action_create
+            response.should redirect_to action: :new
+          end
+        end
+
+        context "with invalid params" do
+          before {User.any_instance.stub(:valid?).and_return false}
+
+          it "don't create new user" do
+            expect {action_create}.not_to change(User, :count)
+          end
+
+          it "don't create new client_user" do
+            expect {action_create}.not_to change(ClientUser, :count)
+          end
+
+          it "render template new" do
+            action_create
+            response.should render_template :new
+          end
+        end
+      end
+
+      describe "GET edit" do
+        before {get :edit, id: user_client.id}
+        subject {response}
+        it {should render_template :edit}
+      end
+
+      describe "PUT update" do
+        context "with valid params" do
+          before {action_update}
+
+          describe "update user params" do
+            subject {user_client.reload.username}
+            it {should eq name_to_change}
+          end
+
+          describe "redirect to action index" do
+            subject {response}
+            it {should redirect_to action: :index}
+          end
+        end
+
+        context "with invalid params" do
+          before {User.any_instance.stub(:valid?).and_return false}
+          before {action_update}
+
+          describe "don't update user params" do
+            subject {user_client.reload.username}
+            it {should_not eq name_to_change}
+          end
+
+          describe "render template edit" do
+            subject {response}
+            it {should render_template :edit}
+          end
+        end
+      end
+
+      describe "enabe disable user" do
+        before {post :enable_disable_user, id: user_client.id}
+
+        describe "set status to deactive" do
+          subject {user_client.reload.status}
+          it {should eq Settings.user.deactive}
+        end
+
+        describe "set client_user status to deleted" do
+          subject {client_user.reload.del_flg}
+          it {should eq Settings.client_user.deleted}
+        end
       end
     end
   end
