@@ -6,4 +6,6 @@ class ClientUser < ActiveRecord::Base
 
   belongs_to :client
   belongs_to :user
+
+  scope :active, where(del_flg: Settings.client_user.active)
 end
