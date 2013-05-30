@@ -34,14 +34,12 @@ Edit Client
 
   List users Added: <br>
 	<div id="user_list">
-    <% @client.client_users.each do |client_user| %>
-      <% if client_user.del_flg == 0 %>
-        <%= client_user.user.username %>
-        <%= client_user.user.email %>
-        <%= client_user.user.role.role_name %>
-        <input type="checkbox" name = "del_user_<%= client_user.user_id %>">
-        <input type = "hidden" name = "users_id[]" value = "<%= client_user.user_id %>"> <br>
-      <% end %>
+    <% @client.client_users.active.each do |client_user| %>
+      <%= short_name(client_user.user.username) %>
+      <%= client_user.user.email %>
+      <%= client_user.user.role.role_name %>
+      <input type="checkbox" name = "del_user_<%= client_user.user_id %>">
+      <input type = "hidden" name = "users_id[]" value = "<%= client_user.user_id %>"> <br>
     <% end %>
     <br>
 	</div>
@@ -55,15 +53,11 @@ Edit Client
 	$(document).ready(function(){
 		list_ignore_user = [];
 		list_user = [];
-		<% @client.client_users.each do |client_user|%>	
-			<% if client_user.del_flg == 0 %>
-				list_ignore_user.push({"value": "<%= client_user.user.id %>"});
-			<% end %>
+		<% @client.client_users.active.each do |client_user|%>	
+      list_ignore_user.push({"value": "<%= client_user.user.id %>"});
 		<% end %>
-		<% User.all.each do |user|%>	
-			<% if user.status == 0 %>
-				list_user.push({"label": "<%= user.username %>", "value": "<%= user.id %>", "email": "<%= user.email %>", "role": "<%= user.role.role_name %>"});
-			<% end %>
+		<% User.active.each do |user|%>	
+      list_user.push({"label": "<%= short_name(user.username) %>", "value": "<%= user.id %>", "email": "<%= user.email %>", "role": "<%= user.role.role_name %>"});
 		<% end %>
 		$(list_ignore_user).each(function(i,data){
 			list_user.splice(index_of(list_user,data.value),1);
