@@ -44,10 +44,8 @@ Client Registration
 <script type="text/javascript">
   $(document).ready(function(){
   	list_user = [];
-	<% User.all.each do |user|%>	
-		<% if user.status == Settings.user.active %>
-			list_user.push({"label": "<%= user.username %>", "value": "<%= user.id %>", "email": "<%= user.email %>", "role": "<%= user.role.role_name %>"});
-		<% end %>
+	<% User.active.each do |user|%>	
+    list_user.push({"label": "<%= short_name(user.username) %>", "value": "<%= user.id %>", "email": "<%= user.email %>", "role": "<%= user.role.role_name %>"});
 	<% end %>
 	$( "#tags" ).autocomplete({
 		source: list_user,

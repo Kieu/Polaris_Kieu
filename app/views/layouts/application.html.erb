@@ -61,7 +61,7 @@
 									<% end %>
 								<% end %>
 							<% else %>
-								<% @promotions.each_with_index do |promotion, index| %>
+								<% @array_promotion.each_with_index do |promotion, index| %>
 									<% if (params[:id] && promotion.id == params[:id].to_i) || (!params[:id] && index == 0) %>
                                         <tr><th class="edit"></th><td><%= link_to "#{edit_promotion_path(promotion)}##{index}", "#{promotion_path(promotion)}##{index}", class: "promotion_name active", id: index %></td></tr>
 									<% else %>

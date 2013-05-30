@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   validates :password_flg, presence: true
   
   scope :order_by_roman_name, ->{order :roman_name}
-  scope :active, where(del_flg: 0)
+  scope :active, where(status: 0)
 
   before_save {|user| user.email = email.downcase}
   
