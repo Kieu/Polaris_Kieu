@@ -1,81 +1,45 @@
 <% if @errors && @errors.count > 0 %>
-		<% @errors.each do |error| %>
-			<div>
-				<span class="text-validationError"><%= error %></span>
-			</div>
-		<% end %>
-		<script type="text/javascript">
-			$("#resend_password_form").show();
-		</script>
-	<% end %>
-<%= flash[:success]%>
+    <% @errors.each do |error| %>
+        <div>
+          <span class="text-validationError"><%= error %></span>
+        </div>
+    <% end %>
+    <script type="text/javascript">
+        $("#resend_password_form").show();
+    </script>
+<% end %>
+<%= flash[:success] %>
 <% if signed_in? %>
-	Welcome to Canpass
+    Welcome to Canpass
 <% else %>
-	<h1>Sign in</h1>
-	<div class="row">
-		<div class="span6 offset3">
-			<%= form_for(:session, url: sessions_path) do |f| %>
-				<%= f.label "Email" %>
-				<%= f.text_field :email, maxlength: 255, style: "width: 200px" %>
-				<%= f.label "Password" %>
-				<%= f.password_field :password, maxlength: 255, style: "width: 200px" %>
-				<%= f.label "Language" %>
-				<select name="language">
-					<option value="ja">Japanese</option>
-					<option value="en">English</option>
-				</select>
-				<%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
-      		<% end %>
-		</div>
-	</div>
+    <div id="infobox">
+    <div class="infoboxHeadtxt">
+      <p class="bold">お知らせ</p>
+    </div>
+    <% @feed.entries.each do |entry| %>
+        <ul>
+          <li><a href="<%= raw entry.url %>"><%= raw entry.title %></a></li>
+        </ul>
+    <% end %>
+          </div>
+
+    <div id="pressbox">
+      <div class="pressboxHeadtxt">
+        <p class="bold">プレスリリース</p>
+      </div>
+
+      <% @press_release.each do |press| %>
+          <ul>
+            <li><span><%= press.release_time %></span></li>
+            <li><%= press.content %> </li>
+          </ul>
+      <% end %>
+    </div>
 <% end %>
-<%= link_to "Resend password", "javascript:void(0)", id: "resend_password" %>
-<% if flash[:send_success] %>
-<div id="resend_password_form" class="row">
-<% else %>
-<div id="resend_password_form" style="display: none" class="row">
-<% end %>
-	<div class="span6 offset3">
-	<%= form_tag(resend_password_sessions_path, method: :post) do %>
-		<%= label_tag "Email" %>
-		<%= text_field_tag "email", nil, maxlength: 255, style: "width: 200px" %>
-		<%= label_tag "Captcha" %>
-		<%= recaptcha_tags %>
-		<%= submit_tag "Send" %>
-	<% end %>
-	<% if @form_errors && @form_errors.count > 0 %>
-		<% @form_errors.each do |error| %>
-			<div>
-				<div><span class="text-validationError"><%= error %></span></div>
-			</div>
-		<% end %>
-		<script type="text/javascript">
-			$("#resend_password_form").show();
-		</script>
-	<% end %>
-	<div><span class="text-validationError"><%= flash[:send_success]%></span></div>
-</div>
-</div>
-<div id="rss">
-	<% @feed.entries.each do |entry|%>
-		<a href="<%= raw entry.url %>"><%= raw entry.title %></a>
-		<br>
-	<% end %>
-</div>
-<h1>Press Release</h1>
-<div style="height: 300px; overflow-y: scroll;">
-<% @press_release.each do |press|%>
-	<div>
-		<%= press.release_time %><br>
-		<%= press.content %>
-	</div>
-<% end %>
-</div>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$("#resend_password").click(function(){
-			$("#resend_password_form").toggle();
-		})
-	})
-</script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#resend_password").click(function () {
+                $("#resend_password_form").toggle();
+            })
+        })
+    </script>
