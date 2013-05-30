@@ -11,7 +11,7 @@
     t(".category").each_with_index.map {|name, index| [name,index]},
     selected: @promotion.promotion_category_id %><br />
   <%= f.label "Tracking period" %>
-  <%= f.text_field :tracking_period, maxlength: 255, style: "width: 250px" %><br />
+  <%= f.text_field :tracking_period, maxlength: 2, style: "width: 250px" %><br />
   <%= f.submit %>
   <%= link_to "Cancel", promotions_path(client_id: @promotion.client_id) %>
   <%= link_to "Delete", "#inline_content", class: "inline" %>

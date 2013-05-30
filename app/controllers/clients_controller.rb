@@ -10,9 +10,6 @@ class ClientsController < ApplicationController
   def index
     if @clients[0].present?
       @client_name = @clients[0].client_name
-      if @client_name.length > Settings.MAX_LENGTH_CLIENT_NAME
-        @client_name = @client_name.first(Settings.MAX_LENGTH_CLIENT_NAME) + "..."
-      end
     else
       @clients = Array.new
     end

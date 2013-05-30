@@ -1,72 +1,104 @@
-Client Registration
+<p class="h2">クライアント編集</p>
 
 <% if flash[:error] %>
-  <div><%= flash[:error] %></div>
+    <div><%= flash[:error] %></div>
 <% end %>
 
 <%= form_for(@client) do |f| %>
-  <%= f.label "Client name" %>
-  <%= f.text_field :client_name, maxlength: 255, style: "width: 250px"%><br />
+    <div class="regist_form">
+      <table class="client_info">
+        <tr>
+          <th> <%= f.label "Client name" %>  </th>
+          <td colspan="2"><%= f.text_field :client_name, maxlength: 255, style: "width: 250px" %></td>
+        </tr>
+        <tr>
+          <th><%= f.label "Roman name" %> </th>
+          <td colspan="2"><%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %>
+          </td>
+        </tr>
 
-  <%= f.label "Roman name" %>
-  <%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %><br />
+        <tr>
+          <th><%= f.label "Contact" %>
+            <td colspan="2"><%= f.text_field :tel, maxlength: 15, style: "width: 250px" %>
+            </td>
+        </tr>
+        <tr>
+          <th>
+            <%= f.label "Person in charge" %> </th>
+          <td colspan="2"><%= f.text_field :person_charge, maxlength: 255, style: "width: 250px" %>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <td><%= f.label "Sale representative" %>   </td>
+            <td colspan="2"><%= f.text_field :person_sale, maxlength: 255, style: "width: 250px" %>
+            </td>
+        </tr>
+        <tr>
+          <th>
+            <%= f.label "Use policy" %>  </th>
+          <td><%= f.radio_button :contract_flg, 0, {checked: true} %> No contract</td>
+          <td> <%= f.radio_button :contract_flg, 1 %> Have contract
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <%= f.label "Plan type" %> </th>
+          <td><%= f.radio_button :contract_type, 0, {checked: true} %> Standard</td>
+          <td> <%= f.radio_button :contract_type, 1 %> Premium
+          </td>
+        </tr>
+      </table>
+      <div class="user_info_add">
+        <p>List users Added▼</p>
+        <input id="tags" placeholder="search" maxlength="255"/>
+      </div>
 
-  <%= f.label "Contact" %>
-  <%= f.text_field :tel, maxlength: 15, style: "width: 250px" %><br />
-
-  <%= f.label "Person in charge" %>
-  <%= f.text_field :person_charge, maxlength: 255, style: "width: 250px" %><br />
-
-  <%= f.label "Sale representative" %>
-  <%= f.text_field :person_sale, maxlength: 255, style: "width: 250px" %><br />
-
-  <%= f.label "Use policy" %>
-  <%= f.radio_button :contract_flg, 0, {checked: true} %> No contract
-  <%= f.radio_button :contract_flg, 1 %> Have contract<br />
-
-  <%= f.label "Plan type" %>
-  <%= f.radio_button :contract_type, 0, {checked: true} %> Standard
-  <%= f.radio_button :contract_type, 1 %> Premium<br />
-
-  List users Added: <br />
-  <div id="user_list">
-    <br />
-  </div>
-  <input id="tags" placeholder="search" maxlength="255"/>
-
-  <div class="actions">
-    <%= f.submit %>
-    <%= link_to 'Cancel', clients_path %>
-  </div>
+      <table id="user_list" class="user_add">
+        <thead>
+        <tr>
+          <th width="170">&nbsp;</th>
+          <th width="240">&nbsp;</th>
+          <th width="80">&nbsp;</th>
+          <th width="40">
+            <small>削除</small>
+          </th>
+        </tr>
+        </thead>
+      </table>
+      <div class="submit_area">
+        <input type="image" id="btn_submit" src="/assets/btn_done.gif">
+        <%= link_to raw('<img align="right" alt="キャンセル" src="/assets/btn_cancel.gif">'), clients_path %>
+      </div>
+    </div>
 <% end %>
 <%= link_to 'New Client', new_client_path %>
 
 <script type="text/javascript">
-  $(document).ready(function(){
-  	list_user = [];
-	<% User.all.each do |user|%>	
-		<% if user.status == Settings.user.active %>
-			list_user.push({"label": "<%= user.username %>", "value": "<%= user.id %>", "email": "<%= user.email %>", "role": "<%= user.role.role_name %>"});
-		<% end %>
-	<% end %>
-	$( "#tags" ).autocomplete({
-		source: list_user,
-		select: function( event, ui ) {
-			$("#tags").val("");
-			list_user.splice(list_user.indexOf(ui.item),1);
-			data = ui.item;
-			$("#user_list").append(data.label + " " + data.email + " " + data.role + " ");
-			$("#user_list").append("<input type = 'hidden' name='users_id[]' value ='" + data.value + "'>");
-			$("#user_list").append("<input type = 'checkbox' name='del_user_" + data.value + "'><br>");
-			return false;
-		},
-		minLength: 0,
-		focus: function(e,ui){
-			e.preventDefault();
-			this.value = ui.item.label;
-		}
-	}).focus(function (event) {
-    		$(this).autocomplete("search");
-		});
-  });
+    $(document).ready(function () {
+        list_user = [];
+        <% User.active.each do |user|%>
+        list_user.push({"label": "<%= short_name(user.username) %>", "value": "<%= user.id %>", "email": "<%= user.email %>", "role": "<%= user.role.role_name %>"});
+        <% end %>
+        $("#tags").autocomplete({
+            source: list_user,
+            select: function (event, ui) {
+                $("#tags").val("");
+                list_user.splice(list_user.indexOf(ui.item), 1);
+                data = ui.item;
+                $("#user_list").append("<tr><th>" + data.label + "</th>" + "<td>" + data.email + "</td><td>" + data.role
+                        + "</td><td><input type = 'hidden' name='users_id[]' value ='" + data.value +
+                        "'><input type = 'checkbox' name='del_user_" + data.value + "'></td></tr>");
+
+                return false;
+            },
+            minLength: 0,
+            focus: function (e, ui) {
+                e.preventDefault();
+                this.value = ui.item.label;
+            }
+        }).focus(function (event) {
+                    $(this).autocomplete("search");
+                });
+    });
 </script>

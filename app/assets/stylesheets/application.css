@@ -9,8 +9,9 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
+ *= require_directory .
  */
+/*
 input[type=text]{
 	width: 255px;
 }
@@ -26,7 +27,7 @@ a:hover {color:#09c; text-decoration:none;}
 	padding-top:15px
 }
 #right {
-	
+
 	float: right;
 	width: 615px;
 	padding-right: 5px;
@@ -34,7 +35,7 @@ a:hover {color:#09c; text-decoration:none;}
 }
 body {
 	font:11px "Trebuchet MS", Arial, sans-serif;
-	
+
 }
 .clear {clear:both;}
 
@@ -53,7 +54,7 @@ h2 {font:18px "Trebuchet MS", Arial, sans-serif;}
 	float:left;
 	height:40px;
 	padding-left:0px;
-	
+
 	background-repeat: no-repeat;
 	background-position: 3px 9px;
 	padding-top: 5px;
@@ -75,7 +76,7 @@ h2 {font:18px "Trebuchet MS", Arial, sans-serif;}
 #searchbar form {padding:3px;}
 #navigation { margin-left:0px; padding-top:8px;background:#0087A9;height:38px}
 #navigation ul {list-style:none;}
-#navigation li {display:inline;} 
+#navigation li {display:inline;}
 #navigation a, #navigation a:visited, #navigation a:active {display:block; float:left; height:19px; padding:5px 15px 0 15px; margin-right:5px; color:white; text-decoration:none; border-left:solid 1px #999;}
 #navigation a:hover {background:#3e5869; color:#fff; border: solid 1px #09c;}
 #navigation .active a {background:#3e5869; color:#fff;}
@@ -142,3 +143,4 @@ ul.ui-autocomplete{
 	max-height: 200px !important;
 	overflow-y: scroll;
 }
+                   */

@@ -16,21 +16,4 @@ promotion:
 client_user:
   deleted: 1
   active: 0
-MAX_LENGTH_CLIENT_NAME: 40
-MAX_LENGTH_PROMOTION_NAME: 40
-media_category:
-  1: 'Listing'
-  2: 'Affiliate'
-  3: 'Display'
-media:
-  1: 'Google'
-  2: 'Yahoo'
-  3: 'Google Adwords'
-account:
-  1: 'Account 1'
-  2: 'Account 2'
-  3: 'Account 3'
-conversion:
-  1: 'conversion 1'
-  2: 'conversion 2'
-  3: 'conversion 3'
+MAX_LENGTH_NAME: 30
