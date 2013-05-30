@@ -13,15 +13,15 @@
     Welcome to Canpass
 <% else %>
     <div id="infobox">
-    <div class="infoboxHeadtxt">
-      <p class="bold">お知らせ</p>
+      <div class="infoboxHeadtxt">
+        <p class="bold">お知らせ</p>
+      </div>
+      <% @feed.entries.each do |entry| %>
+          <ul>
+            <li><a href="<%= raw entry.url %>"><%= raw entry.title %></a></li>
+          </ul>
+      <% end %>
     </div>
-    <% @feed.entries.each do |entry| %>
-        <ul>
-          <li><a href="<%= raw entry.url %>"><%= raw entry.title %></a></li>
-        </ul>
-    <% end %>
-          </div>
 
     <div id="pressbox">
       <div class="pressboxHeadtxt">
@@ -36,10 +36,10 @@
       <% end %>
     </div>
 <% end %>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#resend_password").click(function () {
-                $("#resend_password_form").toggle();
-            })
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#resend_password").click(function () {
+            $("#resend_password_form").toggle();
         })
-    </script>
+    })
+</script>
