@@ -11,3 +11,5 @@ en:
       category: ["IT/Media/App", "AV/Consumer electronics", "Food/Beverage/Consumer Goods", "Distribution/retail/mail order", "Finance", "Communication", "Real estate", "Human resources", "automobile", "Service", "Others"]
     edit:
       category: ["IT/Media/App", "AV/Consumer electronics", "Food/Beverage/Consumer Goods", "Distribution/retail/mail order", "Finance", "Communication", "Real estate", "Human resources", "automobile", "Service", "Others"]
+  conversions:
+    unique_definition: ["Only once", "Limitless", "Once a day", "Once every 7 days", "Once every 28 days", "Once a month"]

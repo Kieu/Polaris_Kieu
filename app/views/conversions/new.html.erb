@@ -1,0 +1,39 @@
+<%= link_to @promotion.client.client_name, client_path(@promotion.client_id) %> > <%= link_to @promotion.promotion_name, promotion_path(@promotion) %> > Conversion Registration
+
+<%= form_for @conversion do |f| %>
+  <%= hidden_field_tag :promotion_id, params[:promotion_id] %>
+  <%= f.label "Conversion name" %>
+  <%= f.text_field :conversion_name, maxlength: 255, style: "width: 250px" %><br />
+
+  <%= f.label "Roman name" %>
+  <%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %><br />
+
+  <%= f.label "Type" %>
+  <%= f.radio_button :conversion_category, 0, checked: true, onclick: "render_web();" %>
+  <%= f.label "Web" %>
+  <%= f.radio_button :conversion_category, 1, onclick: "render_app();" %>
+  <%= f.label "App" %>
+  <%= f.radio_button :conversion_category, 2, onclick: "render_combination();" %>
+  <%= f.label "Combination" %><br />
+
+  <div id="category_area">
+    <%= render "web", f: f %>
+  </div>
+
+  <script>
+    function render_web() {
+      $('#category_area').html('<%=j render "web", f: f %>')
+    }
+    function render_app() {
+      $('#category_area').html('<%=j render "app", f: f %>')
+    }
+    function render_combination() {
+      $('#category_area').html('<%=j render "combination", f: f %>')
+    }
+  </script>
+
+  <%= f.submit %>
+  <%= link_to 'Cancel', conversions_path(promotion_id: @promotion.id) %>
+<% end %>
+
+<%= link_to "Conversion registration", new_conversion_path(promotion_id: @promotion.id) %>

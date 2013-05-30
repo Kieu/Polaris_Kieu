@@ -1,0 +1,10 @@
+<%= f.label "Tracking method" %>
+<%= f.radio_button :track_method, 0, checked: true %>
+<%= f.label "Install referer" %>
+<%= f.radio_button :track_method, 1 %>
+<%= f.label "White" %>
+<%= f.radio_button :track_method, 2 %>
+<%= f.label "Welcome" %>
+<%= f.radio_button :track_method, 3 %>
+<%= f.label "Custom" %>
+<%= f.text_field :url %><br />
