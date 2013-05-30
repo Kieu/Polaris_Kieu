@@ -1,0 +1,71 @@
+<script type="text/javascript">//アコーディオン
+
+$(document).ready(function () {
+
+    //----------------------------
+    $('.accordion01').click(function () {
+        $("#accordion01_inner").slideToggle('slow');
+        $('#passwd').toggleClass("arrow1");
+        $('#passwd').toggleClass("arrow2");
+
+    })
+
+    $('.accordion_close').toggle(
+            function () {
+            },
+            function () {
+            }
+
+    );
+});
+
+</script>
+<div id="sidebar">
+  <div class="loginbox">
+    <p class="title">ログイン</p>
+    <form action="/sessions" method="post">
+      <label><span class="bold">メールアドレス</span><br />
+        <input type="text" name="session[email]" id="email" class="input-text" maxlength="255"/></label>
+      <br />
+      <p class="bold">言語選択</p>
+      <select name="language">
+        <option value="ja">日本語　</option>
+        <option value="en">英語　　</option>
+      </select><br />
+      <label><span class="bold">パスワード</span><br />
+        <input type="password" name="session[password]" id="password" class="input-text" maxlength="255"/></label>
+
+      <input type="image" id="btn_submit" src="/assets/btn_login.gif">
+      <p class="error">パスワードが不正です。</p>
+    </form>
+
+    <div class="accordion01 ta-c clearfix"><p id="passwd" class="arrow1">パスワードを忘れた場合はこちら</p></div>
+
+
+  </div>
+  <!-- /.loginbox end -->
+  <div id="accordion01_inner" class="loginbox_more" style="display:none">
+    <p class="account_txt01">アカウント発行時のメールアドレスと、表示されている認証文字を入力してください。<br/>パスワードを発行し、ご案内さし上げます。</p>
+
+    <div class="span6 offset3">
+      <%= form_tag(resend_password_sessions_path, method: :post) do %>
+          <%= label_tag "Email" %>
+          <%= text_field_tag "email", nil, maxlength: 255, style: "width: 200px" %>
+          <%= label_tag "Captcha" %>
+          <%= recaptcha_tags %>
+          <input type="image" id="Send" src="/assets/btn_submit.gif">
+      <% end %>
+      <% if @form_errors && @form_errors.count > 0 %>
+          <% @form_errors.each do |error| %>
+              <div>
+                <div><span class="text-validationError"><%= error %></span></div>
+              </div>
+          <% end %>
+          <script type="text/javascript">
+              $("#resend_password_form").show();
+          </script>
+      <% end %>
+      <div><span class="text-validationError"><%= flash[:send_success]%></span></div>
+    </div>
+  </div>
+</div>
