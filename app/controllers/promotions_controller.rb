@@ -11,8 +11,12 @@ class PromotionsController < ApplicationController
   	end
 
   	@array_promotion = Promotion.get_by_client(client_id).order_by_promotion_name
+    @array_media_category = @array_media = @array_account = @array_conversion = Array.new
+    @array_media_category, @array_media, @array_account, @array_conversion = get_master_data
 
-    array_category = ['05/02', '05/03', '05/04', '05/05', 
+    
+
+    array_category = ['05/02', '05/03', '05/04', '05/05',
           '05/06', '05/07', '05/08', '05/09', 
           '05/10', '05/11', '05/12', '05/13']
 
@@ -30,6 +34,9 @@ class PromotionsController < ApplicationController
               style: {color: '#6D869F', font: '12px Helvetical'}})
     f.yAxis(min: 0, title: '')
     end
+    
+    promotion_data = Array.new
+    promotion_data = DailySummaryAccount.get_promotion_data(params[:promotion_id], '20130525', '20130525')
   end
 
   def show
@@ -58,6 +65,14 @@ class PromotionsController < ApplicationController
   def edit
   end
 
+  def get_promotions_report
+    # get params for paging
+    promotion_data = Array.new
+    promotion_data = DailySummaryAccount.get_promotion_data(params[:id])
+  
+    render json: {page: params[:page], total: count, rows: rows}
+  end
+
   def update
     @promotion.update_user_id = current_user.id
     if @promotion.update_attributes(params[:promotion])
@@ -75,6 +90,22 @@ class PromotionsController < ApplicationController
     @promotion.delete
     flash[:error] = "Promotion deleted"
     redirect_to promotions_path(client_id: @promotion.client_id)
+  end
+
+  def get_master_data
+    # get list conversion 
+    array_conversion = Conversion.where(' del_flg = 0 ').select(' id, conversion_name')
+
+    # get list media_category
+    array_media_category = Settings.media_category
+    
+    # get list media
+    array_media = Media.where(' del_flg = 0 ').select(' id, media_name, media_category_id')
+
+    # get list account
+    array_account = Account.where(' del_flg = 0 ').select(' id, account_name')
+    
+    return array_media_category, array_media, array_account, array_conversion
   end
 
   private

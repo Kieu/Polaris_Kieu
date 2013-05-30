@@ -49,20 +49,24 @@
 						</div>
 					<% elsif @array_promotion %>
 					    <div id="promotions_list" style="margin-top: 15px;">
-							<% if current_user.super?  || current_user.agency? %>
+							<% if current_user.super? %>
 								<% @array_promotion.each_with_index do |promotion, index| %>
 									<% if (params[:id] && promotion.id == params[:id].to_i) || (!params[:id] && index == 0) %>
-										<div><%= link_to "", "#{edit_promotion_path(promotion)}##{index}", class: "edit_promotion" %><%= link_to promotion.promotion_name, "#{promotion_path(promotion)}##{index}", class: "promotion_name active", id: index %></div>
+										<div><%= link_to "", "#{edit_promotion_path(promotion)}##{index}", class: "edit_promotion" %><%= link_to promotion.promotion_name, "#", class: "promotion_name active", id: "#{index}", onclick: "reloadFlex('.flexme4', '#{get_promotions_report_promotions_path}?id=#{promotion.id}', '##{index}', '.promotion_name', '#promotion_name', #{Settings.MAX_LENGTH_PROMOTION_NAME})" %>
+										</div>
 									<% else %>
-										<div><%= link_to "", "#{edit_promotion_path(promotion)}##{index}", class: "edit_promotion" %><%= link_to promotion.promotion_name, "#{promotion_path(promotion)}##{index}", class: "promotion_name", id: index %></div>
+										<div><%= link_to "", "#{edit_promotion_path(promotion)}##{index}", class: "edit_promotion" %><%= link_to promotion.promotion_name, "#", class: "promotion_name", id: "#{index}", onclick: "reloadFlex('.flexme4', '#{get_promotions_report_promotions_path}?id=#{promotion.id}', '##{index}', '.promotion_name', '#promotion_name', #{Settings.MAX_LENGTH_PROMOTION_NAME})"%>
+										</div>
 									<% end %>
 								<% end %>
 							<% else %>
 								<% @promotions.each_with_index do |promotion, index| %>
 									<% if (params[:id] && promotion.id == params[:id].to_i) || (!params[:id] && index == 0) %>
-										<div><%= link_to "#{edit_promotion_path(promotion)}##{index}", "#{promotion_path(promotion)}##{index}", class: "promotion_name active", id: index %></div>
+										<div><%= link_to promotion.promotion_name, "#", class: "promotion_name active", class: "select_promotion", id: "#{index}", onclick: "reloadFlex('.flexme4', '#{get_promotions_report_promotions_path}?id=#{promotion.id}', '##{index}', '.promotion_name', '#promotion_name', #{Settings.MAX_LENGTH_PROMOTION_NAME})" %>
+										</div>
 									<% else %>
-										<div><%= link_to "#{edit_promotion_path(promotion)}##{index}", "#{promotion_path(promotion)}##{index}", class: "promotion_name", id: index %></div>
+										<div><%= link_to promotion.promotion_name, "#", class: "promotion_name", id: "#{index}", onclick: "reloadFlex('flexme4', '#{get_promotions_report_promotions_path}?id=#{promotion.id}', '##{index}', '.promotion_name', '#promotion_name', #{Settings.MAX_LENGTH_PROMOTION_NAME})"%>
+										</div>
 									<% end %>
 								<% end %>
 							<% end %>

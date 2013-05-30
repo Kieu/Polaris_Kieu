@@ -3,5 +3,19 @@
 <% end %>
 <div id="container" style="height: 120px; min-width: 600px"></div>
 <%= high_chart("container", @chart) %>
-<div style="height: 350px;"></div>
+<table width="100%" border="1" cellspacing="0" cellpadding="0" class="promotion_table" id="promotion_table">
+</table>
+<br/>
+<br/>
 <%= link_to "Create promotion", new_promotion_path(client_id: params[:client_id]) %>
+<script>
+  $(document).ready(function(){
+     $('.promotion_name').click(function(){
+       alert($(this).attr('id'));
+
+     });
+
+  });
+
+
+</script>
