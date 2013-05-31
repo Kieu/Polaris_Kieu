@@ -27,6 +27,6 @@
 <br />
 <div>
 <% if current_user.super? %>
-  <%= link_to 'New Client', new_client_path %>
+ <%= link_to 'New promotion', new_promotion_path(client_id: @client_id) %>
 <% end %>
 </div>
