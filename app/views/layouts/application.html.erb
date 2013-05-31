@@ -35,8 +35,8 @@
             </dd>
           </dl>
           <div style="border-top:1px solid #c1c1c1;"></div>
-          <div id="clients_list">
-            <% if @clients %>
+          <% if @clients %>
+              <div id="clients_list">
                 <table class="sidebar">
                   <% if current_user.super? %>
                       <% @clients.each_with_index do |client, index| %>
@@ -68,41 +68,41 @@
                       <% end %>
                   <% end %>
                 </table>
-            <% elsif @array_promotion %>
-                <div id="promotion_list">
-                  <table class="sidebar">
-                    <% if current_user.super? || current_user.agency? %>
-                        <% @array_promotion.each_with_index do |promotion, index| %>
-                            <% if (params[:id] && promotion.id == params[:id].to_i) || (!params[:id] && index == 0) %>
-                                <tr>
-                                  <th class="edit"><%= link_to "", "#{edit_promotion_path(promotion)}##{index}", class: "edit" %></th>
-                                  <td><%= link_to promotion.promotion_name, "#{promotion_path(promotion)}##{index}", class: "promotion_name active", id: index %></td>
-                                </tr>
-                            <% else %>
-                                <tr>
-                                  <th class="edit"><%= link_to "", "#{edit_promotion_path(promotion)}##{index}", class: "edit" %></th>
-                                  <td><%= link_to promotion.promotion_name, "#{promotion_path(promotion)}##{index}", class: "promotion_name", id: index %></td>
-                                </tr>
-                            <% end %>
-                        <% end %>
-                    <% else %>
-                        <% @array_promotion.each_with_index do |promotion, index| %>
-                            <% if (params[:id] && promotion.id == params[:id].to_i) || (!params[:id] && index == 0) %>
-                                <tr>
-                                  <th class="edit"></th>
-                                  <td><%= link_to "#{edit_promotion_path(promotion)}##{index}", "#{promotion_path(promotion)}##{index}", class: "promotion_name active", id: index %></td>
-                                </tr>
-                            <% else %>
-                                <tr>
-                                  <th class="edit"></th>
-                                  <td><%= link_to "#{edit_promotion_path(promotion)}##{index}", "#{promotion_path(promotion)}##{index}", class: "promotion_name", id: index %></td>
-                                </tr>
-                            <% end %>
-                        <% end %>
-                    <% end %>
-                  </table>
-                </div>
-            <% end %>
+          <% elsif @array_promotion %>
+              <div id="promotions_list">
+                <table class="sidebar">
+                  <% if current_user.super? || current_user.agency? %>
+                      <% @array_promotion.each_with_index do |promotion, index| %>
+                          <% if (params[:id] && promotion.id == params[:id].to_i) || (!params[:id] && index == 0) %>
+                              <tr>
+                                <th class="edit"><%= link_to "", "#{edit_promotion_path(promotion)}##{index}", class: "edit" %></th>
+                                <td><%= link_to promotion.promotion_name, "#{promotion_path(promotion)}##{index}", class: "promotion_name active", id: index %></td>
+                              </tr>
+                          <% else %>
+                              <tr>
+                                <th class="edit"><%= link_to "", "#{edit_promotion_path(promotion)}##{index}", class: "edit" %></th>
+                                <td><%= link_to promotion.promotion_name, "#{promotion_path(promotion)}##{index}", class: "promotion_name", id: index %></td>
+                              </tr>
+                          <% end %>
+                      <% end %>
+                  <% else %>
+                      <% @array_promotion.each_with_index do |promotion, index| %>
+                          <% if (params[:id] && promotion.id == params[:id].to_i) || (!params[:id] && index == 0) %>
+                              <tr>
+                                <th class="edit"></th>
+                                <td><%= link_to "#{edit_promotion_path(promotion)}##{index}", "#{promotion_path(promotion)}##{index}", class: "promotion_name active", id: index %></td>
+                              </tr>
+                          <% else %>
+                              <tr>
+                                <th class="edit"></th>
+                                <td><%= link_to "#{edit_promotion_path(promotion)}##{index}", "#{promotion_path(promotion)}##{index}", class: "promotion_name", id: index %></td>
+                              </tr>
+                          <% end %>
+                      <% end %>
+                  <% end %>
+                </table>
+              </div>
+          <% end %>
 
           </div>
         </div>
