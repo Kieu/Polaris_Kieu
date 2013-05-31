@@ -57,4 +57,39 @@ namespace :master do
       PressRelease.create!(content: "test_#{num}", release_time: Time.now, create_user_id: 1)
     end
   end
+
+  desc "Create Ext Promotion Report"
+  task create_ext_promotion_report: :environment do
+    (1..100).each do |num|
+      ExtPromotionReport.create!(promotion_id: "#{num}", media_category_id: 1,
+                                 media_id: 1, account_id: 1, imp: "#{num + 10}",
+                                 click: "#{num + 15}", cost: "#{num + 30}", report_date: 20130525)
+    end
+  end
+
+  desc "Create Daily Summary Account"
+  task create_daily_summary_account: :environment do
+    (1..100).each do |num|
+      DailySummaryAccount.create!(id: "#{num}", promotion_id: 1, media_category_id: 1,
+                                 media_id: 1, account_id: 1, imp_count: "#{num + 10}",
+                                 click_count: "#{num + 15}", cost_sum: "#{num + 30}", report_ymd: 20130525, create_time: 20130525)
+    end
+  end
+
+  desc "Create Media"
+  task create_media: :environment do
+    (1..100).each do |num|
+      Media.create!(id: "#{num}", media_category_id: 1, media_name: "media_#{num}")
+    end
+  end
+
+  desc "Create Daily Summary Acc Conversion"
+  task create_daily_summary_acc_conversion: :environment do
+    (1..100).each do |num|
+      DailySummaryAccConversion.create!(id: "#{num}", promotion_id: 1, account_id: 1,
+                                 conversion_id: 1, total_cv_count: "#{num + 50}", first_cv_count: "#{num + 35}",
+                                 repeat_cv_count: "#{num + 15}", assist_count: "#{num + 12}", report_ymd: 20130525, create_time: 20130525,
+                                sales: "#{num + 200}", roas: "#{num + 21}", profit: "#{num + 500}", roi: "#{num + 27}")
+    end
+  end
 end

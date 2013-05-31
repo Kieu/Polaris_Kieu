@@ -18,6 +18,9 @@ PolarisManage::Application.routes.draw do
   resources :agencies do
     post "get_agencies_list", on: :collection
   end
+  resources :promotions do
+    post "get_promotions_report", on: :collection
+  end
   resources :sessions, only: [:new, :create, :destroy] do
     post "resend_password", on: :collection
   end
