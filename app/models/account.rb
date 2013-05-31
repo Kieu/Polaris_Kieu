@@ -17,6 +17,11 @@ class Account < ActiveRecord::Base
   validates :sync_account_id, presence: true, length: {maximum: 255}, uniqueness: {case_sensitive: false}, if: :check_sync      
   validates :sync_account_pw, presence: true, length: {maximum: 255}, uniqueness: {case_sensitive: false}, if: :check_sync
   
+  has_many :daily_summary_accounts
+  has_many :daily_summary_acc_conversions
+  belongs_to :promotion
+  belongs_to :media
+
   private
   def check_sync
     sync_flg == 1 ? true : false

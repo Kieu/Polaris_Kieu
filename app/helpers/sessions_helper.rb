@@ -36,4 +36,21 @@ module SessionsHelper
   def store_location
     session[:return_to] = request.url
   end
+
+  def cal_col_cv conversion_id
+    count = 0
+    cookies[("conversion" + conversion_id.to_s).to_sym].split("").each do |i|
+      count += 1 if i == "1"
+    end
+    count
+  end
+  
+  def cal_cv conversion_id
+    count = 0
+    cookies[("conversion" + conversion_id.to_s).to_sym].split("").each_with_index do |i,index|
+      break if index == 3
+      count += 1 if i == "1"
+    end
+    count
+  end
 end

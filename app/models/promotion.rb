@@ -4,6 +4,8 @@ class Promotion < ActiveRecord::Base
 
   belongs_to :client
   belongs_to :agency
+  has_many :conversions
+  has_many :accounts
 
   validates :promotion_name, presence: true, uniqueness: {case_sensitive: false}
   validates :roman_name, presence: true, uniqueness: {case_sensitive: false}
