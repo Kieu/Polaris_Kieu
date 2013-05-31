@@ -107,7 +107,7 @@
         </div>
         <% if @clients %>
             <%= link_to raw('<img src="/assets/btn_client_regist.gif">'), new_client_path %>
-        <% elsif @array_promotion %>
+        <% elsif current_user.super? || current_user.agency? %>
             <%= link_to raw('<img src="/assets/btn_client_regist.gif">'), new_promotion_path(client_id: @client_id) %>
         <% end %>
       </div>
