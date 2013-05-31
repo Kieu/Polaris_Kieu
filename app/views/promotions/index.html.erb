@@ -15,13 +15,12 @@
 </select>
 <br />
 <br />
-<div id="container" style="height: 120px; min-width: 600px"></div>
-<%= high_chart("container", @chart) %>
 <% if flash[:error] %>
   <div><%= flash[:error] %></div>
 <% end %>
-<div id="container" style="height: 120px; min-width: 600px"></div>
-<%= high_chart("container", @chart) %>
+<div id="graph_container" style="height: 150px; min-width: 700px"></div>
+<%= high_chart("graph_container", @chart) %>
+<div style="height: 100px;"></div>
 <table width="100%" border="1" cellspacing="0" cellpadding="0" class="promotion_table" id="promotion_table">
 	<tr>
 		<td rowspan="3">Media</td>
