@@ -40,8 +40,8 @@ function reloadFlex(obj, urlAction, id, current_active, cname, maxlength) {
     
 }
 function ajaxCommon(urlAction, id, current_active, cname,arr_inner) {
-   // location.href = urlAction;
-   // return;
+    location.href = urlAction;
+    return;
     var array_inner = arr_inner.split(',');
     $("#dvloader").css('display','');
     $.ajax({
