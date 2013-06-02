@@ -5,21 +5,30 @@ class PromotionsController < ApplicationController
 
   def index
     if current_user.client?
-      client_id = current_user.company_id
+      @client_id = current_user.company_id
     else
-      client_id = params[:client_id]
+      @client_id = params[:client_id]
     end
-    @array_promotion = Promotion.get_by_client(client_id).order_by_promotion_name
+
+    @array_promotion = Promotion.get_by_client(@client_id).order_by_promotion_name
     @promotion = Promotion.find(params[:promotion_id])
     cookies[:promotion] = "11111" unless cookies[:promotion].present?
     @promotion.conversions.each do |conversion|
       cookies[("conversion" + conversion.id.to_s).to_sym] = "1111111110" unless cookies[("conversion" + conversion.id.to_s).to_sym].present?
     end
     
-    promotion_id = @array_promotion.first[:id]
+    @promotion_id = @array_promotion.first[:id]
+    if(params[:promotion_id])
+      @promotion_id = params[:promotion_id]
+    end
+    
     promotion_data = Array.new
     date_arrange = Array.new
-    promotion_data, date_arrange = DailySummaryAccount.get_promotion_data(params[:promotion_id], '20130520', '20130525')
+
+    # just for test
+    conversion_id = 1;
+
+    promotion_data, date_arrange = DailySummaryAccount.get_promotion_data(@promotion_id, conversion_id, '20130520', '20130525')
     select_left = 'click'
     select_right = 'cost'
     draw_graph(promotion_data, date_arrange, select_left, select_right)
@@ -49,14 +58,6 @@ class PromotionsController < ApplicationController
   end
 
   def edit
-  end
-
-  def get_promotions_report
-    # get params for paging
-    promotion_data = Array.new
-    promotion_data = DailySummaryAccount.get_promotion_data(params[:id])
-  
-    render json: {page: params[:page], total: count, rows: rows}
   end
 
   def update
