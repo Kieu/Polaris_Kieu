@@ -1,7 +1,7 @@
 <% if flash[:success] %>
   <div><%= flash[:success] %></div>
 <% end %>
-<%= link_to 'New User', new_user_path %>
+<%= link_to 'New User', "javascript:void(0)", class: "new_agency",onclick: "ajaxCommon('#{new_user_path}', '', '', '','#inner')" %>
 <table id="flex1" style="display:none"></table>
 <script type="text/javascript">
 	$("#flex1").flexigrid({

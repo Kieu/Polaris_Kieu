@@ -9,6 +9,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<div style="display:none" id="dvloader"><img src="/assets/ajax-loader.gif" /></div>
 <div id="wrapper">
   <%= render "layouts/header" %>
   <div id="container">
@@ -42,13 +43,13 @@
                       <% @clients.each_with_index do |client, index| %>
                           <% if (params[:id] && client.id == params[:id].to_i) || (!params[:id] && index == 0) %>
                               <tr>
-                                <th class="edit"><%= link_to "", "#{edit_client_path(client)}##{index}", class: "edit" %></th>
-                                <td><%= link_to client.client_name, "#", class: "client_name active", id: "#{index}", onclick: "reloadFlex('.flexme4', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{index}', '.client_name', '#client_name', #{Settings.MAX_LENGTH_NAME})" %></td>
+                                <th class="edit"><%= link_to "", "javascript:void(0)", class: "edit", id: "edit#{client.id}",onclick: "ajaxCommon('#{edit_client_path(client)}##{index}}', '##{client.id}', '.client_name', '#client_name','#inner')" %></th>
+                                <td><%= link_to client.client_name, "javascript:void(0)", class: "client_name active", id: "#{client.id}", onclick: "reloadFlex('.flexme4', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{client.id}', '.client_name', '#client_name', #{Settings.MAX_LENGTH_NAME})" %></td>
                               </tr>
                           <% else %>
                               <tr>
-                                <th class="edit"><%= link_to "", "#{edit_client_path(client)}##{index}", class: "edit" %></th>
-                                <td><%= link_to client.client_name, "#", class: "client_name", id: "#{index}", onclick: "reloadFlex('.flexme4', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{index}', '.client_name', '#client_name', #{Settings.MAX_LENGTH_NAME})" %></td>
+                                <th class="edit"><%= link_to "", "javascript:void(0)", class: "edit", id: "edit#{client.id}",onclick: "ajaxCommon('#{edit_client_path(client)}##{client.id}}', '##{client.id}', '.client_name', '#client_name','#inner')" %></th>
+                                <td><%= link_to client.client_name, "javascript:void(0)", class: "client_name", id: "#{client.id}", onclick: "reloadFlex('.flexme4', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{client.id}', '.client_name', '#client_name', #{Settings.MAX_LENGTH_NAME})" %></td>
                               </tr>
                           <% end %>
                       <% end %>
@@ -57,12 +58,12 @@
                           <% if (params[:id] && client.id == params[:id].to_i) || (!params[:id] && index == 0) %>
                               <tr>
                                 <th class="edit"></th>
-                                <td><%= link_to client.client_name, "#", class: "client_name active", id: "#{index}", onclick: "reloadFlex('.flexme4', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{index}', '.client_name', '#client_name', #{Settings.MAX_LENGTH_NAME})" %></td>
+                                <td><%= link_to client.client_name, "javascript:void(0)", class: "client_name active", id: "#{client.id}", onclick: "reloadFlex('.flexme4', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{client.id}', '.client_name', '#client_name', #{Settings.MAX_LENGTH_NAME})" %></td>
                               </tr>
                           <% else %>
                               <tr>
                                 <th class="edit"></th>
-                                <td><%= link_to client.client_name, "#", class: "client_name", id: "#{index}", onclick: "reloadFlex('.flexme4', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{index}', '.client_name', '#client_name', #{Settings.MAX_LENGTH_NAME})" %></td>
+                                <td><%= link_to client.client_name, "javascript:void(0)", class: "client_name", id: "#{client.id}", onclick: "reloadFlex('.flexme4', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{client.id}', '.client_name', '#client_name', #{Settings.MAX_LENGTH_NAME})" %></td>
                               </tr>
                           <% end %>
                       <% end %>
@@ -75,13 +76,13 @@
                         <% @array_promotion.each_with_index do |promotion, index| %>
                             <% if (promotion.id == @promotion_id.to_i) %>
                                 <tr>
-                                  <th class="edit"><%= link_to "", "#{edit_promotion_path(promotion)}##{index}", class: "edit" %></th>
-                                  <td><%= link_to promotion.promotion_name, promotions_path(promotion_id: promotion.id, client_id: @client_id), class: "promotion_name active", id: index %></td>
+                                  <th class="edit"><%= link_to "", "javascript:void(0)", class: "edit", id: "edit#{index}",onclick: "ajaxCommon('#{edit_promotion_path(promotion)}##{index}', '##{index}', '.promotion_name', '#promotion_name','#inner')" %></th>
+                                  <td><%= link_to promotion.promotion_name, "javascript:void(0)", class: "promotion_name active", id: "#{index}",onclick: "ajaxCommon('#{promotions_path(promotion_id: promotion.id, client_id: @client_id)}', '##{index}', '.promotion_name', '#promotion_name','#inner')" %></td>
                                 </tr>
                             <% else %>
                                 <tr>
-                                  <th class="edit"><%= link_to "", "#{edit_promotion_path(promotion)}##{index}", class: "edit" %></th>
-                                  <td><%= link_to promotion.promotion_name, promotions_path(promotion_id: promotion.id, client_id: @client_id), class: "promotion_name", id: index %></td>
+                                  <th class="edit"><%= link_to "","javascript:void(0)", class: "edit", id: "edit#{index}",onclick: "ajaxCommon('#{edit_promotion_path(promotion)}##{index}', '##{index}', '.promotion_name', '#promotion_name','#inner')" %></th>
+                                  <td><%= link_to promotion.promotion_name,  "javascript:void(0)", class: "promotion_name", id: "#{index}",onclick: "ajaxCommon('#{promotions_path(promotion_id: promotion.id, client_id: @client_id)}', '##{index}', '.promotion_name', '#promotion_name','#inner')" %></td>
                                 </tr>
                             <% end %>
                         <% end %>
@@ -106,9 +107,9 @@
           </div>
         </div>
         <% if @clients %>
-            <%= link_to raw('<img src="/assets/btn_client_regist.gif">'), new_client_path %>
+            <%= link_to raw('<img src="/assets/btn_client_regist.gif">'), "javascript:void(0)", class: "new_client_name", onclick: "ajaxCommon('#{new_client_path}', '', '.new_client_name', '#new_client_name','#inner')"  %>
         <% elsif current_user.super? || current_user.agency? %>
-            <%= link_to raw('<img src="/assets/btn_client_regist.gif">'), new_promotion_path(client_id: @client_id) %>
+            <%= link_to raw('<img src="/assets/btn_client_regist.gif">'), "javascript:void(0)", class: "new_promotion_name", onclick: "ajaxCommon('#{new_promotion_path(client_id: @client_id)}', '', '.new_promotion_name', '#new_promotion_name','#inner')"  %>
         <% end %>
       </div>
   <% else %>

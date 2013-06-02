@@ -11,6 +11,12 @@
 		colModel : [
 			{display: 'promotion_name', name : 'promotion_name', width : 700, sortable : false, align: 'center'}
 			],
+        <% if current_user.super? %>
+        buttons : [
+            {name: 'Add', bclass: 'add', onpress : create},
+            {separator: true}
+        ],
+        <% end %>
 	    sortname: "promotion_name",
         sortorder: "desc",
 		usepager: true,
@@ -22,11 +28,9 @@
 		width: 250,
 		height: 250
 	});
+    function create() {
+        var client_id = $('a[class="client_name active"]').attr('id');
+        ajaxCommon('<%= new_promotion_path(client_id: @client_id) %>?client_id='+client_id,'','','','#inner');
+    }
 </script>
-<br />
-<br />
-<div>
-<% if current_user.super? %>
- <%= link_to 'New promotion', new_promotion_path(client_id: @client_id) %>
-<% end %>
-</div>
+

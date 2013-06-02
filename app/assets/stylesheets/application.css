@@ -11,6 +11,12 @@
  *= require_self
  *= require_directory .
  */
+#dvloader {
+    z-index: 5000;
+    position: absolute;
+    top:49%;
+    left:49%;
+}
 /*
 input[type=text]{
 	width: 255px;
