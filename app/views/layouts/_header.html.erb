@@ -6,7 +6,7 @@
           <ul>
             <li><%= link_to(raw('<img src="/assets/head_env.gif" align="left" />'), '#') %></li>
             <li><%= link_to(raw('<img src="/assets/head_help.gif" />'), '#') %></li>
-            <li><p>　<img src="/assets/head_pict.gif" />　<%= current_user.username%></p></li>
+            <li><p>　<img src="/assets/head_pict.gif" />　<%= short_name(current_user.username)%></p></li>
             <li><p>｜<a href="#"><span><%= link_to 'ログアウト', signout_path, method: 'delete' %></span></a></p></li>
           </ul>
         </div><!-- /#personal end -->
