@@ -30,7 +30,7 @@ class PromotionsController < ApplicationController
 
     promotion_data, date_arrange = DailySummaryAccount.get_promotion_data(@promotion_id, conversion_id, '20130520', '20130525')
     select_left = 'click'
-    select_right = 'cost'
+    select_right = 'COST'
     draw_graph(promotion_data, date_arrange, select_left, select_right)
   end
 
@@ -84,11 +84,11 @@ class PromotionsController < ApplicationController
 
     @chart = LazyHighCharts::HighChart.new('graph') do |f|
       
-      f.series(type: 'spline', name: 'Clicks',
-             data: promotion_data['click'],
+      f.series(type: 'spline', name: "#{select_left}",
+             data: promotion_data[select_left],
              color: '#008B8B')
-      f.series(type: 'spline', name: 'Cost',
-             data: promotion_data['cost'],
+      f.series(type: 'spline', name: "#{select_right}",
+             data: promotion_data[select_right],
              color: '#FFA500')
       f.legend(align: "right", verticalAlign: "top", y: 0, x: -50,
              layout: 'vertical', borderWidth: 0)

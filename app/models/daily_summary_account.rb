@@ -66,12 +66,15 @@ class DailySummaryAccount < ActiveRecord::Base
 
       conversion_data.each do |conversion|
         conversion_id = conversion[:conversion_id]
-        array_result["#{conversion_id}_CV"] = Array.new
-        array_result["#{conversion_id}_CV_First"] = Array.new
-        array_result["#{conversion_id}_CV_Repeat"] = Array.new
-        array_result["#{conversion_id}_CVR"] = Array.new
-        array_result["#{conversion_id}_CPA"] = Array.new
-        array_result["#{conversion_id}_ASSIT"] = Array.new
+
+        if(!array_result["#{conversion_id}_CV"])
+          array_result["#{conversion_id}_CV"] = Array.new
+          array_result["#{conversion_id}_CV_First"] = Array.new
+          array_result["#{conversion_id}_CV_Repeat"] = Array.new
+          array_result["#{conversion_id}_CVR"] = Array.new
+          array_result["#{conversion_id}_CPA"] = Array.new
+          array_result["#{conversion_id}_ASSIT"] = Array.new
+        end
 
         if(conversion[:report_ymd] && conversion[:report_ymd].to_s.to_date.strftime("%Y/%m/%d") == datetime)
           array_result["#{conversion[:conversion_id]}_CV"] << conversion[:total_cv_count] ? conversion[:total_cv_count] : 0
