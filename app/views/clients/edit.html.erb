@@ -1,4 +1,7 @@
 <%= render "layouts/prevent_change_page" %>
+<% content_for :sidebar do %>
+	<%= render partial: "layouts/sidebar", locals: {object: @clients} %>
+<% end %>
 <p class="h2">Edit Client</p>
 <%= form_for(@client) do |f| %>
     <div class="regist_form">
@@ -52,12 +55,21 @@
         </tr>
         </thead>
         <% @client.client_users.active.each do |client_user| %>
+        	<%
+        		user = client_user.user
+        		if user.client?
+        			
+        			company = Client.find(user.company_id).client_name
+        		else
+        			company = Agency.find(user.company_id).agency_name
+        		end
+        	%>
             <tr>
-              <th><%= short_name(client_user.user.username) %></th>
-              <td><%= client_user.user.email %></td>
-              <td><%= client_user.user.role.role_name %></td>
-              <td><input type="checkbox" name="del_user_<%= client_user.user_id %>">
-                <input type="hidden" name="users_id[]" value="<%= client_user.user_id %>"></td>
+              <th><%= short_name(user.username) %>(<%= company %>)</th>
+              <td><%= user.email %></td>
+              <td><%= user.role.role_name %></td>
+              <td><input type="checkbox" name="del_user_<%= user.id %>">
+                <input type="hidden" name="users_id[]" value="<%= user.id %>"></td>
             </tr>
         <% end %>
       </table>
@@ -77,7 +89,14 @@
         list_ignore_user.push({"value": "<%= client_user.user.id %>"});
         <% end %>
         <% User.active.each do |user|%>
-        list_user.push({"label": "<%= short_name(user.username) %>", "value": "<%= user.id %>", "email": "<%= user.email %>", "role": "<%= user.role.role_name %>"});
+        <%
+        if user.client?
+			company = Client.find(user.company_id).client_name
+        else
+        	company = Agency.find(user.company_id).agency_name
+        end
+        %>
+        list_user.push({"label": "<%= short_name(user.username) %>", "value": "<%= user.id %>", "email": "<%= user.email %>", "role": "<%= user.role.role_name %>", "company": "<%= company %>"});
         <% end %>
         $(list_ignore_user).each(function (i, data) {
             list_user.splice(index_of(list_user, data.value), 1);
@@ -88,9 +107,9 @@
                 $("#tags").val("");
                 list_user.splice(list_user.indexOf(ui.item), 1);
                 data = ui.item;
-                $("#user_list").append(data.label + " " + data.email + " " + data.role + " ");
-                $("#user_list").append("<input type = 'hidden' name='users_id[]' value ='" + data.value + "'>");
-                $("#user_list").append("<input type = 'checkbox' name='del_user_" + data.value + "'><br>");
+                $("#user_list").append("<tr><th>" + data.label + "(" + data.company + ")</th>" + "<td>" + data.email + "</td><td>" + data.role
+                        + "</td><td><input type = 'hidden' name='users_id[]' value ='" + data.value +
+                        "'><input type = 'checkbox' name='del_user_" + data.value + "'></td></tr>");
                 return false;
             },
             minLength: 0,

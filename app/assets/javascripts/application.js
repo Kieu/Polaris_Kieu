@@ -40,23 +40,68 @@ function reloadFlex(obj, urlAction, id, current_active, cname, maxlength) {
     
 }
 function ajaxCommon(urlAction, id, current_active, cname,arr_inner) {
-    location.href = urlAction;
-    return;
-    var array_inner = arr_inner.split(',');
-    $("#dvloader").css('display','');
-    $.ajax({
-        type: "GET",
-        url: urlAction,
-        dataType: "html"
-    }).done(function( data  ) {
-            for (i=0;i<array_inner.length;i++){
-            var inner_data = $(data).find(array_inner[i]);
-            $(array_inner[i]).html(inner_data.children());
-            }
-            $("#dvloader").css('display','none');
-        });
-    $(current_active).removeClass('active');
-    $(id).addClass('active');
+    //location.href = urlAction;
+    //return;
+    if (prevent == true){
+    	$("#change").click(function(){
+			var array_inner = arr_inner.split(',');
+    		$("#dvloader").css('display','');
+    		$.ajax({
+        		type: "GET",
+        		url: urlAction,
+        		dataType: "html"
+    		}).done(function( data  ) {
+            	for (i=0;i<array_inner.length;i++){
+            		var inner_data = $(data).find(array_inner[i]);
+            		$(array_inner[i]).html(inner_data.children());
+            	}
+            	$("#dvloader").css('display','none');
+				$('input#keywords').quicksearch('div#clients_list tr', {
+	        		"selector": "a.client_name"
+				});
+				$('input#keywords').quicksearch('div#promotions_list tr', {
+					"selector": "a.promotion_name"
+				});
+				$(current_active).removeClass('active');
+    			$(id).addClass('active');
+        	});
+        	prevent = false;
+        	$('#prevent_change').colorbox.close();
+        	$("#popup_prevent").remove();
+		});
+		$("#cancel_change").click(function(){
+			$('#prevent_change').colorbox.close();
+		});
+		$.colorbox({
+			width: "30%",
+			inline: true,
+			escKey: false,
+			overlayClose: false,
+			href: "#prevent_change",
+		})
+    }else{
+    	var array_inner = arr_inner.split(',');
+    		$("#dvloader").css('display','');
+    		$.ajax({
+        		type: "GET",
+        		url: urlAction,
+        		dataType: "html"
+    		}).done(function( data  ) {
+            	for (i=0;i<array_inner.length;i++){
+            		var inner_data = $(data).find(array_inner[i]);
+            		$(array_inner[i]).html(inner_data.children());
+            	}
+            	$("#dvloader").css('display','none');
+				$('input#keywords').quicksearch('div#clients_list tr', {
+	        		"selector": "a.client_name"
+				});
+				$('input#keywords').quicksearch('div#promotions_list tr', {
+					"selector": "a.promotion_name"
+				});
+				$(current_active).removeClass('active');
+    			$(id).addClass('active');
+        	});
+    }
 }
 function reloadFlex1(obj, urlAction) {
     $(obj)
