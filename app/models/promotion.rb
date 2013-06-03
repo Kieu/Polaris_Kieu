@@ -7,8 +7,8 @@ class Promotion < ActiveRecord::Base
   has_many :conversions
   has_many :accounts
 
-  validates :promotion_name, presence: true, uniqueness: {case_sensitive: false}
-  validates :roman_name, presence: true, uniqueness: {case_sensitive: false}
+  validates :promotion_name, presence: true, uniqueness: {scope: :client_id}
+  validates :roman_name, presence: true, uniqueness: {scope: :client_id}
   validates :promotion_category_id, presence: true
   validates :tracking_period, presence: true, inclusion: {in: 1..90}
   validates :client_id, presence: true

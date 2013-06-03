@@ -1,0 +1,3 @@
+<%= link_to @promotion.client.client_name, client_path(@promotion.client_id) %> > <%= link_to @promotion.promotion_name, promotion_path(@promotion) %> > Conversion Setting<br />
+Some random text I don't even understand<br />
+<%= link_to "Conversion Registration", new_conversion_path(promotion_id: @promotion.id) %>

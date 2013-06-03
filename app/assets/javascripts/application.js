@@ -103,3 +103,10 @@ function ajaxCommon(urlAction, id, current_active, cname,arr_inner) {
         	});
     }
 }
+function reloadFlex1(obj, urlAction) {
+    $(obj)
+    .flexOptions({
+        url: urlAction,
+        newp: 1
+    }).flexReload();
+}
