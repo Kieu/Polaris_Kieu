@@ -1,4 +1,4 @@
-<%= link_to Client.find(@client_id).client_name, client_path(@client_id) %> > Promotion Registration
+<%= link_to @client.client_name, client_path(@client) %> > Promotion Registration
 
 <% if flash[:error] %>
   <div><%= flash[:error] %></div>
@@ -16,7 +16,7 @@
   <%= f.label "Tracking period" %>
   <%= f.text_field :tracking_period, maxlength: 2, style: "width: 250px" %><br />
   <%= f.submit %>
-  <%= link_to 'Cancel', promotions_path(client_id: @client_id) %>
+  <%= link_to 'Cancel', promotions_path(client_id: @client.id) %>
 <% end %>
 
-<%= link_to "Promotion registration", new_promotion_path(client_id: @client_id) %>
+<%= link_to "Promotion registration", new_promotion_path(client_id: @client.id) %>

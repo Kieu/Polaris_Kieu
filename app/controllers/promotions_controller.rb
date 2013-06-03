@@ -16,7 +16,7 @@ class PromotionsController < ApplicationController
       @promotion_id = params[:promotion_id]
     end
     
-    @promotion = Promotion.find(@promotion_id)
+    @promotion = @promotion_id.present? ? Promotion.find(@promotion_id) : Promotion.find(@array_promotion[0].id)
     cookies[:promotion] = "11111" unless cookies[:promotion].present?
     @promotion.conversions.each do |conversion|
       cookies[("conversion" + conversion.id.to_s).to_sym] = "1111111110" unless cookies[("conversion" + conversion.id.to_s).to_sym].present?
@@ -39,7 +39,7 @@ class PromotionsController < ApplicationController
   end
 
   def new
-    @client_id = params[:client_id]
+    @client = Client.find(params[:client_id])
     @promotion = Promotion.new
   end
 
@@ -52,7 +52,7 @@ class PromotionsController < ApplicationController
       flash[:error] = "Promotion created"
       redirect_to new_promotion_path(client_id: params[:client_id])
     else
-      @client_id = params[:client_id]
+      @client = Client.find(params[:client_id])
       render :new
     end
   end

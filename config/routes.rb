@@ -11,6 +11,7 @@ PolarisManage::Application.routes.draw do
     post "change_company_list", on: :collection
   end
   resources :roles
+  resources :conversions
   resources :clients do
     post "del_client", to: "clients#del_client", on: :collection
     post "get_promotions_list", on: :collection
