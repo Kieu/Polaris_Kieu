@@ -397,9 +397,6 @@
     <button id="not_change_cookie">Cancel</button>
   </div>
 </div>
-<% elsif %>
-  <b> No data</b>
-<% end %>
 <script type="text/javascript">
     $(function() {
         $("#show_option").click(function(){
@@ -473,3 +470,6 @@
 </script>
 <%= link_to "Create promotion", new_promotion_path(client_id: @client_id) %>
 <%= link_to "Conversion Setting", conversions_path(promotion_id: @promotion.id) %>
+<% elsif %>
+  <b> No data</b>
+<% end %>
