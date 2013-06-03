@@ -2,12 +2,13 @@
 <% if flash[:error] %>
   <div><%= flash[:error] %></div>
 <% end %>
-
+<input type="hidden" id="add_flg" value="<%= @add_flg %>" />
 <script>
 $(document).ready(function(){
-  $('#agency_agency_name').val('');
-  $('#agency_roman_name').val('');
-
+  if($('add_flg').arrt('value') == 1) {
+    $('#agency_agency_name').val('');
+    $('#agency_roman_name').val('');  
+  }
 })
 
 </script>
