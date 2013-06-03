@@ -92,4 +92,28 @@ namespace :master do
                                 sales: "#{num + 200}", roas: "#{num + 21}", profit: "#{num + 500}", roi: "#{num + 27}")
     end
   end
+  
+  desc "Create Display ads"
+  task create_display_ad: :environment do
+    (3..100).each do |num|
+      DisplayAd.create!(id: "#{num}", identifier: "identify#{num}", name: "ad#{num}",
+                                 client_id: 1, promotion_id: 1, account_id: 1,display_campaign_id: 1,
+                                 display_group_id: 1, create_user_id: 1, update_user_id: 1)
+    end
+  end
+  
+  desc "Create Display group"
+  task create_display_group: :environment do
+    (5..100).each do |num|
+      DisplayGroup.create!(id: "#{num}", name: "ad_group#{num}", client_id: 1, promotion_id: 1, account_id: 1,
+       create_user_id: 1, update_user_id: 1)
+    end
+  end
+  desc "Create Display campaign"
+  task create_display_campaign: :environment do
+    (5..100).each do |num|
+      DisplayCampaign.create!(id: "#{num}", name: "campaign#{num}", client_id: 1, promotion_id: 1, account_id: 1, create_user_id: 1, update_user_id: 1)
+    end
+  end
+  
 end

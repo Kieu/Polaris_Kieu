@@ -150,3 +150,11 @@ ul.ui-autocomplete{
 	overflow-y: scroll;
 }
                    */
+ input#datepick {
+    border: 1px solid #B9C9F3;
+    font-size: 11px;
+    height: 24px;
+    margin-top: 12px;
+    padding: 2px;
+    width: 150px;
+}

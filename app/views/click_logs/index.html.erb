@@ -1,0 +1,213 @@
+<% if flash[:error] %>
+	<div><%= flash[:error] %></div>
+<% end %>
+
+<div id="search_box">
+Media Category: <%= select_tag 'media_category_id', "<option value = "">All</option><option value = 0 >Listing ad</option><option value = 1 >Display ad</option><option value = 2 >Affiliate</option>".html_safe %> <br>
+Account name: <%= select_tag 'account_id', content_tag(:option,'All',:value=>"")+options_from_collection_for_select(Account.where(promotion_id: params[:id]).order(:account_name), 'id', 'account_name') %> <br>
+<input id="datepick" type="text" readonly="readonly" value="<%= cookies[:s] + " - " + cookies[:e] %>" name="datepick">
+</div>	
+<button id = "show_option">Show options</button>
+<div id="popup" style="display: none">
+	<div id="list_options" style="width: 400px;">
+		<div id="result_list">
+			<table>
+				<tr>
+					<td colspan="2"><%= link_to "Show All", "javascript:void(0)", onclick: "update_cookies()"%></td>
+				</tr>
+				<tr>
+					<td>Click Time</td>
+					<td><%= link_to cookies[:options][0] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('0',this)"%></td>
+				</tr>
+				<tr>
+					<td>Media Name</td>
+					<td><%= link_to cookies[:options][1] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('1',this)"%></td>
+				</tr>
+				<tr>
+					<td>Account name</td>
+					<td><%= link_to cookies[:options][2] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('2',this)"%></td>
+				</tr>
+				<tr>
+					<td>Campaign Name</td>
+					<td><%= link_to cookies[:options][3] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('3',this)"%></td>
+				</tr>
+				<tr>
+					<td>Ad Group Name</td>
+					<td><%= link_to cookies[:options][4] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('4',this)"%></td>
+				</tr>
+				<tr>
+					<td>Ad Name</td>
+					<td><%= link_to cookies[:options][5] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('5',this)"%></td>
+				</tr>
+				<tr>
+					<td>URL</td>
+					<td><%= link_to cookies[:options][6] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('6',this)"%></td>
+				</tr>
+				<tr>
+					<td>SESID</td>
+					<td><%= link_to cookies[:options][7] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('7',this)"%></td>
+				</tr>
+				<tr>
+					<td>OS</td>
+					<td><%= link_to cookies[:options][8] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('8',this)"%></td>
+				</tr>
+				<tr>
+					<td>OK/NG</td>
+					<td><%= link_to cookies[:options][9] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('9',this)"%></td>
+				</tr>
+				<tr>
+					<td>Error Message</td>
+					<td><%= link_to cookies[:options][10] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('10',this)"%></td>
+				</tr>
+				<tr>
+					<td>Show data from Error table</td>
+					<td><input type="checkbox" name="error_table" id="error_table" checked="checked"></td>
+				</tr>
+			</table>
+		</div>
+		<button id="change_cookie">Ok</button>
+		<button id="not_change_cookie">Cancel</button>
+	</div>
+</div>
+<table id="clicklogs" style="display:none"></table>
+<script type="text/javascript">
+	function showColumn(tbl, colIndex, visible) {
+	    $(tbl).flexToggleCol(colIndex, visible);
+	}
+	$ (function(){
+		function formatDate(year, month, day){
+		 if (year < 2000) { year = parseInt(year) + 1900; }
+		 if (month.length == 1) { month = "0" + parseInt(month); }
+		 if (day.length == 1) { day = "0" + parseInt(day); }
+		 // if(lang===langJP){
+		  // return year + "/" + month + "/" + day;
+		 // }else{
+		  //return month + "/" + day + "/" + year;
+		  return year + "/" + month + "/" + day;
+		 //}
+		}
+		$('#datepick').daterangepicker({
+    		lang: $('#lang').val(),
+            onDone: function() {
+                var term = $('#datepick').val();
+                var d = term.split(' - ');
+                var f = (d[0]).split('/');
+                var t = (d[1]).split('/');
+                // if ($('#lang').val() === langJP) {
+                    // $.cookie("s", formatDate(f[0], f[1], f[2], langJP), {
+                        // path: '/'
+                    // });
+                    // $.cookie("e", formatDate(t[0], t[1], t[2], langJP), {
+                        // path: '/'
+                    // });
+                // } else {
+                    $.cookie("s", formatDate(f[0], f[1], f[2]), {
+                        path: '/'
+                    });
+                    $.cookie("e", formatDate(t[0], t[1], t[2]), {
+                        path: '/'
+                    });
+                //}
+                
+                reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?cid=" + $("#media_category_id").val() + "&account_id=" + $("#account_id").val());
+            }
+        });		
+		
+		$("#media_category_id").change(function(){
+			reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?cid=" + $(this).val() + "&account_id=" + $("#account_id").val());
+		});
+		$("#account_id").change(function(){
+			reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?cid=" + $("#media_category_id").val() + "&account_id=" + $(this).val());
+		});
+		$("#clicklogs").flexigrid({
+			url: "<%= get_logs_list_click_logs_path %>",
+			dataType: 'json',
+			colModel : [
+				{display: 'Click Time', name : 'click_utime', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][0] == "0" ? 1 : 0 %>},
+				{display: 'Media Name:', name : 'media_id', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][1] == "0" ? 1 : 0 %>},
+				{display: 'Account Name', name : 'account_id', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][2] == "0" ? 1 : 0 %>},
+				{display: 'Campaign Name', name : 'campaign_id', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][3] == "0" ? 1 : 0 %>},
+				{display: 'Ad Group Name', name : 'ad_group_id', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][4] == "0" ? 1 : 0 %>},
+				{display: 'Ad Name', name : 'ad_id', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][5] == "0" ? 1 : 0 %>},
+				{display: 'URL', name : 'redirect_url', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][6] == "0" ? 1 : 0 %>},
+				{display: 'SESID', name : 'session_id', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][7] == "0" ? 1 : 0 %>},
+				{display: 'OS', name : 'device_category', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][8] == "0" ? 1 : 0 %>},
+				{display: 'OK/NG', name : 'state', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][9] == "0" ? 1 : 0 %>},
+				{display: 'Error Message', name : 'error_code', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][10] == "0" ? 1 : 0 %>},
+				],
+		    sortname: "click_utime",
+	        sortorder: "desc",
+			usepager: true,
+			title: 'Click Logs list',
+			useRp: true,
+			rp: 10,
+			id:<%=params[:id]%>, 
+			showTableToggleBtn: true,
+			width: 600,
+			height: 200
+		});
+	})
+	
+	var colums = ["click_utime", "media_id", "account_id", "campaign_id", "ad_group_id", "ad_id", "redirect_url", "session_id", "device_category", "state", "error_code"]
+	
+	$("#show_option").click(function(){
+		$.colorbox({
+			width: "50%",
+			height: "70%",
+			inline: true,
+			escKey: false,
+			overlayClose: false,
+			href: "#list_options"
+		});
+	})
+	cookies_options = $.cookie("options");
+	update_cookie = function(data,ele){
+		options = cookies_options.split("");
+		options[data] = (options[data] == "1") ? "0" : "1";
+		text = (options[data] == "1") ? "Delete" : "Add";
+		$(ele).text(text);
+		options = options.join("");
+		cookies_options = options;
+
+		
+	}
+	update_cookies = function(){
+		$.cookie("options", '11111111111');
+		location.href = location.href;		
+	}
+	show_page = function(ele){
+		$(".cv_options").each(function(){
+			if ("#" + $(this).attr("id") == $(ele).attr("href")){
+				$(this).show();
+			}else{
+				$(this).hide();
+			}
+		})
+	}
+	$("#change_cookie").click(function(){
+		$.cookie("options",cookies_options);
+		so = 0;
+		for (var i=0;i<colums.length;i++){
+			if (cookies_options[i] == "1"){
+				showColumn("#clicklogs", i, true);
+			} else{
+				showColumn("#clicklogs", i, false);
+			}
+		 }
+		 
+		if ($("#error_table").is(':checked')) {
+	    	$.cookie("ser",1);
+	    	
+	    } else {
+	    	$.cookie("ser",0);
+	    }
+	    reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?cid=" + $("#media_category_id").val() + "&account_id=" + $("#account_id").val());
+		$("#clicklogs").colorbox.close();
+	});
+	$("#not_change_cookie").click(function(){
+		cookies_options = $.cookie("options");
+		$("#clicklogs").colorbox.close();
+	})
+	
+</script>
+<div style="clear:both"></div>

@@ -5,33 +5,36 @@ class PromotionsController < ApplicationController
 
   def index
     if current_user.client?
-      @client_id = current_user.company_id
+      @array_promotion = Promotion.order_by_promotion_name
     else
       @client_id = params[:client_id]
+      @array_promotion = Promotion.get_by_client(@client_id).order_by_promotion_name
     end
 
-    @array_promotion = Promotion.get_by_client(@client_id).order_by_promotion_name
-    @promotion = Promotion.find(params[:promotion_id])
-    cookies[:promotion] = "11111" unless cookies[:promotion].present?
-    @promotion.conversions.each do |conversion|
-      cookies[("conversion" + conversion.id.to_s).to_sym] = "1111111110" unless cookies[("conversion" + conversion.id.to_s).to_sym].present?
+    if @array_promotion.count > 0
+      @promotion_id = @array_promotion.first[:id]
+      if(params[:promotion_id])
+        @promotion_id = params[:promotion_id]
+      end
+    
+      @promotion = @promotion_id.present? ? Promotion.find(@promotion_id) : Promotion.find(@array_promotion[0].id)
+      cookies[:promotion] = "11111" unless cookies[:promotion].present?
+      @promotion.conversions.each do |conversion|
+        cookies[("conversion" + conversion.id.to_s).to_sym] = "1111111110" unless cookies[("conversion" + conversion.id.to_s).to_sym].present?
+      end
+    
+      promotion_data = Array.new
+      date_arrange = Array.new
+
+      # just for test
+      conversion_id = 1;
+
+      promotion_data, date_arrange = DailySummaryAccount.get_promotion_data(@promotion_id, conversion_id, '20130520', '20130525')
+      select_left = 'click'
+      select_right = 'COST'
+      draw_graph(promotion_data, date_arrange, select_left, select_right)
     end
     
-    @promotion_id = @array_promotion.first[:id]
-    if(params[:promotion_id])
-      @promotion_id = params[:promotion_id]
-    end
-    
-    promotion_data = Array.new
-    date_arrange = Array.new
-
-    # just for test
-    conversion_id = 1;
-
-    promotion_data, date_arrange = DailySummaryAccount.get_promotion_data(@promotion_id, conversion_id, '20130520', '20130525')
-    select_left = 'click'
-    select_right = 'cost'
-    draw_graph(promotion_data, date_arrange, select_left, select_right)
   end
 
   def show
@@ -39,7 +42,7 @@ class PromotionsController < ApplicationController
   end
 
   def new
-    @client_id = params[:client_id]
+    @client = Client.find(params[:client_id])
     @promotion = Promotion.new
   end
 
@@ -52,7 +55,7 @@ class PromotionsController < ApplicationController
       flash[:error] = "Promotion created"
       redirect_to new_promotion_path(client_id: params[:client_id])
     else
-      @client_id = params[:client_id]
+      @client = Client.find(params[:client_id])
       render :new
     end
   end
@@ -84,11 +87,11 @@ class PromotionsController < ApplicationController
 
     @chart = LazyHighCharts::HighChart.new('graph') do |f|
       
-      f.series(type: 'spline', name: 'Clicks',
-             data: promotion_data['click'],
+      f.series(type: 'spline', name: "#{select_left}",
+             data: promotion_data[select_left],
              color: '#008B8B')
-      f.series(type: 'spline', name: 'Cost',
-             data: promotion_data['cost'],
+      f.series(type: 'spline', name: "#{select_right}",
+             data: promotion_data[select_right],
              color: '#FFA500')
       f.legend(align: "right", verticalAlign: "top", y: 0, x: -50,
              layout: 'vertical', borderWidth: 0)
