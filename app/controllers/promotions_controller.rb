@@ -5,12 +5,12 @@ class PromotionsController < ApplicationController
 
   def index
     if current_user.client?
-      @array_promotion = Promotion.order_by_promotion_name
+      @client_id = current_user.company_id
     else
       @client_id = params[:client_id]
-      @array_promotion = Promotion.get_by_client(@client_id).order_by_promotion_name
     end
 
+    @array_promotion = Promotion.get_by_client(@client_id).order_by_promotion_name
     if @array_promotion.count > 0
       @promotion_id = @array_promotion.first[:id]
       if(params[:promotion_id])
