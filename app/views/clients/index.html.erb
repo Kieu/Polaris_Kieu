@@ -1,7 +1,7 @@
 <% if flash[:error] %>
 	<div><%= flash[:error] %></div>
 <% end %>
-<h2 id="client_name"><%= @client_name %></h2>
+<h2 id="client_name"><%= short_name(@client_name) %></h2>
 <br />
 <table class="flexme4" style="display: none"></table>
 <script type="text/javascript">
@@ -11,6 +11,12 @@
 		colModel : [
 			{display: 'promotion_name', name : 'promotion_name', width : 700, sortable : false, align: 'center'}
 			],
+        <% if current_user.super? %>
+        buttons : [
+            {name: 'Add', bclass: 'add', onpress : create},
+            {separator: true}
+        ],
+        <% end %>
 	    sortname: "promotion_name",
         sortorder: "desc",
 		usepager: true,
@@ -22,11 +28,9 @@
 		width: 250,
 		height: 250
 	});
+    function create() {
+        var client_id = $('a[class="client_name active"]').attr('id');
+        ajaxCommon('<%= new_promotion_path(client_id: @client_id) %>?client_id='+client_id,'','','','#inner');
+    }
 </script>
-<br />
-<br />
-<div>
-<% if current_user.super? %>
-  <%= link_to 'New Client', new_client_path %>
-<% end %>
-</div>
+

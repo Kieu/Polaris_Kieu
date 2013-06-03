@@ -1,94 +1,107 @@
 <%= render "layouts/prevent_change_page" %>
-Edit Client
+<p class="h2">Edit Client</p>
 <%= form_for(@client) do |f| %>
-  <div class="field">
-    <%= f.label "Client name" %><br />
-    <%= f.text_field :client_name, maxlength: 255, style: "width: 250px" %>
-  </div>
-  <div class="field">
-    <%= f.label "Roman name" %><br />
-    <%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %>
-  </div>
-  <div class="field">
-    <%= f.label "Tel" %><br />
-    <%= f.text_field :tel, maxlength: 15, style: "width: 250px" %>
-  </div>
-  <div class="field">
-    <%= f.label "person_charge:" %><br />
-    <%= f.text_field :person_charge, maxlength: 255, style: "width: 250px" %>
-  </div>
-  <div class="field">
-    <%= f.label "person_sale" %><br />
-    <%= f.text_field :person_sale, maxlength: 255, style: "width: 250px" %>
-  </div>
-  <div class="field">
-    <%= f.label "Contract type" %><br />
-    <%= f.radio_button :contract_type, 0 %> 0
-    <%= f.radio_button :contract_type, 1 %> 1
-  </div>
-  <div class="field">
-    <%= f.label "Contract flg" %><br />
-    <%= f.radio_button :contract_flg, 0 %> 0
-    <%= f.radio_button :contract_flg, 1 %> 1
-  </div>
+    <div class="regist_form">
+      <table class="client_info">
+        <tr>
+          <th> <%= f.label "Client name" %></th>
+          <td colspan="2"><%= f.text_field :client_name, maxlength: 255, style: "width: 250px" %></td>
+        </tr>
+        <tr>
+          <th><%= f.label "Roman name" %></th>
+          <td colspan="2"><%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %> </td>
+        </tr>
+        <tr>
+          <th><%= f.label "Tel" %></th>
+          <td colspan="2"> <%= f.text_field :tel, maxlength: 15, style: "width: 250px" %>  </td>
+        </tr>
+        <tr>
+          <th><%= f.label "person_charge:" %></th>
+          <td colspan="2"><%= f.text_field :person_charge, maxlength: 255, style: "width: 250px" %></td>
+        </tr>
+        <tr>
+          <th>
+            <%= f.label "person_sale" %></th>
+          <td colspan="2"><%= f.text_field :person_sale, maxlength: 255, style: "width: 250px" %>    </td>
+        </tr>
+        <tr>
+          <th><%= f.label "Contract type" %></th>
+          <td><%= f.radio_button :contract_type, 0 %> 0</td>
+          <td><%= f.radio_button :contract_type, 1 %> 1</td>
+        </tr>
+        <tr>
+          <th><%= f.label "Contract flg" %></th>
+          <td><%= f.radio_button :contract_flg, 0 %> 0</td>
+          <td><%= f.radio_button :contract_flg, 1 %> 1</td>
+        </tr>
+      </table>
+      <div class="user_info_add">
+        <p>List users Added▼</p>
+        <input id="tags" placeholder="search" maxlength="255"/>
+      </div>
 
-  List users Added: <br>
-	<div id="user_list">
-    <% @client.client_users.each do |client_user| %>
-      <% if client_user.del_flg == 0 %>
-        <%= client_user.user.username %>
-        <%= client_user.user.email %>
-        <%= client_user.user.role.role_name %>
-        <input type="checkbox" name = "del_user_<%= client_user.user_id %>">
-        <input type = "hidden" name = "users_id[]" value = "<%= client_user.user_id %>"> <br>
-      <% end %>
-    <% end %>
-    <br>
-	</div>
-	<input id="tags" placeholder="search" maxlength="255"/>
-  <%= link_to 'Cancel', clients_path %>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+      <table id="user_list" class="user_add">
+        <thead>
+        <tr>
+          <th width="170">&nbsp;</th>
+          <th width="240">&nbsp;</th>
+          <th width="80">&nbsp;</th>
+          <th width="40">
+            <small>削除</small>
+          </th>
+        </tr>
+        </thead>
+        <% @client.client_users.active.each do |client_user| %>
+            <tr>
+              <th><%= short_name(client_user.user.username) %></th>
+              <td><%= client_user.user.email %></td>
+              <td><%= client_user.user.role.role_name %></td>
+              <td><input type="checkbox" name="del_user_<%= client_user.user_id %>">
+                <input type="hidden" name="users_id[]" value="<%= client_user.user_id %>"></td>
+            </tr>
+        <% end %>
+      </table>
+
+
+      <div class="submit_area">
+        <input type="image" id="btn_submit" src="/assets/btn_done.gif">
+        <%= link_to raw('<img align="right" alt="キャンセル" src="/assets/btn_cancel.gif">'), clients_path %>
+      </div>
+    </div>
 <% end %>
 <script type="text/javascript">
-	$(document).ready(function(){
-		list_ignore_user = [];
-		list_user = [];
-		<% @client.client_users.each do |client_user|%>	
-			<% if client_user.del_flg == 0 %>
-				list_ignore_user.push({"value": "<%= client_user.user.id %>"});
-			<% end %>
-		<% end %>
-		<% User.all.each do |user|%>	
-			<% if user.status == 0 %>
-				list_user.push({"label": "<%= user.username %>", "value": "<%= user.id %>", "email": "<%= user.email %>", "role": "<%= user.role.role_name %>"});
-			<% end %>
-		<% end %>
-		$(list_ignore_user).each(function(i,data){
-			list_user.splice(index_of(list_user,data.value),1);
-		});
-		$( "#tags" ).autocomplete({
-			source: list_user,
-			select: function( event, ui ) {
-				$("#tags").val("");
-				list_user.splice(list_user.indexOf(ui.item),1);
-				data = ui.item;
-				$("#user_list").append(data.label + " " + data.email + " " + data.role + " ");
-				$("#user_list").append("<input type = 'hidden' name='users_id[]' value ='" + data.value + "'>");
-				$("#user_list").append("<input type = 'checkbox' name='del_user_" + data.value + "'><br>");
-				return false;
-			},
-			minLength: 0,
-			focus: function(e,ui){
-				e.preventDefault();
-				this.value = ui.item.label;
-			}
-		}).focus(function (event) {
-    			$(this).autocomplete("search");
-    			$("#tags").val("");
-    			event.preventDefault();
-		});
-	});
+    $(document).ready(function () {
+        list_ignore_user = [];
+        list_user = [];
+        <% @client.client_users.active.each do |client_user|%>
+        list_ignore_user.push({"value": "<%= client_user.user.id %>"});
+        <% end %>
+        <% User.active.each do |user|%>
+        list_user.push({"label": "<%= short_name(user.username) %>", "value": "<%= user.id %>", "email": "<%= user.email %>", "role": "<%= user.role.role_name %>"});
+        <% end %>
+        $(list_ignore_user).each(function (i, data) {
+            list_user.splice(index_of(list_user, data.value), 1);
+        });
+        $("#tags").autocomplete({
+            source: list_user,
+            select: function (event, ui) {
+                $("#tags").val("");
+                list_user.splice(list_user.indexOf(ui.item), 1);
+                data = ui.item;
+                $("#user_list").append(data.label + " " + data.email + " " + data.role + " ");
+                $("#user_list").append("<input type = 'hidden' name='users_id[]' value ='" + data.value + "'>");
+                $("#user_list").append("<input type = 'checkbox' name='del_user_" + data.value + "'><br>");
+                return false;
+            },
+            minLength: 0,
+            focus: function (e, ui) {
+                e.preventDefault();
+                this.value = ui.item.label;
+            }
+        }).focus(function (event) {
+                    $(this).autocomplete("search");
+                    $("#tags").val("");
+                    event.preventDefault();
+                });
+    });
 </script>
-<%= link_to 'New Client', new_client_path %>

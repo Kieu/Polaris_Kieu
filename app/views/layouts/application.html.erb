@@ -2,88 +2,131 @@
 <html>
 <head>
   <title>PolarisManage</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= stylesheet_link_tag "css/#{params[:controller]}" %>
   <%= javascript_include_tag "application" %>
+
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div id = "wrap">
-	<%= render "layouts/header" %>
-	<div id = "content">
-		<div id="right">
-			<div class="post">
-				<div class="clear"></div>
-				<%= yield %>
-			</div>
-			<div class = "clear2"></div>
-		</div>
-		<% if signed_in? && (@clients || @array_promotion) %>
-		<div id="sidebar">
-			<div id="searchbar">
-				<div id="padding_search">
-					<div class="searchbox">
- 						<form>
-							<input type="text" id="search" maxlength="255" placeholder="search">
-						</form>
- 						<div class="clear"></div>
-					</div>
-					<% if @clients %>
-						<div id="clients_list" style="margin-top: 15px;">
-							<% if current_user.super? %>
-								<% @clients.each_with_index do |client, index| %>
-									<% if (params[:id] && client.id == params[:id].to_i) || (!params[:id] && index == 0) %>
-										<div><%= link_to "", "#{edit_client_path(client)}##{index}", class: "edit_client" %><%= link_to client.client_name, "#", class: "client_name active", id: "#{index}", onclick: "reloadFlex('.flexme4', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{index}', '.client_name', '#client_name', #{Settings.MAX_LENGTH_CLIENT_NAME})" %></div>
-									<% else %>
-										<div><%= link_to "", "#{edit_client_path(client)}##{index}", class: "edit_client" %><%= link_to client.client_name, "#", class: "client_name", id: "#{index}", onclick: "reloadFlex('.flexme4', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{index}', '.client_name', '#client_name', #{Settings.MAX_LENGTH_CLIENT_NAME})"%></div>
-									<% end %>
-								<% end %>
-							<% else %>
-								<% @clients.each_with_index do |client, index| %>
-									<% if (params[:id] && client.id == params[:id].to_i) || (!params[:id] && index == 0) %>
-										<div><%= link_to client.client_name, "#", class: "client_name active", id: "#{index}", onclick: "reloadFlex('.flexme4', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{index}', '.client_name', '#client_name', #{Settings.MAX_LENGTH_CLIENT_NAME})" %></div>
-									<% else %>
-										<div><%= link_to client.client_name, "#", class: "client_name", id: "#{index}", onclick: "reloadFlex('.flexme4', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{index}', '.client_name', '#client_name', #{Settings.MAX_LENGTH_CLIENT_NAME})"%></div>
-									<% end %>
-								<% end %>
-							<% end %>
-						</div>
-					<% elsif @array_promotion %>
-					    <div id="promotions_list" style="margin-top: 15px;">
-							<% if current_user.super?  || current_user.agency? %>
-								<% @array_promotion.each_with_index do |promotion, index| %>
-									<% if (params[:id] && promotion.id == params[:id].to_i) || (!params[:id] && index == 0) %>
-										<div><%= link_to "", "#{edit_promotion_path(promotion)}##{index}", class: "edit_promotion" %><%= link_to promotion.promotion_name, "#{promotion_path(promotion)}##{index}", class: "promotion_name active", id: index %></div>
-									<% else %>
-										<div><%= link_to "", "#{edit_promotion_path(promotion)}##{index}", class: "edit_promotion" %><%= link_to promotion.promotion_name, "#{promotion_path(promotion)}##{index}", class: "promotion_name", id: index %></div>
-									<% end %>
-								<% end %>
-							<% else %>
-								<% @array_promotion.each_with_index do |promotion, index| %>
-									<% if (params[:id] && promotion.id == params[:id].to_i) || (!params[:id] && index == 0) %>
-										<div><%= link_to "#{edit_promotion_path(promotion)}##{index}", "#{promotion_path(promotion)}##{index}", class: "promotion_name active", id: index %></div>
-									<% else %>
-										<div><%= link_to "#{edit_promotion_path(promotion)}##{index}", "#{promotion_path(promotion)}##{index}", class: "promotion_name", id: index %></div>
-									<% end %>
-								<% end %>
-							<% end %>
-						</div>
-					<% end %>
-					
-				</div>
-			</div>
-		</div>
-		<% end %>
-		<div class="clear"></div>
-	</div>
-<script type="text/javascript">
-    $('input#search').quicksearch('div#clients_list div',{
-    	"selector" : "a.client_name" 
-    });
-    $('input#search').quicksearch('div#promotions_list div',{
-    	"selector" : "a.promotion_name" 
-    });
-</script>
-	<%= render "layouts/footer" %>
+<div style="display:none" id="dvloader"><img src="/assets/ajax-loader.gif" /></div>
+<div id="wrapper">
+  <%= render "layouts/header" %>
+  <div id="container">
+    <div id="contents">
+      <% if signed_in? %>
+          <div id="inner">
+            <%= yield %>
+          </div>
+      <% else %>
+          <%= yield %>
+      <% end %>
+    </div>
+  </div>
+  <% if signed_in? && (@clients || @array_promotion) %>
+      <div id="sidebar">
+        <div id="clienetlist_box">
+          <dl>
+            <dt></dt>
+            <dd>
+              <form action="#" method="get" id="searchform" name="searchform">
+                <input type="text" placeholder="検索" id="keywords" name="keywords" maxlength="255">
+                <input type="image" id="searchBtn" name="searchBtn" alt="検索" src="/assets/img_loupe.gif">
+              </form>
+            </dd>
+          </dl>
+          <div style="border-top:1px solid #c1c1c1;"></div>
+          <div id="clients_list">
+            <% if @clients %>
+                <table class="sidebar">
+                  <% if current_user.super? %>
+                      <% @clients.each_with_index do |client, index| %>
+                          <% if (params[:id] && client.id == params[:id].to_i) || (!params[:id] && index == 0) %>
+                              <tr>
+                                <th class="edit"><%= link_to "", "javascript:void(0)", class: "edit", id: "edit#{client.id}",onclick: "ajaxCommon('#{edit_client_path(client)}##{index}}', '##{client.id}', '.client_name', '#client_name','#inner')" %></th>
+                                <td><%= link_to client.client_name, "javascript:void(0)", class: "client_name active", id: "#{client.id}", onclick: "reloadFlex('.flexme4', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{client.id}', '.client_name', '#client_name', #{Settings.MAX_LENGTH_NAME})" %></td>
+                              </tr>
+                          <% else %>
+                              <tr>
+                                <th class="edit"><%= link_to "", "javascript:void(0)", class: "edit", id: "edit#{client.id}",onclick: "ajaxCommon('#{edit_client_path(client)}##{client.id}}', '##{client.id}', '.client_name', '#client_name','#inner')" %></th>
+                                <td><%= link_to client.client_name, "javascript:void(0)", class: "client_name", id: "#{client.id}", onclick: "reloadFlex('.flexme4', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{client.id}', '.client_name', '#client_name', #{Settings.MAX_LENGTH_NAME})" %></td>
+                              </tr>
+                          <% end %>
+                      <% end %>
+                  <% else %>
+                      <% @clients.each_with_index do |client, index| %>
+                          <% if (params[:id] && client.id == params[:id].to_i) || (!params[:id] && index == 0) %>
+                              <tr>
+                                <th class="edit"></th>
+                                <td><%= link_to client.client_name, "javascript:void(0)", class: "client_name active", id: "#{client.id}", onclick: "reloadFlex('.flexme4', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{client.id}', '.client_name', '#client_name', #{Settings.MAX_LENGTH_NAME})" %></td>
+                              </tr>
+                          <% else %>
+                              <tr>
+                                <th class="edit"></th>
+                                <td><%= link_to client.client_name, "javascript:void(0)", class: "client_name", id: "#{client.id}", onclick: "reloadFlex('.flexme4', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{client.id}', '.client_name', '#client_name', #{Settings.MAX_LENGTH_NAME})" %></td>
+                              </tr>
+                          <% end %>
+                      <% end %>
+                  <% end %>
+                </table>
+            <% elsif @array_promotion %>
+                <div id="promotions_list">
+                  <table class="sidebar">
+                    <% if current_user.super? || current_user.agency? %>
+                        <% @array_promotion.each_with_index do |promotion, index| %>
+                            <% if (promotion.id == @promotion_id.to_i) %>
+                                <tr>
+                                  <th class="edit"><%= link_to "", "javascript:void(0)", class: "edit", id: "edit#{index}",onclick: "ajaxCommon('#{edit_promotion_path(promotion)}##{index}', '##{index}', '.promotion_name', '#promotion_name','#inner')" %></th>
+                                  <td><%= link_to promotion.promotion_name, "javascript:void(0)", class: "promotion_name active", id: "#{index}",onclick: "ajaxCommon('#{promotions_path(promotion_id: promotion.id, client_id: @client_id)}', '##{index}', '.promotion_name', '#promotion_name','#inner')" %></td>
+                                </tr>
+                            <% else %>
+                                <tr>
+                                  <th class="edit"><%= link_to "","javascript:void(0)", class: "edit", id: "edit#{index}",onclick: "ajaxCommon('#{edit_promotion_path(promotion)}##{index}', '##{index}', '.promotion_name', '#promotion_name','#inner')" %></th>
+                                  <td><%= link_to promotion.promotion_name,  "javascript:void(0)", class: "promotion_name", id: "#{index}",onclick: "ajaxCommon('#{promotions_path(promotion_id: promotion.id, client_id: @client_id)}', '##{index}', '.promotion_name', '#promotion_name','#inner')" %></td>
+                                </tr>
+                            <% end %>
+                        <% end %>
+                    <% else %>
+                        <% @array_promotion.each_with_index do |promotion, index| %>
+                            <% if (promotion.id == @promotion_id.to_i) %>
+                                <tr>
+                                  <th class="edit"></th>
+                                  <td><%= link_to "#{edit_promotion_path(promotion)}##{index}", promotions_path(promotion_id: promotion.id, client_id: @client_id), class: "promotion_name active", id: index %></td>
+                                </tr>
+                            <% else %>
+                                <tr>
+                                  <th class="edit"></th>
+                                  <td><%= link_to "#{edit_promotion_path(promotion)}##{index}", promotions_path(promotion_id: promotion.id, client_id: @client_id), class: "promotion_name", id: index %></td>
+                                </tr>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                  </table>
+                </div>
+            <% end %>
+          </div>
+        </div>
+        <% if @clients %>
+            <%= link_to raw('<img src="/assets/btn_client_regist.gif">'), "javascript:void(0)", class: "new_client_name", onclick: "ajaxCommon('#{new_client_path}', '', '.new_client_name', '#new_client_name','#inner')"  %>
+        <% elsif current_user.super? || current_user.agency? %>
+            <%= link_to raw('<img src="/assets/btn_client_regist.gif">'), "javascript:void(0)", class: "new_promotion_name", onclick: "ajaxCommon('#{new_promotion_path(client_id: @client_id)}', '', '.new_promotion_name', '#new_promotion_name','#inner')"  %>
+        <% end %>
+      </div>
+  <% else %>
+      <% if !signed_in? %><%= render "layouts/login" %>
+      <% end %>
+  <% end %>
+
+
+  <script type="text/javascript">
+      $('input#keywords').quicksearch('div#clients_list tr', {
+          "selector": "a.client_name"
+      });
+      $('input#keywords').quicksearch('div#promotions_list tr', {
+          "selector": "a.promotion_name"
+      });
+  </script>
+  <%= render "layouts/footer" %>
 </div>
 </body>
 </html>

@@ -47,7 +47,13 @@ class AgenciesController < ApplicationController
   def get_rows agencies
     rows = Array.new
     agencies.each do |agency|
-      link = view_context.link_to("Edit", edit_agency_path(agency))
+      link = view_context.link_to("Edit",
+                                  "javascript:void(0)",
+                                  class: "edit",
+                                  id: "edit#{index}",
+                                  onclick: "ajaxCommon('#{edit_agency_path(agency)}', '', '', '','#inner')"
+
+      )
       rows << {id: agency.id, cell: {link: link,agency_name: agency.agency_name,
                 roman_name: agency.roman_name}}
     end

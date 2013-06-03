@@ -1,26 +1,23 @@
 class ClientsController < ApplicationController
   before_filter :signed_in_user
-  before_filter :must_super_agency, only: [:index,:show]
+  before_filter :must_super_agency, only: [:index, :show]
   before_filter :must_super, only: [:new, :create, :edit, :update, :destroy,
-    :del_client]
+                                    :del_client]
   before_filter :must_deleteable, only: [:show, :edit, :update, :destroy]
   before_filter :load_list_clients, except: [:destroy, :del_client]
-  
+
   #get all clients sorted by romaji name
   def index
     if @clients[0].present?
       @client_name = @clients[0].client_name
-      if @client_name.length > Settings.MAX_LENGTH_CLIENT_NAME
-        @client_name = @client_name.first(Settings.MAX_LENGTH_CLIENT_NAME) + "..."
-      end
     else
       @clients = Array.new
     end
   end
-  
+
   #get list promotion and paging
   def get_promotions_list
-	  # get params for paging
+    # get params for paging
     if params[:id] != ""
       @client_id = params[:id]
     else
@@ -30,10 +27,10 @@ class ClientsController < ApplicationController
     rows = Array.new
     rows = get_rows(Promotion.get_by_client(@client_id).order_by_promotion_name.page(params[:page]).per(params[:rp]), @client_id)
     count = Promotion.get_by_client(@client_id).order_by_promotion_name.count
-	
+
     render json: {page: params[:page], total: count, rows: rows}
   end
-  
+
   def show
     # get current client name
     @clients.each do |client|
@@ -53,23 +50,23 @@ class ClientsController < ApplicationController
   def create
     @client = Client.new(params[:client])
     @client.create_user_id = current_user.id
-    
+
     if @client.valid?
-  		ActiveRecord::Base.transaction do
-  		  @client.save!
-  		  if params[:users_id]
+      ActiveRecord::Base.transaction do
+        @client.save!
+        if params[:users_id]
           if !@client.update_client_users(params)
             flash[:error] = "Can not create user for client"
             raise ActiveRecord::Rollback
           end
         end
-  		end
-  		if flash[:error]
+      end
+      if flash[:error]
         render :new
       else
         flash[:error] = "Client was successfully created"
         redirect_to new_client_path
-  		end 
+      end
     else
       render :new
     end
@@ -124,12 +121,16 @@ class ClientsController < ApplicationController
     rows = Array.new
     promotions.each do |promotion|
       promotion_name = view_context.link_to(promotion.promotion_name,
-        promotions_path(promotion_id: promotion.id, client_id: client_id))
+                                            "javascript:void(0)",
+                                            class: "edit",
+                                            id: "edit#{index}",
+                                            onclick: "ajaxCommon('#{promotions_path(promotion_id: promotion.id, client_id: client_id)}', '', '', '','#sidebar,#container')"
+      )
       rows << {id: promotion.id, cell: {promotion_name: promotion_name}}
     end
     rows
   end
-  
+
   def load_list_clients
     if current_user.super?
       @clients = Client.active.order_by_roman_name

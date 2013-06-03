@@ -3,7 +3,7 @@
 <% end %>
 <div id="agencies_list">
 </div>
-<%= link_to 'New Agency', new_agency_path %>
+<%= link_to 'New Agency', "javascript:void(0)", class: "new_agency",onclick: "ajaxCommon('#{new_agency_path}', '', '', '','#inner')" %>
 <table id="paging" style="display:none"></table>
 <script type="text/javascript">
 	$("#paging").flexigrid({

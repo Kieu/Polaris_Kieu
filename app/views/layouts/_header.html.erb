@@ -1,27 +1,31 @@
 <div id="header">
-	<div id="topbar">
-		<div id="subnav">
-			<div id="logo"></div>
-			<div id="profile">
-				<% if signed_in? %>
-					<%= current_user.username%> <%= link_to "Sign out", signout_path, method: "delete" %>
-				<% else %>
-					<a href="#">Language</a> | <%= link_to "Login", signin_path %> | <a href="#">Sitemap</a> | <a href="#">Contact</a>
-				<% end %>
-			</div>
-			<div class="clear"></div>
-		</div>
-		<% if signed_in? %>
-		<div id="navigation">
-			<ul>
-				<li><%= link_to "Client List", clients_path %></li>
-				<% if current_user.super? %>
-				<li><%= link_to "User List", users_path %></li>
-				<li><%= link_to "Agency List", agencies_path %></li>
-				<% end %>
-				<li></li>
-			</ul>
-		</div>
-		<% end %>
-	</div>
-</div>
+  <div id="headerInner">
+    <h1>Polaris</h1>
+    <% if signed_in? %>
+        <div id="personal">
+          <ul>
+            <li><%= link_to(raw('<img src="/assets/head_env.gif" align="left" />'), '#') %></li>
+            <li><%= link_to(raw('<img src="/assets/head_help.gif" />'), '#') %></li>
+            <li><p>　<img src="/assets/head_pict.gif" />　<%= current_user.username%></p></li>
+            <li><p>｜<a href="#"><span><%= link_to 'ログアウト', signout_path, method: 'delete' %></span></a></p></li>
+          </ul>
+        </div><!-- /#personal end -->
+    <% end %>
+  </div><!-- /#headerInner end -->
+</div><!-- /#header -->
+<% if signed_in? %>
+<div id="nav">
+  <div id="navInner">
+    <div class="nav">
+      <ul>
+        <li class="current"><%= link_to raw('<img src="/assets/nav/nav_01_client_off.gif" width="144" height="38" alt="クライアントリスト" />'), "javascript:void(0)", class: "client_class_header", onclick: "ajaxCommon('#{clients_path}','','','','#container,#sidebar')" %></li>
+        <% if current_user.super? %>
+            <li><%= link_to raw('<img src="/assets/nav/nav_02_agency_off.gif" width="142" height="38" alt="代理店リスト" />'),  "javascript:void(0)", class: "agency_class_header", onclick: "ajaxCommon('#{agencies_path}','','','','#container,#sidebar')" %></li>
+            <li><%= link_to raw('<img src="/assets/nav/nav_03_user_off.gif" width="142" height="38" alt="ユーザーリスト" />'), "javascript:void(0)", class: "user_class_header", onclick: "ajaxCommon('#{users_path}','','','','#container,#sidebar')" %></li>
+            <li><a href="#"><img src="/assets/nav/nav_04_media_off.gif" width="142" height="38" alt="メディアリスト" /></a></li>
+        <% end %>
+      </ul>
+    </div><!-- /.nav-->
+  </div>
+</div><!-- /#nav end -->
+<% end %>

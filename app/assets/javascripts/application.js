@@ -39,3 +39,22 @@ function reloadFlex(obj, urlAction, id, current_active, cname, maxlength) {
     $(cname).text(txt);
     
 }
+function ajaxCommon(urlAction, id, current_active, cname,arr_inner) {
+    location.href = urlAction;
+    return;
+    var array_inner = arr_inner.split(',');
+    $("#dvloader").css('display','');
+    $.ajax({
+        type: "GET",
+        url: urlAction,
+        dataType: "html"
+    }).done(function( data  ) {
+            for (i=0;i<array_inner.length;i++){
+            var inner_data = $(data).find(array_inner[i]);
+            $(array_inner[i]).html(inner_data.children());
+            }
+            $("#dvloader").css('display','none');
+        });
+    $(current_active).removeClass('active');
+    $(id).addClass('active');
+}
