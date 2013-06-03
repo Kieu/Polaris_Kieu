@@ -467,3 +467,5 @@
         })
     });
 </script>
+<%= link_to "Create promotion", new_promotion_path(client_id: @client_id) %>
+<%= link_to "Conversion Setting", conversions_path(promotion_id: @promotion.id) %>
