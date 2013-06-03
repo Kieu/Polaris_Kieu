@@ -1,0 +1,2 @@
+module ClickLogHelper
+end

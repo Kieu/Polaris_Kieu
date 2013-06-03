@@ -58,3 +58,10 @@ function ajaxCommon(urlAction, id, current_active, cname,arr_inner) {
     $(current_active).removeClass('active');
     $(id).addClass('active');
 }
+function reloadFlex1(obj, urlAction) {
+    $(obj)
+    .flexOptions({
+        url: urlAction,
+        newp: 1
+    }).flexReload();
+}
