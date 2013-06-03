@@ -8,4 +8,8 @@ class ClientUser < ActiveRecord::Base
   belongs_to :user
 
   scope :active, where(del_flg: Settings.client_user.active)
+  
+  def active?
+    self.del_flg == Settings.client_user.active
+  end
 end

@@ -34,7 +34,7 @@ group :development, :test do
   gem "growl"
   gem "rspec-rails"
   gem "factory_girl_rails"
-  gem "rack-bug"
+  #gem "rack-bug"
 end
 
 group :test do

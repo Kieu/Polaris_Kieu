@@ -8,8 +8,16 @@ class ClientsController < ApplicationController
 
   #get all clients sorted by romaji name
   def index
-    if @clients[0].present?
-      @client_name = @clients[0].client_name
+    if @clients.count > 0
+      @client = params[:client_id].blank? ? @clients[0] :
+        Client.find_by_id(params[:client_id])
+      @client = @clients[0] unless @client
+      if current_user.agency?
+        client_user = @client.client_users.find_by_id(current_user.id)
+        if !client_user || client_user.active?
+          redirect_to clients_path
+        end
+      end
     else
       @clients = Array.new
     end
@@ -18,7 +26,7 @@ class ClientsController < ApplicationController
   #get list promotion and paging
   def get_promotions_list
     # get params for paging
-    if params[:id] != ""
+    unless params[:id].blank?
       @client_id = params[:id]
     else
       @client_id = @clients[0].id
@@ -29,18 +37,6 @@ class ClientsController < ApplicationController
     count = Promotion.get_by_client(@client_id).order_by_promotion_name.count
 
     render json: {page: params[:page], total: count, rows: rows}
-  end
-
-  def show
-    # get current client name
-    @clients.each do |client|
-      if client.id == params[:id].to_i
-        @client_name = client.client_name
-      end
-    end
-
-    @client_id = params[:id]
-    render :index
   end
 
   def new
@@ -121,10 +117,11 @@ class ClientsController < ApplicationController
     rows = Array.new
     promotions.each do |promotion|
       promotion_name = view_context.link_to(promotion.promotion_name,
-                                            "javascript:void(0)",
-                                            class: "edit",
-                                            id: "edit#{index}",
-                                            onclick: "ajaxCommon('#{promotions_path(promotion_id: promotion.id, client_id: client_id)}', '', '', '','#sidebar,#container')"
+        "javascript:void(0)",
+        class: "edit",
+        id: "edit#{index}",
+        onclick: "ajaxCommon('#{promotions_path(promotion_id: promotion.id,
+          client_id: client_id)}', '', '', '','#sidebar,#container')"
       )
       rows << {id: promotion.id, cell: {promotion_name: promotion_name}}
     end

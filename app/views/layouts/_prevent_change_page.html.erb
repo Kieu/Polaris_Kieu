@@ -1,22 +1,7 @@
+<div id="popup_prevent">
 <script type="text/javascript">
 $(function(){
-	$("#change").click(function(){
-		location.href = href;
-	});
-	$("#cancel_change").click(function(){
-		$('#prevent_change').colorbox.close();
-	});
-	$("a").click(function(e){
-		href = $(this).attr("href");
-		e.preventDefault();
-		$.colorbox({
-			width: "30%",
-			inline: true,
-			escKey: false,
-			overlayClose: false,
-			href: "#prevent_change",
-		})
-	})
+	prevent = true;
 })
 </script>
 <div style="display: none">
@@ -25,4 +10,5 @@ $(function(){
 		<button id="change">ok</button>
 		<button id="cancel_change">Cancel</button>
 	</div>
+</div>
 </div>
