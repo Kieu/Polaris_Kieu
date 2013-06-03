@@ -1,3 +1,4 @@
+<% if @array_promotion.count > 0 %>
 <select>
   <option>Click</option>
   <option>CTR</option>
@@ -396,6 +397,9 @@
     <button id="not_change_cookie">Cancel</button>
   </div>
 </div>
+<% elsif %>
+  <b> No data</b>
+<% end %>
 <script type="text/javascript">
     $(function() {
         $("#show_option").click(function(){
