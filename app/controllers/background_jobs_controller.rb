@@ -9,7 +9,7 @@ class BackgroundJobsController < ApplicationController
   end
   def upload
     @jobs = BackgroundJob.all
-    render "background_jobs/new"
+    render "background_jobs/upload"
   end
   def index
     @jobs = BackgroundJob.all
@@ -17,6 +17,6 @@ class BackgroundJobsController < ApplicationController
   end
   def inprogress
     @jobs = BackgroundJob.all
-    render "background_jobs/new"
+    render "background_jobs/inprogress"
   end
 end
