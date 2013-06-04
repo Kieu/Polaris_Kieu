@@ -104,6 +104,10 @@ class PromotionsController < ApplicationController
          end
     end
 
+    #in this time, we only want to store it
+    open "test.csv", 'w' do |f|
+      f.write "csv_string"
+    end
     send_data csv_string, disposition: :attachment, filename: "users.csv"
 #   :type => 'text/csv; charset=iso-8859-1; header=present',
  #  :disposition => "attachment; filename=users.csv"
