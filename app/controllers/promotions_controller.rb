@@ -1,8 +1,11 @@
+require 'csv'
+
 class PromotionsController < ApplicationController
   before_filter :signed_in_user
   before_filter :must_super_agency, except: [:show, :index]
   before_filter :must_delete_able, only: [:show, :edit, :update,
     :delete_promotion]
+  respond_to :html, :csv
 
   def index
     if current_user.client?
@@ -92,12 +95,22 @@ class PromotionsController < ApplicationController
     background_job.type_view = 'download'
     background_job.status = 0
     background_job.save!
-    sleep(1.minutes)
+    
+    @users = User.find(:all)
+    csv_string = CSV.generate do |csv|
+         csv << ["Id", "Name", "Email","Role"]
+         @users.each do |user|
+           csv << [user.id, user.roman_name, user.email, user.role_id]
+         end
+    end
+
+    send_data csv_string, disposition: :attachment, filename: "users.csv"
+#   :type => 'text/csv; charset=iso-8859-1; header=present',
+ #  :disposition => "attachment; filename=users.csv"
     #=====================================
     background_job.status = 1
     background_job.save!
     #=====================================
-    render text: 'success'
   end
 
   def draw_graph(promotion_data, date_arrange, select_left, select_right)
