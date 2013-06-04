@@ -130,6 +130,50 @@ namespace :master do
     end
   end
   
+  desc "Create Conversion error logs "
+  task create_conversion_error_1_logs: :environment do
+    (1..10000).each do |i|
+      Conversion_error_1_Log.create(media_category_id: 1, media_id: 1, 
+        account_id: 1, campaign_id: 1, ad_group_id: 1, ad_id: 1, conversion_id: 1, 
+        redirect_infomation_id: 1, mpv: "mpv#{i}", redirect_url_id: 1, creative_id: 1, 
+        session_id: "session#{i}", verify: "verify#{i}", suid: "suid#{i}", request_uri: "request#{i}", 
+        redirect_url: "redirect#{i}", media_session_id: "media_session_#{i}", 
+        device_category: "1", user_agent: "user_egent#{i}", referrer: "refferrer#{i}", 
+        click_referrer: "click_refferrer#{i}", conversion_utime: 1, conversion_ymd: 1, 
+        click_time: 11, remote_ip: "remote_ip#{i}", mark: "mark#{i}", 
+        conversion_category: "1", conversion_type: "1", sales: 111, profit: 11, 
+        volume: 111, others: "others", approval_status: "1", access_track_server: 111)
+    end
+  end
+
+  desc "Create Conversion error logs "
+  task create_conversion_error_1_logs: :environment do
+    (1..10000).each do |i|
+      Conversion_error_1_Log.create(media_category_id: 1, media_id: 1, 
+        account_id: 1, campaign_id: 1, ad_group_id: 1, ad_id: 1, conversion_id: 1, 
+        redirect_infomation_id: 1, mpv: "mpv#{i}", redirect_url_id: 1, creative_id: 1, 
+        session_id: "session#{i}", verify: "verify#{i}", suid: "suid#{i}", request_uri: "request#{i}", 
+        redirect_url: "redirect#{i}", media_session_id: "media_session_#{i}", 
+        device_category: "1", user_agent: "user_egent#{i}", referrer: "refferrer#{i}", 
+        click_referrer: "click_refferrer#{i}", conversion_utime: 1, conversion_ymd: 1, 
+        click_time: 11, remote_ip: "remote_ip#{i}", mark: "mark#{i}", 
+        conversion_category: "1", conversion_type: "1", sales: 111, profit: 11, 
+        volume: 111, others: "others", approval_status: "1", access_track_server: 111)
+    end
+  end
+
+  desc "Create Conversion error logs "
+  task create_conversion_organic_1_logs: :environment do
+    (10..20).each do |i|
+      Conversion_organic_1_Log.create(conversion_id: 1, redirect_infomation_id: 1, 
+        verify: "verify#{i}", suid: "suid#{i}",  redirect_url: "redirect#{i}", 
+        media_session_id: "media_session_#{i}", device_category: "1", 
+        user_agent: "user_egent#{i}", referrer: "refferrer#{i}", remote_ip: "remote_ip#{i}", 
+        conversion_category: "1", conversion_type: "1", sales: 111, profit: 11, 
+        volume: 111, others: "others")
+    end
+  end
+
   desc "Create Promotion"
   task create_promotion: :environment do
     (1..200).each do |num|
