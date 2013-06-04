@@ -38,9 +38,10 @@ $(document).ready(function () {
         <input type="password" name="session[password]" id="password" class="input-text" maxlength="255"/></label>
 
       <input type="image" id="btn_submit" src="/assets/btn_login.gif">
-
-      <% @errors.each do |error| %>
-          <p class="error"><%= error %> </p>
+      <% if @errors && @errors.count > 0 %>
+          <% @errors.each do |error| %>
+              <p class="error"><%= error %> </p>
+          <% end %>
       <% end %>
 
     </form>
