@@ -92,7 +92,7 @@ class PromotionsController < ApplicationController
     background_job.type_view = 'download'
     background_job.status = 0
     background_job.save!
-    sleep(1.minutes)
+    #sleep(1.minutes)
     #=====================================
     background_job.status = 1
     background_job.save!
