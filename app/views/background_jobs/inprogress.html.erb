@@ -1,6 +1,6 @@
 <% if @jobs %>
     <% @jobs.each_with_index do |job, index| %>
-        <% if job.status=='0' %>  <img src="/assets/create.gif"> <%=job.filename%> [inprocess][<%=job.type_view%> ]  <% end %>
-        <% if job.status=='2' %>  <img src="/assets/done.gif">   <%=job.filename%> [fail][<%=job.type_view%> ] <% end %>
+        <% if job.status=='0' %>  <img src="/assets/create.gif" /> <%=job.filename%> [inprocess][<%=job.type_view%> ]  <% end %>
+        <% if job.status=='2' %>  <img src="/assets/process.gif" />   <%=job.filename%> [fail][<%=job.type_view%> ] <% end %>
     <% end %>
 <% end %>
