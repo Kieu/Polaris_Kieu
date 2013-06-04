@@ -35,7 +35,7 @@ describe PromotionsController do
     end
 
     describe "GET new" do
-      before {get :new}
+      before {get :new, client_id: client.id}
       subject {response}
       it {should redirect_to signin_path}
     end
@@ -82,7 +82,7 @@ describe PromotionsController do
       end
 
       describe "GET new" do
-        before {get :new}
+        before {get :new, client_id: client.id}
         subject {response}
         it {should redirect_to promotions_path}
       end
@@ -116,7 +116,7 @@ describe PromotionsController do
       before {session[:user_id] = user_super.id}
 
       describe "GET new" do
-        before {get :new}
+        before {get :new, client_id: client.id}
         subject {response}
         it {should render_template :new}
       end
