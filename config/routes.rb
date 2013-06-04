@@ -38,6 +38,12 @@ PolarisManage::Application.routes.draw do
   resources :click_logs do
     post "get_logs_list", on: :collection
   end
+  resources :background_jobs do
+    get "new", on: :collection
+    get "upload", on: :collection
+    get "index", on: :collection
+    get "process", on: :collection
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
