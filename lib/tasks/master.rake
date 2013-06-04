@@ -115,6 +115,23 @@ namespace :master do
       DisplayCampaign.create!(id: "#{num}", name: "campaign#{num}", client_id: 1, promotion_id: 1, account_id: 1, create_user_id: 1, update_user_id: 1)
     end
   end
+
+  desc "Create Conversion logs "
+  task create_conversion_1_logs: :environment do
+    (1..10000).each do |i|
+      Conversion_1_Log.create(media_category_id: 1, media_id: 1, account_id: 1, campaign_id: 1, 
+        ad_group_id: 1, ad_id: 1, conversion_id: 1, redirect_infomation_id: 1, mpv: "mpv#{i}",
+        redirect_url_id: 1, creative_id: 1, session_id: "session#{i}", verify: "verify#{i}", 
+        suid: "suid#{i}", request_uri: "request#{i}", redirect_url: "redirect#{i}", 
+        media_session_id: "media_session_#{i}", device_category: "os", user_agent: "user_egent#{i}", 
+        referrer: "refferrer#{i}", click_referrer: "click_refferrer#{i}", conversion_utime: 1, 
+        conversion_ymd: 1, access_time: 1, access_ymd: 1, click_time: 11, remote_ip: "remote_ip#{i}", 
+        mark: "mark#{i}", conversion_category: "conversion_cate#{i}", conversion_type: "cv_type#{i}", 
+        repeat_flg: "1", repeat_proccessed_flg: "1", parent_conversion_id: "1", sales: 111, 
+        profit: 11, volume: 111, others: "others", approval_status: "1", send_url: "send_url", 
+        send_utime: 11, access_track_server: 111)
+    end
+  end
   
   desc "Create Promotion"
   task create_promotion: :environment do
