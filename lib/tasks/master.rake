@@ -116,4 +116,10 @@ namespace :master do
     end
   end
   
+  desc "Create Promotion"
+  task create_promotion: :environment do
+    (1..200).each do |num|
+      Promotion.create!(promotion_name: "Promotion#{num}", client_id: 1, tracking_period: 30, agency_id: 1, del_flg: 0, roman_name: "Promotion#{num}", update_user_id: 1, promotion_category_id: 1)
+    end
+  end
 end
