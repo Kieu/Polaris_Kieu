@@ -12,12 +12,6 @@ class ClientsController < ApplicationController
       @client = params[:client_id].blank? ? @clients[0] :
         Client.find_by_id(params[:client_id])
       @client = @clients[0] unless @client
-      if current_user.agency?
-        client_user = @client.client_users.find_by_id(current_user.id)
-        if !client_user || client_user.active?
-          redirect_to clients_path
-        end
-      end
     else
       @clients = Array.new
     end
@@ -33,8 +27,7 @@ class ClientsController < ApplicationController
     end
 
     rows = Array.new
-    rows = get_rows(Promotion.get_by_client(@client_id).
-      order_by_promotion_name.page(params[:page]).per(params[:rp]), @client_id)
+    rows = get_rows(Promotion.get_by_client(@client_id).order_by_promotion_name.page(params[:page]).per(params[:rp]), @client_id)
     count = Promotion.get_by_client(@client_id).order_by_promotion_name.count
 
     render json: {page: params[:page], total: count, rows: rows}
