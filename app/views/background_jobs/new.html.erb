@@ -1,3 +1,5 @@
-<img src="/assets/create.gif">
-<img src="/assets/done.gif">
-<img src="/assets/process.gif">
+<% if @jobs %>
+    <% @jobs.each_with_index do |job, | %>
+        <img src="/assets/done.gif" />   <%=job.filename%>
+    <% end %>
+<% end %>

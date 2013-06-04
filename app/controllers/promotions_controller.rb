@@ -1,7 +1,8 @@
 class PromotionsController < ApplicationController
   before_filter :signed_in_user
   before_filter :must_super_agency, except: [:show, :index]
-  before_filter :must_delete_able, only: [:show, :edit, :update, :delete_promotion]
+  before_filter :must_delete_able, only: [:show, :edit, :update,
+    :delete_promotion]
 
   def index
     if current_user.client?
@@ -10,17 +11,21 @@ class PromotionsController < ApplicationController
       @client_id = params[:client_id]
     end
 
-    @array_promotion = Promotion.get_by_client(@client_id).order_by_promotion_name
+    @array_promotion = Promotion.get_by_client(@client_id).
+        order_by_promotion_name
     if @array_promotion.count > 0
       @promotion_id = @array_promotion.first[:id]
       if(params[:promotion_id])
         @promotion_id = params[:promotion_id]
       end
     
-      @promotion = @promotion_id.present? ? Promotion.find(@promotion_id) : Promotion.find(@array_promotion[0].id)
+      @promotion = @promotion_id.present? ? Promotion.find(@promotion_id)
+        : Promotion.find(@array_promotion[0].id)
       cookies[:promotion] = "11111" unless cookies[:promotion].present?
       @promotion.conversions.each do |conversion|
-        cookies[("conversion" + conversion.id.to_s).to_sym] = "1111111110" unless cookies[("conversion" + conversion.id.to_s).to_sym].present?
+        cookies[("conversion" + conversion.id.to_s).to_sym] =
+          "1111111110" unless
+          cookies[("conversion" + conversion.id.to_s).to_sym].present?
       end
     
       promotion_data = Array.new
@@ -29,12 +34,13 @@ class PromotionsController < ApplicationController
       # just for test
       conversion_id = 1;
 
-      promotion_data, date_arrange = DailySummaryAccount.get_promotion_data(@promotion_id, conversion_id, '20130520', '20130525')
+      promotion_data, date_arrange =
+        DailySummaryAccount.get_promotion_data(@promotion_id,
+          conversion_id, '20130520', '20130525')
       select_left = 'click'
       select_right = 'COST'
       draw_graph(promotion_data, date_arrange, select_left, select_right)
     end
-    
   end
 
   def show
@@ -110,7 +116,7 @@ class PromotionsController < ApplicationController
              color: '#FFA500')
       f.legend(align: "right", verticalAlign: "top", y: 0, x: -50,
              layout: 'vertical', borderWidth: 0)
-      f.xAxis(type: 'date', dateTimeLabelFormats: {day: '%e. %b', month: '%e. %b'},
+      f.xAxis(type: 'date',dateTimeLabelFormats: {day: '%e. %b', month: '%e. %b'},
             categories: array_category, labels: {rotation: -45,
               style: {color: '#6D869F', font: '12px Helvetical'}})
       f.yAxis(min: 0, title: '')

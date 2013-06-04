@@ -1,4 +1,7 @@
 PolarisManage::Application.routes.draw do
+  resources :conversion_promotion_logs, only: [:index] do
+    post "get_conversion_logs_list", on: :collection 
+  end
   resources :promotions do
     get "search", on: :collection
     post "delete_promotion", to: "promotions#delete_promotion", on: :collection
@@ -35,6 +38,13 @@ PolarisManage::Application.routes.draw do
   resources :accounts, only: [:new, :create, :edit, :update]
   resources :click_logs do
     post "get_logs_list", on: :collection
+  end
+  resources :background_jobs do
+    get "download", on: :collection
+    get "upload", on: :collection
+    get "index", on: :collection
+    get "inprogress", on: :collection
+    get "notification", on: :collection
   end
   # The priority is based upon order of creation:
   # first created -> highest priority.

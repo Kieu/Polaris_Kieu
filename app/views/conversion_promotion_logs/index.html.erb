@@ -1,0 +1,300 @@
+ConversionLogs List <br>
+Conversion_name: <%= select_tag 'conversion_id', content_tag(:option,'All',:value=>"") + options_from_collection_for_select(Conversion.order(:conversion_name), 'id', 'conversion_name') %> <br>
+Media Category: <%= select_tag 'media_category_id', "<option value = "" >All</option><option value = 0 >Listing ad</option><option value = 1 >Display ad</option><option value = 2 >Affiliate</option>".html_safe %> <br>
+Account name: <%= select_tag 'account_id',content_tag(:option,'All',:value=>"")+ options_from_collection_for_select(Account.order(:account_name), 'id', 'account_name') %> <br>
+<input id="datepick" type="text" readonly="readonly" value="<%= cookies[:s] + " - " + cookies[:e] %>" name="datepick"> <br>
+<button id = "show_option">Show options</button> <br>
+<%= link_to "Conversion Logs", conversion_promotion_logs_path(:promotion_id: @promotion_id)%>|
+<%= link_to "Click Logs", click_logs_path(promotion_id: @promotion_id) %>
+<div id="popup" style="display: none">
+	<div id="list_options" style="width: 400px;">
+		<div id="result_list">
+			<button id="display_all">All</button>
+			<table>
+				<tr>
+					<td align = "center" width = "50%">
+						<table>
+							<tr>
+								<td>conversion_time</td>
+								<td><%= link_to cookies[:options][0] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('0',this)"%></td>
+							</tr>
+							<tr>
+								<td>conversion_name</td>
+								<td><%= link_to cookies[:options][1] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('1',this)"%></td>
+							</tr>
+							<tr>
+								<td>conversion_category</td>
+								<td><%= link_to cookies[:options][2] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('2',this)"%></td>
+							</tr>
+							<tr>
+								<td>tracking_type</td>
+								<td><%= link_to cookies[:options][3] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('3',this)"%></td>
+							</tr>
+							<tr>
+								<td>cv_type</td>
+								<td><%= link_to cookies[:options][4] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('4',this)"%></td>
+							</tr>
+							<tr>
+								<td>media_approval</td>
+								<td><%= link_to cookies[:options][5] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('5',this)"%></td>
+							</tr>
+							<tr>
+								<td>media</td>
+								<td><%= link_to cookies[:options][6] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('6',this)"%></td>
+							</tr>
+							<tr>
+								<td>account</td>
+								<td><%= link_to cookies[:options][7] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('7',this)"%></td>
+							</tr>
+							<tr>
+								<td>campaign</td>
+								<td><%= link_to cookies[:options][8] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('8',this)"%></td>
+							</tr>
+							<tr>
+								<td>ad_group</td>
+								<td><%= link_to cookies[:options][9] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('9',this)"%></td>
+							</tr>
+							<tr>
+								<td>ad_name</td>
+								<td><%= link_to cookies[:options][10] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('10',this)"%></td>
+							</tr>
+							<tr>
+								<td>click_time</td>
+								<td><%= link_to cookies[:options][11] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('11',this)"%></td>
+							</tr>
+						</table>
+					</td>
+					<td align = "center" width = "50%">
+						<table>
+							<tr>
+								<td>verify</td>
+								<td><%= link_to cookies[:options][12] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('12',this)"%></td>
+							</tr>
+							<tr>
+								<td>suid</td>
+								<td><%= link_to cookies[:options][13] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('13',this)"%></td>
+							</tr>
+							<tr>
+								<td>session_id</td>
+								<td><%= link_to cookies[:options][14] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('14',this)"%></td>
+							</tr>
+							<tr>
+								<td>OS</td>
+								<td><%= link_to cookies[:options][15] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('16',this)"%></td>
+							</tr>
+							<tr>
+								<td>repeat</td>
+								<td><%= link_to cookies[:options][16] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('16',this)"%></td>
+							</tr>
+							<tr>
+								<td>log_state</td>
+								<td><%= link_to cookies[:options][17] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('17',this)"%></td>
+							</tr>
+							<tr>
+								<td>sales</td>
+								<td><%= link_to cookies[:options][18] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('18',this)"%></td>
+							</tr>
+							<tr>
+								<td>profit</td>
+								<td><%= link_to cookies[:options][19] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('19',this)"%></td>
+							</tr>
+							<tr>
+								<td>volume</td>
+								<td><%= link_to cookies[:options][20] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('20',this)"%></td>
+							</tr>
+							<tr>
+								<td>others</td>
+								<td><%= link_to cookies[:options][21] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('21',this)"%></td>
+							</tr>
+							<tr>
+								<td>error_message</td>
+								<td><%= link_to cookies[:options][22] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('22',this)"%></td>
+							</tr>
+							<tr>
+								<td>error_log_view</td>
+								<td><input type="checkbox" name="error_table" id="error_table" checked="checked"></td>
+							</tr>
+							
+						</table>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<button id="change_cookie">Ok</button>
+		<button id="not_change_cookie">Cancel</button>
+	</div>
+</div>
+<table id="cvlogs" style="display:none"></table>
+<script type="text/javascript">
+
+	$("#cvlogs").flexigrid({
+		url: "<%= get_conversion_logs_list_conversion_promotion_logs_path %>",
+		dataType: 'json',
+		colModel : [ 
+	{display: 'CV_utime', name : 'conversion_utime', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[0] == "1") ? false : true},
+	{display: 'CV_id', name : 'conversion_id', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[1] == "1") ? false : true},		
+    {display: 'CV_category', name : 'conversion_category', width : 100, sortable : false, align: 'center', hide: ($.cookie("options")[2] == "1") ? false : true}, 
+    {display: 'tracking_type', name : 'tracking_type', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[3] == "1") ? false : true},
+    {display: 'CV_type', name : 'cv_type', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[4] == "1") ? false : true},
+    {display: 'approval', name : 'approval_status', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[5] == "1") ? false : true},
+    {display: 'Media', name : 'media_id', width : 100, sortable : false, align: 'center', hide: ($.cookie("options")[6] == "1") ? false : true},
+    {display: 'Account', name : 'account_id', width : 100, sortable : false, align: 'center', hide: ($.cookie("options")[7] == "1") ? false : true},
+	{display: 'Campaign', name : 'campaign_id', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[8] == "1") ? false : true},
+    {display: 'Ad Group', name : 'ad_group_id', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[9] == "1") ? false : true},
+    {display: 'ad_id', name : 'ad_id', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[10] == "1") ? false : true},
+    {display: 'click_time', name : 'click_time', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[11] == "1") ? false : true},
+    {display: 'verify', name : 'verify', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[12] == "1") ? false : true},
+    {display: 'suid', name : 'suid', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[13] == "1") ? false : true},
+    {display: 'session_id', name : 'session_id', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[14] == "1") ? false : true},
+    {display: 'OS', name : 'os', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[15] == "1") ? false : true},
+    {display: 'Repeat', name : 'repeat', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[16] == "1") ? false : true},
+    {display: 'Log state', name : 'log_state', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[17] == "1") ? false : true},
+    {display: 'Sales', name : 'sales', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[18] == "1") ? false : true},
+    {display: 'Profit', name : 'profit', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[19] == "1") ? false : true},
+    {display: 'Volume', name : 'volume', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[20] == "1") ? false : true},
+    {display: 'Others', name : 'others', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[21] == "1") ? false : true},
+    {display: 'Error message', name : 'error_message', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[22] == "1") ? false : true},
+    {display: 'Error_log_view', name : 'error_log_view', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[23] == "1") ? false : true}
+			],
+		usepager: true,
+		title: 'Users',
+		useRp: true,
+		rp: 10,
+		sortname: 'conversion_utime',
+		sortorder: 'desc',
+		id: "<%= params[:promotion_id] %>",
+		showTableToggleBtn: true,
+		width: 720,
+		height: 300
+	});
+	var colums = ["conversion_utime", "conversion_id", "conversion_category","tracking_type",
+	 "conversion_type", "approval_status", "media_id", "account_id", "campaign_id", "ad_group_id", "ad_id", "click_time", "verify", "suid", "session_id", "os", "repeat", "log_state", "sales", "profit", "volume", "others", "error_message", "error_log_view"]
+	$("#show_option").click(function(){
+		$.colorbox({
+			width: "50%",
+			height: "50%",
+			inline: true,
+			escKey: false,
+			overlayClose: false,
+			href: "#list_options"
+		});
+	})
+	cookies_options = $.cookie("options");
+
+	update_cookie = function(data,ele){
+		options = cookies_options.split("");
+		options[data] = (options[data] == "1") ? "0" : "1";
+		text = (options[data] == "1") ? "Delete" : "Add";
+		$(ele).text(text);
+		options = options.join("");
+		cookies_options = options;
+
+		
+	}
+	show_page = function(ele){
+		$(".cv_options").each(function(){
+			if ("#" + $(this).attr("id") == $(ele).attr("href")){
+				$(this).show();
+			}else{
+				$(this).hide();
+			}
+		})
+	}
+
+	function showColumn(tbl, colIndex, visible) {
+	    $(tbl).flexToggleCol(colIndex, visible);
+	}
+	$("#change_cookie").click(function(){
+		$.cookie("options",cookies_options);
+		for (var i=0;i<colums.length;i++){
+			if (cookies_options[i] == "1"){
+				showColumn("#cvlogs", i, true);
+			}else{
+				showColumn("#cvlogs", i, false);
+			}
+		}
+		if ($("#error_table").is(':checked')) {
+	    	$.cookie("ser",1);
+	    	
+	    } else {
+	    	$.cookie("ser",0);
+	    }
+	    reloadFlex1("#cvlogs","<%= get_conversion_logs_list_conversion_promotion_logs_path %>?cv_id=" + $("#conversion_id").val() + "&account_id=" + $("#account_id").val() + "&media_category_id=" + $("#media_category_id").val());
+		$("#cvlogs").colorbox.close();
+	});
+	$("#not_change_cookie").click(function(){
+		cookies_options = $.cookie("options");
+		location.href = location.href;
+	})
+
+	$("#display_all").click(function(){
+		$.cookie("options", '111111111111111111111111');
+		location.href = location.href;
+	})
+
+</script>
+
+<table id="paging" class="flexme4" style="display:none"></table>
+<script type="text/javascript">
+	
+</script>
+<div style="clear:both"></div>
+<script type="text/javascript">
+	$("#conversion_id").change(function(){
+		conversion_id = $(this).val();
+		reloadFlex1("#cvlogs","<%= get_conversion_logs_list_conversion_promotion_logs_path %>?cv_id=" + $(this).val() + "&account_id=" + $("#account_id").val() + "&media_category_id=" + $("#media_category_id").val());
+	})
+
+	$("#media_category_id").change(function(){
+		media_category_id = $(this).val();
+		reloadFlex1("#cvlogs","<%= get_conversion_logs_list_conversion_promotion_logs_path %>?cv_id=" + $("#conversion_id").val() + "&account_id=" + $("#account_id").val() + "&media_category_id=" + $(this).val());
+	})
+
+	$("#account_id").change(function(){
+		reloadFlex1("#cvlogs","<%= get_conversion_logs_list_conversion_promotion_logs_path %>?cv_id=" + $("#conversion_id").val() + "&account_id=" + $(this).val() + "&media_category_id=" + $("#media_category_id").val());
+	})
+
+	// ------datepicker-------
+	function formatDate(year, month, day){
+		 if (year < 2000) { year = parseInt(year) + 1900; }
+		 if (month.length == 1) { month = "0" + parseInt(month); }
+		 if (day.length == 1) { day = "0" + parseInt(day); }
+		 // if(lang===langJP){
+		  // return year + "/" + month + "/" + day;
+		 // }else{
+		  //return month + "/" + day + "/" + year;
+		  return year + "/" + month + "/" + day;
+		 //}
+		}
+		$('#datepick').daterangepicker({
+    		lang: $('#lang').val(),
+            onDone: function() {
+                var term = $('#datepick').val();
+                var d = term.split(' - ');
+                var f = (d[0]).split('/');
+                var t = (d[1]).split('/');
+                // if ($('#lang').val() === langJP) {
+                    // $.cookie("s", formatDate(f[0], f[1], f[2], langJP), {
+                        // path: '/'
+                    // });
+                    // $.cookie("e", formatDate(t[0], t[1], t[2], langJP), {
+                        // path: '/'
+                    // });
+                // } else {
+                    $.cookie("s", formatDate(f[0], f[1], f[2]), {
+                        path: '/'
+                    });
+                    $.cookie("e", formatDate(t[0], t[1], t[2]), {
+                        path: '/'
+                    });
+                //}
+                
+                reloadFlex1("#cvlogs", "<%= get_conversion_logs_list_conversion_promotion_logs_path %>?cv_id=" + $("#media_category_id").val() + "&account_id=" + $("#account_id").val() + "&media_category_id=" + $("#media_category_id").val());
+            }
+        });
+</script>
+
+
+
+
+

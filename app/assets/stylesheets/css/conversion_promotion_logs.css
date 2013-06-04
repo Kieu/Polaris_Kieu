@@ -413,8 +413,4 @@ div#clients_list{
     max-height: 300px;
     overflow-x: hidden;
 }
-div#promotions_list{
-    overflow-y: scroll;
-    max-height: 300px;
-    overflow-x: hidden;
-}
+

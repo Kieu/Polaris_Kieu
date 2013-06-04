@@ -1,0 +1,2 @@
+module ConversionPromotionLogHelper
+end

@@ -12,12 +12,6 @@ class ClientsController < ApplicationController
       @client = params[:client_id].blank? ? @clients[0] :
         Client.find_by_id(params[:client_id])
       @client = @clients[0] unless @client
-      if current_user.agency?
-        client_user = @client.client_users.find_by_id(current_user.id)
-        if !client_user || client_user.active?
-          redirect_to clients_path
-        end
-      end
     else
       @clients = Array.new
     end

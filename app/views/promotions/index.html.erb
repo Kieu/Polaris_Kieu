@@ -1,3 +1,6 @@
+<% content_for :sidebar do %>
+	<%= render partial: "layouts/sidebar", locals: {object: @array_promotion} %>
+<% end %>
 <% if @array_promotion.count > 0 %>
 <select>
   <option>Click</option>
@@ -471,11 +474,12 @@
                 };
             }
             <% end %>
-            location.href = location.href;
+            ajaxCommon("/promotions?client_id=<%= @client_id %>&promotion_id=<%= @promotion_id %>", "#<%= @promotion_id %>", ".promotion_name", "#promotion_name","#inner");
+            $('#list_options').colorbox.close();
         });
         $("#not_change_cookie").click(function(){
             cookies_options = $.cookie("promotion");
-            location.href = location.href;
+            $('#list_options').colorbox.close();
         })
     });
 </script>

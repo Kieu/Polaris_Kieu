@@ -30,12 +30,6 @@ describe ClientsController do
       it {should redirect_to signin_path}
     end
 
-    describe "GET show" do
-      before {get :show, id: client.id}
-      subject {response}
-      it {should redirect_to signin_path}
-    end
-
     describe "GET new" do
       before {get :new}
       subject {response}
@@ -71,12 +65,6 @@ describe ClientsController do
         it {should redirect_to promotions_path}
       end
 
-      describe "GET show" do
-        before {get :show, id: client.id}
-        subject {response}
-        it {should redirect_to promotions_path}
-      end
-
       describe "GET new" do
         before {get :new}
         subject {response}
@@ -107,12 +95,6 @@ describe ClientsController do
 
       describe "GET index" do
         before {get :index}
-        subject {response}
-        it {should render_template :index}
-      end
-
-      describe "GET show" do
-        before {get :show, id: client.id}
         subject {response}
         it {should render_template :index}
       end
