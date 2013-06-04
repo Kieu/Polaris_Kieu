@@ -7,7 +7,7 @@ Account name: <%= select_tag 'account_id',content_tag(:option,'All',:value=>"")+
 <input id="datepick" type="text" readonly="readonly" value="<%= cookies[:s] + " - " + cookies[:e] %>" name="datepick"> <br>
 <button id = "show_option">Show options</button> <br>
 <%= link_to "Conversion Logs", conversion_promotion_logs_path(promotion_id: @promotion.id)%>|
-<%= link_to "Click Logs", click_logs_path(promotion_id: @promotion.id) %>
+<%= link_to "Click Logs", click_logs_path(id: @promotion.id) %>
 <div id="popup" style="display: none">
 	<div id="list_options" style="width: 400px;">
 		<div id="result_list">

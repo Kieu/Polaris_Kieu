@@ -117,7 +117,7 @@ namespace :master do
   task create_conversion_1_logs: :environment do
     (1..10000).each do |i|
       Conversion_1_Log.create(media_category_id: 1, media_id: 1, account_id: 1, campaign_id: 1, 
-        ad_group_id: 1, ad_id: 1, conversion_id: 1, redirect_infomation_id: 1, mpv: "mpv#{i}",
+        group_id: 1, unit_id: 1, conversion_id: 1, redirect_infomation_id: 1, mpv: "mpv#{i}",
         redirect_url_id: 1, creative_id: 1, session_id: "session#{i}", verify: "verify#{i}", 
         suid: "suid#{i}", request_uri: "request#{i}", redirect_url: "redirect#{i}", 
         media_session_id: "media_session_#{i}", device_category: "os", user_agent: "user_egent#{i}", 
@@ -134,7 +134,7 @@ namespace :master do
   task create_conversion_error_1_logs: :environment do
     (1..10000).each do |i|
       Conversion_error_1_Log.create(media_category_id: 1, media_id: 1, 
-        account_id: 1, campaign_id: 1, ad_group_id: 1, ad_id: 1, conversion_id: 1, 
+        account_id: 1, campaign_id: 1, group_id: 1, unit_id: 1, conversion_id: 1, 
         redirect_infomation_id: 1, mpv: "mpv#{i}", redirect_url_id: 1, creative_id: 1, 
         session_id: "session#{i}", verify: "verify#{i}", suid: "suid#{i}", request_uri: "request#{i}", 
         redirect_url: "redirect#{i}", media_session_id: "media_session_#{i}", 
@@ -150,7 +150,7 @@ namespace :master do
   task create_conversion_error_1_logs: :environment do
     (1..10000).each do |i|
       Conversion_error_1_Log.create(media_category_id: 1, media_id: 1, 
-        account_id: 1, campaign_id: 1, ad_group_id: 1, ad_id: 1, conversion_id: 1, 
+        account_id: 1, campaign_id: 1, group_id: 1, unit_id: 1, conversion_id: 1, 
         redirect_infomation_id: 1, mpv: "mpv#{i}", redirect_url_id: 1, creative_id: 1, 
         session_id: "session#{i}", verify: "verify#{i}", suid: "suid#{i}", request_uri: "request#{i}", 
         redirect_url: "redirect#{i}", media_session_id: "media_session_#{i}", 
