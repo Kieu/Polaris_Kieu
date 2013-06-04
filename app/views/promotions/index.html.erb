@@ -19,6 +19,7 @@
 <% if flash[:error] %>
     <div><%= flash[:error] %></div>
 <% end %>
+<input type="button" value="Download CSV" id="download_csv" />
 <div id="graph_container" style="height: 150px; min-width: 700px"></div>
 <%= high_chart("graph_container", @chart) %>
 <div style="height: 100px;"></div>
@@ -398,6 +399,16 @@
   </div>
 </div>
 <script type="text/javascript">
+    $('#download_csv').click(function(){
+        $.ajax({
+            url: "<%= download_csv_promotions_path %>",
+            method: "post",
+            success: function(data){
+            }
+
+        })
+    })
+
     $(function() {
         $("#show_option").click(function(){
             $.colorbox({

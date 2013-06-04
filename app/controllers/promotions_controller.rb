@@ -79,6 +79,21 @@ class PromotionsController < ApplicationController
     redirect_to promotions_path(client_id: @promotion.client_id)
   end
 
+  def download_csv
+    background_job = BackgroundJob.new
+    background_job.user_id = 1
+    background_job.filename = 'test.csv'
+    background_job.type_view = 'download'
+    background_job.status = 0
+    background_job.save!
+    sleep(1.minutes)
+    #=====================================
+    background_job.status = 1
+    background_job.save!
+    #=====================================
+    render text: 'success'
+  end
+
   def draw_graph(promotion_data, date_arrange, select_left, select_right)
     array_category = Array.new
     date_arrange.each do |date|
