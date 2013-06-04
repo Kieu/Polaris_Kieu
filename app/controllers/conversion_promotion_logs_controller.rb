@@ -51,6 +51,7 @@ def get_rows conversion_logs
                                           others: conversion_log.others,
                                           error_message: conversion_log.error_message,
                                           error_log_view: conversion_log.error_log_view,
+                                          media_category_id: conversion_log.media_category_id
                                            }}
   end
   rows

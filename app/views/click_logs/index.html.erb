@@ -8,7 +8,12 @@ Media Category: <%= select_tag 'media_category_id', "<option value = "">All</opt
 Account name: <%= select_tag 'account_id', content_tag(:option,'All',:value=>"")+options_from_collection_for_select(Account.where(promotion_id: params[:id]).order(:account_name), 'id', 'account_name') %> <br>
 <input id="datepick" type="text" readonly="readonly" value="<%= cookies[:s] + " - " + cookies[:e] %>" name="datepick">
 </div>	
+<br />
+<%= link_to "Conversion Logs", conversion_promotion_logs_path(promotion_id: @promotion.id)%>|
+<%= link_to "Click Logs", click_logs_path(id: @promotion.id) %>
+<br />
 <button id = "show_option">Show options</button>
+
 <div id="popup" style="display: none">
 	<div id="list_options" style="width: 400px;">
 		<div id="result_list">
