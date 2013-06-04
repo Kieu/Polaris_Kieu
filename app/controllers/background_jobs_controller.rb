@@ -16,7 +16,7 @@ class BackgroundJobsController < ApplicationController
     render "background_jobs/new"
   end
   def notification
-    @jobs = BackgroundJob.where(:user_id => current_user.id).size
+    @jobs = BackgroundJob.where(:user_id => current_user.id,:status => '0').size
     render :text => @jobs
   end
   def inprogress
