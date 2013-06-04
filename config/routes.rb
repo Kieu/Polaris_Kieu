@@ -43,6 +43,7 @@ PolarisManage::Application.routes.draw do
     get "upload", on: :collection
     get "index", on: :collection
     get "inprogress", on: :collection
+    get "notification", on: :collection
   end
   # The priority is based upon order of creation:
   # first created -> highest priority.
