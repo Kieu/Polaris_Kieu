@@ -39,7 +39,7 @@ PolarisManage::Application.routes.draw do
     post "get_logs_list", on: :collection
   end
   resources :background_jobs do
-    get "new", on: :collection
+    get "download", on: :collection
     get "upload", on: :collection
     get "index", on: :collection
     get "inprogress", on: :collection
