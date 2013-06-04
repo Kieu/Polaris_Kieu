@@ -6,9 +6,10 @@ $(document).ready(function(){
 		});
 	/* Defining an array with the tab text and AJAX pages: */
 	var Tabs = {
-		'Create'	: '/background_jobs/new',
-		'Upload'	: '/background_jobs/upload',
-		'Process'	: '/background_jobs/inprogress'
+        'Process'	: '/background_jobs/inprogress',
+		'download'	: '/background_jobs/download',
+		'Upload'	: '/background_jobs/upload'
+
 	}
 	
 	/* The available colors for the tabs: */
@@ -16,9 +17,10 @@ $(document).ready(function(){
 	
 	/* The colors of the line above the tab when it is active: */
 	var topLineColor = {
+        red:'red',
 		blue:'lightblue',
-		green:'lightgreen',
-		red:'red'
+		green:'lightgreen'
+
 	}
 	
 	/* Looping through the Tabs object: */
