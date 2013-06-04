@@ -23,20 +23,26 @@ $(document).ready(function () {
 <div id="sidebar">
   <div class="loginbox">
     <p class="title">ログイン</p>
+
     <form action="/sessions" method="post">
-      <label><span class="bold">メールアドレス</span><br />
+      <label><span class="bold">メールアドレス</span><br/>
         <input type="text" name="session[email]" id="email" class="input-text" maxlength="255"/></label>
-      <br />
+      <br/>
+
       <p class="bold">言語選択</p>
       <select name="language">
         <option value="ja">日本語　</option>
         <option value="en">英語　　</option>
-      </select><br />
-      <label><span class="bold">パスワード</span><br />
+      </select><br/>
+      <label><span class="bold">パスワード</span><br/>
         <input type="password" name="session[password]" id="password" class="input-text" maxlength="255"/></label>
 
       <input type="image" id="btn_submit" src="/assets/btn_login.gif">
-      <p class="error">パスワードが不正です。</p>
+
+      <% @errors.each do |error| %>
+          <p class="error"><%= error %> </p>
+      <% end %>
+
     </form>
 
     <div class="accordion01 ta-c clearfix"><p id="passwd" class="arrow1">パスワードを忘れた場合はこちら</p></div>
@@ -65,7 +71,7 @@ $(document).ready(function () {
               $("#resend_password_form").show();
           </script>
       <% end %>
-      <div><span class="text-validationError"><%= flash[:send_success]%></span></div>
+      <div><span class="text-validationError"><%= flash[:send_success] %></span></div>
     </div>
   </div>
 </div>
