@@ -15,4 +15,8 @@ class BackgroundJobsController < ApplicationController
     @jobs = BackgroundJob.all
     render "background_jobs/new"
   end
+  def process
+    @jobs = BackgroundJob.all
+    render "background_jobs/new"
+  end
 end
