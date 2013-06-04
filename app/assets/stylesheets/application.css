@@ -359,7 +359,10 @@ ul.ui-autocomplete{
     padding: 2px;
     width: 150px;
 }
-
+.group_header {
+	background-color: grey;
+	font-weight: bold;
+}
  input#datepick {
     border: 1px solid #B9C9F3;
     font-size: 11px;

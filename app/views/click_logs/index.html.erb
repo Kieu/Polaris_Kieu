@@ -1,7 +1,8 @@
 <% if flash[:error] %>
 	<div><%= flash[:error] %></div>
 <% end %>
-
+<div><%= link_to @promotion.client.client_name, clients_path(id: @promotion.client.id) %> > <%= link_to @promotion.promotion_name, promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %> > Click Logs</div>
+<br />
 <div id="search_box">
 Media Category: <%= select_tag 'media_category_id', "<option value = "">All</option><option value = 0 >Listing ad</option><option value = 1 >Display ad</option><option value = 2 >Affiliate</option>".html_safe %> <br>
 Account name: <%= select_tag 'account_id', content_tag(:option,'All',:value=>"")+options_from_collection_for_select(Account.where(promotion_id: params[:id]).order(:account_name), 'id', 'account_name') %> <br>
@@ -75,6 +76,70 @@ Account name: <%= select_tag 'account_id', content_tag(:option,'All',:value=>"")
 	    $(tbl).flexToggleCol(colIndex, visible);
 	}
 	$ (function(){
+		
+	})
+	jQuery(document).ready(function($) {
+		$("#clicklogs").flexigrid({
+			url: "<%= get_logs_list_click_logs_path %>",
+			dataType: 'json',
+			colModel : [
+				{display: 'Click Time', name : 'click_utime', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][0] == "0" ? 1 : 0 %>},
+				{display: 'Media Name:', name : 'media_id', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][1] == "0" ? 1 : 0 %>},
+				{display: 'Account Name', name : 'account_id', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][2] == "0" ? 1 : 0 %>},
+				{display: 'Campaign Name', name : 'campaign_id', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][3] == "0" ? 1 : 0 %>},
+				{display: 'Ad Group Name', name : 'ad_group_id', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][4] == "0" ? 1 : 0 %>},
+				{display: 'Ad Name', name : 'ad_id', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][5] == "0" ? 1 : 0 %>},
+				{display: 'URL', name : 'redirect_url', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][6] == "0" ? 1 : 0 %>},
+				{display: 'SESID', name : 'session_id', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][7] == "0" ? 1 : 0 %>},
+				{display: 'OS', name : 'device_category', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][8] == "0" ? 1 : 0 %>},
+				{display: 'OK/NG', name : 'state', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][9] == "0" ? 1 : 0 %>},
+				{display: 'Error Message', name : 'error_code', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][10] == "0" ? 1 : 0 %>},
+				],
+				preProcess : function (json) {
+	            var results = new Array();
+	            jQuery.each(json.rows, function(idx, v) {
+	                if (idx==0) {
+	                	results.push({id: "-" + v.cell.media_category_id, cell: {click_utime: "", media_id: "",
+	                					account_id: "", campaign_id: "", ad_group_id: "", ad_id: "", redirect_url: "", session_id: "",device_category: "", state: "", error_code: ""}});
+	               	} else {
+	               		
+	               		if (json.rows[idx-1].cell.media_category_id != v.cell.media_category_id)
+	               			results.push({id: "-" + v.cell.media_category_id, cell: {click_utime: "", media_id: "",
+	                					account_id: "", campaign_id: "", ad_group_id: "", ad_id: "", redirect_url: "", session_id: "",device_category: "", state: "", error_code: ""}});
+	               	}
+              
+              results.push(this);
+	            });
+	            
+	            return {
+	                rows : results,
+	                page : json.page,
+	                total : json.total
+	            };
+	        },
+		    sortname: "click_utime",
+	        sortorder: "desc",
+			usepager: true,
+			title: 'Click Logs list',
+			useRp: true,
+			rp: 10,
+			id:<%=params[:id]%>, 
+			showTableToggleBtn: true,
+			width: 600,
+			height: 200,
+			onSuccess: function() {
+				$('tr#row-0 td:nth-child('+(1+'n-'+(11))+')').remove();
+				$('tr#row-0').append("<td colspan='11'><div class='group_header'>Listing ad</div></td>");
+				
+				$('tr#row-1 td:nth-child('+(1+'n-'+(11))+')').remove();
+				$('tr#row-1').append("<td colspan='11'><div class='group_header'>Display ad</div></td>");
+				
+				$('tr#row-2 td:nth-child('+(1+'n-'+(11))+')').remove();
+				$('tr#row-2').append("<td colspan='11'><div class='group_header'>Affiliate</div></td>");
+			}
+		});
+		
+	});
 		function formatDate(year, month, day){
 		 if (year < 2000) { year = parseInt(year) + 1900; }
 		 if (month.length == 1) { month = "0" + parseInt(month); }
@@ -119,35 +184,15 @@ Account name: <%= select_tag 'account_id', content_tag(:option,'All',:value=>"")
 		$("#account_id").change(function(){
 			reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?cid=" + $("#media_category_id").val() + "&account_id=" + $(this).val());
 		});
-		$("#clicklogs").flexigrid({
-			url: "<%= get_logs_list_click_logs_path %>",
-			dataType: 'json',
-			colModel : [
-				{display: 'Click Time', name : 'click_utime', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][0] == "0" ? 1 : 0 %>},
-				{display: 'Media Name:', name : 'media_id', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][1] == "0" ? 1 : 0 %>},
-				{display: 'Account Name', name : 'account_id', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][2] == "0" ? 1 : 0 %>},
-				{display: 'Campaign Name', name : 'campaign_id', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][3] == "0" ? 1 : 0 %>},
-				{display: 'Ad Group Name', name : 'ad_group_id', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][4] == "0" ? 1 : 0 %>},
-				{display: 'Ad Name', name : 'ad_id', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][5] == "0" ? 1 : 0 %>},
-				{display: 'URL', name : 'redirect_url', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][6] == "0" ? 1 : 0 %>},
-				{display: 'SESID', name : 'session_id', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][7] == "0" ? 1 : 0 %>},
-				{display: 'OS', name : 'device_category', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][8] == "0" ? 1 : 0 %>},
-				{display: 'OK/NG', name : 'state', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][9] == "0" ? 1 : 0 %>},
-				{display: 'Error Message', name : 'error_code', width : 100, sortable : true, align: 'center', hide: <%= cookies[:options][10] == "0" ? 1 : 0 %>},
-				],
-		    sortname: "click_utime",
-	        sortorder: "desc",
-			usepager: true,
-			title: 'Click Logs list',
-			useRp: true,
-			rp: 10,
-			id:<%=params[:id]%>, 
-			showTableToggleBtn: true,
-			width: 600,
-			height: 200
-		});
-	})
+		
+		
+		
 	
+	
+	//$('tr#row-g1 td:nth-child('+(11+'n-'+(11))+')').remove();
+	//$('tr#row-g1').append("<td colspan='11'>aaaaa</td>";
+	$('tr#row-g1 td:nth-child('+(1+'n-'+(11))+')').remove();
+	$('tr#row-g1').append("<td colspan='11'>aaaaa</td>");
 	var colums = ["click_utime", "media_id", "account_id", "campaign_id", "ad_group_id", "ad_id", "redirect_url", "session_id", "device_category", "state", "error_code"]
 	
 	$("#show_option").click(function(){
