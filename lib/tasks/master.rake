@@ -58,15 +58,6 @@ namespace :master do
     end
   end
 
-  desc "Create Ext Promotion Report"
-  task create_ext_promotion_report: :environment do
-    (1..100).each do |num|
-      ExtPromotionReport.create!(promotion_id: "#{num}", media_category_id: 1,
-                                 media_id: 1, account_id: 1, imp: "#{num + 10}",
-                                 click: "#{num + 15}", cost: "#{num + 30}", report_date: 20130525)
-    end
-  end
-
   desc "Create Daily Summary Account"
   task create_daily_summary_account: :environment do
     (1..100).each do |num|
@@ -116,6 +107,12 @@ namespace :master do
     end
   end
 
+  desc "Create Promotion"
+  task create_promotion: :environment do
+    (1..200).each do |num|
+      Promotion.create!(promotion_name: "Promotion#{num}", client_id: 1, tracking_period: 30, agency_id: 1, del_flg: 0, roman_name: "Promotion#{num}", update_user_id: 1, promotion_category_id: 1)
+    end
+  end
   desc "Create Conversion logs "
   task create_conversion_1_logs: :environment do
     (1..10000).each do |i|
