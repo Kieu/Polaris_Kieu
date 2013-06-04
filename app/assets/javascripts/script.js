@@ -61,8 +61,8 @@ $(document).ready(function(){
 		
 		/* Checking whether the AJAX fetched page has been cached: */
 		
-		if(!element.data('cache'))
-		{	
+		//if(!element.data('cache'))
+		//{
 			/* If no cache is present, show the gif preloader and run an AJAX request: */
 			$('#contentHolder').html('<img src="/assets/img/ajax_preloader.gif"  class="preloader" />');
 
@@ -72,8 +72,8 @@ $(document).ready(function(){
 				/* After page was received, add it to the cache for the current hyperlink: */
 				element.data('cache',msg);
 			});
-		}
-		else $('#contentHolder').html(element.data('cache'));
+		//}
+		//else $('#contentHolder').html(element.data('cache'));
 		
 		e.preventDefault();
 	})
