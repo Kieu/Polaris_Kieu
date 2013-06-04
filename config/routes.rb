@@ -1,4 +1,7 @@
 PolarisManage::Application.routes.draw do
+  resources :conversion_promotion_logs, only: [:index] do
+    post "get_conversion_logs_list", on: :collection 
+  end
   resources :promotions do
     get "search", on: :collection
     post "delete_promotion", to: "promotions#delete_promotion", on: :collection
