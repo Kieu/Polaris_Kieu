@@ -17,7 +17,7 @@ class BackgroundJobsController < ApplicationController
   end
   def notification
     @jobs = BackgroundJob.where(:user_id => current_user.id).size
-    puts @jobs
+    render :text => @jobs
   end
   def inprogress
     @jobs = BackgroundJob.all
