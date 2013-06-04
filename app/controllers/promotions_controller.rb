@@ -6,13 +6,13 @@ class PromotionsController < ApplicationController
 
   def index
     if current_user.client?
-      @array_promotion = Promotion.order_by_promotion_name
+      @client_id = current_user.company_id
     else
       @client_id = params[:client_id]
-      @array_promotion = Promotion.get_by_client(@client_id).
-        order_by_promotion_name
     end
 
+    @array_promotion = Promotion.get_by_client(@client_id).
+        order_by_promotion_name
     if @array_promotion.count > 0
       @promotion_id = @array_promotion.first[:id]
       if(params[:promotion_id])
@@ -83,6 +83,21 @@ class PromotionsController < ApplicationController
     @promotion.delete
     flash[:error] = "Promotion deleted"
     redirect_to promotions_path(client_id: @promotion.client_id)
+  end
+
+  def download_csv
+    background_job = BackgroundJob.new
+    background_job.user_id = 1
+    background_job.filename = 'test.csv'
+    background_job.type_view = 'download'
+    background_job.status = 0
+    background_job.save!
+    #sleep(1.minutes)
+    #=====================================
+    background_job.status = 1
+    background_job.save!
+    #=====================================
+    render text: 'success'
   end
 
   def draw_graph(promotion_data, date_arrange, select_left, select_right)
