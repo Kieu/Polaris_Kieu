@@ -8,7 +8,7 @@ $(document).ready(function(){
 	var Tabs = {
 		'Create'	: '/background_jobs/new',
 		'Upload'	: '/background_jobs/upload',
-		'Process'	: '/background_jobs/inprogess'
+		'Process'	: '/background_jobs/inprogress'
 	}
 	
 	/* The available colors for the tabs: */
