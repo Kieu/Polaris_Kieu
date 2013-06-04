@@ -6,9 +6,9 @@ $(document).ready(function(){
 		});
 	/* Defining an array with the tab text and AJAX pages: */
 	var Tabs = {
-		'Create'	: '/background_jobs/create',
-		'Upload'	: '/backdround_jobs/upload',
-		'Process'	: '/background_jobs/process'
+		'Create'	: '/background_jobs/new',
+		'Upload'	: '/background_jobs/upload',
+		'Process'	: '/background_jobs/inprogess'
 	}
 	
 	/* The available colors for the tabs: */
