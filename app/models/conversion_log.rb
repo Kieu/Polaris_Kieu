@@ -2,14 +2,14 @@ class ConversionLog < ActiveRecord::Base
   establish_connection :log_db_development
 
     FIELD = "conversion_utime, conversion_id, conversion_category, conversion_type, repeat_flg,
-              approval_status, media_id,account_id, campaign_id,ad_group_id, ad_id, click_time, verify,
+              approval_status, media_id,account_id, campaign_id,group_id, unit_id, click_time, verify,
               suid, session_id, device_category,  repeat_proccessed_flg,'OK' as log_state, sales, profit, volume, others, null as error_message, null as error_log_view"
     FIELD_ERROR = "conversion_utime, conversion_id, conversion_category, conversion_type, null as repeat_flg,
-              approval_status, media_id,account_id, campaign_id,ad_group_id, ad_id, click_time, verify,
+              approval_status, media_id,account_id, campaign_id,group_id, unit_id, click_time, verify,
               suid, session_id, device_category, null as repeat_proccessed_flg, 'NG' as log_state , sales, profit, volume, others, null as error_message, null as error_log_view"
 
     FIELD_ORGANIC = "conversion_time as conversion_utime, conversion_id, conversion_category,null as conversion_type, null as repeat_flg,
-              null as approval_status, null as media_id,null as account_id, null as campaign_id,null as ad_group_id, null as ad_id, null as click_time, verify,
+              null as approval_status, null as media_id,null as account_id, null as campaign_id,null as group_id, null as unit_id, null as click_time, verify,
               suid, null as session_id, null as device_category, null as repeat_proccessed_flg,'OGANIC' as log_state, sales, profit, volume, others, null as error_message, null as error_log_view"
     
   def self.get_all_logs id, page, rp, cv_id, media_category_id, account_id, start_date, end_date, show_error, sortname, sortorder
