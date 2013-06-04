@@ -3,12 +3,12 @@ class BackgroundJobsController < ApplicationController
   before_filter :must_super_agency
   layout false
 
-  def create
-    @jobs = BackgroundJob.where(:user_id => current_user.id,:type_view => 'download')
+  def download
+    @jobs = BackgroundJob.where(:user_id => current_user.id,:type_view => 'download',:status =>'1')
     render "background_jobs/new"
   end
   def upload
-    @jobs = BackgroundJob.where(:user_id => current_user.id,:type_view => 'upload')
+    @jobs = BackgroundJob.where(:user_id => current_user.id,:type_view => 'upload',:status =>'1')
     render "background_jobs/upload"
   end
   def index
@@ -20,7 +20,7 @@ class BackgroundJobsController < ApplicationController
     render :text => @jobs
   end
   def inprogress
-    @jobs = BackgroundJob.where(:user_id => current_user.id,:status => '1')
+    @jobs = BackgroundJob.where(:user_id => current_user.id,:status => !'1')
     render "background_jobs/inprogress"
   end
 end
