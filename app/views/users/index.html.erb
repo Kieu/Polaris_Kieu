@@ -15,6 +15,34 @@
     {display: 'Company', name : 'company', width : 200, sortable : false, align: 'left'},
     {display: 'Role', name : 'role_id', width : 100, sortable : false, align: 'left'}
 			],
+			preProcess : function (json) {
+            
+            var results = new Array();
+            jQuery.each(json.object, function() {
+                
+                var row = {};
+                var cell = new Array();
+                
+                jQuery.each(this, function(k, v) {
+
+                    if (k == "state" && v == "") {
+                        cell.push("NA");
+                    } else {
+                    	cell[k] = v;
+                        cell.push(this);
+                    }
+                });
+
+                row["cell"] = cell;
+                results.push(row);
+            });
+            
+            return {
+                rows : results,
+                page : json.pageCount,
+                total : json.total
+            };
+        }
 		usepager: true,
 		title: 'Users',
 		useRp: true,
