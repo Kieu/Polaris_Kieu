@@ -32,6 +32,9 @@ PolarisManage::Application.routes.draw do
   root to: "clients#index"
   
   resources :accounts, only: [:new, :create, :edit, :update]
+  resources :click_logs do
+    post "get_logs_list", on: :collection
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

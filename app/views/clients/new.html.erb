@@ -1,9 +1,11 @@
 <p class="h2">クライアント編集</p>
-
+<%= render "layouts/prevent_change_page" %>
 <% if flash[:error] %>
     <div><%= flash[:error] %></div>
 <% end %>
-
+<% content_for :sidebar do %>
+	<%= render partial: "layouts/sidebar", locals: {object: @clients} %>
+<% end %>
 <%= form_for(@client) do |f| %>
     <div class="regist_form">
       <table class="client_info">
@@ -77,7 +79,14 @@
     $(document).ready(function () {
         list_user = [];
         <% User.active.each do |user|%>
-        list_user.push({"label": "<%= short_name(user.username) %>", "value": "<%= user.id %>", "email": "<%= user.email %>", "role": "<%= user.role.role_name %>"});
+        <%
+        if user.client?
+			company = Client.find(user.company_id).client_name
+        else
+        	company = Agency.find(user.company_id).agency_name
+        end
+        %>
+        list_user.push({"label": "<%= short_name(user.username) %>", "value": "<%= user.id %>", "email": "<%= user.email %>", "role": "<%= user.role.role_name %>", "company": "<%= company %>"});
         <% end %>
         $("#tags").autocomplete({
             source: list_user,
@@ -85,7 +94,8 @@
                 $("#tags").val("");
                 list_user.splice(list_user.indexOf(ui.item), 1);
                 data = ui.item;
-                $("#user_list").append("<tr><th>" + data.label + "</th>" + "<td>" + data.email + "</td><td>" + data.role
+                console.log(data);
+                $("#user_list").append("<tr><th>" + data.label + "(" + data.company + ")</th>" + "<td>" + data.email + "</td><td>" + data.role
                         + "</td><td><input type = 'hidden' name='users_id[]' value ='" + data.value +
                         "'><input type = 'checkbox' name='del_user_" + data.value + "'></td></tr>");
 

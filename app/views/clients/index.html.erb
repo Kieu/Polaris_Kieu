@@ -1,7 +1,11 @@
 <% if flash[:error] %>
 	<div><%= flash[:error] %></div>
 <% end %>
-<h2 id="client_name"><%= short_name(@client_name) %></h2>
+<% if @clients.count > 0 %>
+<% content_for :sidebar do %>
+	<%= render partial: "layouts/sidebar", locals: {object: @clients} %>
+<% end %>
+<h2 id="client_name"><%= short_name(@client.client_name) %></h2>
 <br />
 <table class="flexme4" style="display: none"></table>
 <script type="text/javascript">
@@ -22,7 +26,7 @@
 		usepager: true,
 		title: 'Promotion Name',
 		useRp: true,
-		id: "<%= @client_id %>",
+		id: "<%= @client.id if @client %>",
 		rp: 10,
 		showTableToggleBtn: true,
 		width: 250,
@@ -30,7 +34,9 @@
 	});
     function create() {
         var client_id = $('a[class="client_name active"]').attr('id');
-        ajaxCommon('<%= new_promotion_path(client_id: @client_id) %>?client_id='+client_id,'','','','#inner');
+        ajaxCommon('<%= new_promotion_path(client_id: @client.id) %>?client_id='+client_id,'','','','#inner');
     }
 </script>
-
+<% else %>
+<h2 id="client_name">No data</h2>
+<% end %>
