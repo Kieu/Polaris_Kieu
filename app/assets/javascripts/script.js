@@ -1,6 +1,8 @@
 $(document).ready(function(){
 	/* This code is executed after the DOM has been completely loaded */
-	
+	$(".notification").click(function () {
+		$("#notice").toggle();
+		});
 	/* Defining an array with the tab text and AJAX pages: */
 	var Tabs = {
 		'Create'	: '/background_jobs/create',
