@@ -72,7 +72,7 @@ $(document).ready(function(){
 				$('#contentHolder').html(msg);
 				
 				/* After page was received, add it to the cache for the current hyperlink: */
-				element.data('cache',msg);
+				//element.data('cache',msg);
 			});
 		//}
 		//else $('#contentHolder').html(element.data('cache'));
