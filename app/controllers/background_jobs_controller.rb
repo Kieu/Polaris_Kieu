@@ -4,11 +4,11 @@ class BackgroundJobsController < ApplicationController
   layout false
 
   def create
-    @jobs = BackgroundJob.all
+    @jobs = BackgroundJob.where(:user_id => current_user.id,:type_view => 'download')
     render "background_jobs/new"
   end
   def upload
-    @jobs = BackgroundJob.all
+    @jobs = BackgroundJob.where(:user_id => current_user.id,:type_view => 'upload')
     render "background_jobs/upload"
   end
   def index
@@ -20,7 +20,7 @@ class BackgroundJobsController < ApplicationController
     render :text => @jobs
   end
   def inprogress
-    @jobs = BackgroundJob.all
+    @jobs = BackgroundJob.where(:user_id => current_user.id,:status => '1')
     render "background_jobs/inprogress"
   end
 end
