@@ -27,12 +27,12 @@ class ClickLog < ActiveRecord::Base
                where DATE_FORMAT(created_at, '%Y/%m/%d') BETWEEN ? AND ? #{where_clause} union all
                select *, 'OK' as state from click_error_#{id}_logs
                where DATE_FORMAT(created_at, '%Y/%m/%d') BETWEEN ? AND ? #{where_clause}
-               ORDER BY #{sortname} #{sortorder} LIMIT #{start}, #{rp} "
+               ORDER BY media_category_id, #{sortname} #{sortorder} LIMIT #{start}, #{rp} "
       params += params
     else
       sql_str = "select *, null as error_code, 'OK' as state from click_#{id}_logs
                where DATE_FORMAT(created_at, '%Y/%m/%d') BETWEEN ? AND ? #{where_clause}
-               ORDER BY #{sortname} #{sortorder} LIMIT #{start}, #{rp} "
+               ORDER BY media_category_id, #{sortname} #{sortorder} LIMIT #{start}, #{rp} "
     end
     @logs = ClickLog.find_by_sql([sql_str] + params)
   end         

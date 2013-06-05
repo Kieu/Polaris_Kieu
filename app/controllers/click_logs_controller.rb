@@ -3,6 +3,7 @@ class ClickLogsController < ApplicationController
   before_filter :must_super_agency
   before_filter :set_cookie
   def index
+    @promotion = Promotion.find(params[:id])
   end
 
   def get_logs_list
@@ -23,9 +24,9 @@ class ClickLogsController < ApplicationController
     rows = Array.new
     
     click_logs.each do |log|
-      rows << {id: log.id, cell: {click_utime: log.click_utime, media_id: medias.find_by_id(log.media_id).media_name,
-              account_id: accounts.find(log.account_id).account_name, campaign_id: display_campaigns.find(log.campaign_id).name, ad_group_id: display_groups.find(log.ad_group_id).name,
-              ad_id: display_ads.find(log.ad_id).name, redirect_url: log.redirect_url, session_id: log.session_id,
+      rows << {id: log.id, cell: {click_utime: log.click_utime, media_id: medias.find_by_id(log.media_id).media_name, media_category_id: log.media_category_id,
+              account_id: accounts.find(log.account_id).account_name, campaign_id: display_campaigns.find(log.campaign_id).name, ad_group_id: display_groups.find(log.group_id).name,
+              ad_id: display_ads.find(log.unit_id).name, redirect_url: log.redirect_url, session_id: log.session_id,
               device_category: os[log.device_category.to_i], state: log.state, error_code: log.error_code}}
     end
     rows

@@ -1,11 +1,10 @@
-require 'csv'
-
+require "resque"
 class PromotionsController < ApplicationController
   before_filter :signed_in_user
   before_filter :must_super_agency, except: [:show, :index]
   before_filter :must_delete_able, only: [:show, :edit, :update,
     :delete_promotion]
-  respond_to :html, :csv
+
 
   def index
     if current_user.client?
@@ -89,32 +88,11 @@ class PromotionsController < ApplicationController
   end
 
   def download_csv
-    background_job = BackgroundJob.new
-    background_job.user_id = 1
-    background_job.filename = 'test.csv'
-    background_job.type_view = 'download'
-    background_job.status = 0
-    background_job.save!
+    promotion_id = params[:promotion_id].to_i
+    user_id = current_user.id
+    Resque.enqueue ExportPromotionData, user_id, promotion_id
     
-    @users = User.find(:all)
-    csv_string = CSV.generate do |csv|
-         csv << ["Id", "Name", "Email","Role"]
-         @users.each do |user|
-           csv << [user.id, user.roman_name, user.email, user.role_id]
-         end
-    end
-
-    #in this time, we only want to store it
-    open "test.csv", 'w' do |f|
-      f.write "csv_string"
-    end
-    send_data csv_string, disposition: :attachment, filename: "users.csv"
-#   :type => 'text/csv; charset=iso-8859-1; header=present',
- #  :disposition => "attachment; filename=users.csv"
-    #=====================================
-    background_job.status = 1
-    background_job.save!
-    #=====================================
+    render text: "processing"
   end
 
   def draw_graph(promotion_data, date_arrange, select_left, select_right)

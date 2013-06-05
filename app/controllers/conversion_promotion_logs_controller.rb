@@ -3,7 +3,7 @@ before_filter :signed_in_user
 before_filter :set_cookies
 
 def index
-  
+  @promotion = Promotion.find_by_id(params[:promotion_id])
 end
 
 def get_conversion_logs_list
@@ -36,8 +36,8 @@ def get_rows conversion_logs
                                           media_id: medias.find_by_id(conversion_log.media_id).media_name, 
                                           account_id: accounts.find_by_id(conversion_log.account_id).account_name, 
                                           campaign_id: campaigns.find_by_id(conversion_log.campaign_id).name,
-                                          ad_group_id: ad_groups.find_by_id(conversion_log.ad_group_id).name, 
-                                          ad_id: ads.find_by_id(conversion_log.ad_id).name,
+                                          ad_group_id: ad_groups.find_by_id(conversion_log.group_id).name, 
+                                          ad_id: ads.find_by_id(conversion_log.unit_id).name,
                                           click_time: conversion_log.click_time,
                                           sales: conversion_log.sales,
                                           verify: conversion_log.verify,
