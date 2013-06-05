@@ -14,6 +14,7 @@ gem "curb", "0.8.4"
 gem "lazy_high_charts"
 gem "recaptcha", :require => "recaptcha/rails"
 gem "kaminari"
+gem "resque", require: 'resque/server'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
