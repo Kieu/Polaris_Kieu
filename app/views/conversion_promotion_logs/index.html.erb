@@ -158,6 +158,28 @@ Account name: <%= select_tag 'account_id',content_tag(:option,'All',:value=>"")+
     {display: 'Error message', name : 'error_message', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[22] == "1") ? false : true},
     {display: 'Error_log_view', name : 'error_log_view', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[23] == "1") ? false : true}
 			],
+				preProcess : function (json) {
+	            var results = new Array();
+	            jQuery.each(json.rows, function(idx, v) {
+	                if (idx==0) {
+	                	results.push({id: "-" + v.cell.media_category_id, cell: {conversion_utime: "", conversion_id: "",volume: "", others: "",error_message: "",
+	                					conversion_category: "", tracking_type: "", cv_type: "", approval_status: "", media_id: "", account_id: "",campaign_id: "", ad_group_id: "", ad_id: "",
+	                					click_time: "", sales: "", verify: "", suid: "", session_id: "", os: "",repeat: "", log_state: "", sales: ""}});
+	               	} else {
+	               		if (json.rows[idx-1].cell.media_category_id != v.cell.media_category_id)
+	               			results.push({id: "-" + v.cell.media_category_id, cell: {conversion_utime: "", conversion_id: "",volume: "", others: "",error_message: "",
+	                					conversion_category: "", tracking_type: "", cv_type: "", approval_status: "", media_id: "", account_id: "",campaign_id: "", ad_group_id: "", ad_id: "",
+	                					click_time: "", sales: "", verify: "", suid: "", session_id: "", os: "",repeat: "", log_state: "", sales: ""}});
+	               	}
+              
+              results.push(this);
+	            });
+	            return {
+	                rows : results,
+	                page : json.page,
+	                total : json.total
+	            };
+	        },
 		usepager: true,
 		title: 'Users',
 		useRp: true,
@@ -167,7 +189,17 @@ Account name: <%= select_tag 'account_id',content_tag(:option,'All',:value=>"")+
 		id: "<%= params[:promotion_id] %>",
 		showTableToggleBtn: true,
 		width: 720,
-		height: 300
+		height: 300,
+		onSuccess: function() {
+			$('tr#row-0 td:nth-child('+(1+'n-'+(11))+')').remove();
+			$('tr#row-0').append("<td colspan='11'><div class='group_header'>Listing ad</div></td>");
+			
+			$('tr#row-1 td:nth-child('+(1+'n-'+(11))+')').remove();
+			$('tr#row-1').append("<td colspan='11'><div class='group_header'>Display ad</div></td>");
+			
+			$('tr#row-2 td:nth-child('+(1+'n-'+(11))+')').remove();
+			$('tr#row-2').append("<td colspan='11'><div class='group_header'>Affiliate</div></td>");
+		}
 	});
 	var colums = ["conversion_utime", "conversion_id", "conversion_category","tracking_type",
 	 "conversion_type", "approval_status", "media_id", "account_id", "campaign_id", "ad_group_id", "ad_id", "click_time", "verify", "suid", "session_id", "os", "repeat", "log_state", "sales", "profit", "volume", "others", "error_message", "error_log_view"]

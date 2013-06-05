@@ -56,8 +56,8 @@ class UsersController < ApplicationController
   end
 
   def get_users_list
-    rows = get_rows(User.active.order_by_roman_name.page(params[:page]).per(params[:rp]))
-    render json: {page: params[:page], total: User.active.count, rows: rows}
+    rows = get_rows(User.order_by_roman_name.page(params[:page]).per(params[:rp]))
+    render json: {page: params[:page], total: User.count, rows: rows}
   end
 
   def change_company_list

@@ -20,7 +20,7 @@ class ClickLogsController < ApplicationController
     display_ads = DisplayAd.where(promotion_id: params[:id]).select("id, name")
     display_campaigns = DisplayCampaign.where(promotion_id: params[:id]).select("id, name")
     accounts = Account.where(promotion_id: params[:id]).select("id,account_name")
-    os = {1 => "Adroid", 2 => "iOS", 9 => "Other"}
+    os = {1 => "Android", 2 => "iOS", 9 => "Other"}
     rows = Array.new
     
     click_logs.each do |log|

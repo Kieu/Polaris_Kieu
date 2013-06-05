@@ -1,14 +1,14 @@
 class ConversionLog < ActiveRecord::Base
   establish_connection :log_db_development
 
-    FIELD = "conversion_utime, conversion_id, conversion_category, conversion_type, repeat_flg,
+    FIELD = "media_category_id, conversion_utime, conversion_id, conversion_category, conversion_type, repeat_flg,
               approval_status, media_id,account_id, campaign_id,group_id, unit_id, click_time, verify,
               suid, session_id, device_category,  repeat_proccessed_flg,'OK' as log_state, sales, profit, volume, others, null as error_message, null as error_log_view"
-    FIELD_ERROR = "conversion_utime, conversion_id, conversion_category, conversion_type, null as repeat_flg,
+    FIELD_ERROR = "media_category_id, conversion_utime, conversion_id, conversion_category, conversion_type, null as repeat_flg,
               approval_status, media_id,account_id, campaign_id,group_id, unit_id, click_time, verify,
               suid, session_id, device_category, null as repeat_proccessed_flg, 'NG' as log_state , sales, profit, volume, others, null as error_message, null as error_log_view"
 
-    FIELD_ORGANIC = "conversion_time as conversion_utime, conversion_id, conversion_category,null as conversion_type, null as repeat_flg,
+    FIELD_ORGANIC = "null as media_category_id, conversion_time as conversion_utime, conversion_id, conversion_category,null as conversion_type, null as repeat_flg,
               null as approval_status, null as media_id,null as account_id, null as campaign_id,null as group_id, null as unit_id, null as click_time, verify,
               suid, null as session_id, null as device_category, null as repeat_proccessed_flg,'OGANIC' as log_state, sales, profit, volume, others, null as error_message, null as error_log_view"
     
@@ -38,13 +38,13 @@ class ConversionLog < ActiveRecord::Base
                                        (select #{FIELD_ERROR} from conversion_error_#{id}_logs where DATE_FORMAT(created_at, '%Y/%m/%d') BETWEEN ? AND ? #{where_clause}) union all
                                        (select #{FIELD_ORGANIC} from conversion_organic_#{id}_logs)
 
-                                       ORDER BY #{sortname} #{sortorder} LIMIT #{start}, #{rp} "
+                                       ORDER BY media_category_id, #{sortname} #{sortorder} LIMIT #{start}, #{rp} "
                                         
       params += params1
     else
       sql_str = "(select #{FIELD} from conversion_#{id}_logs  where DATE_FORMAT(created_at, '%Y/%m/%d') BETWEEN ? AND ? #{where_clause}) union all
                                        (select #{FIELD_ORGANIC} from conversion_organic_#{id}_logs)
-                                       ORDER BY #{sortname} #{sortorder} LIMIT #{start}, #{rp} "
+                                       ORDER BY media_category_id, #{sortname} #{sortorder} LIMIT #{start}, #{rp} "
                                         
     end                                    
             
