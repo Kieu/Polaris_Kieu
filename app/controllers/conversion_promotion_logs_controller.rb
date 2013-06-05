@@ -3,7 +3,7 @@ before_filter :signed_in_user
 before_filter :set_cookies
 
 def index
-  @promotion = Promotion.find_by_id(params[:promotion_id])
+  @promotion = Promotion.find(params[:promotion_id])
 end
 
 def get_conversion_logs_list

@@ -19,6 +19,7 @@ Gemfile.lock
 config/database.yml
 coverage/*
 solr/*
+sass-cache/*
 *~
 .project
 .loadpath

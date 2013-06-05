@@ -13,3 +13,135 @@ en:
       category: ["IT/Media/App", "AV/Consumer electronics", "Food/Beverage/Consumer Goods", "Distribution/retail/mail order", "Finance", "Communication", "Real estate", "Human resources", "automobile", "Service", "Others"]
   conversions:
     unique_definition: ["Only once", "Limitless", "Once a day", "Once every 7 days", "Once every 28 days", "Once a month"]
+  errors: &errors
+    format: ! '%{attribute}%{message}'
+    max_size: '%s以下にしてください en'
+    messages:
+      accepted: 受諾してください。 English
+      blank: 入力してください。English
+      confirmation: 確認の入力が一致しません。 English
+      empty: 入力してください。English
+      equal_to: ! '%{count}にしてください。English ' 
+      even: 偶数にしてください。English
+      exclusion: 予約されています。English
+      greater_than: ! '%{count}より大きい値にしてください。English'
+      greater_than_or_equal_to: ! '%{count}以上の値にしてください。English'
+      inclusion: 正しい値が選択されていません。English
+      invalid: 正しく入力して下さい。English
+      less_than: ! '%{count}より小さい値にしてください。English'
+      less_than_or_equal_to: ! '%{count}以下の値にしてください。English'
+      not_a_number: 数値で入力してください。English
+      not_an_integer: 整数で入力してください。English
+      odd: 奇数にしてください。
+      record_invalid: バリデーションに失敗しました。 English'%{errors}'
+      taken: すでに登録されています。English
+      too_long: ! '%{count}文字以内で入力してください。English'
+      too_short: ! '%{count}文字以上で入力してください。English'
+      wrong_length: ! '%{count}文字で入力してください。English'
+      acceptance: チェックボックスを選択してください。English
+
+  layout:
+    login: "Login"
+    login: "Logout"
+    submit:
+      create: "Create"
+      submit: "Submit"
+      update: "Update"
+    terms_of_use: "Terms of Use"
+    privacy_policy: "Privacy Policy"
+    porporate_information: "Porporate information"
+  login:
+    email: "Email address"
+    pw: "Password"
+    choose_lang: "Choose Language"
+    forgor_pw: "Forgot Password"
+    announcements: "Announcements"
+    captcha: "Captcha"
+    notice: "Please enter your Email of the account, the authentication characters that are displayed.."
+  client:
+    crumb_edit: "Client Edit"
+    crumb_add: "Add Client"
+    crumb_list: "Client list"
+    client_name: "Client name en"
+    romaji_name: "Roman name"
+    tel: "Contact"
+    person_charge: "Person in charge"
+    person_sales: "Person sales"
+    contract_flg: "Use policy"
+    contract_type: "Plan type"
+    user_information: "User information"
+    delete: "Delete"
+  agency:
+    crumb_edit: "Agency Edit"
+    crumb_add: "Agency Add"
+    agency_name: "Agency name"
+    roman_name: "Roman name"
+  account:
+    crumb_add: "Account Add"
+    crumb_edit: "Account Edit"
+    media_category: "Media category"
+    media: "Media"
+    account_name: "Account name"
+    roman_name: "Roman name"
+    cost: "Cost calculation： Input data "
+    sync_account_id: "Sync account ID"
+  conversion:
+    crumb_add: "Conversion add"
+    crumb_edit: "Conversion Edit"
+    user_information: "User information"
+    delete: "Delete"
+    conversion_name: "Conversion name"
+    roman_name: "Roman name"
+    conversion_category:
+      label: "Conversion category"
+      web: "WEB"
+      app: "APP"
+      combination: "Combination"
+    deduplicated:
+      label: "Deduplicated"
+      yes: "yes"
+      no: " no"
+    unique_definition: "Unique definition"
+    option1:
+      label: "<Option①>　"
+      starting_point_setting:
+        label: "Starting point setting"
+        configure: "Configure"
+        not_configure: "Not configure"
+      sale_unit_price: "Sale unit price"
+    option2:
+      label: "<Option②>"
+      reward_format:
+        label: "Reward format"
+        straight_line_type: "Straight line type"
+        not_set: "Not set"
+  log:
+    conversion_name: "Conversion name"
+    media_category: "Media category"
+    account_name: "Account name"
+  promotion:
+    crumb_edit: "Promotion edit"
+    crumb_add: "Promotion asd"
+    promotion_name: "Promotion name"
+    category: "Category"
+    tracking_period:
+      label: "Tracking period"
+      day: "Day"
+    dashboard: "Dashboard"
+  user:
+    crumb_edit: "User edit"
+    user_name: "User name"
+    roman_name: "roman_name"
+    email: "Email address"
+    role: "Role"
+    company_name: "Conpany name"
+    password: "password"
+    password_notification:
+      label: "Password notification"
+      not_notified: "Not notified"
+      to_notified: "To notified"
+    disabled:
+      label: "User disabled"
+      disable: "i want to disable"
+
+
