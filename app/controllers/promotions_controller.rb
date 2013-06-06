@@ -20,7 +20,9 @@ class PromotionsController < ApplicationController
     
       @promotion = @array_promotion.find_by_id(@promotion_id)
       if @promotion
-        cookies[:promotion] = "11111" unless cookies[:promotion].present?
+        start_date = params[:start_date].present? ? params[:start_date] : Date.today.at_beginning_of_month.strftime("%Y/%m/%d").to_s
+        end_date = params[:end_date].present? ? params[:end_date] : Date.today.strftime("%Y/%m/%d").to_s
+        cookies[:promotion] = "111111" unless cookies[:promotion].present?
         @promotion.conversions.each do |conversion|
           cookies[("conversion" + conversion.id.to_s).to_sym] = "1111111111" unless
             cookies[("conversion" + conversion.id.to_s).to_sym].present?
@@ -31,24 +33,28 @@ class PromotionsController < ApplicationController
         @conversions = @promotion.conversions
         @promotion_results = Hash.new
         @promotion_results = DailySummaryAccount
-          .get_promotion_summary(@promotion_id)
+          .get_promotion_summary(@promotion_id,start_date, end_date)
         
         @conversions_results = Hash.new
         @conversions_results = DailySummaryAccConversion
-          .get_conversions_summary(@promotion_id)
+          .get_conversions_summary(@promotion_id,start_date, end_date)
         
-        promotion_data = Array.new
+        @promotion_data = Array.new
         date_arrange = Array.new
   
         # just for test
         conversion_id = 1;
+        
   
         @promotion_data, date_arrange =
           DailySummaryAccount.get_promotion_data(@promotion_id,
-            conversion_id, '20130520', '20130525')
+            conversion_id, start_date, end_date)
+        @array_category = Array.new
+        date_arrange.each do |date|
+          @array_category << date.to_date.strftime("%m/%d")
+        end
         @select_left = params[:left].present? ? params[:left] : "COST"
         @select_right = params[:right].present? ? params[:right] : "click"
-        draw_graph(@promotion_data, date_arrange, @select_left, @select_right)
       else
         render 'public/404'
       end
@@ -110,7 +116,7 @@ class PromotionsController < ApplicationController
     date_arrange.each do |date|
       @array_category << date.to_date.strftime("%m/%d")
     end
-
+    binding.pry
     @chart = LazyHighCharts::HighChart.new('graph') do |f|
       
       f.series(type: 'spline', name: "#{select_left}",

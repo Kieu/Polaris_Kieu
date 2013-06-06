@@ -12,6 +12,7 @@ class DailySummaryAccount < ActiveRecord::Base
           .select(" report_ymd
   	                ,account_id
                     ,sum(cost_per_click) as cost_per_click
+                    ,sum(cost_per_mille) as cost_per_mille
                     ,sum(click_through_ratio) as click_through_ratio
   	                ,sum(imp_count) as imp_count
   	                ,sum(click_count) as click_count
@@ -48,6 +49,7 @@ class DailySummaryAccount < ActiveRecord::Base
     array_result['CTR'] = Array.new
     array_result['CPC'] = Array.new
     array_result['COST'] = Array.new
+    array_result['CPM'] = Array.new
 
     date_range.each do |datetime|
       promotion_data.each do |val|
@@ -57,12 +59,14 @@ class DailySummaryAccount < ActiveRecord::Base
           array_result['CTR'] << val[:click_through_ratio] ? val[:click_through_ratio] : 0
           array_result['CPC'] << val[:cost_per_click] ? val[:cost_per_click] : 0
           array_result['COST'] << val[:cost_sum] ? val[:cost_sum] : 0
+          array_result['CPM'] << val[:cost_per_mille] ? val[:cost_per_mille] : 0
         else
           array_result['click'] << 0
           array_result['imp'] << 0
           array_result['CTR'] << 0
           array_result['CPC'] << 0
           array_result['COST'] << 0
+          array_result['CPM'] << 0
         end
       end
 
@@ -99,11 +103,11 @@ class DailySummaryAccount < ActiveRecord::Base
     return array_result, date_range
   end
   
-  def self.get_promotion_summary promotion_id
+  def self.get_promotion_summary promotion_id, start_date, end_date    
     results = Hash.new
     Settings.media_category.each do |category|
       summary = DailySummaryAccount.where(promotion_id: promotion_id)
-        .where(media_category_id: category[0].to_s)
+        .where(media_category_id: category[0].to_s).where(report_ymd: (start_date)..(end_date))
       Settings.promotions_sums.each_with_index do |sum, index|
         results[category[1]+"_"+Settings.promotions_options[index]+"_total"] =
           summary.sum(sum)

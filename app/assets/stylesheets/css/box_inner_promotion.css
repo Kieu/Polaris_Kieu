@@ -17,7 +17,7 @@ div.check-group input {
 	display: none;
 }
 div.check-group label {
-   background: url("../images/btn_box_add.gif") no-repeat scroll 0 0 transparent;
+   background: url("/assets/btn_box_add.gif") no-repeat scroll 0 0 transparent;
     float: right;
     height: 28px;
     padding: 0 5px;
@@ -37,7 +37,7 @@ div.check-group div:last-child label {
 	-moz-border-radius-bottomright: 7px;
 }
 div.check-group label.checked {
-	  background: url("../images/btn_box_dl.gif") no-repeat scroll 0 0 transparent;
+	  background: url("/assets/btn_box_dl.gif") no-repeat scroll 0 0 transparent;
     float: right;
     height: 28px;
     padding: 0 5px;
@@ -64,7 +64,7 @@ div.check-group label.checked {
 
 
 .box02 .f_arrow{
-    background: url("../images/icon_arrow.png") no-repeat scroll 168px center / 12px auto transparent;
+    background: url("/assets/icon_arrow.png") no-repeat scroll 168px center / 12px auto transparent;
     padding: 1px 0 1px 14px;
     text-align: left;
     text-indent: 0;

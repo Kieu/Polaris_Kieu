@@ -1,412 +1,472 @@
 @charset "UTF-8";
-/* CSS Document */
-
-
-/* ==========================================================================
-   client/index.html  [右固定/左可変]
-   ========================================================================== */
-
-*{
-	padding: 0;
-	margin: 0;
+#wrapper {
+    margin: 0 auto;
+    width: 100%;
 }
-
-img{
-	border: 0;
+#container {
+    float: right;
+    margin-left: -310px;
+    width: 100%;
 }
-
-body {
-font-family:'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ',Meiryo,'ＭＳ Ｐゴシック',sans-serif;
-color: #3d3d3d;
-font-size: 14px;
-line-height: 1.1em;
+#contents {
+    border-left: 2px solid #C1C1C1;
+    margin: 0 40px 0 310px;
+    min-height: 500px;
+    position: relative;
 }
-
-a:hover{
-	opacity:0.7;
-}
-
-p img:hover{
-	opacity:0.7;
-}
-
-#wrapper{
-	margin: 0 auto;
-	width: 100%;
-}
-
-#header{
-height: 50px;
-/*background-color: #f1f1f1; */
-}
-
-#headerInner{
-	margin: 0 auto;
-	width: 95%;
-}
-
-#headerInner h1{
-	height: 50px;
-	width: 130px;
-	float: left;
-	text-indent: -9999px;
-	background: url(/assets/logo_polaris.png) no-repeat;
-	background-position: 0 13px;
-}
-
-#personal{
-	width:400px;
-	margin: 0;
-	padding: 0;
-	float:right;
-	margin-top: 13px;
-}
-
-
-p.h2{
-	font-size: 16px;
-	font-weight: bold;
-	color: #3e5869;
-}
-
-#personal ul{
-}
-
-#personal ul li{
-	margin:0;
-	padding:0;
-	display:inline;
-}
-
-#personal ul li a{
-	color: #F60;
-}
-
-#personal ul li img:hover{
-	opacity:0.7
-}
-
-#personal ul li p{
-	display:inline;
-}
-
-#nav{
-	clear: both;
-	width: 100%;
-	height: 38px;
-	background-color: #0087a9;
-}
-
-#navInner{
-	margin: 0 auto;
-	width: 95%;
-	height: 38px;
+.w_box{
+	min-width:1200px;
 	}
-
-.nav ul{
-	width:570px;
-	overflow:hidden;
-	position:relative;
+#inner {
+    padding: 25px 0 20px 30px;
+}
+#inner p.client_name {
+    color: #3E5869;
+    font-size: 16px;
+    font-weight: bold;
 }
 
-.nav ul li{
-	margin: 0;
-	padding: 0;
-	height:38px;
-	float:left;
+#inner p.regist {
+    color: #3E5869;
+    font-size: 16px;
+    font-weight: bold;
 }
-
-.nav ul li a{
-	opacity:10;
-}
-
-.nav ul li img{
-	display:block;
-}
-
-.nav ul li a{
-	display:block;
-}
-
-
-#container{
-	width: 100%;
-	float: right;
-	margin-left: -310px;
-}
-
-
-#contents{
-	position: relative;
-	margin: 0 40px 0 310px;
-	border-left: 2px solid #c1c1c1;
-	min-height:510px;
-}
-
-#inner{
-	padding: 25px 0 20px 30px;
-}
-
-#inner p.client_name{
+.regist_form {
 	font-size: 16px;
-	font-weight: bold;
-	color: #3e5869;
+    background-color: #F1F1F1;
+    border: 1px solid #B6B6B6;
+    margin: 10px 0 0;
+    min-height: 270px;
+    width: 630px;
 }
-
-#sidebar{
-	width: 250px;
-	min-height:500px;
-	float: left;
-	margin-left: 50px;
+.regist_form table.client_info {
+	margin: 25px 0 0 80px;
+    width: 550px;
 }
-
-#clienetlist_box{
-	min-height: 315px;
-	margin-top: 20px;
-	margin-right: 10px;
-	margin-bottom: 20px;
-	-webkit-border-radius: 8px;
-	-moz-border-radius: 8px;
-	border-radius: 8px;
-	background-color: #f1f1f1;
+.regist_form table.client_info tbody {
+    width: 610px;
 }
-
-	
-#clienetlist_box dl{
-	padding:10px;
-}
-
-#searchform{
-	width: 225px;
-	background: url(/assets/img_search_form.gif) left top no-repeat;
-	display: block;
-	height: 35px;
-	position: relative;
-	background-position: -2px 0;
-}
-#keywords{
-	width: 170px;
-	position: absolute;
-	top: 4px;
-	left: 15px;
-	border: 1px solid #FFF;
-	color:#aaa;
-}
-
-#keywords:focus {
-	color:#333;
-}
-
-
-#searchBtn{
-	position: absolute;
-	top: 7px;
-	left: 193px;
-}
-
-table.sidebar{
-	width: 240px;
-    overflow-y: scroll;
-    max-height: 400px;
-}
-
-table.sidebar tbody{
-	width:240px;
-}
-
-table.sidebar tbody tr{
-	height: 28px;
-	width:240px;
-	border-bottom: 1px solid #c1c1c1;
-}
-
-table.sidebar tbody th.edit{
-	height:28px;
-	width:25px;
-	text-indent: -9999px;
-	background-image: url(/assets/img_edit.png);
-}
-
-table.sidebar tbody th a{
-	opacity: 0.7;
-	display:block;
-	width: 25px;
-	height: 28px;
-}
-
-table.sidebar tbody td a{
-	text-decoration:none;
-	color: #3e5869;
-}
-
-table.sidebar tbody td{
-	font-size: 14px;
-	font-weight: bold;
-	color: #3e5869;
-	vertical-align: middle;
-	height: 28px;
-	width:210px;
-	padding-left: 3px;
-}
-
-#footer{
-	clear: both;
-	margin: 0 auto;
-	border-top:#0b8eb0 1px solid;
-	width: 95%;
-	font-size:12px;	
-	text-align: center;
-}
-
-#footerInner{
-	margin: 15px 0 20px;
-}
-
-#footerInner ul{
-}
-
-#footerInner ul li{
-	color: #0b8eb0;
-	font-weight: bold;
-	text-decoration: underline;
-	padding: 15px;
-	display: inline;
-}
-
-#footerInner ul li a{
-	color: #0b8eb0;
-}
-
-#copyright{
-	font-size:12px;
-}
-
-#copyright p{
-	display: inline;
-	vertical-align: top;
-}
-
-
-
-/* ==========================================================================
-   client/regist.html [右固定/左固定]
-   ========================================================================== */
-
-#inner p.regist{
-	font-size: 16px;
-	color: #3e5869;
-}
-
-.regist_form{
-	width: 630px;
-	margin: 15px 0 0 0;
-	background-color: #f1f1f1;
-	border: 1px solid #b6b6b6;
-	min-height: 460px;
-}
-
-.regist_form table.client_info{
-	letter-spacing: 0.1em;
-	width: 610px;
-	margin: 12px 0 23px 10px;
-}
-
-.regist_form table.client_info tbody{
-	font-size:16px;
-	width: 610px;
-	letter-spacing: -0.3px;
-}
-
-.regist_form table.client_info tbody tr{
-	border-bottom-style: none;
+.regist_form table.client_info tbody tr {
 	height: 45px;
+    border-bottom-style: none;
+}
+.regist_form table.client_info tbody th {
+	font-weight: bold;
+    text-align: right;
+    width: 150px;
 }
 
-.regist_form table.client_info tbody th{
-	font-weight: bold;
-	text-align: right;
-	width: 175px;
-}
-
-.regist_form table.client_info tbody td{
-	font-weight: bold;
+.regist_form table.client_info tbody td {
 	padding-left: 10px;
 }
-
-.regist_form .input-text{
-	padding-left: 5px;
+.regist_form .input-text {
 	font-weight: normal;
+	padding-left: 5px;
+    width: 285px;
+}
+
+.regist_form select {
 	width: 285px;
+}
+input.w-130{
+	font-weight: normal;
+	padding-left: 5px;
+	width:130px;
 }
 
 .submit_area{
 	margin: auto;
 	width: 380px;
-	margin-bottom: 18px;
-	margin-top: 33px;
+	margin-top: 40px;
+	margin-bottom: 30px;
+}
+.submit_area input:hover{
+	opacity:0.7;
+}
+.submit_area p {
+    display: inline;
+}
+.submit_area p img:hover {
+	opacity:0.7
 }
 
-.submit_area p{
-	display:inline;
+.submit_area2 {
+	margin: auto;
+	width: 530px;
+	margin-top: 40px;
+	margin-bottom: 30px;
 }
-
-.user_info_add{
-	width:450px;
-	margin-left: 35px;
-}
-.user_info_add p{
-	margin-bottom: 0;
-}
-.user_info_add input{
-	font-weight: normal;
-	width: 300px;
-	height: 30px;
-	margin-right: 10px;
-}
-.user_info_add img{
-	vertical-align:bottom;
-}
-
-#btn_submit{
-	text-indent:-9999px;
-    width: 169px;
-    height: 44px;
-    background: url(//btn_done.gif) left top no-repeat;
-}
-#btn_submit:hover{
+.submit_area2 input:hover{
 	opacity:0.7;
 }
 
- 
+.submit_area2 p {
+    display: inline;
+}
+
+.submit_area2 p img:hover {
+	opacity:0.7
+}
+
+table.user_add {
+    width: 610px;
+}
+table.user_add tbody th {
+    text-align: right;
+    width: 170px;
+}
+table.user_add tbody td {
+    padding-left: 5px;
+}
+.p-blue{
+	color: #0087a9;
+	font-weight: bold;
+}
+
+
 /* ==========================================================================
-   client/edit.html [右固定/左固定]
+   ボタン部分のプルダウン
    ========================================================================== */
-table.user_add{
-	width: 580px;
-	margin-left: 35px;
-}
-.user_info_add p{
-	font-weight: bold;
-	font-size: 16px;
-	margin-bottom: 5px;
-}
-table.user_add tbody tr{
-	height: 22px;
+.date{
+  background-color: #F8F8F8;
+    float: right;
+    height: 38px;
+    line-height: 16px;
+    margin: 0;
+    padding: 5px 0 0 5px;
+    width: 215px;
+	    border: 1px solid #3aa2bc;
 }
 
-table.user_add tbody th{
-	width: 170px;
+#graph{
+	margin: 10px 0;
 }
 
-table.user_add tbody td{
+#graph p{
+	float:left;
+	padding: 5px 4px;
+	vertical-align: bottom;
+}
+
+
+.btn_use{
+	width: 115px;
+	height: 30px;
+	background-color: rgb(255, 192, 203);
+	opacity: 1;
+	padding-left: 3px;
+	color: rgb(136, 136, 136);
+	-webkit-box-shadow: rgb(211, 211, 211) 2px 2px 2px;
+	box-shadow: rgb(211, 211, 211) 2px 2px 2px;
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(255, 255, 255)), to(rgb(232, 232, 232)));
+	border: 0px solid rgb(192, 192, 192);
+	outline: rgb(211, 211, 211) solid 1px;
+}
+.btn_use span{
+	color: #00a013;
+}
+
+.btn_use p{
 	font-weight: bold;
-	padding-left:5px;
+	color: #4d4d4d;
 }
-table.user_add.input-text{
-	padding-left: 5px;
+.btn_click{
+	width: 115px;
+	height: 30px;
+	background-color: rgb(255, 192, 203);
+	opacity: 1;
+	padding-left: 3px;
+	color: rgb(136, 136, 136);
+	-webkit-box-shadow: rgb(211, 211, 211) 2px 2px 2px;
+	box-shadow: rgb(211, 211, 211) 2px 2px 2px;
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(255, 255, 255)), to(rgb(232, 232, 232)));
+	border: 0px solid rgb(192, 192, 192);
+	outline: rgb(211, 211, 211) solid 1px;
 }
-table.sidebar tbody td a.active {
-    text-decoration: underline;
+.btn_click span{
+	color: #e7227e;
+}
+
+.btn_click p{
+	font-weight: bold;
+	color: #4d4d4d;
+}
+
+
+
+/* ==========================================================================
+   ボタン部分のプルダウン
+   ========================================================================== */
+
+ul, li {
+	margin:0;
+	padding:0;
+}
+.btn_details {
+	width: 120px;
+	float:left;
+}
+.btn_details li {
+	list-style: none;
+	float: left;
+	position: relative;
+}
+.btn_details ul {
+	display: none;
+	position: absolute;
+	top: 29px;
+	left: 0;
+}
+* html .btn_details ul {
+	line-height: 0;
+}
+.btn_details ul li {
+	float: none;
+}
+.btn_details ul {
+	width: 120px;
+		border: 1px solid #bcbfc0;
+}
+.btn_details ul ul {
+	top: 0;
+	left: 121px;
+	
+	border: 1px solid #bcbfc0;
+}
+.btn_details ul a {
+	display: block;
+	width: 108px;
+	background-color:#FFF;
+	padding: 6px;
+	color:#000;
+	zoom: 1;
+	line-height: 1;
+	text-decoration:none!important;
+}
+.btn_details ul a.hover {
+	background-color:#d6ecf1;
+	color:#0087a9;
+	  opacity: 1!important;
+	
+	
+}
+
+
+/* ==========================================================================
+   ファンシーボックス
+   ========================================================================== */
+
+	/* サムネイルリストのCSS */
+	#content {
+		width: 665px;
+		margin: 150px auto 0;
+	}
+	
+	#content .cookie_list {
+		width: 665px;
+		margin: 0 auto 15px;
+	}
+	
+	#content .cookie_list li {
+		float: left;
+		padding-right: 15px;
+	}
+	
+	#content li.lc {
+		padding: 0;
+	}
+	
+	/* 隠しコンテンツのCSS */
+	/*position: absolute;を記述する*/
+	.f_box {
+		/*position: relative;*/
+		width: 100%;/* 隠しコンテンツの横幅 */
+		height: 100%;/* 隠しコンテンツの高さ */
+		background-color:#efefef;
+				font-weight:bold;
+	font-size:14px;
+	text-decoration:none;
+	color:#404040;
+	}
+	
+	
+.f_box a:link { color: #404040; }
+.f_box a:visited { color: #404040; }
+.f_box a:hover { color: #404040; }
+.f_box a:active { color: #404040; }
+	
+	.f_box_title {
+		border: 1px solid #efefef;
+	  background-color: #545454;
+    color: #FFFFFF;
+    font-size: 18px;
+    height: 33px;
+    padding: 10px 0 0 20px;
+    position: absolute;
+    text-align: left;
+    width: 703px;
+	top:0;
+	}
+	
+	
+.f_category_title1{
+  color: #404040;
+    font-size: 16px;
+    left: 49px;
+    position: absolute;
+    top: 63px;
+	
+	}
+.f_category_title2{
+  color: #404040;
+    font-size: 16px;
+    left: 276px;
+    position: absolute;
+    top: 63px;
+	}	
+		
+		
+		
+		
+	.box01{
+	   background-color: #FFFFFF;
+    border: 2px solid #C4C4C4;
+    height: 250px;
+    left: 50px;
+    position: absolute;
+    top: 90px;
+    width: 200px;
+		
+		}
+.box01_txt{
+	color:#e76813;
+	padding: 0 0 0 110px;
+	}
+	.box02{
+    background-color: #FFFFFF;
+	border: 2px solid #C4C4C4;
+    height: 350px;
+    left: 275px;
+    position: absolute;
+    top: 90px;
+    width: 200px;
+		}	
+		.box02 ul li{
+			padding: 10px 0 10px 10px;
+		}	
+			.box02 ul .present{
+			padding: 10px 0 10px 10px;
+			background-color:#d8d8d8;
+		}		
+		
+	.box02 ul li .small{
+		
+		font-size:12px;
+		padding:0 0 0 0;
+		
+		}	
+		
+		.box03{
+    background-color: #FFFFFF;
+    border: 2px solid #C4C4C4;
+    height: 350px;
+     left: 477px;
+	 position: absolute;
+    top: 90px;
+    width: 200px;
+		}	
+	.submit_area_option{
+   left: 200px;
+    position: absolute;
+    top: 465px;
+    width: 350px;
+		}	
+	.submit_area_option img{
+    float: left;
+}	
+	.submit_area_option p a img:hover{
+		opacity:0.7;
+		
+		}	
+
+
+/* ==========================================================================
+   タブの切り替え
+   ========================================================================== */
+
+
+
+/* ファンシーボックス内のチェックボックス
+============================================  */
+div.check-group {
+
+    float: left;
+    margin-left: 12px;
+    margin-top: 7px;
+    width: 190px;
+}
+div.check-group li {
+	padding: 0 0 34px;
+
+	}
+div.check-group input {
+	display: none;
+}
+div.check-group label {
+   background: url("/assets/btn_box_add.gif") no-repeat scroll 0 0 transparent;
+    float: right;
+    height: 28px;
+    padding: 0 5px;
+    text-indent: -9999px;
+    width: 55px;
+}
+div.check-group div:first-child label {
+	-webkit-border-top-left-radius: 7px;
+	-webkit-border-bottom-left-radius: 7px;
+	-moz-border-radius-topleft: 7px;
+	-moz-border-radius-bottomleft: 7px;
+}
+div.check-group div:last-child label {
+	-webkit-border-top-right-radius: 7px;
+	-webkit-border-bottom-right-radius: 7px;
+	-moz-border-radius-topright: 7px;
+	-moz-border-radius-bottomright: 7px;
+}
+div.check-group label.checked {
+	  background: url("/assets/btn_box_dl.gif") no-repeat scroll 0 0 transparent;
+    float: right;
+    height: 28px;
+    padding: 0 5px;
+    text-indent: -9999px;
+    width: 55px;	
+}
+ div.check-group label::-moz-selection, div.check-group label::selection {
+ background: transparent;
+}
+.check_txt{
+	float:left;
+	}
+
+#sample-chart{
+	clear:both;
+	width:100%; 
+	height:200px; 
+}
+.sample-chart{
+	clear:both;
+	width:100%; 
+	height:200px; 
+}
+td.table_header{
+	color: white;
+	background-color: #707070;
+}
+td.header_total{
+	color: white;
+	background-color: #a1a1a1;
+}
+td.category_header{
+	background-color: #BDD8E3;
 }
 div#clients_list{
     overflow-y: scroll;
@@ -418,4 +478,3 @@ div#promotions_list{
     max-height: 300px;
     overflow-x: hidden;
 }
-

@@ -7,12 +7,12 @@ class DailySummaryAccConversion < ActiveRecord::Base
   belongs_to :account
   belongs_to :conversion
   
-  def self.get_conversions_summary promotion_id
+  def self.get_conversions_summary promotion_id, start_date, end_date
     conversions = Promotion.find(promotion_id).conversions
     results = Hash.new
     conversions.each_with_index do |conversion|
       Settings.media_category.each do |category|
-        summary = DailySummaryAccConversion.where(conversion_id: conversion.id)
+        summary = DailySummaryAccConversion.where(conversion_id: conversion.id).where(report_ymd: (start_date)..(end_date))
         Settings.conversions_sums.each_with_index do |sum, index|
           results[category[1]+"_conversion" + conversion.id.to_s + "_" +
             Settings.conversions_options[index]] = 0
