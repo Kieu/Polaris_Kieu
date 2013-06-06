@@ -21,6 +21,7 @@ media_category:
   1: 'Listing'
   2: 'Display'
   3: 'Affiliate'
+
 EXPORT_PROMOTION: 'export_promotion'
 type_view:
   UPLOAD: 'upload'

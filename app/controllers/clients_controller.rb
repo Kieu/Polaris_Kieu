@@ -27,7 +27,8 @@ class ClientsController < ApplicationController
     end
 
     rows = Array.new
-    rows = get_rows(Promotion.get_by_client(@client_id).order_by_promotion_name.page(params[:page]).per(params[:rp]), @client_id)
+    rows = get_rows(Promotion.get_by_client(@client_id).
+      order_by_promotion_name.page(params[:page]).per(params[:rp]), @client_id)
     count = Promotion.get_by_client(@client_id).order_by_promotion_name.count
 
     render json: {page: params[:page], total: count, rows: rows}
