@@ -1,8 +1,10 @@
+require "resque"
 class PromotionsController < ApplicationController
   before_filter :signed_in_user
   before_filter :must_super_agency, except: [:show, :index]
   before_filter :must_delete_able, only: [:show, :edit, :update,
     :delete_promotion]
+
 
   def index
     if current_user.client?
@@ -86,18 +88,11 @@ class PromotionsController < ApplicationController
   end
 
   def download_csv
-    background_job = BackgroundJob.new
-    background_job.user_id = 1
-    background_job.filename = 'test.csv'
-    background_job.type_view = 'download'
-    background_job.status = 0
-    background_job.save!
-    #sleep(1.minutes)
-    #=====================================
-    background_job.status = 1
-    background_job.save!
-    #=====================================
-    render text: 'success'
+    promotion_id = params[:promotion_id].to_i
+    user_id = current_user.id
+    Resque.enqueue ExportPromotionData, user_id, promotion_id
+    
+    render text: "processing"
   end
 
   def draw_graph(promotion_data, date_arrange, select_left, select_right)

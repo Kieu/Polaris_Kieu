@@ -21,3 +21,18 @@ media_category:
   1: 'Listing'
   2: 'Display'
   3: 'Affiliate'
+EXPORT_PROMOTION: 'export_promotion'
+type_view:
+  UPLOAD: 'upload'
+  DOWNLOAD: 'download'
+job_status:
+  PROCESSING: 0
+  SUCCESS: 1
+  FALSE: 2
+file_type:
+  CSV: '.csv'
+export_promotion_path: 'doc/promotion_export/'
+promotions_options: ["imp", "click", "CTR", "COST", "CPM", "CPC"]
+conversions_options: ["CV(first)", "CV(repeat)", "CV", "CVR", "CPA", "ASSIST", "SALES", "ROAS", "PROFIT", "ROI"]
+promotions_sums: ["imp_count", "click_count", "click_through_ratio", "cost_sum", "cost_per_mille", "cost_per_click"]
+conversions_sums: ["total_cv_count", "first_cv_count", "repeat_cv_count", "conversion_rate", "click_per_action", "assist_count", "sales", "roas", "profit", "roi"]
