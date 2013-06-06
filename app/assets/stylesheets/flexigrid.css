@@ -34,7 +34,9 @@
 .flexigrid div.nDiv table {
 	margin: 2px;
 }
-
+.flexigrid div.bDiv table tr {
+    word-wrap: break-word !important;
+}
 .flexigrid div.hDivBox {
 	float: left;
 	padding-right: 40px;
@@ -230,7 +232,7 @@
 
 /* end toolbar*/
 .flexigrid div.hDiv {
-	background: #fafafa url(/assets/fhbg.gif) repeat-x bottom;
+	background: gray;
 	position: relative;
 	border: 1px solid #ccc;
 	border-bottom: 0px;
@@ -523,8 +525,8 @@ div.colCopy {
 
 /* end novstripe */
 .flexigrid div.pDiv {
-	background: url(/assets/wbg.gif) repeat-x 0 -1px;
-	border: 1px solid #ccc;
+	background: transparent;
+	border: 0px solid #ccc;
 	border-top: 0px;
 	overflow: hidden;
 	white-space: nowrap;
@@ -534,8 +536,8 @@ div.colCopy {
 .flexigrid div.pDiv div.pDiv2 {
 	margin: 3px;
 	margin-left: -2px;
-	float: left;
-	width: 1024px;
+	float: right;
+	width: 400px;
 }
 
 div.pGroup {
@@ -627,4 +629,44 @@ div.pGroup {
 .flexigrid.ie div.hDiv th div,.flexigrid.ie  div.bDiv td  div,div.colCopy.ie div
 	/* common inner cell properties*/ {
 	overflow: hidden;
+}
+.flexigrid.ie div.hDiv th div, .flexigrid.ie div.bDiv td div, div.colCopy.ie div /* common inner cell properties*/ {
+    overflow:hidden
+}
+table.fixTable, .hDivBox table {
+    width:100%;
+// min-width:1400px!important;
+    table-layout:fixed;
+}
+table.fixTable tr td div {
+    width:auto!important;
+}
+table.large {
+// min-width:1000px!important;
+}
+.nBtn {
+    display:none!important;
+}
+.flexigrid div.hDivBox {
+    padding:0;
+}
+.cDrag {
+    display:none!important;
+}
+table tr {
+    word-wrap:break-word!important;
+}
+table.fixTable tr td:nth-last-child(2) {
+    border-right:none;
+}
+.fixTable {
+    min-width:900px!important;
+}
+
+
+
+.bDiv .copyBtn {
+    float: right;
+    right: 70px;
+    width: 38px;
 }
