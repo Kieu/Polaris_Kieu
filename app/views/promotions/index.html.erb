@@ -1,3 +1,6 @@
+<% content_for :sidebar do %>
+	<%= render partial: "layouts/sidebar", locals: {object: @array_promotion} %>
+<% end %>
 <% if @array_promotion.count > 0 %>
 <select>
   <option>Click</option>
@@ -19,6 +22,7 @@
 <% if flash[:error] %>
     <div><%= flash[:error] %></div>
 <% end %>
+<input type="button" value="Download CSV" id="download_csv" />
 <div id="graph_container" style="height: 150px; min-width: 700px"></div>
 <%= high_chart("graph_container", @chart) %>
 <div style="height: 100px;"></div>
@@ -398,6 +402,17 @@
   </div>
 </div>
 <script type="text/javascript">
+    $('#download_csv').click(function(){
+        $.ajax({
+            url: "<%= download_csv_promotions_path %>",
+            data: {"promotion_id" : "<%= @promotion.id if @promotion %>"},
+            method: "post",
+            success: function(data){
+            }
+
+        })
+    })
+
     $(function() {
         $("#show_option").click(function(){
             $.colorbox({
@@ -460,11 +475,12 @@
                 };
             }
             <% end %>
-            location.href = location.href;
+            ajaxCommon("/promotions?client_id=<%= @client_id %>&promotion_id=<%= @promotion_id %>", "#<%= @promotion_id %>", ".promotion_name", "#promotion_name","#inner");
+            $('#list_options').colorbox.close();
         });
         $("#not_change_cookie").click(function(){
             cookies_options = $.cookie("promotion");
-            location.href = location.href;
+            $('#list_options').colorbox.close();
         })
     });
 </script>

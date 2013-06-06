@@ -58,15 +58,6 @@ namespace :master do
     end
   end
 
-  desc "Create Ext Promotion Report"
-  task create_ext_promotion_report: :environment do
-    (1..100).each do |num|
-      ExtPromotionReport.create!(promotion_id: "#{num}", media_category_id: 1,
-                                 media_id: 1, account_id: 1, imp: "#{num + 10}",
-                                 click: "#{num + 15}", cost: "#{num + 30}", report_date: 20130525)
-    end
-  end
-
   desc "Create Daily Summary Account"
   task create_daily_summary_account: :environment do
     (1..100).each do |num|
@@ -115,5 +106,74 @@ namespace :master do
       DisplayCampaign.create!(id: "#{num}", name: "campaign#{num}", client_id: 1, promotion_id: 1, account_id: 1, create_user_id: 1, update_user_id: 1)
     end
   end
+
+  desc "Create Promotion"
+  task create_promotion: :environment do
+    (1..200).each do |num|
+      Promotion.create!(promotion_name: "Promotion#{num}", client_id: 1, tracking_period: 30, agency_id: 1, del_flg: 0, roman_name: "Promotion#{num}", update_user_id: 1, promotion_category_id: 1)
+    end
+  end
+  desc "Create Conversion logs "
+  task create_conversion_1_logs: :environment do
+    (1..10000).each do |i|
+      Conversion_1_Log.create(media_category_id: 1, media_id: 1, account_id: 1, campaign_id: 1, 
+        group_id: 1, unit_id: 1, conversion_id: 1, redirect_infomation_id: 1, mpv: "mpv#{i}",
+        redirect_url_id: 1, creative_id: 1, session_id: "session#{i}", verify: "verify#{i}", 
+        suid: "suid#{i}", request_uri: "request#{i}", redirect_url: "redirect#{i}", 
+        media_session_id: "media_session_#{i}", device_category: "os", user_agent: "user_egent#{i}", 
+        referrer: "refferrer#{i}", click_referrer: "click_refferrer#{i}", conversion_utime: 1, 
+        conversion_ymd: 1, access_time: 1, access_ymd: 1, click_time: 11, remote_ip: "remote_ip#{i}", 
+        mark: "mark#{i}", conversion_category: "conversion_cate#{i}", conversion_type: "cv_type#{i}", 
+        repeat_flg: "1", repeat_proccessed_flg: "1", parent_conversion_id: "1", sales: 111, 
+        profit: 11, volume: 111, others: "others", approval_status: "1", send_url: "send_url", 
+        send_utime: 11, access_track_server: 111)
+    end
+  end
   
+  desc "Create Conversion error logs "
+  task create_conversion_error_1_logs: :environment do
+    (1..10000).each do |i|
+      Conversion_error_1_Log.create(media_category_id: 1, media_id: 1, 
+        account_id: 1, campaign_id: 1, group_id: 1, unit_id: 1, conversion_id: 1, 
+        redirect_infomation_id: 1, mpv: "mpv#{i}", redirect_url_id: 1, creative_id: 1, 
+        session_id: "session#{i}", verify: "verify#{i}", suid: "suid#{i}", request_uri: "request#{i}", 
+        redirect_url: "redirect#{i}", media_session_id: "media_session_#{i}", 
+        device_category: "1", user_agent: "user_egent#{i}", referrer: "refferrer#{i}", 
+        click_referrer: "click_refferrer#{i}", conversion_utime: 1, conversion_ymd: 1, 
+        click_time: 11, remote_ip: "remote_ip#{i}", mark: "mark#{i}", 
+        conversion_category: "1", conversion_type: "1", sales: 111, profit: 11, 
+        volume: 111, others: "others", approval_status: "1", access_track_server: 111)
+    end
+  end
+
+  desc "Create Conversion organic logs "
+  task create_conversion_organic_1_logs: :environment do
+    (10..20).each do |i|
+      Conversion_organic_1_Log.create(conversion_id: 1, redirect_infomation_id: 1, 
+        verify: "verify#{i}", suid: "suid#{i}",  redirect_url: "redirect#{i}", 
+        media_session_id: "media_session_#{i}", device_category: "1", 
+        user_agent: "user_egent#{i}", referrer: "refferrer#{i}", remote_ip: "remote_ip#{i}", 
+        conversion_category: "1", conversion_type: "1", sales: 111, profit: 11, 
+        volume: 111, others: "others")
+    end
+  end
+
+  desc "Create Click logs "
+  task create_click_1_logs: :environment do
+    (1..1000).each do |i|
+      Click_1_Log.create(media_category_id: 1, media_id: 1, account_id: 1, campaign_id: 1, 
+        group_id: 1, unit_id: 1, redirect_infomation_id: 1, mpv: "mpv#{i}", click_url: "click_url#{i}",  
+        redirect_url_id: 1, creative_id: 1, session_id: "session", verify: "verify", 
+        request_uri: "request_uri#{i}", redirect_url: "redirect#{i}", media_session_id: "media_sess#{i}", 
+        device_category: "os", user_agent: "user_agent", referrer: "referrer", click_utime: 1, 
+        click_ymd: 1, remote_ip: "remote_ip#{i}", mark: "mark#{i}", access_track_server: "access_track_server")
+    end
+  end
+
+  desc "Create Promotion"
+  task create_promotion: :environment do
+    (1..200).each do |num|
+      Promotion.create!(promotion_name: "Promotion#{num}", client_id: 1, tracking_period: 30, agency_id: 1, del_flg: 0, roman_name: "Promotion#{num}", update_user_id: 1, promotion_category_id: 1)
+    end
+  end
 end

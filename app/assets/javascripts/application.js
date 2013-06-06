@@ -14,6 +14,11 @@
 //= require jquery_ujs
 //= require_tree .
 //= require highcharts
+var auto_refresh = setInterval(
+    function ()
+    {
+        $('.notification').load('/background_jobs/notification').fadeIn("slow");
+    }, 10000); // refresh every 10000 milliseconds
 function index_of(haystack, needle) {
     for (var i = 0, l = haystack.length; i < l; ++i) {
         if( haystack[i].value === needle ) {

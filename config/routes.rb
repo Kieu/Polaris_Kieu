@@ -21,6 +21,7 @@ PolarisManage::Application.routes.draw do
   end
   resources :promotions do
     post "get_promotions_report", on: :collection
+    post "download_csv", on: :collection
   end
   resources :sessions, only: [:new, :create, :destroy] do
     post "resend_password", on: :collection
@@ -35,6 +36,14 @@ PolarisManage::Application.routes.draw do
   resources :click_logs do
     post "get_logs_list", on: :collection
   end
+ resources :background_jobs do
+    get "upload", on: :collection
+    get "download", on: :collection
+    get "inprogress", on: :collection
+    get "notification", on: :collection
+  end
+
+  mount Resque::Server, at: '/resque'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   validates :roman_name, presence: true, uniqueness: {case_sensitive: false},
     length: {maximum: 255}
   validates :email, presence: true, uniqueness: {case_sensitive: false},
-    format: {with: VALID_EMAIL_REGEX}, length: {maximum: 100}
+    format: {with: VALID_EMAIL_REGEX}, length: {maximum: 255}
   validates :company_id, presence: true
   validates :role_id, presence: true
   validates :password_flg, presence: true

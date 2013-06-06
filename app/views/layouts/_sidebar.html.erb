@@ -38,11 +38,11 @@
         	<table class="sidebar">
 				<% object.each_with_index do |promotion, index| %>
 					<tr>
-						<th class="edit"><%= link_to "", "javascript:void(0)", class: "edit", id: "edit#{index}",onclick: "ajaxCommon('#{edit_promotion_path(promotion)}', '##{index}', '.promotion_name', '#promotion_name','#inner,#sidebar')" if current_user.super? || current_user.agency? %></th>
+						<th class="edit"><%= link_to "", "javascript:void(0)", class: "edit", id: "edit#{promotion.id}",onclick: "ajaxCommon('#{edit_promotion_path(promotion)}', '##{promotion.id}', '.promotion_name', '#promotion_name','#inner')" if current_user.super? || current_user.agency? %></th>
 						<% if (params[:promotion_id] && promotion.id == params[:promotion_id].to_i) || (!params[:promotion_id] && index == 0) %>
-	                        <td><%= link_to promotion.promotion_name, "javascript:void(0)", class: "promotion_name active", id: "#{index}",onclick: "ajaxCommon('#{promotions_path(promotion_id: promotion.id, client_id: @client_id)}', '##{index}', '.promotion_name', '#promotion_name','#inner,#sidebar')" %></td>
+	                        <td><%= link_to promotion.promotion_name, "javascript:void(0)", class: "promotion_name active", id: "#{promotion.id}",onclick: "ajaxCommon('#{promotions_path(promotion_id: promotion.id, client_id: @client_id)}', '##{promotion.id}', '.promotion_name', '#promotion_name','#inner')" %></td>
 						<% else %>
-							<td><%= link_to promotion.promotion_name,  "javascript:void(0)", class: "promotion_name", id: "#{index}",onclick: "ajaxCommon('#{promotions_path(promotion_id: promotion.id, client_id: @client_id)}', '##{index}', '.promotion_name', '#promotion_name','#inner,#sidebar')" %></td>
+							<td><%= link_to promotion.promotion_name,  "javascript:void(0)", class: "promotion_name", id: "#{promotion.id}",onclick: "ajaxCommon('#{promotions_path(promotion_id: promotion.id, client_id: @client_id)}', '##{promotion.id}', '.promotion_name', '#promotion_name','#inner')" %></td>
 						<% end %>
 					</tr>
 				<% end %>
@@ -53,6 +53,6 @@
 	<% if params[:controller] == "clients" && current_user.super? %>
     	<%= link_to raw('<img src="/assets/btn_client_regist.gif">'), "javascript:void(0)", class: "new_client_name", onclick: "ajaxCommon('#{new_client_path}', '', '.new_client_name', '#new_client_name','#inner,#sidebar')"  %>
 	<% elsif (current_user.super? || current_user.agency?) && params[:controller] == "promotions" %>
-    	<%= link_to raw('<img src="/assets/btn_client_regist.gif">'), "javascript:void(0)", class: "new_promotion_name", onclick: "ajaxCommon('#{new_promotion_path(client_id: @client_id)}', '', '.new_promotion_name', '#new_promotion_name','#inner,#sidebar')"  %>
+    	<%= link_to raw('<img src="/assets/btn_client_regist.gif">'), "javascript:void(0)", class: "new_promotion_name", onclick: "ajaxCommon('#{new_promotion_path(client_id: @client_id)}', '', '.new_promotion_name', '#new_promotion_name','#inner')"  %>
 	<% end %>
 </div>

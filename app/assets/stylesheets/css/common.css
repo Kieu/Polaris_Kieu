@@ -1,0 +1,314 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/* ==========================================================================
+    全体
+   ========================================================================== */
+
+*{
+margin: 0;
+padding: 0;
+}
+
+body {
+font-family:'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ',Meiryo,'ＭＳ Ｐゴシック',sans-serif;
+color: #3d3d3d;
+font-size: 14px;
+}
+
+a:hover{
+	opacity:0.7;
+}
+
+/*p img:hover{
+	opacity:0.7;
+}*/
+
+.clear{
+	clear:both;
+	}
+
+p.h2{
+	font-size: 16px;
+	font-weight: bold;
+	color: #3e5869;
+}
+
+/* ==========================================================================
+    ヘッダー(ロゴ)
+   ========================================================================== */
+
+#header{
+	height: 50px;
+}
+
+#headerInner{
+	margin: 0 auto;
+	width: 95%;
+}
+
+#headerInner h1{
+	height: 50px;
+	width: 130px;
+	float: left;
+	text-indent: -9999px;
+	background: url(/assets/logo_polaris.png) no-repeat;
+	background-position: 0 13px;
+}
+
+/* ==========================================================================
+    ナビ
+   ========================================================================== */
+
+#nav{
+	clear: both;
+	width: 100%;
+	height: 38px;
+	background-color: #0087a9;
+}
+
+#navInner{
+	margin: 0 auto;
+	width: 95%;
+	height: 38px;
+	}
+
+.nav ul{
+	width:570px;
+	overflow:hidden;
+	position:relative;
+}
+
+.nav ul li{
+	margin: 0;
+	padding: 0;
+	height:38px;
+	float:left;
+}
+
+.nav ul li a{
+	opacity:10;
+}
+
+.nav ul li img{
+	display:block;
+}
+
+.nav ul li a{
+	display:block;
+}
+
+/* ==========================================================================
+    パンくず
+   ========================================================================== */
+.contentNavi li{
+	font-weight: bold;
+	float:left;
+	color:#3e5869;
+	font-size:12px;
+	/*padding:  0 0 20px 0;*/
+	letter-spacing: 0.1em;
+}
+
+.contentNavi li.pre{
+	color: #F63;
+}
+
+/* ==========================================================================
+    header上部
+   ========================================================================== */
+
+#personal{
+	width:400px;
+	margin: 0;
+	padding: 0;
+	float:right;
+	margin-top: 13px;
+}
+#personal ul{
+}
+
+#personal ul li{
+	margin:0;
+	padding:0;
+	display:inline;
+}
+
+#personal ul li a{
+	color: #F60;
+}
+
+#personal ul li p{
+	display:inline;
+}
+
+#personal ul li a img:hover{
+	opacity:0.7
+}
+
+/* ==========================================================================
+    サイド
+   ========================================================================== */
+
+
+#sidebar {
+    float: left;
+    margin-left: 50px;
+    min-height: 500px;
+    width: 250px;
+}
+#clienetlist_box {
+    background-color: #F1F1F1;
+    border-radius: 8px 8px 8px 8px;
+    margin-bottom: 20px;
+    margin-right: 10px;
+    margin-top: 20px;
+    min-height: 315px;
+}
+#clienetlist_box dl {
+    padding: 10px;
+}
+.borderTop{
+	border-top:1px solid #c1c1c1;
+}
+
+
+#searchform {
+    background: url("/assets/img_search_form.gif") no-repeat scroll -2px 0 transparent;
+    display: block;
+    height: 35px;
+    position: relative;
+    width: 225px;
+}
+#keywords {
+    border: 1px solid #FFFFFF;
+    color: #AAAAAA;
+    left: 15px;
+    position: absolute;
+    top: 4px;
+    width: 170px;
+}
+#keywords:focus {
+    color: #333333;
+}
+#searchBtn {
+    left: 193px;
+    position: absolute;
+    top: 7px;
+}
+table.sidebar {
+    width: 240px;
+}
+table.sidebar .current{
+	color: #0087a9;
+	text-decoration: underline;
+}
+
+table.sidebar tbody {
+    width: 240px;
+}
+table.sidebar tbody tr {
+    border-bottom: 1px solid #C1C1C1;
+    height: 28px;
+    width: 240px;
+}
+table.sidebar tbody th.edit {
+    background-image: url("/assets/img_edit.png");
+    height: 28px;
+    text-indent: -9999px;
+    width: 25px;
+}
+table.sidebar tbody th a {
+    display: block;
+    height: 28px;
+    opacity: 0.7;
+    width: 25px;
+}
+table.sidebar tbody td a {
+    color: #3E5869;
+    text-decoration: none;
+}
+table.sidebar tbody td {
+    color: #3E5869;
+    font-size: 14px;
+    font-weight: bold;
+    height: 28px;
+    padding-left: 3px;
+    vertical-align: middle;
+    width: 210px;
+}
+
+
+
+/* ==========================================================================
+    フッター
+   ========================================================================== */
+
+#footer{
+	clear: both;
+	margin: 0 auto;
+	border-top:#0b8eb0 1px solid;
+	width: 95%;
+	font-size:12px;	
+	text-align: center;
+}
+
+#footerInner{
+	margin: 15px 0 20px;
+}
+
+#footerInner ul{
+}
+
+#footerInner ul li{
+	color: #0b8eb0;
+	font-weight: bold;
+	text-decoration: underline;
+	padding: 15px;
+	display: inline;
+}
+
+#footerInner ul li a{
+	color: #0b8eb0;
+}
+
+#copyright{
+	font-size:12px;
+}
+
+#copyright p{
+	display: inline;
+	vertical-align: top;
+}
+
+
+/* ==========================================================================
+    便利クラス
+   ========================================================================== */
+
+.fl-l{float: left;}
+.fl-r{float: right;}
+
+.ta-l{text-align: left;}
+.ta-c{	text-align: center;}
+.ta-r{text-align: right;}
+
+.ml-5{margin-left: 5px;}
+.ml-10{margin-left: 10px;}
+.ml-15{margin-left: 15px;}
+.ml-20{margin-left: 20px;}
+
+.mt-5{margin-top: 5px;}
+.mt-10{margin-top: 10px;}
+.mt-15{margin-top: 15px;}
+.mt-20{margin-top: 20px;}
+
+.mr-5{margin-right: 5px;}
+.mr10{margin-right: 10px;}
+.mr-15{margin-right: 15px;}
+.mr-20{margin-right: 20px;}
+
+.mb-5{margin-bottom: 5px;}
+.mb-10{margin-bottom: 10px;}
+.mb-15{margin-bottom: 15px;}
+.mb-20{margin-bottom: 20px;}

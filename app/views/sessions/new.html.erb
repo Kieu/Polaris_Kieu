@@ -1,9 +1,4 @@
 <% if @errors && @errors.count > 0 %>
-    <% @errors.each do |error| %>
-        <div>
-          <span class="text-validationError"><%= error %></span>
-        </div>
-    <% end %>
     <script type="text/javascript">
         $("#resend_password_form").show();
     </script>

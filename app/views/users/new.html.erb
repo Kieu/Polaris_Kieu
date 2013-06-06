@@ -1,66 +1,87 @@
+<%= stylesheet_link_tag "css/user" %>
+<%= stylesheet_link_tag "css/common" %>
+<%= stylesheet_link_tag "css/reset" %>
 <%= flash[:success] if flash[:success] %>
-<%= form_for(@user) do |f| %>
-  <div class="field">
-    <%= f.label "User name" %><br />
-    <%= f.text_field :username, maxlength: 255, style: "width: 200px" %>
-  </div>
-  <div class="field">
-    <%= f.label "Roman name" %><br />
-    <%= f.text_field :roman_name, maxlength: 255, style: "width: 200px" %>
-  </div>
-  <div class="field">
-    <%= f.label "Email" %><br />
-    <%= f.text_field :email, maxlength: 255, style: "width: 200px" %>
-  </div>
-  <div class="field">
-    <%= f.label "Role" %><br />
-    <select id="user_role_id" name="user[role_id]">
-    	<option value="2">Client</option>
-		<option value="3">Agency</option>
-		<option value="1">Super</option>
-	</select>
-  </div>
-  <div class="field">
-    <%= f.label "Company" %><br />
-    <%= f.collection_select :company_id, Client.all, :id, :client_name, {} %>
-  </div>
-  <div class="field">
-    <%= f.radio_button :password_flg, "0", checked: true %>
-    <%= f.label "Send Password" %>
-    <%= f.radio_button :password_flg, "1" %>
-    <%= f.label "Dont Send Password" %>
-  </div>
-  <%= f.submit %>
-  <button id="cancel">Cancel</button>
-<% end %>
+<div id="user_form">
+  <p class="h2">ユーザー登録</p>
+  <%= form_for(@user) do |f| %>
+      <table>
+        <tbody>
+        <tr>
+          <th><%= f.label "ユーザー名：" %></th>
+          <td colspan="2"><%= f.text_field :username, maxlength: 255, style: "width: 200px" %></td>
+        </tr>
+        <tr>
+          <th><%= f.label "ユーザー名(英語)：" %></th>
+          <td colspan="2"><%= f.text_field :roman_name, maxlength: 255, style: "width: 200px" %></td>
+        </tr>
+        <tr>
+          <th> <%= f.label "メールアドレス：" %></th>
+          <td colspan="2"><%= f.text_field :email, maxlength: 255, style: "width: 200px" %></td>
+        </tr>
+        <tr>
+          <th> <%= f.label "権限：" %></th>
+          <td colspan="2">
+            <select class="input-text">
+              <option value="">選択してください</option>
+              <option value="2">Client</option>
+              <option value="3">Agency</option>
+              <option value="1">Super</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th><%= f.label "会社名：" %></th>
+          <td colspan="2">
+            <%= f.collection_select :company_id, Client.all, :id, :client_name, {} %></td>
+        </tr>
+        <tr>
+          <th>パスワード：</th>
+          <td colspan="2">※自動で振り分けます</td>
+        </tr>
+        <tr>
+          <th>パスワード通知：</th>
+          <td><%= f.radio_button :password_flg, "0", checked: true %> 通知しない</td>
+          <td><%= f.radio_button :password_flg, "1" %> 通知する</td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="submit_area">
+        <input type="image" id="btn_submit" src="/assets/btn_done.gif" name="commit">
+
+        <p><%= link_to raw('<img align="right" alt="キャンセル" src="/assets/btn_cancel.gif">'), users_path %></p>
+      </div>
+      </form>
+  <% end %>
+</div>
 <script type="text/javascript">
-	$(document).ready(function(){
-		$("#cancel").click(function(e){
-			e.preventDefault();
-			location.href = "<%= users_path %>";
-		})
-		last_choice = $("#user_role_id").val();
-		$("#user_role_id").change(function(){
-			id = $(this).val();
-			if ((id == 1 && last_choice == 3) || (id ==3 && last_choice == 1)){
-				last_choice = id;
-				return;
-			}
-			last_choice = id;
-			name_data = (id == "2") ? "Client" : "Agency";
-			$.ajax({
-				type: "POST",
-				url: "<%= change_company_list_users_path %>",
-				data: "model="+name_data,
-				success: function(data){
-					$("#user_company_id").html("");
-					for (var i=0;i < data.length; i++){
-						name = (name_data == "Client") ? data[i].client_name : data[i].agency_name;
-						option = "<option value='" + data[i].id + "'>" + name + "</option>";
-						$("#user_company_id").append(option);
-					}
-				}
-			});
-		})
-	})
+    $(document).ready(function () {
+        $("#cancel").click(function (e) {
+            e.preventDefault();
+            location.href = "<%= users_path %>";
+        })
+        last_choice = $("#user_role_id").val();
+        $("#user_role_id").change(function () {
+            id = $(this).val();
+            if ((id == 1 && last_choice == 3) || (id == 3 && last_choice == 1)) {
+                last_choice = id;
+                return;
+            }
+            last_choice = id;
+            name_data = (id == "2") ? "Client" : "Agency";
+            $.ajax({
+                type: "POST",
+                url: "<%= change_company_list_users_path %>",
+                data: "model=" + name_data,
+                success: function (data) {
+                    $("#user_company_id").html("");
+                    for (var i = 0; i < data.length; i++) {
+                        name = (name_data == "Client") ? data[i].client_name : data[i].agency_name;
+                        option = "<option value='" + data[i].id + "'>" + name + "</option>";
+                        $("#user_company_id").append(option);
+                    }
+                }
+            });
+        })
+    })
 </script>

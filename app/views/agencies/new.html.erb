@@ -1,35 +1,43 @@
-<div><b>Add Agency</b></div>
+<%= stylesheet_link_tag "css/agency" %>
+<%= stylesheet_link_tag "css/common" %>
+<%= stylesheet_link_tag "css/reset" %>
 <% if flash[:error] %>
-  <div><%= flash[:error] %></div>
+    <div><%= flash[:error] %></div>
 <% end %>
-<input type="hidden" id="add_flg" value="<%= @add_flg %>" />
+<input type="hidden" id="add_flg" value="<%= @add_flg %>"/>
 <script>
-$(document).ready(function(){
-  if($('add_flg').attr('value') == 1) {
-    $('#agency_agency_name').val('');
-    $('#agency_roman_name').val('');
-  }
-})
+    $(document).ready(function () {
+        if ($('add_flg').attr('value') == 1) {
+            $('#agency_agency_name').val('');
+            $('#agency_roman_name').val('');
+        }
+    })
 
 </script>
-<%= form_for(@agency) do |f| %>
-  <br/>
-  <div class="field">
-      <%= f.label "Agency name:" %>
-      <%= f.text_field :agency_name, maxlength: 255, style: "width: 250px" %><br />
-  </div>
-  <br/>
-  <div class="field">
-      <%= f.label "Roman name:" %>
-      <%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %>
-  </div>
-  <br/>
-  <br/>
-  <div class="float:left">
-    <%= f.submit %>
-  </div>
-  <div class="float:left">
-    <%= link_to 'Cancel', agencies_path %>
-  </div>
-  <div style="clear:both"></div>
-<% end %>
+<div id="user_form">
+  <p class="h2">代理店登録</p>
+  <%= form_for(@agency) do |f| %>
+      <table>
+        <tbody>
+        <tr>
+          <th><%= f.label "代理店名：" %></th>
+          <td colspan="2">
+            <%= f.text_field :agency_name, maxlength: 255, style: "width: 250px" %>
+          </td>
+        </tr>
+        <tr>
+          <th> <%= f.label "代理店名(英語)：" %></th>
+          <td colspan="2">
+            <%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="submit_area">
+        <input type="image" id="btn_submit" src="/assets/btn_done.gif" name="commit">
+
+        <p><%= link_to raw('<img align="right" alt="キャンセル" src="/assets/btn_cancel.gif">'), agencies_path %></p>
+      </div>
+      </form>
+  <% end %>
+</div>
