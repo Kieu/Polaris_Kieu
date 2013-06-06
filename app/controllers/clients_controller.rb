@@ -47,7 +47,7 @@ class ClientsController < ApplicationController
         @client.save!
         if params[:users_id]
           if !@client.update_client_users(params)
-            flash[:error] = "Can not create user for client"
+            flash[:error] = I18n.t("client.flash_messages.success_error")
             raise ActiveRecord::Rollback
           end
         end
@@ -55,7 +55,7 @@ class ClientsController < ApplicationController
       if flash[:error]
         render :new
       else
-        flash[:error] = "Client was successfully created"
+        flash[:error] = I18n.t("client.flash_messages.success")
         redirect_to new_client_path
       end
     else
@@ -74,7 +74,7 @@ class ClientsController < ApplicationController
         @client.save!
         if params[:users_id]
           if !@client.update_client_users(params)
-            flash[:error] = "Can not update user for client"
+            flash[:error] = I18n.t("client.flash_messages.update_error")
             raise ActiveRecord::Rollback
           end
         end
@@ -82,7 +82,7 @@ class ClientsController < ApplicationController
       if flash[:error]
         render :edit
       else
-        flash[:error] = "Edit successfull"
+        flash[:error] = I18n.t("client.flash_messages.update")
         redirect_to clients_path
       end
     else

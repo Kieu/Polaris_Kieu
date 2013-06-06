@@ -3,13 +3,13 @@ before_filter :signed_in_user
 before_filter :set_cookies
 
 def index
-  @promotion = Promotion.find_by_id(params[:promotion_id])
+  @promotion = Promotion.find(params[:promotion_id])
 end
 
 def get_conversion_logs_list
   start_date = cookies[:s]
   end_date = cookies[:e]
-  promotion_id = params[:id]
+  promotion_id = params[:query]
   @conversion_logs = ConversionLog.get_all_logs(promotion_id, params[:page], params[:rp],params[:cv_id], params[:media_category_id],
                      params[:account_id], start_date, end_date, cookies[:ser],  params[:sortname], params[:sortorder])
   rows = get_rows(@conversion_logs) if @conversion_logs
@@ -36,8 +36,8 @@ def get_rows conversion_logs
                                           media_id: medias.find_by_id(conversion_log.media_id).media_name, 
                                           account_id: accounts.find_by_id(conversion_log.account_id).account_name, 
                                           campaign_id: campaigns.find_by_id(conversion_log.campaign_id).name,
-                                          ad_group_id: ad_groups.find_by_id(conversion_log.group_id).name, 
-                                          ad_id: ads.find_by_id(conversion_log.unit_id).name,
+                                          group_id: ad_groups.find_by_id(conversion_log.group_id).name, 
+                                          unit_id: ads.find_by_id(conversion_log.unit_id).name,
                                           click_time: conversion_log.click_time,
                                           sales: conversion_log.sales,
                                           verify: conversion_log.verify,
@@ -59,7 +59,7 @@ end
 
 private
   def set_cookies
-    cookies[:options] = "111111111111111000000000" if !cookies[:options]
+    cookies[:options] = "111111111111111000100000" if !cookies[:options]
     time = Time.new
     cookies[:s]="#{time.year}/#{time.month}/01" if !cookies[:s] 
     cookies[:e]="#{time.year}/#{time.month}/#{time.day}" if !cookies[:e]
