@@ -1,52 +1,69 @@
 <%= render "layouts/prevent_change_page" %>
+<%= stylesheet_link_tag "css/user" %>
+<%= stylesheet_link_tag "css/common" %>
+<%= stylesheet_link_tag "css/reset" %>
 <%= flash[:success] if flash[:success] %>
-Edit User
-<%= form_for(@user) do |f| %>
-  <div class="field">
-    <%= f.label "User name" %><br />
-    <%= f.text_field :username, maxlength: 255, style: "width: 200px" %>
-  </div>
-  <div class="field">
-    <%= f.label "Roman name" %><br />
-    <%= f.text_field :roman_name, maxlength: 255, style: "width: 200px" %>
-  </div>
-  <div class="field">
-    <%= f.label "Email" %><br />
-    <%= f.text_field :email, maxlength: 255, style: "width: 200px" %>
-  </div>
-  <div class="field">
-    <%= f.label "Role" %><br />
-    <%= text_field_tag :role_id, @user.role.role_name, disabled: true %>
-  </div>
-  <div class="field">
-    <%= f.label "Company" %><br />
-    <% if @user.client? %>
-    	<%= text_field_tag :company_id, Client.find(@user.company_id).client_name, disabled: true %>
-    <% else %>
-    	<%= text_field_tag :company_id, Agency.find(@user.company_id).agency_name, disabled: true %>
-    <% end %>
-  </div>
-  <div class="field">
-    <%= f.label "Password" %><br />
-    *******************
-  </div>
-  <div class="field">
-    <%= f.radio_button :password_flg, "0", disabled: true %>
-    <%= f.label "Send Password" %>
-    <%= f.radio_button :password_flg, "1", disabled: true %>
-    <%= f.label "Dont Send Password" %>
-  </div>
-  <div class="field">
-    <%= f.label "Disable User" %><br />
-    <% if @user.status == Settings.user.deactive %>
-    	<input type="checkbox" id = "disable_button" checked="checked">
-	<% else %>
-		<input type="checkbox" id = "disable_button">
-	<% end %>
-  </div>
-  <%= f.submit %>
-  <button id="cancel">Cancel</button>
-<% end %>
+<div id="user_form">
+  <p class="h2">Edit User</p>
+  <%= form_for(@user) do |f| %>
+      <table>
+        <tbody>
+        <tr>
+          <th><%= f.label "User name：" %></th>
+          <td colspan="2"><%= f.text_field :username, maxlength: 255, style: "width: 200px" %></td>
+        </tr>
+        <tr>
+          <th><%= f.label "Roman name：" %></th>
+          <td colspan="2"><%= f.text_field :roman_name, maxlength: 255, style: "width: 200px" %></td>
+        </tr>
+        <tr>
+          <th> <%= f.label "Email：" %></th>
+          <td colspan="2"><%= f.text_field :email, maxlength: 255, style: "width: 200px" %></td>
+        </tr>
+        <tr>
+          <th> <%= f.label "Role：" %></th>
+          <td colspan="2">
+            <%= text_field_tag :role_id, @user.role.role_name, disabled: true %>
+          </td>
+        </tr>
+        <tr>
+          <th><%= f.label "会社名：" %></th>
+          <td colspan="2">
+            <% if @user.client? %>
+                <%= text_field_tag :company_id, Client.find(@user.company_id).client_name, disabled: true %>
+            <% else %>
+                <%= text_field_tag :company_id, Agency.find(@user.company_id).agency_name, disabled: true %>
+            <% end %>
+        </tr>
+        <tr>
+          <th> <%= f.label "Password" %></th>
+          <td colspan="2">*******************</td>
+        </tr>
+        <tr>
+          <th>パスワード通知：</th>
+          <td><%= f.radio_button :password_flg, "0", disabled: true %> 通知しない</td>
+          <td><%= f.radio_button :password_flg, "1", disabled: true %> 通知する</td>
+        </tr>
+        <tr>
+          <th><%= f.label "Disable User" %></th>
+          <td>
+              <% if @user.status == Settings.user.deactive %>
+                  <input type="checkbox" id = "disable_button" checked="checked">
+              <% else %>
+                  <input type="checkbox" id = "disable_button">
+              <% end %>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="submit_area">
+        <input type="image" id="btn_submit" src="/assets/btn_done.gif">
+        <%= link_to raw('<img align="right" alt="キャンセル" src="/assets/btn_cancel.gif">'), users_path %>
+      </div>
+      </form>
+  <% end %>
+</div>
+
 <div style='display:none'>
 	<div id="disabled" style='padding:10px; background:#fff;'>
 		<div>User can not login again</div>

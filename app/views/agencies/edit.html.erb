@@ -1,11 +1,29 @@
 <%= render "layouts/prevent_change_page" %>
-Editing Agency
-
-<%= form_for(@agency) do |f| %>
-  <%= f.label "Agency name" %>
-  <%= f.text_field :agency_name, maxlength: 255, style: "width: 250px" %><br />
-  <%= f.label "Roman name" %>
-  <%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %><br />
-  <%= f.submit %>
-  <%= link_to 'Cancel', agencies_path %>
-<% end %>
+<%= stylesheet_link_tag "css/agency" %>
+代理店編集
+<div id="user_form">
+  <p class="h2">代理店登録</p>
+  <%= form_for(@agency) do |f| %>
+      <table>
+        <tbody>
+        <tr>
+          <th><%= f.label "代理店名：" %></th>
+          <td colspan="2">
+            <%= f.text_field :agency_name, maxlength: 255, style: "width: 250px" %>
+          </td>
+        </tr>
+        <tr>
+          <th> <%= f.label "代理店名(英語)：" %></th>
+          <td colspan="2">
+            <%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="submit_area">
+        <input type="image" id="btn_submit" src="/assets/btn_done.gif" name="commit">
+        <p><%= link_to raw('<img align="right" alt="キャンセル" src="/assets/btn_cancel.gif">'), agencies_path %></p>
+      </div>
+      </form>
+  <% end %>
+</div>
