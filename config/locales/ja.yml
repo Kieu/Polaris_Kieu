@@ -136,3 +136,4 @@ ja:
     disabled:
       label: "ユーザー無効化"
       disable: "無効化にする"
+  media_categories: ["Listing ad", "Display ad", "affiliate"]   

@@ -1,13 +1,4 @@
-<%= link_to @promotion.client.client_name, client_path(@promotion.client.id)%> > 
-<%= link_to @promotion.promotion_name, promotion_path(@promotion.id)%> >
-Conversion Logs <br>
-Conversion_name: <%= select_tag 'conversion_id', content_tag(:option,'All',:value=>"") + options_from_collection_for_select(Conversion.order(:conversion_name), 'id', 'conversion_name') %> <br>
-Media Category: <%= select_tag 'media_category_id', "<option value = "" >All</option><option value = 0 >Listing ad</option><option value = 1 >Display ad</option><option value = 2 >Affiliate</option>".html_safe %> <br>
-Account name: <%= select_tag 'account_id',content_tag(:option,'All',:value=>"")+ options_from_collection_for_select(Account.order(:account_name), 'id', 'account_name') %> <br>
-<input id="datepick" type="text" readonly="readonly" value="<%= cookies[:s] + " - " + cookies[:e] %>" name="datepick"> <br>
-<button id = "show_option">Show options</button> <br>
-<%= link_to "Conversion Logs", conversion_promotion_logs_path(promotion_id: @promotion.id)%>|
-<%= link_to "Click Logs", click_logs_path(id: @promotion.id) %>
+<link rel="stylesheet" href="/assets/css/logs.css" type="text/css" media="screen"  />
 <div id="popup" style="display: none">
 	<div id="list_options" style="width: 400px;">
 		<div id="result_list">
@@ -126,37 +117,103 @@ Account name: <%= select_tag 'account_id',content_tag(:option,'All',:value=>"")+
 		<button id="not_change_cookie">Cancel</button>
 	</div>
 </div>
-<table id="cvlogs" style="display:none"></table>
+<ul class="contentNavi">
+	<li class="pre"><%= link_to @promotion.client.client_name, clients_path(id: @promotion.client.id) %> </li>
+	<li>&gt;</li>
+	<li><%= link_to @promotion.promotion_name, promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %></li>
+	<li>&gt;</li>
+	<li>本体プロモーション</li>
+</ul>
+<div class="area_block">
+	<div class="selectarea">
+		<ul>
+			<li> コンバージョン名
+				<%= select_tag 'conversion_id', content_tag(:option,'All',:value=>"") + options_from_collection_for_select(Conversion.order(:conversion_name), 'id', 'conversion_name'), class: "input-text"%>
+			</li>
+			<li> メディアカテゴリ
+				<%= select_tag 'media_category_id', "<option value = "">All</option><option value = 0 >Listing ad</option><option value = 1 >Display ad</option><option value = 2 >Affiliate</option>".html_safe, class: "input-text" %>
+			</li>
+			<li> アカウント名
+				<%= select_tag 'account_id',content_tag(:option,'All',:value=>"")+ options_from_collection_for_select(Account.order(:account_name), 'id', 'account_name'), class: "input-text" %>
+			</li>
+		</ul>
+	</div>
+	<div class="date">今日<br />
+		<input id="datepick" type="text" readonly="readonly" value="<%= cookies[:s] + " - " + cookies[:e] %>" name="datepick">&#9660;</div>
+</div>
+<div class="clear"></div>
+<div id="conversion_inner">
+	<!--タブ切り替え-->
+	<ul class="ui-tabs-nav">
+		<li class="ui-tabs-selected">
+			<%= link_to(conversion_promotion_logs_path(promotion_id: @promotion.id)) do %>
+			  <span>CVログ</span>
+			<% end %>
+		</li>
+		<li class="">
+			<%= link_to(click_logs_path(id: @promotion.id)) do %>
+			  <span>clickログ</span>
+			<% end %>
+		</li>
+	</ul>
+	<div id="ui-tab">
+		<div id="fragment-1" class="ui-tabs-panel">
+			<div id="graph">
+				<div class="fl-r">
+					<p><a id = "show_option"><img src="/assets/btn_dl_option.gif"  /></a></p>
+					<p><a href="#"><img src="/assets/btn_dl_report.gif"  /></a></p>
+				</div>
+			</div>
+			
+			<table id="cvlogs" class="fixTable" ></table>
+			
+			
+		</div>
+		<div id="fragment-2" class="ui-tabs-panel ui-tabs-hide">
+			<div id="graph">
+				<div class="fl-r">
+					<p><a id = "show_option"><img src="/assets/btn_dl_option.gif"  /></a></p>
+					<p><a href="#"><img src="/assets/btn_dl_report.gif"  /></a></p>
+				</div>
+			</div>
+			
+			<table id="cvlogs" class="fixTable newTable07" ></table>
+			
+			
+		</div>
+		
+	</div>
+	<!--/タブ切り替え-->
+</div>
 <script type="text/javascript">
 
 	$("#cvlogs").flexigrid({
 		url: "<%= get_conversion_logs_list_conversion_promotion_logs_path %>",
 		dataType: 'json',
 		colModel : [ 
-	{display: 'CV_utime', name : 'conversion_utime', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[0] == "1") ? false : true},
-	{display: 'CV_id', name : 'conversion_id', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[1] == "1") ? false : true},		
-    {display: 'CV_category', name : 'conversion_category', width : 100, sortable : false, align: 'center', hide: ($.cookie("options")[2] == "1") ? false : true}, 
-    {display: 'tracking_type', name : 'tracking_type', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[3] == "1") ? false : true},
-    {display: 'CV_type', name : 'cv_type', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[4] == "1") ? false : true},
-    {display: 'approval', name : 'approval_status', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[5] == "1") ? false : true},
-    {display: 'Media', name : 'media_id', width : 100, sortable : false, align: 'center', hide: ($.cookie("options")[6] == "1") ? false : true},
-    {display: 'Account', name : 'account_id', width : 100, sortable : false, align: 'center', hide: ($.cookie("options")[7] == "1") ? false : true},
-	{display: 'Campaign', name : 'campaign_id', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[8] == "1") ? false : true},
-    {display: 'Ad Group', name : 'ad_group_id', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[9] == "1") ? false : true},
-    {display: 'ad_id', name : 'ad_id', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[10] == "1") ? false : true},
-    {display: 'click_time', name : 'click_time', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[11] == "1") ? false : true},
-    {display: 'verify', name : 'verify', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[12] == "1") ? false : true},
-    {display: 'suid', name : 'suid', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[13] == "1") ? false : true},
-    {display: 'session_id', name : 'session_id', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[14] == "1") ? false : true},
-    {display: 'OS', name : 'os', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[15] == "1") ? false : true},
-    {display: 'Repeat', name : 'repeat', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[16] == "1") ? false : true},
-    {display: 'Log state', name : 'log_state', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[17] == "1") ? false : true},
-    {display: 'Sales', name : 'sales', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[18] == "1") ? false : true},
-    {display: 'Profit', name : 'profit', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[19] == "1") ? false : true},
-    {display: 'Volume', name : 'volume', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[20] == "1") ? false : true},
-    {display: 'Others', name : 'others', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[21] == "1") ? false : true},
-    {display: 'Error message', name : 'error_message', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[22] == "1") ? false : true},
-    {display: 'Error_log_view', name : 'error_log_view', width : 100, sortable : false, align: 'center',hide: ($.cookie("options")[23] == "1") ? false : true}
+	{display: 'CV_utime', name : 'conversion_utime', width : 100, sortable : true, align: 'center',hide: ($.cookie("options")[0] == "1") ? false : true},
+	{display: 'CV_id', name : 'conversion_id', width : 100, sortable : true, align: 'center',hide: ($.cookie("options")[1] == "1") ? false : true},		
+    {display: 'CV_category', name : 'conversion_category', width : 100, sortable : true, align: 'center', hide: ($.cookie("options")[2] == "1") ? false : true}, 
+    {display: 'tracking_type', name : 'tracking_type', width : 100, sortable : true, align: 'center',hide: ($.cookie("options")[3] == "1") ? false : true},
+    {display: 'CV_type', name : 'cv_type', width : 100, sortable : true, align: 'center',hide: ($.cookie("options")[4] == "1") ? false : true},
+    {display: 'approval', name : 'approval_status', width : 100, sortable : true, align: 'center',hide: ($.cookie("options")[5] == "1") ? false : true},
+    {display: 'Media', name : 'media_id', width : 100, sortable : true, align: 'center', hide: ($.cookie("options")[6] == "1") ? false : true},
+    {display: 'Account', name : 'account_id', width : 100, sortable : true, align: 'center', hide: ($.cookie("options")[7] == "1") ? false : true},
+	{display: 'Campaign', name : 'campaign_id', width : 100, sortable : true, align: 'center',hide: ($.cookie("options")[8] == "1") ? false : true},
+    {display: 'Ad Group', name : 'group_id', width : 100, sortable : true, align: 'center',hide: ($.cookie("options")[9] == "1") ? false : true},
+    {display: 'ad_id', name : 'unit_id', width : 100, sortable : true, align: 'center',hide: ($.cookie("options")[10] == "1") ? false : true},
+    {display: 'click_time', name : 'click_time', width : 100, sortable : true, align: 'center',hide: ($.cookie("options")[11] == "1") ? false : true},
+    {display: 'verify', name : 'verify', width : 100, sortable : true, align: 'center',hide: ($.cookie("options")[12] == "1") ? false : true},
+    {display: 'suid', name : 'suid', width : 100, sortable : true, align: 'center',hide: ($.cookie("options")[13] == "1") ? false : true},
+    {display: 'session_id', name : 'session_id', width : 100, sortable : true, align: 'center',hide: ($.cookie("options")[14] == "1") ? false : true},
+    {display: 'OS', name : 'os', width : 100, sortable : true, align: 'center',hide: ($.cookie("options")[15] == "1") ? false : true},
+    {display: 'Repeat', name : 'repeat', width : 100, sortable : true, align: 'center',hide: ($.cookie("options")[16] == "1") ? false : true},
+    {display: 'Log state', name : 'log_state', width : 100, sortable : true, align: 'center',hide: ($.cookie("options")[17] == "1") ? false : true},
+    {display: 'Sales', name : 'sales', width : 100, sortable : true, align: 'center',hide: ($.cookie("options")[18] == "1") ? false : true},
+    {display: 'Profit', name : 'profit', width : 100, sortable : true, align: 'center',hide: ($.cookie("options")[19] == "1") ? false : true},
+    {display: 'Volume', name : 'volume', width : 100, sortable : true, align: 'center',hide: ($.cookie("options")[20] == "1") ? false : true},
+    {display: 'Others', name : 'others', width : 100, sortable : true, align: 'center',hide: ($.cookie("options")[21] == "1") ? false : true},
+    {display: 'Error message', name : 'error_message', width : 100, sortable : true, align: 'center',hide: ($.cookie("options")[22] == "1") ? false : true}
 			],
 				preProcess : function (json) {
 	            var results = new Array();
@@ -166,10 +223,15 @@ Account name: <%= select_tag 'account_id',content_tag(:option,'All',:value=>"")+
 	                					conversion_category: "", tracking_type: "", cv_type: "", approval_status: "", media_id: "", account_id: "",campaign_id: "", ad_group_id: "", ad_id: "",
 	                					click_time: "", sales: "", verify: "", suid: "", session_id: "", os: "",repeat: "", log_state: "", sales: ""}});
 	               	} else {
-	               		if (json.rows[idx-1].cell.media_category_id != v.cell.media_category_id)
-	               			results.push({id: "-" + v.cell.media_category_id, cell: {conversion_utime: "", conversion_id: "",volume: "", others: "",error_message: "",
+	               		if (json.rows[idx-1].cell.media_category_id != v.cell.media_category_id) {
+	               			var gid = 1000;
+	               			if (v.cell.media_category_id != "null")
+	               				gid = v.cell.media_category_id
+	               				
+	               			results.push({id: "-" + gid, cell: {conversion_utime: "", conversion_id: "",volume: "", others: "",error_message: "",
 	                					conversion_category: "", tracking_type: "", cv_type: "", approval_status: "", media_id: "", account_id: "",campaign_id: "", ad_group_id: "", ad_id: "",
 	                					click_time: "", sales: "", verify: "", suid: "", session_id: "", os: "",repeat: "", log_state: "", sales: ""}});
+	                	}
 	               	}
               
               results.push(this);
@@ -181,24 +243,25 @@ Account name: <%= select_tag 'account_id',content_tag(:option,'All',:value=>"")+
 	            };
 	        },
 		usepager: true,
-		title: 'Users',
 		useRp: true,
 		rp: 10,
 		sortname: 'conversion_utime',
 		sortorder: 'desc',
-		id: "<%= params[:promotion_id] %>",
+		query: "<%= params[:promotion_id] %>",
 		showTableToggleBtn: true,
-		width: 720,
+		width: 1620,
 		height: 300,
 		onSuccess: function() {
-			$('tr#row-0 td:nth-child('+(1+'n-'+(11))+')').remove();
-			$('tr#row-0').append("<td colspan='11'><div class='group_header'>Listing ad</div></td>");
+			$('tr#row-0 td:nth-child('+(1+'n-'+(24))+')').remove();
+			$('tr#row-0').append("<td colspan='22'><div class='group_header'>Listing ad</div></td>");
 			
-			$('tr#row-1 td:nth-child('+(1+'n-'+(11))+')').remove();
-			$('tr#row-1').append("<td colspan='11'><div class='group_header'>Display ad</div></td>");
+			$('tr#row-1 td:nth-child('+(1+'n-'+(24))+')').remove();
+			$('tr#row-1').append("<td colspan='24'><div class='group_header'>Display ad</div></td>");
 			
-			$('tr#row-2 td:nth-child('+(1+'n-'+(11))+')').remove();
-			$('tr#row-2').append("<td colspan='11'><div class='group_header'>Affiliate</div></td>");
+			$('tr#row-2 td:nth-child('+(1+'n-'+(24))+')').remove();
+			$('tr#row-2').append("<td colspan='24'><div class='group_header'>Affiliate</div></td>");
+			$('tr#row-1000 td:nth-child('+(1+'n-'+(24))+')').remove();
+			$('tr#row-1000').append("<td colspan='24'><div class='group_header'>Oganic</div></td>");
 		}
 	});
 	var colums = ["conversion_utime", "conversion_id", "conversion_category","tracking_type",

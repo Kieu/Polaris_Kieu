@@ -143,5 +143,4 @@ en:
     disabled:
       label: "User disabled"
       disable: "i want to disable"
-
-
+  media_categories: ["Listing ad", "Display ad", "affiliate"]

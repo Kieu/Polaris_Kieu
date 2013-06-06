@@ -32,7 +32,9 @@ PolarisManage::Application.routes.draw do
 
   root to: "clients#index"
   
-  resources :accounts, only: [:new, :create, :edit, :update]
+  resources :accounts, only: [:new, :create, :edit, :update] do
+    post "change_medias_list", on: :collection
+  end
   resources :click_logs do
     post "get_logs_list", on: :collection
   end
@@ -48,7 +50,9 @@ PolarisManage::Application.routes.draw do
     get "inprogress", on: :collection
     get "notification", on: :collection
   end
-
+ resources :conversion_promotion_logs, only: [:index] do
+    post "get_conversion_logs_list", on: :collection 
+  end
   mount Resque::Server, at: '/resque'
   # The priority is based upon order of creation:
   # first created -> highest priority.
