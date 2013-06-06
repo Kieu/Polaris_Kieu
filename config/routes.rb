@@ -39,7 +39,7 @@ PolarisManage::Application.routes.draw do
  resources :background_jobs do
     get "upload", on: :collection
     get "download", on: :collection
-    get "progress", on: :collection
+    get "inprogress", on: :collection
     get "notification", on: :collection
   end
 
