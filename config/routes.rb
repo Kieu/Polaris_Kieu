@@ -36,6 +36,12 @@ PolarisManage::Application.routes.draw do
   resources :click_logs do
     post "get_logs_list", on: :collection
   end
+ resources :background_jobs do
+    get "upload", on: :collection
+    get "download", on: :collection
+    get "progress", on: :collection
+    get "notification", on: :collection
+  end
 
   mount Resque::Server, at: '/resque'
   # The priority is based upon order of creation:
