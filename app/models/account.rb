@@ -1,5 +1,6 @@
 class Account < ActiveRecord::Base
   VALID_NUMBER_REGEX = /^\d+$/
+  VALID_ROMAN_NAME_REGEX = /^[A-Z_a-z][A-Za-z_0-9]*$/
   
   attr_accessible :cost, :create_user_id, :media_id, :promotion_id, :account_name, :roman_name,
                   :sync_account_id, :sync_account_pw, :sync_flg, :update_user_id
@@ -13,7 +14,8 @@ class Account < ActiveRecord::Base
   validates :sync_flg, presence: true,
             format: {with: VALID_NUMBER_REGEX}, length: {maximum: 1}
   validates :account_name, presence: true, length: {maximum: 255}, uniqueness: {case_sensitive: false}
-  validates :roman_name, presence: true, length: {maximum: 255}, uniqueness: {case_sensitive: false}              
+  validates :roman_name, presence: true, length: {maximum: 255}, uniqueness: {case_sensitive: false}, 
+              format: {with: VALID_ROMAN_NAME_REGEX}
   validates :sync_account_id, presence: true, length: {maximum: 255}, uniqueness: {case_sensitive: false}, if: :check_sync      
   validates :sync_account_pw, presence: true, length: {maximum: 255}, uniqueness: {case_sensitive: false}, if: :check_sync
   
