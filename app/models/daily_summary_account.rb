@@ -1,5 +1,7 @@
 class DailySummaryAccount < ActiveRecord::Base
-  attr_accessible :promotion_id, :media_category_id, :cost_per_click, :account_id, :media_id, :imp_count, :click_count, :cost_sum, :click_through_ratio, :report_ymd, :create_time
+  attr_accessible :promotion_id, :media_category_id, :cost_per_click,
+    :account_id, :media_id, :imp_count, :click_count, :cost_sum,
+    :click_through_ratio, :report_ymd, :create_time, :cost_per_mille
 
 
   def self.get_promotion_data(promotion_id, conversion_id, start_date, end_date)
@@ -96,5 +98,33 @@ class DailySummaryAccount < ActiveRecord::Base
 
     return array_result, date_range
   end
+  
+  def self.get_promotion_summary promotion_id
+    results = Hash.new
+    Settings.media_category.each do |category|
+      summary = DailySummaryAccount.where(promotion_id: promotion_id)
+        .where(media_category_id: category[0].to_s)
+      Settings.promotions_sums.each_with_index do |sum, index|
+        results[category[1]+"_"+Settings.promotions_options[index]+"_total"] =
+          summary.sum(sum)
+  
+        Media.where(media_category_id: category[0].to_s)
+          .each_with_index do |media, index1|
+          media.accounts.each_with_index do |account, index2|
+            results[account.account_name+"_"+Settings
+              .promotions_options[index]] =
+                summary.where(account_id: account.id).sum(sum)
+          end
+        end
+      end
+    end
+    
+    Settings.promotions_options.each_with_index do |option, index|
+      results[option+"_total"] = 0
+      Settings.media_category.each do |category|
+        results[option+"_total"] += results[category[1]+"_"+option+"_total"]
+      end
+    end
+    results
+  end
 end
-

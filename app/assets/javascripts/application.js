@@ -92,9 +92,11 @@ function ajaxCommon(urlAction, id, current_active, cname,arr_inner) {
         		url: urlAction,
         		dataType: "html"
     		}).done(function( data  ) {
+    			
             	for (i=0;i<array_inner.length;i++){
             		var inner_data = $(data).find(array_inner[i]);
             		$(array_inner[i]).html(inner_data.children());
+            		console.log(inner_data.children());
             	}
             	$("#dvloader").css('display','none');
 				$('input#keywords').quicksearch('div#clients_list tr', {

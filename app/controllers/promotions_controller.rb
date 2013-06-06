@@ -2,48 +2,56 @@ require "resque"
 class PromotionsController < ApplicationController
   before_filter :signed_in_user
   before_filter :must_super_agency, except: [:show, :index]
-  before_filter :must_delete_able, only: [:show, :edit, :update,
-    :delete_promotion]
+  before_filter :must_delete_able, only: [:show, :edit, :update, :delete_promotion]
 
 
   def index
     if current_user.client?
-      @client_id = current_user.company_id
+      @client_id = current_user.company_id  
     else
-      @client_id = params[:client_id]
-      @array_promotion = Promotion.get_by_client(@client_id).
-        order_by_promotion_name
+      @client_id = params[:client_id] if params[:client_id]
     end
 
-    @array_promotion = Promotion.get_by_client(@client_id).
-        order_by_promotion_name
+    @array_promotion = @client_id.blank? ? Array.new :
+      Promotion.get_by_client(@client_id).order_by_promotion_name
     if @array_promotion.count > 0
-      @promotion_id = @array_promotion.first[:id]
-      if(params[:promotion_id])
-        @promotion_id = params[:promotion_id]
-      end
+      @promotion_id = params[:promotion_id].blank? ? @array_promotion.first[:id] :
+        params[:promotion_id]
     
-      @promotion = @promotion_id.present? ? Promotion.find(@promotion_id)
-        : Promotion.find(@array_promotion[0].id)
-      cookies[:promotion] = "11111" unless cookies[:promotion].present?
-      @promotion.conversions.each do |conversion|
-        cookies[("conversion" + conversion.id.to_s).to_sym] =
-          "1111111110" unless
-          cookies[("conversion" + conversion.id.to_s).to_sym].present?
+      @promotion = @array_promotion.find_by_id(@promotion_id)
+      if @promotion
+        cookies[:promotion] = "11111" unless cookies[:promotion].present?
+        @promotion.conversions.each do |conversion|
+          cookies[("conversion" + conversion.id.to_s).to_sym] = "1111111111" unless
+            cookies[("conversion" + conversion.id.to_s).to_sym].present?
+        end
+        @client_name = Client.find(@client_id).client_name
+        @promotion_name = Promotion.find(@promotion_id).promotion_name
+        
+        @conversions = @promotion.conversions
+        @promotion_results = Hash.new
+        @promotion_results = DailySummaryAccount
+          .get_promotion_summary(@promotion_id)
+        
+        @conversions_results = Hash.new
+        @conversions_results = DailySummaryAccConversion
+          .get_conversions_summary(@promotion_id)
+        
+        promotion_data = Array.new
+        date_arrange = Array.new
+  
+        # just for test
+        conversion_id = 1;
+  
+        @promotion_data, date_arrange =
+          DailySummaryAccount.get_promotion_data(@promotion_id,
+            conversion_id, '20130520', '20130525')
+        @select_left = params[:left].present? ? params[:left] : "COST"
+        @select_right = params[:right].present? ? params[:right] : "click"
+        draw_graph(@promotion_data, date_arrange, @select_left, @select_right)
+      else
+        render 'public/404'
       end
-    
-      promotion_data = Array.new
-      date_arrange = Array.new
-
-      # just for test
-      conversion_id = 1;
-
-      promotion_data, date_arrange =
-        DailySummaryAccount.get_promotion_data(@promotion_id,
-          conversion_id, '20130520', '20130525')
-      select_left = 'click'
-      select_right = 'COST'
-      draw_graph(promotion_data, date_arrange, select_left, select_right)
     end
   end
 
@@ -98,9 +106,9 @@ class PromotionsController < ApplicationController
   end
 
   def draw_graph(promotion_data, date_arrange, select_left, select_right)
-    array_category = Array.new
+    @array_category = Array.new
     date_arrange.each do |date|
-      array_category << date.to_date.strftime("%m/%d")
+      @array_category << date.to_date.strftime("%m/%d")
     end
 
     @chart = LazyHighCharts::HighChart.new('graph') do |f|
@@ -114,7 +122,7 @@ class PromotionsController < ApplicationController
       f.legend(align: "right", verticalAlign: "top", y: 0, x: -50,
              layout: 'vertical', borderWidth: 0)
       f.xAxis(type: 'date',dateTimeLabelFormats: {day: '%e. %b', month: '%e. %b'},
-            categories: array_category, labels: {rotation: -45,
+            categories: @array_category, labels: {rotation: -45,
               style: {color: '#6D869F', font: '12px Helvetical'}})
       f.yAxis(min: 0, title: '')
     end

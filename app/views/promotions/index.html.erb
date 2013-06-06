@@ -1,311 +1,162 @@
 <% content_for :sidebar do %>
 	<%= render partial: "layouts/sidebar", locals: {object: @array_promotion} %>
 <% end %>
+<%= stylesheet_link_tag "css/promotion" %>
+<%= stylesheet_link_tag "css/box_inner_promotion" %>
+
+
+<ul class="contentNavi">
+	<li class="pre"><a href="javascript:void(0)" onclick="ajaxCommon('/clients?client_id=<%=@client_id%>', '#<%= @client_id %>', '.client_name', '','#inner,#sidebar')"><%= @client_name %></a></li>
+	<li>&gt;</li>
+	<li><%= @promotion_name %></li>
+</ul>
+<div class="date">今日<br />
+2013/03/01~2012/03/27&#9660;</div>
+<div class="clear"></div>
+<div id="graph">
+	<ul class="btn_details" id="">
+		<li> <a href="#"><img src="/assets/btn_use.gif" alt="" class="btn" width="120" height="35" /></a>
+			<ul>
+				<li> <a href="#">掲載結果</a>
+					<ul>
+						<li><a href="javascript:void(0)" onclick="ajaxCommon('/promotions?client_id=<%=@client_id%>&promotion_id=<%= @promotion_id %>&left=imp', '', '', '','#sample-chart')">imp</a></li>
+						<li><a href="javascript:void(0)" onclick="ajaxCommon('/promotions?client_id=<%=@client_id%>&promotion_id=<%= @promotion_id %>&left=click', '', '', '','#sample-chart')">click</a></li>
+						<li><a href="javascript:void(0)" onclick="ajaxCommon('/promotions?client_id=<%=@client_id%>&promotion_id=<%= @promotion_id %>&left=CTR', '', '', '','#sample-chart')">CTR</a></li>
+						<li><a href="javascript:void(0)" onclick="ajaxCommon('/promotions?client_id=<%=@client_id%>&promotion_id=<%= @promotion_id %>&left=COST', '', '', '','#sample-chart')">COST</a></li>
+						<li><a href="javascript:void(0)" onclick="ajaxCommon('/promotions?client_id=<%=@client_id%>&promotion_id=<%= @promotion_id %>&left=CPM', '', '', '','#sample-chart')">CPM</a></li>
+						<li><a href="javascript:void(0)" onclick="ajaxCommon('/promotions?client_id=<%=@client_id%>&promotion_id=<%= @promotion_id %>&left=CPC', '', '', '','#sample-chart')">CPC</a></li>
+					</ul>
+				</li>
+				<li><a href="#">成果</a>
+					<ul>
+						<li><a href="#">CV</a></li>
+						<li><a href="#">CV(初回)</a></li>
+						<li><a href="#">CV(リピート)</a></li>
+						<li><a href="#">CVR</a></li>
+						<li><a href="#">CPA</a></li>
+						<li><a href="#">ASSIST</a> </li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<p> vs </p>
+	<ul class="btn_details" id="">
+		<li> <a href="#"><img src="/assets/btn_click.gif" alt="" class="btn" width="120" height="35" /></a>
+			<ul>
+				<li> <a href="#">掲載結果</a>
+					<ul>
+						<li><a href="javascript:void(0)" onclick="ajaxCommon('/promotions?client_id=<%=@client_id%>&promotion_id=<%= @promotion_id %>&right=imp', '', '', '','#sample-chart')">imp</a></li>
+						<li><a href="javascript:void(0)" onclick="ajaxCommon('/promotions?client_id=<%=@client_id%>&promotion_id=<%= @promotion_id %>&right=click', '', '', '','#sample-chart')">click</a></li>
+						<li><a href="javascript:void(0)" onclick="ajaxCommon('/promotions?client_id=<%=@client_id%>&promotion_id=<%= @promotion_id %>&right=CTR', '', '', '','#sample-chart')">CTR</a></li>
+						<li><a href="javascript:void(0)" onclick="ajaxCommon('/promotions?client_id=<%=@client_id%>&promotion_id=<%= @promotion_id %>&right=COST', '', '', '','#sample-chart')">COST</a></li>
+						<li><a href="javascript:void(0)" onclick="ajaxCommon('/promotions?client_id=<%=@client_id%>&promotion_id=<%= @promotion_id %>&right=CPM', '', '', '','#sample-chart')">CPM</a></li>
+						<li><a href="javascript:void(0)" onclick="ajaxCommon('/promotions?client_id=<%=@client_id%>&promotion_id=<%= @promotion_id %>&right=CPC', '', '', '','#sample-chart')">CPC</a></li>
+					</ul>
+				</li>
+				<li><a href="#">成果</a>
+					<ul>
+						<li><a href="#">CV</a></li>
+						<li><a href="#">CV(初回)</a></li>
+						<li><a href="#">CV(リピート)</a></li>
+						<li><a href="#">CVR</a></li>
+						<li><a href="#">CPA</a></li>
+						<li><a href="#">ASSIST</a> </li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<div class="fl-r">
+		<p><%= link_to image_tag("/assets/btn_dl_option.gif"), "javascript:void(0)", id: "show_option" %></p>
+		<p><a href="#"><img src="/assets/btn_dl_report.gif"  /></a></p>
+	</div>
+</div>
+<div class="clear"></div>
+<!--グラフ_JS-->
+<div id="sample-chart" class="sample-chart">
+<!--/グラフ_JS-->
 <% if @array_promotion.count > 0 %>
-<select>
-  <option>Click</option>
-  <option>CTR</option>
-  <option>COST</option>
-  <option>CPM</option>
-  <option>CPC</option>
-</select>
-<label>VS</label>
-<select>
-  <option>Click</option>
-  <option>CTR</option>
-  <option>COST</option>
-  <option>CPM</option>
-  <option>CPC</option>
-</select>
-<br />
-<br />
 <% if flash[:error] %>
     <div><%= flash[:error] %></div>
 <% end %>
 <input type="button" value="Download CSV" id="download_csv" />
 <div id="graph_container" style="height: 150px; min-width: 700px"></div>
-<%= high_chart("graph_container", @chart) %>
-<div style="height: 100px;"></div>
-<table width="100%" border="1" cellspacing="0" cellpadding="0" class="promotion_table" id="promotion_table">
+
+</div>
+<p class="p-blue category_Dashboard">ダッシュボード</p>
+<table width="100%" border="1" bordercolor="#b5b5b5" cellpadding="0" class="promotion_table" id="promotion_table">
 <tr>
-  <td rowspan="3">Media</td>
-  <td rowspan="3">Account</td>
-  <% if cookies[:promotion][0] == "1" %>
-      <td rowspan="3">IMP</td>
-  <% end %>
-  <% if cookies[:promotion][1] == "1" %>
-      <td rowspan="3">Click</td>
-  <% end %>
-  <% if cookies[:promotion][2] == "1" %>
-      <td rowspan="3">CTR</td>
-  <% end %>
-  <% if cookies[:promotion][3] == "1" %>
-      <td rowspan="3">CPC</td>
-  <% end %>
-  <% if cookies[:promotion][4] == "1" %>
-      <td rowspan="3">COST</td>
-  <% end %>
-  <% @promotion.conversions.each do |conversion|%>
-      <% colspan = cal_col_cv(conversion.id) %>
-      <% if colspan > 0 %>
-          <td colspan="<%= colspan %>"><%= conversion.conversion_name %></td>
-      <% end %>
-  <% end %>
+	<td rowspan="3" class="table_header">Media</td>
+	<td rowspan="3" class="table_header">Account</td>
+	<% Settings.promotions_options.each_with_index do |option, index|%>
+		<%= content_tag(:td, option, rowspan: "3", class: "table_header") if cookies[:promotion][index] == "1" %>
+	<% end %>
+	<% @conversions.each do |conversion|%>
+		<% colspan = cal_col_cv(conversion.id) %>
+		<%= content_tag(:td, conversion.conversion_name, colspan: colspan, class: "table_header") if colspan > 0 %>
+	<% end %>
 </tr>
 <tr>
-  <% @promotion.conversions.each_with_index do |conversion, index|%>
-      <% colspan = cal_cv(conversion.id) %>
-      <% if colspan > 0 %>
-          <td colspan="<%= colspan %>">CV<%= index %></td>
-          <% if cookies[("conversion" + conversion.id.to_s).to_sym][3] == "1" %>
-              <td rowspan="2">CVR</td>
-          <% end %>
-          <% if cookies[("conversion" + conversion.id.to_s).to_sym][4] == "1" %>
-              <td rowspan="2">CPA</td>
-          <% end %>
-          <% if cookies[("conversion" + conversion.id.to_s).to_sym][5] == "1" %>
-              <td rowspan="2">Assist</td>
-          <% end %>
-          <% if cookies[("conversion" + conversion.id.to_s).to_sym][6] == "1" %>
-              <td rowspan="2">Sales</td>
-          <% end %>
-          <% if cookies[("conversion" + conversion.id.to_s).to_sym][7] == "1" %>
-              <td rowspan="2">Roas</td>
-          <% end %>
-          <% if cookies[("conversion" + conversion.id.to_s).to_sym][8] == "1" %>
-              <td rowspan="2">Profit</td>
-          <% end %>
-          <% if cookies[("conversion" + conversion.id.to_s).to_sym][9] == "1" %>
-              <td rowspan="2">ROI</td>
-          <% end %>
-      <% end %>
-  <% end %>
+	<% @conversions.each_with_index do |conversion, index|%>
+		<% colspan = cal_cv(conversion.id) %>
+		<%= content_tag(:td, "CV#{index}", colspan: colspan, class: "table_header") if colspan > 0 %>
+		<% Settings.conversions_options.each_with_index do |option, index1|%>
+			<% break if index1 == 7 %>
+			<%= content_tag(:td, Settings.conversions_options[index1+3], rowspan: "2", class: "table_header") if colspan > 0 && cookies[("conversion" + conversion.id.to_s).to_sym][index1+3] == "1"%>
+		<% end %>
+	<% end %>
 </tr>
 <tr>
-  <% @promotion.conversions.each do |conversion|%>
-      <% colspan = cal_cv(conversion.id) %>
-      <% if colspan > 0 %>
-          <% if cookies[("conversion" + conversion.id.to_s).to_sym][0] == "1" %>
-              <td>First</td>
-          <% end %>
-          <% if cookies[("conversion" + conversion.id.to_s).to_sym][1] == "1" %>
-              <td>Repeat</td>
-          <% end %>
-          <% if cookies[("conversion" + conversion.id.to_s).to_sym][2] == "1" %>
-              <td>Total</td>
-          <% end %>
-      <% end %>
-  <% end %>
+	<% @conversions.each do |conversion|%>
+		<% colspan = cal_cv(conversion.id) %>
+		<% Settings.conversions_options.each_with_index do |option, index1|%>
+			<% break if index1 == 3 %>
+			<%= content_tag(:td, Settings.conversions_options[index1], class: "table_header") if colspan > 0 && cookies[("conversion" + conversion.id.to_s).to_sym][index1] == "1"%>
+		<% end %>
+	<% end %>
 </tr>
 <tr>
-  <td>Total</td>
-  <td>Total</td>
-  <% if cookies[:promotion][0] == "1" %>
-      <td>Total</td>
-  <% end %>
-  <% if cookies[:promotion][1] == "1" %>
-      <td>Total</td>
-  <% end %>
-  <% if cookies[:promotion][2] == "1" %>
-      <td>Total</td>
-  <% end %>
-  <% if cookies[:promotion][3] == "1" %>
-      <td>Total</td>
-  <% end %>
-  <% if cookies[:promotion][4] == "1" %>
-      <td>Total</td>
-  <% end %>
-  <% @promotion.conversions.each do |conversion|%>
-      <% if cookies[("conversion" + conversion.id.to_s).to_sym][0] == "1" %>
-          <td>Total</td>
-      <% end %>
-      <% if cookies[("conversion" + conversion.id.to_s).to_sym][1] == "1" %>
-          <td>Total</td>
-      <% end %>
-      <% if cookies[("conversion" + conversion.id.to_s).to_sym][2] == "1" %>
-          <td>Total</td>
-      <% end %>
-      <% if cookies[("conversion" + conversion.id.to_s).to_sym][3] == "1" %>
-          <td>Total</td>
-      <% end %>
-      <% if cookies[("conversion" + conversion.id.to_s).to_sym][4] == "1" %>
-          <td>Total</td>
-      <% end %>
-      <% if cookies[("conversion" + conversion.id.to_s).to_sym][5] == "1" %>
-          <td>Total</td>
-      <% end %>
-      <% if cookies[("conversion" + conversion.id.to_s).to_sym][6] == "1" %>
-          <td>Total</td>
-      <% end %>
-      <% if cookies[("conversion" + conversion.id.to_s).to_sym][7] == "1" %>
-          <td>Total</td>
-      <% end %>
-      <% if cookies[("conversion" + conversion.id.to_s).to_sym][8] == "1" %>
-          <td>Total</td>
-      <% end %>
-      <% if cookies[("conversion" + conversion.id.to_s).to_sym][9] == "1" %>
-          <td>Total</td>
-      <% end %>
-  <% end %>
+	<td class="header_total"></td>
+	<td class="header_total"></td>
+	<% Settings.promotions_options.each_with_index do |option, index|%>
+		<%= content_tag(:td, @promotion_results[option+"_total"], class: "header_total") if cookies[:promotion][index] == "1" %>
+	<% end %>
+	<% @conversions.each do |conversion|%>
+		<% Settings.conversions_options.each_with_index do |option, index|%>
+			<%= content_tag(:td, @conversions_results["conversion"+conversion.id.to_s+"_"+ option+"_total"], class: "header_total") if cookies[("conversion" + conversion.id.to_s).to_sym][index] == "1"%>
+		<% end %>
+	<% end %>
 </tr>
 <% Settings.media_category.each do |category| %>
-    <tr>
-      <td><%= category[1] %></td>
-      <td>total</td>
-      <% if cookies[:promotion][0] == "1" %>
-          <td>Total</td>
-      <% end %>
-      <% if cookies[:promotion][1] == "1" %>
-          <td>Total</td>
-      <% end %>
-      <% if cookies[:promotion][2] == "1" %>
-          <td>Total</td>
-      <% end %>
-      <% if cookies[:promotion][3] == "1" %>
-          <td>Total</td>
-      <% end %>
-      <% if cookies[:promotion][4] == "1" %>
-          <td>Total</td>
-      <% end %>
-      <% @promotion.conversions.each do |conversion|%>
-          <% if cookies[("conversion" + conversion.id.to_s).to_sym][0] == "1" %>
-              <td>Total</td>
-          <% end %>
-          <% if cookies[("conversion" + conversion.id.to_s).to_sym][1] == "1" %>
-              <td>Total</td>
-          <% end %>
-          <% if cookies[("conversion" + conversion.id.to_s).to_sym][2] == "1" %>
-              <td>Total</td>
-          <% end %>
-          <% if cookies[("conversion" + conversion.id.to_s).to_sym][3] == "1" %>
-              <td>Total</td>
-          <% end %>
-          <% if cookies[("conversion" + conversion.id.to_s).to_sym][4] == "1" %>
-              <td>Total</td>
-          <% end %>
-          <% if cookies[("conversion" + conversion.id.to_s).to_sym][5] == "1" %>
-              <td>Total</td>
-          <% end %>
-          <% if cookies[("conversion" + conversion.id.to_s).to_sym][6] == "1" %>
-              <td>Total</td>
-          <% end %>
-          <% if cookies[("conversion" + conversion.id.to_s).to_sym][7] == "1" %>
-              <td>Total</td>
-          <% end %>
-          <% if cookies[("conversion" + conversion.id.to_s).to_sym][8] == "1" %>
-              <td>Total</td>
-          <% end %>
-          <% if cookies[("conversion" + conversion.id.to_s).to_sym][9] == "1" %>
-              <td>Total</td>
-          <% end %>
-      <% end %>
-    </tr>
+	<tr>
+    	<td class="category_header"><%= category[1] %></td>
+		<td class="category_header">total</td>
+		<% Settings.promotions_options.each_with_index do |option, index|%>
+			<%= content_tag(:td, @promotion_results[category[1]+"_"+option+"_total"], class: "category_header") if cookies[:promotion][index] == "1" %>
+		<% end %>
+		<% @conversions.each do |conversion|%>
+			<% Settings.conversions_options.each_with_index do |option, index|%>
+				<%= content_tag(:td, @conversions_results[category[1]+"_conversion"+conversion.id.to_s+"_"+option], class: "category_header") if cookies[("conversion" + conversion.id.to_s).to_sym][index] == "1"%>
+			<% end %>
+		<% end %>
+	</tr>
     <% Media.where(media_category_id: category[0].to_s).each_with_index do |media, index| %>
-        <% break if index == "10" || media.accounts.count == 0 %>
-        <tr>
-          <td rowspan="<%= media.accounts.count %>"><%= media.media_name %></td>
-          <td><%= media.accounts.first.account_name %></td>
-          <% if cookies[:promotion][0] == "1" %>
-              <td><%= media.accounts.first.daily_summary_accounts.sum(:imp_count) %></td>
-          <% end %>
-          <% if cookies[:promotion][1] == "1" %>
-              <td><%= media.accounts.first.daily_summary_accounts.sum(:click_count) %></td>
-          <% end %>
-          <% if cookies[:promotion][2] == "1" %>
-              <td><%= media.accounts.first.daily_summary_accounts.sum(:click_through_ratio) %>%</td>
-          <% end %>
-          <% if cookies[:promotion][3] == "1" %>
-              <td><%= media.accounts.first.daily_summary_accounts.sum(:cost_per_click) %>%</td>
-          <% end %>
-          <% if cookies[:promotion][4] == "1" %>
-              <td><%= media.accounts.first.daily_summary_accounts.sum(:cost_sum) %></td>
-          <% end %>
-          <% @promotion.conversions.each do |conversion|%>
-              <% if cookies[("conversion" + conversion.id.to_s).to_sym][0] == "1" %>
-                  <td><%= media.accounts.first.daily_summary_acc_conversions.where(conversion_id: conversion.id).sum(:first_cv_count) %></td>
-              <% end %>
-              <% if cookies[("conversion" + conversion.id.to_s).to_sym][1] == "1" %>
-                  <td><%= media.accounts.first.daily_summary_acc_conversions.where(conversion_id: conversion.id).sum(:repeat_cv_count) %></td>
-              <% end %>
-              <% if cookies[("conversion" + conversion.id.to_s).to_sym][2] == "1" %>
-                  <td><%= media.accounts.first.daily_summary_acc_conversions.where(conversion_id: conversion.id).sum(:total_cv_count) %></td>
-              <% end %>
-              <% if cookies[("conversion" + conversion.id.to_s).to_sym][3] == "1" %>
-                  <td><%= media.accounts.first.daily_summary_acc_conversions.where(conversion_id: conversion.id).sum(:conversion_rate) %></td>
-              <% end %>
-              <% if cookies[("conversion" + conversion.id.to_s).to_sym][4] == "1" %>
-                  <td><%= media.accounts.first.daily_summary_acc_conversions.where(conversion_id: conversion.id).sum(:click_per_action) %></td>
-              <% end %>
-              <% if cookies[("conversion" + conversion.id.to_s).to_sym][5] == "1" %>
-                  <td><%= media.accounts.first.daily_summary_acc_conversions.where(conversion_id: conversion.id).sum(:assist_count) %></td>
-              <% end %>
-              <% if cookies[("conversion" + conversion.id.to_s).to_sym][6] == "1" %>
-                  <td><%= media.accounts.first.daily_summary_acc_conversions.where(conversion_id: conversion.id).sum(:sales) %></td>
-              <% end %>
-              <% if cookies[("conversion" + conversion.id.to_s).to_sym][7] == "1" %>
-                  <td><%= media.accounts.first.daily_summary_acc_conversions.where(conversion_id: conversion.id).sum(:roas) %></td>
-              <% end %>
-              <% if cookies[("conversion" + conversion.id.to_s).to_sym][8] == "1" %>
-                  <td><%= media.accounts.first.daily_summary_acc_conversions.where(conversion_id: conversion.id).sum(:profit) %></td>
-              <% end %>
-              <% if cookies[("conversion" + conversion.id.to_s).to_sym][9] == "1" %>
-                  <td><%= media.accounts.first.daily_summary_acc_conversions.where(conversion_id: conversion.id).sum(:roi) %></td>
-              <% end %>
-          <% end %>
+		<% break if index == "10" %>
+		<% media.accounts.each_with_index do |account, index1| %>
+		<tr>
+			<%= content_tag(:td, media.media_name, rowspan: media.accounts.count) if index1 == 0 %>
+            <td><%= account.account_name %></td>
+            <% Settings.promotions_options.each_with_index do |option, index2|%>
+				<%= content_tag(:td, @promotion_results[account.account_name+"_"+option]) if cookies[:promotion][index2] == "1" %>
+			<% end %>
+			<% @conversions.each do |conversion|%>
+				<% Settings.conversions_options.each_with_index do |option, index2|%>
+					<%= content_tag(:td, @conversions_results[account.account_name+"_conversion"+conversion.id.to_s+"_"+option]) if cookies[("conversion" + conversion.id.to_s).to_sym][index2] == "1"%>
+				<% end %>
+			<% end %>
         </tr>
-        <tr>
-          <% media.accounts.each_with_index do |account, index1| %>
-              <% next if index1 == 0 %>
-              <td><%= account.account_name %></td>
-              <% if cookies[:promotion][0] == "1" %>
-                  <td><%= account.daily_summary_accounts.sum(:imp_count) %></td>
-              <% end %>
-              <% if cookies[:promotion][1] == "1" %>
-                  <td><%= account.daily_summary_accounts.sum(:click_count) %></td>
-              <% end %>
-              <% if cookies[:promotion][2] == "1" %>
-                  <td><%= account.daily_summary_accounts.sum(:click_through_ratio) %>%</td>
-              <% end %>
-              <% if cookies[:promotion][3] == "1" %>
-                  <td><%= account.daily_summary_accounts.sum(:cost_per_click) %>%</td>
-              <% end %>
-              <% if cookies[:promotion][4] == "1" %>
-                  <td><%= account.daily_summary_accounts.sum(:cost_sum) %></td>
-              <% end %>
-              <% @promotion.conversions.each do |conversion|%>
-                  <% if cookies[("conversion" + conversion.id.to_s).to_sym][0] == "1" %>
-                      <td><%= account.daily_summary_acc_conversions.where(conversion_id: conversion.id).sum(:first_cv_count) %></td>
-                  <% end %>
-                  <% if cookies[("conversion" + conversion.id.to_s).to_sym][1] == "1" %>
-                      <td><%= account.daily_summary_acc_conversions.where(conversion_id: conversion.id).sum(:repeat_cv_count) %></td>
-                  <% end %>
-                  <% if cookies[("conversion" + conversion.id.to_s).to_sym][2] == "1" %>
-                      <td><%= account.daily_summary_acc_conversions.where(conversion_id: conversion.id).sum(:total_cv_count) %></td>
-                  <% end %>
-                  <% if cookies[("conversion" + conversion.id.to_s).to_sym][3] == "1" %>
-                      <td><%= account.daily_summary_acc_conversions.where(conversion_id: conversion.id).sum(:conversion_rate) %></td>
-                  <% end %>
-                  <% if cookies[("conversion" + conversion.id.to_s).to_sym][4] == "1" %>
-                      <td><%= account.daily_summary_acc_conversions.where(conversion_id: conversion.id).sum(:click_per_action) %></td>
-                  <% end %>
-                  <% if cookies[("conversion" + conversion.id.to_s).to_sym][5] == "1" %>
-                      <td><%= account.daily_summary_acc_conversions.where(conversion_id: conversion.id).sum(:assist_count) %></td>
-                  <% end %>
-                  <% if cookies[("conversion" + conversion.id.to_s).to_sym][6] == "1" %>
-                      <td><%= account.daily_summary_acc_conversions.where(conversion_id: conversion.id).sum(:sales) %></td>
-                  <% end %>
-                  <% if cookies[("conversion" + conversion.id.to_s).to_sym][7] == "1" %>
-                      <td><%= account.daily_summary_acc_conversions.where(conversion_id: conversion.id).sum(:roas) %></td>
-                  <% end %>
-                  <% if cookies[("conversion" + conversion.id.to_s).to_sym][8] == "1" %>
-                      <td><%= account.daily_summary_acc_conversions.where(conversion_id: conversion.id).sum(:profit) %></td>
-                  <% end %>
-                  <% if cookies[("conversion" + conversion.id.to_s).to_sym][9] == "1" %>
-                      <td><%= account.daily_summary_acc_conversions.where(conversion_id: conversion.id).sum(:roi) %></td>
-                  <% end %>
-              <% end %>
-          <% end %>
-        </tr>
+        <% end %>
     <% end %>
 <% end %>
 </table>
@@ -313,93 +164,45 @@
 <br/>
 <%= link_to "Show options", "javascript:void(0)", id: "show_option" %>
 <div id="popup" style="display: none">
-  <div id="list_options" style="width: 400px;">
-    <div id="result_list" style="float: left;margin-right: 20px;">
-      Result
-      <table>
-        <tr>
-          <td>IMP</td>
-          <td><%= link_to cookies[:promotion][0] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie_promotion('0',this)"%></td>
-        </tr>
-        <tr>
-          <td>Click</td>
-          <td><%= link_to cookies[:promotion][1] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie_promotion('1',this)"%></td>
-        </tr>
-        <tr>
-          <td>CTR</td>
-          <td><%= link_to cookies[:promotion][2] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie_promotion('2',this)"%></td>
-        </tr>
-        <tr>
-          <td>COST</td>
-          <td><%= link_to cookies[:promotion][3] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie_promotion('3',this)"%></td>
-        </tr>
-        <tr>
-          <td>CPC</td>
-          <td><%= link_to cookies[:promotion][4] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie_promotion('4',this)"%></td>
-        </tr>
-      </table>
-    </div>
-    <div id="result_cv" style="float: right">
-      <div id="tabs1" style="float: left">
-        <ul>
-          <% @promotion.conversions.each do |conversion| %>
-              <li><%= link_to "#{conversion.conversion_name}>>", "#conversion#{conversion.id}", onclick: "show_page(this)" %></li>
-          <% end %>
-        </ul>
-      </div>
-      <div style="float: left">
-        <% @promotion.conversions.each_with_index do |conversion,index| %>
-            <div id="conversion#{conversion.id}" class="cv_options">
-              <table>
-                <tr>
-                  <td>First</td>
-                  <td><%= link_to cookies[("conversion" + conversion.id.to_s).to_sym][0] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('0','#{conversion.id}',this)"%></td>
-                </tr>
-                <tr>
-                  <td>Repeat</td>
-                  <td><%= link_to cookies[("conversion" + conversion.id.to_s).to_sym][1] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('1','#{conversion.id}',this)"%></td>
-                </tr>
-                <tr>
-                  <td>Total</td>
-                  <td><%= link_to cookies[("conversion" + conversion.id.to_s).to_sym][2] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('2','#{conversion.id}',this)"%></td>
-                </tr>
-                <tr>
-                  <td>CVR</td>
-                  <td><%= link_to cookies[("conversion" + conversion.id.to_s).to_sym][3] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('3','#{conversion.id}',this)"%></td>
-                </tr>
-                <tr>
-                  <td>CPA</td>
-                  <td><%= link_to cookies[("conversion" + conversion.id.to_s).to_sym][4] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('4','#{conversion.id}',this)"%></td>
-                </tr>
-                <tr>
-                  <td>Assits</td>
-                  <td><%= link_to cookies[("conversion" + conversion.id.to_s).to_sym][5] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('5','#{conversion.id}',this)"%></td>
-                </tr>
-                <tr>
-                  <td>Sales</td>
-                  <td><%= link_to cookies[("conversion" + conversion.id.to_s).to_sym][6] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('6','#{conversion.id}',this)"%></td>
-                </tr>
-                <tr>
-                  <td>Roars</td>
-                  <td><%= link_to cookies[("conversion" + conversion.id.to_s).to_sym][7] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('7','#{conversion.id}',this)"%></td>
-                </tr>
-                <tr>
-                  <td>Profit</td>
-                  <td><%= link_to cookies[("conversion" + conversion.id.to_s).to_sym][8] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('8','#{conversion.id}',this)"%></td>
-                </tr>
-                <tr>
-                  <td>Roi</td>
-                  <td><%= link_to cookies[("conversion" + conversion.id.to_s).to_sym][9] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('9','#{conversion.id}',this)"%></td>
-                </tr>
-              </table>
-            </div>
-        <% end %>
-      </div>
-    </div>
-    <div style="clear: both"></div>
-    <button id="change_cookie">Ok</button>
-    <button id="not_change_cookie">Cancel</button>
-  </div>
+	<div id="list_options" style="width: 400px;">
+		<div id="result_list" style="float: left;margin-right: 20px;">
+		Result
+			<table>
+				<% Settings.promotions_options.each_with_index do |option, index|%>
+					<tr>
+						<td><%= option %></td>
+						<td><%= link_to cookies[:promotion][index] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie_promotion('#{index}',this)"%></td>
+					</tr>	
+				<% end %>
+			</table>
+		</div>
+		<div id="result_cv" style="float: right">
+			<div id="tabs1" style="float: left">
+				<ul>
+					<% @conversions.each do |conversion| %>
+						<li><%= link_to "#{conversion.conversion_name}>>", "#conversion#{conversion.id}", onclick: "show_page(this)" %></li>
+					<% end %>
+				</ul>
+			</div>
+			<div style="float: left">
+	        	<% @conversions.each_with_index do |conversion,index| %>
+					<div id="conversion#{conversion.id}" class="cv_options">
+						<table>
+							<% Settings.conversions_options.each_with_index do |option, index1|%>
+								<tr>
+									<td>option</td>
+									<td><%= link_to cookies[("conversion" + conversion.id.to_s).to_sym][index1] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('#{index1}','#{conversion.id}',this)"%></td>
+								</tr>
+							<% end %>
+						</table>
+					</div>
+				<% end %>
+			</div>
+    	</div>
+    	<div style="clear: both"></div>
+    	<button id="change_cookie">Ok</button>
+    	<button id="not_change_cookie">Cancel</button>
+  	</div>
 </div>
 <script type="text/javascript">
     $('#download_csv').click(function(){
@@ -426,9 +229,9 @@
         cookies_options = $.cookie("promotion");
         array_conversions = new Array();
         cookies_conversions = new Object();
-        <% @promotion.conversions.each do |conversion| %>
-        cookies_conversions = {key: "<%= conversion.id %>", value: $.cookie("conversion<%= conversion.id %>")};
-        array_conversions.push(cookies_conversions);
+        <% @conversions.each do |conversion| %>
+	        cookies_conversions = {key: "<%= conversion.id %>", value: $.cookie("conversion<%= conversion.id %>")};
+	        array_conversions.push(cookies_conversions);
         <% end %>
         console.log(array_conversions);
         update_cookie_promotion = function(data,ele){
@@ -465,7 +268,7 @@
         }
         $("#change_cookie").click(function(){
             $.cookie("promotion",cookies_options);
-            <% @promotion.conversions.each do |conversion| %>
+            <% @conversions.each do |conversion| %>
             $.cookie("conversion<%= conversion.id %>", array_conversions)
             array_conversions.push(cookies_conversions);
             for(var i=0;i<array_conversions.length;i++){
@@ -482,6 +285,81 @@
             cookies_options = $.cookie("promotion");
             $('#list_options').colorbox.close();
         })
+		$(".btn_details").droppy();
+		var tab = {
+    		init: function(){
+    			var tabs = this.setup.tabs;
+    			var pages = this.setup.pages;
+				for(i=0; i<pages.length; i++) {
+					if(i !== 0) pages[i].style.display = 'none';
+					tabs[i].onclick = function(){ tab.showpage(this); return false; };
+    			}
+    		},
+			showpage: function(obj){
+    			var tabs = this.setup.tabs;
+    			var pages = this.setup.pages;
+    			var num;
+				for(num=0; num<tabs.length; num++) {
+    				if(tabs[num] === obj) break;
+    			}
+				for(var i=0; i<pages.length; i++) {
+					if(i == num) {
+						pages[num].style.display = 'block';
+						tabs[num].className = 'present';
+					}
+					else{
+    					pages[i].style.display = 'none';
+    					tabs[i].className = null;
+    				}
+    			}
+    		}
+    	}
+    	$('div.check-group input').each(function(){
+		if ($(this).attr('checked') == 'checked') {
+			$(this).next().addClass('checked');
+
+		}
+	});
+	//クリックした要素にクラス割り当てる
+	$('div.check-group label').toggle(function () {
+		$(this)
+			.addClass('checked')
+			.prev('input').attr('checked','checked');
+		},
+		function () {
+			$(this)
+				.removeClass('checked')
+				.prev('input').removeAttr('checked');
+		}
+	);
+	var chart = new Highcharts.StockChart({  
+		chart: {  
+        	renderTo: 'graph_container'
+		},  
+		legend: {  
+			align: 'right',  
+			borderWidth: 0,  
+			layout: 'vertical',  
+			verticalAlign: 'top',  
+			y: 0,
+			x: -50,  
+			shadow: true  
+		},
+     rangeSelector: {  
+        selected: ""  
+      },  
+      series: {  
+      	type: 'spline',
+        name: '<%= @select_left %>',  
+        data: "<% @promotion_data[@select_left] %>",
+        color: '#008B8B'  
+      }, {
+      	type: 'spline',  
+        name: '<%= @select_right %>',  
+        data: "<% @promotion_data[@select_right] %>",
+        color: '#008B8B'
+      }
+    });
     });
 </script>
 <%= link_to "Create promotion", new_promotion_path(client_id: @client_id) %>

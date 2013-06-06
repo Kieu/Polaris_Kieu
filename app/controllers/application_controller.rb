@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   include SessionsHelper
-  
+  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
   #before_filter :set_locale
   
   def signed_in_user
@@ -14,6 +14,11 @@ class ApplicationController < ActionController::Base
 
   def must_super_agency
     redirect_to promotions_path if current_user.client?
+  end
+  
+  def record_not_found
+    #render :text => "404 Not Found", :status => 404
+    render 'public/404', :status => :not_found
   end
   
   private
