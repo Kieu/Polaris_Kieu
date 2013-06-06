@@ -17,7 +17,7 @@ class AgenciesController < ApplicationController
   def update
     @agency.update_user_id = current_user.id
     if @agency.update_attributes(params[:agency])
-      flash[:error] = "Agency info updated"
+      flash[:error] = I18n.t("agency.flash_messages.update")
       redirect_to agencies_path
     else
       render :edit
@@ -33,7 +33,7 @@ class AgenciesController < ApplicationController
     @agency.create_user_id = current_user.id
     @add_flg = 0
     if @agency.save
-      flash[:error] = 'Agency is created successful'
+      flash[:error] = I18n.t("agency.flash_messages.success")
       redirect_to new_agency_path
     else
       @add_flg = 1

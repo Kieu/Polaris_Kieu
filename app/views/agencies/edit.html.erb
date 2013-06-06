@@ -1,19 +1,19 @@
 <%= render "layouts/prevent_change_page" %>
 <%= stylesheet_link_tag "css/agency" %>
-代理店編集
+<%= I18n.t("agency.crumb_edit") %>
 <div id="user_form">
-  <p class="h2">代理店登録</p>
+  <p class="h2"><%= I18n.t("agency.crumb_edit") %></p>
   <%= form_for(@agency) do |f| %>
       <table>
         <tbody>
         <tr>
-          <th><%= f.label "代理店名：" %></th>
+          <th><%= f.label t("agency.agency_name") %></th>
           <td colspan="2">
             <%= f.text_field :agency_name, maxlength: 255, style: "width: 250px" %>
           </td>
         </tr>
         <tr>
-          <th> <%= f.label "代理店名(英語)：" %></th>
+          <th> <%= f.label t("agency.roman_name") %></th>
           <td colspan="2">
             <%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %>
           </td>

@@ -64,11 +64,18 @@ ja:
     contract_type: "ご契約プラン"
     user_information: "ユーザー情報"
     delete: "削除"
+    flash_messages:
+      success: "Client is created successful ja"
+      update: "Client is updated successful ja"
   agency:
     crumb_edit: "代理店編集"
     crumb_add: "代理店登録"
+    crumb_list: ""
     agency_name: "代理店名"
     roman_name: "代理店名(英語)"
+    flash_messages:
+      success: "Agency is created successful ja"
+      update: "Agency is updated successful ja"
   account:
     crumb_add: "本体プロモーション"
     crumb_edit: "アカウント編集"
@@ -78,6 +85,9 @@ ja:
     roman_name: "アカウント名(英語)"
     cost: "コスト計算： 入力データ "
     sync_account_id: "アカウントの同期"
+    flash_messages:
+      success: "Account is created successful ja"
+      update: "Account is updated successful ja"
   conversion:
     crumb_add: "クライアント登録"
     crumb_edit: "クライアント編集"
@@ -121,6 +131,9 @@ ja:
       label: "計測期間"
       day: "日"
     dashboard: "ダッシュボード"
+    flash_messages:
+      success: "Promotion is created successful ja"
+      update: "Promotion is updated successful ja"
   user:
     crumb_edit: "ユーザー編集"
     user_name: "ユーザー名"
@@ -136,4 +149,7 @@ ja:
     disabled:
       label: "ユーザー無効化"
       disable: "無効化にする"
+    flash_messages:
+      success: "Account is created successful ja"
+      update: "Account is updated successful ja"
   media_categories: ["Listing ad", "Display ad", "affiliate"]   
