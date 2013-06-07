@@ -1,0 +1,39 @@
+development:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: Polaris_manage_development
+  pool: 5
+  username: root
+  password: "123456"
+  host: localhost
+
+test:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: Polaris_manage_test
+  pool: 5
+  username: root
+  password: "123456"
+  host: localhost
+
+production:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: Polaris_manage_production
+  pool: 5
+  username: root
+  password: "123456"
+  host: localhost
+
+log_db_development:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: log_polaris_development
+  pool: 5
+  username: root
+  password: "123456"
+  host: 192.168.1.31

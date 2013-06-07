@@ -1,0 +1,2 @@
+module UrlSettingsHelper
+end

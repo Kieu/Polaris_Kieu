@@ -176,4 +176,19 @@ namespace :master do
       Promotion.create!(promotion_name: "Promotion#{num}", client_id: 1, tracking_period: 30, agency_id: 1, del_flg: 0, roman_name: "Promotion#{num}", update_user_id: 1, promotion_category_id: 1)
     end
   end
+
+  desc "Create Redirect Infomations"
+  task create_redirect_infomation: :environment do
+    (1..20).each do |num|
+      RedirectInfomation.create!(mpv: "1.1.1.#{num}", client_id: 1, promotion_id: num, media_category_id: 1, media_id: 1, account_id: 1, campaign_id: 1, group_id: 1,
+                                 unit_id: 1, creative_id: 1, click_unit: 13, del_flg: 0)
+    end
+  end
+
+  desc "Create Redirect URL"
+  task create_redirect_url: :environment do
+    (1..10).each do |num|
+      RedirectUrl.create!(mpv: "1.1.1.1", url: 'http://domain/click/?mpv=MPV&cid=Client ID&pid=Promotion ID_x000D_', rate: 12, name: "url_#{num}")
+    end
+  end
 end
