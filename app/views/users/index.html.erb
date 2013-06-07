@@ -1,7 +1,9 @@
+<%= stylesheet_link_tag "css/user2", :media => "all" %>
+<%= stylesheet_link_tag "css/common", :media => "all" %>
 <% if flash[:success] %>
   <div><%= flash[:success] %></div>
 <% end %>
-<%= link_to 'New User', "javascript:void(0)", class: "new_agency",onclick: "ajaxCommon('#{new_user_path}', '', '', '','#inner')" %>
+<%= link_to raw("<img src='/assets/btn_user_regist.gif' >"), "javascript:void(0)", class: "new_agency",onclick: "ajaxCommon('#{new_user_path}', '', '', '','#inner')" %>
 <table style="display:none" class="newTable04 fixTable d-none"></table>
 <script type="text/javascript">
 	$(".newTable04").flexigrid({

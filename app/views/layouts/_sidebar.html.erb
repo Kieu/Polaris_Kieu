@@ -53,6 +53,6 @@
 	<% if params[:controller] == "clients" && current_user.super? %>
     	<%= link_to raw('<img src="/assets/btn_client_regist.gif">'), "javascript:void(0)", class: "new_client_name", onclick: "ajaxCommon('#{new_client_path}', '', '.new_client_name', '#new_client_name','#inner,#sidebar')"  %>
 	<% elsif (current_user.super? || current_user.agency?) && params[:controller] == "promotions" %>
-    	<%= link_to raw('<img src="/assets/btn_client_regist.gif">'), "javascript:void(0)", class: "new_promotion_name", onclick: "ajaxCommon('#{new_promotion_path(client_id: @client_id)}', '', '.new_promotion_name', '#new_promotion_name','#inner')"  %>
+    	<%= link_to raw('<img src="/assets/btn_promotion_regist.gif">'), "javascript:void(0)", class: "new_promotion_name", onclick: "ajaxCommon('#{new_promotion_path(client_id: @client_id)}', '', '.new_promotion_name', '#new_promotion_name','#inner')"  %>
 	<% end %>
 </div>

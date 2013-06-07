@@ -49,7 +49,7 @@ class AgenciesController < ApplicationController
   def get_rows agencies
     rows = Array.new
     agencies.each do |agency|
-      link = view_context.link_to("Edit",
+      link = view_context.link_to(view_context.image_tag("/assets/img_edit.png"),
                                   "javascript:void(0)",
                                   class: "edit",
                                   id: "edit#{index}",
