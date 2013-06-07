@@ -12,12 +12,12 @@
 //
 //= require jquery-1.8
 //= require jquery_ujs
-//= require_tree .
+//= require_directory .
 var auto_refresh = setInterval(
     function ()
     {
         $('.notification').load('/background_jobs/notification').fadeIn("slow");
-    }, 10000); // refresh every 10000 milliseconds
+    }, 30000); // refresh every 10000 milliseconds
 function index_of(haystack, needle) {
     for (var i = 0, l = haystack.length; i < l; ++i) {
         if( haystack[i].value === needle ) {
@@ -26,6 +26,7 @@ function index_of(haystack, needle) {
     }
     return -1;
 }
+
 
 function reloadFlex(obj, urlAction, id, current_active, cname, maxlength) {
 	$(obj)
