@@ -16,6 +16,9 @@
     position: absolute;
     padding-top:25px;
 }
+.notification p {
+    position: absolute;
+}
 .notification
 {
 background: url(/assets/display_upload.gif) left top no-repeat;
