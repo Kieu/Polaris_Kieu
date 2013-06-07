@@ -12,6 +12,7 @@ gem "feedzirra"
 gem "curb", "0.8.4"
 gem "recaptcha", :require => "recaptcha/rails"
 gem "kaminari"
+gem "redis"
 gem "resque", require: 'resque/server'
 gem 'json'
 
