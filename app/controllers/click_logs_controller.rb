@@ -1,3 +1,4 @@
+require "resque"
 class ClickLogsController < ApplicationController
   before_filter :signed_in_user
   before_filter :must_super_agency
@@ -13,6 +14,11 @@ class ClickLogsController < ApplicationController
     
   end  
   
+  def download_csv
+    Resque.enqueue ExportClickLogsData, current_user.id, params[:promotion_id].to_i, params[:media_category_id], params[:account_id], cookies[:cs], cookies[:ce], cookies[:ser]
+    
+    render text: "processing"
+  end
   private
   def get_rows click_logs
     medias = Media.select("id, media_name")
