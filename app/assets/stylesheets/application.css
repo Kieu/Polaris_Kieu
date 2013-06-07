@@ -218,6 +218,10 @@ p.tutInfo{
 h1,h2,p.tutInfo{
     font-family:"Myriad Pro",Arial,Helvetica,sans-serif;
 }
+.text-validationError
+{
+    color:#FF0000;
+}
 /*
 input[type=text]{
 	width: 255px;
