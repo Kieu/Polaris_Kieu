@@ -2,25 +2,35 @@
   <div><%= flash[:success] %></div>
 <% end %>
 <%= link_to 'New User', "javascript:void(0)", class: "new_agency",onclick: "ajaxCommon('#{new_user_path}', '', '', '','#inner')" %>
-<table id="flex1" style="display:none"></table>
+<table style="display:none" class="newTable04 fixTable d-none"></table>
 <script type="text/javascript">
-	$("#flex1").flexigrid({
+	$(".newTable04").flexigrid({
 		url: "<%= get_users_list_users_path %>",
+        optionGet : "6",
+        editOption : true,
+        deleteOption : true,
+        onSuccess : function(){tableResize();},
+        resizable : false,
+        striped : true,
 		dataType: 'json',
 		colModel : [
     {display: '', name : 'link', width : 20, sortable : false, align: 'center'},
-    {display: 'Romanji Name', name : 'roman_name', width : 200, sortable : false, align: 'center'},
-	  {display: 'User Name', name : 'username', width : 200, sortable : false, align: 'center'},
-    {display: 'email', name : 'email', width : 200, sortable : false, align: 'left'},
-    {display: 'Company', name : 'company', width : 200, sortable : false, align: 'left'},
-    {display: 'Role', name : 'role_id', width : 100, sortable : false, align: 'left'}
+    {display: 'Romanji Name', name : 'roman_name', width : 'auto', sortable : false, align: 'center'},
+	  {display: 'User Name', name : 'username', width : 'auto', sortable : false, align: 'center'},
+    {display: 'email', name : 'email', width : 'auto', sortable : false, align: 'left'},
+    {display: 'Company', name : 'company', width : 'auto', sortable : false, align: 'left'},
+    {display: 'Role', name : 'role_id', width : 'auto', sortable : false, align: 'left'}
 			],
 		usepager: true,
-		title: 'Users',
 		useRp: true,
 		rp: 10,
 		showTableToggleBtn: true,
-		width: 720,
 		height: 300
 	});
+</script>
+<script>
+    $(window).resize(function() {
+        tableResize();
+    });
+
 </script>

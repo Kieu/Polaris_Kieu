@@ -2,44 +2,43 @@
 <% content_for :sidebar do %>
 	<%= render partial: "layouts/sidebar", locals: {object: @clients} %>
 <% end %>
-<p class="h2">Edit Client</p>
+<p class="h2"><%= I18n.t("client.crumb_edit") %></p>
 <%= form_for(@client) do |f| %>
     <div class="regist_form">
       <table class="client_info">
         <tr>
-          <th> <%= f.label "Client name" %></th>
+          <th> <%= f.label t("client.client_name") %></th>
           <td colspan="2"><%= f.text_field :client_name, maxlength: 255, style: "width: 250px" %></td>
         </tr>
         <tr>
-          <th><%= f.label "Roman name" %></th>
+          <th><%= f.label t("client.roman_name") %></th>
           <td colspan="2"><%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %> </td>
         </tr>
         <tr>
-          <th><%= f.label "Tel" %></th>
+          <th><%= f.label t("client.tel") %></th>
           <td colspan="2"> <%= f.text_field :tel, maxlength: 15, style: "width: 250px" %>  </td>
         </tr>
         <tr>
-          <th><%= f.label "person_charge:" %></th>
+          <th><%= f.label t("client.person_charge") %></th>
           <td colspan="2"><%= f.text_field :person_charge, maxlength: 255, style: "width: 250px" %></td>
         </tr>
         <tr>
-          <th>
-            <%= f.label "person_sale" %></th>
-          <td colspan="2"><%= f.text_field :person_sale, maxlength: 255, style: "width: 250px" %>    </td>
+          <th><%= f.label t("client.person_sale") %></th>
+          <td colspan="2"><%= f.text_field :person_sale, maxlength: 255, style: "width: 250px" %></td>
         </tr>
         <tr>
-          <th><%= f.label "Contract type" %></th>
-          <td><%= f.radio_button :contract_type, 0 %> 0</td>
-          <td><%= f.radio_button :contract_type, 1 %> 1</td>
+          <th><%= f.label t("client.contract_type.label") %></th>
+          <td><%= f.radio_button :contract_type, 0 %> <%= I18n.t("client.contract_type.unrecovered") %></td>
+          <td><%= f.radio_button :contract_type, 1 %> <%= I18n.t("client.contract_type.been_recovered") %></td>
         </tr>
         <tr>
-          <th><%= f.label "Contract flg" %></th>
-          <td><%= f.radio_button :contract_flg, 0 %> 0</td>
-          <td><%= f.radio_button :contract_flg, 1 %> 1</td>
+          <th><%= f.label t("client.contract_flg.label") %></th>
+          <td><%= f.radio_button :contract_flg, 0 %> <%= I18n.t("client.contract_flg.standard_plan") %></td>
+          <td><%= f.radio_button :contract_flg, 1 %> <%= I18n.t("client.contract_flg.premium_plan") %></td>
         </tr>
       </table>
       <div class="user_info_add">
-        <p>List users Added▼</p>
+        <p><%= I18n.t("client.user_information") %>▼</p>
         <input id="tags" placeholder="search" maxlength="255"/>
       </div>
 
@@ -50,7 +49,7 @@
           <th width="240">&nbsp;</th>
           <th width="80">&nbsp;</th>
           <th width="40">
-            <small>削除</small>
+            <small><%= I18n.t("client.delete") %></small>
           </th>
         </tr>
         </thead>

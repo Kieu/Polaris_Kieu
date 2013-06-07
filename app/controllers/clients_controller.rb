@@ -27,7 +27,8 @@ class ClientsController < ApplicationController
     end
 
     rows = Array.new
-    rows = get_rows(Promotion.get_by_client(@client_id).order_by_promotion_name.page(params[:page]).per(params[:rp]), @client_id)
+    rows = get_rows(Promotion.get_by_client(@client_id).
+      order_by_promotion_name.page(params[:page]).per(params[:rp]), @client_id)
     count = Promotion.get_by_client(@client_id).order_by_promotion_name.count
 
     render json: {page: params[:page], total: count, rows: rows}
@@ -46,7 +47,7 @@ class ClientsController < ApplicationController
         @client.save!
         if params[:users_id]
           if !@client.update_client_users(params)
-            flash[:error] = "Can not create user for client"
+            flash[:error] = I18n.t("client.flash_messages.success_error")
             raise ActiveRecord::Rollback
           end
         end
@@ -54,7 +55,7 @@ class ClientsController < ApplicationController
       if flash[:error]
         render :new
       else
-        flash[:error] = "Client was successfully created"
+        flash[:error] = I18n.t("client.flash_messages.success")
         redirect_to new_client_path
       end
     else
@@ -73,7 +74,7 @@ class ClientsController < ApplicationController
         @client.save!
         if params[:users_id]
           if !@client.update_client_users(params)
-            flash[:error] = "Can not update user for client"
+            flash[:error] = I18n.t("client.flash_messages.update_error")
             raise ActiveRecord::Rollback
           end
         end
@@ -81,7 +82,7 @@ class ClientsController < ApplicationController
       if flash[:error]
         render :edit
       else
-        flash[:error] = "Edit successfull"
+        flash[:error] = I18n.t("client.flash_messages.update")
         redirect_to clients_path
       end
     else

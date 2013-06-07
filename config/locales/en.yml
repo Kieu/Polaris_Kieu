@@ -42,9 +42,9 @@ en:
 
   layout:
     login: "Login"
-    login: "Logout"
+    logout: "Logout"
     submit:
-      create: "Create"
+      create: "Create New"
       submit: "Submit"
       update: "Update"
     terms_of_use: "Terms of Use"
@@ -63,19 +63,33 @@ en:
     crumb_add: "Add Client"
     crumb_list: "Client list"
     client_name: "Client name en"
-    romaji_name: "Roman name"
+    roman_name: "Roman name"
     tel: "Contact"
     person_charge: "Person in charge"
-    person_sales: "Person sales"
-    contract_flg: "Use policy"
-    contract_type: "Plan type"
+    person_sale: "Person sales"
+    contract_flg:
+      label: "Use policy"
+      standard_plan: "Standard Plan"
+      premium_plan: "Premium Plan (¥ 50,000 per month)"
+    contract_type:
+      label: "Plan type"
+      unrecovered: "Unrecovered"
+      been_recovered: "Been recovered"
     user_information: "User information"
     delete: "Delete"
+    flash_messages:
+      success: "Client is created successful"
+      update: "Client is updated successful"
+      success_error: "Can not create user for client"
+      update_error: "Can not update user for client"
   agency:
     crumb_edit: "Agency Edit"
     crumb_add: "Agency Add"
     agency_name: "Agency name"
     roman_name: "Roman name"
+    flash_messages:
+      success: "Agency is created successful"
+      update: "Agency is updated successful"
   account:
     crumb_add: "Account Add"
     crumb_edit: "Account Edit"
@@ -85,6 +99,9 @@ en:
     roman_name: "Roman name"
     cost: "Cost calculation： Input data "
     sync_account_id: "Sync account ID"
+    flash_messages:
+      success: "Account is created successful"
+      update: "Account is updated successful"
   conversion:
     crumb_add: "Conversion add"
     crumb_edit: "Conversion Edit"
@@ -128,6 +145,9 @@ en:
       label: "Tracking period"
       day: "Day"
     dashboard: "Dashboard"
+    flash_messages:
+      success: "Promotion is created successful"
+      update: "Promotion is updated successful"
   user:
     crumb_edit: "User edit"
     user_name: "User name"
@@ -143,5 +163,7 @@ en:
     disabled:
       label: "User disabled"
       disable: "i want to disable"
-
-
+    flash_messages:
+      success: "User is created successful en"
+      update: "User is updated successful en"
+  media_categories: ["Listing ad", "Display ad", "affiliate"]

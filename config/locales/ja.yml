@@ -55,20 +55,35 @@ ja:
     crumb_edit: "クライアント編集"
     crumb_add: "クライアント登録"
     crumb_list: "リクルート（ゼクシィ）"
-    client_name: "Client name ja"
-    roman_name: "Roman name ja"
-    tel: "Contact ja "
-    person_charge: "Person in charge ja"
-    person_sales: "Person sales ja"
-    contract_flg: "利用規約"
-    contract_type: "ご契約プラン"
+    client_name: "クライアント名："
+    roman_name: "クライント名(英語)："
+    tel: "電話番号："
+    person_charge: "ご担当者様："
+    person_sale: "担当営業："
+    contract_flg:
+      label: "利用規約"
+      standard_plan: "スタンダードプラン"
+      premium_plan: "プレミアムプラン(月額5万円)"
+    contract_type:
+      label: "ご契約プラン"
+      unrecovered: "未回収"
+      been_recovered: "回収済み"
     user_information: "ユーザー情報"
     delete: "削除"
+    flash_messages:
+      success: "Client is created successful ja"
+      update: "Client is updated successful ja"
+      success_error: "Can not create user for client ja"
+      update_error: "Can not update user for client ja"
   agency:
     crumb_edit: "代理店編集"
     crumb_add: "代理店登録"
+    crumb_list: ""
     agency_name: "代理店名"
     roman_name: "代理店名(英語)"
+    flash_messages:
+      success: "Agency is created successful ja"
+      update: "Agency is updated successful ja"
   account:
     crumb_add: "本体プロモーション"
     crumb_edit: "アカウント編集"
@@ -78,6 +93,9 @@ ja:
     roman_name: "アカウント名(英語)"
     cost: "コスト計算： 入力データ "
     sync_account_id: "アカウントの同期"
+    flash_messages:
+      success: "Account is created successful ja"
+      update: "Account is updated successful ja"
   conversion:
     crumb_add: "クライアント登録"
     crumb_edit: "クライアント編集"
@@ -121,6 +139,9 @@ ja:
       label: "計測期間"
       day: "日"
     dashboard: "ダッシュボード"
+    flash_messages:
+      success: "Promotion is created successful ja"
+      update: "Promotion is updated successful ja"
   user:
     crumb_edit: "ユーザー編集"
     user_name: "ユーザー名"
@@ -136,3 +157,7 @@ ja:
     disabled:
       label: "ユーザー無効化"
       disable: "無効化にする"
+    flash_messages:
+      success: "Account is created successful ja"
+      update: "Account is updated successful ja"
+  media_categories: ["Listing ad", "Display ad", "affiliate"]   

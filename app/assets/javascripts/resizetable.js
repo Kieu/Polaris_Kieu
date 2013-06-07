@@ -27,7 +27,7 @@ function tableResize(){
 
 	//最小サイズ
 	var min = 20;
-	console.log(num);
+
 	//テーブルごとにリサイズ処理する
 	for(i = 0;i < num;i++){
 		cell = "";
@@ -38,7 +38,7 @@ function tableResize(){
 
 		var userAgent = window.navigator.userAgent.toLowerCase();
 				
-		for(k = 1;k < cell;k++){
+		for(k = 0;k < cell;k++){
 			if($(getclassName).find("tr td").eq(k).css("display") == "none"){
 				continue;
 			}
@@ -49,29 +49,25 @@ function tableResize(){
 			if(userAgent.indexOf('chrome') != -1){
 				cellWidth = 
 					$(getclassName).eq(i).find("tr td").eq(k).outerWidth() -
-					parseInt($(getclassName).eq(i).find("tr td div").eq(k).css("border-left-width")) -
-					parseInt($(getclassName).eq(i).find("tr td div").eq(k).css("border-right-width")) + 1;
+					parseInt($(getclassName).eq(i).find("tr td").eq(k).css("border-left-width")) -
+					parseInt($(getclassName).eq(i).find("tr td").eq(k).css("border-right-width")) + 1;
 			//safariはouterWidthでborderが取れないのかも
 			}else if (userAgent.indexOf('safari') != -1) {
 				cellWidth = 
-					$(getclassName).eq(i).find("tr td div").eq(k).outerWidth();
+					$(getclassName).eq(i).find("tr td").eq(k).outerWidth();
 			//その他
 			}else{
-				
 				cellWidth = 
-					parseInt($(getclassName).eq(i).find("tr td div").eq(k).width()) -
-					parseInt($(getclassName).eq(i).find("tr td div").eq(k).css("border-left-width")) -
-					parseInt($(getclassName).eq(i).find("tr td div").eq(k).css("border-right-width"));
-					console.log($(getclassName).eq(i).find("tr td div").eq(k));
-					console.log($(getclassName).eq(i).find("tr td div").eq(k).width());
+					$(getclassName).eq(i).find("tr td").eq(k).outerWidth() -
+					parseInt($(getclassName).eq(i).find("tr td").eq(k).css("border-left-width")) -
+					parseInt($(getclassName).eq(i).find("tr td").eq(k).css("border-right-width"));
 			}
-			
+
 			if(cellWidth < min){
 				$(getclassName).eq(i).find("tr td").eq(k).css("width",min)
 				cellWidth = min;
 			}
 			$(className).eq(i).find("tr th").eq(k).css("width",(cellWidth));
-			$(getclassName).eq(i).find("tr td").eq(k).css("width",(cellWidth));
 		}
 
 		tableWidth = parseInt($(getclassName).eq(i).innerWidth());

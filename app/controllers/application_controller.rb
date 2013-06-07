@@ -8,8 +8,9 @@ class ApplicationController < ActionController::Base
     rescue_from ActiveRecord::RecordNotFound, with: :render_404
   end
   include SessionsHelper
+
   
-  #before_filter :set_locale
+  before_filter :set_locale
   
   def signed_in_user
     redirect_to signin_url, notice: "Please sign in." unless signed_in?
@@ -21,6 +22,11 @@ class ApplicationController < ActionController::Base
 
   def must_super_agency
     redirect_to promotions_path if current_user.client?
+  end
+  
+  def record_not_found
+    #render :text => "404 Not Found", :status => 404
+    render 'public/404', :status => :not_found
   end
   
   private
