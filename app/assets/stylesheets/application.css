@@ -365,4 +365,5 @@ ul.ui-autocomplete{
     border: 0px;
     font-size: 11px;
     background-color: #F8F8F8;
+     max-width: 180px;
 }
