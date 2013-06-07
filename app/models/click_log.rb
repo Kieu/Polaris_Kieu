@@ -37,6 +37,37 @@ class ClickLog < ActiveRecord::Base
     @logs = ClickLog.find_by_sql([sql_str] + params)
   end         
   
+  def self.get_logs id, media_category_id, account_id, start_date, end_date, show_error
+    set_table_name "click_#{id}_logs"
+    
+    params = [start_date, end_date]
+    where_clause = ""
+    
+    if media_category_id.present?
+      where_clause += " AND media_category_id=?"
+      params += [media_category_id.to_i]
+    end
+    if account_id.present?
+      where_clause += " AND account_id=? "
+      params += [account_id.to_i]
+    end
+    
+    if (show_error == "1")
+      sql_str = "select *, null as error_code, 'OK' as state from click_#{id}_logs
+               where DATE_FORMAT(created_at, '%Y/%m/%d') BETWEEN ? AND ? #{where_clause} union all
+               select *, 'OK' as state from click_error_#{id}_logs
+               where DATE_FORMAT(created_at, '%Y/%m/%d') BETWEEN ? AND ? #{where_clause}
+               ORDER BY media_category_id, click_utime "
+      params += params
+    else
+      sql_str = "select *, null as error_code, 'OK' as state from click_#{id}_logs
+               where DATE_FORMAT(created_at, '%Y/%m/%d') BETWEEN ? AND ? #{where_clause}
+               ORDER BY media_category_id, click_utime"
+    end
+    @logs = ClickLog.find_by_sql([sql_str] + params)
+  end         
+  
+  
   def self.get_log_count id, media_category_id, account_id, start_date, end_date, show_error
     
     params = [start_date, end_date]

@@ -1,4 +1,6 @@
-<link rel="stylesheet" href="/assets/css/logs.css" type="text/css" media="screen"  />
+<%= stylesheet_link_tag "css/logs" %>
+<%= stylesheet_link_tag "css/common" %>
+<%= stylesheet_link_tag "css/flexigrid.pack" %>
 <% if flash[:error] %>
 	<div><%= flash[:error] %></div>
 <% end %>
@@ -108,7 +110,7 @@
 			<div id="graph">
 				<div class="fl-r">
 					<p><a id = "show_option"><img src="/assets/btn_dl_option.gif"  /></a></p>
-					<p><a href="#"><img src="/assets/btn_dl_report.gif"  /></a></p>
+					<p><a id="download_csv"><img src="/assets/btn_dl_report.gif"  /></a></p>
 				</div>
 			</div>
 			<div class="w_box">
@@ -124,23 +126,35 @@
 	function showColumn(tbl, colIndex, visible) {
 	    $(tbl).flexToggleCol(colIndex, visible);
 	}
+	$('#download_csv').click(function(){
+        $.ajax({
+            url: "<%= download_csv_click_logs_path %>",
+            data: {"promotion_id" : "<%= @promotion.id if @promotion %>",
+            	   "media_cateory_id": $("#media_category_id").val(),
+            	   "account_id": $("#account_id").val()},
+            method: "post",
+            success: function(data){
+            }
+
+        })
+    })
 	jQuery(document).ready(function($) {
 		$(".newTable06").flexigrid({
 			url: "<%= get_logs_list_click_logs_path %>",
 			ptionGet : "4",
 			dataType: 'json',
 			colModel : [
-				{display: 'Click Time', name : 'click_utime', width : 100, sortable : true, align: 'center', hide: <%= cookies[:coptions][0] == "0" ? 1 : 0 %>},
-				{display: 'Media Name:', name : 'media_id', width : 200, sortable : true, align: 'center', hide: <%= cookies[:coptions][1] == "0" ? 1 : 0 %>},
-				{display: 'Account Name', name : 'account_id', width : 200, sortable : true, align: 'center', hide: <%= cookies[:coptions][2] == "0" ? 1 : 0 %>},
-				{display: 'Campaign Name', name : 'campaign_id', width : 200, sortable : true, align: 'center', hide: <%= cookies[:coptions][3] == "0" ? 1 : 0 %>},
-				{display: 'Ad Group Name', name : 'group_id', width : 200, sortable : true, align: 'center', hide: <%= cookies[:coptions][4] == "0" ? 1 : 0 %>},
-				{display: 'Ad Name', name : 'unit_id', width : 200, sortable : true, align: 'center', hide: <%= cookies[:coptions][5] == "0" ? 1 : 0 %>},
-				{display: 'URL', name : 'redirect_url', width : 100, sortable : true, align: 'center', hide: <%= cookies[:coptions][6] == "0" ? 1 : 0 %>},
-				{display: 'SESID', name : 'session_id', width : 100, sortable : true, align: 'center', hide: <%= cookies[:coptions][7] == "0" ? 1 : 0 %>},
-				{display: 'OS', name : 'device_category', width : 100, sortable : true, align: 'center', hide: <%= cookies[:coptions][8] == "0" ? 1 : 0 %>},
-				{display: 'OK/NG', name : 'state', width : 100, sortable : true, align: 'center', hide: <%= cookies[:coptions][9] == "0" ? 1 : 0 %>},
-				{display: 'Error Message', name : 'error_code', width : 100, sortable : true, align: 'center', hide: <%= cookies[:coptions][10] == "0" ? 1 : 0 %>},
+				{display: 'Click Time', name : 'click_utime', sortable : true, align: 'center', hide: <%= cookies[:coptions][0] == "0" ? 1 : 0 %>},
+				{display: 'Media Name:', name : 'media_id', sortable : false, align: 'center', hide: <%= cookies[:coptions][1] == "0" ? 1 : 0 %>},
+				{display: 'Account Name', name : 'account_id', sortable : false, align: 'center', hide: <%= cookies[:coptions][2] == "0" ? 1 : 0 %>},
+				{display: 'Campaign Name', name : 'campaign_id', sortable : false, align: 'center', hide: <%= cookies[:coptions][3] == "0" ? 1 : 0 %>},
+				{display: 'Ad Group Name', name : 'group_id', sortable : false, align: 'center', hide: <%= cookies[:coptions][4] == "0" ? 1 : 0 %>},
+				{display: 'Ad Name', name : 'unit_id', sortable : false, align: 'center', hide: <%= cookies[:coptions][5] == "0" ? 1 : 0 %>},
+				{display: 'URL', name : 'redirect_url', sortable : false, align: 'center', hide: <%= cookies[:coptions][6] == "0" ? 1 : 0 %>},
+				{display: 'SESID', name : 'session_id', sortable : false, align: 'center', hide: <%= cookies[:coptions][7] == "0" ? 1 : 0 %>},
+				{display: 'OS', name : 'device_category', sortable : false, align: 'center', hide: <%= cookies[:coptions][8] == "0" ? 1 : 0 %>},
+				{display: 'OK/NG', name : 'state', sortable : false, align: 'center', hide: <%= cookies[:coptions][9] == "0" ? 1 : 0 %>},
+				{display: 'Error Message', name : 'error_code', sortable : false, align: 'center', hide: <%= cookies[:coptions][10] == "0" ? 1 : 0 %>},
 				],
 				preProcess : function (json) {
 	            var results = new Array();
@@ -178,12 +192,13 @@
 				tableResize();
 				$('tr#row-0 td:nth-child('+(1+'n-'+(11))+')').remove();
 				$('tr#row-0').append("<td colspan='11'><div class='group_header'>Listing ad</div></td>");
-				
+				$('tr#row-0').addClass('group_header');
 				$('tr#row-1 td:nth-child('+(1+'n-'+(11))+')').remove();
 				$('tr#row-1').append("<td colspan='11'><div class='group_header'>Display ad</div></td>");
-				
+				$('tr#row-1').addClass('group_header');
 				$('tr#row-2 td:nth-child('+(1+'n-'+(11))+')').remove();
 				$('tr#row-2').append("<td colspan='11'><div class='group_header'>Affiliate</div></td>");
+				$('tr#row-2').addClass('group_header');
 				
 			}
 		});

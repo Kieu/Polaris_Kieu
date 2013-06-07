@@ -1,3 +1,4 @@
+require "resque"
 class ConversionPromotionLogsController < ApplicationController
 before_filter :signed_in_user
 before_filter :set_cookies
@@ -16,6 +17,13 @@ def get_conversion_logs_list
   count = ConversionLog.get_count(promotion_id,params[:cv_id], params[:media_category_id], params[:account_id],
                                   start_date, end_date, cookies[:ser])
   render json: {page: params[:page], total: count, rows: rows}
+end
+
+
+def download_csv
+    Resque.enqueue ExportConversionLogsData, current_user.id, params[:promotion_id].to_i, params[:conversion_id], params[:media_category_id], params[:account_id], cookies[:cs], cookies[:ce], cookies[:ser]
+    
+    render text: "processing"
 end
 
 def get_rows conversion_logs

@@ -1,4 +1,4 @@
-# Sample localization file for English. Add more files in this directory for other locales.
+# Sample localization file for . Add more files in this directory for other locales.
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
@@ -13,33 +13,436 @@ en:
       category: ["IT/Media/App", "AV/Consumer electronics", "Food/Beverage/Consumer Goods", "Distribution/retail/mail order", "Finance", "Communication", "Real estate", "Human resources", "automobile", "Service", "Others"]
   conversions:
     unique_definition: ["Only once", "Limitless", "Once a day", "Once every 7 days", "Once every 28 days", "Once a month"]
-  errors: &errors
-    format: ! '%{attribute}%{message}'
-    max_size: '%s以下にしてください en'
-    messages:
-      accepted: 受諾してください。 English
-      blank: 入力してください。English
-      confirmation: 確認の入力が一致しません。 English
-      empty: 入力してください。English
-      equal_to: ! '%{count}にしてください。English ' 
-      even: 偶数にしてください。English
-      exclusion: 予約されています。English
-      greater_than: ! '%{count}より大きい値にしてください。English'
-      greater_than_or_equal_to: ! '%{count}以上の値にしてください。English'
-      inclusion: 正しい値が選択されていません。English
-      invalid: 正しく入力して下さい。English
-      less_than: ! '%{count}より小さい値にしてください。English'
-      less_than_or_equal_to: ! '%{count}以下の値にしてください。English'
-      not_a_number: 数値で入力してください。English
-      not_an_integer: 整数で入力してください。English
-      odd: 奇数にしてください。
-      record_invalid: バリデーションに失敗しました。 English'%{errors}'
-      taken: すでに登録されています。English
-      too_long: ! '%{count}文字以内で入力してください。English'
-      too_short: ! '%{count}文字以上で入力してください。English'
-      wrong_length: ! '%{count}文字で入力してください。English'
-      acceptance: チェックボックスを選択してください。English
-
+  activerecord:
+    attributes:
+      client:
+    errors:
+      models:
+        client:
+          attributes:
+            client_name:
+              blank: "Client name can't be blank"
+              accepted: Client name must be accepted 
+              confirmation: Client name doesn't match confirmation 
+              empty: Client name can't be empty
+              equal_to: ! 'Client name must be equal to %{count} ' 
+              even: Client name must be even
+              exclusion: Client name is reserved
+              greater_than: ! 'Client name must be greater than %{count}'
+              greater_than_or_equal_to: ! 'Client name must be greater than or equal to %{count}'
+              inclusion: Client name is not included in the list
+              invalid: Client name is invalid
+              less_than: ! 'Client name must be less than %{count}'
+              less_than_or_equal_to: ! 'Client name must be less than or equal to %{count}'
+              not_a_number: Client name is not a number
+              not_an_integer: Client name is not a interger
+              odd: Client name must be odd
+              record_invalid: Client name バリデーションに失敗しました。 '%{errors}'
+              taken: Client name すでに登録されています。
+              too_long: ! 'Client name is too long (maximum is %{count} characters)'
+              too_short: ! 'Client name is too short (minimum is %{count} characters)'
+              wrong_length: ! 'Client name is the wrong length (should be %{count} characters)'
+              acceptance: Client name must be accepted
+            roman_name: 
+              blank: "Roman name can't be blank"
+              accepted: Roman name must be accepted 
+              confirmation: Roman name doesn't match confirmation 
+              empty: Roman name can't be empty
+              equal_to: ! 'Client name must be equal to %{count} ' 
+              even: Roman name must be even
+              exclusion: Roman name is reserved
+              greater_than: ! 'Roman name must be greater than %{count}'
+              greater_than_or_equal_to: ! 'Roman name must be greater than or equal to %{count}'
+              inclusion: Roman name is not included in the list
+              invalid: Roman name is invalid
+              less_than: ! 'Roman name must be less than %{count}'
+              less_than_or_equal_to: ! 'Client name must be less than or equal to %{count}'
+              not_a_number: Roman name is not a number
+              not_an_integer: Roman name is not a interger
+              odd: Roman name must be odd
+              record_invalid: Roman name バリデーションに失敗しました。 '%{errors}'
+              taken: Roman name すでに登録されています。
+              too_long: ! 'Roman name is too long (maximum is %{count} characters)'
+              too_short: ! 'Roman name is too short (minimum is %{count} characters)'
+              wrong_length: ! 'Roman name is the wrong length (should be %{count} characters)'
+              acceptance: Roman name must be accepted
+            tel: 
+              blank: "Contact can't be blank"
+              invalid: Contact is invalid
+            person_charge:
+              blank: "Person in charge can't be blank"
+              too_long: ! 'Person in charge is too long (maximum is %{count} characters)'
+              too_short: ! 'Person in charge is too short (minimum is %{count} characters)'
+            person_sale:
+              blank: "Person in sales can't be blank"
+              too_long: ! 'Person in sales is too long (maximum is %{count} characters)'
+              too_short: ! 'Person in sales is too short (minimum is %{count} characters)'
+        user:
+          attributes:
+            username:
+              blank: "User name can't be blank"
+              accepted: User name must be accepted 
+              confirmation: User name doesn't match confirmation 
+              empty: User name can't be empty
+              equal_to: ! 'User name must be equal to %{count} ' 
+              even: User name must be even
+              exclusion: User name is reserved
+              greater_than: ! 'User name must be greater than %{count}'
+              greater_than_or_equal_to: ! 'User name must be greater than or equal to %{count}'
+              inclusion: User name is not included in the list
+              invalid: User name is invalid
+              less_than: ! 'User name must be less than %{count}'
+              less_than_or_equal_to: ! 'User name must be less than or equal to %{count}'
+              not_a_number: User name is not a number
+              not_an_integer: User name is not a interger
+              odd: User name must be odd
+              record_invalid: User name バリデーションに失敗しました。 '%{errors}'
+              taken: User name すでに登録されています。
+              too_long: ! 'User name is too long (maximum is %{count} characters)'
+              too_short: ! 'User name is too short (minimum is %{count} characters)'
+              wrong_length: ! 'User name is the wrong length (should be %{count} characters)'
+              acceptance: User name must be accepted
+            roman_name: 
+              blank: "Roman name can't be blank"
+              accepted: Roman name must be accepted 
+              confirmation: Roman name doesn't match confirmation 
+              empty: Roman name can't be empty
+              equal_to: ! 'Client name must be equal to %{count} ' 
+              even: Roman name must be even
+              exclusion: Roman name is reserved
+              greater_than: ! 'Roman name must be greater than %{count}'
+              greater_than_or_equal_to: ! 'Roman name must be greater than or equal to %{count}'
+              inclusion: Roman name is not included in the list
+              invalid: Roman name is invalid
+              less_than: ! 'Roman name must be less than %{count}'
+              less_than_or_equal_to: ! 'Client name must be less than or equal to %{count}'
+              not_a_number: Roman name is not a number
+              not_an_integer: Roman name is not a interger
+              odd: Roman name must be odd
+              record_invalid: Roman name バリデーションに失敗しました。 '%{errors}'
+              taken: Roman name すでに登録されています。
+              too_long: ! 'Roman name is too long (maximum is %{count} characters)'
+              too_short: ! 'Roman name is too short (minimum is %{count} characters)'
+              wrong_length: ! 'Roman name is the wrong length (should be %{count} characters)'
+              acceptance: Roman name must be accepted
+            email: 
+              blank: "Email address can't be blank"
+              invalid: Email address is invalid
+            company_id:
+              blank: "Person in charge can't be blank"
+              too_long: ! 'Person in charge is too long (maximum is %{count} characters)'
+              too_short: ! 'Person in charge is too short (minimum is %{count} characters)'
+            role_id:
+              blank: "Person in sales can't be blank"
+              too_long: ! 'Person in sales is too long (maximum is %{count} characters)'
+              too_short: ! 'Person in sales is too short (minimum is %{count} characters)'
+        agency:
+          attributes:
+            agency_name:
+              blank: "Agency name can't be blank"
+              accepted: Agency name must be accepted 
+              confirmation: Agency name doesn't match confirmation 
+              empty: Agency name can't be empty
+              equal_to: ! 'Agency name must be equal to %{count} ' 
+              even: Agency name must be even
+              exclusion: Agency name is reserved
+              greater_than: ! 'Agency name must be greater than %{count}'
+              greater_than_or_equal_to: ! 'Agency name must be greater than or equal to %{count}'
+              inclusion: Agency name is not included in the list
+              invalid: Agency name is invalid
+              less_than: ! 'Agency name must be less than %{count}'
+              less_than_or_equal_to: ! 'Agency name must be less than or equal to %{count}'
+              not_a_number: Agency name is not a number
+              not_an_integer: Agency name is not a interger
+              odd: Agency name must be odd
+              record_invalid: Agency name バリデーションに失敗しました。 '%{errors}'
+              taken: Agency name すでに登録されています。
+              too_long: ! 'Agency name is too long (maximum is %{count} characters)'
+              too_short: ! 'Agency name is too short (minimum is %{count} characters)'
+              wrong_length: ! 'Agency name is the wrong length (should be %{count} characters)'
+              acceptance: Agency name must be accepted
+            roman_name: 
+              blank: "Roman name can't be blank"
+              accepted: Roman name must be accepted 
+              confirmation: Roman name doesn't match confirmation 
+              empty: Roman name can't be empty
+              equal_to: ! 'Client name must be equal to %{count} ' 
+              even: Roman name must be even
+              exclusion: Roman name is reserved
+              greater_than: ! 'Roman name must be greater than %{count}'
+              greater_than_or_equal_to: ! 'Roman name must be greater than or equal to %{count}'
+              inclusion: Roman name is not included in the list
+              invalid: Roman name is invalid
+              less_than: ! 'Roman name must be less than %{count}'
+              less_than_or_equal_to: ! 'Client name must be less than or equal to %{count}'
+              not_a_number: Roman name is not a number
+              not_an_integer: Roman name is not a interger
+              odd: Roman name must be odd
+              record_invalid: Roman name バリデーションに失敗しました。 '%{errors}'
+              taken: Roman name すでに登録されています。
+              too_long: ! 'Roman name is too long (maximum is %{count} characters)'
+              too_short: ! 'Roman name is too short (minimum is %{count} characters)'
+              wrong_length: ! 'Roman name is the wrong length (should be %{count} characters)'
+              acceptance: Roman name must be accepted
+        account:
+          attributes:
+            account_name:
+              blank: "Account name can't be blank"
+              accepted: Account name must be accepted 
+              confirmation: Account name doesn't match confirmation 
+              empty: Account name can't be empty
+              equal_to: ! 'Account name must be equal to %{count} ' 
+              even: Account name must be even
+              exclusion: Account name is reserved
+              greater_than: ! 'Account name must be greater than %{count}'
+              greater_than_or_equal_to: ! 'Account name must be greater than or equal to %{count}'
+              inclusion: Account name is not included in the list
+              invalid: Account name is invalid
+              less_than: ! 'Account name must be less than %{count}'
+              less_than_or_equal_to: ! 'Account name must be less than or equal to %{count}'
+              not_a_number: Account name is not a number
+              not_an_integer: Account name is not a interger
+              odd: Account name must be odd
+              record_invalid: Account name バリデーションに失敗しました。 '%{errors}'
+              taken: Account name すでに登録されています。
+              too_long: ! 'Account name is too long (maximum is %{count} characters)'
+              too_short: ! 'Account name is too short (minimum is %{count} characters)'
+              wrong_length: ! 'Account name is the wrong length (should be %{count} characters)'
+              acceptance: Account name must be accepted
+            roman_name: 
+              blank: "Roman name can't be blank"
+              accepted: Roman name must be accepted 
+              confirmation: Roman name doesn't match confirmation 
+              empty: Roman name can't be empty
+              equal_to: ! 'Client name must be equal to %{count} ' 
+              even: Roman name must be even
+              exclusion: Roman name is reserved
+              greater_than: ! 'Roman name must be greater than %{count}'
+              greater_than_or_equal_to: ! 'Roman name must be greater than or equal to %{count}'
+              inclusion: Roman name is not included in the list
+              invalid: Roman name is invalid
+              less_than: ! 'Roman name must be less than %{count}'
+              less_than_or_equal_to: ! 'Client name must be less than or equal to %{count}'
+              not_a_number: Roman name is not a number
+              not_an_integer: Roman name is not a interger
+              odd: Roman name must be odd
+              record_invalid: Roman name バリデーションに失敗しました。 '%{errors}'
+              taken: Roman name すでに登録されています。
+              too_long: ! 'Roman name is too long (maximum is %{count} characters)'
+              too_short: ! 'Roman name is too short (minimum is %{count} characters)'
+              wrong_length: ! 'Roman name is the wrong length (should be %{count} characters)'
+              acceptance: Roman name must be accepted
+            media_id: 
+              blank: "Media name can't be blank"
+              accepted: Media name must be accepted 
+              confirmation: Media name doesn't match confirmation 
+              empty: Media name can't be empty
+              equal_to: ! 'Media name must be equal to %{count} ' 
+              even: Media name must be even
+              exclusion: Media name  is reserved
+              greater_than: ! 'Media name must be greater than %{count}'
+              greater_than_or_equal_to: ! 'Media name must be greater than or equal to %{count}'
+              inclusion: Media name is not included in the list
+              invalid: Media name  is invalid
+              less_than: ! 'Media name must be less than %{count}'
+              less_than_or_equal_to: ! 'Media name must be less than or equal to %{count}'
+              not_a_number: Media name is not a number
+              not_an_integer: Media name is not a interger
+              odd: Media name must be odd
+              record_invalid: Media name バリデーションに失敗しました。 '%{errors}'
+              taken: Media すでに登録されています。
+              too_long: ! 'Media name is too long (maximum is %{count} characters)'
+              too_short: ! 'Media name is too short (minimum is %{count} characters)'
+              wrong_length: ! 'Media name is the wrong length (should be %{count} characters)'
+              acceptance: Roman name must be accepted
+            cost: 
+              blank: "Cost can't be blank"
+              accepted: Cost must be accepted 
+              confirmation: Cost doesn't match confirmation 
+              empty: Cost can't be empty
+              equal_to: ! 'Media name must be equal to %{count} ' 
+              even: Cost must be even
+              exclusion: Cost is reserved
+              greater_than: ! 'Cost must be greater than %{count}'
+              greater_than_or_equal_to: ! 'Cost must be greater than or equal to %{count}'
+              inclusion: Cost is not included in the list
+              invalid: Cost  is invalid
+              less_than: ! 'Cost must be less than %{count}'
+              less_than_or_equal_to: ! 'Cost must be less than or equal to %{count}'
+              not_a_number: Cost is not a number
+              not_an_integer: Cost is not a interger
+              odd: Cost must be odd
+              record_invalid: Cost バリデーションに失敗しました。 '%{errors}'
+              taken: Cost すでに登録されています。
+              too_long: ! 'Cost is too long (maximum is %{count} characters)'
+              too_short: ! 'Cost is too short (minimum is %{count} characters)'
+              wrong_length: ! 'Cost is the wrong length (should be %{count} characters)'
+              acceptance: Cost must be accepted
+        conversion:
+          attributes:
+            conversion_name:
+              blank: "Conversion name can't be blank"
+              accepted: Conversion name must be accepted 
+              confirmation: Conversion name doesn't match confirmation 
+              empty: Conversion name can't be empty
+              equal_to: ! 'Conversion name must be equal to %{count} ' 
+              even: Conversion name must be even
+              exclusion: Conversion name is reserved
+              greater_than: ! 'Conversion name must be greater than %{count}'
+              greater_than_or_equal_to: ! 'Conversion name must be greater than or equal to %{count}'
+              inclusion: Conversion name is not included in the list
+              invalid: Conversion name is invalid
+              less_than: ! 'Conversion name must be less than %{count}'
+              less_than_or_equal_to: ! 'Conversion name must be less than or equal to %{count}'
+              not_a_number: Conversion name is not a number
+              not_an_integer: Conversion name is not a interger
+              odd: Conversion name must be odd
+              record_invalid: Conversion name バリデーションに失敗しました。 '%{errors}'
+              taken: Conversion name すでに登録されています。
+              too_long: ! 'Conversion name is too long (maximum is %{count} characters)'
+              too_short: ! 'Conversion name is too short (minimum is %{count} characters)'
+              wrong_length: ! 'Conversion name is the wrong length (should be %{count} characters)'
+              acceptance: Conversion name must be accepted
+            roman_name: 
+              blank: "Roman name can't be blank"
+              accepted: Roman name must be accepted 
+              confirmation: Roman name doesn't match confirmation 
+              empty: Roman name can't be empty
+              equal_to: ! 'Client name must be equal to %{count} ' 
+              even: Roman name must be even
+              exclusion: Roman name is reserved
+              greater_than: ! 'Roman name must be greater than %{count}'
+              greater_than_or_equal_to: ! 'Roman name must be greater than or equal to %{count}'
+              inclusion: Roman name is not included in the list
+              invalid: Roman name is invalid
+              less_than: ! 'Roman name must be less than %{count}'
+              less_than_or_equal_to: ! 'Client name must be less than or equal to %{count}'
+              not_a_number: Roman name is not a number
+              not_an_integer: Roman name is not a interger
+              odd: Roman name must be odd
+              record_invalid: Roman name バリデーションに失敗しました。 '%{errors}'
+              taken: Roman name すでに登録されています。
+              too_long: ! 'Roman name is too long (maximum is %{count} characters)'
+              too_short: ! 'Roman name is too short (minimum is %{count} characters)'
+              wrong_length: ! 'Roman name is the wrong length (should be %{count} characters)'
+              acceptance: Roman name must be accepted
+            sale_unit_price: 
+              blank: "Sale unit price can't be blank"
+              accepted: Sale unit price must be accepted 
+              confirmation: Sale unit price doesn't match confirmation 
+              empty: Sale unit price can't be empty
+              equal_to: ! 'Sale unit price must be equal to %{count} ' 
+              even: Sale unit price must be even
+              exclusion: Sale unit price  is reserved
+              greater_than: ! 'Sale unit price must be greater than %{count}'
+              greater_than_or_equal_to: ! 'Sale unit price must be greater than or equal to %{count}'
+              inclusion: Sale unit price is not included in the list
+              invalid: Sale unit price  is invalid
+              less_than: ! 'Sale unit price must be less than %{count}'
+              less_than_or_equal_to: ! 'Sale unit price must be less than or equal to %{count}'
+              not_a_number: Sale unit price is not a number
+              not_an_integer: Sale unit price is not a interger
+              odd: Sale unit price must be odd
+              record_invalid: Sale unit price バリデーションに失敗しました。 '%{errors}'
+              taken: Sale unit price すでに登録されています。
+              too_long: ! 'Sale unit price is too long (maximum is %{count} characters)'
+              too_short: ! 'Sale unit price is too short (minimum is %{count} characters)'
+              wrong_length: ! 'Sale unit price is the wrong length (should be %{count} characters)'
+              acceptance: Sale unit price must be accepted
+        promotion:
+          attributes:
+            promotion_name:
+              blank: "Promotion name can't be blank"
+              accepted: Promotion name must be accepted 
+              confirmation: Promotion name doesn't match confirmation 
+              empty: Promotion name can't be empty
+              equal_to: ! 'Promotion name must be equal to %{count} ' 
+              even: Promotion name must be even
+              exclusion: Promotion name is reserved
+              greater_than: ! 'Promotion name must be greater than %{count}'
+              greater_than_or_equal_to: ! 'Promotion name must be greater than or equal to %{count}'
+              inclusion: Promotion name is not included in the list
+              invalid: Promotion name is invalid
+              less_than: ! 'Promotion name must be less than %{count}'
+              less_than_or_equal_to: ! 'Promotion name must be less than or equal to %{count}'
+              not_a_number: Promotion name is not a number
+              not_an_integer: Promotion name is not a interger
+              odd: Promotion name must be odd
+              record_invalid: Promotion name バリデーションに失敗しました。 '%{errors}'
+              taken: Promotion name すでに登録されています。
+              too_long: ! 'Promotion name is too long (maximum is %{count} characters)'
+              too_short: ! 'Promotion name is too short (minimum is %{count} characters)'
+              wrong_length: ! 'Promotion name is the wrong length (should be %{count} characters)'
+              acceptance: Promotion name must be accepted
+            roman_name: 
+              blank: "Roman name can't be blank"
+              accepted: Roman name must be accepted 
+              confirmation: Roman name doesn't match confirmation 
+              empty: Roman name can't be empty
+              equal_to: ! 'Client name must be equal to %{count} ' 
+              even: Roman name must be even
+              exclusion: Roman name is reserved
+              greater_than: ! 'Roman name must be greater than %{count}'
+              greater_than_or_equal_to: ! 'Roman name must be greater than or equal to %{count}'
+              inclusion: Roman name is not included in the list
+              invalid: Roman name is invalid
+              less_than: ! 'Roman name must be less than %{count}'
+              less_than_or_equal_to: ! 'Client name must be less than or equal to %{count}'
+              not_a_number: Roman name is not a number
+              not_an_integer: Roman name is not a interger
+              odd: Roman name must be odd
+              record_invalid: Roman name バリデーションに失敗しました。 '%{errors}'
+              taken: Roman name すでに登録されています。
+              too_long: ! 'Roman name is too long (maximum is %{count} characters)'
+              too_short: ! 'Roman name is too short (minimum is %{count} characters)'
+              wrong_length: ! 'Roman name is the wrong length (should be %{count} characters)'
+              acceptance: Roman name must be accepted
+            promotion_category_id: 
+              blank: "Category can't be blank"
+              accepted: Category must be accepted 
+              confirmation: Category doesn't match confirmation 
+              empty: Category can't be empty
+              equal_to: ! 'Category must be equal to %{count} ' 
+              even: Category must be even
+              exclusion: Category  is reserved
+              greater_than: ! 'Category must be greater than %{count}'
+              greater_than_or_equal_to: ! 'Category must be greater than or equal to %{count}'
+              inclusion: Category is not included in the list
+              invalid: Category  is invalid
+              less_than: ! 'Category must be less than %{count}'
+              less_than_or_equal_to: ! 'Category must be less than or equal to %{count}'
+              not_a_number: Category is not a number
+              not_an_integer: Category is not a interger
+              odd: Category must be odd
+              record_invalid: Category バリデーションに失敗しました。 '%{errors}'
+              taken: Category すでに登録されています。
+              too_long: ! 'Category is too long (maximum is %{count} characters)'
+              too_short: ! 'Category is too short (minimum is %{count} characters)'
+              wrong_length: ! 'Category is the wrong length (should be %{count} characters)'
+              acceptance: Category must be accepted
+            tracking_period: 
+              blank: "Tracking period can't be blank"
+              accepted: Tracking period must be accepted 
+              confirmation: Tracking period doesn't match confirmation 
+              empty: Tracking period can't be empty
+              equal_to: ! 'Tracking period must be equal to %{count} ' 
+              even: Tracking period must be even
+              exclusion: Tracking period  is reserved
+              greater_than: ! 'Tracking period must be greater than %{count}'
+              greater_than_or_equal_to: ! 'Tracking period must be greater than or equal to %{count}'
+              inclusion: Tracking period is not included in the list
+              invalid: Tracking period  is invalid
+              less_than: ! 'Tracking period must be less than %{count}'
+              less_than_or_equal_to: ! 'Tracking period must be less than or equal to %{count}'
+              not_a_number: Tracking period is not a number
+              not_an_integer: Tracking period is not a interger
+              odd: Tracking period must be odd
+              record_invalid: Tracking period バリデーションに失敗しました。 '%{errors}'
+              taken: Tracking period すでに登録されています。
+              too_long: ! 'Tracking period is too long (maximum is %{count} characters)'
+              too_short: ! 'Tracking period is too short (minimum is %{count} characters)'
+              wrong_length: ! 'Tracking period is the wrong length (should be %{count} characters)'
+              acceptance: Tracking period must be accepted
   layout:
     login: "Login"
     logout: "Logout"
@@ -138,7 +541,7 @@ en:
     account_name: "Account name"
   promotion:
     crumb_edit: "Promotion edit"
-    crumb_add: "Promotion asd"
+    crumb_add: "Promotion add"
     promotion_name: "Promotion name"
     category: "Category"
     tracking_period:
