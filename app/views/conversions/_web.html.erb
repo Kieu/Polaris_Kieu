@@ -1,24 +1,42 @@
-<%= f.label "Duplicate" %>
-<%= f.radio_button :duplicate, 0, checked: true %>
-<%= f.label "Yes" %>
-<%= f.radio_button :duplicate, 1 %>
-<%= f.label "No" %><br />
-
-<%= f.label "Starting point setting" %>
-<%= f.radio_button :start_point, 0, checked: true %>
-<%= f.label "Set" %>
-<%= f.radio_button :start_point, 1 %>
-<%= f.label "Not set" %><br />
-
-<%= f.label "Sale unit price" %>
-<%= f.text_field :sale_unit_price, maxlength: 255, style: "width: 250px" %><br />
-
-<%= f.label "Reward format" %>
-<%= f.radio_button :reward_form, 0 %>
-<%= f.label "Fixed amount" %>
-<%= f.radio_button :reward_form, 1 %>
-<%= f.label "Fixed rate" %><br />
-
-<%= f.label "Unique definition" %>
-<%= f.select :unique_def,
-  t("conversions.unique_definition").each_with_index.map {|name, index| [name, index]} %><br />
+<!-- WEB選択 -->
+<tbody>
+  <tr>
+    <th><a href="#"><img src="/assets/icon_help.gif" /></a><%= f.label "重複排除：" %></th>
+    <td colspan="2"><label>
+      <%= f.radio_button :duplicate, 0, checked: true %>あり
+      </label></td>
+    <td colspan="2"><label>
+      <%= f.radio_button :duplicate, 1 %>なし
+    </label></td>
+  </tr>
+  <tr>
+    <th><%= f.label "ユニーク定義：" %></th>
+    <td colspan="4">
+      <%= f.select :unique_def, t("conversions.unique_definition").each_with_index.map {|name, index| [name, index]} %>
+    </td>
+  </tr>
+  <tr>
+    <th>&lt;オプション①&gt;<br /><%= f.label "起点設定：" %></th>
+    <td colspan="2"><br /><label>
+      <%= f.radio_button :start_point, 0, checked: true %>設定する
+    </label></td>
+    <td colspan="2"><br /><label>
+      <%= f.radio_button :start_point, 1 %>設定しない
+    </label></td>
+  </tr>
+  <tr>
+    <th><%= f.label "売上単価：" %></th>
+    <td colspan="4">
+      <%= f.text_field :sale_unit_price, id: "name", class: "input-text", placeholder: "￥" %>
+    </td>
+  </tr>
+  <tr>
+    <th>&lt;オプション②&gt;<br /><%= f.label "報酬型式：" %></th>
+    <td colspan="2"><br /><label>
+      <%= f.radio_button :reward_form, 0 %>定額型
+    </label></td>
+    <td colspan="2"><br /><label>
+      <%= f.radio_button :reward_form, 1 %>定率型
+    </label></td>
+  </tr>
+</tbody>
