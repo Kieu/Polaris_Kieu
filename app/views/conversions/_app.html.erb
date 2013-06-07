@@ -1,18 +1,23 @@
-<%= f.label "Tracking type" %>
-<%= f.radio_button :track_type, 0, checked: true, onclick: "render_install();" %>
-<%= f.label "Install" %>
-<%= f.radio_button :track_type, 1, onclick: "render_action();" %>
-<%= f.label "Action in App" %><br />
-
-<div id="type_area">
-  <%= render "app_install", f: f %>
-</div>
-
-<script>
-  function render_install() {
-    $('#type_area').html('<%=j render "app_install", f: f %>')
+<!-- APP選択 -->
+<script type="text/javascript">
+  function render_install(){
+    $('#app_type_area').html('<%=j render "app_install", f: f %>');
   }
-  function render_action() {
-    $('#type_area').html('<%=j render "app_action_in_app", f: f %>')
+  function render_action_in_app(){
+    $('#app_type_area').html('<%=j render "app_action_in_app", f: f %>');
   }
 </script>
+<tbody>
+  <tr>
+    <th><%= f.label "計測タイプ：" %></th>
+    <td colspan="2"><label>
+      <%= f.radio_button :track_type, 0, checked: true, onclick: "render_install();" %>Install
+    </label></td>
+    <td colspan="2"><label>
+      <%= f.radio_button :track_type, 1, onclick: "render_action_in_app();" %>アプリ内アクション
+    </label></td>
+  </tr>
+</tbody>
+<div id="app_type_area">
+  <%= render "app_install", f: f %>
+</div>
