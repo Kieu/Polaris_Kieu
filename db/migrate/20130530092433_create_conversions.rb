@@ -21,7 +21,7 @@ class CreateConversions < ActiveRecord::Migration
       t.text :conversion_combine
       t.integer :create_user_id
       t.integer :update_user_id
-      t.integer :del_flg
+      t.integer :del_flg, default: 0
 
       t.timestamps
     end

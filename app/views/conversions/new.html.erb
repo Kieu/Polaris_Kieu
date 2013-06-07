@@ -1,39 +1,96 @@
-<%= link_to @promotion.client.client_name, client_path(@promotion.client_id) %> > <%= link_to @promotion.promotion_name, promotion_path(@promotion) %> > Conversion Registration
+<script type="text/javascript">
+  ChiliBook.recipeFolder = "./lib/chili/";
+  $(document).ready(function (){
+    $("#current_rev").html("v"+$.mcDropdown.version);
+    $("#category").mcDropdown("#categorymenu");
+    $("#category2").mcDropdown("#categorymenu2");
+  });
 
-<%= form_for @conversion do |f| %>
-  <%= hidden_field_tag :promotion_id, params[:promotion_id] %>
-  <%= f.label "Conversion name" %>
-  <%= f.text_field :conversion_name, maxlength: 255, style: "width: 250px" %><br />
-
-  <%= f.label "Roman name" %>
-  <%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %><br />
-
-  <%= f.label "Type" %>
-  <%= f.radio_button :conversion_category, 0, checked: true, onclick: "render_web();" %>
-  <%= f.label "Web" %>
-  <%= f.radio_button :conversion_category, 1, onclick: "render_app();" %>
-  <%= f.label "App" %>
-  <%= f.radio_button :conversion_category, 2, onclick: "render_combination();" %>
-  <%= f.label "Combination" %><br />
-
-  <div id="category_area">
-    <%= render "web", f: f %>
-  </div>
-
-  <script>
-    function render_web() {
-      $('#category_area').html('<%=j render "web", f: f %>')
-    }
-    function render_app() {
-      $('#category_area').html('<%=j render "app", f: f %>')
-    }
-    function render_combination() {
-      $('#category_area').html('<%=j render "combination", f: f %>')
-    }
-  </script>
-
-  <%= f.submit %>
-  <%= link_to 'Cancel', conversions_path(promotion_id: @promotion.id) %>
+  $(function() {
+    $('#ui-tab > ul').tabs();
+  });
+</script>
+<% content_for :stylesheet_includes do %>
+  <%= stylesheet_link_tag "css/reset" %>
+  <%= stylesheet_link_tag "css/common" %>
+  <%= stylesheet_link_tag "css/ui.tabs" %>
+  <%= stylesheet_link_tag "css/jquery.mcdropdown.min" %>
 <% end %>
-
-<%= link_to "Conversion registration", new_conversion_path(promotion_id: @promotion.id) %>
+<ul class="contentNavi">
+  <li class="pre">
+    <%= link_to @promotion.client.client_name, client_path(@promotion.client_id) %>
+  </li>
+  <li>&gt;</li>
+  <li class="pre">
+    <%= link_to @promotion.promotion_name, promotion_path(@promotion) %>
+  </li>
+  <li>&gt;</li>
+  <li>コンバージョン登録</li>
+</ul>
+<div class="clear"></div>
+<div id="conversion_inner">
+  <div id="ui-tab">
+    <ul>
+      <li><a href="#fragment-1"><span>コンバージョン設定</span></a></li>
+      <li class="disabled"><span>タグ取得</span></li>
+    </ul>
+    <div id="fragment-1">
+      <%= form_for @conversion do |f| %>
+        <script type="text/javascript">
+          function render_web(){
+            $('#category_area').html('<%=j render "web", f: f %>');
+          }
+          function render_app(){
+            $('#category_area').html('<%=j render "app", f: f %>');
+          }
+          function render_combination(){
+            $('#category_area').html('<%=j render "combination", f: f %>');
+          }
+        </script>
+        <form>
+          <%= hidden_field_tag :promotion_id, params[:promotion_id] %>
+          <div class="conversion_form">
+            <table class="client_info">
+              <tbody>
+                <tr>
+                  <th><%= f.label "コンバージョン名：" %></th>
+                  <td colspan="4">
+                    <%= f.text_field :conversion_name, maxlength: 255, id: "name", class: "input-text" %>
+                  </td>
+                </tr>
+                <tr>
+                  <th>
+                    <%= f.label "コンバージョン名" %><br /><%= f.label "(英語)：" %>
+                  </th>
+                  <td colspan="4"><br />
+                    <%= f.text_field :roman_name, maxlength: 255, id: "name_e", class: "input-text" %>
+                  </td>
+                </tr>
+                <tr>
+                  <th><%= f.label "成果カテゴリ：" %></th>
+                  <td><label>
+                    <%= f.radio_button :conversion_category, 0, checked: true, onclick: "render_web();" %>WEB
+                  </label></td>
+                  <td><label>
+                    <%= f.radio_button :conversion_category, 1, onclick: "render_app();" %>APP
+                  </label></td>
+                  <td><label>
+                    <%= f.radio_button :conversion_category, 2, onclick: "render_combination();" %>組み合わせ
+                  </label></td>
+                  <td>&nbsp;</td>
+                </tr>
+              </tbody>
+            </table>
+            <table class="client_info" id="category_area">
+              <%= render "web", f: f %>
+            </table>
+            <div class="submit_area">
+              <%= f.submit "完了", type: :image, src: "/assets/btn_done.gif", id: "btn_submit" %>
+              <%= link_to image_tag("/assets/btn_cancel.gif", alt: "キャンセル", align: "right"), conversions_path(promotion_id: @promotion.id) %>
+            </div>
+          </div>
+        </form>
+      <% end %>
+    </div>
+  </div>
+</div>

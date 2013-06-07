@@ -16,10 +16,26 @@ class Conversion < ActiveRecord::Base
   validates :conversion_mode, presence: true, if: :check_app
   validates :duplicate, presence: true, if: :check_conversion_category
   validates :track_method, presence: true, if: :check_app
-  validates :facebook_app_id, presence: true, if: :check_os
+  validates :facebook_app_id, presence: true, if: :check_conversion_mode
   validates :start_point, presence: true, if: :check_web
   validates :conversion_combine, presence: true, if: :check_combination
   validates :url, presence: true, if: :check_track_method
+
+  def create_mv
+    mv = ""
+    if (client_id = self.promotion.client.id.to_s(36)).length < 8
+      mv << "0" * (8 - client_id.length) << client_id
+    end
+    if (promotion_id = self.promotion.id.to_s(36)).length < 8
+      mv << "0" * (8 - promotion_id.length) << promotion_id
+    end
+    if (conversion_id = self.id.to_s(36)).length < 8
+      mv << "0" * (8 - conversion_id.length) << conversion_id
+    end
+    mv << SecureRandom.urlsafe_base64(6)
+    mv = Digest::MD5::hexdigest(mv)
+    self.update_attribute(:mv, mv)
+  end
 
   private
   def check_conversion_category
@@ -42,11 +58,11 @@ class Conversion < ActiveRecord::Base
     track_type == 1
   end
 
-  def check_os
-    os == 0
-  end
-
   def check_track_method
     track_method == 3
+  end
+
+  def check_conversion_mode
+    conversion_mode == 2
   end
 end
