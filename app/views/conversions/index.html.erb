@@ -4,13 +4,16 @@
   });
 </script>
 <% content_for :stylesheet_includes do %>
-  <%= stylesheet_link_tag "css/reset" %>
+  <%= stylesheet_link_tag "css/conversion" %>
   <%= stylesheet_link_tag "css/common" %>
   <%= stylesheet_link_tag "css/ui.tabs" %>
 <% end %>
+<%= javascript_include_tag "js/ui.core" %>
+<%= javascript_include_tag "js/ui.tabs" %>
 <% if flash[:error] %>
   <div><%= flash[:error] %></div>
 <% end %>
+
 <ul class="contentNavi">
   <li class="pre">
     <%= link_to @promotion.client.client_name, client_path(@promotion.client_id) %>

@@ -23,25 +23,25 @@
 </tr>
 <tr>
   <th><%= f.label "計測媒体：" %></th>
-  <td><label>
+  <td>
     <%= f.radio_button :conversion_mode, 0, checked: true, onclick: "render_fb_app_id();" %>全て
-  </label></td>
-  <td><label>
+  </td>
+  <td>
     <%= f.radio_button :conversion_mode, 1, onclick: "render_fb_app_id();" %>Facebookのみ
-  </label></td>
-  <td><label>
+ </td>
+  <td>
     <%= f.radio_button :conversion_mode, 2, onclick: "remove_fb_app_id();" %>その他広告
-  </label></td>
+ </td>
   <td>&nbsp;</td>
 </tr>
 <tr>
   <th><a href="#"><img src="/assets/icon_help.gif" /></a><%= f.label "重複排除：" %></th>
-  <td><label>
+  <td>
     <%= f.radio_button :duplicate, 0, checked: true %>あり
-  </label></td>
-  <td><label>
+ </td>
+  <td>
     <%= f.radio_button :duplicate, 1 %>なし
-  </label></td>
+ </td>
   <td colspan="2">&nbsp;</td>
 </tr>
 <tr id="method_area">

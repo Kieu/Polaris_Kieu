@@ -7,15 +7,20 @@
   });
 
   $(function() {
-    $('#ui-tab > ul').tabs();
+    $('#ui-tab').tabs();
   });
 </script>
 <% content_for :stylesheet_includes do %>
-  <%= stylesheet_link_tag "css/reset" %>
   <%= stylesheet_link_tag "css/common" %>
+    <%= stylesheet_link_tag "css/conversion" %>
   <%= stylesheet_link_tag "css/ui.tabs" %>
   <%= stylesheet_link_tag "css/jquery.mcdropdown.min" %>
+    <%= javascript_include_tag "js/jquery.chili-2.2.js" %>
+    <%= javascript_include_tag "js/jquery.bgiframe.js" %>
+    <%= javascript_include_tag "js/jquery.mcdropdown.min" %>
 <% end %>
+<%= javascript_include_tag "js/ui.core" %>
+<%= javascript_include_tag "js/ui.tabs" %>
 <ul class="contentNavi">
   <li class="pre">
     <%= link_to @promotion.client.client_name, client_path(@promotion.client_id) %>
@@ -30,7 +35,7 @@
 <div class="clear"></div>
 <div id="conversion_inner">
   <div id="ui-tab">
-    <ul>
+    <ul class="ui-tabs-nav">
       <li><a href="#fragment-1"><span>コンバージョン設定</span></a></li>
       <li class="disabled"><span>タグ取得</span></li>
     </ul>
@@ -85,8 +90,8 @@
               <%= render "web", f: f %>
             </table>
             <div class="submit_area">
-              <%= f.submit "完了", type: :image, src: "/assets/btn_done.gif", id: "btn_submit" %>
-              <%= link_to image_tag("/assets/btn_cancel.gif", alt: "キャンセル", align: "right"), conversions_path(promotion_id: @promotion.id) %>
+              <input type="image" src="/assets/btn_done.gif" id="btn_done">
+              <p><%= link_to raw('<img align="right" alt="キャンセル" src="/assets/btn_cancel.gif">'), conversions_path(promotion_id: @promotion.id) %></p>
             </div>
           </div>
         </form>

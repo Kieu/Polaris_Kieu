@@ -13,11 +13,14 @@
 <script type="text/javascript">
   $(document).ready(function(){
   	prevent = false;
-  	$('input#keywords').quicksearch('div#clients_list table tbody tr td', {
+  	$('input#keywords').quicksearch('div#clients_list tr', {
           "selector": "a.client_name"
       });
-      $('input#keywords').quicksearch('div#promotions_list table tbody tr td', {
+      $('input#keywords').quicksearch('div#promotions_list tr', {
           "selector": "a.promotion_name"
+      });
+      $('input#keywords').quicksearch('div#conversions_list tr', {
+          "selector": "a.conversion_name"
       });
   	
   })
