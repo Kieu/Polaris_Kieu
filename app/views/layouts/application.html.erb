@@ -5,8 +5,9 @@
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= stylesheet_link_tag "css/#{params[:controller]}" %>
   <%= javascript_include_tag "application" %>
-
   <%= csrf_meta_tags %>
+  <%= yield :stylesheet_includes %>
+  <%= yield :javascript_includes %>
 </head>
 <body>
 <script type="text/javascript">
@@ -17,6 +18,9 @@
       });
       $('input#keywords').quicksearch('div#promotions_list tr', {
           "selector": "a.promotion_name"
+      });
+      $('input#keywords').quicksearch('div#conversions_list tr', {
+          "selector": "a.conversion_name"
       });
   	
   })

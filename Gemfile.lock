@@ -42,7 +42,6 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    cocaine (0.4.2)
     coderay (1.0.9)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -77,10 +76,6 @@ GEM
       nokogiri (> 0.0.0)
       sax-machine (>= 0.0.12)
     growl (1.0.3)
-    hash-deep-merge (0.1.1)
-    highcharts-rails (3.0.1.5)
-      cocaine (~> 0.4.0)
-      railties (>= 3.1)
     hike (1.2.2)
     i18n (0.6.1)
     journey (1.0.4)
@@ -91,9 +86,6 @@ GEM
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    lazy_high_charts (1.4.2)
-      bundler (>= 1.0)
-      hash-deep-merge
     libv8 (3.11.8.17)
     loofah (1.2.1)
       nokogiri (>= 1.4.4)
@@ -106,6 +98,12 @@ GEM
     multi_json (1.7.3)
     mysql2 (0.3.11)
     nokogiri (1.5.9)
+    paperclip (3.4.0)
+      activemodel (>= 3.0.0)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.4.0)
+      mime-types
     polyglot (0.3.3)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
@@ -227,12 +225,11 @@ DEPENDENCIES
   factory_girl_rails
   feedzirra
   growl
-  highcharts-rails (= 3.0.1.5)
   jquery-rails
   json
   kaminari
-  lazy_high_charts
   mysql2
+  paperclip
   pry
   pry-debugger
   pry-doc
@@ -241,6 +238,7 @@ DEPENDENCIES
   rails (= 3.2.13)
   rails_config
   recaptcha
+  redis
   resque
   rspec-rails
   sass-rails (~> 3.2.3)

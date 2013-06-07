@@ -35,14 +35,13 @@ PolarisManage::Application.routes.draw do
   resources :accounts, only: [:new, :create, :edit, :update] do
     post "change_medias_list", on: :collection
   end
-  resources :click_logs do
+  resources :click_logs, only: [:index] do
     post "get_logs_list", on: :collection
+    get "download_csv", on: :collection
   end
- resources :click_logs do
-    post "get_logs_list", on: :collection
- end
  resources :conversion_promotion_logs, only: [:index] do
     post "get_conversion_logs_list", on: :collection 
+    get "download_csv", on: :collection
  end
 
  resources :url_settings do
@@ -53,9 +52,6 @@ PolarisManage::Application.routes.draw do
     get "download", on: :collection
     get "inprogress", on: :collection
     get "notification", on: :collection
-  end
- resources :conversion_promotion_logs, only: [:index] do
-    post "get_conversion_logs_list", on: :collection 
   end
   mount Resque::Server, at: '/resque'
   # The priority is based upon order of creation:

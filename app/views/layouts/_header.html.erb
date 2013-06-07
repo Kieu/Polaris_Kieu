@@ -2,7 +2,7 @@
   <div id="headerInner">
     <h1>Polaris</h1>
     <% if signed_in? %>
-     <div id="notification" style="float:right;right:220px;position: absolute;top:20px">
+     <div id="notification" style="float:right;right:450px;position: absolute;top:22px">
           <span class="notification">2</span>
           <div id='notice'>
             <div id="main_tab">
@@ -37,11 +37,20 @@
   <div id="navInner">
     <div class="nav">
       <ul>
-        <li class="current"><%= link_to raw('<img src="/assets/nav/nav_01_client_off.gif" width="144" height="38" alt="クライアントリスト" />'), "javascript:void(0)", class: "client_class_header", onclick: "ajaxCommon('#{clients_path}','','','','#container,#sidebar')" %></li>
         <% if current_user.super? %>
-            <li><%= link_to raw('<img src="/assets/nav/nav_02_agency_off.gif" width="142" height="38" alt="代理店リスト" />'),  "javascript:void(0)", class: "agency_class_header", onclick: "ajaxCommon('#{agencies_path}','','','','#container,#sidebar')" %></li>
+           <% if (params[:controller] == "promotions" || params[:controller] == "conversions" || params[:controller] == "accounts" || params[:controller] == "click_logs") %>
+                <li><%= link_to raw('<img src="/assets/nav/nav_01_promotion_off.gif" alt="代理店リスト" />'),  "javascript:void(0)", class: "agency_class_header", onclick: "ajaxCommon('#{promotions_path}?client_id=#{params[:client_id]}&promotion_id=#{params[:promotion_id]}','','','','#container,#sidebar')" %></li>
+                <li><%= link_to raw('<img src="/assets/nav/nav_02_account_off.gif" alt="ユーザーリスト" />'), "javascript:void(0)", class: "user_class_header", onclick: "ajaxCommon('#{accounts_path}?client_id=#{params[:client_id]}&promotion_id=#{params[:promotion_id]}','','','','#container,#sidebar')" %></li>
+                <li><%= link_to raw('<img src="/assets/nav/nav_03_conversion_off.gif" alt="代理店リスト" />'),  "javascript:void(0)", class: "agency_class_header", onclick: "ajaxCommon('#{conversions_path}?client_id=#{params[:client_id]}&promotion_id=#{params[:promotion_id]}','','','','#container,#sidebar')" %></li>
+                <li><%= link_to raw('<img src="/assets/nav/nav_04_log_off.gif"  alt="ユーザーリスト" />'), "javascript:void(0)", class: "user_class_header", onclick: "ajaxCommon('#{click_logs_path}?id=#{params[:client_id]}&promotion_id=#{params[:promotion_id]}','','','','#container,#sidebar')" %></li>
+
+      <%else%>
+                <li class="current"><%= link_to raw('<img src="/assets/nav/nav_01_client_off.gif" width="144" height="38" alt="クライアントリスト" />'), "javascript:void(0)", class: "client_class_header", onclick: "ajaxCommon('#{clients_path}','','','','#container,#sidebar')" %></li>
+
+                <li><%= link_to raw('<img src="/assets/nav/nav_02_agency_off.gif" width="142" height="38" alt="代理店リスト" />'),  "javascript:void(0)", class: "agency_class_header", onclick: "ajaxCommon('#{agencies_path}','','','','#container,#sidebar')" %></li>
             <li><%= link_to raw('<img src="/assets/nav/nav_03_user_off.gif" width="142" height="38" alt="ユーザーリスト" />'), "javascript:void(0)", class: "user_class_header", onclick: "ajaxCommon('#{users_path}','','','','#container,#sidebar')" %></li>
             <li><a href="#"><img src="/assets/nav/nav_04_media_off.gif" width="142" height="38" alt="メディアリスト" /></a></li>
+            <% end %>
         <% end %>
       </ul>
     </div><!-- /.nav-->

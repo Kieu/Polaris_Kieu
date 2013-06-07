@@ -10,15 +10,14 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require jquery
+//= require jquery-1.8
 //= require jquery_ujs
-//= require_tree .
-//= require highcharts
+//= require_directory .
 var auto_refresh = setInterval(
     function ()
     {
         $('.notification').load('/background_jobs/notification').fadeIn("slow");
-    }, 10000); // refresh every 10000 milliseconds
+    }, 30000); // refresh every 10000 milliseconds
 function index_of(haystack, needle) {
     for (var i = 0, l = haystack.length; i < l; ++i) {
         if( haystack[i].value === needle ) {
@@ -27,6 +26,7 @@ function index_of(haystack, needle) {
     }
     return -1;
 }
+
 
 function reloadFlex(obj, urlAction, id, current_active, cname, maxlength) {
 	$(obj)
@@ -45,8 +45,8 @@ function reloadFlex(obj, urlAction, id, current_active, cname, maxlength) {
     
 }
 function ajaxCommon(urlAction, id, current_active, cname,arr_inner) {
-    //location.href = urlAction;
-    //return;
+    location.href = urlAction;
+    return;
     if (prevent == true){
     	$("#change").click(function(){
 			var array_inner = arr_inner.split(',');
@@ -92,6 +92,7 @@ function ajaxCommon(urlAction, id, current_active, cname,arr_inner) {
         		url: urlAction,
         		dataType: "html"
     		}).done(function( data  ) {
+    			
             	for (i=0;i<array_inner.length;i++){
             		var inner_data = $(data).find(array_inner[i]);
             		$(array_inner[i]).html(inner_data.children());
@@ -114,4 +115,62 @@ function reloadFlex1(obj, urlAction) {
         url: urlAction,
         newp: 1
     }).flexReload();
+}
+function draw_chart(data_left, data_right, left, right, categories){
+	console.log(data_left);
+	chart = new Highcharts.Chart({ // 以下、chartオブジェクトに渡す引数
+		chart: {
+			renderTo: 'sample-chart', // どの要素にグラフを描画するかを指定
+			type: 'line' // グラフの種類を指定
+		},
+		credits: {//右下リンクの消去
+            enabled: false
+        },
+		title: {
+			text:false
+			},
+		subtitle: {
+			text:false
+		},
+		xAxis: { // x軸の値を指定
+			categories: categories,
+			dateTimeLabelFormats: {day: '%e. %b', month: '%e. %b'},
+			labels:{
+				rotation: -45
+			}
+		},
+		yAxis: {
+			title: {
+            	text: null
+			},
+            labels: {
+				align: 'left',
+                x: 3,
+                y: 16,
+                formatter: function() {
+                	return Highcharts.numberFormat(this.value, 0);
+				}
+			},
+			plotLines: [{
+				value: 0,
+				width: 1,
+				color: '#808080'
+			}]
+		},
+		tooltip: { // マウスオーバーした際に表示する文書を指定
+			formatter: function() {
+				return '<b>'+ this.series.name +'</b><br/>'+
+				this.x +': '+ this.y +' 度';
+			}
+		},
+		series: [{ // データ系列を指定
+			name: left,
+			data: data_left,
+			color: "#FF1493"
+			},{
+			name: right,
+			data: data_right,
+			color: "#32CF32"
+			}]
+		});
 }

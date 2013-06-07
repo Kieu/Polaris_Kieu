@@ -1,18 +1,25 @@
+<%= stylesheet_link_tag "css/agency2", :media => "all" %>
+<%= stylesheet_link_tag "css/common", :media => "all" %>
 <% if flash[:error] %>
 	<div><%= flash[:error] %></div>
 <% end %>
 <div id="agencies_list">
 </div>
-<%= link_to 'New Agency', "javascript:void(0)", class: "new_agency",onclick: "ajaxCommon('#{new_agency_path}', '', '', '','#inner')" %>
-<table id="paging" style="display:none"></table>
+<%= link_to raw('<img src="/assets/btn_agent_regist.jpg">'), "javascript:void(0)", class: "new_agency",onclick: "ajaxCommon('#{new_agency_path}', '', '', '','#inner')" %>
+<table style="display:none" class="newTable04 fixTable d-none"></table>
 <script type="text/javascript">
-	$("#paging").flexigrid({
+	$(".newTable04").flexigrid({
 		url: "<%= get_agencies_list_agencies_path %>",
+        editOption : true,
+        deleteOption : true,
+        onSuccess : function(){tableResize();},
+        resizable : false,
+        striped : true,
 		dataType: 'json',
 		colModel : [
-			{display: '', name : 'link', width : 100, sortable : false, align: 'center'},
-			{display: 'agency_name', name : 'agency_name', width : 250, sortable : false, align: 'center'},
-			{display: 'roman_name', name : 'roman_name', width : 250, sortable : false, align: 'center'}
+			{display: '', name : 'link', width : '60', sortable : false, align: 'center'},
+			{display: 'agency_name', name : 'agency_name', width : 'auto', sortable : false, align: 'center'},
+			{display: 'roman_name', name : 'roman_name', width : 'auto', sortable : false, align: 'center'}
 			],
 	    sortname: "roman_name",
         sortorder: "desc",
@@ -21,7 +28,6 @@
 		useRp: true,
 		rp: 10,
 		showTableToggleBtn: true,
-		width: 600,
 		height: 200
 	});
 </script>

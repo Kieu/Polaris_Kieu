@@ -1,4 +1,4 @@
-<p class="h2">クライアント編集</p>
+<p class="h2"><%= I18n.t("client.crumb_add") %></p>
 <%= render "layouts/prevent_change_page" %>
 <% if flash[:error] %>
     <div><%= flash[:error] %></div>
@@ -10,49 +10,48 @@
     <div class="regist_form">
       <table class="client_info">
         <tr>
-          <th> <%= f.label :client_name, "Client name" %>  </th>
+          <th> <%= f.label t("client.client_name") %>  </th>
           <td colspan="2"><%= f.text_field :client_name, maxlength: 255, style: "width: 250px" %></td>
         </tr>
         <tr>
-          <th><%= f.label "Roman name" %> </th>
+          <th><%= f.label t("client.roman_name") %> </th>
           <td colspan="2"><%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %>
           </td>
         </tr>
 
         <tr>
-          <th><%= f.label "Contact" %>
+          <th><%= f.label t("client.tel") %>
             <td colspan="2"><%= f.text_field :tel, maxlength: 15, style: "width: 250px" %>
             </td>
         </tr>
         <tr>
           <th>
-            <%= f.label "Person in charge" %> </th>
+            <%= f.label t("client.person_charge") %> </th>
           <td colspan="2"><%= f.text_field :person_charge, maxlength: 255, style: "width: 250px" %>
           </td>
         </tr>
         <tr>
           <th>
-            <td><%= f.label "Sale representative" %>   </td>
+            <td><%= f.label t("client.person_sale") %>   </td>
             <td colspan="2"><%= f.text_field :person_sale, maxlength: 255, style: "width: 250px" %>
             </td>
         </tr>
         <tr>
           <th>
-            <%= f.label "Use policy" %>  </th>
-          <td><%= f.radio_button :contract_flg, 0, {checked: true} %> No contract</td>
-          <td> <%= f.radio_button :contract_flg, 1 %> Have contract
+            <%= f.label t("client.contract_flg.label") %> </th>
+          <td><%= f.radio_button :contract_flg, 0, {checked: true} %> <%= I18n.t("client.contract_flg.standard_plan") %></td>
+          <td> <%= f.radio_button :contract_flg, 1 %> <%= I18n.t("client.contract_flg.premium_plan") %>
           </td>
         </tr>
         <tr>
-          <th>
-            <%= f.label "Plan type" %> </th>
-          <td><%= f.radio_button :contract_type, 0, {checked: true} %> Standard</td>
-          <td> <%= f.radio_button :contract_type, 1 %> Premium
+          <th><%= f.label t("client.contract_type.label") %></th>
+          <td><%= f.radio_button :contract_type, 0, {checked: true} %> <%= I18n.t("client.contract_type.unrecovered") %></td>
+          <td> <%= f.radio_button :contract_type, 1 %> <%= I18n.t("client.contract_type.been_recovered") %>
           </td>
         </tr>
       </table>
       <div class="user_info_add">
-        <p>List users Added▼</p>
+        <p><%= I18n.t("client.user_information") %>▼</p>
         <input id="tags" placeholder="search" maxlength="255"/>
       </div>
 
@@ -63,7 +62,7 @@
           <th width="240">&nbsp;</th>
           <th width="80">&nbsp;</th>
           <th width="40">
-            <small>削除</small>
+            <small><%= I18n.t("client.delete") %></small>
           </th>
         </tr>
         </thead>

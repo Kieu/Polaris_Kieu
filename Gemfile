@@ -9,11 +9,10 @@ gem "rails_config"
 gem "mysql2"
 gem "bcrypt-ruby"
 gem "feedzirra"
-gem "highcharts-rails", "3.0.1.5"
 gem "curb", "0.8.4"
-gem "lazy_high_charts"
 gem "recaptcha", :require => "recaptcha/rails"
 gem "kaminari"
+gem "redis"
 gem "resque", require: 'resque/server'
 gem 'json'
 

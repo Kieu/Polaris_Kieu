@@ -48,11 +48,28 @@
 				<% end %>
 			</table>
 		</div>
+      <% elsif params[:controller] == "conversions" %>
+          <div id="conversions_list">
+            <table class="sidebar">
+              <% object.each_with_index do |conversion, index| %>
+                  <tr>
+                    <th class="edit"><%= link_to "", "javascript:void(0)", class: "edit", id: "edit#{conversion.id}",onclick: "ajaxCommon('#{edit_conversion_path(conversion)}?promotion_id=#{params[:promotion_id]}', '##{conversion.id}', '.conversion_name', '#conversion_name','#inner')" if current_user.super? || current_user.agency? %></th>
+                    <% if (params[:promotion_id] && conversion.id == params[:conversion_id].to_i) || (!params[:conversion_id] && index == 0) %>
+                        <td><%= link_to conversion.conversion_name, "javascript:void(0)", class: "conversion_name active", id: "#{conversion.id}",onclick: "ajaxCommon('#{edit_conversion_path(conversion)}?promotion_id=#{params[:promotion_id]}', '##{conversion.id}', '.conversion_name', '#conversion_name','#inner')" %></td>
+                    <% else %>
+                        <td><%= link_to conversion.conversion_name,  "javascript:void(0)", class: "conversion_name", id: "#{conversion.id}",onclick: "ajaxCommon('#{edit_conversion_path(conversion)}?promotion_id=#{params[:promotion_id]}', '##{conversion.id}', '.conversion_name', '#conversion_name','#inner')" %></td>
+                    <% end %>
+                  </tr>
+              <% end %>
+            </table>
+          </div>
         <% end %>
 	</div>
 	<% if params[:controller] == "clients" && current_user.super? %>
     	<%= link_to raw('<img src="/assets/btn_client_regist.gif">'), "javascript:void(0)", class: "new_client_name", onclick: "ajaxCommon('#{new_client_path}', '', '.new_client_name', '#new_client_name','#inner,#sidebar')"  %>
 	<% elsif (current_user.super? || current_user.agency?) && params[:controller] == "promotions" %>
-    	<%= link_to raw('<img src="/assets/btn_client_regist.gif">'), "javascript:void(0)", class: "new_promotion_name", onclick: "ajaxCommon('#{new_promotion_path(client_id: @client_id)}', '', '.new_promotion_name', '#new_promotion_name','#inner')"  %>
-	<% end %>
+    	<%= link_to raw('<img src="/assets/btn_promotion_regist.gif">'), "javascript:void(0)", class: "new_promotion_name", onclick: "ajaxCommon('#{new_promotion_path(client_id: @client_id)}', '', '.new_promotion_name', '#new_promotion_name','#inner')"  %>
+  <% elsif (current_user.super? || current_user.agency?) && params[:controller] == "conversions" %>
+      <%= link_to raw('<img src="/assets/btn_conversion_regist.gif">'), "javascript:void(0)", class: "new_conversion_name", onclick: "ajaxCommon('#{new_conversion_path(client_id: @client_id,promotion_id: params[:promotion_id])}', '', '.new_coversion_name', '#new_conversion_name','#inner')"  %>
+<% end %>
 </div>

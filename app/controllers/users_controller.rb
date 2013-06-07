@@ -79,7 +79,7 @@ class UsersController < ApplicationController
         end
       end
       link = user.id == current_user.id ?
-         "" : "<a href='users/#{user.id}/edit'>Edit</a>"
+         "" : "<a href='users/#{user.id}/edit'>#{view_context.image_tag("/assets/img_edit.png")}</a>"
       rows << {"id" => user.id, "cell" => {"link" => link,
         "roman_name" => user.roman_name, 
         "username" => user.username, "company" => company,
