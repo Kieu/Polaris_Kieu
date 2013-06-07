@@ -11,9 +11,10 @@ class Client < ActiveRecord::Base
   validates :client_name, presence: true, uniqueness: {case_sensitive: false},
     length: {maximum: 255}
   validates :roman_name, presence: true, uniqueness: {case_sensitive: false},
-    length: {maximum: 255}, format: {with: VALID_ROMAN_NAME_REGEX}
-  validates :tel, presence: true, length: {maximum: 15},
-    format: {with: VALID_PHONE_NUMBER_REGEX}, uniqueness: true
+    length: {maximum: 255}
+  validates :roman_name, format: {with: VALID_ROMAN_NAME_REGEX}, if: -> client { client.roman_name.present?}
+  validates :tel, presence: true, length: {maximum: 15}
+  validates :tel, format: {with: VALID_PHONE_NUMBER_REGEX}, if: -> client { client.tel.present?}, uniqueness: true
   validates :contract_flg, presence: true
   validates :contract_type, presence: true
   validates :person_charge, presence: true, length: {maximum: 255}
