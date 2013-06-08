@@ -1,5 +1,7 @@
 <%= stylesheet_link_tag "css/logs" %>
+<%= stylesheet_link_tag "css/colorbox" %>
 <%= stylesheet_link_tag "css/common" %>
+<%= stylesheet_link_tag "css/box_inner_log" %>
 <%= stylesheet_link_tag "css/flexigrid.pack" %>
 <% if flash[:error] %>
 	<div><%= flash[:error] %></div>
@@ -8,62 +10,67 @@
 <div id="popup" style="display: none">
 	<div id="list_options" style="width: 400px;">
 		<div id="result_list">
-			<table>
-				<tr>
-					<td colspan="2"><%= link_to "Show All", "javascript:void(0)", onclick: "update_cookies()"%></td>
-				</tr>
-				<tr>
-					<td>Click Time</td>
-					<td><%= link_to cookies[:coptions][0] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('0',this)"%></td>
-				</tr>
-				<tr>
-					<td>Media Name</td>
-					<td><%= link_to cookies[:coptions][1] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('1',this)"%></td>
-				</tr>
-				<tr>
-					<td>Account name</td>
-					<td><%= link_to cookies[:coptions][2] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('2',this)"%></td>
-				</tr>
-				<tr>
-					<td>Campaign Name</td>
-					<td><%= link_to cookies[:coptions][3] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('3',this)"%></td>
-				</tr>
-				<tr>
-					<td>Ad Group Name</td>
-					<td><%= link_to cookies[:coptions][4] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('4',this)"%></td>
-				</tr>
-				<tr>
-					<td>Ad Name</td>
-					<td><%= link_to cookies[:coptions][5] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('5',this)"%></td>
-				</tr>
-				<tr>
-					<td>URL</td>
-					<td><%= link_to cookies[:coptions][6] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('6',this)"%></td>
-				</tr>
-				<tr>
-					<td>SESID</td>
-					<td><%= link_to cookies[:coptions][7] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('7',this)"%></td>
-				</tr>
-				<tr>
-					<td>OS</td>
-					<td><%= link_to cookies[:coptions][8] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('8',this)"%></td>
-				</tr>
-				<tr>
-					<td>OK/NG</td>
-					<td><%= link_to cookies[:coptions][9] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('9',this)"%></td>
-				</tr>
-				<tr>
-					<td>Error Message</td>
-					<td><%= link_to cookies[:coptions][10] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('10',this)"%></td>
-				</tr>
-				<tr>
-					<td>Show data from Error table</td>
-					<td><input type="checkbox" name="error_table" id="error_table" checked="checked"></td>
-				</tr>
-			</table>
-		</div>
-		<button id="change_cookie">Ok</button>
-		<button id="not_change_cookie">Cancel</button>
+            <p class="box3_txt">全て追加する </p>
+            <!-- チェックボックス -->
+            <div class="check-group clearfix">
+			<ul>
+
+				<li>
+				<%= link_to "Show All", "javascript:void(0)", onclick: "update_cookies()"%>
+				</li>
+				<li>
+					<p class="check_txt">Click Time</p>
+					<div><%= link_to cookies[:coptions][0] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('0',this)"%></div>
+				</li>
+				<li>
+					<p class="check_txt">Media Name</p>
+					<div><%= link_to cookies[:coptions][1] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('1',this)"%></div>
+				</li>
+				<li>
+					<p class="check_txt">Account name</p>
+					<div><%= link_to cookies[:coptions][2] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('2',this)"%></div>
+				</li>
+				<li>
+					<p class="check_txt">Campaign Name</p>
+					<div><%= link_to cookies[:coptions][3] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('3',this)"%></div>
+				</li>
+				<li>
+					<p class="check_txt">Ad Group Name</p>
+					<div><%= link_to cookies[:coptions][4] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('4',this)"%></div>
+				</li>
+				<li>
+					<p class="check_txt">Ad Name</p>
+					<div><%= link_to cookies[:coptions][5] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('5',this)"%></div>
+				</li>
+				<li>
+					<p class="check_txt">URL</p>
+					<div><%= link_to cookies[:coptions][6] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('6',this)"%></div>
+				</li>
+				<li>
+					<p class="check_txt">SESID</p>
+					<div><%= link_to cookies[:coptions][7] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('7',this)"%></div>
+				</li>
+				<li>
+					<p class="check_txt">OS</p>
+					<div><%= link_to cookies[:coptions][8] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('8',this)"%></div>
+				</li>
+				<li>
+					<p class="check_txt">OK/NG</p>
+					<div><%= link_to cookies[:coptions][9] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('9',this)"%></div>
+				</li>
+				<li>
+					<p class="check_txt">Error Message</p>
+					<div><%= link_to cookies[:coptions][10] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('10',this)"%></div>
+				</li>
+				<li>
+					<p class="check_txt">Show data from Error table</p>
+					<div><input type="checkbox" name="error_table" id="error_table" checked="checked"></div>
+				</li>
+			</ul>
+            </div>
+          </div>
+		<button id="change_cookie"><img src="/assets/btn_done.gif" alt="完成"></button>
+		<button id="not_change_cookie"><img src="/assets/btn_cancel.gif" alt="完成"></button>
 	</div>
 </div>
 
@@ -114,7 +121,7 @@
 				</div>
 			</div>
 			<div class="w_box">
-			<table id="clicklogs" class="newTable06 fixTable large" ></table>
+			<table id="clicklogs" class="newTable06 fixTable d-none" style="background: grey" ></table>
 			</div>
 			
 		</div>
@@ -144,17 +151,17 @@
 			ptionGet : "4",
 			dataType: 'json',
 			colModel : [
-				{display: 'Click Time', name : 'click_utime', sortable : true, align: 'center', hide: <%= cookies[:coptions][0] == "0" ? 1 : 0 %>},
-				{display: 'Media Name:', name : 'media_id', sortable : false, align: 'center', hide: <%= cookies[:coptions][1] == "0" ? 1 : 0 %>},
-				{display: 'Account Name', name : 'account_id', sortable : false, align: 'center', hide: <%= cookies[:coptions][2] == "0" ? 1 : 0 %>},
-				{display: 'Campaign Name', name : 'campaign_id', sortable : false, align: 'center', hide: <%= cookies[:coptions][3] == "0" ? 1 : 0 %>},
-				{display: 'Ad Group Name', name : 'group_id', sortable : false, align: 'center', hide: <%= cookies[:coptions][4] == "0" ? 1 : 0 %>},
-				{display: 'Ad Name', name : 'unit_id', sortable : false, align: 'center', hide: <%= cookies[:coptions][5] == "0" ? 1 : 0 %>},
-				{display: 'URL', name : 'redirect_url', sortable : false, align: 'center', hide: <%= cookies[:coptions][6] == "0" ? 1 : 0 %>},
-				{display: 'SESID', name : 'session_id', sortable : false, align: 'center', hide: <%= cookies[:coptions][7] == "0" ? 1 : 0 %>},
-				{display: 'OS', name : 'device_category', sortable : false, align: 'center', hide: <%= cookies[:coptions][8] == "0" ? 1 : 0 %>},
-				{display: 'OK/NG', name : 'state', sortable : false, align: 'center', hide: <%= cookies[:coptions][9] == "0" ? 1 : 0 %>},
-				{display: 'Error Message', name : 'error_code', sortable : false, align: 'center', hide: <%= cookies[:coptions][10] == "0" ? 1 : 0 %>},
+				{display: 'Click Time', name : 'click_utime', sortable : true, with:'auto',align: 'center', hide: <%= cookies[:coptions][0] == "0" ? 1 : 0 %>},
+				{display: 'Media Name:', name : 'media_id', sortable : false,  with:'auto',align: 'center', hide: <%= cookies[:coptions][1] == "0" ? 1 : 0 %>},
+				{display: 'Account Name', name : 'account_id', sortable : false,  with:'auto',align: 'center', hide: <%= cookies[:coptions][2] == "0" ? 1 : 0 %>},
+				{display: 'Campaign Name', name : 'campaign_id', sortable : false,  with:'auto',align: 'center', hide: <%= cookies[:coptions][3] == "0" ? 1 : 0 %>},
+				{display: 'Ad Group Name', name : 'group_id', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][4] == "0" ? 1 : 0 %>},
+				{display: 'Ad Name', name : 'unit_id', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][5] == "0" ? 1 : 0 %>},
+				{display: 'URL', name : 'redirect_url', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][6] == "0" ? 1 : 0 %>},
+				{display: 'SESID', name : 'session_id', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][7] == "0" ? 1 : 0 %>},
+				{display: 'OS', name : 'device_category', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][8] == "0" ? 1 : 0 %>},
+				{display: 'OK/NG', name : 'state', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][9] == "0" ? 1 : 0 %>},
+				{display: 'Error Message', name : 'error_code', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][10] == "0" ? 1 : 0 %>},
 				],
 				preProcess : function (json) {
 	            var results = new Array();
@@ -189,17 +196,16 @@
 			showTableToggleBtn: true,
 			height: 200,
 			onSuccess: function() {
-				tableResize();
+                tableResize();
 				$('tr#row-0 td:nth-child('+(1+'n-'+(11))+')').remove();
-				$('tr#row-0').append("<td colspan='11'><div class='group_header'>Listing ad</div></td>");
+				$('tr#row-0').append("<td><div class='group_header'>Listing ad</div></td>");
 				$('tr#row-0').addClass('group_header');
 				$('tr#row-1 td:nth-child('+(1+'n-'+(11))+')').remove();
-				$('tr#row-1').append("<td colspan='11'><div class='group_header'>Display ad</div></td>");
+				$('tr#row-1').append("<td><div class='group_header'>Display ad</div></td>");
 				$('tr#row-1').addClass('group_header');
 				$('tr#row-2 td:nth-child('+(1+'n-'+(11))+')').remove();
-				$('tr#row-2').append("<td colspan='11'><div class='group_header'>Affiliate</div></td>");
+				$('tr#row-2').append("<td><div class='group_header'>Affiliate</div></td>");
 				$('tr#row-2').addClass('group_header');
-				
 			}
 		});
 		
@@ -273,8 +279,8 @@
 	update_cookie = function(data,ele){
 		options = cookies_options.split("");
 		options[data] = (options[data] == "1") ? "0" : "1";
-		text = (options[data] == "1") ? "Delete" : "Add";
-		$(ele).text(text);
+		text = (options[data] == "1") ? "<img src='/assets/btn_box_dl.gif' >" : "<img src='/assets/btn_box_add.gif' >";
+		$(ele).html(text);
 		options = options.join("");
 		cookies_options = options;
 
@@ -318,5 +324,10 @@
 		$("#clicklogs").colorbox.close();
 	})
 	
+</script>
+<script type="text/javascript">
+    $(window).resize(function() {
+        tableResize();
+    });
 </script>
 <div style="clear:both"></div>
