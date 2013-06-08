@@ -196,16 +196,10 @@
 			onSuccess: function() {
                 tableResize();
 				$('tr#row-0 td:nth-child('+(1+'n-'+(11))+')').remove();
-				//$('tr#row-0').append("<div class='group_header'>Listing ad</div>");
-				///$('tr#row-0').addClass('group_header');
                 $('tr#row-0').after("<div class='group_header'>Listing ad</div>");
 				$('tr#row-1 td:nth-child('+(1+'n-'+(11))+')').remove();
-				//$('tr#row-1').append("<div class='group_header'>Display ad</div>");
-				//$('tr#row-1').addClass('group_header');
                 $('tr#row-1').after("<div class='group_header'>Display ad</div>");
 				$('tr#row-2 td:nth-child('+(1+'n-'+(11))+')').remove();
-				//$('tr#row-2').append("<div class='group_header'>Affiliate</div>");
-				//$('tr#row-2').addClass('group_header');
                 $('tr#row-2').after("<div class='group_header'>Affiliate</div>");
 			}
 		});

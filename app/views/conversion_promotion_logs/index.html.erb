@@ -258,15 +258,16 @@
 		onSuccess: function() {
             tableResize();
 			$('tr#row-0 td:nth-child('+(1+'n-'+(24))+')').remove();
-			$('tr#row-0').append("<td><div class='group_header'>Listing ad</div></td>");
-			
+            $('tr#row-0').after("<div class='group_header'>Listing ad</div>");
+
 			$('tr#row-1 td:nth-child('+(1+'n-'+(24))+')').remove();
-			$('tr#row-1').append("<td><div class='group_header'>Display ad</div></td>");
-			
+            $('tr#row-1').after("<div class='group_header'>Display ad</div>");
+
 			$('tr#row-2 td:nth-child('+(1+'n-'+(24))+')').remove();
-			$('tr#row-2').append("<td><div class='group_header'>Affiliate</div></td>");
+            $('tr#row-2').after("<div class='group_header'>Affiliate</div>");
+
 			$('tr#row-1000 td:nth-child('+(1+'n-'+(24))+')').remove();
-			$('tr#row-1000').append("<td><div class='group_header'>Oganic</div></td>");
+            $('tr#row-1000').after("<div class='group_header'>Oganic</div>");
 		}
 	});
 	var colums = ["conversion_utime", "conversion_id", "conversion_category","tracking_type",
