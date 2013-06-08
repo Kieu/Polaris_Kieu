@@ -182,7 +182,6 @@
                 $(g.bDiv).slimScroll({
                     color: '#0087A9',
                     size: '8px',
-                    height: '100px',
                     alwaysVisible: true
                 });
                 var hrH = g.bDiv.offsetTop + newH;
