@@ -1,6 +1,7 @@
 <%= stylesheet_link_tag "css/logs" %>
+<%= stylesheet_link_tag "css/colorbox" %>
 <%= stylesheet_link_tag "css/common" %>
-<%= stylesheet_link_tag "css/flexigrid.pack" %>
+<%= stylesheet_link_tag "css/box_inner_log" %>
 <div id="popup" style="display: none">
 	<div id="list_options" style="width: 400px;">
 		<div id="result_list">
@@ -11,51 +12,51 @@
 						<table>
 							<tr>
 								<td>conversion_time</td>
-								<td><%= link_to cookies[:options][0] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('0',this)"%></td>
+								<td><%= link_to cookies[:options][0] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('0',this)"%></td>
 							</tr>
 							<tr>
 								<td>conversion_name</td>
-								<td><%= link_to cookies[:options][1] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('1',this)"%></td>
+								<td><%= link_to cookies[:options][1] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('1',this)"%></td>
 							</tr>
 							<tr>
 								<td>conversion_category</td>
-								<td><%= link_to cookies[:options][2] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('2',this)"%></td>
+								<td><%= link_to cookies[:options][2] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('2',this)"%></td>
 							</tr>
 							<tr>
 								<td>tracking_type</td>
-								<td><%= link_to cookies[:options][3] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('3',this)"%></td>
+								<td><%= link_to cookies[:options][3] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('3',this)"%></td>
 							</tr>
 							<tr>
 								<td>cv_type</td>
-								<td><%= link_to cookies[:options][4] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('4',this)"%></td>
+								<td><%= link_to cookies[:options][4] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('4',this)"%></td>
 							</tr>
 							<tr>
 								<td>media_approval</td>
-								<td><%= link_to cookies[:options][5] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('5',this)"%></td>
+								<td><%= link_to cookies[:options][5] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('5',this)"%></td>
 							</tr>
 							<tr>
 								<td>media</td>
-								<td><%= link_to cookies[:options][6] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('6',this)"%></td>
+								<td><%= link_to cookies[:options][6] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('6',this)"%></td>
 							</tr>
 							<tr>
 								<td>account</td>
-								<td><%= link_to cookies[:options][7] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('7',this)"%></td>
+								<td><%= link_to cookies[:options][7] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('7',this)"%></td>
 							</tr>
 							<tr>
 								<td>campaign</td>
-								<td><%= link_to cookies[:options][8] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('8',this)"%></td>
+								<td><%= link_to cookies[:options][8] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('8',this)"%></td>
 							</tr>
 							<tr>
 								<td>ad_group</td>
-								<td><%= link_to cookies[:options][9] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('9',this)"%></td>
+								<td><%= link_to cookies[:options][9] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('9',this)"%></td>
 							</tr>
 							<tr>
 								<td>ad_name</td>
-								<td><%= link_to cookies[:options][10] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('10',this)"%></td>
+								<td><%= link_to cookies[:options][10] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('10',this)"%></td>
 							</tr>
 							<tr>
 								<td>click_time</td>
-								<td><%= link_to cookies[:options][11] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('11',this)"%></td>
+								<td><%= link_to cookies[:options][11] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('11',this)"%></td>
 							</tr>
 						</table>
 					</td>
@@ -63,47 +64,47 @@
 						<table>
 							<tr>
 								<td>verify</td>
-								<td><%= link_to cookies[:options][12] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('12',this)"%></td>
+								<td><%= link_to cookies[:options][12] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('12',this)"%></td>
 							</tr>
 							<tr>
 								<td>suid</td>
-								<td><%= link_to cookies[:options][13] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('13',this)"%></td>
+								<td><%= link_to cookies[:options][13] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('13',this)"%></td>
 							</tr>
 							<tr>
 								<td>session_id</td>
-								<td><%= link_to cookies[:options][14] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('14',this)"%></td>
+								<td><%= link_to cookies[:options][14] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('14',this)"%></td>
 							</tr>
 							<tr>
 								<td>OS</td>
-								<td><%= link_to cookies[:options][15] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('16',this)"%></td>
+								<td><%= link_to cookies[:options][15] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('16',this)"%></td>
 							</tr>
 							<tr>
 								<td>repeat</td>
-								<td><%= link_to cookies[:options][16] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('16',this)"%></td>
+								<td><%= link_to cookies[:options][16] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('16',this)"%></td>
 							</tr>
 							<tr>
 								<td>log_state</td>
-								<td><%= link_to cookies[:options][17] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('17',this)"%></td>
+								<td><%= link_to cookies[:options][17] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('17',this)"%></td>
 							</tr>
 							<tr>
 								<td>sales</td>
-								<td><%= link_to cookies[:options][18] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('18',this)"%></td>
+								<td><%= link_to cookies[:options][18] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('18',this)"%></td>
 							</tr>
 							<tr>
 								<td>profit</td>
-								<td><%= link_to cookies[:options][19] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('19',this)"%></td>
+								<td><%= link_to cookies[:options][19] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('19',this)"%></td>
 							</tr>
 							<tr>
 								<td>volume</td>
-								<td><%= link_to cookies[:options][20] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('20',this)"%></td>
+								<td><%= link_to cookies[:options][20] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('20',this)"%></td>
 							</tr>
 							<tr>
 								<td>others</td>
-								<td><%= link_to cookies[:options][21] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('21',this)"%></td>
+								<td><%= link_to cookies[:options][21] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('21',this)"%></td>
 							</tr>
 							<tr>
 								<td>error_message</td>
-								<td><%= link_to cookies[:options][22] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('22',this)"%></td>
+								<td><%= link_to cookies[:options][22] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('22',this)"%></td>
 							</tr>
 							<tr>
 								<td>error_log_view</td>
@@ -115,8 +116,8 @@
 				</tr>
 			</table>
 		</div>
-		<button id="change_cookie">Ok</button>
-		<button id="not_change_cookie">Cancel</button>
+		<button id="change_cookie"><img src="/assets/btn_done.gif" alt="完成"></button>
+		<button id="not_change_cookie"><img src="/assets/btn_cancel.gif" alt="完成"></button>
 	</div>
 </div>
 <ul class="contentNavi">
@@ -163,11 +164,11 @@
 			<div id="graph">
 				<div class="fl-r">
 					<p><a id = "show_option"><img src="/assets/btn_dl_option.gif"  /></a></p>
-					<p><a id = "download_csv"><img src="/assets/btn_dl_report.gif"  /></a></p>
+					<p><a href="#"><img src="/assets/btn_dl_report.gif"  /></a></p>
 				</div>
 			</div>
 			
-			<table id="cvlogs" class="fixTable" ></table>
+			<table id="cvlogs"class="newTable06 fixTable d-none" style="background: grey" ></table>
 			
 			
 		</div>
@@ -175,11 +176,11 @@
 			<div id="graph">
 				<div class="fl-r">
 					<p><a id = "show_option"><img src="/assets/btn_dl_option.gif"  /></a></p>
-					<p><a id = "download_csv"><img src="/assets/btn_dl_report.gif"  /></a></p>
+					<p><a href="#"><img src="/assets/btn_dl_report.gif"  /></a></p>
 				</div>
 			</div>
 			
-			<table id="cvlogs" class="fixTable newTable07" ></table>
+			<table id="cvlogs" class="newTable06 fixTable d-none" style="background: grey" ></table>
 			
 			
 		</div>
@@ -188,52 +189,40 @@
 	<!--/タブ切り替え-->
 </div>
 <script type="text/javascript">
-	$('#download_csv').click(function(){
-        $.ajax({
-            url: "<%= download_csv_conversion_promotion_logs_path %>",
-            data: {"conversion_id" : $("#conversion_id").val(),
-            	   "promotion_id" : "<%= @promotion.id if @promotion %>",
-            	   "media_category_id": $("#media_category_id").val(),
-            	   "account_id": $("#account_id").val()},
-            method: "post",
-            success: function(data){
-            }
 
-        })
-    })
 	$("#cvlogs").flexigrid({
 		url: "<%= get_conversion_logs_list_conversion_promotion_logs_path %>",
 		dataType: 'json',
 		colModel : [ 
-	{display: 'CV_utime', name : 'conversion_utime', sortable : true, align: 'center',hide: ($.cookie("options")[0] == "1") ? false : true},
-	{display: 'CV_id', name : 'conversion_id', sortable : false, align: 'center',hide: ($.cookie("options")[1] == "1") ? false : true},		
-    {display: 'CV_category', name : 'conversion_category', sortable : false, align: 'center', hide: ($.cookie("options")[2] == "1") ? false : true}, 
-    {display: 'tracking_type', name : 'tracking_type', sortable : false, align: 'center',hide: ($.cookie("options")[3] == "1") ? false : true},
-    {display: 'CV_type', name : 'cv_type', sortable : false, align: 'center',hide: ($.cookie("options")[4] == "1") ? false : true},
-    {display: 'approval', name : 'approval_status', sortable : false, align: 'center',hide: ($.cookie("options")[5] == "1") ? false : true},
-    {display: 'Media', name : 'media_id', sortable : false, align: 'center', hide: ($.cookie("options")[6] == "1") ? false : true},
-    {display: 'Account', name : 'account_id', sortable : false, align: 'center', hide: ($.cookie("options")[7] == "1") ? false : true},
-	{display: 'Campaign', name : 'campaign_id', sortable : false, align: 'center',hide: ($.cookie("options")[8] == "1") ? false : true},
-    {display: 'Ad Group', name : 'group_id', sortable : false, align: 'center',hide: ($.cookie("options")[9] == "1") ? false : true},
-    {display: 'ad_id', name : 'unit_id', sortable : false, align: 'center',hide: ($.cookie("options")[10] == "1") ? false : true},
-    {display: 'click_time', name : 'click_time', sortable : false, align: 'center',hide: ($.cookie("options")[11] == "1") ? false : true},
-    {display: 'verify', name : 'verify', sortable : false, align: 'center',hide: ($.cookie("options")[12] == "1") ? false : true},
-    {display: 'suid', name : 'suid', sortable : false, align: 'center',hide: ($.cookie("options")[13] == "1") ? false : true},
-    {display: 'session_id', name : 'session_id', sortable : false, align: 'center',hide: ($.cookie("options")[14] == "1") ? false : true},
-    {display: 'OS', name : 'os', sortable : false, align: 'center',hide: ($.cookie("options")[15] == "1") ? false : true},
-    {display: 'Repeat', name : 'repeat', sortable : false, align: 'center',hide: ($.cookie("options")[16] == "1") ? false : true},
-    {display: 'Log state', name : 'log_state', sortable : false, align: 'center',hide: ($.cookie("options")[17] == "1") ? false : true},
-    {display: 'Sales', name : 'sales', sortable : false, align: 'center',hide: ($.cookie("options")[18] == "1") ? false : true},
-    {display: 'Profit', name : 'profit', sortable : false, align: 'center',hide: ($.cookie("options")[19] == "1") ? false : true},
-    {display: 'Volume', name : 'volume', sortable : false, align: 'center',hide: ($.cookie("options")[20] == "1") ? false : true},
-    {display: 'Others', name : 'others', sortable : false, align: 'center',hide: ($.cookie("options")[21] == "1") ? false : true},
-    {display: 'Error message', name : 'error_message', sortable : false, align: 'center',hide: ($.cookie("options")[22] == "1") ? false : true}
+	{display: 'CV_utime', name : 'conversion_utime', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[0] == "1") ? false : true},
+	{display: 'CV_id', name : 'conversion_id', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[1] == "1") ? false : true},
+    {display: 'CV_category', name : 'conversion_category', width : 'auto', sortable : true, align: 'center', hide: ($.cookie("options")[2] == "1") ? false : true},
+    {display: 'tracking_type', name : 'tracking_type', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[3] == "1") ? false : true},
+    {display: 'CV_type', name : 'cv_type', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[4] == "1") ? false : true},
+    {display: 'approval', name : 'approval_status', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[5] == "1") ? false : true},
+    {display: 'Media', name : 'media_id', width : 'auto', sortable : true, align: 'center', hide: ($.cookie("options")[6] == "1") ? false : true},
+    {display: 'Account', name : 'account_id', width : 'auto', sortable : true, align: 'center', hide: ($.cookie("options")[7] == "1") ? false : true},
+	{display: 'Campaign', name : 'campaign_id', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[8] == "1") ? false : true},
+    {display: 'Ad Group', name : 'group_id', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[9] == "1") ? false : true},
+    {display: 'ad_id', name : 'unit_id', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[10] == "1") ? false : true},
+    {display: 'click_time', name : 'click_time', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[11] == "1") ? false : true},
+    {display: 'verify', name : 'verify', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[12] == "1") ? false : true},
+    {display: 'suid', name : 'suid', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[13] == "1") ? false : true},
+    {display: 'session_id', name : 'session_id', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[14] == "1") ? false : true},
+    {display: 'OS', name : 'os', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[15] == "1") ? false : true},
+    {display: 'Repeat', name : 'repeat', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[16] == "1") ? false : true},
+    {display: 'Log state', name : 'log_state', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[17] == "1") ? false : true},
+    {display: 'Sales', name : 'sales', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[18] == "1") ? false : true},
+    {display: 'Profit', name : 'profit', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[19] == "1") ? false : true},
+    {display: 'Volume', name : 'volume', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[20] == "1") ? false : true},
+    {display: 'Others', name : 'others', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[21] == "1") ? false : true},
+    {display: 'Error message', name : 'error_message', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[22] == "1") ? false : true}
 			],
 				preProcess : function (json) {
 	            var results = new Array();
 	            jQuery.each(json.rows, function(idx, v) {
 	                if (idx==0) {
-	                	results.push({id: "-" + v.cell.media_category_id, cell: {conversion_utime: "conversion_utime", conversion_id: "conversion_id",volume: "", others: "",error_message: "",
+	                	results.push({id: "-" + v.cell.media_category_id, cell: {conversion_utime: "", conversion_id: "",volume: "", others: "",error_message: "",
 	                					conversion_category: "", tracking_type: "", cv_type: "", approval_status: "", media_id: "", account_id: "",campaign_id: "", ad_group_id: "", ad_id: "",
 	                					click_time: "", sales: "", verify: "", suid: "", session_id: "", os: "",repeat: "", log_state: "", sales: ""}});
 	               	} else {
@@ -261,24 +250,23 @@
 		rp: 10,
 		sortname: 'conversion_utime',
 		sortorder: 'desc',
+        resizable : false,
+        optionGet : "5",
 		query: "<%= params[:promotion_id] %>",
 		showTableToggleBtn: true,
-		width: 2000,
-		height: 200,
+		height: 300,
 		onSuccess: function() {
-			tableResize();
+            tableResize();
 			$('tr#row-0 td:nth-child('+(1+'n-'+(24))+')').remove();
-			$('tr#row-0').append("<td colspan='22'><div class='group_header'>Listing ad</div></td>");
-			$('tr#row-0').addClass('group_header');
+			$('tr#row-0').append("<td><div class='group_header'>Listing ad</div></td>");
+			
 			$('tr#row-1 td:nth-child('+(1+'n-'+(24))+')').remove();
-			$('tr#row-1').append("<td colspan='24'><div class='group_header'>Display ad</div></td>");
-			$('tr#row-1').addClass('group_header');
+			$('tr#row-1').append("<td><div class='group_header'>Display ad</div></td>");
+			
 			$('tr#row-2 td:nth-child('+(1+'n-'+(24))+')').remove();
-			$('tr#row-2').append("<td colspan='24'><div class='group_header'>Affiliate</div></td>");
-			$('tr#row-2').addClass('group_header');
+			$('tr#row-2').append("<td><div class='group_header'>Affiliate</div></td>");
 			$('tr#row-1000 td:nth-child('+(1+'n-'+(24))+')').remove();
-			$('tr#row-1000').append("<td colspan='24'><div class='group_header'>Oganic</div></td>");
-			$('tr#row-1000').addClass('group_header');
+			$('tr#row-1000').append("<td><div class='group_header'>Oganic</div></td>");
 		}
 	});
 	var colums = ["conversion_utime", "conversion_id", "conversion_category","tracking_type",
@@ -298,8 +286,8 @@
 	update_cookie = function(data,ele){
 		options = cookies_options.split("");
 		options[data] = (options[data] == "1") ? "0" : "1";
-		text = (options[data] == "1") ? "Delete" : "Add";
-		$(ele).text(text);
+		text = (options[data] == "1") ?  "<img src='/assets/btn_box_dl.gif' >" : "<img src='/assets/btn_box_add.gif' >";
+		$(ele).html(text);
 		options = options.join("");
 		cookies_options = options;
 
@@ -345,12 +333,7 @@
 		$.cookie("options", '111111111111111111111111');
 		location.href = location.href;
 	})
-<script>
-    $(window).resize(function() {
-        tableResize();
-    });
 
-</script>
 </script>
 
 <table id="paging" class="flexme4" style="display:none"></table>

@@ -2,7 +2,6 @@
 <%= stylesheet_link_tag "css/colorbox" %>
 <%= stylesheet_link_tag "css/common" %>
 <%= stylesheet_link_tag "css/box_inner_log" %>
-<%= stylesheet_link_tag "css/flexigrid.pack" %>
 <% if flash[:error] %>
 	<div><%= flash[:error] %></div>
 <% end %>
@@ -148,7 +147,6 @@
 	jQuery(document).ready(function($) {
 		$(".newTable06").flexigrid({
 			url: "<%= get_logs_list_click_logs_path %>",
-			ptionGet : "4",
 			dataType: 'json',
 			colModel : [
 				{display: 'Click Time', name : 'click_utime', sortable : true, with:'auto',align: 'center', hide: <%= cookies[:coptions][0] == "0" ? 1 : 0 %>},
