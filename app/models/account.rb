@@ -23,6 +23,21 @@ class Account < ActiveRecord::Base
   has_many :daily_summary_acc_conversions
   belongs_to :promotion
   belongs_to :media
+  
+  def self.get_account_list promotion_id, media_list
+    results = Hash.new
+    accounts_list = Account.where(promotion_id: promotion_id)
+    Settings.media_category.each do |category|
+      media_list[category[1]+"_media"].each do |media|
+        results["media"+media.id.to_s+"_account"] = Array.new
+      end
+    end
+    
+    accounts_list.each do |account|
+      results["media"+account.media_id.to_s+"_account"] << account
+    end
+    results
+  end
 
   private
   def check_sync

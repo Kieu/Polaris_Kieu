@@ -14,10 +14,10 @@
 <script type="text/javascript">
   $(document).ready(function(){
   	prevent = false;
-  	$('input#keywords').quicksearch('div#clients_list table tbody tr td', {
+  	$('input#keywords').quicksearch('div#clients_list table tr', {
           "selector": "a.client_name"
       });
-      $('input#keywords').quicksearch('div#promotions_list table tbody tr td', {
+      $('input#keywords').quicksearch('div#promotions_list table tr', {
           "selector": "a.promotion_name"
       });
   	

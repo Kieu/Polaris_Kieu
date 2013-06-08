@@ -20,8 +20,10 @@ class PromotionsController < ApplicationController
     
       @promotion = @array_promotion.find_by_id(@promotion_id)
       if @promotion
-        start_date = params[:start_date].present? ? params[:start_date] : Date.today.at_beginning_of_month.strftime("%Y/%m/%d").to_s
-        end_date = params[:end_date].present? ? params[:end_date] : Date.today.strftime("%Y/%m/%d").to_s
+        start_date = params[:start_date].present? ? params[:start_date] :
+          Date.today.at_beginning_of_month.strftime("%Y/%m/%d").to_s
+        end_date = params[:end_date].present? ? params[:end_date] :
+          Date.today.strftime("%Y/%m/%d").to_s
         cookies[:promotion] = "111111" unless cookies[:promotion].present?
         @promotion.conversions.each do |conversion|
           cookies[("conversion" + conversion.id.to_s).to_sym] = "1111111111" unless
@@ -31,14 +33,14 @@ class PromotionsController < ApplicationController
         @promotion_name = Promotion.find(@promotion_id).promotion_name
         
         @conversions = @promotion.conversions
-        @promotion_results = Hash.new
-        @promotion_results = DailySummaryAccount
-          .get_promotion_summary(@promotion_id,start_date, end_date)
         
-        @conversions_results = Hash.new
+        @media_list = Media.get_media_list
+        @account_list = Account.get_account_list(@promotion_id, @media_list)
+        
+        @promotion_results = DailySummaryAccount
+          .get_promotion_summary(@promotion_id, start_date, end_date)
         @conversions_results = DailySummaryAccConversion
           .get_conversions_summary(@promotion_id,start_date, end_date)
-        
         @promotion_data = Array.new
         date_arrange = Array.new
   
@@ -53,8 +55,8 @@ class PromotionsController < ApplicationController
         date_arrange.each do |date|
           @array_category << date.to_date.strftime("%m/%d")
         end
-        @select_left = params[:left].present? ? params[:left] : "COST"
-        @select_right = params[:right].present? ? params[:right] : "click"
+        @select_left = params[:left].present? ? params[:left] : "click"
+        @select_right = params[:right].present? ? params[:right] : "COST"
       else
         render 'public/404'
       end
@@ -102,6 +104,29 @@ class PromotionsController < ApplicationController
     flash[:error] = "Promotion deleted"
     redirect_to promotions_path(client_id: @promotion.client_id)
   end
+  
+  def change_data
+    results = Hash.new
+    client_id = params[:client_id]
+    promotion_id = params[:promotion_id]
+    start_date = params[:start_date]
+    end_date = params[:end_date]
+    results[:promotion_results] = DailySummaryAccount
+      .get_promotion_summary(promotion_id, start_date, end_date)
+    results[:conversions_results] = DailySummaryAccConversion
+      .get_conversions_summary(promotion_id,start_date, end_date)
+    conversion_id = 1;
+    results[:promotion_data], date_arrange =
+      DailySummaryAccount.get_promotion_data(promotion_id,
+        conversion_id, start_date, end_date)
+    results[:array_category] = Array.new
+    date_arrange.each do |date|
+      results[:array_category] << date.to_date.strftime("%m/%d")
+    end
+    respond_to do |format|
+      format.json{render json: results}
+    end 
+  end
 
   def download_csv
     promotion_id = params[:promotion_id].to_i
@@ -109,30 +134,6 @@ class PromotionsController < ApplicationController
     Resque.enqueue ExportPromotionData, user_id, promotion_id
     
     render text: "processing"
-  end
-
-  def draw_graph(promotion_data, date_arrange, select_left, select_right)
-    @array_category = Array.new
-    date_arrange.each do |date|
-      @array_category << date.to_date.strftime("%m/%d")
-    end
-    binding.pry
-    @chart = LazyHighCharts::HighChart.new('graph') do |f|
-      
-      f.series(type: 'spline', name: "#{select_left}",
-             data: promotion_data[select_left],
-             color: '#008B8B')
-      f.series(type: 'spline', name: "#{select_right}",
-             data: promotion_data[select_right],
-             color: '#FFA500')
-      f.legend(align: "right", verticalAlign: "top", y: 0, x: -50,
-             layout: 'vertical', borderWidth: 0)
-      f.xAxis(type: 'date',dateTimeLabelFormats: {day: '%e. %b', month: '%e. %b'},
-            categories: @array_category, labels: {rotation: -45,
-              style: {color: '#6D869F', font: '12px Helvetical'}})
-      f.yAxis(min: 0, title: '')
-    end
-    
   end
 
   private

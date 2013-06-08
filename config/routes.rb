@@ -22,6 +22,7 @@ PolarisManage::Application.routes.draw do
   resources :promotions do
     post "get_promotions_report", on: :collection
     post "download_csv", on: :collection
+    post "change_data", on: :collection
   end
   resources :sessions, only: [:new, :create, :destroy] do
     post "resend_password", on: :collection

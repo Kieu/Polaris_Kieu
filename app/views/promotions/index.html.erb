@@ -120,12 +120,12 @@
 <tr>
 	<td class="header_total"></td>
 	<td class="header_total"></td>
-	<% Settings.promotions_options.each_with_index do |option, index|%>
-		<%= content_tag(:td, @promotion_results[option+"_total"], class: "header_total") if cookies[:promotion][index] == "1" %>
+	<% Settings.promotions_sums.each_with_index do |option, index|%>
+		<%= content_tag(:td, @promotion_results["total"][option], class: "header_total") if cookies[:promotion][index] == "1" %>
 	<% end %>
 	<% @conversions.each do |conversion|%>
-		<% Settings.conversions_options.each_with_index do |option, index|%>
-			<%= content_tag(:td, @conversions_results["conversion"+conversion.id.to_s+"_"+ option+"_total"], class: "header_total") if cookies[("conversion" + conversion.id.to_s).to_sym][index] == "1"%>
+		<% Settings.conversions_sums.each_with_index do |option, index|%>
+			<%= content_tag(:td, @conversions_results["total_conversion"+conversion.id.to_s][option], class: "header_total") if cookies[("conversion" + conversion.id.to_s).to_sym][index] == "1"%>
 		<% end %>
 	<% end %>
 </tr>
@@ -133,27 +133,28 @@
 	<tr>
     	<td class="category_header"><%= category[1] %></td>
 		<td class="category_header">total</td>
-		<% Settings.promotions_options.each_with_index do |option, index|%>
-			<%= content_tag(:td, @promotion_results[category[1]+"_"+option+"_total"], class: "category_header") if cookies[:promotion][index] == "1" %>
+		<% Settings.promotions_sums.each_with_index do |option, index|%>
+			<% val = @promotion_results[category[1]+"_total"] %>
+			<%= content_tag(:td, val.nil? ? "0" : val[option], class: "category_header") if cookies[:promotion][index] == "1" %>
 		<% end %>
 		<% @conversions.each do |conversion|%>
-			<% Settings.conversions_options.each_with_index do |option, index|%>
-				<%= content_tag(:td, @conversions_results[category[1]+"_conversion"+conversion.id.to_s+"_"+option], class: "category_header") if cookies[("conversion" + conversion.id.to_s).to_sym][index] == "1"%>
+			<% Settings.conversions_sums.each_with_index do |option, index|%>
+				<%= content_tag(:td, "total", class: "category_header") if cookies[("conversion" + conversion.id.to_s).to_sym][index] == "1"%>
 			<% end %>
 		<% end %>
 	</tr>
-    <% Media.where(media_category_id: category[0].to_s).each_with_index do |media, index| %>
+    <% @media_list[category[1].to_s+"_media"].each_with_index do |media, index| %>
 		<% break if index == "10" %>
-		<% media.accounts.each_with_index do |account, index1| %>
+		<% @account_list["media"+media.id.to_s+"_account"].each_with_index do |account, index1| %>
 		<tr>
-			<%= content_tag(:td, media.media_name, rowspan: media.accounts.count) if index1 == 0 %>
+			<%= content_tag(:td, media.media_name, rowspan: @account_list["media"+media.id.to_s+"_account"].count) if index1 == 0 %>
             <td><%= account.account_name %></td>
-            <% Settings.promotions_options.each_with_index do |option, index2|%>
-				<%= content_tag(:td, @promotion_results[account.account_name+"_"+option]) if cookies[:promotion][index2] == "1" %>
+            <% Settings.promotions_sums.each_with_index do |option, index2|%>
+				<%= content_tag(:td, @promotion_results["account"+account.id.to_s+"_promotion"][option]) if cookies[:promotion][index2] == "1" %>
 			<% end %>
 			<% @conversions.each do |conversion|%>
-				<% Settings.conversions_options.each_with_index do |option, index2|%>
-					<%= content_tag(:td, @conversions_results[account.account_name+"_conversion"+conversion.id.to_s+"_"+option]) if cookies[("conversion" + conversion.id.to_s).to_sym][index2] == "1"%>
+				<% Settings.conversions_sums.each_with_index do |option, index2|%>
+					<%= content_tag(:td, @conversions_results["account"+account.id.to_s+"_conversion"+conversion.id.to_s][option]) if cookies[("conversion" + conversion.id.to_s).to_sym][index2] == "1"%>
 				<% end %>
 			<% end %>
         </tr>
@@ -265,7 +266,7 @@
 	        cookies_conversions = {key: "<%= conversion.id %>", value: $.cookie("conversion<%= conversion.id %>")};
 	        array_conversions.push(cookies_conversions);
         <% end %>
-        console.log(array_conversions);
+        
         update_cookie_promotion = function(data){
             options = cookies_options.split("");
             options[data] = (options[data] == "1") ? "0" : "1";
@@ -389,25 +390,25 @@
 		lang: $('#lang').val(),
             onDone: function() {
                 var term = $('#datepicker').val();
-                
                 var d = term.split(' - ');
-                start_date = d[0].split("/");
-                start_date = formatDate(start_date[0],start_date[1],start_date[2]);
-                end_date = d[1].split("/");
-                end_date = formatDate(end_date[0],end_date[1],end_date[2]);
+                start_date = d[0];
+                end_date = d[1];
                 $.ajax({
-                	url: "<%= promotions_path %>",
-                	method: "GET",
-                	dataType: "html",
+                	url: "<%= change_data_promotions_path %>",
+                	type: "POST",
+                	dataType: "json",
                 	data: "client_id=" + "<%= @client_id %>" + "&promotion_id=" + "<%= @promotion_id %>" + "&start_date=" + start_date + "&end_date=" + end_date,
-                	success: function(data){
-                		array_inner = "#sample-chart,#promotion_table";
-                		array_inner = array_inner.split(",");
-                		for (i=0;i<array_inner.length;i++){
-	            		var inner_data = $(data).find(array_inner[i]);
-	            		$(array_inner[i]).html(inner_data.children());
-	            		}
-	            		draw_chart(data[left], data[right], left, right, categories);
+                	success: function(all_data){
+						<% Settings.promotions_options.each do |option| %>
+							data["<%= option %>"] = [];
+					    	for (var i=0; i< all_data["promotion_data"]["<%= option %>"].length; i++){
+								data["<%= option %>"].push(parseInt(all_data["promotion_data"]["<%= option %>"][i]));
+							};
+						<% end %>
+						for (var i=0; i< all_data["array_category"].length; i++){
+							categories.push(all_data["array_category"][i]);
+						}
+						draw_chart(data[left], data[right], left, right, categories);
 	            	}
 				})
 			}

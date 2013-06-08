@@ -36,4 +36,4 @@ export_promotion_path: 'doc/promotion_export/'
 promotions_options: ["imp", "click", "CTR", "COST", "CPM", "CPC"]
 conversions_options: ["CV(first)", "CV(repeat)", "CV", "CVR", "CPA", "ASSIST", "SALES", "ROAS", "PROFIT", "ROI"]
 promotions_sums: ["imp_count", "click_count", "click_through_ratio", "cost_sum", "cost_per_mille", "cost_per_click"]
-conversions_sums: ["total_cv_count", "first_cv_count", "repeat_cv_count", "conversion_rate", "click_per_action", "assist_count", "sales", "roas", "profit", "roi"]
+conversions_sums: ["first_cv_count", "repeat_cv_count", "total_cv_count", "conversion_rate", "click_per_action", "assist_count", "sales", "roas", "profit", "roi"]
