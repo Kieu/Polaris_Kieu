@@ -368,44 +368,6 @@ ul, li {
 }
 
 
-/* ==========================================================================
-   タブの切り替え
-   ========================================================================== */
-
-    var tab = {
- init: function() {
- var tabs = this.setup.tabs;
- var pages = this.setup.pages;
- for(i=0;
-i<pages.length;
-i++) {
- if(i !== 0) pages[i].style.display = 'none';
- tabs[i].onclick = function() {
-tab.showpage(this);
-return false;
-};
- showpage: function(obj) {
- var tabs = this.setup.tabs;
- var pages = this.setup.pages;
- var num;
- for(num=0;
-num<tabs.length;
-num++) {
- if(tabs[num] === obj) break;
-}
- for(var i=0;
-i<pages.length;
-i++) {
- if(i == num) {
- pages[num].style.display = 'block';
- tabs[num].className = 'present';
-}
- else {
- pages[i].style.display = 'none';
- tabs[i].className = null;
-}
-	
-
 
 
 
@@ -424,7 +386,7 @@ div.check-group input {
  display: none;
 }
 div.check-group label {
- background: url("../images/btn_box_add.gif") no-repeat scroll 0 0 transparent;
+ background: url("/assets/btn_box_add.gif") no-repeat scroll 0 0 transparent;
  float: right;
  height: 28px;
  padding: 0 5px;
@@ -444,7 +406,7 @@ div.check-group div:last-child label {
  -moz-border-radius-bottomright: 7px;
 }
 div.check-group label.checked {
- background: url("../images/btn_box_dl.gif") no-repeat scroll 0 0 transparent;
+ background: url("/assets/btn_box_dl.gif") no-repeat scroll 0 0 transparent;
  float: right;
  height: 28px;
  padding: 0 5px;
