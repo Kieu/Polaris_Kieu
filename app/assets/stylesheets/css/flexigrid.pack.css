@@ -331,6 +331,7 @@ div.colCopy {
 	border-bottom:1px solid #fff;
 	vertical-align:top;
 	white-space:nowrap;
+    background: white;
 }
 .flexigrid span.cdropleft {
 	display:block;
