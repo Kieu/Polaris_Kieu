@@ -7,13 +7,13 @@
         <%= render partial: "layouts/sidebar", locals: {object: @clients} %>
     <% end %>
     <p class="h2" id="client_name"><%= short_name(@client.client_name) %></p>
-    <table class="flexme4" style="display: none"></table>
+    <table class="flexme4" class="newTable06 fixTable d-none" style="display: none"></table>
     <script type="text/javascript">
         $(".flexme4").flexigrid({
             url: "<%= get_promotions_list_clients_path %>",
             dataType: 'json',
             colModel : [
-                {display: 'promotion_name', name : 'promotion_name', width : "auto", sortable : false, align: 'center'}
+                {display: 'promotion_name', name : 'promotion_name', width : 'auto', sortable : false, align: 'center'}
             ],
             <% if current_user.super? %>
             buttons : [
