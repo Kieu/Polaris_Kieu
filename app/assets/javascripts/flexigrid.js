@@ -3,12 +3,7 @@
      * jQuery 1.9 support. browser object has been removed in 1.9
      */
     var browser = $.browser
-    $('.bDiv').slimScroll({
-        color: '#00f',
-        size: '10px',
-        height: '180px',
-        alwaysVisible: true
-    });
+
     if (!browser) {
         function uaMatch( ua ) {
             ua = ua.toLowerCase();
