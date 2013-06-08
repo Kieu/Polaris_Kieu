@@ -31,22 +31,21 @@
           </td>
         </tr>
         <tr>
-          <th>
-            <td><%= f.label t("client.person_sale") %>   </td>
+          <th><%= f.label t("client.person_sale") %>   </th>
             <td colspan="2"><%= f.text_field :person_sale, maxlength: 255, style: "width: 250px" %>
             </td>
+        </tr>
+        <tr>
+          <th><%= f.label t("client.contract_type.label") %></th>
+          <td><%= f.radio_button :contract_type, 0, {checked: true} %> <%= I18n.t("client.contract_type.unrecovered") %></td>
+          <td> <%= f.radio_button :contract_type, 1 %> <%= I18n.t("client.contract_type.been_recovered") %>
+          </td>
         </tr>
         <tr>
           <th>
             <%= f.label t("client.contract_flg.label") %> </th>
           <td><%= f.radio_button :contract_flg, 0, {checked: true} %> <%= I18n.t("client.contract_flg.standard_plan") %></td>
           <td> <%= f.radio_button :contract_flg, 1 %> <%= I18n.t("client.contract_flg.premium_plan") %>
-          </td>
-        </tr>
-        <tr>
-          <th><%= f.label t("client.contract_type.label") %></th>
-          <td><%= f.radio_button :contract_type, 0, {checked: true} %> <%= I18n.t("client.contract_type.unrecovered") %></td>
-          <td> <%= f.radio_button :contract_type, 1 %> <%= I18n.t("client.contract_type.been_recovered") %>
           </td>
         </tr>
       </table>
@@ -62,7 +61,7 @@
           <th width="240">&nbsp;</th>
           <th width="80">&nbsp;</th>
           <th width="40">
-            <small><%= I18n.t("client.delete") %></small>
+            <small id="delete_label" style="display:none"><%= I18n.t("client.delete") %></small>
           </th>
         </tr>
         </thead>
@@ -97,7 +96,7 @@
                 $("#user_list").append("<tr><th>" + data.label + "(" + data.company + ")</th>" + "<td>" + data.email + "</td><td>" + data.role
                         + "</td><td><input type = 'hidden' name='users_id[]' value ='" + data.value +
                         "'><input type = 'checkbox' name='del_user_" + data.value + "'></td></tr>");
-
+                $('#delete_label').css("display", "block")
                 return false;
             },
             minLength: 0,

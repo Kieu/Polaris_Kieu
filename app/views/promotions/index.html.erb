@@ -238,9 +238,9 @@
 <script type="text/javascript">
     $('#download_csv').click(function(){
         $.ajax({
+        	type: "POST",
             url: "<%= download_csv_promotions_path %>",
             data: {"promotion_id" : "<%= @promotion.id if @promotion %>"},
-            method: "post",
             success: function(data){
             }
 
