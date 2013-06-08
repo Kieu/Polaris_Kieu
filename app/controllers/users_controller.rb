@@ -56,7 +56,7 @@ class UsersController < ApplicationController
   end
 
   def get_users_list
-    rows = get_rows(User.order_by_roman_name.page(params[:page]).per(params[:rp]))
+    rows = get_rows(User.order('role_id').page(params[:page]).per(params[:rp]))
     render json: {page: params[:page], total: User.count, rows: rows}
   end
 
@@ -80,10 +80,9 @@ class UsersController < ApplicationController
       end
       link = user.id == current_user.id ?
          "" : "<a href='users/#{user.id}/edit'>#{view_context.image_tag("/assets/img_edit.png")}</a>"
-      rows << {"id" => user.id, "cell" => {"link" => link,
-        "roman_name" => user.roman_name, 
-        "username" => user.username, "company" => company,
-        "email" => user.email, "role_id" => user.role.role_name}}
+      rows << {id: user.id, cell: {
+               link: link, roman_name: user.roman_name, username: user.username, company: company,
+               email: user.email, role: user.role.role_name}}
     end
     rows
   end
