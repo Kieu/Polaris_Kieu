@@ -29,6 +29,12 @@
             id: "<%= @client.id if @client %>",
             rp: 10,
             showTableToggleBtn: true,
+            resizable : false,
+
+            height: 300,
+            onSuccess: function() {
+                tableResize();
+            },
             height: 250
         });
         function create() {
