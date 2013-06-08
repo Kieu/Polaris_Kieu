@@ -3,7 +3,7 @@
 
 
 /* ==========================================================================
-   account/account_regist.html  [å…¨ä½“å¯å¤‰]
+   account/account_regist.html  [全体可変]
    ========================================================================== */
 
 #wrapper{
@@ -20,16 +20,14 @@
     margin: auto;
     margin-top: 20px;
     margin-bottom: 20px;
-    font-family: "ãƒ’ãƒ©ã‚®ãƒŽè§’ã‚´ Pro W3", "Hiragino Kaku Gothic Pro", "ãƒ¡ã‚¤ãƒªã‚ª", Meiryo, "ï¼­ï¼³ ï¼°ã‚´ã‚·ãƒƒã‚¯", sans-serif;
+    font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", sans-serif;
 }
 
 
 #contents{
     position: relative;
-    margin: 0 40px 0 310px;
-    border-left: 2px solid #c1c1c1;
     min-height:500px;
-    font-family: "ãƒ’ãƒ©ã‚®ãƒŽè§’ã‚´ Pro W3", "Hiragino Kaku Gothic Pro", "ãƒ¡ã‚¤ãƒªã‚ª", Meiryo, "ï¼­ï¼³ ï¼°ã‚´ã‚·ãƒƒã‚¯", sans-serif;
+    font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", sans-serif;
 }
 
 #inner{
@@ -125,3 +123,5 @@ table td .multiply{
 #id:focus {
     color: #333;
 }
+
+
