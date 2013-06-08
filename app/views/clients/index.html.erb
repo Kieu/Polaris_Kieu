@@ -16,7 +16,7 @@
 		url: "<%= get_promotions_list_clients_path %>",
 		dataType: 'json',
 		colModel : [
-			{display: 'promotion_name', name : 'promotion_name', width : 700, sortable : false, align: 'center'}
+			{display: 'promotion_name', name : 'promotion_name', width : 'auto', sortable : false, align: 'center'}
 			],
         <% if current_user.super? %>
         buttons : [
@@ -32,7 +32,11 @@
 		id: "<%= @client.id if @client %>",
 		rp: 10,
 		showTableToggleBtn: true,
-		width: 250,
+        resizable : false,
+        height: 300,
+        onSuccess: function() {
+            tableResize();
+        },
 		height: 250
 	});
     function create() {
