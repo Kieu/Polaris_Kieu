@@ -343,12 +343,7 @@
 </script>
 <div style="clear:both"></div>
 <script type="text/javascript">
-    $('.bDiv').slimScroll({
-        color: '#00f',
-        size: '10px',
-        height: '180px',
-        alwaysVisible: true
-    });
+
 	$("#conversion_id").change(function(){
 		conversion_id = $(this).val();
 		reloadFlex1("#cvlogs","<%= get_conversion_logs_list_conversion_promotion_logs_path %>?cv_id=" + $(this).val() + "&account_id=" + $("#account_id").val() + "&media_category_id=" + $("#media_category_id").val());

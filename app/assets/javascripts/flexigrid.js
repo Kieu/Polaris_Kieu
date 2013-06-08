@@ -184,6 +184,12 @@
                 $(g.rDiv).css({
                     height: hrH
                 });
+                $(g.bDiv).slimScroll({
+                    color: '#00f',
+                    size: '10px',
+                    height: '180px',
+                    alwaysVisible: true
+                });
             },
             dragStart: function (dragtype, e, obj) { //default drag function start
                 if (dragtype == 'colresize' && p.colResize === true) {//column resize
