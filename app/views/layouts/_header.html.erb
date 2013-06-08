@@ -48,13 +48,26 @@
                 <li><%= link_to params[:controller] == "accounts" ? raw('<img src="/assets/nav/nav_01_account_on.gif" alt="ユーザーリスト" />'):raw('<img src="/assets/nav/nav_01_account_off.gif" alt="ユーザーリスト" />'), "javascript:void(0)", class: "account_class_header", onclick: "ajaxCommon('#{accounts_path}?client_id=#{params[:client_id]}&promotion_id=#{params[:promotion_id]}','','','','#container,#sidebar')" %></li>
 
                 <li><%= link_to params[:controller] == "url_settings" ? raw('<img src="/assets/nav/nav_02_url_current.gif" alt="代理店リスト" />'):raw('<img src="/assets/nav/nav_02_url_on.gif" alt="代理店リスト" />'),  "javascript:void(0)", class: "settings_class_header", onclick: "ajaxCommon('#{url_settings_path}?client_id=#{params[:client_id]}&promotion_id=#{params[:promotion_id]}&media_id=#{params[:promotion_id]}','','','','#container,#sidebar')" %></li>
-
             <% else %>
-                <li class="current"><%= link_to raw('<img src="/assets/nav/nav_01_client_off.gif" width="144" height="38" alt="クライアントリスト" />'), "javascript:void(0)", class: "client_class_header", onclick: "ajaxCommon('#{clients_path}','','','','#container,#sidebar')" %></li>
+                <% 
+                  # set class for all tabs
+                  client_class = ""
+                  agency_class = ""
+                  user_class = ""
+                  media_class = ""
+                  if params[:controller] == "users"
+                    user_class = "current"
+                  elsif params[:controller] == "agencies"
+                    agency_class = "current"
+                  else
+                    client_class = "current"
+                  end
+                %>
+                <li class="<%= client_class %>"><%= link_to raw('<img src="/assets/nav/nav_01_client_off.gif" width="144" height="38" alt="クライアントリスト" />'), "javascript:void(0)", class: "client_class_header", onclick: "ajaxCommon('#{clients_path}','','','','#container,#sidebar')" %></li>
 
-                <li><%= link_to raw('<img src="/assets/nav/nav_02_agency_off.gif" width="142" height="38" alt="代理店リスト" />'),  "javascript:void(0)", class: "agency_class_header", onclick: "ajaxCommon('#{agencies_path}','','','','#container,#sidebar')" %></li>
-                <li><%= link_to raw('<img src="/assets/nav/nav_03_user_off.gif" width="142" height="38" alt="ユーザーリスト" />'), "javascript:void(0)", class: "user_class_header", onclick: "ajaxCommon('#{users_path}','','','','#container,#sidebar')" %></li>
-                <li><a href="#"><img src="/assets/nav/nav_04_media_off.gif" width="142" height="38" alt="メディアリスト" /></a></li>
+                <li class="<%= agency_class %>"><%= link_to raw('<img src="/assets/nav/nav_02_agency_off.gif" width="142" height="38" alt="代理店リスト" />'),  "javascript:void(0)", class: "agency_class_header", onclick: "ajaxCommon('#{agencies_path}','','','','#container,#sidebar')" %></li>
+                <li class="<%= user_class %>"><%= link_to raw('<img src="/assets/nav/nav_03_user_off.gif" width="142" height="38" alt="ユーザーリスト" />'), "javascript:void(0)", class: "user_class_header", onclick: "ajaxCommon('#{users_path}','','','','#container,#sidebar')" %></li>
+                <li class="<%= media_class %>"><a href="#"><img src="/assets/nav/nav_04_media_off.gif" width="142" height="38" alt="メディアリスト" /></a></li>
             <% end %>
         <% end %>
       </ul>
