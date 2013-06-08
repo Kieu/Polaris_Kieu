@@ -20,19 +20,12 @@
         </tr>
         <tr>
           <th> <%= f.label "権限：" %></th>
-          <td colspan="2">
-            <select class="input-text">
-              <option value="">選択してください</option>
-              <option value="2">Client</option>
-              <option value="3">Agency</option>
-              <option value="1">Super</option>
-            </select>
-          </td>
+          <td colspan="2"><%= f.collection_select :role_id, Role.all, :id, :role_name, {:include_blank => "選択してください"},{:class => 'input-text'} %></td>
         </tr>
         <tr>
           <th><%= f.label "会社名：" %></th>
           <td colspan="2">
-            <%= f.collection_select :company_id, Client.all, :id, :client_name, {} %></td>
+            <%= f.collection_select :company_id, Client.all, :id, :client_name, {}, {:class => 'input-text'} %></td>
         </tr>
         <tr>
           <th>パスワード：</th>
