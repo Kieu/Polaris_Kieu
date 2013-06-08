@@ -185,9 +185,9 @@
                     height: hrH
                 });
                 $(g.bDiv).slimScroll({
-                    color: '#00f',
-                    size: '10px',
-                    height: '180px',
+                    color: '#0087A9',
+                    size: '8px',
+                    height: '100px',
                     alwaysVisible: true
                 });
             },
