@@ -1,4 +1,5 @@
 <%= stylesheet_link_tag "css/common" %>
+<%= stylesheet_link_tag "css/agency" %>
 <div><%= link_to @promotion.client.client_name, clients_path %> > <%= link_to @promotion.promotion_name, promotions_path %> > <%= I18n.t("account.crumb_edit") %></div>
 <% if flash[:success] %>
   <div><%= flash[:success] %></div>
