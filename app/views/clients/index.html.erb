@@ -1,5 +1,6 @@
-<%= stylesheet_link_tag "css/flexigrid.pack" %>
-<%= stylesheet_link_tag "css/clients" %>
+<%= stylesheet_link_tag "css/user2", :media => "all" %>
+<%= stylesheet_link_tag "css/common", :media => "all" %>
+
 <% if flash[:error] %>
 	<div><%= flash[:error] %></div>
 <% end %>
@@ -7,9 +8,8 @@
 <% content_for :sidebar do %>
 	<%= render partial: "layouts/sidebar", locals: {object: @clients} %>
 <% end %>
-<h2 id="client_name"><%= short_name(@client.client_name) %></h2>
-<br />
-<p class="h2"><%= @client.client_name %></p>
+
+<p class="h2" id="client_name"><%= short_name(@client.client_name) %></p>
 <table class="flexme4" style="display: none"></table>
 <script type="text/javascript">
 	$(".flexme4").flexigrid({
