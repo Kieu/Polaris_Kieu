@@ -66,6 +66,12 @@
 	float:right;
 }
 
+p.dl{
+	color: #F63;
+	text-decoration:underline;
+	padding: 2px 0;
+}
+
 .date{
   background-color: #F8F8F8;
     float: right;
