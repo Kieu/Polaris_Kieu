@@ -179,11 +179,17 @@
                     height: newH,
                     marginBottom: (newH * -1)
                 });
+                $(g.bDiv).slimScroll({
+                    color: '#0087A9',
+                    size: '8px',
+                    alwaysVisible: true
+                });
                 var hrH = g.bDiv.offsetTop + newH;
                 if (p.height != 'auto' && p.resizable) hrH = g.vDiv.offsetTop;
                 $(g.rDiv).css({
                     height: hrH
                 });
+
             },
             dragStart: function (dragtype, e, obj) { //default drag function start
                 if (dragtype == 'colresize' && p.colResize === true) {//column resize

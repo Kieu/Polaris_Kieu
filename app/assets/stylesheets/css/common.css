@@ -167,6 +167,8 @@ p.h2{
     margin-right: 10px;
     margin-top: 20px;
     min-height: 315px;
+    max-height: 315px;
+    overflow: hidden;
 }
 #clienetlist_box dl {
     padding: 10px;

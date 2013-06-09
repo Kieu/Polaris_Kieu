@@ -1,155 +1,57 @@
-<div><%= link_to @promotion.client.client_name, clients_path %> > <%= link_to @promotion.promotion_name, promotions_path %> > Account Register</div>
+<%= stylesheet_link_tag "css/common" %>
+<%= stylesheet_link_tag "css/accounts" %>
+<%= link_to @promotion.client.client_name, clients_path %> > <%= link_to @promotion.promotion_name, promotions_path %> > Account Register
 <% if flash[:success] %>
-  <div><%= flash[:success] %></div>
+    <div><%= flash[:success] %></div>
 <% end %>
-
-<h1>Create Account</h1>
+<p class="h2"><%= I18n.t("account.crumb_add") %></p>
 <%= form_for(@account) do |f| %>
-  <input type="hidden" name="account[promotion_id]" value="<%= @promotion_id%>">
-  <div class="field">
-    <%= f.label "Media Category"%>
-    <select name="media_category" id="media_category">
-      <option value=1>Listing ad</option> 
-      <option value=2>Display ad</option> 
-      <option value=3>Affiliate</option> 
-    </select>
-  </div>
-<div class="field">
-    <%= f.label "Media"%>
-    <select name="account[media_id]" id="media_id">
-      <option value=1>Google Adwords</option> 
-      <option value=2>Yahoo sponsered search</option> 
-      <option value=3>Others</option>
-    </select>
-  </div>
-  <div class="field">
-    <%= f.label "Account name" %><br />
-    <%= f.text_field :account_name, maxlength: 255, style: "width: 250px" %>
-  </div>
-  <div class="field">
-    <%= f.label "Roman name" %><br />
-    <%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %>
-  </div>
-  <div id="sync_box">
-  	<div class="field">
-    	<label for="account_Account synchronize1">Account synchronize1</label>
-      	<%= f.radio_button :sync_flg, 1, {checked: true}%>
-    	<label for="account_Yes">Yes</label>
-    	<%= f.radio_button :sync_flg, 0%>
-    	<label for="account_No">No</label>
-    </div>
-    <div id="sync" class="field">
-      	<label for="account_Account Sycn ID1">Account sycn id</label><br />
-      	<%= f.text_field :sync_account_id, maxlength: 255, style: "width: 250px" %>
-      	<label for="account_Account Sycn PW">Account sycn pw</label><br />
-      	<%= f.text_field :sync_account_pw, maxlength: 255, style: "width: 250px" %>
-    </div>
-  </div>
-  <div class="field">
-    <%= f.label "Cost" %><br />
-    <%= f.text_field :cost, maxlength: 3, value: 100, style: "width: 50px" %> %
-  </div>
-  <div id="sdk_box">
-    <div class="field">
-      	<%= f.label "SDK" %>
-      	<input type="radio" name="sdk_flg" checked="checked" value="1"  />Yes
-      	<input type="radio" name="sdk_flg" value="0" />No
-    </div>
-    <div class="field" id="sync">
-      	<%= f.label "SDK"%>
-      	<select disabled="disabled"></select>
-    </div>
-  </div>
-	
-  	
-  <%= f.submit %>
-  <%= link_to 'Cancel', promotions_path %>
+    <div class="regist_form">
+      <table class="account_info">
+        <tr>
+          <th> <%= f.label t("account.media_category") %></th>
+          <td><%= select_tag :media_category_id, "<option value = 0 >Listing ad</option><option value = 1 >Display ad</option><option value = 2 >Affiliate</option>".html_safe, class: "input-text" %></td>
+        </tr>
+        <tr>
+          <th><%= f.label t("account.media") %></th>
+          <td>
+            <select name="account[media_id]" id="media_id">
+              <option value=1>Google Adwords</option>
+              <option value=2>Yahoo sponsered search</option>
+              <option value=3>Others</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th><%= f.label t("account.account_name") %></th>
+          <td> <%= f.text_field :account_name, maxlength: 15, style: "width: 250px" %>  </td>
+        </tr>
+        <tr>
+          <th><%= f.label t("account.roman_name") %></th>
+          <td><%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %></td>
+        </tr>
+        <tr>
+          <th><%= f.label t("account.cost") %></th>
+          <td><%= f.text_field :cost, maxlength: 3, value: 100, style: "width: 50px" %> %</td>
+        </tr>
+        <tr>
+          <th><%= f.label t("account.sync_account_id") %></th>
+          <td><%= f.radio_button :sync_account_id, 0 %> <%= I18n.t("client.contract_type.unrecovered") %>
+            <%= f.radio_button :sync_account_id, 1 %> <%= I18n.t("client.contract_type.been_recovered") %></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td>
+            <input type="text" name="name" id="id" value="Google＋31344938595@septeni.co.jp" class="input-text" disabled="disabled">
+          </td>
+        </tr>
+        <th></th>
+        <td><input type="text" name="name" id="pw" value="****************" class="input-text" disabled="disabled"></td>
+        </tr>
+      </table>
+      <div class="submit_area">
+        <input type="image" id="btn_submit" src="/assets/btn_done.gif">
+        <%= link_to raw('<img align="right" alt="キャンセル" src="/assets/btn_cancel.gif">'), promotions_path %>
+      </div>
+      <input type="hidden" name="promotion_id" value="<%= @promotion.id %>">
 <% end %>
-<div id="sync_box_c" style="display: none">
-		<div class="field">
-	    	<label for="account_Account synchronize">Account synchronize</label>
-	      	<input type="radio" value="1" name="account[sync_flg]" id="account_sync_flg_1" checked="checked">
-	    	<label for="account_Yes">Yes</label>
-	    	<input type="radio" value="0" name="account[sync_flg]" id="account_sync_flg_0">
-	    	<label for="account_No">No</label>
-	    </div>
-	    <div id="sync" class="field">
-	      	<label for="account_Account Sycn ID">Account sycn id</label><br />
-	      	<input type="text" style="width: 250px" size="255" name="account[sync_account_id]" maxlength="255" id="account_sync_account_id"><br />
-	      	<label for="account_Account Sycn PW">Account sycn pw</label><br />
-	      	<input type="text" style="width: 250px" size="255" name="account[sync_account_pw]" maxlength="255" id="account_sync_account_pw">
-	    </div>
-	</div>	
-<script type="text/javascript">
-  $(document).ready(function()
-  {
-    $("#sdk_box").hide();
-    $("#media_category").change(function()
-    {
-      var id=parseInt($(this).val());
-      switch(id)
-      {
-        case 1: 
-          var html = "<option value=1>Google Adwords</option>";
-          html += "<option value=2>Yahoo sponsered search</option> "; 
-          html += "<option value=3>Others</option>"; 
-          $("#sync_box").html('');
-          $("#sync_box").append($('#sync_box_c').html());
-          $("#sdk_box").hide();
-          break;
-        case 2:
-          var html = "<option value=4>Google</option>";
-          html += "<option value=5>Yahoo</option> "; 
-          html += "<option value=6>Facebook(APP)</option>"; 
-          html += "<option value=7>Others(WEB)</option>";
-          html += "<option value=8>Others(APP)</option>";
-          $("#sync_box").append($('#sync_box_c'));
-          $("#sdk_box").hide();
-          break;
-        default:
-          var html = "<option value=9>Google Adwords</option>";
-          html += "<option value=11>Yahoo sponsered search</option> "; 
-          html += "<option value=12>Others</option>"; 
-          $("#sync_box").html('');
-          $("#sdk_box").hide();
-          break;
-      }
-      $("#media_id").html(html);
-
-    });
-      
-    $("#media_id").change(function(){
-      if($("#media_cateogry").val() == 1 || $(this).val()<7)
-        $("#sync_box").append($('#sync_box_c').html());
-      else 
-        $("#sync_box").html('');
-      if($("#media_id").val() == 8)  
-        $("#sdk_box").show();
-      else
-        $("#sdk_box").hide();
-  })  
-
- 	$("input[name$='account[sync_flg]']").click(function() {
-      var sync = $(this).val();
-      //$("div.desc").hide();
-      if (sync==1) {
-      	$('#account_sync_account_id').attr('readonly', false);
-        $('#account_sync_account_pw').attr('readonly', false);
-      } else {
-        $('#account_sync_account_id').attr('readonly', true);
-        $('#account_sync_account_pw').attr('readonly', true);
-      }
-
-    });
-	var sync = $("#account_sync_flg_0").val();
-      //$("div.desc").hide();
-      if ($("#account_sync_flg_0").is(':checked')) {
-      	$('#account_sync_account_id').attr('readonly', true);
-        $('#account_sync_account_pw').attr('readonly', true);
-      } else {
-        $('#account_sync_account_id').attr('readonly', false);
-        $('#account_sync_account_pw').attr('readonly', false);
-      }
-
-  });
-</script>

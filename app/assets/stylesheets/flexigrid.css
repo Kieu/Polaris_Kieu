@@ -280,7 +280,6 @@
 .flexigrid div.hDiv th, .flexigrid div.bDiv td /* common cell properties*/ {
     text-align:left;
     border-right:1px solid #b5b5b5;
-    border-left:1px solid #fff;
     overflow:hidden;
     vertical-align:top!important;
     padding-left:0;
@@ -307,7 +306,7 @@ div.colCopy {
     overflow:hidden
 }
 .flexigrid div.hDiv th.sorted {
-    background:url(/assets/wbg.gif) repeat-x 0 -1px;
+    background:#0087A9;
     border-bottom:0 solid #ccc
 }
 .flexigrid div.hDiv th.thOver div, .flexigrid div.hDiv th.sorted.thOver div {

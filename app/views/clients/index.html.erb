@@ -1,45 +1,47 @@
-<%= stylesheet_link_tag "css/flexigrid.pack" %>
-<%= stylesheet_link_tag "css/clients" %>
+<%= stylesheet_link_tag "css/common" %>
 <% if flash[:error] %>
-	<div><%= flash[:error] %></div>
+    <div><%= flash[:error] %></div>
 <% end %>
 <% if @clients.count > 0 %>
-<% content_for :sidebar do %>
-	<%= render partial: "layouts/sidebar", locals: {object: @clients} %>
-<% end %>
-<h2 id="client_name"><%= short_name(@client.client_name) %></h2>
-<br />
-<p class="h2"><%= @client.client_name %></p>
-<table class="flexme4" style="display: none"></table>
-<script type="text/javascript">
-	$(".flexme4").flexigrid({
-		url: "<%= get_promotions_list_clients_path %>",
-		dataType: 'json',
-		colModel : [
-			{display: 'promotion_name', name : 'promotion_name', width : 700, sortable : false, align: 'center'}
-			],
-        <% if current_user.super? %>
-        buttons : [
-            {name: 'Add', bclass: 'add', onpress : create},
-            {separator: true}
-        ],
-        <% end %>
-	    sortname: "promotion_name",
-        sortorder: "desc",
-		usepager: true,
-		title: 'Promotion Name',
-		useRp: true,
-		id: "<%= @client.id if @client %>",
-		rp: 10,
-		showTableToggleBtn: true,
-		width: 250,
-		height: 250
-	});
-    function create() {
-        var client_id = $('a[class="client_name active"]').attr('id');
-        ajaxCommon('<%= new_promotion_path(client_id: @client.id) %>?client_id='+client_id,'','','','#inner');
-    }
-</script>
+    <% content_for :sidebar do %>
+        <%= render partial: "layouts/sidebar", locals: {object: @clients} %>
+    <% end %>
+    <p class="h2" id="client_name"><%= short_name(@client.client_name) %></p>
+    <table class="flexme4" class="newTable06 fixTable d-none" style="display: none"></table>
+    <script type="text/javascript">
+        $(".flexme4").flexigrid({
+            url: "<%= get_promotions_list_clients_path %>",
+            dataType: 'json',
+            colModel : [
+                {display: 'promotion_name', name : 'promotion_name', width : 'auto', sortable : false, align: 'center'}
+            ],
+            <% if current_user.super? %>
+            buttons : [
+                {name: 'Add', bclass: 'add', onpress : create},
+                {separator: true}
+            ],
+            <% end %>
+            sortname: "promotion_name",
+            sortorder: "desc",
+            usepager: true,
+            title: 'Promotion Name',
+            useRp: true,
+            id: "<%= @client.id if @client %>",
+            rp: 10,
+            showTableToggleBtn: true,
+            resizable : false,
+
+            height: 300,
+            onSuccess: function() {
+                tableResize();
+            },
+            height: 250
+        });
+        function create() {
+            var client_id = $('a[class="client_name active"]').attr('id');
+            ajaxCommon('<%= new_promotion_path(client_id: @client.id) %>?client_id='+client_id,'','','','#inner');
+        }
+    </script>
 <% else %>
-<h2 id="client_name">No data</h2>
+    <h2 id="client_name">No data</h2>
 <% end %>
