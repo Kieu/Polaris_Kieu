@@ -6,6 +6,14 @@ class UrlSettingsController < ApplicationController
     @promotion_id = 1
     @account_id = 1
     @media_id = 1
+    @promotion = Promotion.where(id: @promotion_id).select('client_id, promotion_name')
+    @promotion_name = @promotion.first['promotion_name']
+    @client_id = @promotion.first['client_id']
+    @client_name = Client.where(id: @client_id).select('client_name').first['client_name']
+    @account = Account.where(id: @account_id).select('media_id, account_name')
+    @account_name = @account.first['account_name']
+    @media_id = @account.first['media_id']
+    @media_name = Media.where(id: @media_id).select('media_name').first['media_name']
 	end
   
   def get_urls_list
@@ -23,12 +31,14 @@ class UrlSettingsController < ApplicationController
   def get_rows url_data
     rows = Array.new
     url_data.each do |url|
-      edit_button = 'edit'
-      copy_button = "button"
-      delete_check = "delete_check"
-
+      redirect_url_id = url['redirect_url_id']
+      edit_button = '<a href="#"> <img src="/assets/img_edit.png" alt="Edit URL"></a>'
+      copy_button = '<a href="#"><img src="/assets/btn_copy2.gif" /></a>'
+      delete_check = '<input type="checkbox" name="del_url_#{redirect_url_id}" id="#{redirect_url_id}" />'
+      image = url['creative']
+      creative = '<img src=' + "/assets/creative/#{image}" + '  />'
       rows << { id: url['redirect_url_id'], cell: {edit_button: edit_button, ad_id: url['ad_id'], campaign_name: url['campaign_name'],
-               group_name: url['group_name'], ad_name: url['ad_name'], url: url['url'], copy: copy_button,
+               group_name: url['group_name'], ad_name: url['ad_name'], creative: creative, url: url['url'], copy: copy_button,
                delete_check: delete_check}}
     end
 

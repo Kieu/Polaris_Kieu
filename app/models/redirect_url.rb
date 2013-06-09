@@ -15,12 +15,14 @@ class RedirectUrl < ActiveRecord::Base
               ,r_url.id as redirect_url_id
               ,r_url.url as url
               ,r_url.name as url_name
+              ,creative.image as creative
             FROM  redirect_urls as r_url
               inner join redirect_infomations as r_info
                    on r_info.mpv = r_url.mpv
               inner join display_campaigns as camp on camp.id = r_info.campaign_id
               inner join display_groups as d_group on d_group.id = r_info.group_id
               inner join display_ads as ad on ad.id = r_info.group_id
+              inner join creatives as creative on creative.id = r_info.creative_id
             WHERE
               r_info.promotion_id = #{promotion_id}
               and r_info.account_id = #{account_id}
@@ -32,6 +34,7 @@ class RedirectUrl < ActiveRecord::Base
             LIMIT #{current_record}, #{row_per_page}
 	"
 	result = ActiveRecord::Base.connection.select_all(sql)
+
 	return result
   end
 end
