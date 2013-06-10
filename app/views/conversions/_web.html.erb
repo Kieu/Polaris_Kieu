@@ -1,42 +1,42 @@
 <!-- WEB選択 -->
 <tbody>
   <tr>
-    <th><a href="#"><img src="/assets/icon_help.gif" /></a><%= f.label "重複排除：" %></th>
+    <th><a href="#"><img src="/assets/icon_help.gif" /></a><%= f.label I18n.t("conversion.deduplicated.label") %></th>
     <td colspan="2"><label>
-      <%= f.radio_button :duplicate, 0, checked: true %>あり
+      <%= f.radio_button :duplicate, 0, checked: true %><%= I18n.t("conversion.deduplicated.label1") %>
       </label></td>
     <td colspan="2"><label>
-      <%= f.radio_button :duplicate, 1 %>なし
+      <%= f.radio_button :duplicate, 1 %><%= I18n.t("conversion.deduplicated.label2")%>
     </label></td>
   </tr>
   <tr>
-    <th><%= f.label "ユニーク定義：" %></th>
+    <th><%= f.label t("conversion.unique_definition") %></th>
     <td colspan="4">
       <%= f.select :unique_def, t("conversions.unique_definition").each_with_index.map {|name, index| [name, index]} %>
     </td>
   </tr>
   <tr>
-    <th>&lt;オプション①&gt;<br /><%= f.label "起点設定：" %></th>
+    <th><%= I18n.t("conversion.option1.label") %><br /><%= f.label I18n.t("conversion.option1.starting_point_setting.label") %></th>
     <td colspan="2"><br /><label>
-      <%= f.radio_button :start_point, 0, checked: true %>設定する
+      <%= f.radio_button :start_point, 0, checked: true %><%= f.label I18n.t("conversion.option1.starting_point_setting.configure") %>
     </label></td>
     <td colspan="2"><br /><label>
-      <%= f.radio_button :start_point, 1 %>設定しない
+      <%= f.radio_button :start_point, 1 %><%= f.label I18n.t("conversion.option1.starting_point_setting.not_configure") %>
     </label></td>
   </tr>
   <tr>
-    <th><%= f.label "売上単価：" %></th>
+    <th><%= f.label I18n.t("conversion.option1.sale_unit_price") %></th>
     <td colspan="4">
       <%= f.text_field :sale_unit_price, id: "name", class: "input-text", placeholder: "￥" %>
     </td>
   </tr>
   <tr>
-    <th>&lt;オプション②&gt;<br /><%= f.label "報酬型式：" %></th>
+    <th><%= I18n.t("conversion.option2.label") %><br /><%= f.label I18n.t("conversion.option2.reward_format.label") %></th>
     <td colspan="2"><br /><label>
-      <%= f.radio_button :reward_form, 0 %>定額型
+      <%= f.radio_button :reward_form, 0 %><%= I18n.t("conversion.option2.reward_format.straight_line_type") %>
     </label></td>
     <td colspan="2"><br /><label>
-      <%= f.radio_button :reward_form, 1 %>定率型
+      <%= f.radio_button :reward_form, 1 %><%= I18n.t("conversion.option2.reward_format.not_set")%>
     </label></td>
   </tr>
 </tbody>
