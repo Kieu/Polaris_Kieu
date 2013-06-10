@@ -622,3 +622,8 @@ en:
       success: "User is created successful en"
       update: "User is updated successful en"
   media_categories: ["Listing ad", "Display ad", "affiliate"]
+  log_track_type: ["Install", "アプリ内アクション (Action in app)"]
+  log_repeat_flg: ["新規 (new)", "リピート (repeat)"]
+  Listing: "Listing ads"
+  Display: "Display ads"
+  Affiliate: "Affiliate" 
