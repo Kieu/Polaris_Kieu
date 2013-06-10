@@ -1,5 +1,22 @@
-<% if @jobs %>
-    <% @jobs.each_with_index do |job, | %>
-        <img src="/assets/btn_download.gif" />   <%=job.filename%>
-    <% end %>
-<% end %>
+<div id="download">
+  <% if @jobs %>
+      <% @jobs.each_with_index do |job,| %>
+          <ul class="entrydate_box">
+            <li>
+              <table class="entrydate_table">
+                <tr>
+                  <td class="file_name"><%= job.filename %></td>
+                  <td class="capacity">298MB</td>
+                  <td class="daily">05/10/12:50</td>
+                  <td class="c_orange">アップロード中</td>
+                </tr>
+                <tr>
+                  <td colspan="4"> リクルート(ゼクシィ) > 本体プロモーション > Google Network / Google リマーケティング</td>
+                </tr>
+              </table>
+              <p class="btn_cancel"><a href="#"><img src="/assets/btn_cancel.gif"/></a></p>
+            </li>
+          </ul>
+      <% end %>
+  <% end %>
+</div>
