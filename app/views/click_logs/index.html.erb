@@ -80,20 +80,20 @@
 	<li>&gt;</li>
 	<li><%= link_to @promotion.promotion_name, promotions_path(promotion_id: @promotion.id) %></li>
 	<li>&gt;</li>
-	<li>本体プロモーション</li>
+	<li><%= I18n.t("log.crumb_click")%></li>
 </ul>
 <div class="area_block">
 	<div class="selectarea">
 		<ul>
-			<li> メディアカテゴリ
+			<li> <%= I18n.t("log.media_category")%>
 				<%= select_tag 'media_category_id', "<option value = "">All</option><option value = 0 >Listing ad</option><option value = 1 >Display ad</option><option value = 2 >Affiliate</option>".html_safe, class: "input-text" %>
 			</li>
-			<li> アカウント名
+			<li> <%= I18n.t("log.account_name")%>
 				<%= select_tag 'account_id', content_tag(:option,'All',:value=>"")+options_from_collection_for_select(Account.where(promotion_id: params[:id]).order(:account_name), 'id', 'account_name'), class: "input-text" %> <br>
 			</li>
 		</ul>
 	</div>
-	<div class="date">今日<br />
+	<div class="date"><%= I18n.t("log.today_text")%><br />
 		<input id="datepick" type="text" readonly="readonly" value="<%= cookies[:cs] + " - " + cookies[:ce] %>" name="datepick">&#9660;</div>
 </div>
 <div class="clear"></div>

@@ -553,6 +553,9 @@ ja:
         straight_line_type: "定額型"
         not_set: "設定しない"
   log:
+    today_text: "今日"
+    crumb_click: "本体プロモーション"
+    crumb_cv_logs: "本体プロモーション"
     conversion_name: "コンバージョン名"
     media_category: "メディアカテゴリ"
     account_name: "アカウント名"
