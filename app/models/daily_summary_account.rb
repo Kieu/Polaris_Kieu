@@ -4,7 +4,7 @@ class DailySummaryAccount < ActiveRecord::Base
     :click_through_ratio, :report_ymd, :create_time, :cost_per_mille
 
 
-  def self.get_promotion_data(promotion_id, conversion_id, start_date, end_date)
+  def self.get_promotion_data(promotion_id, start_date, end_date)
   	# get promotion data
     promotion_data = Array.new
     promotion_data = self.where(promotion_id: promotion_id).group(:report_ymd)
@@ -112,6 +112,7 @@ class DailySummaryAccount < ActiveRecord::Base
   def self.get_promotion_summary promotion_id, start_date, end_date
     results = Hash.new
     total_data = DailySummaryAccount.where(promotion_id: promotion_id)
+      .where("DATE_FORMAT(report_ymd, '%Y/%m/%d') between '#{start_date}' and '#{end_date}'")
       .select("sum(imp_count) as imp_count")
       .select("sum(click_count) as click_count")
       .select("sum(click_through_ratio) as click_through_ratio")

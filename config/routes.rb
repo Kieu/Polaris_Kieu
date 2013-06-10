@@ -2,6 +2,10 @@ PolarisManage::Application.routes.draw do
   resources :promotions do
     get "search", on: :collection
     post "delete_promotion", to: "promotions#delete_promotion", on: :collection
+    post "get_promotions_report", on: :collection
+    post "download_csv", on: :collection
+    post "change_data", on: :collection
+    get "promotion_table", on: :collection
   end
   resources :users do
     get "change_lang", on: :collection
@@ -18,11 +22,6 @@ PolarisManage::Application.routes.draw do
   end
   resources :agencies do
     post "get_agencies_list", on: :collection
-  end
-  resources :promotions do
-    post "get_promotions_report", on: :collection
-    post "download_csv", on: :collection
-    post "change_data", on: :collection
   end
   resources :sessions, only: [:new, :create, :destroy] do
     post "resend_password", on: :collection

@@ -21,9 +21,9 @@ class PromotionsController < ApplicationController
     
       @promotion = @array_promotion.find_by_id(@promotion_id)
       if @promotion
-        start_date = params[:start_date].present? ? params[:start_date] :
+        @start_date = params[:start_date].present? ? params[:start_date] :
           Date.today.at_beginning_of_month.strftime("%Y/%m/%d").to_s
-        end_date = params[:end_date].present? ? params[:end_date] :
+        @end_date = params[:end_date].present? ? params[:end_date] :
           Date.today.strftime("%Y/%m/%d").to_s
         cookies[:promotion] = "111111" unless cookies[:promotion].present?
         @promotion.conversions.each do |conversion|
@@ -39,25 +39,21 @@ class PromotionsController < ApplicationController
         @account_list = Account.get_account_list(@promotion_id, @media_list)
         
         @promotion_results = DailySummaryAccount
-          .get_promotion_summary(@promotion_id, start_date, end_date)
+          .get_promotion_summary(@promotion_id, @start_date, @end_date)
         @conversions_results = DailySummaryAccConversion
-          .get_conversions_summary(@promotion_id,start_date, end_date)
+          .get_conversions_summary(@promotion_id, @start_date, @end_date)
         @promotion_data = Array.new
         date_arrange = Array.new
   
-        # just for test
-        conversion_id = 1;
-        
-  
         @promotion_data, date_arrange =
-          DailySummaryAccount.get_promotion_data(@promotion_id,
-            conversion_id, start_date, end_date)
+          DailySummaryAccount.get_promotion_data(@promotion_id, @start_date,
+            @end_date)
         @array_category = Array.new
         date_arrange.each do |date|
           @array_category << date.to_date.strftime("%m/%d")
         end
-        @select_left = params[:left].present? ? params[:left] : "click"
-        @select_right = params[:right].present? ? params[:right] : "COST"
+        @select_left = params[:left].present? ? params[:left] : "COST"
+        @select_right = params[:right].present? ? params[:right] : "click"
       else
         render 'public/404'
       end
@@ -126,14 +122,9 @@ class PromotionsController < ApplicationController
     promotion_id = params[:promotion_id]
     start_date = params[:start_date]
     end_date = params[:end_date]
-    results[:promotion_results] = DailySummaryAccount
-      .get_promotion_summary(promotion_id, start_date, end_date)
-    results[:conversions_results] = DailySummaryAccConversion
-      .get_conversions_summary(promotion_id,start_date, end_date)
-    conversion_id = 1;
     results[:promotion_data], date_arrange =
-      DailySummaryAccount.get_promotion_data(promotion_id,
-        conversion_id, start_date, end_date)
+      DailySummaryAccount.get_promotion_data(promotion_id, start_date,
+        end_date)
     results[:array_category] = Array.new
     date_arrange.each do |date|
       results[:array_category] << date.to_date.strftime("%m/%d")
@@ -149,6 +140,28 @@ class PromotionsController < ApplicationController
     Resque.enqueue ExportPromotionData, user_id, promotion_id
     
     render text: "processing"
+  end
+  
+  def promotion_table
+    @promotion_id = params[:promotion_id]
+    @client_id = params[:client_id]
+    @promotion = Promotion.find(@promotion_id)
+    start_date = params[:start_date].present? ? params[:start_date] :
+      Date.today.at_beginning_of_month.strftime("%Y/%m/%d").to_s
+    end_date = params[:end_date].present? ? params[:end_date] :
+      Date.today.strftime("%Y/%m/%d").to_s
+    @client_name = Client.find(@client_id).client_name
+    @promotion_name = @promotion.promotion_name
+    @conversions = @promotion.conversions
+        
+    @media_list = Media.get_media_list
+    @account_list = Account.get_account_list(@promotion_id, @media_list)
+        
+    @promotion_results = DailySummaryAccount
+      .get_promotion_summary(@promotion_id, start_date, end_date)
+    @conversions_results = DailySummaryAccConversion
+      .get_conversions_summary(@promotion_id,start_date, end_date)
+    render layout: false
   end
 
   private

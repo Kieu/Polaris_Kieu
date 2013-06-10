@@ -37,7 +37,8 @@
 	<% end %>
 	<% @conversions.each do |conversion|%>
 		<% Settings.conversions_sums.each_with_index do |option, index|%>
-			<%= content_tag(:td, @conversions_results["total_conversion"+conversion.id.to_s][option], class: "header_total") if cookies[("conversion" + conversion.id.to_s).to_sym][index] == "1"%>
+			<% val = @conversions_results["total_conversion"+conversion.id.to_s] %>
+			<%= content_tag(:td, val.nil? ? "0" : val[option], class: "header_total") if cookies[("conversion" + conversion.id.to_s).to_sym][index] == "1"%>
 		<% end %>
 	<% end %>
 </tr>
@@ -62,11 +63,13 @@
 			<%= content_tag(:td, media.media_name, rowspan: @account_list["media"+media.id.to_s+"_account"].count) if index1 == 0 %>
             <td><%= account.account_name %></td>
             <% Settings.promotions_sums.each_with_index do |option, index2|%>
-				<%= content_tag(:td, @promotion_results["account"+account.id.to_s+"_promotion"][option]) if cookies[:promotion][index2] == "1" %>
+            	<% val = @promotion_results["account"+account.id.to_s+"_promotion"] %>
+				<%= content_tag(:td, val.nil? ? "0" : val[option]) if cookies[:promotion][index2] == "1" %>
 			<% end %>
 			<% @conversions.each do |conversion|%>
 				<% Settings.conversions_sums.each_with_index do |option, index2|%>
-					<%= content_tag(:td, @conversions_results["account"+account.id.to_s+"_conversion"+conversion.id.to_s][option]) if cookies[("conversion" + conversion.id.to_s).to_sym][index2] == "1"%>
+					<% val = @conversions_results["account"+account.id.to_s+"_conversion"+conversion.id.to_s] %>
+					<%= content_tag(:td, val.nil? ? "0" : val[option]) if cookies[("conversion" + conversion.id.to_s).to_sym][index2] == "1"%>
 				<% end %>
 			<% end %>
         </tr>

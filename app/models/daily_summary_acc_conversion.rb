@@ -21,6 +21,7 @@ class DailySummaryAccConversion < ActiveRecord::Base
       .select("sum(roas) as roas")
       .select("sum(profit) as profit")
       .select("sum(roi) as roi")
+      .where("DATE_FORMAT(report_ymd, '%Y/%m/%d') between '#{start_date}' and '#{end_date}'")
       
     all_data = total_data.group(:account_id)
       .select(:account_id)
