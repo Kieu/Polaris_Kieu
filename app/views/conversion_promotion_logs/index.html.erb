@@ -345,11 +345,13 @@
 	$("#not_change_cookie").click(function(){
 		cookies_options = $.cookie("options");
 		//location.href = location.href;
+		$("#cvlogs").colorbox.close();
 	})
 
 	$("#display_all").click(function(){
 		$.cookie("options", '111111111111111111111111');
 		location.href = location.href;
+		
 	})
 
 </script>
