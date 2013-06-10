@@ -7,7 +7,9 @@
         <%= render partial: "layouts/sidebar", locals: {object: @clients} %>
     <% end %>
     <p class="h2" id="client_name"><%= short_name(@client.client_name) %></p>
-    <img id='create_promotion' src="/assets/btn_promotion_regist.gif" onclick="create()" style="display: none">
+    <% if current_user.super? %>
+        <img id='create_promotion' src="/assets/btn_promotion_regist.gif" onclick="create()" style="display: none">
+    <% end %>
     <table class="newTable06 fixTable d-none" style="display: none"></table>
     <script type="text/javascript">
         $(".newTable06").flexigrid({
@@ -16,12 +18,6 @@
             colModel: [
                 {display: 'promotion_name', name: 'promotion_name', width: 'auto', sortable: false, align: 'center'}
             ],
-            <% if current_user.super? %>
-            buttons: [
-                {name: 'Add', bclass: 'add', onpress: create},
-                {separator: true}
-            ],
-            <% end %>
             sortname: "promotion_name",
             sortorder: "desc",
             usepager: true,
