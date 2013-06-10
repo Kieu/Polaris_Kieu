@@ -137,7 +137,7 @@
 				<%= select_tag 'conversion_id', content_tag(:option,'All',:value=>"") + options_from_collection_for_select(Conversion.order(:conversion_name), 'id', 'conversion_name'), class: "input-text"%>
 			</li>
 			<li> <%= I18n.t("log.media_category")%>
-				<%= select_tag 'media_category_id', "<option value = "">All</option><option value = 0 >Listing ad</option><option value = 1 >Display ad</option><option value = 2 >Affiliate</option>".html_safe, class: "input-text" %>
+				<%= select_tag 'media_category_id', "<option value = "">All</option><option value = 1 >Listing ad</option><option value = 2 >Display ad</option><option value = 3 >Affiliate</option>".html_safe, class: "input-text" %>
 			</li>
 			<li> <%= I18n.t("log.account_name")%>
 				<%= select_tag 'account_id',content_tag(:option,'All',:value=>"")+ options_from_collection_for_select(Account.order(:account_name), 'id', 'account_name'), class: "input-text" %>
@@ -288,7 +288,7 @@
 		}
 	});
 	var colums = ["conversion_utime", "conversion_id", "conversion_category","tracking_type",
-	 "conversion_type", "approval_status", "media_id", "account_id", "campaign_id", "ad_group_id", "ad_id", "click_time", "verify", "suid", "session_id", "os", "repeat", "log_state", "sales", "profit", "volume", "others", "error_message", "error_log_view"]
+	 "track_type", "approval_status", "media_id", "account_id", "campaign_id", "group_id", "unit_id", "click_time", "verify", "suid", "session_id", "os", "repeat", "log_state", "sales", "profit", "volume", "others", "error_message", "error_log_view"]
 	$("#show_option").click(function(){
 		$.colorbox({
 			width: "50%",
@@ -344,12 +344,14 @@
 	});
 	$("#not_change_cookie").click(function(){
 		cookies_options = $.cookie("options");
-		location.href = location.href;
+		//location.href = location.href;
+		$("#cvlogs").colorbox.close();
 	})
 
 	$("#display_all").click(function(){
 		$.cookie("options", '111111111111111111111111');
 		location.href = location.href;
+		
 	})
 
 </script>
