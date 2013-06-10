@@ -99,7 +99,7 @@ function ajaxCommon(urlAction, id, current_active, cname,arr_inner) {
 			inline: true,
 			escKey: false,
 			overlayClose: false,
-			href: "#prevent_change",
+			href: "#prevent_change"
 		})
     }else{
     	var array_inner = arr_inner.split(',');
