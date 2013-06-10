@@ -5,9 +5,13 @@ class ConversionsController < ApplicationController
   before_filter :get_conversion, only: [:edit, :update]
 
   def index
+    @conversions = params[:promotion_id].blank? ? Array.new :
+        Conversion.get_by_promotion_id(params[:promotion_id]).order_by_conversion_name
   end
 
   def new
+    @conversions = params[:promotion_id].blank? ? Array.new :
+        Conversion.get_by_promotion_id(params[:promotion_id]).order_by_conversion_name
     @conversion = Conversion.new
   end
 
@@ -26,6 +30,8 @@ class ConversionsController < ApplicationController
   end
 
   def edit
+    @conversions = params[:promotion_id].blank? ? Array.new :
+        Conversion.get_by_promotion_id(params[:promotion_id]).order_by_conversion_name
   end
 
   def update

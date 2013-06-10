@@ -2,6 +2,9 @@
 <%= stylesheet_link_tag "css/colorbox" %>
 <%= stylesheet_link_tag "css/common" %>
 <%= stylesheet_link_tag "css/box_inner_log" %>
+<% content_for :sidebar do %>
+    <%= render partial: "layouts/sidebar", locals: {object: @promotions} %>
+<% end %>
 <div id="popup" style="display: none">
 	<div id="list_options" style="width: 400px;">
 		<div id="result_list">
@@ -121,9 +124,9 @@
 	</div>
 </div>
 <ul class="contentNavi">
-	<li class="pre"><%= link_to @promotion.client.client_name, clients_path(id: @promotion.client.id) %> </li>
+	<li class="pre"><%= link_to @promotion.client.client_name, clients_path(client_id: @promotion.client.id) %> </li>
 	<li>&gt;</li>
-	<li><%= link_to @promotion.promotion_name, promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %></li>
+	<li><%= link_to @promotion.promotion_name, promotions_path(promotion_id: @promotion.id) %></li>
 	<li>&gt;</li>
 	<li>本体プロモーション</li>
 </ul>
@@ -154,7 +157,7 @@
 			<% end %>
 		</li>
 		<li class="">
-			<%= link_to(click_logs_path(id: @promotion.id)) do %>
+			<%= link_to(click_logs_path(promotion_id: @promotion.id)) do %>
 			  <span>clickログ</span>
 			<% end %>
 		</li>
@@ -164,7 +167,7 @@
 			<div id="graph">
 				<div class="fl-r">
 					<p><a id = "show_option"><img src="/assets/btn_dl_option.gif"  /></a></p>
-					<p><a href="#"><img src="/assets/btn_dl_report.gif"  /></a></p>
+					<p><a id="download_csv"><img src="/assets/btn_dl_report.gif"  /></a></p>
 				</div>
 			</div>
 			
@@ -189,7 +192,21 @@
 	<!--/タブ切り替え-->
 </div>
 <script type="text/javascript">
+   function showColumn(tbl, colIndex, visible) {
+        $(tbl).flexToggleCol(colIndex, visible);
+    }
+    $('#download_csv').click(function(){
+        $.ajax({
+            url: "<%= download_csv_conversion_promotion_logs_path %>",
+            data: {"promotion_id" : "<%= @promotion.id if @promotion %>",
+                "media_cateory_id": $("#media_category_id").val(),
+                "account_id": $("#account_id").val()},
+            method: "post",
+            success: function(data){
+            }
 
+        })
+    })
 	$("#cvlogs").flexigrid({
 		url: "<%= get_conversion_logs_list_conversion_promotion_logs_path %>",
 		dataType: 'json',
@@ -396,6 +413,11 @@
                 reloadFlex1("#cvlogs", "<%= get_conversion_logs_list_conversion_promotion_logs_path %>?cv_id=" + $("#media_category_id").val() + "&account_id=" + $("#account_id").val() + "&media_category_id=" + $("#media_category_id").val());
             }
         });
+</script>
+<script type="text/javascript">
+    $(window).resize(function() {
+        tableResize();
+    });
 </script>
 
 

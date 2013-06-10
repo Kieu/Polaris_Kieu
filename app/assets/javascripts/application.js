@@ -13,6 +13,23 @@
 //= require jquery-1.8
 //= require jquery_ujs
 //= require_directory .
+$(function(){
+    $('#clients_list').slimScroll({
+        color: '#0087A9',
+        size: '8px',
+        alwaysVisible: false
+    });
+    $('#promotions_list').slimScroll({
+        color: '#0087A9',
+        size: '8px',
+        alwaysVisible: false
+    });
+    $('#conversions_list').slimScroll({
+        color: '#0087A9',
+        size: '8px',
+        alwaysVisible: false
+    });
+});
 var auto_refresh = setInterval(
     function ()
     {

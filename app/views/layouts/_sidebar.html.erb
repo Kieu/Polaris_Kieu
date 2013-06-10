@@ -33,28 +33,28 @@
 				<% end %>
 			</table>
 		</div>
-		<% elsif params[:controller] == "promotions" %>
+		<% elsif params[:controller] == "promotions" || params[:controller] == "click_logs" || params[:controller] == "conversion_promotion_logs" %>
 		<div id="promotions_list">
         	<table class="sidebar">
 				<% object.each_with_index do |promotion, index| %>
 					<tr>
 						<th class="edit"><%= link_to "", "javascript:void(0)", class: "edit", id: "edit#{promotion.id}",onclick: "ajaxCommon('#{edit_promotion_path(promotion)}', '##{promotion.id}', '.promotion_name', '#promotion_name','#inner')" if current_user.super? || current_user.agency? %></th>
 						<% if (params[:promotion_id] && promotion.id == params[:promotion_id].to_i) || (!params[:promotion_id] && index == 0) %>
-	                        <td><%= link_to promotion.promotion_name, "javascript:void(0)", class: "promotion_name active", id: "#{promotion.id}",onclick: "ajaxCommon('#{promotions_path(promotion_id: promotion.id, client_id: @client_id)}', '##{promotion.id}', '.promotion_name', '#promotion_name','#inner')" %></td>
+	                        <td><%= link_to promotion.promotion_name, "javascript:void(0)", class: "promotion_name active", id: "#{promotion.id}",onclick: "ajaxCommon('#{promotions_path(promotion_id: promotion.id)}', '##{promotion.id}', '.promotion_name', '#promotion_name','#inner')" %></td>
 						<% else %>
-							<td><%= link_to promotion.promotion_name,  "javascript:void(0)", class: "promotion_name", id: "#{promotion.id}",onclick: "ajaxCommon('#{promotions_path(promotion_id: promotion.id, client_id: @client_id)}', '##{promotion.id}', '.promotion_name', '#promotion_name','#inner')" %></td>
+							<td><%= link_to promotion.promotion_name,  "javascript:void(0)", class: "promotion_name", id: "#{promotion.id}",onclick: "ajaxCommon('#{promotions_path(promotion_id: promotion.id)}', '##{promotion.id}', '.promotion_name', '#promotion_name','#inner')" %></td>
 						<% end %>
 					</tr>
 				<% end %>
 			</table>
 		</div>
-      <% elsif params[:controller] == "conversions" %>
+      <% elsif params[:controller] == "conversions"%>
           <div id="conversions_list">
             <table class="sidebar">
               <% object.each_with_index do |conversion, index| %>
                   <tr>
                     <th class="edit"><%= link_to "", "javascript:void(0)", class: "edit", id: "edit#{conversion.id}",onclick: "ajaxCommon('#{edit_conversion_path(conversion)}?promotion_id=#{params[:promotion_id]}', '##{conversion.id}', '.conversion_name', '#conversion_name','#inner')" if current_user.super? || current_user.agency? %></th>
-                    <% if (params[:promotion_id] && conversion.id == params[:conversion_id].to_i) || (!params[:conversion_id] && index == 0) %>
+                    <% if (params[:promotion_id] && conversion.promotion_id == params[:promotion_id].to_i) || (!params[:promotion_id] && index == 0) %>
                         <td><%= link_to conversion.conversion_name, "javascript:void(0)", class: "conversion_name active", id: "#{conversion.id}",onclick: "ajaxCommon('#{edit_conversion_path(conversion)}?promotion_id=#{params[:promotion_id]}', '##{conversion.id}', '.conversion_name', '#conversion_name','#inner')" %></td>
                     <% else %>
                         <td><%= link_to conversion.conversion_name,  "javascript:void(0)", class: "conversion_name", id: "#{conversion.id}",onclick: "ajaxCommon('#{edit_conversion_path(conversion)}?promotion_id=#{params[:promotion_id]}', '##{conversion.id}', '.conversion_name', '#conversion_name','#inner')" %></td>

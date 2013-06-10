@@ -1,6 +1,9 @@
 <%= render "layouts/prevent_change_page" %>
 <%= stylesheet_link_tag "css/promotion" %>
 <%= stylesheet_link_tag "css/common" %>
+<% content_for :sidebar do %>
+    <%= render partial: "layouts/sidebar", locals: {object: @promotions} %>
+<% end %>
   <ul class="contentNavi">
     <li class="pre"><%= link_to @promotion.client.client_name, client_path(@promotion.client_id) %></li>
     <li> &gt; </li>

@@ -196,7 +196,7 @@ h2 {
 }
 
 a, a:visited {
-    color:#0196e3;
+    color:#FF6633;
     text-decoration:none;
     outline:none;
 }
@@ -367,4 +367,16 @@ ul.ui-autocomplete{
     font-size: 11px;
     background-color: #F8F8F8;
      max-width: 180px;
+}
+ #clients_list  {
+    overflow: scroll;
+    height:310px;
+ }
+#promotions_list  {
+    overflow: scroll;
+    height:310px;
+}
+#conversions_list {
+    overflow: scroll;
+    height:310px;
 }

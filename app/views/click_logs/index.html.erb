@@ -5,7 +5,9 @@
 <% if flash[:error] %>
 	<div><%= flash[:error] %></div>
 <% end %>
-
+<% content_for :sidebar do %>
+    <%= render partial: "layouts/sidebar", locals: {object: @promotions} %>
+<% end %>
 <div id="popup" style="display: none">
 	<div id="list_options" style="width: 400px;">
 		<div id="result_list">
@@ -74,9 +76,9 @@
 </div>
 
 <ul class="contentNavi">
-	<li class="pre"><%= link_to @promotion.client.client_name, clients_path(id: @promotion.client.id) %> </li>
+	<li class="pre"><%= link_to @promotion.client.client_name, clients_path(client_id: @promotion.client.id) %> </li>
 	<li>&gt;</li>
-	<li><%= link_to @promotion.promotion_name, promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %></li>
+	<li><%= link_to @promotion.promotion_name, promotions_path(promotion_id: @promotion.id) %></li>
 	<li>&gt;</li>
 	<li>本体プロモーション</li>
 </ul>
@@ -104,7 +106,7 @@
 			<% end %>
 		</li>
 		<li class="ui-tabs-selected">
-			<%= link_to(click_logs_path(id: @promotion.id)) do %>
+			<%= link_to(click_logs_path(promotion_id: @promotion.id)) do %>
 			  <span>clickログ</span>
 			<% end %>
 		</li>
@@ -190,7 +192,7 @@
 			rp: 10,
 			resizable : false,
 			optionGet : "5",
-			query: <%=params[:id]%>, 
+			query: <%=params[:promotion_id]%>,
 			showTableToggleBtn: true,
 			height: 200,
 			onSuccess: function() {
@@ -249,11 +251,7 @@
 		$("#account_id").change(function(){
 			reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?cid=" + $("#media_category_id").val() + "&account_id=" + $(this).val());
 		});
-		
-		
-		
-	
-	
+
 	//$('tr#row-g1 td:nth-child('+(11+'n-'+(11))+')').remove();
 	//$('tr#row-g1').append("<td colspan='11'>aaaaa</td>";
 	$('tr#row-g1 td:nth-child('+(1+'n-'+(11))+')').remove();

@@ -22,6 +22,9 @@
 <% end %>
 <%= javascript_include_tag "js/ui.core" %>
 <%= javascript_include_tag "js/ui.tabs" %>
+<% content_for :sidebar do %>
+    <%= render partial: "layouts/sidebar", locals: {object: @conversions} %>
+<% end %>
 <ul class="contentNavi">
   <li class="pre">
     <%= link_to @promotion.client.client_name, client_path(@promotion.client_id) %>

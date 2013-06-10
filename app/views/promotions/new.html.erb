@@ -3,6 +3,9 @@
 <% if flash[:error] %>
   <div><%= flash[:error] %></div>
 <% end %>
+<% content_for :sidebar do %>
+    <%= render partial: "layouts/sidebar", locals: {object: @promotions} %>
+<% end %>
   <ul class="contentNavi">
     <li class="pre"><%= link_to @client.client_name, client_path(@client) %></li>
     <li>&gt;</li>

@@ -6,10 +6,11 @@ class PromotionsController < ApplicationController
 
 
   def index
+    @promotion = Promotion.find(params[:promotion_id])
     if current_user.client?
       @client_id = current_user.company_id  
     else
-      @client_id = params[:client_id] if params[:client_id]
+      @client_id = @promotion.client_id
     end
 
     @array_promotion = @client_id.blank? ? Array.new :
@@ -66,6 +67,13 @@ class PromotionsController < ApplicationController
   end
 
   def new
+    if current_user.client?
+      @client_id = current_user.company_id
+    else
+      @client_id = params[:client_id] if params[:client_id]
+    end
+    @promotions = @client_id.blank? ? Array.new :
+        Promotion.get_by_client(@client_id).order_by_promotion_name
     @client = Client.find(params[:client_id])
     @promotion = Promotion.new
   end
@@ -85,6 +93,13 @@ class PromotionsController < ApplicationController
   end
 
   def edit
+    if current_user.client?
+      @client_id = current_user.company_id
+    else
+      @client_id =@promotion.client_id
+    end
+    @promotions = @client_id.blank? ? Array.new :
+        Promotion.get_by_client(@client_id).order_by_promotion_name
   end
 
   def update

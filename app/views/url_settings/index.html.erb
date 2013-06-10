@@ -1,103 +1,256 @@
 <%= stylesheet_link_tag "css/common", :media => "all" %>
-<input type= "hidden" id="promotion_id" value="<%= @promotion_id %> "/>
-<input type= "hidden" id="account_id" value="<%= @account_id %> "/>
-<input type= "hidden" id="media_id" value="<%= @media_id %> "/>
-<div class="date">今日<br />
+<%= stylesheet_link_tag "css/colorbox", :media => "all" %>
+<%= javascript_include_tag "js/url_settings" %>
+<input type="hidden" id="promotion_id" value="<%= @promotion_id %> "/>
+<input type="hidden" id="account_id" value="<%= @account_id %> "/>
+<input type="hidden" id="media_id" value="<%= @media_id %> "/>
+
+<div class="date">今日<br/>
   <input id="datepick" type="text" readonly="readonly" value="<%= cookies[:s] + " - " + cookies[:e] %>" name="datepick">&#9660;
+
+  <a class="fancybox mt-10 fl-l inline cboxElement" rel="gallery" href="#inline_content"><img src="/assets/btn_dl_option.gif"></a> <a href="#" class="mt-10 fl-r"><img src="/assets/btn_dl_csv.gif"></a>
 </div>
-<script type="text/javascript">
-$(document).ready(function() {
-    $(".newTable04").flexigrid({
-        url: "<%= get_urls_list_url_settings_path %>?promotion_id=" + $("#promotion_id").val() + "&account_id=" + $("#account_id").val() + "&media_id=" + $("#media_id").val(),
-        dataType: 'json',
-        editOption : true,
-        deleteOption : true,
-        onSuccess : function(){tableResize();},
-        resizable : false,
-        striped : true,
-        colModel : [
-            {display: 'edit_button', name : 'edit_button', width : 'auto', sortable : false, align: 'center'},
-            {display: 'ad_id', name : 'ad_id', width : 'auto', sortable : false, align: 'center'},
-            {display: 'campaign_name', name : 'campaign_name', width : 'auto', sortable : false, align: 'center'},
-            {display: 'group_name', name : 'group_name', width : 'auto', sortable : false, align: 'center'},
-            {display: 'ad_name', name : 'ad_name', width : 'auto', sortable : false, align: 'center'},
-            {display: 'url', name : 'url', width : 'auto', sortable : false, align: 'center'},
-            {display: 'copy', name : 'copy', width : 'auto', sortable : false, align: 'center'},
-            {display: 'delete_check', name : 'delete_check', width : 'auto', sortable : false, align: 'center'}
-            ],
-        usepager: true,
-        title: 'Url List',
-        useRp: true,
-        id: 1,
-        promotion_id: 1,
-        media_id: 1,
-        account_id: 1,
-        rp: 10,
-        showTableToggleBtn: true,
-        height: 250
-    });
-})
-</script>
-<script type="text/javascript">
-function formatDate(year, month, day){
-    if (year < 2000) { year = parseInt(year) + 1900; }
-    if (month.length == 1) { month = "0" + parseInt(month); }
-    if (day.length == 1) { day = "0" + parseInt(day); }
-    return year + "/" + month + "/" + day;
-}
-
-$('#datepick').daterangepicker({
-    onDone: function() {
-        var term = $('#datepick').val();
-        var d = term.split(' - ');
-        var f = (d[0]).split('/');
-        var t = (d[1]).split('/');
-        $.cookie("s", formatDate(f[0], f[1], f[2]), {
-            path: '/'
-        });
-        $.cookie("e", formatDate(t[0], t[1], t[2]), {
-            path: '/'
-        });
-
-        reloadFlex1(".newTable04", "<%= get_urls_list_url_settings_path %>?promotion_id=" + $("#promotion_id").val() + "&account_id=" + $("#account_id").val() + "&media_id=" + $("#media_id").val());
-    }
-});
-</script>
-<script type="text/javascript">
-$(window).resize(function() {
-    tableResize();
-});
-</script>
 <div id="container">
-        <div class="contentNavi">
-            <ul>
-                <li class="pre">リクルート(ゼクシィ)</li>
-                <li>&gt;</li>
-                <li class="pre">本体プロモーション</li>
-                <li>&gt;</li>
-                <li>URL設定/Google Display Network/Google リマーケティング</li>
-            </ul>
-        </div>
-        <div class="clear"></div>
-        <div id="uploadArea">
-            <table class="file_upload">
-                <tr>
-                    <td colspan="2"><a href="#"><img src="/assets/btn_file_select.gif" /></a></td>
-                    <td><input type="radio" name="upload" checked="checked" />
-                        追加</td>
-                    <td><input type="radio" name="upload" />
-                        新規(存外)</td>
-                </tr>
-                <tr>
-                    <td colspan="2"><input type="text" /></td>
-                    <td colspan="2"><a href="#"><img src="/assets/btn_upload.gif" /></a></td>
-                </tr>
+<div class="contentNavi">
+  <ul>
+    <li class="pre">ss</li>
+    <li>&gt;</li>
+    <li class="pre">ss</li>
+    <li>&gt;</li>
+    <li>URL設定/Google Display Network/Google リマーケティング</li>
+  </ul>
+</div>
+<div class="clear"></div>
+<div id="uploadArea">
+  <table class="file_upload">
+    <tr>
+      <td colspan="2"><a href="#"><img src="/assets/btn_file_select.gif"/></a></td>
+      <td><input type="radio" name="upload" checked="checked"/>
+        追加
+      </td>
+      <td><input type="radio" name="upload"/>
+        新規(存外)
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2"><input type="text"/></td>
+      <td colspan="2"><a href="#"><img src="/assets/btn_upload.gif"/></a></td>
+    </tr>
+  </table>
+  <p class="dl">
+    <small>アップロードファイルフォーマットのダウンロード</small>
+  </p>
+  <p class="bold">入稿リクエストを受け付けました。</p>
+</div>
+<!-- #uploadArea -->
+<div class="clear"></div>
+<div style='display:none'>
+  <div id='inline_content'>
+    <div class="f_box">
+      <ul id="tab">
+        <li class="present">実行中</li>
+        <li>ダウンロードリスト</li>
+        <li>アップロードリスト</li>
+      </ul>
+      <div id="page1">
+        <ul class="entrydate_box">
+          <li>
+            <table class="entrydate_table">
+              <tr>
+                <td class="file_name">12345677889989999990.csv</td>
+                <td class="capacity">298MB</td>
+                <td class="daily">05/10/12:50</td>
+                <td class="c_orange">アップロード中</td>
+              </tr>
+              <tr>
+                <td colspan="4"> リクルート(ゼクシィ) > 本体プロモーション > Google Network / Google リマーケティング</td>
+              </tr>
             </table>
-            <p class="dl"><small>アップロードファイルフォーマットのダウンロード</small></p>
-            <p class="bold">入稿リクエストを受け付けました。</p>
-        </div>
-        <!-- #uploadArea -->
+            <p class="btn_cancel"><a href="#"><img src="/assets/btn_cancel.gif"/></a></p>
+          </li>
+          <li>
+            <table class="entrydate_table">
+              <tr>
+                <td class="file_name">12345677889989999990.csv</td>
+                <td class="capacity">298MB</td>
+                <td class="daily">05/10/12:50</td>
+                <td class="c_blue">作成中</td>
+              </tr>
+              <tr>
+                <td colspan="4"> リクルート(ゼクシィ) > 本体プロモーション > Google Network / Google リマーケティング</td>
+              </tr>
+            </table>
+            <p class="btn_cancel"><a href="#"><img src="/assets/btn_cancel.gif"/></a></p>
+          </li>
+          <li>
+            <table class="entrydate_table">
+              <tr>
+                <td class="file_name">12345677889989999990.csv</td>
+                <td class="capacity">298MB</td>
+                <td class="daily">05/10/12:50</td>
+                <td class="c_black">準備中</td>
+              </tr>
+              <tr>
+                <td colspan="4"> リクルート(ゼクシィ) > 本体プロモーション > Google Network / Google リマーケティング</td>
+              </tr>
+            </table>
+            <p class="btn_cancel"><a href="#"><img src="/assets/btn_cancel.gif"/></a></p>
+          </li>
+          <li>
+            <table class="entrydate_table">
+              <tr>
+                <td class="file_name">12345677889989999990.csv</td>
+                <td class="capacity">298MB</td>
+                <td class="daily">05/10/12:50</td>
+                <td class="c_black">アップロード待機</td>
+              </tr>
+              <tr>
+                <td colspan="4"> リクルート(ゼクシィ) > 本体プロモーション > Google Network / Google リマーケティング</td>
+              </tr>
+            </table>
+            <p class="btn_cancel"><a href="#"><img src="/assets/btn_cancel.gif"/></a></p>
+          </li>
+          <li class="submit_area">
+            <p><a href="index.html"><img src="/assets/btn_close.gif" alt="キャンセル"></a></p>
+          </li>
+        </ul>
+      </div>
+      <div id="page2">
+        <ul class="entrydate_box">
+          <li>
+            <table class="entrydate_table">
+              <tr>
+                <td class="file_name">12345677889989999990.csv</td>
+                <td class="capacity">298MB</td>
+                <td class="daily">05/10/12:50</td>
+                <td class="c_black">完了</td>
+              </tr>
+              <tr>
+                <td colspan="4"> リクルート(ゼクシィ) > 本体プロモーション > Google Network / Google リマーケティング</td>
+              </tr>
+            </table>
+            <p class="btn_download"><a href="#"><img src="/assets/btn_download.gif"/></a></p>
+          </li>
+          <li>
+            <table class="entrydate_table">
+              <tr>
+                <td class="file_name">12345677889989999990.csv</td>
+                <td class="capacity">298MB</td>
+                <td class="daily">05/10/12:50</td>
+                <td class="c_black">完了</td>
+              </tr>
+              <tr>
+                <td colspan="4"> リクルート(ゼクシィ) > 本体プロモーション > Google Network / Google リマーケティング</td>
+              </tr>
+            </table>
+            <p class="btn_download"><a href="#"><img src="/assets/btn_download.gif"/></a></p>
+          </li>
+          <li>
+            <table class="entrydate_table">
+              <tr>
+                <td class="file_name">12345677889989999990.csv</td>
+                <td class="capacity">298MB</td>
+                <td class="daily">05/10/12:50</td>
+                <td class="c_black">完了</td>
+              </tr>
+              <tr>
+                <td colspan="4"> リクルート(ゼクシィ) > 本体プロモーション > Google Network / Google リマーケティング</td>
+              </tr>
+            </table>
+            <p class="btn_download"><a href="#"><img src="/assets/btn_download.gif"/></a></p>
+          </li>
+          <li>
+            <table class="entrydate_table">
+              <tr>
+                <td class="file_name">12345677889989999990.csv</td>
+                <td class="capacity">298MB</td>
+                <td class="daily">05/10/12:50</td>
+                <td class="c_black">完了</td>
+              </tr>
+              <tr>
+                <td colspan="4"> リクルート(ゼクシィ) > 本体プロモーション > Google Network / Google リマーケティング</td>
+              </tr>
+            </table>
+            <p class="btn_download"><a href="#"><img src="/assets/btn_download.gif"/></a></p>
+          </li>
+          <li class="submit_area">
+            <p><a href="index.html"><img src="/assets/btn_close.gif" alt="キャンセル"></a></p>
+          </li>
+        </ul>
+      </div>
+      <div id="page3">
+        <ul class="entrydate_box">
+          <li>
+            <table class="entrydate_table">
+              <tr>
+                <td class="file_name">12345677889989999990.csv</td>
+                <td class="capacity">298MB</td>
+                <td class="daily">05/10/12:50</td>
+                <td class="c_orange">アップロード中</td>
+              </tr>
+              <tr>
+                <td colspan="4"> リクルート(ゼクシィ) > 本体プロモーション > Google Network / Google リマーケティング</td>
+              </tr>
+            </table>
+            <p class="btn_cancel"><a href="#"><img src="/assets/btn_cancel.gif"/></a></p>
+          </li>
+          <li>
+            <table class="entrydate_table">
+              <tr>
+                <td class="file_name">12345677889989999990.csv</td>
+                <td class="capacity">298MB</td>
+                <td class="daily">05/10/12:50</td>
+                <td class="c_blue">作成中</td>
+              </tr>
+              <tr>
+                <td colspan="4"> リクルート(ゼクシィ) > 本体プロモーション > Google Network / Google リマーケティング</td>
+              </tr>
+            </table>
+            <p class="btn_cancel"><a href="#"><img src="/assets/btn_cancel.gif"/></a></p>
+          </li>
+          <li>
+            <table class="entrydate_table">
+              <tr>
+                <td class="file_name">12345677889989999990.csv</td>
+                <td class="capacity">298MB</td>
+                <td class="daily">05/10/12:50</td>
+                <td class="c_black">準備中</td>
+              </tr>
+              <tr>
+                <td colspan="4"> リクルート(ゼクシィ) > 本体プロモーション > Google Network / Google リマーケティング</td>
+              </tr>
+            </table>
+            <p class="btn_cancel"><a href="#"><img src="/assets/btn_cancel.gif"/></a></p>
+          </li>
+          <li>
+            <table class="entrydate_table">
+              <tr>
+                <td class="file_name">12345677889989999990.csv</td>
+                <td class="capacity">298MB</td>
+                <td class="daily">05/10/12:50</td>
+                <td class="c_black">アップロード待機</td>
+              </tr>
+              <tr>
+                <td colspan="4"> リクルート(ゼクシィ) > 本体プロモーション > Google Network / Google リマーケティング</td>
+              </tr>
+            </table>
+            <p class="btn_cancel"><a href="#"><img src="/assets/btn_cancel.gif"/></a></p>
+          </li>
+          <li class="submit_area">
+            <p><a href="index.html"><img src="/assets/btn_close.gif" alt="キャンセル"></a></p>
+          </li>
+        </ul>
+      </div>
     </div>
-    <!-- /#container end -->
-<table style="display:none" class="newTable04 fixTable d-none"></table>
+  </div>
+</div>
+</div>
+<!-- /#container end -->
+<div style='display:none'>
+  <div id="inline_content" class="f_box">
+    <!--	<p class="f_category_title1">掲載結果</p>
+<p class="f_category_title2">成果</p>-->
+  </div>
+</div>
 
+<table style="display:none" class="newTable04 fixTable d-none"></table>

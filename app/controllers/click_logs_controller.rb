@@ -4,7 +4,14 @@ class ClickLogsController < ApplicationController
   before_filter :must_super_agency
   before_filter :set_cookie
   def index
-    @promotion = Promotion.find(params[:id])
+    @promotion = Promotion.find(params[:promotion_id])
+    if current_user.client?
+      @client_id = current_user.company_id
+    else
+      @client_id =@promotion.client_id
+    end
+    @promotions = @client_id.blank? ? Array.new :
+        Promotion.get_by_client(@client_id).order_by_promotion_name
   end
 
   def get_logs_list
