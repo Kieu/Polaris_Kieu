@@ -68,11 +68,11 @@
           <table class="sidebar">
             <% object.each_with_index do |conversion, index| %>
                 <tr>
-                  <th class="edit"><%= link_to "", "javascript:void(0)", class: "edit", id: "edit#{conversion.id}", onclick: "ajaxCommon('#{edit_conversions_path(conversions)}', '##{promotion.id}', '.promotion_name', '#promotion_name','#inner')" if current_user.super? || current_user.agency? %></th>
+                  <th class="edit"><%= link_to "", "javascript:void(0)", class: "edit", id: "edit#{conversion.id}", onclick: "ajaxCommon('#{edit_conversions_path(conversions)}', '##{conversion.id}', '.promotion_name', '#promotion_name','#inner')" if current_user.super? || current_user.agency? %></th>
                   <% if (params[:promotion_id] && promotion.id == params[:promotion_id].to_i) || (!params[:promotion_id] && index == 0) %>
-                      <td><%= link_to conversion.conversion_name, "javascript:void(0)", class: "conversion_name active", id: "#{conversion.id}", onclick: "ajaxCommon('#{conversions_path(promotion_id: promotion.id)}', '##{conversion.id}', '.promotion_name', '#promotion_name','#inner')" %></td>
+                      <td><%= link_to conversion.conversion_name, "javascript:void(0)", class: "conversion_name active", id: "#{conversion.id}", onclick: "ajaxCommon('#{conversions_path(promotion_id: conversion.id)}', '##{conversion.id}', '.promotion_name', '#promotion_name','#inner')" %></td>
                   <% else %>
-                      <td><%= link_to conversion.promotion_name, "javascript:void(0)", class: "conversion_name", id: "#{conversion.id}", onclick: "ajaxCommon('#{conversions_path(promotion_id: promotion.id)}', '##{conversion.id}', '.promotion_name', '#promotion_name','#inner')" %></td>
+                      <td><%= link_to conversion.conversion_name, "javascript:void(0)", class: "conversion_name", id: "#{conversion.id}", onclick: "ajaxCommon('#{conversions_path(promotion_id: conversion.id)}', '##{conversion.id}', '.promotion_name', '#promotion_name','#inner')" %></td>
                   <% end %>
                 </tr>
             <% end %>
