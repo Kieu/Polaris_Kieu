@@ -181,13 +181,13 @@ function draw_chart(data_left, data_right, left, right, categories){
 			}
 		},
 		series: [{ // データ系列を指定
-			name: left,
-			data: data_left,
-			color: "#FF1493"
+				name: right,
+				data: data_right,
+				color: "#32CF32"
 			},{
-			name: right,
-			data: data_right,
-			color: "#32CF32"
+				name: left,
+				data: data_left,
+				color: "#FF1493"
 			}]
 		});
 }

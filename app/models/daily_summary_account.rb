@@ -7,35 +7,33 @@ class DailySummaryAccount < ActiveRecord::Base
   def self.get_promotion_data(promotion_id, conversion_id, start_date, end_date)
   	# get promotion data
     promotion_data = Array.new
-    promotion_data = self.where(promotion_id: promotion_id).where(report_ymd: (start_date)..(end_date))
-          .group(:report_ymd)
-          .select(" report_ymd
-  	                ,account_id
-                    ,sum(cost_per_click) as cost_per_click
-                    ,sum(cost_per_mille) as cost_per_mille
-                    ,sum(click_through_ratio) as click_through_ratio
-  	                ,sum(imp_count) as imp_count
-  	                ,sum(click_count) as click_count
-  	                ,sum(cost_sum) as cost_sum ")
-          .order(:promotion_id)
+    promotion_data = self.where(promotion_id: promotion_id).group(:report_ymd)
+      .select(:report_ymd)
+      .select(:account_id)
+      .select("sum(cost_per_click) as cost_per_click")
+      .select("sum(cost_per_mille) as cost_per_mille")
+      .select("sum(click_through_ratio) as click_through_ratio")
+      .select("sum(imp_count) as imp_count")
+      .select("sum(click_count) as click_count")
+      .select("sum(cost_sum) as cost_sum")
+      .order(:promotion_id).where("DATE_FORMAT(report_ymd, '%Y/%m/%d') between '#{start_date}' and '#{end_date}'")
     
     # get conversion data
   	conversion_data = Array.new
-    conversion_data = DailySummaryAccConversion.where(promotion_id: promotion_id).where(report_ymd: (start_date)..(end_date))
-          .group(:conversion_id, :report_ymd)
-          .select(" report_ymd
-  	                ,conversion_id
-  	                ,account_id 
-  	                ,sum(total_cv_count) as total_cv_count
-  	                ,sum(first_cv_count) as first_cv_count
-  	                ,sum(repeat_cv_count) as repeat_cv_count
-                    ,sum(conversion_rate) as conversion_rate
-  	                ,sum(assist_count)  as assist_count
-  	                ,sum(sales) as sales
-  	                ,sum(roas) as roas
-  	                ,sum(profit) as profit
-  	                ,sum(roi) as roi ")
-          .order(:promotion_id)
+    conversion_data = DailySummaryAccConversion
+      .where(promotion_id: promotion_id)
+      .group(:conversion_id, :report_ymd)
+      .select(:report_ymd).select(:conversion_id).select(:account_id)
+      .select("sum(total_cv_count) as total_cv_count")
+      .select("sum(first_cv_count) as first_cv_count")
+      .select("sum(repeat_cv_count) as repeat_cv_count")
+      .select("sum(conversion_rate) as conversion_rate")
+  	  .select("sum(assist_count)  as assist_count")
+      .select("sum(sales) as sales")
+      .select("sum(roas) as roas")
+      .select("sum(profit) as profit")
+      .select("sum(roi) as roi ")
+      .order(:promotion_id)
 
     # make array result
     array_result = Hash.new
@@ -52,6 +50,14 @@ class DailySummaryAccount < ActiveRecord::Base
     array_result['CPM'] = Array.new
 
     date_range.each do |datetime|
+      if promotion_data.length == 0
+        array_result['click'] << 0
+        array_result['imp'] << 0
+        array_result['CTR'] << 0
+        array_result['CPC'] << 0
+        array_result['COST'] << 0
+        array_result['CPM'] << 0
+      end
       promotion_data.each do |val|
         if(val[:report_ymd] && val[:report_ymd].to_s.to_date.strftime("%Y/%m/%d") == datetime)
           array_result['click'] << val[:click_count] ? val[:click_count] : 0
@@ -103,32 +109,29 @@ class DailySummaryAccount < ActiveRecord::Base
     return array_result, date_range
   end
   
-  def self.get_promotion_summary promotion_id, start_date, end_date    
+  def self.get_promotion_summary promotion_id, start_date, end_date
     results = Hash.new
-    Settings.media_category.each do |category|
-      summary = DailySummaryAccount.where(promotion_id: promotion_id)
-        .where(media_category_id: category[0].to_s).where(report_ymd: (start_date)..(end_date))
-      Settings.promotions_sums.each_with_index do |sum, index|
-        results[category[1]+"_"+Settings.promotions_options[index]+"_total"] =
-          summary.sum(sum)
-  
-        Media.where(media_category_id: category[0].to_s)
-          .each_with_index do |media, index1|
-          media.accounts.each_with_index do |account, index2|
-            results[account.account_name+"_"+Settings
-              .promotions_options[index]] =
-                summary.where(account_id: account.id).sum(sum)
-          end
-        end
-      end
-    end
+    total_data = DailySummaryAccount.where(promotion_id: promotion_id)
+      .select("sum(imp_count) as imp_count")
+      .select("sum(click_count) as click_count")
+      .select("sum(click_through_ratio) as click_through_ratio")
+      .select("sum(cost_sum) as cost_sum")
+      .select("sum(cost_per_click) as cost_per_click")
+      .select("sum(cost_per_mille) as cost_per_mille")
+      
+    category_data = total_data.group(:media_category_id)
+      .select(:media_category_id)
+      
+    all_data = total_data.group(:account_id).select(:account_id)
     
-    Settings.promotions_options.each_with_index do |option, index|
-      results[option+"_total"] = 0
-      Settings.media_category.each do |category|
-        results[option+"_total"] += results[category[1]+"_"+option+"_total"]
-      end
+    category_data.each do |data|
+      results[Settings.media_category[data.media_category_id]+"_total"] = data
     end
+      
+    all_data.each do |data|
+      results["account"+data.account_id.to_s+"_promotion"] = data
+    end
+    results["total"] = total_data[0]
     results
   end
 end
