@@ -294,6 +294,52 @@ ja:
               too_short: ! 'コスト計算 %{count}文字以上で入力してください。'
               wrong_length: ! 'コスト計算 %{count}文字で入力してください。'
               acceptance: コスト計算 チェックボックスを選択してください。
+            sync_account_id: 
+              blank: "Sync account ID can't be blank"
+              accepted: Sync account ID must be accepted 
+              confirmation: Sync account ID doesn't match confirmation 
+              empty: Sync account ID can't be empty
+              equal_to: ! 'Sync account ID must be equal to %{count} ' 
+              even: Sync account ID must be even
+              exclusion: Sync account ID is reserved
+              greater_than: ! 'Sync account ID must be greater than %{count}'
+              greater_than_or_equal_to: ! 'Sync account ID must be greater than or equal to %{count}'
+              inclusion: Sync account ID is not included in the list
+              invalid: Sync account ID is invalid
+              less_than: ! 'Sync account ID must be less than %{count}'
+              less_than_or_equal_to: ! 'Sync account ID must be less than or equal to %{count}'
+              not_a_number: Sync account ID is not a number
+              not_an_integer: Sync account ID is not a interger
+              odd: Sync account ID must be odd
+              record_invalid: Sync account ID バリデーションに失敗しました。 '%{errors}'
+              taken: Sync account ID すでに登録されています。
+              too_long: ! 'Sync account ID is too long (maximum is %{count} characters)'
+              too_short: ! 'Sync account ID is too short (minimum is %{count} characters)'
+              wrong_length: ! 'Sync account ID is the wrong length (should be %{count} characters)'
+              acceptance: Sync account ID must be accepted
+            sync_account_pw: 
+              blank: "Sync account password can't be blank"
+              accepted: Sync account password must be accepted 
+              confirmation: Sync account password doesn't match confirmation 
+              empty: Sync account password can't be empty
+              equal_to: ! 'Sync account password must be equal to %{count} ' 
+              even: Sync account password must be even
+              exclusion: Sync account password is reserved
+              greater_than: ! 'Sync account password must be greater than %{count}'
+              greater_than_or_equal_to: ! 'Sync account password must be greater than or equal to %{count}'
+              inclusion: Sync account password is not included in the list
+              invalid: Sync account password is invalid
+              less_than: ! 'Sync account password must be less than %{count}'
+              less_than_or_equal_to: ! 'Sync account password must be less than or equal to %{count}'
+              not_a_number: Sync account password is not a number
+              not_an_integer: Sync account password is not a interger
+              odd: Sync account password must be odd
+              record_invalid: Sync account password バリデーションに失敗しました。 '%{errors}'
+              taken: Sync account password すでに登録されています。
+              too_long: ! 'Sync account password is too long (maximum is %{count} characters)'
+              too_short: ! 'Sync account password is too short (minimum is %{count} characters)'
+              wrong_length: ! 'Sync account password is the wrong length (should be %{count} characters)'
+              acceptance: Sync account password must be accepted
         conversion:
           attributes:
             conversion_name:
@@ -519,6 +565,7 @@ ja:
     roman_name: "アカウント名(英語)"
     cost: "コスト計算： 入力データ "
     sync_account_id: "アカウントの同期"
+    sync_account_pw: "Sync account PW"
     flash_messages:
       success: "アカウント登録が完了しました。"
       update: "アカウント編集が完了しました。"

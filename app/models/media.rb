@@ -3,6 +3,8 @@ class Media < ActiveRecord::Base
 
   has_many :accounts
   
+  scope :active, where(del_flg: Settings.media.active)
+
   def self.get_media_list
     results = Hash.new
     all_media = Media.all
