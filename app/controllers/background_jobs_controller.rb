@@ -20,7 +20,7 @@ class BackgroundJobsController < ApplicationController
     render :text => @jobs
   end
   def inprogress
-    @jobs = BackgroundJob.where(:user_id => current_user.id,:status => !'1')
+    @jobs = BackgroundJob.where(:user_id => current_user.id,:status => '0')
     render "background_jobs/inprogress"
   end
 end
