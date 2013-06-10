@@ -341,6 +341,11 @@ table.sidebar tbody td {
     margin: 10px 0 0;
     width: 615px;
 }
+.btn_cancel {
+    float: right;
+    margin: 10px 5px 0 0;
+    width: 90px;
+}
 
 /* ==========================================================================
     便利クラス
