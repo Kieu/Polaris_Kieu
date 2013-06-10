@@ -289,6 +289,50 @@ table.sidebar tbody td {
 	vertical-align: top;
 }
 
+.entrydate_box {
+    clear: both;
+    left: 9px;
+    position: absolute;
+    top: 35px;
+}
+.entrydate_table {
+    float: left;
+    font-size: 11px;
+    font-weight: normal;
+    margin: 5px 0 0 5px;
+    width: 500px;
+}
+.file_name {
+    text-align: left;
+    width: 230px;
+}
+.capacity {
+    text-align: left;
+    width: 90px;
+}
+.daily {
+    text-align: left;
+    width: 90px;
+}
+
+.c_orange {
+    color: #E76813;
+    font-weight: bold;
+    text-align: right;
+    width: 100px;
+}
+.c_blue {
+    color: #0087A9;
+    font-weight: bold;
+    text-align: right;
+    width: 100px;
+}
+.c_black {
+    color: #000000;
+    font-weight: bold;
+    text-align: right;
+    width: 100px;
+}
 
 /* ==========================================================================
     便利クラス
