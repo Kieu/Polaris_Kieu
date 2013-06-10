@@ -28,7 +28,7 @@ end
 
 
 def download_csv
-    Resque.enqueue ExportConversionLogsData, current_user.id, params[:promotion_id].to_i, params[:conversion_id], params[:media_category_id], params[:account_id], cookies[:cs], cookies[:ce], cookies[:ser]
+    Resque.enqueue ExportConversionLogsData, current_user.id, params[:promotion_id].to_i, params[:conversion_id], params[:media_category_id], params[:account_id], cookies[:s], cookies[:e], cookies[:ser]
     
     render text: "processing"
 end
