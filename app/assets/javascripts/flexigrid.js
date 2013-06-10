@@ -185,6 +185,9 @@
                 $(g.rDiv).css({
                     height: hrH
                 });
+                $(g.bDiv).css({
+                    height: 'auto'
+                });
             },
             dragStart: function (dragtype, e, obj) { //default drag function start
                 if (dragtype == 'colresize' && p.colResize === true) {//column resize
