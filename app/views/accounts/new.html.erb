@@ -18,7 +18,7 @@
         <tr>
           <th> <%= f.label t("account.media_category") %></th>
           <td><%= f.select :media_category_id,
-                         t("media_categories").each_with_index.map {|name, index| [name,index]}, class: "input-text" %>
+                         Settings.media_category.each_with_index.map {|name, index| [t(name[1]), index+1]}, class: "input-text" %>
           </td>
         </tr>
         <tr>

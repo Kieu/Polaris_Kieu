@@ -3,7 +3,7 @@ require 'csv'
 
 # export click logs data table from click logs screen to csv file
 class ExportClickLogsData
-  @queue = :default
+  @queue = :click_logs
 
   def self.perform user_id, promotion_id, media_category_id, account_id, start_date, end_date, show_error
     # make file name
