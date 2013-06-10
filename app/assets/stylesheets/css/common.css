@@ -170,6 +170,9 @@ p.h2{
     max-height: 315px;
     overflow: hidden;
 }
+table.sidebar tbody td a.active {
+    text-decoration: underline !important;
+}
 #clienetlist_box dl {
     padding: 10px;
 }
