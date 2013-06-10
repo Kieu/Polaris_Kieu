@@ -506,8 +506,8 @@ en:
       success: "Account is created successful"
       update: "Account is updated successful"
   conversion:
-    crumb_add: "Conversion add"
-    crumb_edit: "Conversion Edit"
+    crumb_add: "Add Conversion"
+    crumb_edit: "Edit Conversion"
     user_information: "User information"
     delete: "Delete"
     conversion_name: "Conversion name"
@@ -519,8 +519,8 @@ en:
       combination: "Combination"
     deduplicated:
       label: "Deduplicated"
-      yes: "yes"
-      no: " no"
+      label1: "yes"
+      label2: "no"
     unique_definition: "Unique definition"
     option1:
       label: "<Option①>　"
@@ -535,6 +535,8 @@ en:
         label: "Reward format"
         straight_line_type: "Straight line type"
         not_set: "Not set"
+    combination:
+      pattern: "Pattern"
   log:
     today_text: "Today"
     crumb_click: "List Click_logs"
