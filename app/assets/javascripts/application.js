@@ -134,7 +134,6 @@ function reloadFlex1(obj, urlAction) {
     }).flexReload();
 }
 function draw_chart(data_left, data_right, left, right, categories){
-	console.log(data_left);
 	chart = new Highcharts.Chart({ // 以下、chartオブジェクトに渡す引数
 		chart: {
 			renderTo: 'sample-chart', // どの要素にグラフを描画するかを指定
@@ -180,14 +179,14 @@ function draw_chart(data_left, data_right, left, right, categories){
 				this.x +': '+ this.y +' 度';
 			}
 		},
-		series: [{ // データ系列を指定
-			name: left,
-			data: data_left,
-			color: "#FF1493"
-			},{
-			name: right,
-			data: data_right,
-			color: "#32CF32"
+		series: [{
+				name: left,
+				data: data_left,
+				color: "#32CF32"
+			},{ // データ系列を指定
+				name: right,
+				data: data_right,
+				color: "#FF1493"
 			}]
 		});
 }
