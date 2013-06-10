@@ -555,13 +555,18 @@ en:
       success: "Promotion is created successful"
       update: "Promotion is updated successful"
   user:
+    crumb_add: "Add User"
     crumb_edit: "User edit"
-    user_name: "User name"
+    username: "User name"
     roman_name: "roman_name"
     email: "Email address"
-    role: "Role"
+    role:
+      label: "Role"
+      include_blank: "Please select" 
     company_name: "Conpany name"
-    password: "password"
+    password:
+      label: "password:"
+      info: "※Automatically create"
     password_notification:
       label: "Password notification"
       not_notified: "Not notified"

@@ -572,13 +572,18 @@ ja:
       success: "プロモーション登録が完了しました。"
       update: "プロモーション編集が完了しました。"
   user:
+    crumb_add: "ユーザー登録"
     crumb_edit: "ユーザー編集"
-    user_name: "ユーザー名"
+    username: "ユーザー名"
     roman_name: "ユーザー名(英語)"
     email: "メールアドレス"
-    role: "権限"
+    role:
+      label: "権限"
+      include_blank: "選択してください" 
     company_name: "会社名"
-    password: "パスワード"
+    password:
+      label: "パスワード: "
+      info: "※自動で振り分けます"
     password_notification:
       label: "パスワード通知"
       not_notified: "通知しない"
