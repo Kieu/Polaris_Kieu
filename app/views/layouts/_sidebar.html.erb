@@ -17,7 +17,7 @@
                 <tr>
                   <th class="edit"><%= link_to "", "javascript:void(0)", class: "edit", id: "edit#{client.id}", onclick: "ajaxCommon('#{edit_client_path(client)}', '##{client.id}', '.client_name', '#client_name','#inner,#sidebar')" if current_user.super? %></th>
                   <% if params[:action] == "index" %>
-                      <% if (params[:id] && client.id == params[:id].to_i) || (!params[:id] && index == 0) %>
+                      <% if (params[:client_id] && client.id == params[:client_id].to_i) || (!params[:client_id] && index == 0) %>
                           <td><%= link_to client.client_name, "javascript:void(0)", class: "client_name active", id: "#{client.id}", onclick: "reloadFlex('.newTable06', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{client.id}', '.client_name', '#client_name', #{Settings.MAX_LENGTH_NAME})" %></td>
                       <% else %>
                           <td><%= link_to client.client_name, "javascript:void(0)", class: "client_name", id: "#{client.id}", onclick: "reloadFlex('.newTable06', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{client.id}', '.client_name', '#client_name', #{Settings.MAX_LENGTH_NAME})" %></td>
