@@ -536,6 +536,9 @@ en:
         straight_line_type: "Straight line type"
         not_set: "Not set"
   log:
+    today_text: "Today"
+    crumb_click: "List Click_logs"
+    crumb_cv_logs: "List Conversion logs"
     conversion_name: "Conversion name"
     media_category: "Media category"
     account_name: "Account name"
