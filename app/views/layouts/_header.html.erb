@@ -1,25 +1,39 @@
+<%= stylesheet_link_tag "css/colorbox", :media => "all" %>
+<script>
+    $(document).ready(function () {
+    $(".inline").colorbox({inline: true, width: "635", height: "350" });
+        $( "#tabs" ).tabs({
+            beforeLoad: function( event, ui ) {
+                ui.jqXHR.error(function() {
+                    ui.panel.html(
+                            "Couldn't load this tab. We'll try to fix this as soon as possible. " +
+                                    "If this wouldn't be a demo." );
+                });
+            }
+        });
+    });
+</script>
 <div id="header">
   <div id="headerInner">
     <h1>Polaris</h1>
     <% if signed_in? %>
      <div id="notification" style="float:right;right:450px;position: absolute;top:22px">
-          <span class="notification">2</span>
-          <div id='notice'>
-            <div id="main_tab">
+       <a class="fancybox mt-10 fl-l inline cboxElement" rel="gallery" href="#inline_content"><span class="notification">2</span></a>
 
-              <ul class="tabContainer">
-                <!-- The jQuery generated tabs go here -->
-              </ul>
-
-              <div class="clear"></div>
-
-              <div id="tabContent">
-                <div id="contentHolder">
-                  <!-- The AJAX fetched content goes here -->
+            <div style='display:none'>
+              <div id='inline_content'>
+                <div class="f_box">
+                  <div id="tabs">
+                  <ul>
+                    <li><a href="/background_jobs/inprogress">実行中</a></li>
+                    <li><a href="/background_jobs/new">ダウンロードリスト</a></li>
+                    <li><a href="/background_jobs/upload">アップロードリスト</a></li>
+                  </ul>
+                  </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
+
         </div>
         <div id="personal">
           <ul>
