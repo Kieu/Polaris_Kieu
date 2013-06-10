@@ -37,8 +37,38 @@
 	<% end %>
 	<% @conversions.each do |conversion|%>
 		<% Settings.conversions_sums.each_with_index do |option, index|%>
-			<% val = @conversions_results["total_conversion"+conversion.id.to_s] %>
-			<%= content_tag(:td, val.nil? ? "0" : val[option], class: "header_total") if cookies[("conversion" + conversion.id.to_s).to_sym][index] == "1"%>
+			<% if option == "conversion_rate" || option == "roas" || option == "roi" || option == "click_per_action"%>
+				<% val = @conversions_results["total_conversion"+conversion.id.to_s] %>
+				<% val_pro = @promotion_results["total"] %>
+				<% if val.nil? || val_pro.nil? %>
+					<% val = "0" %>
+				<% else %>
+					<% if option == "conversion_rate" %>
+						<% val = val["total_cv_count"] %>
+						<% val_pro = val_pro["click_count"] %>
+						<% val = (val == "0" || val_pro == "0") ? "0" : (val.to_f)/(val_pro.to_f)*100%>
+					<% end %>
+					<% if option == "roas" %>
+						<% val = val["sales"] %>
+						<% val_pro = val_pro["cost_sum"] %>
+						<% val = (val == "0" || val_pro == "0") ? "0" : (val.to_f)/(val_pro.to_f)*100%>
+					<% end %>
+					<% if option == "roi" %>
+						<% val = val["profit"] %>
+						<% val_pro = val_pro["cost_sum"] %>
+						<% val = (val == "0" || val_pro == "0") ? "0" : (val.to_f-val_pro.to_f)/(val_pro.to_f)*100%>
+					<% end %>
+					<% if option == "click_per_action" %>
+						<% val = val["total_cv_count"] %>
+						<% val_pro = val_pro["cost_sum"] %>
+						<% val = (val == "0" || val_pro == "0") ? "0" : (val_pro.to_f)/(val.to_f)%>
+					<% end %>
+				<% end %>
+			<% else %>
+				<% val = @conversions_results["total_conversion"+conversion.id.to_s] %>
+				<% val = val.nil? ? "0" : val[option] %>
+			<% end %>
+			<%= content_tag(:td, val, class: "header_total") if cookies[("conversion" + conversion.id.to_s).to_sym][index] == "1"%>
 		<% end %>
 	<% end %>
 </tr>
@@ -52,7 +82,38 @@
 		<% end %>
 		<% @conversions.each do |conversion|%>
 			<% Settings.conversions_sums.each_with_index do |option, index|%>
-				<%= content_tag(:td, "total", class: "category_header") if cookies[("conversion" + conversion.id.to_s).to_sym][index] == "1"%>
+				<% if option == "conversion_rate" || option == "roas" || option == "roi" || option == "click_per_action"%>
+					<% val = @conversions_results[category[1]+"_conversion"+conversion.id.to_s+"_total"] %>
+					<% val_pro = @promotion_results[category[1]+"_total"] %>
+					<% if val.nil? || val_pro.nil? %>
+						<% val = "0" %>
+					<% else %>
+						<% if option == "conversion_rate" %>
+							<% val = val["total_cv_count"] %>
+							<% val_pro = val_pro["click_count"] %>
+							<% val = (val == "0" || val_pro == "0") ? "0" : (val.to_f)/(val_pro.to_f)*100%>
+						<% end %>
+						<% if option == "roas" %>
+							<% val = val["sales"] %>
+							<% val_pro = val_pro["cost_sum"] %>
+							<% val = (val == "0" || val_pro == "0") ? "0" : (val.to_f)/(val_pro.to_f)*100%>
+						<% end %>
+						<% if option == "roi" %>
+							<% val = val["profit"] %>
+							<% val_pro = val_pro["cost_sum"] %>
+							<% val = (val == "0" || val_pro == "0") ? "0" : (val.to_f-val_pro.to_f)/(val_pro.to_f)*100%>
+						<% end %>
+						<% if option == "click_per_action" %>
+							<% val = val["total_cv_count"] %>
+							<% val_pro = val_pro["cost_sum"] %>
+							<% val = (val == "0" || val_pro == "0") ? "0" : (val_pro.to_f)/(val.to_f)%>
+						<% end %>
+					<% end %>
+				<% else %>
+					<% val = @conversions_results[category[1]+"_conversion"+conversion.id.to_s+"_total"] %>
+					<% val = val.nil? ? "0" : val[option] %>
+				<% end %>
+				<%= content_tag(:td, val, class: "category_header") if cookies[("conversion" + conversion.id.to_s).to_sym][index] == "1"%>
 			<% end %>
 		<% end %>
 	</tr>
@@ -68,8 +129,38 @@
 			<% end %>
 			<% @conversions.each do |conversion|%>
 				<% Settings.conversions_sums.each_with_index do |option, index2|%>
-					<% val = @conversions_results["account"+account.id.to_s+"_conversion"+conversion.id.to_s] %>
-					<%= content_tag(:td, val.nil? ? "0" : val[option]) if cookies[("conversion" + conversion.id.to_s).to_sym][index2] == "1"%>
+					<% if option == "conversion_rate" || option == "roas" || option == "roi" || option == "click_per_action"%>
+						<% val = @conversions_results["account"+account.id.to_s+"_conversion"+conversion.id.to_s] %>
+						<% val_pro = @promotion_results["account"+account.id.to_s+"_promotion"]%>
+						<% if val.nil? || val_pro.nil? %>
+							<% val = "0" %>
+						<% else %>
+							<% if option == "conversion_rate" %>
+								<% val = val["total_cv_count"] %>
+								<% val_pro = val_pro["click_count"] %>
+								<% val = (val == "0" || val_pro == "0") ? "0" : (val.to_f)/(val_pro.to_f)*100%>
+							<% end %>
+							<% if option == "roas" %>
+								<% val = val["sales"] %>
+								<% val_pro = val_pro["cost_sum"] %>
+								<% val = (val == "0" || val_pro == "0") ? "0" : (val.to_f)/(val_pro.to_f)*100%>
+							<% end %>
+							<% if option == "roi" %>
+								<% val = val["profit"] %>
+								<% val_pro = val_pro["cost_sum"] %>
+								<% val = (val == "0" || val_pro == "0") ? "0" : (val.to_f-val_pro.to_f)/(val_pro.to_f)*100%>
+							<% end %>
+							<% if option == "click_per_action" %>
+								<% val = val["total_cv_count"] %>
+								<% val_pro = val_pro["cost_sum"] %>
+								<% val = (val == "0" || val_pro == "0") ? "0" : (val_pro.to_f)/(val.to_f)%>
+							<% end %>
+						<% end %>
+					<% else %>
+						<% val = @conversions_results["account"+account.id.to_s+"_conversion"+conversion.id.to_s] %>
+						<% val = val.nil? ? "0" : val[option] %>
+					<% end %>
+					<%= content_tag(:td, val) if cookies[("conversion" + conversion.id.to_s).to_sym][index2] == "1"%>
 				<% end %>
 			<% end %>
         </tr>
