@@ -346,6 +346,11 @@ table.sidebar tbody td {
     margin: 10px 5px 0 0;
     width: 90px;
 }
+.btn_download {
+    float: right;
+    margin: 10px 5px 0 0;
+    width: 90px;
+}
 
 /* ==========================================================================
     便利クラス
