@@ -21,6 +21,8 @@ class Conversion < ActiveRecord::Base
   validates :conversion_combine, presence: true, if: :check_combination
   validates :url, presence: true, if: :check_track_method
 
+  scope :order_by_conversion_name, ->{order :conversion_name}
+  scope :get_by_promotion_id, lambda {|promotion_id| where(promotion_id: promotion_id)}
   def create_mv
     mv = ""
     if (client_id = self.promotion.client.id.to_s(36)).length < 8
