@@ -1,7 +1,8 @@
 <div id="download">
+  <ul class="entrydate_box">
   <% if @jobs %>
       <% @jobs.each_with_index do |job,| %>
-          <ul class="entrydate_box">
+
             <li>
               <table class="entrydate_table">
                 <tr>
@@ -16,7 +17,8 @@
               </table>
               <p class="btn_download"><a href="#"><img src="/assets/btn_download.gif"/></a></p>
             </li>
-          </ul>
+
       <% end %>
   <% end %>
+  </ul>
 </div>
