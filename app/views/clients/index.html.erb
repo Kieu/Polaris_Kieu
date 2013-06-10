@@ -7,9 +7,9 @@
         <%= render partial: "layouts/sidebar", locals: {object: @clients} %>
     <% end %>
     <p class="h2" id="client_name"><%= short_name(@client.client_name) %></p>
-    <table class="flexme4" class="newTable06 fixTable d-none" style="display: none"></table>
+    <table class="newTable06 fixTable d-none" style="display: none"></table>
     <script type="text/javascript">
-        $(".flexme4").flexigrid({
+        $(".newTable06").flexigrid({
             url: "<%= get_promotions_list_clients_path %>"+"?id=<%= @client.id if @client %>",
             dataType: 'json',
             colModel : [
@@ -29,6 +29,7 @@
             rp: 10,
             showTableToggleBtn: true,
             resizable : false,
+            optionGet : "1",
             onSuccess: function() {
                 tableResize();
             },
@@ -42,3 +43,8 @@
 <% else %>
     <h2 id="client_name">No data</h2>
 <% end %>
+<script type="text/javascript">
+    $(window).resize(function() {
+        tableResize();
+    });
+</script>
