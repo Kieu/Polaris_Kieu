@@ -523,8 +523,8 @@ ja:
       success: "アカウント登録が完了しました。"
       update: "アカウント編集が完了しました。"
   conversion:
-    crumb_add: "クライアント登録"
-    crumb_edit: "クライアント編集"
+    crumb_add: "コンバージョン登録"
+    crumb_edit: "コンバージョン編集"
     user_information: "ユーザー情報"
     delete: "削除"
     conversion_name: "コンバージョン名"
@@ -536,8 +536,8 @@ ja:
       combination: " 組み合わせ"
     deduplicated:
       label: "重複排除"
-      yes: "あり"
-      no: " なし"
+      label1: "あり"
+      label2: " なし"
     unique_definition: "ユニーク定義"
     option1:
       label: "<オプション①>　"
@@ -547,11 +547,13 @@ ja:
         not_configure: "設定しない"
       sale_unit_price: "売上単価"
     option2:
-      lable: "<オプション②>"
+      label: "<オプション②>"
       reward_format:
         label: "報酬型式"
         straight_line_type: "定額型"
         not_set: "設定しない"
+    combination:
+      pattern: "パターン: "
   log:
     today_text: "今日"
     crumb_click: "本体プロモーション"
