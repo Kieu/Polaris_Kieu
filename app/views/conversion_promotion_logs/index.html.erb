@@ -288,7 +288,7 @@
 		}
 	});
 	var colums = ["conversion_utime", "conversion_id", "conversion_category","tracking_type",
-	 "conversion_type", "approval_status", "media_id", "account_id", "campaign_id", "ad_group_id", "ad_id", "click_time", "verify", "suid", "session_id", "os", "repeat", "log_state", "sales", "profit", "volume", "others", "error_message", "error_log_view"]
+	 "track_type", "approval_status", "media_id", "account_id", "campaign_id", "group_id", "unit_id", "click_time", "verify", "suid", "session_id", "os", "repeat", "log_state", "sales", "profit", "volume", "others", "error_message", "error_log_view"]
 	$("#show_option").click(function(){
 		$.colorbox({
 			width: "50%",
@@ -344,7 +344,7 @@
 	});
 	$("#not_change_cookie").click(function(){
 		cookies_options = $.cookie("options");
-		location.href = location.href;
+		//location.href = location.href;
 	})
 
 	$("#display_all").click(function(){
