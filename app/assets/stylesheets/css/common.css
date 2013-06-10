@@ -333,6 +333,14 @@ table.sidebar tbody td {
     text-align: right;
     width: 100px;
 }
+.entrydate_box li {
+    background-color: white;
+    border: 1px solid;
+    clear: both;
+    height: 50px;
+    margin: 10px 0 0;
+    width: 615px;
+}
 
 /* ==========================================================================
     便利クラス
