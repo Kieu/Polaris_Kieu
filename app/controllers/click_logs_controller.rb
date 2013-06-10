@@ -47,8 +47,8 @@ class ClickLogsController < ApplicationController
   
   def set_cookie
     cookies[:coptions]="11111101010" if !cookies[:coptions]
-    time = Time.new
-    cookies[:cs]="#{time.year}/#{time.month}/01" if !cookies[:s] 
-    cookies[:ce]="#{time.year}/#{time.month}/#{time.day}" if !cookies[:e]   
+    time = Time.yesterday.stftime("%y/%m/%d")
+    cookies[:cs]="#{time.year}/#{time.month}/01" if !cookies[:cs] 
+    cookies[:ce]="#{time.year}/#{time.month}/#{time.day}" if !cookies[:ce]   
   end
 end

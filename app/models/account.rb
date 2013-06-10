@@ -3,7 +3,7 @@ class Account < ActiveRecord::Base
   VALID_ROMAN_NAME_REGEX = /^[A-Z_a-z][A-Za-z_0-9]*$/
   
   attr_accessible :cost, :create_user_id, :media_id, :promotion_id, :account_name, :roman_name,
-                  :sync_account_id, :sync_account_pw, :sync_flg, :update_user_id
+                  :sync_account_id, :sync_account_pw, :sync_flg, :update_user_id, :media_category_id
   
   validates :promotion_id, presence: true
   validates :promotion_id, format: {with: VALID_NUMBER_REGEX}, if: -> account { account.promotion_id.present?}
@@ -16,8 +16,10 @@ class Account < ActiveRecord::Base
   validates :account_name, presence: true, length: {maximum: 255}, uniqueness: {case_sensitive: false}
   validates :roman_name, presence: true, length: {maximum: 255}, uniqueness: {case_sensitive: false}
   validates :roman_name, format: {with: VALID_ROMAN_NAME_REGEX}, if: -> account { account.roman_name.present?}
-  validates :sync_account_id, presence: true, length: {maximum: 255}, uniqueness: {case_sensitive: false}, if: :check_sync
-  validates :sync_account_pw, presence: true, length: {maximum: 255}, uniqueness: {case_sensitive: false}, if: :check_sync
+  validates :sync_account_id, presence: true, length: {maximum: 255}
+  validates :sync_account_id, uniqueness: {case_sensitive: false}, if: :check_sync, if: -> account {account.sync_account_id.present?} 
+  validates :sync_account_pw, presence: true, length: {maximum: 255}
+  validates :sync_account_pw, uniqueness: {case_sensitive: false}, if: :check_sync, if: -> account {account.sync_account_pw.present?}
   
   has_many :daily_summary_accounts
   has_many :daily_summary_acc_conversions
