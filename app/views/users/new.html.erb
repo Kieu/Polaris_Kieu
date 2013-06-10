@@ -2,39 +2,39 @@
 <%= stylesheet_link_tag "css/common" %>
 <%= flash[:success] if flash[:success] %>
 <div id="user_form">
-  <p class="h2">ユーザー登録</p>
+  <p class="h2"><%= I18n.t("user.crumb_add") %></p>
   <%= form_for(@user) do |f| %>
       <table>
         <tbody>
         <tr>
-          <th><%= f.label "ユーザー名：" %></th>
+          <th><%= f.label t("user.username") %></th>
           <td colspan="2"><%= f.text_field :username, maxlength: 255, style: "width: 200px" %></td>
         </tr>
         <tr>
-          <th><%= f.label "ユーザー名(英語)：" %></th>
+          <th><%= f.label t("user.roman_name") %></th>
           <td colspan="2"><%= f.text_field :roman_name, maxlength: 255, style: "width: 200px" %></td>
         </tr>
         <tr>
-          <th> <%= f.label "メールアドレス：" %></th>
+          <th> <%= f.label t("user.email") %></th>
           <td colspan="2"><%= f.text_field :email, maxlength: 255, style: "width: 200px" %></td>
         </tr>
         <tr>
-          <th> <%= f.label "権限：" %></th>
-          <td colspan="2"><%= f.collection_select :role_id, Role.all, :id, :role_name, {:include_blank => "選択してください"},{:class => 'input-text'} %></td>
-        </tr>
+          <th> <%= f.label t("user.role.label") %></th>
+          <td colspan="2"><%= f.collection_select :role_id, Role.all, :id, :role_name, {include_blank: t("user.role.include_blank")},{:class => 'input-text'} %></td>
+        </tr> 
         <tr>
-          <th><%= f.label "会社名：" %></th>
+          <th><%= f.label t("user.company_name") %></th>
           <td colspan="2">
             <%= f.collection_select :company_id, Client.all, :id, :client_name, {}, {:class => 'input-text'} %></td>
         </tr>
         <tr>
-          <th>パスワード：</th>
-          <td colspan="2">※自動で振り分けます</td>
+          <th><%= I18n.t("user.password.label") %></th>
+          <td colspan="2"><%= I18n.t("user.password.info") %></td>
         </tr>
         <tr>
-          <th>パスワード通知：</th>
-          <td><%= f.radio_button :password_flg, "0", checked: true %> 通知しない</td>
-          <td><%= f.radio_button :password_flg, "1" %> 通知する</td>
+          <th><%= I18n.t("user.password_notification.label") %></th>
+          <td><%= f.radio_button :password_flg, "0", checked: true %> <%= I18n.t("user.password_notification.not_notified") %></td>
+          <td><%= f.radio_button :password_flg, "1" %> <%= I18n.t("user.password_notification.to_notified") %></td>
         </tr>
         </tbody>
       </table>
