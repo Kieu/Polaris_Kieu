@@ -72,7 +72,7 @@ function reloadFlex(obj, urlAction, id, current_active, cname, maxlength) {
     
 }
 function ajaxCommon(urlAction, id, current_active, cname,arr_inner) {
-    $this.preventDefault();
+    ($this).preventDefault();
     location.href = urlAction;
     return;
     if (prevent == true){
