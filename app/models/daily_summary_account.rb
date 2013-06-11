@@ -85,7 +85,7 @@ class DailySummaryAccount < ActiveRecord::Base
           array_result["#{conversion_id}_CV(repeat)"] = Array.new
           array_result["#{conversion_id}_CVR"] = Array.new
           array_result["#{conversion_id}_CPA"] = Array.new
-          array_result["#{conversion_id}_ASSIT"] = Array.new
+          array_result["#{conversion_id}_ASSIST"] = Array.new
         end
 
         if(conversion[:report_ymd] && conversion[:report_ymd].to_s.to_date.strftime("%Y/%m/%d") == datetime)
@@ -94,14 +94,14 @@ class DailySummaryAccount < ActiveRecord::Base
           array_result["#{conversion[:conversion_id]}_CV(repeat)"] << conversion[:repeat_cv_count] ? conversion[:repeat_cv_count] : 0
           array_result["#{conversion[:conversion_id]}_CVR"] << conversion[:conversion_rate] ? conversion[:conversion_rate] : 0
           array_result["#{conversion[:conversion_id]}_CPA"] << conversion[:first_cv_count] ? conversion[:first_cv_count] : 0
-          array_result["#{conversion[:conversion_id]}_ASSIT"] << conversion[:assist_count] ? conversion[:assist_count] : 0
+          array_result["#{conversion[:conversion_id]}_ASSIST"] << conversion[:assist_count] ? conversion[:assist_count] : 0
         else
           array_result["#{conversion[:conversion_id]}_CV"] << 0
           array_result["#{conversion[:conversion_id]}_CV(first)"] << 0
           array_result["#{conversion[:conversion_id]}_CV(repeat)"] << 0
           array_result["#{conversion[:conversion_id]}_CVR"] << 0
           array_result["#{conversion[:conversion_id]}_CPA"] << 0
-          array_result["#{conversion[:conversion_id]}_ASSIT"] << 0
+          array_result["#{conversion[:conversion_id]}_ASSIST"] << 0
         end
       end
     end

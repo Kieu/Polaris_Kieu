@@ -502,11 +502,14 @@ en:
   login:
     email: "Email address"
     pw: "Password"
-    choose_lang: "Choose Language"
+    choose_lang:
+      label: "Choose Language"
+      ja: "Japanese"
+      en: "English"
     forgor_pw: "Forgot Password"
     announcements: "Announcements"
     captcha: "Captcha"
-    notice: "Please enter your Email of the account, the authentication characters that are displayed.."
+    notice: "Please enter the email address of the account at the time of issuance, the authentication characters that are displayed. Issue a password, and raise the guide. "
   client:
     crumb_edit: "Client Edit"
     crumb_add: "Add Client"
