@@ -4,13 +4,11 @@ $(function(){
 	$("#cancel_change").click(function(){
 		$('#prevent_change').colorbox.close();
 	});
-	$.colorbox({
-		width: "30%",
-		inline: true,
-		escKey: false,
-		overlayClose: false,
+    $("a").click(function(){
+	$.colorbox({inline:true, width:"425", height:"330",
 		href: "#prevent_change"
 	})
+    });
 })
 </script>
 <div style="display: none">
