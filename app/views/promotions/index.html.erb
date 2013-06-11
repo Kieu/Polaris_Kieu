@@ -38,7 +38,7 @@
 							<li><a href="javascript:void(0)"><%= conversion.conversion_name %></a>
 								<ul>
 									<% Settings.conversions_graph.each do |option| %>
-										<li><a href="javascript:void(0)" class="result_click_left"><%= option %></a></li>
+										<li><a href="javascript:void(0)" class="result_click_left" id="conversion_left_<%= conversion.id %>"><%= option %></a></li>
 									<% end %>
 								</ul>
 							<li>
@@ -68,7 +68,7 @@
 							<li><a href="javascript:void(0)"><%= conversion.conversion_name %></a>
 								<ul>
 									<% Settings.conversions_graph.each do |option| %>
-										<li><a href="javascript:void(0)" class="result_click_right"><%= option %></a></li>
+										<li><a href="javascript:void(0)" class="result_click_right" id="conversion_right_<%= conversion.id %>"><%= option %></a></li>
 									<% end %>
 								</ul>
 							<li>
@@ -182,6 +182,50 @@
     })
 
     $(function() {
+    	
+    	var tab = {
+	        init: function(){
+	            var tabs = this.setup.tabs;
+	            var pages = this.setup.pages;
+	
+	            for(i=0; i<pages.length; i++) {
+	                if(i !== 0) pages[i].style.display = 'none';
+	                tabs[i].onclick = function(){ tab.showpage(this); return false; };
+	            }
+	        },
+
+	        showpage: function(obj){
+				var tabs = this.setup.tabs;
+	            var pages = this.setup.pages;
+	            var num;
+	
+	            for(num=0; num<tabs.length; num++) {
+	                if(tabs[num] === obj) break;
+	            }
+	
+	            for(var i=0; i<pages.length; i++) {
+	                if(i == num) {
+	                    pages[num].style.display = 'block';
+	                    tabs[num].className = 'present';
+	                }
+	                else{
+	                    pages[i].style.display = 'none';
+	                    tabs[i].className = null;
+	                }
+	            }
+	        }
+    	}
+    // <![CDATA[
+    	pages = [];
+		<% @conversions.each_with_index do |conversion, index| %>
+			pages.push(document.getElementById('page' + "<%= index+1 %>"))
+		<% end %>
+    	tab.setup = {
+        	tabs: document.getElementById('tab').getElementsByTagName('li'),
+
+        	pages: pages
+    		} //オブジェクトをセット
+    	tab.init(); //起動！
     	default_list_options = $("#list_options").html();
         $("#show_option").click(function(){
             $.colorbox({
@@ -239,34 +283,6 @@
             $("#list_options").html(default_list_options);
         })
 		$(".btn_details").droppy();
-		var tab = {
-    		init: function(){
-    			var tabs = this.setup.tabs;
-    			var pages = this.setup.pages;
-				for(i=0; i<pages.length; i++) {
-					if(i !== 0) pages[i].style.display = 'none';
-					tabs[i].onclick = function(){ tab.showpage(this); return false; };
-    			}
-    		},
-			showpage: function(obj){
-    			var tabs = this.setup.tabs;
-    			var pages = this.setup.pages;
-    			var num;
-				for(num=0; num<tabs.length; num++) {
-    				if(tabs[num] === obj) break;
-    			}
-				for(var i=0; i<pages.length; i++) {
-					if(i == num) {
-						pages[num].style.display = 'block';
-						tabs[num].className = 'present';
-					}
-					else{
-    					pages[i].style.display = 'none';
-    					tabs[i].className = null;
-    				}
-    			}
-    		}
-    	}
     	$('div.check-group input').each(function(){
 		if ($(this).attr('checked') == 'checked') {
 			$(this).next().addClass('checked');
@@ -293,6 +309,14 @@
 			data["<%= option %>"].push(parseInt("<%= data%>"));
 		<% end %>
 	<% end %>
+	<% @conversions.each do |conversion| %>
+		<% Settings.conversions_graph.each do |option| %>
+			data["<%= conversion.id %>" + "_" + "<%= option %>"] = [];
+			<% @promotion_data[conversion.id.to_s + "_" + option].each do |data| %>
+				data["<%= conversion.id %>" + "_" + "<%= option %>"].push(parseInt("<%= data%>"));
+			<% end %>
+		<% end %>
+	<% end %>
 	/* Get data*/
 	<% @array_category.each do |category|%>
 		categories.push("<%= category %>");
@@ -311,11 +335,11 @@
     });
     
     $(".result_click_left").click(function(){
-    	left = $(this).text();
+    	left = $(this).attr("id").split("_")[2] + "_" + $(this).text();
     	draw_chart(data[left], data[right], left,right, categories)
     });
     $(".result_click_right").click(function(){
-    	right = $(this).text();
+    	right = $(this).attr("id").split("_")[2] + "_" + $(this).text();
     	draw_chart(data[left], data[right], left,right, categories)
     });
     
@@ -341,6 +365,11 @@
                 	success: function(all_data){
 						<% Settings.promotions_options.each do |option| %>
 							data["<%= option %>"] = all_data["promotion_data"]["<%= option %>"];
+						<% end %>
+						<% @conversions.each do |conversion| %>
+							<% Settings.conversions_graph.each do |option| %>
+								data["<%= conversion.id %>" + "_" + "<%= option %>"] = all_data["promotion_data"]["<%= conversion.id%>"+"_"+"<%= option %>"];
+							<% end %>
 						<% end %>
 						categories = all_data["array_category"];
 						draw_chart(data[left], data[right], left, right, categories);
