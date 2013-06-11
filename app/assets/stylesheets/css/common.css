@@ -19,11 +19,12 @@ font-size: 14px;
 a:hover{
 	opacity:0.7;
 }
-#promotion_tables {
+/*#promotion_tables {
     width: 100%;
     overflow: hidden;
     overflow-x:scroll ;
 }
+*/
 /*p img:hover{
 	opacity:0.7;
 }*/
