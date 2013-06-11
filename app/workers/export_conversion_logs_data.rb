@@ -49,7 +49,6 @@ class ExportConversionLogsData
         # make header for CSV file
         csv << header_col
         rows.each do |row|
-          binding.pry
           csv << [row.conversion_utime, conversions.find(row.conversion_id).conversion_name,cv_categories[conversions.find(row.conversion_id).conversion_category], I18n.t("log_track_type")[row.track_type], I18n.t("log_repeat_flg")[row.repeat_flg],
                   row.id, row.parent_conversion_id, row.approval_status, client_name, promotion.promotion_name,
                   medias.find(row.media_id).media_name, accounts.find(row.account_id).account_name, display_campaigns.find(row.campaign_id).name,
