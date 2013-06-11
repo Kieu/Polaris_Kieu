@@ -610,8 +610,8 @@ ja:
       pattern: "パターン: "
   log:
     today_text: "今日"
-    crumb_click: "本体プロモーション"
-    crumb_cv_logs: "本体プロモーション"
+    crumb_click: "Clickログ"
+    crumb_cv_logs: "CVログ"
     conversion_name: "コンバージョン名"
     media_category: "メディアカテゴリ"
     account_name: "アカウント名"
