@@ -294,6 +294,8 @@ table.sidebar tbody td {
     left: 9px;
     position: absolute;
     top: 35px;
+    overflow: hidden;
+    height: 300px;
 }
 .entrydate_table {
     float: left;
@@ -351,6 +353,7 @@ table.sidebar tbody td {
     margin: 10px 5px 0 0;
     width: 90px;
 }
+
 
 /* ==========================================================================
     便利クラス
