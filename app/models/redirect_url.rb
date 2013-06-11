@@ -24,7 +24,7 @@ class RedirectUrl < ActiveRecord::Base
               ,creative.image as creative
               ,creative.text as creative_text
               ,creative.type as creative_type
-              ,DATE_FORMAT(r_url.updated_at, '%Y/%m/%d %h:%i:%s') as last_modified
+              ,DATE_FORMAT(r_url.update_time, '%Y/%m/%d %h:%i:%s') as last_modified
             FROM  redirect_urls as r_url
               inner join redirect_infomations as r_info
                    on r_info.mpv = r_url.mpv
