@@ -1,6 +1,5 @@
 class BackgroundJobsController < ApplicationController
-  before_filter :signed_in_user
-  before_filter :must_super_agency
+  before_filter :must_sigin
   layout false
 
   def download
