@@ -192,7 +192,14 @@ namespace :master do
   desc "Create Redirect URL"
   task create_redirect_url: :environment do
     (1..10).each do |num|
-      RedirectUrl.create!(mpv: "1.1.1.1", url: 'http://domain/click/?mpv=MPV&cid=Client ID&pid=Promotion ID_x000D_', rate: 12, name: "url_#{num}")
+      RedirectUrl.create!(mpv: "1.1.1.1", url: "http://domain/click/?mpv=MPV&cid=Client ID&pid=Promotion ID_x000D_#{num}", rate: 12, name: "url_#{num}")
+    end
+  end
+
+  desc "Create Creative"
+  task create_creative: :environment do
+    (1..10).each do |num|
+      Creative.create!(ad_id: 1, creative_name: "creative_#{num}", image: 'image1.gif', create_user_id: 1)
     end
   end
 end

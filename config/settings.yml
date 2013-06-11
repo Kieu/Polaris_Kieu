@@ -26,6 +26,7 @@ media_category:
   3: 'Affiliate'
 
 EXPORT_PROMOTION: 'export_promotion'
+EXPORT_URL: 'export_url'
 EXPORT_CLICK_LOGS: 'export_click_logs'
 EXPORT_CV_LOGS: 'export_cv_logs'
 type_view:
@@ -38,6 +39,7 @@ job_status:
 file_type:
   CSV: '.csv'
 export_promotion_path: 'doc/promotion_export/'
+export_url_path: 'doc/url/export_url/'
 export_click_logs_path: 'doc/click_logs_export/'
 export_conversion_logs_path: 'doc/cv_logs_export/'
 promotions_options: ["imp", "click", "CTR", "COST", "CPM", "CPC"]
