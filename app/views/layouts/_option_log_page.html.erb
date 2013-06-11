@@ -1,51 +1,51 @@
 <div style='display:none'>
 <div id="inline_logs">
 <div class="f_box">
-<p class="f_box_title">ログ</p>
-<p class="f_category_title1">表示項目</p>
+<p class="f_box_title"><%= I18n.t("click_logs.label")%></p>
+<p class="f_category_title1"><%= I18n.t("click_logs.display_item")%></p>
 <div class="box02">
   <ul id="tab_logs">
-    <li class="present"><p class="f_arrow">通常</p></li>
+    <li class="present"><p class="f_arrow"><%= I18n.t("click_logs.usually")%></p></li>
   </ul>
 </div>
 <div id="page1">
 <div class="box03">
-  <p class="box3_txt"><%= link_to "Show All", "javascript:void(0)", onclick: "update_cookies()"%> </p>
+  <p class="box3_txt"><%= link_to I18n.t("click_logs.show_all"), "javascript:void(0)", onclick: "update_cookies()"%> </p>
   <!-- チェックボックス -->
   <div class="check-group clearfix">
     <ul>
       <li>
-        <p class="check_txt">Click Time</p>
+        <p class="check_txt"><%= I18n.t("click_logs.click_time")%></p>
         <div>
           <%= link_to cookies[:coptions][0] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('0',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">Media Name</p>
+        <p class="check_txt"><%= I18n.t("click_logs.media_name")%></p>
         <div>
           <%= link_to cookies[:coptions][1] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('1',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">Account name</p>
+        <p class="check_txt"><%= I18n.t("click_logs.account_name")%></p>
         <div>
           <%= link_to cookies[:coptions][2] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('2',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">Campaign Name</p>
+        <p class="check_txt"><%= I18n.t("click_logs.campaign_name")%></p>
         <div>
           <%= link_to cookies[:coptions][3] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('3',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">Ad Group Name</p>
+        <p class="check_txt"><%= I18n.t("click_logs.ad_group_name")%></p>
         <div>
           <%= link_to cookies[:coptions][4] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('4',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">Ad Name</p>
+        <p class="check_txt"><%= I18n.t("click_logs.ad_name")%></p>
         <div>
           <%= link_to cookies[:coptions][5] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('5',this)"%>
         </div>
@@ -55,42 +55,42 @@
   <!-- /チェックボックス -->
 </div>
 <div class="box01">
-  <p class="box3_txt"><%= link_to "Show All", "javascript:void(0)", onclick: "update_cookies()"%> </p>
+  <p class="box3_txt"><%= link_to I18n.t("click_logs.show_all"), "javascript:void(0)", onclick: "update_cookies()"%> </p>
   <!-- チェックボックス -->
   <div class="check-group clearfix">
     <ul>
       <li>
-        <p class="check_txt">URL</p>
+        <p class="check_txt"><%= I18n.t("click_logs.url")%></p>
         <div>
           <%= link_to cookies[:coptions][6] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('6',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">SESID</p>
+        <p class="check_txt"><%= I18n.t("click_logs.sesid")%></p>
         <div>
           <%= link_to cookies[:coptions][7] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('7',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">OS</p>
+        <p class="check_txt"><%= I18n.t("click_logs.os")%></p>
         <div>
           <%= link_to cookies[:coptions][8] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('8',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">OK/NG</p>
+        <p class="check_txt"><%= I18n.t("click_logs.log_state")%></p>
         <div>
           <%= link_to cookies[:coptions][9] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('9',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">Error Message</p>
+        <p class="check_txt"><%= I18n.t("click_logs.error_message")%></p>
         <div>
           <%= link_to cookies[:coptions][10] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('10',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">Show data from Error table</p>
+        <p class="check_txt"><%= I18n.t("click_logs.error_log_view")%></p>
         <div>
           <input type="checkbox" name="error_table" id="error_table" checked="checked">
         </div>

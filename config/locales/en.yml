@@ -594,6 +594,53 @@ en:
     conversion_name: "Conversion name"
     media_category: "Media category"
     account_name: "Account name"
+  cv_logs:
+    label: "Logs"
+    cv_test: "CV test"
+    display_item: "Display item"
+    usually: "Usually"
+    show_all: "Show All"
+    conversion_time: "Conversion Times"
+    conversion_name: "Conversion Name"
+    conversion_category: "Conversion Category"
+    tracking_type: "Tracking Type"
+    cv_type: "Conversion type"
+    media_approval: "Media Approval"
+    media: "Media"
+    account: "Account"
+    campaign: "Campaign"
+    ad_group: "Ad Group name"
+    ad_name: "Ad Name"
+    click_time: "Click Times"
+    verify: "Verify"
+    suid: "SUID"
+    session_id: "Session ID"
+    os: "OS"
+    repeat: "Repeat"
+    log_state: "OK/NG"
+    sales: "Sales"
+    profit: "Profit"
+    volume: "Volume"
+    others: "Others"
+    error_message: "Error Message"
+    error_log_view: "Show data from Error table"
+  click_logs:
+    label: Clicks
+    display_item: Display item
+    usually: Usually
+    show_all: "Show All"
+    click_time: "Click Time"
+    media_name: Media Name
+    account_name: Account name
+    campaign_name: Campaign Name
+    ad_group_name: Ad Group Name
+    ad_name: Ad Name
+    url: URL
+    sesid: SESID
+    os: OS
+    log_state: OK/NG
+    error_message: Error Message
+    error_log_view: Show data from Error table
   promotion:
     crumb_edit: "Promotion edit"
     crumb_add: "Promotion add"
