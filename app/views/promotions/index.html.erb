@@ -12,7 +12,15 @@
 	<li>&gt;</li>
 	<li><%= @promotion_name %></li>
 </ul>
-
+ <script>
+     $(function(){
+         $('#tab').slimScroll({
+             color: '#0087A9',
+             size: '8px',
+             alwaysVisible: false
+         });
+     });
+ </script>
 <div class="date">今日<br />
 <div id="datepicker">
 <%= @start_date %>~<%= @end_date %>&#9660;</div>
