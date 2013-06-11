@@ -1,7 +1,7 @@
 class Agency < ActiveRecord::Base
   attr_accessible :agency_name, :roman_name
 
-  VALID_ROMAN_NAME_REGEX = /^[A-Z_a-z][A-Za-z_0-9]*$/
+  VALID_ROMAN_NAME_REGEX = /^[A-Z_\-a-z][A-Za-z_\-0-9]*$/
   
   has_many :promotions
 

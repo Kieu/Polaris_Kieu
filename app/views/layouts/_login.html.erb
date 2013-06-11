@@ -22,22 +22,21 @@ $(document).ready(function () {
 </script>
 <div id="sidebar">
   <div class="loginbox">
-    <p class="title">ログイン</p>
+    <p class="title"><%= I18n.t("layout.login")%></p>
 
     <form action="/sessions" method="post">
-      <label><span class="bold">メールアドレス</span><br/>
+      <label><span class="bold"><%= I18n.t("login.email")%></span><br/>
         <input type="text" name="session[email]" id="email" class="input-text" maxlength="255" tabindex="1"/></label>
       <br/>
 
-      <p class="bold">言語選択</p>
+      <p class="bold"><%= I18n.t("login.choose_lang.label")%></p>
       <select name="language" tabindex="2">
-        <option value="ja">日本語　</option>
-        <option value="en">英語　　</option>
+        <option value="ja"><%= I18n.t("login.choose_lang.ja")%>　</option>
+        <option value="en"><%= I18n.t("login.choose_lang.en")%>　</option>
       </select><br/>
-      <label><span class="bold">パスワード</span><br/>
+      <label><span class="bold"><%= I18n.t("login.pw")%></span><br/>
         <input type="password" name="session[password]" id="password" class="input-text" maxlength="255" tabindex="3"/></label>
-
-      <input type="image" id="btn_submit" src="/assets/btn_login.gif">
+      <input type="image" id="btn_submit" src="/assets/btn_login.gif" tabindex="4">
       <% if @errors && @errors.count > 0 %>
           <% @errors.each do |error| %>
               <p class="error"><%= error %> </p>
@@ -46,7 +45,7 @@ $(document).ready(function () {
 
     </form>
 
-    <div class="accordion01 ta-c clearfix"><p tabindex="4" id="passwd" class="arrow1">パスワードを忘れた場合はこちら</p></div>
+    <div class="accordion01 ta-c clearfix"><p tabindex="5" id="passwd" class="arrow1"><%= I18n.t("login.forgor_pw")%></p></div>
 
 
   </div>
@@ -56,13 +55,13 @@ $(document).ready(function () {
   <% else %>
   <div id="accordion01_inner" class="loginbox_more" style="display:none">
   <% end %>
-    <p class="account_txt01">アカウント発行時のメールアドレスと、表示されている認証文字を入力してください。<br/>パスワードを発行し、ご案内さし上げます。</p>
+    <p class="account_txt01"><%= I18n.t("login.notice")%>
 
     <div class="span6 offset3">
       <%= form_tag(resend_password_sessions_path, method: :post) do %>
-          <%= label_tag "Email" %>
-          <%= text_field_tag "email", nil, maxlength: 255, style: "width: 200px" %>
-          <%= label_tag "Captcha" %>
+          <%= label_tag I18n.t("login.email") %>
+          <%= text_field_tag I18n.t("login.email"), nil, maxlength: 255, style: "width: 200px" %><br>
+          <%= label_tag I18n.t("login.captcha") %>
           <%= recaptcha_tags %>
           <input type="image" id="Send" src="/assets/btn_submit.gif">
       <% end %>
