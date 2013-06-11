@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   has_secure_password
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]{2,}+\z/i
-  VALID_ROMAN_NAME_REGEX = /^[A-Z_a-z][A-Za-z_0-9]*$/
+  VALID_ROMAN_NAME_REGEX = /^[A-Z_\-a-z][A-Za-z_\-0-9]*$/
 
   attr_accessible :username, :roman_name, :email, :company_id, :role_id,
     :password_flg, :language

@@ -1,4 +1,8 @@
 ja:
+  hello: "Hello world"
+  recaptcha:
+    errors:
+      incorrect-captcha-sol: "間違ったcaptchaの"
   promotions:
     new:
       category: ["IT/メディア/アプリ", "AV/家電", "食品/飲料/消費材", "流通/小売/通販", "金融", "通信", "不動産", "人材", "自動車", "サービス", "その他"]
@@ -516,12 +520,15 @@ ja:
     privacy_policy: "プライバシーポリシー"
     porporate_information: "企業情報"
   login:
-    email: "Email address"
+    email: "メールアドレス"
     pw: "パスワード"
-    choose_lang: "Choose Language"
+    choose_lang:
+      label: "言語選択"
+      ja: "日本語"
+      en: "英語"
     forgor_pw: "PWを忘れた場合の画面"
     announcements: "お知らせ"
-    captcha: "Captcha"
+    captcha: "キャプチャ"
     notice: "アカウント発行時のメールアドレスと、表示されている認証文字を入力してください。パスワードを発行し、ご案内さし上げます。"
   client:
     crumb_edit: "クライアント編集"

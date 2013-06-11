@@ -1,6 +1,6 @@
 class Account < ActiveRecord::Base
   VALID_NUMBER_REGEX = /^\d+$/
-  VALID_ROMAN_NAME_REGEX = /^[A-Z_a-z][A-Za-z_0-9]*$/
+  VALID_ROMAN_NAME_REGEX = /^[A-Z_\-a-z][A-Za-z_\-0-9]*$/
   
   attr_accessible :cost, :create_user_id, :media_id, :promotion_id, :account_name, :roman_name,
                   :sync_account_id, :sync_account_pw, :sync_flg, :update_user_id, :media_category_id

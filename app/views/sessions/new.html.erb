@@ -9,7 +9,7 @@
 <% else %>
     <div id="infobox">
       <div class="infoboxHeadtxt">
-        <p class="bold">お知らせ</p>
+        <p class="bold"><%= I18n.t("login.announcements")%></p>
       </div>
       <% @feed.entries.each do |entry| %>
           <ul>
