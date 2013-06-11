@@ -1,4 +1,3 @@
-<% if @array_promotion.count > 0 %>
 <% content_for :sidebar do %>
 	<%= render partial: "layouts/sidebar", locals: {object: @array_promotion} %>
 <% end %>
@@ -7,6 +6,7 @@
 <%= stylesheet_link_tag "css/colorbox" %>
 
 <%= stylesheet_link_tag "css/box_inner_promotion" %>
+<% if @array_promotion.count > 0 %>
 <ul class="contentNavi">
 	<li class="pre"><a href="javascript:void(0)" onclick="ajaxCommon('/clients?client_id=<%=@client_id%>', '#<%= @client_id %>', '.client_name', '','#inner,#sidebar')"><%= @client_name %></a></li>
 	<li>&gt;</li>
@@ -15,14 +15,14 @@
 
 <div class="date">今日<br />
 <div id="datepicker">
-<%= Date.today.at_beginning_of_month.strftime("%Y/%m/%d").to_s %>~<%= Date.today.strftime("%Y/%m/%d").to_s %>&#9660;</div>
+<%= @start_date %>~<%= @end_date %>&#9660;</div>
 </div>
 <div class="clear"></div>
 <div id="graph">
 	<ul class="btn_details" id="">
 		<li> <a href="#"><img src="/assets/btn_use.gif" alt="" class="btn" width="120" height="35" /></a>
 			<ul>
-				<li> <a href="#">掲載結果</a>
+				<li> <a href="">掲載結果</a>
 					<ul>
 						<li><a href="javascript:void(0)" class="metric_click_left">imp</a></li>
 						<li><a href="javascript:void(0)" class="metric_click_left">click</a></li>
@@ -32,14 +32,17 @@
 						<li><a href="javascript:void(0)" class="metric_click_left">CPC</a></li>
 					</ul>
 				</li>
-				<li><a href="#">成果</a>
+				<li><a href="javascript:void(0)">成果</a>
 					<ul>
-						<li><a href="#">CV</a></li>
-						<li><a href="#">CV(初回)</a></li>
-						<li><a href="#">CV(リピート)</a></li>
-						<li><a href="#">CVR</a></li>
-						<li><a href="#">CPA</a></li>
-						<li><a href="#">ASSIST</a> </li>
+						<% @conversions.each do |conversion| %>
+							<li><a href="javascript:void(0)"><%= conversion.conversion_name %></a>
+								<ul>
+									<% Settings.conversions_graph.each do |option| %>
+										<li><a href="javascript:void(0)" class="result_click_left" id="conversion_left_<%= conversion.id %>"><%= option %></a></li>
+									<% end %>
+								</ul>
+							<li>
+						<% end %>
 					</ul>
 				</li>
 			</ul>
@@ -59,14 +62,17 @@
 						<li><a href="javascript:void(0)" class="metric_click_right">CPC</a></li>
 					</ul>
 				</li>
-				<li><a href="#">成果</a>
+				<li><a href="javascript:void(0)">成果</a>
 					<ul>
-						<li><a href="#">CV</a></li>
-						<li><a href="#">CV(初回)</a></li>
-						<li><a href="#">CV(リピート)</a></li>
-						<li><a href="#">CVR</a></li>
-						<li><a href="#">CPA</a></li>
-						<li><a href="#">ASSIST</a> </li>
+						<% @conversions.each do |conversion| %>
+							<li><a href="javascript:void(0)"><%= conversion.conversion_name %></a>
+								<ul>
+									<% Settings.conversions_graph.each do |option| %>
+										<li><a href="javascript:void(0)" class="result_click_right" id="conversion_right_<%= conversion.id %>"><%= option %></a></li>
+									<% end %>
+								</ul>
+							<li>
+						<% end %>
 					</ul>
 				</li>
 			</ul>
@@ -86,81 +92,9 @@
     <div><%= flash[:error] %></div>
 <% end %>
 <p class="p-blue category_Dashboard">ダッシュボード</p>
-<table width="100%" border="1" bordercolor="#b5b5b5" cellpadding="0" class="promotion_table" id="promotion_table">
-<tr>
-	<td rowspan="3" class="table_header">Media</td>
-	<td rowspan="3" class="table_header">Account</td>
-	<% Settings.promotions_options.each_with_index do |option, index|%>
-		<%= content_tag(:td, option, rowspan: "3", class: "table_header") if cookies[:promotion][index] == "1" %>
-	<% end %>
-	<% @conversions.each do |conversion|%>
-		<% colspan = cal_col_cv(conversion.id) %>
-		<%= content_tag(:td, conversion.conversion_name, colspan: colspan, class: "table_header") if colspan > 0 %>
-	<% end %>
-</tr>
-<tr>
-	<% @conversions.each_with_index do |conversion, index|%>
-		<% colspan = cal_cv(conversion.id) %>
-		<%= content_tag(:td, "CV#{index}", colspan: colspan, class: "table_header") if colspan > 0 %>
-		<% Settings.conversions_options.each_with_index do |option, index1|%>
-			<% break if index1 == 7 %>
-			<%= content_tag(:td, Settings.conversions_options[index1+3], rowspan: "2", class: "table_header") if colspan > 0 && cookies[("conversion" + conversion.id.to_s).to_sym][index1+3] == "1"%>
-		<% end %>
-	<% end %>
-</tr>
-<tr>
-	<% @conversions.each do |conversion|%>
-		<% colspan = cal_cv(conversion.id) %>
-		<% Settings.conversions_options.each_with_index do |option, index1|%>
-			<% break if index1 == 3 %>
-			<%= content_tag(:td, Settings.conversions_options[index1], class: "table_header") if colspan > 0 && cookies[("conversion" + conversion.id.to_s).to_sym][index1] == "1"%>
-		<% end %>
-	<% end %>
-</tr>
-<tr>
-	<td class="header_total"></td>
-	<td class="header_total"></td>
-	<% Settings.promotions_options.each_with_index do |option, index|%>
-		<%= content_tag(:td, @promotion_results[option+"_total"], class: "header_total") if cookies[:promotion][index] == "1" %>
-	<% end %>
-	<% @conversions.each do |conversion|%>
-		<% Settings.conversions_options.each_with_index do |option, index|%>
-			<%= content_tag(:td, @conversions_results["conversion"+conversion.id.to_s+"_"+ option+"_total"], class: "header_total") if cookies[("conversion" + conversion.id.to_s).to_sym][index] == "1"%>
-		<% end %>
-	<% end %>
-</tr>
-<% Settings.media_category.each do |category| %>
-	<tr>
-    	<td class="category_header"><%= category[1] %></td>
-		<td class="category_header">total</td>
-		<% Settings.promotions_options.each_with_index do |option, index|%>
-			<%= content_tag(:td, @promotion_results[category[1]+"_"+option+"_total"], class: "category_header") if cookies[:promotion][index] == "1" %>
-		<% end %>
-		<% @conversions.each do |conversion|%>
-			<% Settings.conversions_options.each_with_index do |option, index|%>
-				<%= content_tag(:td, @conversions_results[category[1]+"_conversion"+conversion.id.to_s+"_"+option], class: "category_header") if cookies[("conversion" + conversion.id.to_s).to_sym][index] == "1"%>
-			<% end %>
-		<% end %>
-	</tr>
-    <% Media.where(media_category_id: category[0].to_s).each_with_index do |media, index| %>
-		<% break if index == "10" %>
-		<% media.accounts.each_with_index do |account, index1| %>
-		<tr>
-			<%= content_tag(:td, media.media_name, rowspan: media.accounts.count) if index1 == 0 %>
-            <td><%= account.account_name %></td>
-            <% Settings.promotions_options.each_with_index do |option, index2|%>
-				<%= content_tag(:td, @promotion_results[account.account_name+"_"+option]) if cookies[:promotion][index2] == "1" %>
-			<% end %>
-			<% @conversions.each do |conversion|%>
-				<% Settings.conversions_options.each_with_index do |option, index2|%>
-					<%= content_tag(:td, @conversions_results[account.account_name+"_conversion"+conversion.id.to_s+"_"+option]) if cookies[("conversion" + conversion.id.to_s).to_sym][index2] == "1"%>
-				<% end %>
-			<% end %>
-        </tr>
-        <% end %>
-    <% end %>
-<% end %>
-</table>
+<div id="promotion_tables">
+	<%= render template: "promotions/promotion_table" %>
+</div>
 <br/>
 <br/>
 <div id="popup" style="display: none">
@@ -248,6 +182,51 @@
     })
 
     $(function() {
+    	
+    	var tab = {
+	        init: function(){
+	            var tabs = this.setup.tabs;
+	            var pages = this.setup.pages;
+	
+	            for(i=0; i<pages.length; i++) {
+	                if(i !== 0) pages[i].style.display = 'none';
+	                tabs[i].onclick = function(){ tab.showpage(this); return false; };
+	            }
+	        },
+
+	        showpage: function(obj){
+				var tabs = this.setup.tabs;
+	            var pages = this.setup.pages;
+	            var num;
+	
+	            for(num=0; num<tabs.length; num++) {
+	                if(tabs[num] === obj) break;
+	            }
+	
+	            for(var i=0; i<pages.length; i++) {
+	                if(i == num) {
+	                    pages[num].style.display = 'block';
+	                    tabs[num].className = 'present';
+	                }
+	                else{
+	                    pages[i].style.display = 'none';
+	                    tabs[i].className = null;
+	                }
+	            }
+	        }
+    	}
+    // <![CDATA[
+    	pages = [];
+		<% @conversions.each_with_index do |conversion, index| %>
+			pages.push(document.getElementById('page' + "<%= index+1 %>"))
+		<% end %>
+    	tab.setup = {
+        	tabs: document.getElementById('tab').getElementsByTagName('li'),
+
+        	pages: pages
+    		} //オブジェクトをセット
+    	tab.init(); //起動！
+    	default_list_options = $("#list_options").html();
         $("#show_option").click(function(){
             $.colorbox({
                 width: "725",
@@ -258,14 +237,14 @@
                 height:"525"
             });
         })
-        cookies_options = $.cookie("promotion");
-        array_conversions = new Array();
+        cookies_options = $.cookie("promotion");        
         cookies_conversions = new Object();
         <% @conversions.each do |conversion| %>
-	        cookies_conversions = {key: "<%= conversion.id %>", value: $.cookie("conversion<%= conversion.id %>")};
-	        array_conversions.push(cookies_conversions);
+	        cookies_conversions["<%= conversion.id %>"] = $.cookie("conversion<%= conversion.id %>");
         <% end %>
-        console.log(array_conversions);
+        start_date = "<%= @start_date %>";
+        end_date = "<%= @end_date %>";
+        
         update_cookie_promotion = function(data){
             options = cookies_options.split("");
             options[data] = (options[data] == "1") ? "0" : "1";
@@ -273,67 +252,37 @@
             cookies_options = options;
         }
         update_cookie = function(data, pos){
-            position = 0;
-            for(var i=0;i<array_conversions.length;i++){
-                if (parseInt(array_conversions[i].key) == pos){
-                    options = array_conversions[i].value.split("");
-                    position = i;
-                    break;
-                };
-            }
+            options = cookies_conversions[pos].split("");
             options[data] = (options[data] == "1") ? "0" : "1";
             options = options.join("");
-            array_conversions[position].value = options;
+            cookies_conversions[pos] = options;
         }
-        $("#change_cookie").click(function(){
-            $.cookie("promotion",cookies_options);
+        $(document).on('click', "#change_cookie", function(){
+        	$.cookie("promotion",cookies_options);
             <% @conversions.each do |conversion| %>
-            $.cookie("conversion<%= conversion.id %>", array_conversions)
-            array_conversions.push(cookies_conversions);
-            for(var i=0;i<array_conversions.length;i++){
-                if (array_conversions[i].key == "<%= conversion.id %>"){
-                    $.cookie("conversion<%= conversion.id %>", array_conversions[i].value)
-                    break;
-                };
-            }
+	            $.cookie("conversion<%= conversion.id %>", cookies_conversions["<%= conversion.id %>"]);
             <% end %>
-            //ajaxCommon("/promotions?client_id=<%= @client_id %>&promotion_id=<%= @promotion_id %>", "#<%= @promotion_id %>", ".promotion_name", "#promotion_name","#inner");
-            //$('#list_options').colorbox.close();
-            location.href = location.href;
+            $.ajax({
+				url: "<%= promotion_table_promotions_path %>",
+                type: "GET",
+                dataType: "html",
+                data: "client_id=" + "<%= @client_id %>" + "&promotion_id=" + "<%= @promotion_id %>" + "&start_date=" + start_date + "&end_date=" + end_date,
+                success: function(html){
+					$("#promotion_tables").html(html);
+	            }
+			})
+			default_list_options = $("#list_options").html();
+			$('#list_options').colorbox.close();
         });
-        $("#not_change_cookie").click(function(){
-            cookies_options = $.cookie("promotion");
+        $(document).on('click', "#not_change_cookie", function(){
+            cookies_options = $.cookie("promotion");        
+	        <% @conversions.each do |conversion| %>
+		        cookies_conversions["<%= conversion.id %>"] = $.cookie("conversion<%= conversion.id %>");
+	        <% end %>
             $('#list_options').colorbox.close();
+            $("#list_options").html(default_list_options);
         })
 		$(".btn_details").droppy();
-		var tab = {
-    		init: function(){
-    			var tabs = this.setup.tabs;
-    			var pages = this.setup.pages;
-				for(i=0; i<pages.length; i++) {
-					if(i !== 0) pages[i].style.display = 'none';
-					tabs[i].onclick = function(){ tab.showpage(this); return false; };
-    			}
-    		},
-			showpage: function(obj){
-    			var tabs = this.setup.tabs;
-    			var pages = this.setup.pages;
-    			var num;
-				for(num=0; num<tabs.length; num++) {
-    				if(tabs[num] === obj) break;
-    			}
-				for(var i=0; i<pages.length; i++) {
-					if(i == num) {
-						pages[num].style.display = 'block';
-						tabs[num].className = 'present';
-					}
-					else{
-    					pages[i].style.display = 'none';
-    					tabs[i].className = null;
-    				}
-    			}
-    		}
-    	}
     	$('div.check-group input').each(function(){
 		if ($(this).attr('checked') == 'checked') {
 			$(this).next().addClass('checked');
@@ -341,8 +290,7 @@
 		}
 	});
 	//クリックした要素にクラス割り当てる
-	$('div.check-group label').click(function(){
-		
+	$(document).on('click', "div.check-group label", function(){
 		if ($(this).prev('input').attr('checked')=="checked"){
 			$(this)
 				.removeClass('checked')
@@ -359,6 +307,14 @@
 		data["<%= option %>"] = [];
     	<% @promotion_data[option].each do |data| %>
 			data["<%= option %>"].push(parseInt("<%= data%>"));
+		<% end %>
+	<% end %>
+	<% @conversions.each do |conversion| %>
+		<% Settings.conversions_graph.each do |option| %>
+			data["<%= conversion.id %>" + "_" + "<%= option %>"] = [];
+			<% @promotion_data[conversion.id.to_s + "_" + option].each do |data| %>
+				data["<%= conversion.id %>" + "_" + "<%= option %>"].push(parseInt("<%= data%>"));
+			<% end %>
 		<% end %>
 	<% end %>
 	/* Get data*/
@@ -378,6 +334,15 @@
     	draw_chart(data[left], data[right], left,right, categories)
     });
     
+    $(".result_click_left").click(function(){
+    	left = $(this).attr("id").split("_")[2] + "_" + $(this).text();
+    	draw_chart(data[left], data[right], left,right, categories)
+    });
+    $(".result_click_right").click(function(){
+    	right = $(this).attr("id").split("_")[2] + "_" + $(this).text();
+    	draw_chart(data[left], data[right], left,right, categories)
+    });
+    
     function formatDate(year, month, day){
 		 if (year < 2000) { year = parseInt(year) + 1900; }
 		 if (month.length == 1) { month = "0" + parseInt(month); }
@@ -389,31 +354,40 @@
 		lang: $('#lang').val(),
             onDone: function() {
                 var term = $('#datepicker').val();
-                
                 var d = term.split(' - ');
-                start_date = d[0].split("/");
-                start_date = formatDate(start_date[0],start_date[1],start_date[2]);
-                end_date = d[1].split("/");
-                end_date = formatDate(end_date[0],end_date[1],end_date[2]);
+                start_date = d[0];
+                end_date = d[1];
                 $.ajax({
-                	url: "<%= promotions_path %>",
-                	method: "GET",
-                	dataType: "html",
+                	url: "<%= change_data_promotions_path %>",
+                	type: "POST",
+                	dataType: "json",
                 	data: "client_id=" + "<%= @client_id %>" + "&promotion_id=" + "<%= @promotion_id %>" + "&start_date=" + start_date + "&end_date=" + end_date,
-                	success: function(data){
-                		array_inner = "#sample-chart,#promotion_table";
-                		array_inner = array_inner.split(",");
-                		for (i=0;i<array_inner.length;i++){
-	            		var inner_data = $(data).find(array_inner[i]);
-	            		$(array_inner[i]).html(inner_data.children());
-	            		}
-	            		draw_chart(data[left], data[right], left, right, categories);
+                	success: function(all_data){
+						<% Settings.promotions_options.each do |option| %>
+							data["<%= option %>"] = all_data["promotion_data"]["<%= option %>"];
+						<% end %>
+						<% @conversions.each do |conversion| %>
+							<% Settings.conversions_graph.each do |option| %>
+								data["<%= conversion.id %>" + "_" + "<%= option %>"] = all_data["promotion_data"]["<%= conversion.id%>"+"_"+"<%= option %>"];
+							<% end %>
+						<% end %>
+						categories = all_data["array_category"];
+						draw_chart(data[left], data[right], left, right, categories);
 	            	}
 				})
+				
+				$.ajax({
+                	url: "<%= promotion_table_promotions_path %>",
+                	type: "GET",
+                	dataType: "html",
+                	data: "client_id=" + "<%= @client_id %>" + "&promotion_id=" + "<%= @promotion_id %>" + "&start_date=" + start_date + "&end_date=" + end_date,
+                	success: function(html){
+						$("#promotion_tables").html(html);
+	            	}
+				})
+				$("#datepicker").text(start_date + "~" + end_date + "▼");
 			}
         });
-    
-
     });
 </script>
 <% else %>

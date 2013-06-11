@@ -157,7 +157,7 @@ table.user_add tbody td {
 	/*position: absolute;を記述する*/
 	.f_box {
 		position: relative;
-		display: none;/* ライトボックス表示するコンテンツは消しておきます */
+
 		width: 725px;/* 隠しコンテンツの横幅 */
 		 height: 630px;/* 隠しコンテンツの高さ */
 		background-color:#efefef;
@@ -169,15 +169,16 @@ table.user_add tbody td {
 	.f_box2 {
     background-color: #EFEFEF;
     color: #404040;
-    display: none;
     font-size: 14px;
     font-weight: bold;
     height: 650px;
     position: relative;
     text-decoration: none;
     width: 515px;
-	}	
-	
+	}
+.f_box, img {
+    float: right;
+}
 	
 .f_box a:link { color: #404040; }
 .f_box a:visited { color: #404040; }

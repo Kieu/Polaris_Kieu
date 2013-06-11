@@ -5,93 +5,30 @@
 <% if flash[:error] %>
 	<div><%= flash[:error] %></div>
 <% end %>
-
-<div id="popup" style="display: none">
-	<div id="list_options" style="width: 400px;">
-		<div id="result_list">
-            <p class="box3_txt">全て追加する </p>
-            <!-- チェックボックス -->
-            <div class="check-group clearfix">
-			<ul>
-
-				<li>
-				<%= link_to "Show All", "javascript:void(0)", onclick: "update_cookies()"%>
-				</li>
-				<li>
-					<p class="check_txt">Click Time</p>
-					<div><%= link_to cookies[:coptions][0] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('0',this)"%></div>
-				</li>
-				<li>
-					<p class="check_txt">Media Name</p>
-					<div><%= link_to cookies[:coptions][1] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('1',this)"%></div>
-				</li>
-				<li>
-					<p class="check_txt">Account name</p>
-					<div><%= link_to cookies[:coptions][2] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('2',this)"%></div>
-				</li>
-				<li>
-					<p class="check_txt">Campaign Name</p>
-					<div><%= link_to cookies[:coptions][3] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('3',this)"%></div>
-				</li>
-				<li>
-					<p class="check_txt">Ad Group Name</p>
-					<div><%= link_to cookies[:coptions][4] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('4',this)"%></div>
-				</li>
-				<li>
-					<p class="check_txt">Ad Name</p>
-					<div><%= link_to cookies[:coptions][5] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('5',this)"%></div>
-				</li>
-				<li>
-					<p class="check_txt">URL</p>
-					<div><%= link_to cookies[:coptions][6] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('6',this)"%></div>
-				</li>
-				<li>
-					<p class="check_txt">SESID</p>
-					<div><%= link_to cookies[:coptions][7] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('7',this)"%></div>
-				</li>
-				<li>
-					<p class="check_txt">OS</p>
-					<div><%= link_to cookies[:coptions][8] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('8',this)"%></div>
-				</li>
-				<li>
-					<p class="check_txt">OK/NG</p>
-					<div><%= link_to cookies[:coptions][9] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('9',this)"%></div>
-				</li>
-				<li>
-					<p class="check_txt">Error Message</p>
-					<div><%= link_to cookies[:coptions][10] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('10',this)"%></div>
-				</li>
-				<li>
-					<p class="check_txt">Show data from Error table</p>
-					<div><input type="checkbox" name="error_table" id="error_table" checked="checked"></div>
-				</li>
-			</ul>
-            </div>
-          </div>
-		<button id="change_cookie"><img src="/assets/btn_done.gif" alt="完成"></button>
-		<button id="not_change_cookie"><img src="/assets/btn_cancel.gif" alt="完成"></button>
-	</div>
-</div>
+<% content_for :sidebar do %>
+    <%= render partial: "layouts/sidebar", locals: {object: @promotions} %>
+<% end %>
+<%= render partial: "layouts/option_log_page" %>
 
 <ul class="contentNavi">
-	<li class="pre"><%= link_to @promotion.client.client_name, clients_path(id: @promotion.client.id) %> </li>
+	<li class="pre"><%= link_to @promotion.client.client_name, clients_path(client_id: @promotion.client.id) %> </li>
 	<li>&gt;</li>
-	<li><%= link_to @promotion.promotion_name, promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %></li>
+	<li><%= link_to @promotion.promotion_name, promotions_path(promotion_id: @promotion.id) %></li>
 	<li>&gt;</li>
-	<li>本体プロモーション</li>
+	<li><%= I18n.t("log.crumb_click")%></li>
 </ul>
 <div class="area_block">
 	<div class="selectarea">
 		<ul>
-			<li> メディアカテゴリ
-				<%= select_tag 'media_category_id', "<option value = "">All</option><option value = 0 >Listing ad</option><option value = 1 >Display ad</option><option value = 2 >Affiliate</option>".html_safe, class: "input-text" %>
+			<li> <%= I18n.t("log.media_category")%>
+				<%= select_tag 'media_category_id', "<option value = "">All</option><option value = 1 >Listing ad</option><option value = 2 >Display ad</option><option value = 3 >Affiliate</option>".html_safe, class: "input-text" %>
 			</li>
-			<li> アカウント名
-				<%= select_tag 'account_id', content_tag(:option,'All',:value=>"")+options_from_collection_for_select(Account.where(promotion_id: params[:id]).order(:account_name), 'id', 'account_name'), class: "input-text" %> <br>
+			<li> <%= I18n.t("log.account_name")%>
+				<%= select_tag 'account_id', content_tag(:option,'All',:value=>"")+options_from_collection_for_select(Account.where(promotion_id: params[:promotion_id]).order(:account_name), 'id', 'account_name'), class: "input-text" %> <br>
 			</li>
 		</ul>
 	</div>
-	<div class="date">今日<br />
+	<div class="date"><%= I18n.t("log.today_text")%><br />
 		<input id="datepick" type="text" readonly="readonly" value="<%= cookies[:cs] + " - " + cookies[:ce] %>" name="datepick">&#9660;</div>
 </div>
 <div class="clear"></div>
@@ -104,7 +41,7 @@
 			<% end %>
 		</li>
 		<li class="ui-tabs-selected">
-			<%= link_to(click_logs_path(id: @promotion.id)) do %>
+			<%= link_to(click_logs_path(promotion_id: @promotion.id)) do %>
 			  <span>clickログ</span>
 			<% end %>
 		</li>
@@ -115,7 +52,7 @@
 		<div id="fragment-2" class="ui-tabs-panel">
 			<div id="graph">
 				<div class="fl-r">
-					<p><a id = "show_option"><img src="/assets/btn_dl_option.gif"  /></a></p>
+					<p><a class="inline_logs" href="#inline_logs"><img src="/assets/btn_dl_option.gif"  /></a></p>
 					<p><a id="download_csv"><img src="/assets/btn_dl_report.gif"  /></a></p>
 				</div>
 			</div>
@@ -190,7 +127,7 @@
 			rp: 10,
 			resizable : false,
 			optionGet : "5",
-			query: <%=params[:id]%>, 
+			query: <%=params[:promotion_id]%>,
 			showTableToggleBtn: true,
 			height: 200,
 			onSuccess: function() {
@@ -249,27 +186,14 @@
 		$("#account_id").change(function(){
 			reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?cid=" + $("#media_category_id").val() + "&account_id=" + $(this).val());
 		});
-		
-		
-		
-	
-	
+
 	//$('tr#row-g1 td:nth-child('+(11+'n-'+(11))+')').remove();
 	//$('tr#row-g1').append("<td colspan='11'>aaaaa</td>";
 	$('tr#row-g1 td:nth-child('+(1+'n-'+(11))+')').remove();
 	$('tr#row-g1').append("<td colspan='11'>aaaaa</td>");
 	var colums = ["click_utime", "media_id", "account_id", "campaign_id", "ad_group_id", "ad_id", "redirect_url", "session_id", "device_category", "state", "error_code"]
 	
-	$("#show_option").click(function(){
-		$.colorbox({
-			width: "50%",
-			height: "70%",
-			inline: true,
-			escKey: false,
-			overlayClose: false,
-			href: "#list_options"
-		});
-	})
+
 	cookies_options = $.cookie("coptions");
 	update_cookie = function(data,ele){
 		options = cookies_options.split("");

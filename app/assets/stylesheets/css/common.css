@@ -170,6 +170,9 @@ p.h2{
     max-height: 315px;
     overflow: hidden;
 }
+table.sidebar tbody td a.active {
+    text-decoration: underline !important;
+}
 #clienetlist_box dl {
     padding: 10px;
 }
@@ -284,6 +287,71 @@ table.sidebar tbody td {
 #copyright p{
 	display: inline;
 	vertical-align: top;
+}
+
+.entrydate_box {
+    clear: both;
+    left: 9px;
+    position: absolute;
+    top: 35px;
+    overflow: hidden;
+    height: 300px;
+}
+.entrydate_table {
+    float: left;
+    font-size: 11px;
+    font-weight: normal;
+    margin: 5px 0 0 5px;
+    width: 500px;
+}
+.file_name {
+    text-align: left;
+    width: 230px;
+}
+.capacity {
+    text-align: left;
+    width: 90px;
+}
+.daily {
+    text-align: left;
+    width: 90px;
+}
+
+.c_orange {
+    color: #E76813;
+    font-weight: bold;
+    text-align: right;
+    width: 100px;
+}
+.c_blue {
+    color: #0087A9;
+    font-weight: bold;
+    text-align: right;
+    width: 100px;
+}
+.c_black {
+    color: #000000;
+    font-weight: bold;
+    text-align: right;
+    width: 100px;
+}
+.entrydate_box li {
+    background-color: white;
+    border: 1px solid;
+    clear: both;
+    height: 50px;
+    margin: 10px 0 0;
+    width: 615px;
+}
+.btn_cancel {
+    float: right;
+    margin: 10px 5px 0 0;
+    width: 90px;
+}
+.btn_download {
+    float: right;
+    margin: 10px 5px 0 0;
+    width: 90px;
 }
 
 

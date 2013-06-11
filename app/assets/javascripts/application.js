@@ -13,6 +13,23 @@
 //= require jquery-1.8
 //= require jquery_ujs
 //= require_directory .
+$(function(){
+    $('#clients_list').slimScroll({
+        color: '#0087A9',
+        size: '8px',
+        alwaysVisible: false
+    });
+    $('#promotions_list').slimScroll({
+        color: '#0087A9',
+        size: '8px',
+        alwaysVisible: false
+    });
+    $('#conversions_list').slimScroll({
+        color: '#0087A9',
+        size: '8px',
+        alwaysVisible: false
+    });
+});
 var auto_refresh = setInterval(
     function ()
     {
@@ -82,7 +99,7 @@ function ajaxCommon(urlAction, id, current_active, cname,arr_inner) {
 			inline: true,
 			escKey: false,
 			overlayClose: false,
-			href: "#prevent_change",
+			href: "#prevent_change"
 		})
     }else{
     	var array_inner = arr_inner.split(',');
@@ -117,7 +134,6 @@ function reloadFlex1(obj, urlAction) {
     }).flexReload();
 }
 function draw_chart(data_left, data_right, left, right, categories){
-	console.log(data_left);
 	chart = new Highcharts.Chart({ // 以下、chartオブジェクトに渡す引数
 		chart: {
 			renderTo: 'sample-chart', // どの要素にグラフを描画するかを指定
@@ -163,14 +179,14 @@ function draw_chart(data_left, data_right, left, right, categories){
 				this.x +': '+ this.y +' 度';
 			}
 		},
-		series: [{ // データ系列を指定
-			name: left,
-			data: data_left,
-			color: "#FF1493"
-			},{
-			name: right,
-			data: data_right,
-			color: "#32CF32"
+		series: [{
+				name: left,
+				data: data_left,
+				color: "#32CF32"
+			},{ // データ系列を指定
+				name: right,
+				data: data_right,
+				color: "#FF1493"
 			}]
 		});
 }

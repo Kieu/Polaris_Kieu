@@ -7,39 +7,45 @@
         <%= render partial: "layouts/sidebar", locals: {object: @clients} %>
     <% end %>
     <p class="h2" id="client_name"><%= short_name(@client.client_name) %></p>
-    <table class="flexme4" class="newTable06 fixTable d-none" style="display: none"></table>
+    <% if current_user.super? %>
+        <img id='create_promotion' src="/assets/btn_promotion_regist.gif" onclick="create()" style="display: none">
+    <% end %>
+    <table class="newTable06 fixTable d-none" style="display: none"></table>
     <script type="text/javascript">
-        $(".flexme4").flexigrid({
-            url: "<%= get_promotions_list_clients_path %>",
+        $(".newTable06").flexigrid({
+            url: "<%= get_promotions_list_clients_path %>" + "?id=<%= @client.id if @client %>",
             dataType: 'json',
-            colModel : [
-                {display: 'promotion_name', name : 'promotion_name', width : 'auto', sortable : false, align: 'center'}
+            colModel: [
+                {display: 'promotion_name', name: 'promotion_name', width: 'auto', sortable: false, align: 'center'}
             ],
-            <% if current_user.super? %>
-            buttons : [
-                {name: 'Add', bclass: 'add', onpress : create},
-                {separator: true}
-            ],
-            <% end %>
             sortname: "promotion_name",
             sortorder: "desc",
             usepager: true,
             title: 'Promotion Name',
             useRp: true,
-            id: "<%= @client.id if @client %>",
             rp: 10,
             showTableToggleBtn: true,
-            resizable : false,
-
-            height: 300,
-            onSuccess: function() {
+            resizable: false,
+            optionGet: "1",
+            onSuccess: function () {
                 tableResize();
-            },
-            height: 250
+                checkrow();
+            }
         });
+        function checkrow(com, grid) {
+            var i = 0;
+            $('.newTable06 tr', grid).each(function () {
+                i++;
+            });
+            if (i == 0)
+                $('#create_promotion').css('display', '');
+            else
+                $('#create_promotion').css('display', 'none');
+
+        }
         function create() {
             var client_id = $('a[class="client_name active"]').attr('id');
-            ajaxCommon('<%= new_promotion_path(client_id: @client.id) %>?client_id='+client_id,'','','','#inner');
+            ajaxCommon('<%= new_promotion_path() %>?client_id=' + client_id, '', '', '', '#inner');
         }
     </script>
 <% else %>

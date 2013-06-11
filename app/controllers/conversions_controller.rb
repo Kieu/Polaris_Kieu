@@ -3,6 +3,7 @@ class ConversionsController < ApplicationController
   before_filter :must_super_agency
   before_filter :get_promotion, only: [:index, :new, :edit]
   before_filter :get_conversion, only: [:edit, :update]
+  before_filter :get_list_conversions
 
   def index
   end
@@ -45,5 +46,11 @@ class ConversionsController < ApplicationController
 
   def get_conversion
     @conversion = Conversion.find(params[:id])
+  end
+  
+  def get_list_conversions
+    @conversions = params[:promotion_id].blank? ? Array.new :
+      Conversion.get_by_promotion_id(params[:promotion_id])
+      .order_by_conversion_name
   end
 end

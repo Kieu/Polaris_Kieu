@@ -8,39 +8,46 @@ class DailySummaryAccConversion < ActiveRecord::Base
   belongs_to :conversion
   
   def self.get_conversions_summary promotion_id, start_date, end_date
-    conversions = Promotion.find(promotion_id).conversions
+    
     results = Hash.new
-    conversions.each_with_index do |conversion|
-      Settings.media_category.each do |category|
-        summary = DailySummaryAccConversion.where(conversion_id: conversion.id).where(report_ymd: (start_date)..(end_date))
-        Settings.conversions_sums.each_with_index do |sum, index|
-          results[category[1]+"_conversion" + conversion.id.to_s + "_" +
-            Settings.conversions_options[index]] = 0
-          Media.where(media_category_id: category[0].to_s)
-            .each_with_index do |media, index1|
-            media.accounts.each_with_index do |account, index2|
-              results[account.account_name + "_conversion" + conversion.id.to_s + 
-                "_" + Settings.conversions_options[index]] =
-                  summary.where(account_id: account.id).sum(sum)
-              results[category[1]+"_conversion" + conversion.id.to_s + "_" +
-                Settings.conversions_options[index]] +=
-                  results[account.account_name + "_conversion" +
-                    conversion.id.to_s + "_" + Settings.conversions_options[index]] 
-            end
-          end
-        end
+    total_data = DailySummaryAccConversion.where(promotion_id: promotion_id)
+      .group(:conversion_id).select("sum(total_cv_count) as total_cv_count")
+      .select("sum(first_cv_count) as first_cv_count")
+      .select("sum(repeat_cv_count) as repeat_cv_count")
+      .select("sum(conversion_rate) as conversion_rate")
+      .select("sum(click_per_action) as click_per_action")
+      .select("sum(assist_count) as assist_count")
+      .select("sum(sales) as sales")
+      .select("sum(roas) as roas")
+      .select("sum(profit) as profit")
+      .select("sum(roi) as roi")
+      .select(:conversion_id)
+      .where("DATE_FORMAT(daily_summary_acc_conversions.report_ymd, '%Y/%m/%d') between '#{start_date}' and '#{end_date}'")
+      
+    begin
+      connection.execute("DROP TEMPORARY TABLE IF EXISTS table2")
+      connection.execute("CREATE TEMPORARY TABLE table2 (SELECT account_id, media_category_id FROM daily_summary_accounts group by media_category_id, account_id)")
+      category_data = total_data.joins("left join table2 on table2.account_id = daily_summary_acc_conversions.account_id")
+        .select("table2.media_category_id")
+        .group("table2.media_category_id")
+      category_data.each do |data|
+        results[Settings.media_category[data.media_category_id]+ "_conversion" + data.conversion_id.to_s + "_total"] = data
       end
+    ensure
+      connection.execute("DROP TEMPORARY TABLE IF EXISTS table2")
     end
     
-    conversions.each_with_index do |conversion|
-      Settings.conversions_options.each_with_index do |option, index|
-        results["conversion"+conversion.id.to_s+"_"+ option+"_total"] = 0
-        Settings.media_category.each do |category|
-          results["conversion"+conversion.id.to_s+"_"+ option+"_total"] +=
-            results[category[1]+"_conversion"+conversion.id.to_s+"_" +option]
-        end
-      end
+    all_data = total_data.group(:account_id)
+      .select(:account_id)
+      
+    all_data.each do |data|
+      results["account"+data.account_id.to_s+"_conversion"+data.conversion_id.to_s] = data
     end
+    
+    total_data.each do |data|
+      results["total"+"_conversion"+data.conversion_id.to_s] = data
+    end
+    
     results
   end
 end

@@ -22,7 +22,7 @@ class UsersController < ApplicationController
       if @user.client?
         ClientUser.create(client_id: @user.company_id, user_id: @user.id)
       end
-      flash[:success] = "User was successfully created"
+      flash[:success] = I18n.t("user.flash_messages.success")
       if @user.password_flg == 0
         UserMailer.send_password(@user, @user.password).deliver
       end
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
     @user.attributes = params[:user]
     if @user.valid?
       @user.save!
-      flash[:success] = "Update successfull"
+      flash[:success] = I18n.t("user.flash_messages.update")
       redirect_to users_path
     else
       render :edit

@@ -1,25 +1,30 @@
 <%= stylesheet_link_tag "css/common" %>
 <%= stylesheet_link_tag "css/accounts" %>
-<%= link_to @promotion.client.client_name, clients_path %> > <%= link_to @promotion.promotion_name, promotions_path %> > Account Register
+<ul class="contentNavi">
+    <li class="pre"><%= link_to @promotion.client.client_name, clients_path %></li>
+    <li>&gt;</li>
+    <li class="pre"><%= link_to @promotion.promotion_name, promotions_path %></li>
+    <li>&gt;</li>
+    <li><%= I18n.t("account.crumb_add") %></li>
+</ul>
 <% if flash[:success] %>
     <div><%= flash[:success] %></div>
 <% end %>
-<p class="h2"><%= I18n.t("account.crumb_add") %></p>
+<div id="account_form">
 <%= form_for(@account) do |f| %>
+    <input type="hidden" name="account[promotion_id]" value="<%= params[:promotion_id]%>" />
     <div class="regist_form">
       <table class="account_info">
         <tr>
           <th> <%= f.label t("account.media_category") %></th>
-          <td><%= select_tag :media_category_id, "<option value = 0 >Listing ad</option><option value = 1 >Display ad</option><option value = 2 >Affiliate</option>".html_safe, class: "input-text" %></td>
+          <td><%= f.select :media_category_id,
+                         Settings.media_category.each_with_index.map {|name, index| [t(name[1]), index+1]}, class: "input-text" %>
+          </td>
         </tr>
         <tr>
           <th><%= f.label t("account.media") %></th>
           <td>
-            <select name="account[media_id]" id="media_id">
-              <option value=1>Google Adwords</option>
-              <option value=2>Yahoo sponsered search</option>
-              <option value=3>Others</option>
-            </select>
+            <%= select_tag 'account[media_id]', options_from_collection_for_select(@medias, 'id', 'media_name'), class: "input-select" %>
           </td>
         </tr>
         <tr>
@@ -35,19 +40,27 @@
           <td><%= f.text_field :cost, maxlength: 3, value: 100, style: "width: 50px" %> %</td>
         </tr>
         <tr>
-          <th><%= f.label t("account.sync_account_id") %></th>
-          <td><%= f.radio_button :sync_account_id, 0 %> <%= I18n.t("client.contract_type.unrecovered") %>
-            <%= f.radio_button :sync_account_id, 1 %> <%= I18n.t("client.contract_type.been_recovered") %></td>
-        </tr>
-        <tr>
-          <th></th>
-          <td>
-            <input type="text" name="name" id="id" value="Google＋31344938595@septeni.co.jp" class="input-text" disabled="disabled">
-          </td>
-        </tr>
-        <th></th>
-        <td><input type="text" name="name" id="pw" value="****************" class="input-text" disabled="disabled"></td>
-        </tr>
+        	<td colspan="2">
+        		<div id="account_sync_box">
+        			<table>
+        				<tr>
+				          <th><%= f.label t("account.sync_account_id") %></th>
+				          <td><%= f.radio_button :sync_flg, 1 , {checked: true} %> <%= I18n.t("client.contract_type.unrecovered") %>
+				            <%= f.radio_button :sync_flg, 0 %> <%= I18n.t("client.contract_type.been_recovered") %></td>
+				        </tr>
+				        <tr>
+				          <th></th>
+				          <td>
+				            <%= f.text_field :sync_account_id, maxlength: 255, style: "width: 250px", placeholder: " ID: " %>
+				          </td>
+				        </tr>
+				        <th></th>
+				        <td><%= f.text_field :sync_account_pw, maxlength: 255, style: "width: 250px", placeholder: " PW: " %></td>
+				        </tr>
+        			</table>
+        		</div>
+        	</td>
+        </tr> 
       </table>
       <div class="submit_area">
         <input type="image" id="btn_submit" src="/assets/btn_done.gif">
@@ -55,3 +68,85 @@
       </div>
       <input type="hidden" name="promotion_id" value="<%= @promotion.id %>">
 <% end %>
+
+<div id="sync_box_add" style="display: none">
+	<table>
+		<tr>
+          <th><label for="account_アカウントの同期"><%= t("account.sync_account_id") %></label></th>
+          <td><input type="radio" value="1" name="account[sync_flg]" id="account_sync_flg_1" checked="checked"> <%= I18n.t("client.contract_type.unrecovered") %>
+            <input type="radio" value="0" name="account[sync_flg]" id="account_sync_flg_0"> <%= I18n.t("client.contract_type.been_recovered") %></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td>
+            <input type="text" style="width: 250px" size="255" placeholder=" ID: " name="account[sync_account_id]" maxlength="255" id="account_sync_account_id">
+          </td>
+        </tr>
+        <tr>
+        	<th></th>
+        	<td><input type="text" style="width: 250px" size="255" placeholder=" PW: " name="account[sync_account_pw]" maxlength="255" id="account_sync_account_pw"></td>
+        </tr>
+	</table>
+</div>
+</div>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$("#account_sync_flg_0").click(function() {
+		if ($("#account_sync_flg_0").is(':checked')) {
+			$("#account_sync_account_id").attr('disabled','disabled');
+			$("#account_sync_account_pw").attr('disabled','disabled');
+		}	
+	});
+	$("#account_sync_flg_1").click(function() {
+		if ($("#account_sync_flg_1").is(':checked')) {
+			$("#account_sync_account_id").removeAttr('disabled');
+			$("#account_sync_account_pw").removeAttr('disabled');
+		}	
+	});
+	
+	$("#account_media_category_id").change(function(){
+		$.ajax({
+	        type: "POST",
+	        url: "<%= change_medias_list_accounts_path %>",
+	        data: "cid=" + $(this).val(),
+	        success: function (data) {
+	            $("#account_media_id").html("");
+	            for (var i = 0; i < data.length; i++) {
+	                option = "<option value='" + data[i].id + "'>" + data[i].media_name + "</option>";
+	                $("#account_media_id").append(option);
+	            }
+	        }
+	    });
+	    if ($(this).val() < 2) {
+	    	if ($("#account_sync_box").html() == "")
+	    		$("#account_sync_box").append($('#sync_box_add').html());
+	    } else {
+	    	$("#account_sync_box").html("");
+	    }
+	});
+	
+	$("#account_media_id").change(function() {
+		if ($(this).val() < 6) {
+	    	if ($("#account_sync_box").html() == "")
+	    		$("#account_sync_box").append($('#sync_box_add').html());
+	    } else {
+	    	$("#account_sync_box").html("");
+	    }
+	});
+	if ($("#account_media_category_id").val() < 2) {
+    	if ($("#account_sync_box").html() == "")
+    		$("#account_sync_box").append($('#sync_box_add').html());
+    } else {
+    	$("#account_sync_box").html("");
+    }
+    
+    if ($("#account_media_id").val() < 6) {
+    	if ($("#account_sync_box").html() == "")
+    		$("#account_sync_box").append($('#sync_box_add').html());
+    } else {
+    	$("#account_sync_box").html("");
+    }
+});
+
+	
+</script>

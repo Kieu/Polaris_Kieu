@@ -13,16 +13,15 @@
 <script type="text/javascript">
   $(document).ready(function(){
   	prevent = false;
-  	$('input#keywords').quicksearch('div#clients_list tr', {
-          "selector": "a.client_name"
-      });
-      $('input#keywords').quicksearch('div#promotions_list tr', {
-          "selector": "a.promotion_name"
-      });
-      $('input#keywords').quicksearch('div#conversions_list tr', {
-          "selector": "a.conversion_name"
-      });
-  	
+	$('input#keywords').quicksearch('div#clients_list tr', {
+    	"selector": "a.client_name"
+	});
+    $('input#keywords').quicksearch('div#promotions_list tr', {
+    	"selector": "a.promotion_name"
+	});
+    $('input#keywords').quicksearch('div#conversions_list tr', {
+    	"selector": "a.conversion_name"
+	});
   })
 </script>
 <div style="display:none" id="dvloader"><img src="/assets/ajax-loader.gif" /></div>

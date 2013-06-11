@@ -1,4 +1,8 @@
 ja:
+  hello: "Hello world"
+  recaptcha:
+    errors:
+      incorrect-captcha-sol: "間違ったcaptchaの"
   promotions:
     new:
       category: ["IT/メディア/アプリ", "AV/家電", "食品/飲料/消費材", "流通/小売/通販", "金融", "通信", "不動産", "人材", "自動車", "サービス", "その他"]
@@ -155,28 +159,28 @@ ja:
               wrong_length: ! '代理店名 %{count}文字で入力してください。'
               acceptance: 代理店名 チェックボックスを選択してください。
             roman_name: 
-              blank: "ユーザー名(英語) 入力してください。"
-              accepted: ユーザー名(英語) 受諾してください。 
-              confirmation: ユーザー名(英語) 確認の入力が一致しません。 
-              empty: ユーザー名(英語) 入力してください。
-              equal_to: ! 'Client name %{count}にしてください。 ' 
-              even: ユーザー名(英語) 偶数にしてください。
-              exclusion: ユーザー名(英語) 予約されています。
-              greater_than: ! 'ユーザー名(英語) %{count}より大きい値にしてください。'
-              greater_than_or_equal_to: ! 'ユーザー名(英語) %{count}以上の値にしてください。'
-              inclusion: ユーザー名(英語) 正しい値が選択されていません。
-              invalid: ユーザー名(英語) 正しく入力して下さい。
-              less_than: ! 'ユーザー名(英語) %{count}より小さい値にしてください。'
-              less_than_or_equal_to: ! 'Client name %{count}以下の値にしてください。'
-              not_a_number: ユーザー名(英語) 数値で入力してください。
-              not_an_integer: ユーザー名(英語) 整数で入力してください。
-              odd: ユーザー名(英語) 奇数にしてください。
-              record_invalid: ユーザー名(英語) バリデーションに失敗しました。 '%{errors}'
-              taken: ユーザー名(英語) すでに登録されています。
-              too_long: ! 'ユーザー名(英語) %{count}文字以内で入力してください。'
-              too_short: ! 'ユーザー名(英語) %{count}文字以上で入力してください。'
-              wrong_length: ! 'ユーザー名(英語) %{count}文字で入力してください。'
-              acceptance: ユーザー名(英語) チェックボックスを選択してください。
+              blank: "代理店名(英語) 入力してください。"
+              accepted: 代理店名(英語) 受諾してください。 
+              confirmation: 代理店名(英語) 確認の入力が一致しません。 
+              empty: 代理店名(英語) 入力してください。
+              equal_to: ! '代理店名 %{count}にしてください。 ' 
+              even: 代理店名(英語) 偶数にしてください。
+              exclusion: 代理店名(英語) 予約されています。
+              greater_than: ! '代理店名(英語) %{count}より大きい値にしてください。'
+              greater_than_or_equal_to: ! '代理店名(英語) %{count}以上の値にしてください。'
+              inclusion: 代理店名(英語) 正しい値が選択されていません。
+              invalid: 代理店名(英語) 正しく入力して下さい。
+              less_than: ! '代理店名(英語) %{count}より小さい値にしてください。'
+              less_than_or_equal_to: ! '代理店名 %{count}以下の値にしてください。'
+              not_a_number: 代理店名(英語) 数値で入力してください。
+              not_an_integer: 代理店名(英語) 整数で入力してください。
+              odd: 代理店名(英語) 奇数にしてください。
+              record_invalid: 代理店名(英語) バリデーションに失敗しました。 '%{errors}'
+              taken: 代理店名(英語) すでに登録されています。
+              too_long: ! '代理店名(英語) %{count}文字以内で入力してください。'
+              too_short: ! '代理店名(英語) %{count}文字以上で入力してください。'
+              wrong_length: ! '代理店名(英語) %{count}文字で入力してください。'
+              acceptance: 代理店名(英語) チェックボックスを選択してください。
         account:
           attributes:
             account_name:
@@ -294,6 +298,52 @@ ja:
               too_short: ! 'コスト計算 %{count}文字以上で入力してください。'
               wrong_length: ! 'コスト計算 %{count}文字で入力してください。'
               acceptance: コスト計算 チェックボックスを選択してください。
+            sync_account_id: 
+              blank: "Sync account ID can't be blank"
+              accepted: Sync account ID must be accepted 
+              confirmation: Sync account ID doesn't match confirmation 
+              empty: Sync account ID can't be empty
+              equal_to: ! 'Sync account ID must be equal to %{count} ' 
+              even: Sync account ID must be even
+              exclusion: Sync account ID is reserved
+              greater_than: ! 'Sync account ID must be greater than %{count}'
+              greater_than_or_equal_to: ! 'Sync account ID must be greater than or equal to %{count}'
+              inclusion: Sync account ID is not included in the list
+              invalid: Sync account ID is invalid
+              less_than: ! 'Sync account ID must be less than %{count}'
+              less_than_or_equal_to: ! 'Sync account ID must be less than or equal to %{count}'
+              not_a_number: Sync account ID is not a number
+              not_an_integer: Sync account ID is not a interger
+              odd: Sync account ID must be odd
+              record_invalid: Sync account ID バリデーションに失敗しました。 '%{errors}'
+              taken: Sync account ID すでに登録されています。
+              too_long: ! 'Sync account ID is too long (maximum is %{count} characters)'
+              too_short: ! 'Sync account ID is too short (minimum is %{count} characters)'
+              wrong_length: ! 'Sync account ID is the wrong length (should be %{count} characters)'
+              acceptance: Sync account ID must be accepted
+            sync_account_pw: 
+              blank: "Sync account password can't be blank"
+              accepted: Sync account password must be accepted 
+              confirmation: Sync account password doesn't match confirmation 
+              empty: Sync account password can't be empty
+              equal_to: ! 'Sync account password must be equal to %{count} ' 
+              even: Sync account password must be even
+              exclusion: Sync account password is reserved
+              greater_than: ! 'Sync account password must be greater than %{count}'
+              greater_than_or_equal_to: ! 'Sync account password must be greater than or equal to %{count}'
+              inclusion: Sync account password is not included in the list
+              invalid: Sync account password is invalid
+              less_than: ! 'Sync account password must be less than %{count}'
+              less_than_or_equal_to: ! 'Sync account password must be less than or equal to %{count}'
+              not_a_number: Sync account password is not a number
+              not_an_integer: Sync account password is not a interger
+              odd: Sync account password must be odd
+              record_invalid: Sync account password バリデーションに失敗しました。 '%{errors}'
+              taken: Sync account password すでに登録されています。
+              too_long: ! 'Sync account password is too long (maximum is %{count} characters)'
+              too_short: ! 'Sync account password is too short (minimum is %{count} characters)'
+              wrong_length: ! 'Sync account password is the wrong length (should be %{count} characters)'
+              acceptance: Sync account password must be accepted
         conversion:
           attributes:
             conversion_name:
@@ -470,12 +520,15 @@ ja:
     privacy_policy: "プライバシーポリシー"
     porporate_information: "企業情報"
   login:
-    email: "Email address"
+    email: "メールアドレス"
     pw: "パスワード"
-    choose_lang: "Choose Language"
+    choose_lang:
+      label: "言語選択"
+      ja: "日本語"
+      en: "英語"
     forgor_pw: "PWを忘れた場合の画面"
     announcements: "お知らせ"
-    captcha: "Captcha"
+    captcha: "キャプチャ"
     notice: "アカウント発行時のメールアドレスと、表示されている認証文字を入力してください。パスワードを発行し、ご案内さし上げます。"
   client:
     crumb_edit: "クライアント編集"
@@ -519,12 +572,13 @@ ja:
     roman_name: "アカウント名(英語)"
     cost: "コスト計算： 入力データ "
     sync_account_id: "アカウントの同期"
+    sync_account_pw: "Sync account PW"
     flash_messages:
       success: "アカウント登録が完了しました。"
       update: "アカウント編集が完了しました。"
   conversion:
-    crumb_add: "クライアント登録"
-    crumb_edit: "クライアント編集"
+    crumb_add: "コンバージョン登録"
+    crumb_edit: "コンバージョン編集"
     user_information: "ユーザー情報"
     delete: "削除"
     conversion_name: "コンバージョン名"
@@ -536,8 +590,8 @@ ja:
       combination: " 組み合わせ"
     deduplicated:
       label: "重複排除"
-      yes: "あり"
-      no: " なし"
+      label1: "あり"
+      label2: " なし"
     unique_definition: "ユニーク定義"
     option1:
       label: "<オプション①>　"
@@ -547,12 +601,17 @@ ja:
         not_configure: "設定しない"
       sale_unit_price: "売上単価"
     option2:
-      lable: "<オプション②>"
+      label: "<オプション②>"
       reward_format:
         label: "報酬型式"
         straight_line_type: "定額型"
         not_set: "設定しない"
+    combination:
+      pattern: "パターン: "
   log:
+    today_text: "今日"
+    crumb_click: "本体プロモーション"
+    crumb_cv_logs: "本体プロモーション"
     conversion_name: "コンバージョン名"
     media_category: "メディアカテゴリ"
     account_name: "アカウント名"
@@ -569,17 +628,22 @@ ja:
       success: "プロモーション登録が完了しました。"
       update: "プロモーション編集が完了しました。"
   user:
+    crumb_add: "ユーザー登録"
     crumb_edit: "ユーザー編集"
-    user_name: "ユーザー名"
+    username: "ユーザー名"
     roman_name: "ユーザー名(英語)"
     email: "メールアドレス"
-    role: "権限"
+    role:
+      label: "権限"
+      include_blank: "選択してください" 
     company_name: "会社名"
-    password: "パスワード"
+    password:
+      label: "パスワード: "
+      info: "※自動で振り分けます"
     password_notification:
       label: "パスワード通知"
       not_notified: "通知しない"
-      to_notified: "通知しない"
+      to_notified: "通知する"
     disabled:
       label: "ユーザー無効化"
       disable: "無効化にする"
@@ -587,3 +651,8 @@ ja:
       success: "アカウント登録が完了しました。"
       update: "アカウント編集が完了しました"
   media_categories: ["リスティング", "ディスプレイ", "アフィリエイト"]   
+  log_track_type: ["Install", "アプリ内アクション (Action in app)"]
+  log_repeat_flg: ["新規 (new)", "リピート (repeat)"]
+  Listing: "Listing ads"
+  Display: "Display ads"
+  Affiliate: "Affiliate" 

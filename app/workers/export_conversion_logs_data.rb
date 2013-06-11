@@ -3,7 +3,7 @@ require 'csv'
 
 # export conversion data table from conversion log screen to csv file
 class ExportConversionLogsData
-  @queue = :default
+  @queue = :conversion_logs
 
   def self.perform user_id, promotion_id, conversion_id, media_category_id, account_id, start_date, end_date, show_error
     # make file name
@@ -49,13 +49,14 @@ class ExportConversionLogsData
         # make header for CSV file
         csv << header_col
         rows.each do |row|
-          csv << [row.conversion_utime, conversions.find(row.conversion_id).conversion_name,cv_categories[conversions.find(row.conversion_id).conversion_category], row.conversion_type, row.repeat_flg,
+          csv << [row.conversion_utime, conversions.find(row.conversion_id).conversion_name,cv_categories[conversions.find(row.conversion_id).conversion_category], I18n.t("log_track_type")[row.track_type], I18n.t("log_repeat_flg")[row.repeat_flg],
                   row.id, row.parent_conversion_id, row.approval_status, client_name, promotion.promotion_name,
                   medias.find(row.media_id).media_name, accounts.find(row.account_id).account_name, display_campaigns.find(row.campaign_id).name,
                   display_groups.find(row.group_id).name, display_ads.find(row.unit_id), row.redirect_url, row.click_time, row.click_referrer, row.sales,
                   row.volume, row.others, row.verify, row.suid,row.session_id, os[row.device_category], row.repeat_proccessed_flg, row.log_state, row.user_agent,
                   row.remote_ip, row.referrer, row.media_session_id, row.mark, row.request_uri, row.send_url, row.send_utime, row.error_message]
         end
+        csv << header_col
       end
       
       # success case
