@@ -1,7 +1,16 @@
 <div id="popup_prevent">
 <script type="text/javascript">
 $(function(){
-	prevent = true;
+	$("#cancel_change").click(function(){
+		$('#prevent_change').colorbox.close();
+	});
+	$.colorbox({
+		width: "30%",
+		inline: true,
+		escKey: false,
+		overlayClose: false,
+		href: "#prevent_change"
+	})
 })
 </script>
 <div style="display: none">

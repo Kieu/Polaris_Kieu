@@ -81,8 +81,8 @@ class DailySummaryAccount < ActiveRecord::Base
 
         if(!array_result["#{conversion_id}_CV"])
           array_result["#{conversion_id}_CV"] = Array.new
-          array_result["#{conversion_id}_CV_First"] = Array.new
-          array_result["#{conversion_id}_CV_Repeat"] = Array.new
+          array_result["#{conversion_id}_CV(first)"] = Array.new
+          array_result["#{conversion_id}_CV(repeat)"] = Array.new
           array_result["#{conversion_id}_CVR"] = Array.new
           array_result["#{conversion_id}_CPA"] = Array.new
           array_result["#{conversion_id}_ASSIT"] = Array.new
@@ -90,15 +90,15 @@ class DailySummaryAccount < ActiveRecord::Base
 
         if(conversion[:report_ymd] && conversion[:report_ymd].to_s.to_date.strftime("%Y/%m/%d") == datetime)
           array_result["#{conversion[:conversion_id]}_CV"] << conversion[:total_cv_count] ? conversion[:total_cv_count] : 0
-          array_result["#{conversion[:conversion_id]}_CV_First"] << conversion[:first_cv_count] ? conversion[:first_cv_count] : 0
-          array_result["#{conversion[:conversion_id]}_CV_Repeat"] << conversion[:repeat_cv_count] ? conversion[:repeat_cv_count] : 0
+          array_result["#{conversion[:conversion_id]}_CV(first)"] << conversion[:first_cv_count] ? conversion[:first_cv_count] : 0
+          array_result["#{conversion[:conversion_id]}_CV(repeat)"] << conversion[:repeat_cv_count] ? conversion[:repeat_cv_count] : 0
           array_result["#{conversion[:conversion_id]}_CVR"] << conversion[:conversion_rate] ? conversion[:conversion_rate] : 0
           array_result["#{conversion[:conversion_id]}_CPA"] << conversion[:first_cv_count] ? conversion[:first_cv_count] : 0
           array_result["#{conversion[:conversion_id]}_ASSIT"] << conversion[:assist_count] ? conversion[:assist_count] : 0
         else
           array_result["#{conversion[:conversion_id]}_CV"] << 0
-          array_result["#{conversion[:conversion_id]}_CV_First"] << 0
-          array_result["#{conversion[:conversion_id]}_CV_Repeat"] << 0
+          array_result["#{conversion[:conversion_id]}_CV(first)"] << 0
+          array_result["#{conversion[:conversion_id]}_CV(repeat)"] << 0
           array_result["#{conversion[:conversion_id]}_CVR"] << 0
           array_result["#{conversion[:conversion_id]}_CPA"] << 0
           array_result["#{conversion[:conversion_id]}_ASSIT"] << 0
