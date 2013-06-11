@@ -5,7 +5,7 @@
 <div class="date">今日<br />
   <input id="datepick" type="text" readonly="readonly" value="<%= cookies[:s] + " - " + cookies[:e] %>" name="datepick">&#9660;
   <a class="fancybox mt-10 fl-l" rel="gallery" href="#"><img src="/assets/btn_dl_option.gif" /></a>
-<a href="#" class="mt-10 fl-r"><img src="/assets/btn_dl_csv.gif" /></a>
+  <a href="#" class="mt-10 fl-r" id="download_csv"><img src="/assets/btn_dl_csv.gif" /></a>
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -42,6 +42,20 @@ $(document).ready(function() {
 })
 </script>
 <script type="text/javascript">
+$('#download_csv').click(function(){
+  $.ajax({
+    type: "POST",
+    url: "<%= download_csv_url_settings_path %>",
+    data: {"promotion_id" : "<%= @promotion_id if @promotion_id %>",
+           "account_id" : "<%= @account_id if @account_id %>",
+           "media_id": "<%= @media_id if @media_id %>"
+           },
+    success: function(data){
+  }
+
+  })
+})
+
 function formatDate(year, month, day){
     if (year < 2000) { year = parseInt(year) + 1900; }
     if (month.length == 1) { month = "0" + parseInt(month); }

@@ -1,3 +1,6 @@
+require 'csv'
+require 'time'
+
 class UrlSettingsController < ApplicationController
   before_filter :set_cookies
   before_filter :signed_in_user
@@ -36,7 +39,12 @@ class UrlSettingsController < ApplicationController
       copy_button = '<a href="#"><img src="/assets/btn_copy2.gif" /></a>'
       delete_check = '<input type="checkbox" name="del_url_#{redirect_url_id}" id="#{redirect_url_id}" />'
       image = url['creative']
-      creative = '<img src=' + "/assets/creative/#{image}" + '  />'
+      if url['creative_type'] == '1'
+        creative = '<img src=' + "/assets/creative/#{image}" + '  />'
+      else
+        creative = url['creative_text']
+      end
+      
       rows << { id: url['redirect_url_id'], cell: {edit_button: edit_button, ad_id: url['ad_id'], campaign_name: url['campaign_name'],
                group_name: url['group_name'], ad_name: url['ad_name'], creative: creative, url: url['url'], copy: copy_button,
                delete_check: delete_check}}
@@ -45,11 +53,24 @@ class UrlSettingsController < ApplicationController
     rows
   end
 
+  def download_csv
+    start_date = cookies[:s]
+    end_date = cookies[:e]
+    user_id = current_user.id
+    promotion_id = params[:promotion_id]
+    account_id = params[:account_id]
+    media_id = params[:media_id]
+    controller = params[:controller]
+    Resque.enqueue ExportUrlData, start_date, end_date, user_id, 
+                                  promotion_id, account_id, media_id, controller
+    
+    render text: "processing"
+  end
   private
   def set_cookies
     time = Time.new
-    cookies[:s]="#{time.year}/#{time.month}/01" if !cookies[:s] 
-    cookies[:e]="#{time.year}/#{time.month}/#{time.day}" if !cookies[:e]
+    cookies[:s] = "#{time.year}/#{time.month}/01" if !cookies[:s] 
+    cookies[:e] = "#{time.year}/#{time.month}/#{time.day}" if !cookies[:e]
     cookies[:ser] = "1" if !cookies[:ser]
   end
 end
