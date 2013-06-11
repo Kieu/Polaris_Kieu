@@ -51,7 +51,7 @@ $(document).ready(function () {
 
   </div>
   <!-- /.loginbox end -->
-  <% if @form_errors.count > 0%>
+  <% if @form_errors && @form_errors.count > 0%>
   <div id="accordion01_inner" class="loginbox_more">
   <% else %>
   <div id="accordion01_inner" class="loginbox_more" style="display:none">
