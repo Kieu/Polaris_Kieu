@@ -5,14 +5,13 @@ $(function(){
 		$('#prevent_change').colorbox.close();
 	});
     $("a").click(function(event){
-      //  console.log(event);
-      //  event.preventDefault();
+        event.preventDefault();
 	$.colorbox({inline:true,
         transition:"none",
 		href: "#prevent_change"
 
 	})
-        event.preventDefault();
+
     });
 })
 </script>
