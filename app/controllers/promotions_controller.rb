@@ -6,15 +6,15 @@ class PromotionsController < ApplicationController
 
 
   def index
-    @promotion = Promotion.find(params[:promotion_id])
     if current_user.client?
       @client_id = current_user.company_id  
     else
+      @promotion = Promotion.find(params[:promotion_id])
       @client_id = @promotion.client_id
     end
 
     @array_promotion = @client_id.blank? ? Array.new :
-      Promotion.get_by_client(@client_id).order_by_promotion_name
+      Promotion.get_by_client(@client_id).active.order_by_promotion_name
     if @array_promotion.count > 0
       @promotion_id = params[:promotion_id].blank? ? @array_promotion.first[:id] :
         params[:promotion_id]

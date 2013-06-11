@@ -18,6 +18,7 @@ class Promotion < ActiveRecord::Base
 
   scope :order_by_promotion_name, ->{order :promotion_name}
   scope :get_by_client, lambda {|client_id| where(client_id: client_id)}
+  scope :active, ->{where(del_flg: 0)}
 
   def delete
     self.update_attribute(:del_flg, Settings.promotion.deleted)

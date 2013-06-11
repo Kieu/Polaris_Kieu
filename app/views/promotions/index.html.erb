@@ -1,4 +1,3 @@
-<% if @array_promotion.count > 0 %>
 <% content_for :sidebar do %>
 	<%= render partial: "layouts/sidebar", locals: {object: @array_promotion} %>
 <% end %>
@@ -7,6 +6,7 @@
 <%= stylesheet_link_tag "css/colorbox" %>
 
 <%= stylesheet_link_tag "css/box_inner_promotion" %>
+<% if @array_promotion.count > 0 %>
 <ul class="contentNavi">
 	<li class="pre"><a href="javascript:void(0)" onclick="ajaxCommon('/clients?client_id=<%=@client_id%>', '#<%= @client_id %>', '.client_name', '','#inner,#sidebar')"><%= @client_name %></a></li>
 	<li>&gt;</li>
@@ -32,14 +32,17 @@
 						<li><a href="javascript:void(0)" class="metric_click_left">CPC</a></li>
 					</ul>
 				</li>
-				<li><a href="">成果</a>
+				<li><a href="javascript:void(0)">成果</a>
 					<ul>
-						<li><a href="#">CV</a></li>
-						<li><a href="#">CV(初回)</a></li>
-						<li><a href="#">CV(リピート)</a></li>
-						<li><a href="#">CVR</a></li>
-						<li><a href="#">CPA</a></li>
-						<li><a href="#">ASSIST</a> </li>
+						<% @conversions.each do |conversion| %>
+							<li><a href="javascript:void(0)"><%= conversion.conversion_name %></a>
+								<ul>
+									<% Settings.conversions_graph.each do |option| %>
+										<li><a href="javascript:void(0)" class="result_click_left"><%= option %></a></li>
+									<% end %>
+								</ul>
+							<li>
+						<% end %>
 					</ul>
 				</li>
 			</ul>
@@ -59,14 +62,17 @@
 						<li><a href="javascript:void(0)" class="metric_click_right">CPC</a></li>
 					</ul>
 				</li>
-				<li><a href="#">成果</a>
+				<li><a href="javascript:void(0)">成果</a>
 					<ul>
-						<li><a href="#">CV</a></li>
-						<li><a href="#">CV(初回)</a></li>
-						<li><a href="#">CV(リピート)</a></li>
-						<li><a href="#">CVR</a></li>
-						<li><a href="#">CPA</a></li>
-						<li><a href="#">ASSIST</a> </li>
+						<% @conversions.each do |conversion| %>
+							<li><a href="javascript:void(0)"><%= conversion.conversion_name %></a>
+								<ul>
+									<% Settings.conversions_graph.each do |option| %>
+										<li><a href="javascript:void(0)" class="result_click_right"><%= option %></a></li>
+									<% end %>
+								</ul>
+							<li>
+						<% end %>
 					</ul>
 				</li>
 			</ul>
@@ -300,6 +306,15 @@
     	draw_chart(data[left], data[right], left,right, categories)
     });
     $(".metric_click_right").click(function(){
+    	right = $(this).text();
+    	draw_chart(data[left], data[right], left,right, categories)
+    });
+    
+    $(".result_click_left").click(function(){
+    	left = $(this).text();
+    	draw_chart(data[left], data[right], left,right, categories)
+    });
+    $(".result_click_right").click(function(){
     	right = $(this).text();
     	draw_chart(data[left], data[right], left,right, categories)
     });
