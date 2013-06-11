@@ -45,7 +45,7 @@ class DailySummaryAccConversion < ActiveRecord::Base
     end
     
     total_data.each do |data|
-      results["total"+"_conversion"+data.conversion.id.to_s] = data
+      results["total"+"_conversion"+data.conversion_id.to_s] = data
     end
     
     results
