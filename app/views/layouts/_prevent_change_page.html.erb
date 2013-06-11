@@ -4,9 +4,11 @@ $(function(){
 	$("#cancel_change").click(function(){
 		$('#prevent_change').colorbox.close();
 	});
-    $("a").click(function(e){
-        e.preventDefault();
-
+    $("a").click(function(event){
+        event.preventDefault();
+	$.colorbox({inline:true, width:"425", height:"330",
+		href: "#prevent_change"
+	})
     });
 })
 </script>
