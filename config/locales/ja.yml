@@ -159,28 +159,28 @@ ja:
               wrong_length: ! '代理店名 %{count}文字で入力してください。'
               acceptance: 代理店名 チェックボックスを選択してください。
             roman_name: 
-              blank: "ユーザー名(英語) 入力してください。"
-              accepted: ユーザー名(英語) 受諾してください。 
-              confirmation: ユーザー名(英語) 確認の入力が一致しません。 
-              empty: ユーザー名(英語) 入力してください。
-              equal_to: ! 'Client name %{count}にしてください。 ' 
-              even: ユーザー名(英語) 偶数にしてください。
-              exclusion: ユーザー名(英語) 予約されています。
-              greater_than: ! 'ユーザー名(英語) %{count}より大きい値にしてください。'
-              greater_than_or_equal_to: ! 'ユーザー名(英語) %{count}以上の値にしてください。'
-              inclusion: ユーザー名(英語) 正しい値が選択されていません。
-              invalid: ユーザー名(英語) 正しく入力して下さい。
-              less_than: ! 'ユーザー名(英語) %{count}より小さい値にしてください。'
-              less_than_or_equal_to: ! 'Client name %{count}以下の値にしてください。'
-              not_a_number: ユーザー名(英語) 数値で入力してください。
-              not_an_integer: ユーザー名(英語) 整数で入力してください。
-              odd: ユーザー名(英語) 奇数にしてください。
-              record_invalid: ユーザー名(英語) バリデーションに失敗しました。 '%{errors}'
-              taken: ユーザー名(英語) すでに登録されています。
-              too_long: ! 'ユーザー名(英語) %{count}文字以内で入力してください。'
-              too_short: ! 'ユーザー名(英語) %{count}文字以上で入力してください。'
-              wrong_length: ! 'ユーザー名(英語) %{count}文字で入力してください。'
-              acceptance: ユーザー名(英語) チェックボックスを選択してください。
+              blank: "代理店名(英語) 入力してください。"
+              accepted: 代理店名(英語) 受諾してください。 
+              confirmation: 代理店名(英語) 確認の入力が一致しません。 
+              empty: 代理店名(英語) 入力してください。
+              equal_to: ! '代理店名 %{count}にしてください。 ' 
+              even: 代理店名(英語) 偶数にしてください。
+              exclusion: 代理店名(英語) 予約されています。
+              greater_than: ! '代理店名(英語) %{count}より大きい値にしてください。'
+              greater_than_or_equal_to: ! '代理店名(英語) %{count}以上の値にしてください。'
+              inclusion: 代理店名(英語) 正しい値が選択されていません。
+              invalid: 代理店名(英語) 正しく入力して下さい。
+              less_than: ! '代理店名(英語) %{count}より小さい値にしてください。'
+              less_than_or_equal_to: ! '代理店名 %{count}以下の値にしてください。'
+              not_a_number: 代理店名(英語) 数値で入力してください。
+              not_an_integer: 代理店名(英語) 整数で入力してください。
+              odd: 代理店名(英語) 奇数にしてください。
+              record_invalid: 代理店名(英語) バリデーションに失敗しました。 '%{errors}'
+              taken: 代理店名(英語) すでに登録されています。
+              too_long: ! '代理店名(英語) %{count}文字以内で入力してください。'
+              too_short: ! '代理店名(英語) %{count}文字以上で入力してください。'
+              wrong_length: ! '代理店名(英語) %{count}文字で入力してください。'
+              acceptance: 代理店名(英語) チェックボックスを選択してください。
         account:
           attributes:
             account_name:
@@ -643,7 +643,7 @@ ja:
     password_notification:
       label: "パスワード通知"
       not_notified: "通知しない"
-      to_notified: "通知しない"
+      to_notified: "通知する"
     disabled:
       label: "ユーザー無効化"
       disable: "無効化にする"
