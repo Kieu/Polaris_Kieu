@@ -1,9 +1,11 @@
 <%= stylesheet_link_tag "css/common" %>
 <%= stylesheet_link_tag "css/accounts" %>
 <ul class="contentNavi">
-    <li class="pre"><%= link_to @promotion.client.client_name, clients_path %></li>
+    <li class="pre"><%= link_to @promotion.client.client_name, clients_path(client_id: @promotion.client.id ) %></li>
     <li>&gt;</li>
-    <li class="pre"><%= link_to @promotion.promotion_name, promotions_path %></li>
+    <li class="pre"><%= link_to @promotion.promotion_name, promotions_path(promotion_id: @promotion.client.id) %>
+      <input type="hidden" name="promotion_id" value="<%= @promotion.id %>">
+    </li>
     <li>&gt;</li>
     <li><%= I18n.t("account.crumb_add") %></li>
 </ul>

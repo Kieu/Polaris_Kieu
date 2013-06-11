@@ -3,7 +3,7 @@
 <ul class="contentNavi">
     <li class="pre"><%= link_to @promotion.client.client_name, clients_path %></li>
     <li>&gt;</li>
-    <li class="pre"><%= link_to @promotion.promotion_name, promotions_path %></li>
+    <li class="pre"><%= link_to @promotion.promotion_name, controller: "promotions", action: "index", promotion_id: @promotion.id %></li>
     <li>&gt;</li>
     <li><%= I18n.t("account.crumb_edit") %>/<%= t("media_categories")[@account.media_category_id]%>/<%= @account.media.media_name%> </li>
 </ul>
