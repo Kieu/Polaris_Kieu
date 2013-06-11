@@ -1,6 +1,5 @@
 class BackgroundJobsController < ApplicationController
   before_filter :signed_in_user
-  before_filter :must_super_agency
   layout false
 
   def download
@@ -22,5 +21,9 @@ class BackgroundJobsController < ApplicationController
   def inprogress
     @jobs = BackgroundJob.where(:user_id => current_user.id,:status => '0')
     render "background_jobs/inprogress"
+  end
+  def kill_job
+    @job = BackgroundJob.find(params[:id])
+    Resque::Plugins::Status::Hash.kill(@job.job_id)
   end
 end

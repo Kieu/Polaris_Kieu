@@ -1,89 +1,89 @@
 <div style='display:none'>
 <div id="inline_cv_logs">
 <div class="f_box">
-<p class="f_box_title">CVログ</p>
-<p class="f_category_title1">表示項目</p>
+<p class="f_box_title"><%= I18n.t("cv_logs.label")%></p>
+<p class="f_category_title1"><%= I18n.t("cv_logs.display_item")%></p>
 <div class="box02">
   <ul id="tab_cv_logs">
-    <li class="present"><p class="f_arrow">CVテスト</p></li>
+    <li class="present"><p class="f_arrow"><%= I18n.t("cv_logs.cv_test")%></p></li>
   </ul>
 </div>
 <div id="page1">
 <div class="box03">
-  <p class="box3_txt"><button id="display_all">All</button>
+  <p class="box3_txt"><button id="display_all"><%= I18n.t("cv_logs.show_all")%></button>
   <!-- チェックボックス -->
   <div class="check-group clearfix">
     <ul>
       <li>
-        <p class="check_txt">conversion_time</p>
+        <p class="check_txt"><%= I18n.t("cv_logs.conversion_time")%></p>
         <div>
-          <%= link_to cookies[:options][0] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('0',this)"%>
+          <%= link_to cookies[:cv_options][0] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('0',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">conversion_name</p>
+        <p class="check_txt"><%= I18n.t("cv_logs.conversion_name")%></p>
         <div>
-          <%= link_to cookies[:options][1] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('1',this)"%>
+          <%= link_to cookies[:cv_options][1] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('1',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">conversion_category</p>
+        <p class="check_txt"><%= I18n.t("cv_logs.conversion_category")%></p>
         <div>
-          <%= link_to cookies[:options][2] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('2',this)"%>
+          <%= link_to cookies[:cv_options][2] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('2',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">tracking_type</p>
+        <p class="check_txt"><%= I18n.t("cv_logs.tracking_type")%></p>
         <div>
-          <%= link_to cookies[:options][3] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('3',this)"%>
+          <%= link_to cookies[:cv_options][3] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('3',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">cv_type</p>
+        <p class="check_txt"><%= I18n.t("cv_logs.cv_type")%></p>
         <div>
-          <%= link_to cookies[:options][4] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('4',this)"%>
+          <%= link_to cookies[:cv_options][4] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('4',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">media_approval</p>
+        <p class="check_txt"><%= I18n.t("cv_logs.media_approval")%></p>
         <div>
-          <%= link_to cookies[:options][5] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('5',this)"%>
+          <%= link_to cookies[:cv_options][5] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('5',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">media</p>
+        <p class="check_txt"><%= I18n.t("cv_logs.media")%></p>
         <div>
-          <%= link_to cookies[:options][6] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('6',this)"%>
+          <%= link_to cookies[:cv_options][6] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('6',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">account</p>
+        <p class="check_txt"><%= I18n.t("cv_logs.account")%></p>
         <div>
-          <%= link_to cookies[:options][7] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('7',this)"%>
+          <%= link_to cookies[:cv_options][7] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('7',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">campaign</p>
+        <p class="check_txt"><%= I18n.t("cv_logs.campaign")%></p>
         <div>
-          <%= link_to cookies[:options][8] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('8',this)"%>
+          <%= link_to cookies[:cv_options][8] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('8',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">ad_group</p>
+        <p class="check_txt"><%= I18n.t("cv_logs.ad_group")%></p>
         <div>
-          <%= link_to cookies[:options][9] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('9',this)"%>
+          <%= link_to cookies[:cv_options][9] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('9',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">ad_name</p>
+        <p class="check_txt"><%= I18n.t("cv_logs.ad_name")%></p>
         <div>
-          <%= link_to cookies[:options][10] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('10',this)"%>
+          <%= link_to cookies[:cv_options][10] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('10',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">click_time</p>
+        <p class="check_txt"><%= I18n.t("cv_logs.click_time")%></p>
         <div>
-          <%= link_to cookies[:options][11] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('11',this)"%>
+          <%= link_to cookies[:cv_options][11] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('11',this)"%>
         </div>
       </li>
     </ul>
@@ -91,79 +91,79 @@
   <!-- /チェックボックス -->
 </div>
 <div class="box01">
-  <p class="box3_txt"><%= link_to "Show All", "javascript:void(0)", onclick: "update_cookies()"%> </p>
+  <p class="box3_txt"><%= link_to I18n.t("cv_logs.show_all"), "javascript:void(0)", onclick: "update_cookies()"%> </p>
   <!-- チェックボックス -->
   <div class="check-group clearfix">
     <ul>
 
       <li>
-        <p class="check_txt">verify</p>
+        <p class="check_txt"><%= I18n.t("cv_logs.verify")%></p>
         <div>
-          <%= link_to cookies[:options][12] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('12',this)"%>
+          <%= link_to cookies[:cv_options][12] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('12',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">suid</p>
+        <p class="check_txt"><%= I18n.t("cv_logs.suid")%></p>
         <div>
-          <%= link_to cookies[:options][13] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('13',this)"%>
+          <%= link_to cookies[:cv_options][13] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('13',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">session_id</p>
+        <p class="check_txt"><%= I18n.t("cv_logs.session_id")%></p>
         <div>
-          <%= link_to cookies[:options][14] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('14',this)"%>
+          <%= link_to cookies[:cv_options][14] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('14',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">OS</p>
+        <p class="check_txt"><%= I18n.t("cv_logs.os")%></p>
         <div>
-          <%= link_to cookies[:options][15] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('15',this)"%>
+          <%= link_to cookies[:cv_options][15] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('15',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">repeat</p>
+        <p class="check_txt"><%= I18n.t("cv_logs.repeat")%></p>
         <div>
-          <%= link_to cookies[:options][16] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('16',this)"%>
+          <%= link_to cookies[:cv_options][16] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('16',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">log_state</p>
+        <p class="check_txt"><%= I18n.t("cv_logs.log_state")%></p>
         <div>
-          <%= link_to cookies[:options][17] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('17',this)"%>
+          <%= link_to cookies[:cv_options][17] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('17',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">sales</p>
+        <p class="check_txt"><%= I18n.t("cv_logs.sales")%></p>
         <div>
-          <%= link_to cookies[:options][18] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('18',this)"%>
+          <%= link_to cookies[:cv_options][18] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('18',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">profit</p>
+        <p class="check_txt"><%= I18n.t("cv_logs.profit")%></p>
         <div>
-          <%= link_to cookies[:options][19] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('19',this)"%>
+          <%= link_to cookies[:cv_options][19] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('19',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">volume</p>
+        <p class="check_txt"><%= I18n.t("cv_logs.volume")%></p>
         <div>
-          <%= link_to cookies[:options][20] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('20',this)"%>
+          <%= link_to cookies[:cv_options][20] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('20',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">others</p>
+        <p class="check_txt"><%= I18n.t("cv_logs.others")%></p>
         <div>
-          <%= link_to cookies[:options][21] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('21',this)"%>
+          <%= link_to cookies[:cv_options][21] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('21',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">error_message</p>
+        <p class="check_txt"><%= I18n.t("cv_logs.error_message")%></p>
         <div>
-          <%= link_to cookies[:options][12] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('22',this)"%>
+          <%= link_to cookies[:cv_options][12] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('22',this)"%>
         </div>
       </li>
       <li>
-        <p class="check_txt">error_log_view</p>
+        <p class="check_txt"><%= I18n.t("cv_logs.error_log_view")%></p>
         <div>
           <input type="checkbox" name="error_table" id="error_table" checked="checked">
         </div>

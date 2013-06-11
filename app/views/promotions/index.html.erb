@@ -12,7 +12,16 @@
 	<li>&gt;</li>
 	<li><%= @promotion_name %></li>
 </ul>
-
+ <script>
+     $(function(){
+         $('#tab').slimScroll({
+             color: '#0087A9',
+             size: '8px',
+             alwaysVisible: false,
+             height:'350px'
+         });
+     });
+ </script>
 <div class="date">今日<br />
 <div id="datepicker">
 <%= @start_date %>~<%= @end_date %>&#9660;</div>
@@ -126,7 +135,7 @@
 				</div>
 			</div>
 			<div class="box02">
-				<ul id="tab">
+				<ul id="tab" style="height: 350px; overflow: hidden;">
 					<% @conversions.each_with_index do |conversion, index| %>
 						<% if index == 0%>
 							<li class="present"><p class="f_arrow">CV<%=index +1 %><span class=><%= conversion.conversion_name%></span></p></li>

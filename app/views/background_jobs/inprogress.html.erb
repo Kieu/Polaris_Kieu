@@ -1,4 +1,10 @@
+<script>
+    $(document).ready(function(){
+        $(".cautionBox").colorbox({inline:true, width:"725", height:"630" });
+    });
+    </script>
 <div id="inprogress">
+  <a class='cautionBox' href="#cautionBox">test popup</a>
   <ul class="entrydate_box">
   <% if @jobs %>
     <% @jobs.each_with_index do |job, index| %>

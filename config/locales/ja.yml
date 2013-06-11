@@ -125,6 +125,7 @@ ja:
             email: 
               blank: "メールアドレス 入力してください。"
               invalid: メールアドレス 正しく入力して下さい。
+              taken: メールアドレス すでに登録されています。
             company_id:
               blank: "会社名 入力してください。"
               too_long: ! '会社名 %{count}文字以内で入力してください。'
@@ -610,11 +611,58 @@ ja:
       pattern: "パターン: "
   log:
     today_text: "今日"
-    crumb_click: "本体プロモーション"
-    crumb_cv_logs: "本体プロモーション"
+    crumb_click: "Clickログ"
+    crumb_cv_logs: "CVログ"
     conversion_name: "コンバージョン名"
     media_category: "メディアカテゴリ"
     account_name: "アカウント名"
+  cv_logs:
+    label: "CVログ"
+    cv_test: "CVテスト"
+    display_item: "表示項目"
+    usually: "通常"
+    show_all: "全て追加する"
+    conversion_time: "成果発生日時"
+    conversion_name: "コンバージョン名"
+    conversion_category: "コンバージョン種別"
+    tracking_type: "計測タイプ"
+    cv_type: "CVタイプ"
+    media_approval: "媒体承認"
+    media: "メディア"
+    account: "アカウント名"
+    campaign: "キャンペーン名"
+    ad_group: "広告グループ名"
+    ad_name: "広告名"
+    click_time: "クリック日時"
+    verify: "Verify"
+    suid: "SUID"
+    session_id: "Session ID"
+    os: "OS"
+    repeat: "リピート"
+    log_state: "OK/NG"
+    sales: "Sales"
+    profit: "Profit"
+    volume: "Volume"
+    others: "Others"
+    error_message: "エラーメッセージ"
+    error_log_view: "エラーテーブルを表示"
+  click_logs:
+    label: Clickログ
+    display_item: 表示項目
+    usually: 通常
+    show_all: "全て追加する"
+    click_time: "時間をクリック"
+    media_name: メディア名
+    account_name: アカウント名
+    campaign_name: キャンペーン名
+    ad_group_name: 広告グループ名
+    ad_name: 広告名
+    url: URL
+    sesid: SESID
+    os: OS
+    log_state: OK/NG
+    error_message: エラーメッセージ
+    error_log_view: エラーテーブルを表示
   promotion:
     crumb_edit: "プロモーション編集"
     crumb_add: "プロモーション登録"
