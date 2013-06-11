@@ -85,6 +85,7 @@ $(window).resize(function() {
     tableResize();
 });
 </script>
+<%= flash[:error] %>
         <div class="contentNavi">
             <ul>
                 <li class="pre"><%= @client_name %></li>
@@ -96,21 +97,25 @@ $(window).resize(function() {
         </div>
         <div class="clear"></div>
         <div id="uploadArea">
+          <%= form_for Import.new, html: {multipart: true} do |f| %>
             <table class="file_upload">
                 <tr>
-                    <td colspan="2"><a href="#"><img src="/assets/btn_file_select.gif" /></a></td>
-                    <td><input type="radio" name="upload" checked="checked" />
-                        追加</td>
-                    <td><input type="radio" name="upload" />
-                        新規(存外)</td>
+                  <td colspan="2"><%= f.file_field :csv %></td>
+                  <td></td>
                 </tr>
                 <tr>
-                    <td colspan="2"><input type="text" /></td>
-                    <td colspan="2"><a href="#"><img src="/assets/btn_upload.gif" /></a></td>
+                  <td><input type="radio" name="upload" checked="checked" />
+                      追加</td>
+                  <td><input type="radio" name="upload" />
+                      新規(存外)</td>
+                  <td>
+                    <input type="image" src="/assets/btn_upload.gif">
+                  </td>
                 </tr>
             </table>
             <p class="dl"><small>アップロードファイルフォーマットのダウンロード</small></p>
             <p class="bold">入稿リクエストを受け付けました。</p>
+          <% end %>
         </div>
         <!-- #uploadArea -->
         <table style="display:none" class="newTable04 fixTable d-none"></table>
