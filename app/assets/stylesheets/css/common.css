@@ -29,6 +29,35 @@ a:hover{
 	opacity:0.7;
 }*/
 
+#cautionBox{
+    margin:0 auto;
+    width: 500px;
+    height: 220px;
+    -webkit-border-radius: 13px;
+    -moz-border-radius: 13px;
+    border-radius: 13px;
+    background-color: #f1f1f1;
+    border: 4px #333 solid;
+}
+
+#cautionBox p.del_message{
+    margin: auto;
+    margin-bottom: 10px;
+    width: 420px;
+}
+
+#cautionBox .clientName{
+    font-weight: bold;
+    margin: 0 auto;
+    text-align: center;
+    color: #F63;
+    width: 200px;
+    height: 30px;
+    border-bottom: 1px solid #F63;
+    border-top: 1px solid #F63;
+    padding-top: 10px;
+}
+
 .clear{
 	clear:both;
 	}
