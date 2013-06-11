@@ -40,8 +40,8 @@
         </tr>
         <tr>
           <th><%= f.label I18n.t("user.password_notification.label") %></th>
-          <td><%= f.radio_button :password_flg, "0", disabled: true %> <%= f.label I18n.t("user.password_notification.not_notified") %></td>
-          <td><%= f.radio_button :password_flg, "1", disabled: true %> <%= f.label I18n.t("user.password_notification.to_notified") %></td>
+          <td><%= f.radio_button :password_flg, "1", disabled: true %> <%= f.label I18n.t("user.password_notification.not_notified") %></td>
+          <td><%= f.radio_button :password_flg, "0", disabled: true %> <%= f.label I18n.t("user.password_notification.to_notified") %></td>
         </tr>
         <tr>
           <th><%= f.label I18n.t("user.disabled.label") %></th>
