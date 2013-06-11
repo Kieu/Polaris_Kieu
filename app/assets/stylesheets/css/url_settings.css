@@ -45,62 +45,19 @@
 #inner {
 
 }
-#account_form {
-    margin: auto;
-    width: 635px;
-    height: 580px;
-    margin-top: 30px;
+
+#personal ul{
+	float:right;
 }
-form {
-    margin: auto;
-    margin-top: 10px;
-    width: 635px;
-    min-height: 470px;
-    background-color: #f1f1f1;
-    border: 1px solid #b6b6b6;
+
+p.dl{
+	color: #F63;
+	text-decoration:underline;
+	padding: 2px 0;
 }
-#uploadArea table {
-    font-size: 14px;
-    font-weight: bold;
-    margin:auto;
-    margin-top:30px;
-    width:485px;
-}
-#uploadArea table th {
-    font-weight: bold;
-    width:345px;
-    text-align:right;
-}
-#uploadArea table td {
-    margin: 0 0 0 10px;
-    padding-left: 5px;
-}
-#uploadArea table td .input-text {
-    width:285px;
-}
-#uploadArea table td input {
-    padding: 0 0 0 5px;
-    font-weight: normal;
-}
-#uploadArea {
-    float:left;
-    margin: 0 0 0 10px;
-}
-table.file_upload {
-    font-size:14px;
-    width:400px;
-}
-table.file_upload tr {
-    height: 35px;
-}
-table.file_upload td {
-    width: 135px;
-}
-p.error {
-    color:#F00;
-}
-.date {
-    background-color: #F8F8F8;
+
+.date{
+  background-color: #F8F8F8;
     float: right;
     height: 38px;
     line-height: 16px;

@@ -2,7 +2,7 @@ class Promotion < ActiveRecord::Base
   attr_accessible :promotion_category_id, :promotion_name, :roman_name, :tracking_period,
     :client_id, :agency_id, :del_flg, :update_user_id
 
-  VALID_ROMAN_NAME_REGEX = /^[A-Z_a-z][A-Za-z_0-9]*$/
+  VALID_ROMAN_NAME_REGEX = /^[A-Z_\-a-z][A-Za-z_\-0-9]*$/
 
   belongs_to :client
   belongs_to :agency

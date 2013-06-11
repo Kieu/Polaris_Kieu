@@ -9,10 +9,9 @@
   <ul class="contentNavi">
     <li class="pre"><%= link_to @client.client_name, client_path(@client) %></li>
     <li>&gt;</li>
-    <li>本体プロモーション</li>
+    <li><%= I18n.t("promotion.crumb_add")%></li>
   </ul>
   <div class="clear"></div>
-  <p class="h2 mt-20">プロモーション登録</p>
 <%= form_for(@promotion) do |f| %>
     <%= hidden_field_tag :client_id, params[:client_id] %>
     <div class="regist_form">
