@@ -46,7 +46,6 @@ class ExportPromotionData
 
       # get row data
       array_data_row = DailySummaryAccConversion.get_conversions_summary(@promotion_id)
-      binding.pry
       account_col = ["Media", "Account", "Imp", "Click", "CTR", "CPC", "CPM", "COST"]
       array_conversion = Conversion.where(promotion_id: @promotion_id)
       
