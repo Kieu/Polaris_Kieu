@@ -1,19 +1,30 @@
 <div id="popup_prevent">
+  <script src="jquery.confirm/jquery.confirm.js"></script>
 <script type="text/javascript">
 $(function(){
 	$("#cancel_change").click(function(){
 		$('#prevent_change').colorbox.close();
 	});
     $("a").click(function(event){
-        event.preventDefault();
-	$.colorbox({inline:true,
-        width:"725", height:"630",
-		href: "#prevent_change"
+        $.confirm({
+            'title'		: 'Delete Confirmation',
+            'message'	: 'You are about to delete this item. <br />It cannot be restored at a later time! Continue?',
+            'buttons'	: {
+                'Yes'	: {
+                    'class'	: 'blue',
+                    'action': function(){
+                        //	elem.slideUp();
 
-	})
-
+                    },
+                    'No'	: {
+                        'class'	: 'gray',
+                        'action': function(){}	// Nothing to do in this case. You can as well omit the action property.
+                    }
+                }
+            }
     });
-})
+});
+});
 </script>
 <div style="display: none">
   <div id="cautionBox">
