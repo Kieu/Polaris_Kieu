@@ -4,6 +4,7 @@ class BackgroundJobsController < ApplicationController
   # Stream a file that has already been generated and stored on disk
   def download_file
     job = BackgroundJob.find(params[:id])
+    binding.pry
     send_data("#{RAILS_ROOT}/Settings.#{job.controller}/#{job.filename}", :filename => "#{job.filename}", :type => "text/csv")
   end
   def download
