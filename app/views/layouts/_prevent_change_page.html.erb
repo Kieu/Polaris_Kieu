@@ -6,6 +6,7 @@ $(function(){
        var href = ($(this).attr('href'));
         event.preventDefault();
         $.confirm({
+            'title'  : 'Confirm edit/new',
             'message'	: '<%= render partial: "layouts/popup" %>',
             'buttons'	: {
                 'Yes'	: {
