@@ -49,6 +49,7 @@ PolarisManage::Application.routes.draw do
     get "download", on: :collection
     get "inprogress", on: :collection
     get "notification", on: :collection
+    get "download_file", on: :collection
     post "kill_job", to: "background_jobs#kill_job", on: :collection
   end
   resources :imports
