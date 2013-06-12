@@ -7,7 +7,16 @@ $(function(){
 	});
     $("a").click(function(event){
         //var elem = $(this).closest('#cautionBox');
-        alert('tét') ;
+        var mess = 'changed page';
+        if(confirm(mess))
+        {
+
+        }
+        else
+        {
+            event.preventDefault();
+        }
+        //alert('tét') ;
 });
 });
 </script>
