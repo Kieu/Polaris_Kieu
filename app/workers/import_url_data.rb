@@ -4,6 +4,7 @@ class ImportUrl
   
   def perform
     require "csv"
+    type = options['type']
     job_id = BackgroundJob.find(options['bgj_id']).job_id
     CSV.foreach(options['file'], headers: true) do |row|
       Client.create(
