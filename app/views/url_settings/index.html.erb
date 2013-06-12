@@ -58,7 +58,7 @@ $(function() {
 	           "media_id": "<%= @media_id if @media_id %>"
 	           },
 	    success: function(data){
-	  }
+	  	}
 	
 	  })
 	})
@@ -96,7 +96,6 @@ $(function() {
 		cookies_options = options;
 	}
 	$(document).on('click', "#change_cookie", function(){
-		console.log(cookies_options);
 		$.cookie("url_setting",cookies_options);
 		so = 0;
 		for (var i=0;i<colums.length;i++){
@@ -112,7 +111,7 @@ $(function() {
 		$("#clicklogs").colorbox.close();
 	});
 	$(document).on('click', "#not_change_cookie", function(){
-		cookies_options = $.cookie("coptions");
+		cookies_options = $.cookie("url_setting");
 		$("#inline_cv_logs").html(default_url_options);
 		$("#clicklogs").colorbox.close();
 	})

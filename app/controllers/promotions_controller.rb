@@ -1,37 +1,28 @@
 require "resque"
 class PromotionsController < ApplicationController
   before_filter :signed_in_user
-  before_filter :must_super_agency, except: [:show, :index]
-  before_filter :must_delete_able, only: [:show, :edit, :update, :delete_promotion]
-
+  before_filter :must_super_agency, except: [:index]
+  before_filter :must_right_object, only: [:edit, :update, :delete_promotion,
+    :index, :new, :create]
 
   def index
-    if current_user.client?
-      @client_id = current_user.company_id  
-    else
-      @promotion_id = params[:promotion_id]
-      @client_id = params[:client_id]
-    end
-    
-    @client = Client.find(@client_id)
-    @array_promotion = @client.promotions.active.order_by_promotion_name
     if @array_promotion.count > 0
-      @promotion_id = @array_promotion.first[:id] unless @promotion_id
-    
+      @promotion_id = params[:promotion_id].blank? ? @array_promotion.first[:id] :
+        params[:promotion_id]
+      
       @promotion = @array_promotion.find(@promotion_id)
       @start_date = params[:start_date].present? ? params[:start_date] :
         Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d")
       @end_date = params[:end_date].present? ? params[:end_date] :
         Date.yesterday.strftime("%Y/%m/%d")
       cookies[:promotion] = "111111" unless cookies[:promotion].present?
-      @promotion.conversions.each do |conversion|
+      @conversions = @promotion.conversions.order_by_id
+      @conversions.each do |conversion|
         cookies[("conversion" + conversion.id.to_s).to_sym] = "1111111111" unless
           cookies[("conversion" + conversion.id.to_s).to_sym].present?
       end
-      @client_name = Client.find(@client_id).client_name
-      @promotion_name = Promotion.find(@promotion_id).promotion_name
-        
-      @conversions = @promotion.conversions
+      @client_name = @client.client_name
+      @promotion_name = @promotion.promotion_name
         
       @media_list = Media.get_media_list
       @account_list = Account.get_account_list(@promotion_id, @media_list)
@@ -55,19 +46,7 @@ class PromotionsController < ApplicationController
     end
   end
 
-  def show
-    render :index
-  end
-
   def new
-    if current_user.client?
-      @client_id = current_user.company_id
-    else
-      @client_id = params[:client_id] if params[:client_id]
-    end
-    @promotions = @client_id.blank? ? Array.new :
-        Promotion.get_by_client(@client_id).order_by_promotion_name
-    @client = Client.find(params[:client_id])
     @promotion = Promotion.new
   end
 
@@ -86,16 +65,11 @@ class PromotionsController < ApplicationController
   end
 
   def edit
-    if current_user.client?
-      @client_id = current_user.company_id
-    else
-      @client_id =@promotion.client_id
-    end
-    @promotions = @client_id.blank? ? Array.new :
-        Promotion.get_by_client(@client_id).order_by_promotion_name
+    @promotion = @array_promotion.find(params[:id])
   end
 
   def update
+    @promotion = @array_promotion.find(params[:id])
     @promotion.update_user_id = current_user.id
     if @promotion.update_attributes(params[:promotion])
       flash[:error] = "Promotion updated"
@@ -160,10 +134,16 @@ class PromotionsController < ApplicationController
   end
 
   private
-  def must_delete_able
-    @promotion = Promotion.find_by_id(params[:id])
-    if @promotion.nil? || @promotion.deleted?
-      redirect_to root_path + '404.html'
-    end 
+  def must_right_object
+    if current_user.client?
+      @client_id = current_user.company_id  
+    else
+      @client_id = params[:client_id]
+    end
+    @client = Client.find(@client_id)    
+    if current_user.agency? && !@client.client_users.find_by_user_id(current_user.id)
+      redirect_to clients_path
+    end
+    @array_promotion = @client.promotions.active.order_by_promotion_name
   end
 end
