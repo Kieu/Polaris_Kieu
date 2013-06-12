@@ -172,9 +172,9 @@
 		}
 	});
 	var colums = ["conversion_utime", "conversion_id", "conversion_category","tracking_type",
-	 "track_type", "approval_status", "media_id", "account_id", "campaign_id", "group_id", "unit_id", "click_time", "verify", "suid", "session_id", "os", "repeat", "log_state", "sales", "profit", "volume", "others", "error_message", "error_log_view"]
+	 "cv_type", "approval_status", "media_id", "account_id", "campaign_id", "group_id", "unit_id", "click_time", "verify", "suid", "session_id", "os", "repeat", "log_state", "sales", "profit", "volume", "others", "error_message"]
 
-	cookies_options = $.cookie("cv_options");
+	var cookies_options = $.cookie("cv_options");
 
 	update_cookie = function(data,ele){
 		options = cookies_options.split("");

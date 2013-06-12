@@ -79,6 +79,7 @@ class AccountsController < ApplicationController
         end
       end
       if flash[:error]
+        #render :new
         render "new", promotion_id: @promotion_id
       else
         flash[:error] = I18n.t("account.flash_messages.success")

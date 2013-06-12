@@ -65,7 +65,7 @@ ja:
               acceptance: クライント名(英語) チェックボックスを選択してください。
             tel: 
               blank: "電話番号を入力して下さい"
-              invalid: 電話番号が無効です
+              invalid: 電話番号を英数で入力して下さい
             person_charge:
               blank: "ご担当者様 を入力して下さい"
               too_long: ! 'ご担当者様 %{count}の文字数をオーバーしています'
