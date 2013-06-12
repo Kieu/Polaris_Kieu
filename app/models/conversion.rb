@@ -22,6 +22,7 @@ class Conversion < ActiveRecord::Base
   validates :url, presence: true, if: :check_track_method
 
   scope :order_by_conversion_name, ->{order :conversion_name}
+  scope :order_by_id, ->{order :id}
   scope :get_by_promotion_id, lambda {|promotion_id| where(promotion_id: promotion_id)}
   def create_mv
     mv = ""
