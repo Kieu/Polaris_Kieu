@@ -75,8 +75,8 @@ def get_rows conversion_logs
                                           volume: conversion_log.volume,
                                           others: conversion_log.others,
                                           error_message: conversion_log.error_message,
-                                          error_log_view: conversion_log.error_log_view,
-                                          media_category_id: conversion_log.media_category_id
+                                          media_category_id: conversion_log.media_category_id,
+                                          profit: conversion_log.profit
                                            }}
   end
   rows
