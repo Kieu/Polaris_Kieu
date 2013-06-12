@@ -38,7 +38,7 @@
           <table class="sidebar">
             <% object.each_with_index do |promotion, index| %>
                 <tr>
-                  <th class="edit"><%= link_to "", "#{edit_promotion_path(promotion)}", class: "edit", id: "edit#{promotion.id}" if current_user.super? || current_user.agency? %></th>
+                  <th class="edit"><%= link_to "", "#{edit_promotion_path(promotion)}?client_id=#{params[:client_id]}", class: "edit", id: "edit#{promotion.id}" if current_user.super? || current_user.agency? %></th>
                   <% if (params[:promotion_id] && promotion.id == params[:promotion_id].to_i) || (!params[:promotion_id] && index == 0) %>
                       <td>
                         <% if params[:controller] == "click_logs" %>
