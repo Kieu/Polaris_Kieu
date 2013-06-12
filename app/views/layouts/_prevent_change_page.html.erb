@@ -1,14 +1,12 @@
 <div id="popup_prevent">
   <script src="http://demo.tutorialzine.com/2010/12/better-confirm-box-jquery-css3/jquery.confirm/jquery.confirm.js"></script>
-  <link rel="stylesheet" type="text/css" href="http://demo.tutorialzine.com/2010/12/better-confirm-box-jquery-css3/jquery.confirm/jquery.confirm.css" />
-<script type="text/javascript">
+ <script type="text/javascript">
 $(function(){
     $("a").click(function(event){
        var href = ($(this).attr('href'));
         event.preventDefault();
         $.confirm({
-            'title'		: 'Delete Confirmation',
-            'message'	: 'You are about to delete this item. <br />It cannot be restored at a later time! Continue?',
+            'message'	: '<%= render partial: "layouts/popup" %>',
             'buttons'	: {
                 'Yes'	: {
                     'class'	: 'blue',
