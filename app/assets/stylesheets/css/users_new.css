@@ -85,3 +85,6 @@ disabled {
 .disabled {
     color: #999999;
 }
+#user_company_id option{
+  width: 250px;
+}
