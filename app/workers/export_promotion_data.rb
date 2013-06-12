@@ -2,7 +2,7 @@ require 'csv'
 
 # export promotion data table from promotion screen to csv file
 class ExportPromotionData
-  @queue = :default
+  @queue = :export_promotion
 
   def self.perform user_id, promotion_id
 
