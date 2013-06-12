@@ -67,7 +67,7 @@
 
 #confirmBox .button{
 	display:inline-block;
-	background:url('buttons.png') no-repeat;
+	background:url('/assets/buttons.png') no-repeat;
 	color:white;
 	position:relative;
 	height: 33px;
@@ -86,7 +86,7 @@
 	position:absolute;
 	top:0;
 	right:-5px;
-	background:url('buttons.png') no-repeat;
+	background:url('/assets/buttons.png') no-repeat;
 	width:5px;
 	height:33px
 }
