@@ -1,11 +1,11 @@
 <th><%= f.label "計測方法：" %></th>
 <td>
-  <%= f.radio_button :track_method, 1, checked: true, onclick: "entryChange5();" %>White
+  <%= f.radio_button :track_method, 1, checked: true, onclick: "check_track_method();" %>White
 </td>
 <td>
-  <%= f.radio_button :track_method, 2, onclick: "entryChange5();" %>Welcome
+  <%= f.radio_button :track_method, 2, onclick: "check_track_method();" %>Welcome
 </td>
 <td colspan="2">
-  <%= f.radio_button :track_method, 3, onclick: "entryChange5();" %>custom
-  <%= f.text_field :url, id: "url", class: "urlBox", placeholder: "URL必須" %>
+  <%= f.radio_button :track_method, 3, onclick: "check_track_method();" %>custom
+  <%= f.text_field :url, id: "url", class: "urlBox", placeholder: "URL必須", :disabled => 'disabled'%>
 </td>

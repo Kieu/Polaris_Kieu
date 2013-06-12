@@ -10,12 +10,28 @@ class ConversionsController < ApplicationController
 
   def new
     @conversion = Conversion.new
+    @converions = Conversion.where(promotion_id: params[:promotion_id])
   end
 
   def create
     @conversion = Conversion.new(params[:conversion])
     @conversion.create_user_id = current_user.id
     @conversion.promotion_id = params[:promotion_id]
+    conversion_combine = ''
+    idx = 0
+    params[:op].each do |op|
+         if idx == 0
+           if params[:cv][idx].present?
+            conversion_combine = params[:cv][idx] + "_" + params[:cv_kind][idx]  
+           end
+         else
+          if params[:cv][idx].present?
+            conversion_combine += "|" + op + "|" + params[:cv][idx] + "_" + params[:cv_kind][idx]  
+           end
+         end   
+         idx = idx + 1
+    end
+    @conversion.conversion_combine = conversion_combine
     if @conversion.save
       @conversion.create_mv
       flash[:error] = "Conversion created"
