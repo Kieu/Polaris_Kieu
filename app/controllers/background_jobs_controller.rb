@@ -1,7 +1,11 @@
 class BackgroundJobsController < ApplicationController
   before_filter :signed_in_user
   layout false
-
+  # Stream a file that has already been generated and stored on disk
+  def download_file
+    job = BackgroundJob.find(params[:id])
+    send_data("#{RAILS_ROOT}/Settings.#{job.controller}/#{job.filename}.pdf", :filename => "#{job.filename}.pdf", :type => "application/csv")
+  end
   def download
     @jobs = BackgroundJob.where(:user_id => current_user.id,:type_view => 'download',:status =>'1')
     render "background_jobs/new"
