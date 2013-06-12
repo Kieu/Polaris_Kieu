@@ -1,3 +1,4 @@
+<%= render "layouts/prevent_change_page_new" %>
 <%= stylesheet_link_tag "css/agency" %>
 <%= stylesheet_link_tag "css/common" %>
 <% if flash[:error] %>
@@ -14,7 +15,7 @@
 
 </script>
 <div id="user_form">
-  <%= I18n.t("agency.crumb_add") %>
+  <p class="h2"><%= I18n.t("agency.crumb_add") %></p>
   <%= form_for(@agency) do |f| %>
       <table>
         <tbody>

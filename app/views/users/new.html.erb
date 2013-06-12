@@ -26,7 +26,7 @@
         <tr>
           <th><%= f.label t("user.company_name") %></th>
           <td colspan="2">
-            <%= f.collection_select :company_id, Client.all, :id, :client_name, {}, {:class => 'input-text'} %></td>
+            <%= f.collection_select :company_id, Client.where(id: 0), :id, :client_name, {include_blank: t("user.company_id.include_blank")} , {:class => 'input-text'} %></td>
         </tr>
         <tr>
           <th><%= I18n.t("user.password.label") %></th>
@@ -60,6 +60,10 @@
                 last_choice = id;
                 return;
             }
+            if (id==""){
+            	$("#user_company_id").html("<option value><%= t('user.company_id.include_blank') %></option>");
+            	return;
+            }
             last_choice = id;
             name_data = (id == "2") ? "Client" : "Agency";
             $.ajax({
@@ -67,7 +71,7 @@
                 url: "<%= change_company_list_users_path %>",
                 data: "model=" + name_data,
                 success: function (data) {
-                    $("#user_company_id").html("");
+                    $("#user_company_id").html("<option value><%= t('user.company_id.include_blank') %></option>");
                     for (var i = 0; i < data.length; i++) {
                         name = (name_data == "Client") ? data[i].client_name : data[i].agency_name;
                         option = "<option value='" + data[i].id + "'>" + name + "</option>";

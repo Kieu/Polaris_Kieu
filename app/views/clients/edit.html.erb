@@ -58,7 +58,6 @@
         	<%
         		user = client_user.user
         		if user.client?
-        			
         			company = Client.find(user.company_id).client_name
         		else
         			company = Agency.find(user.company_id).agency_name
@@ -91,7 +90,7 @@
         <% User.active.each do |user|%>
         <%
         if user.client?
-			company = Client.find(user.company_id).client_name
+          company = Client.find(user.company_id).client_name
         else
         	company = Agency.find(user.company_id).agency_name
         end

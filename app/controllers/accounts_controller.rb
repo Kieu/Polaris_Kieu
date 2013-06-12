@@ -6,7 +6,7 @@ class AccountsController < ApplicationController
     @account = Account.new
     @promotion_id = params[:promotion_id]
     @promotion = Promotion.find_by_id(@promotion_id)
-    @medias = Media.active.where(media_category_id: 0)
+    @medias = Media.active.where(media_category_id: 1)
   end
   
   def edit
@@ -25,7 +25,7 @@ class AccountsController < ApplicationController
     
     ActiveRecord::Base.transaction do
       if @account.save
-        @margin = MarginManagerment.new
+        @margin = MarginManagement.new
         time = Time.new
         @margin.report_ymd = "#{time.year}#{time.month}#{time.day}"
         @margin.account_id = @account.id
@@ -51,6 +51,7 @@ class AccountsController < ApplicationController
   def create
     
     @account = Account.new(params[:account])
+    
     @medias = Media.active.where(media_category_id: @account.media_category_id)
     @promotion_id = params[:promotion_id]
     #get promotion by id
@@ -63,7 +64,7 @@ class AccountsController < ApplicationController
     if @account.valid?
       ActiveRecord::Base.transaction do
         if @account.save
-          @margin = MarginManagerment.new
+          @margin = MarginManagement.new
           time = Time.new
           @margin.report_ymd = "#{time.year}#{time.month}#{time.day}"
           @margin.account_id = @account.id
@@ -77,12 +78,11 @@ class AccountsController < ApplicationController
           end
         end
       end
-       
       if flash[:error]
-        render :new
+        render "new", promotion_id: @promotion_id
       else
         flash[:error] = I18n.t("account.flash_messages.success")
-        redirect_to promotions_path(promotion_id: @promotion_id)
+        redirect_to promotions_path(promotion_id: @promotion_id, client_id: @promotion.client.id)
       end
     else
       @account.sync_flg = 1

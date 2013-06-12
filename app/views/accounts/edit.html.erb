@@ -54,7 +54,7 @@
       </table>
       <div class="submit_area">
         <input type="image" id="btn_submit" src="/assets/btn_done.gif" >
-        <%= link_to raw('<img align="right" alt="キャンセル" src="/assets/btn_cancel.gif">'), promotions_path %>
+        <%= link_to raw('<img align="right" alt="キャンセル" src="/assets/btn_cancel.gif">'), promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %>
       </div>
     </div>
     <input type="hidden" name="promotion_id" value="<%= @promotion.id %>">
