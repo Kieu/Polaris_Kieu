@@ -286,12 +286,14 @@ table.sidebar tbody td {
     overflow-y: auto;
     /* prevent horizontal scrollbar */
     overflow-x: hidden;
+    background: #F1F1F1;
 }
 /* IE 6 doesn't support max-height
 * we use height instead, but this forces the menu to always be this tall
 */
 * html .ui-autocomplete {
     height: 200px;
+    background: #F1F1F1;
 }
 
 /* ==========================================================================
