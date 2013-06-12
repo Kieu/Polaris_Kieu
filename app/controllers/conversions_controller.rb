@@ -18,18 +18,18 @@ class ConversionsController < ApplicationController
     @conversion.create_user_id = current_user.id
     @conversion.promotion_id = params[:promotion_id]
     conversion_combine = ''
-    idx = 0
-    params[:op].each do |op|
-         if idx == 0
-           if params[:cv][idx].present?
-            conversion_combine = params[:cv][idx] + "_" + params[:cv_kind][idx]  
-           end
-         else
-          if params[:cv][idx].present?
-            conversion_combine += "|" + op + "|" + params[:cv][idx] + "_" + params[:cv_kind][idx]  
-           end
-         end   
-         idx = idx + 1
+    if params[:op] && params[:op].count > 0
+      params[:op].each_with_index do |op, idx|
+           if idx == 0
+             if params[:cv][idx].present?
+              conversion_combine << "#{params[:cv][idx]}_#{params[:cv_kind][idx]}"
+             end
+           else
+            if params[:cv][idx].present?
+              conversion_combine << "|#{op}|#{params[:cv][idx]}_#{params[:cv_kind][idx]}"
+             end
+           end   
+      end
     end
     @conversion.conversion_combine = conversion_combine
     if @conversion.save

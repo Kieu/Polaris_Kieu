@@ -6,7 +6,7 @@ class AccountsController < ApplicationController
     @account = Account.new
     @promotion_id = params[:promotion_id]
     @promotion = Promotion.find_by_id(@promotion_id)
-    @medias = Media.active.where(media_category_id: 0)
+    @medias = Media.active.where(media_category_id: 1)
   end
   
   def edit
@@ -49,17 +49,16 @@ class AccountsController < ApplicationController
     end
   end
   def create
-    
     @account = Account.new(params[:account])
     @medias = Media.active.where(media_category_id: @account.media_category_id)
     @promotion_id = params[:promotion_id]
     #get promotion by id
     @promotion = Promotion.find_by_id(@promotion_id)
     @account.create_user_id = current_user.id
-    if !@account.sync_flg
-      @account.sync_account_id = ""
-      @account.sync_account_pw = ""
-    end
+    #if !@account.sync_flg
+      #@account.sync_account_id = ""
+      #@account.sync_account_pw = ""
+    #end
     if @account.valid?
       ActiveRecord::Base.transaction do
         if @account.save
@@ -82,7 +81,7 @@ class AccountsController < ApplicationController
         render :new
       else
         flash[:error] = I18n.t("account.flash_messages.success")
-        redirect_to promotions_path(promotion_id: @promotion_id)
+        redirect_to promotions_path(promotion_id: @promotion_id, client_id: @promotion.client.id)
       end
     else
       @account.sync_flg = 1
