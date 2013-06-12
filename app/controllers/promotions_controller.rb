@@ -9,54 +9,49 @@ class PromotionsController < ApplicationController
     if current_user.client?
       @client_id = current_user.company_id  
     else
-      @promotion = Promotion.find(params[:promotion_id])
-      @client_id = @promotion.client_id
+      @promotion_id = params[:promotion_id]
+      @client_id = params[:client_id]
     end
-
-    @array_promotion = @client_id.blank? ? Array.new :
-      Promotion.get_by_client(@client_id).active.order_by_promotion_name
-    if @array_promotion.count > 0
-      @promotion_id = params[:promotion_id].blank? ? @array_promotion.first[:id] :
-        params[:promotion_id]
     
-      @promotion = @array_promotion.find_by_id(@promotion_id)
-      if @promotion
-        @start_date = params[:start_date].present? ? params[:start_date] :
-          Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d")
-        @end_date = params[:end_date].present? ? params[:end_date] :
-          Date.yesterday.strftime("%Y/%m/%d")
-        cookies[:promotion] = "111111" unless cookies[:promotion].present?
-        @promotion.conversions.each do |conversion|
-          cookies[("conversion" + conversion.id.to_s).to_sym] = "1111111111" unless
-            cookies[("conversion" + conversion.id.to_s).to_sym].present?
-        end
-        @client_name = Client.find(@client_id).client_name
-        @promotion_name = Promotion.find(@promotion_id).promotion_name
-        
-        @conversions = @promotion.conversions
-        
-        @media_list = Media.get_media_list
-        @account_list = Account.get_account_list(@promotion_id, @media_list)
-        
-        @promotion_results = DailySummaryAccount
-          .get_promotion_summary(@promotion_id, @start_date, @end_date)
-        @conversions_results = DailySummaryAccConversion
-          .get_conversions_summary(@promotion_id, @start_date, @end_date)
-        @promotion_data = Array.new
-        date_arrange = Array.new
-  
-        @promotion_data, date_arrange =
-          DailySummaryAccount.get_promotion_data(@promotion_id, @start_date,
-            @end_date)
-        @array_category = Array.new
-        date_arrange.each do |date|
-          @array_category << date.to_date.strftime("%m/%d")
-        end
-        @select_left = params[:left].present? ? params[:left] : "COST"
-        @select_right = params[:right].present? ? params[:right] : "click"
-      else
-        render 'public/404'
+    @client = Client.find(@client_id)
+    @array_promotion = @client.promotions.active.order_by_promotion_name
+    if @array_promotion.count > 0
+      @promotion_id = @array_promotion.first[:id] unless @promotion_id
+    
+      @promotion = @array_promotion.find(@promotion_id)
+      @start_date = params[:start_date].present? ? params[:start_date] :
+        Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d")
+      @end_date = params[:end_date].present? ? params[:end_date] :
+        Date.yesterday.strftime("%Y/%m/%d")
+      cookies[:promotion] = "111111" unless cookies[:promotion].present?
+      @promotion.conversions.each do |conversion|
+        cookies[("conversion" + conversion.id.to_s).to_sym] = "1111111111" unless
+          cookies[("conversion" + conversion.id.to_s).to_sym].present?
       end
+      @client_name = Client.find(@client_id).client_name
+      @promotion_name = Promotion.find(@promotion_id).promotion_name
+        
+      @conversions = @promotion.conversions
+        
+      @media_list = Media.get_media_list
+      @account_list = Account.get_account_list(@promotion_id, @media_list)
+        
+      @promotion_results = DailySummaryAccount
+        .get_promotion_summary(@promotion_id, @start_date, @end_date)
+      @conversions_results = DailySummaryAccConversion
+        .get_conversions_summary(@promotion_id, @start_date, @end_date)
+      @promotion_data = Array.new
+      date_arrange = Array.new
+  
+      @promotion_data, date_arrange =
+        DailySummaryAccount.get_promotion_data(@promotion_id, @start_date,
+          @end_date)
+      @array_category = Array.new
+      date_arrange.each do |date|
+        @array_category << date.to_date.strftime("%m/%d")
+      end
+      @select_left = params[:left].present? ? params[:left] : "COST"
+      @select_right = params[:right].present? ? params[:right] : "click"
     end
   end
 
@@ -167,6 +162,8 @@ class PromotionsController < ApplicationController
   private
   def must_delete_able
     @promotion = Promotion.find_by_id(params[:id])
-    redirect_to promotions_path if @promotion.nil? || @promotion.deleted?
+    if @promotion.nil? || @promotion.deleted?
+      redirect_to root_path + '404.html'
+    end 
   end
 end
