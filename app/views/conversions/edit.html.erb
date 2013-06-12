@@ -31,16 +31,16 @@
   </li>
   <li>&gt;</li>
   <li class="pre">
-    <%= link_to @promotion.promotion_name, promotion_path(@promotion) %>
+    <%= link_to @promotion.promotion_name, promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %>
   </li>
   <li>&gt;</li>
-  <li>コンバージョン登録</li>
+  <li><li><%= I18n.t("conversion.crumb_edit")%></li></li>
 </ul>
 <div class="clear"></div>
 <div id="conversion_inner">
   <div id="ui-tab">
     <ul class="ui-tabs-nav">
-      <li><a href="#fragment-1"><span>コンバージョン設定</span></a></li>
+      <li><a href="#fragment-1"><span><%= I18n.t("conversion.crumb_edit")%></span></a></li>
       <li class="disabled"><span>タグ取得</span></li>
     </ul>
     <div id="fragment-1">
