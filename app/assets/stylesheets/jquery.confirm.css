@@ -26,7 +26,22 @@
 	-webkit-box-shadow: 0 0 2px rgba(255, 255, 255, 0.6) inset;
 	box-shadow: 0 0 2px rgba(255, 255, 255, 0.6) inset;
 }
-
+#confirmBox .clientName{
+    font-weight: bold;
+    margin: 0 auto;
+    text-align: center;
+    color: #F63;
+    width: 200px;
+    height: 30px;
+    border-bottom: 1px solid #F63;
+    border-top: 1px solid #F63;
+    padding-top: 10px;
+}
+#confirmBox p.del_message{
+    margin: auto;
+    margin-bottom: 10px;
+    width: 420px;
+}
 #confirmBox h1,
 #confirmBox p{
 	font:26px/1 'Cuprum','Lucida Sans Unicode', 'Lucida Grande', sans-serif;
