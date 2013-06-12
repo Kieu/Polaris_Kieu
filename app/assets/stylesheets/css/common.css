@@ -287,6 +287,7 @@ table.sidebar tbody td {
     /* prevent horizontal scrollbar */
     overflow-x: hidden;
     background: #F1F1F1;
+    border: 1px solid gray;
 }
 /* IE 6 doesn't support max-height
 * we use height instead, but this forces the menu to always be this tall
