@@ -75,10 +75,10 @@ end
 
 private
   def set_cookies
-    cookies[:options] = "111111111111111000100000" if !cookies[:options]
+    cookies[:cv_options] = "111111111111111000100000" if !cookies[:cv_options]
     time = Time.new
-    cookies[:s]="#{time.year}/#{time.month}/01" if !cookies[:s] 
-    cookies[:e]="#{time.year}/#{time.month}/#{time.day}" if !cookies[:e]
+    cookies[:s]=Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d") if !cookies[:s] 
+    cookies[:e]=Date.yesterday.strftime("%Y/%m/%d") if !cookies[:e]
     cookies[:ser] = "1" if !cookies[:ser]
   end
 end

@@ -95,29 +95,29 @@
 		url: "<%= get_conversion_logs_list_conversion_promotion_logs_path %>",
 		dataType: 'json',
 		colModel : [ 
-	{display: 'CV_utime', name : 'conversion_utime', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[0] == "1") ? false : true},
-	{display: 'CV_id', name : 'conversion_id', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[1] == "1") ? false : true},
-    {display: 'CV_category', name : 'conversion_category', width : 'auto', sortable : true, align: 'center', hide: ($.cookie("options")[2] == "1") ? false : true},
-    {display: 'tracking_type', name : 'tracking_type', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[3] == "1") ? false : true},
-    {display: 'CV_type', name : 'cv_type', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[4] == "1") ? false : true},
-    {display: 'approval', name : 'approval_status', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[5] == "1") ? false : true},
-    {display: 'Media', name : 'media_id', width : 'auto', sortable : true, align: 'center', hide: ($.cookie("options")[6] == "1") ? false : true},
-    {display: 'Account', name : 'account_id', width : 'auto', sortable : true, align: 'center', hide: ($.cookie("options")[7] == "1") ? false : true},
-	{display: 'Campaign', name : 'campaign_id', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[8] == "1") ? false : true},
-    {display: 'Ad Group', name : 'group_id', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[9] == "1") ? false : true},
-    {display: 'ad_id', name : 'unit_id', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[10] == "1") ? false : true},
-    {display: 'click_time', name : 'click_time', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[11] == "1") ? false : true},
-    {display: 'verify', name : 'verify', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[12] == "1") ? false : true},
-    {display: 'suid', name : 'suid', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[13] == "1") ? false : true},
-    {display: 'session_id', name : 'session_id', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[14] == "1") ? false : true},
-    {display: 'OS', name : 'os', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[15] == "1") ? false : true},
-    {display: 'Repeat', name : 'repeat', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[16] == "1") ? false : true},
-    {display: 'Log state', name : 'log_state', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[17] == "1") ? false : true},
-    {display: 'Sales', name : 'sales', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[18] == "1") ? false : true},
-    {display: 'Profit', name : 'profit', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[19] == "1") ? false : true},
-    {display: 'Volume', name : 'volume', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[20] == "1") ? false : true},
-    {display: 'Others', name : 'others', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[21] == "1") ? false : true},
-    {display: 'Error message', name : 'error_message', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("options")[22] == "1") ? false : true}
+	{display: 'CV_utime', name : 'conversion_utime', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("cv_options")[0] == "1") ? false : true},
+	{display: 'CV_id', name : 'conversion_id', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("cv_options")[1] == "1") ? false : true},
+    {display: 'CV_category', name : 'conversion_category', width : 'auto', sortable : true, align: 'center', hide: ($.cookie("cv_options")[2] == "1") ? false : true},
+    {display: 'tracking_type', name : 'tracking_type', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("cv_options")[3] == "1") ? false : true},
+    {display: 'CV_type', name : 'cv_type', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("cv_options")[4] == "1") ? false : true},
+    {display: 'approval', name : 'approval_status', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("cv_options")[5] == "1") ? false : true},
+    {display: 'Media', name : 'media_id', width : 'auto', sortable : true, align: 'center', hide: ($.cookie("cv_options")[6] == "1") ? false : true},
+    {display: 'Account', name : 'account_id', width : 'auto', sortable : true, align: 'center', hide: ($.cookie("cv_options")[7] == "1") ? false : true},
+	{display: 'Campaign', name : 'campaign_id', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("cv_options")[8] == "1") ? false : true},
+    {display: 'Ad Group', name : 'group_id', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("cv_options")[9] == "1") ? false : true},
+    {display: 'ad_id', name : 'unit_id', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("cv_options")[10] == "1") ? false : true},
+    {display: 'click_time', name : 'click_time', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("cv_options")[11] == "1") ? false : true},
+    {display: 'verify', name : 'verify', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("cv_options")[12] == "1") ? false : true},
+    {display: 'suid', name : 'suid', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("cv_options")[13] == "1") ? false : true},
+    {display: 'session_id', name : 'session_id', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("cv_options")[14] == "1") ? false : true},
+    {display: 'OS', name : 'os', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("cv_options")[15] == "1") ? false : true},
+    {display: 'Repeat', name : 'repeat', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("cv_options")[16] == "1") ? false : true},
+    {display: 'Log state', name : 'log_state', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("cv_options")[17] == "1") ? false : true},
+    {display: 'Sales', name : 'sales', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("cv_options")[18] == "1") ? false : true},
+    {display: 'Profit', name : 'profit', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("cv_options")[19] == "1") ? false : true},
+    {display: 'Volume', name : 'volume', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("cv_options")[20] == "1") ? false : true},
+    {display: 'Others', name : 'others', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("cv_options")[21] == "1") ? false : true},
+    {display: 'Error message', name : 'error_message', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("cv_options")[22] == "1") ? false : true}
 			],
 				preProcess : function (json) {
 	            var results = new Array();
@@ -174,7 +174,7 @@
 	var colums = ["conversion_utime", "conversion_id", "conversion_category","tracking_type",
 	 "track_type", "approval_status", "media_id", "account_id", "campaign_id", "group_id", "unit_id", "click_time", "verify", "suid", "session_id", "os", "repeat", "log_state", "sales", "profit", "volume", "others", "error_message", "error_log_view"]
 
-	cookies_options = $.cookie("options");
+	cookies_options = $.cookie("cv_options");
 
 	update_cookie = function(data,ele){
 		options = cookies_options.split("");
@@ -200,7 +200,7 @@
 	    $(tbl).flexToggleCol(colIndex, visible);
 	}
 	$("#change_cookie").click(function(){
-		$.cookie("options",cookies_options);
+		$.cookie("cv_options",cookies_options);
 		for (var i=0;i<colums.length;i++){
 			if (cookies_options[i] == "1"){
 				showColumn("#cvlogs", i, true);
@@ -218,13 +218,13 @@
 		$("#cvlogs").colorbox.close();
 	});
 	$("#not_change_cookie").click(function(){
-		cookies_options = $.cookie("options");
+		cookies_options = $.cookie("cv_options");
 		//location.href = location.href;
 		$("#cvlogs").colorbox.close();
 	})
 
 	$("#display_all").click(function(){
-		$.cookie("options", '111111111111111111111111');
+		$.cookie("cv_options", '111111111111111111111111');
 		location.href = location.href;
 		
 	})

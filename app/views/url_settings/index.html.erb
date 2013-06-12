@@ -4,7 +4,7 @@
 <input type= "hidden" id="media_id" value="<%= @media_id %> "/>
 <div class="date">今日<br />
   <input id="datepick" type="text" readonly="readonly" value="<%= cookies[:s] + " - " + cookies[:e] %>" name="datepick">&#9660;
-  <a class="fancybox mt-10 fl-l" rel="gallery" href="#"><img src="/assets/btn_dl_option.gif" /></a>
+  <a class="fancybox mt-10 fl-l" rel="gallery" href="javascript:void(0)" id="show_option"><img src="/assets/btn_dl_option.gif" /></a>
   <a href="#" class="mt-10 fl-r" id="download_csv"><img src="/assets/btn_dl_csv.gif" /></a>
 </div>
 <script type="text/javascript">
@@ -18,15 +18,16 @@ $(document).ready(function() {
         resizable : false,
         striped : true,
         colModel : [
-            {display: 'Edit', name : 'edit_button', width : 'auto', sortable : false, align: 'center'},
-            {display: 'Ad Id', name : 'ad_id', width : 'auto', sortable : false, align: 'center'},
-            {display: 'Campaign name', name : 'campaign_name', width : 'auto', sortable : false, align: 'center'},
-            {display: 'Group name', name : 'group_name', width : 'auto', sortable : false, align: 'center'},
-            {display: 'Ad name', name : 'ad_name', width : 'auto', sortable : false, align: 'center'},
-            {display: 'Creative', name : 'creative', width : 'auto', sortable : false, align: 'center'},
-            {display: 'URL', name : 'url', width : 'auto', sortable : false, align: 'center'},
-            {display: 'Copy', name : 'copy', width : 'auto', sortable : false, align: 'center'},
-            {display: 'Delete', name : 'delete_check', width : 'auto', sortable : false, align: 'center'}
+            {display: 'Edit', name : 'edit_button', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][0] == "0" ? 1 : 0 %>},
+            {display: 'Ad Id', name : 'ad_id', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][1] == "0" ? 1 : 0 %>},
+            {display: 'Campaign name', name : 'campaign_name', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][2] == "0" ? 1 : 0 %>},
+            {display: 'Group name', name : 'group_name', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][3] == "0" ? 1 : 0 %>},
+            {display: 'Ad name', name : 'ad_name', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][4] == "0" ? 1 : 0 %>},
+            {display: 'Creative', name : 'creative', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][5] == "0" ? 1 : 0 %>},
+            {display: 'URL', name : 'url', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][6] == "0" ? 1 : 0 %>},
+            {display: 'Last Modified', name : 'last_modified', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][7] == "0" ? 1 : 0 %>},
+            {display: 'Copy', name : 'copy', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][8] == "0" ? 1 : 0 %>},
+            {display: 'Delete', name : 'delete_check', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][9] == "0" ? 1 : 0 %>},
             ],
         usepager: true,
         title: 'Url List',
@@ -42,42 +43,90 @@ $(document).ready(function() {
 })
 </script>
 <script type="text/javascript">
-$('#download_csv').click(function(){
-  $.ajax({
-    type: "POST",
-    url: "<%= download_csv_url_settings_path %>",
-    data: {"promotion_id" : "<%= @promotion_id if @promotion_id %>",
-           "account_id" : "<%= @account_id if @account_id %>",
-           "media_id": "<%= @media_id if @media_id %>"
-           },
-    success: function(data){
-  }
+$(function() {
+	var colums = ["edit_button", "ad_id", "campaign_name","group_name", "ad_name", "creative", "url", "copy", "delete_check", "last_modified"];
+	default_url_options = $("#inline_cv_logs").html();
+	function showColumn(tbl, colIndex, visible) {
+	    $(tbl).flexToggleCol(colIndex, visible);
+	}
+	$('#download_csv').click(function(){
+	  $.ajax({
+	    type: "POST",
+	    url: "<%= download_csv_url_settings_path %>",
+	    data: {"promotion_id" : "<%= @promotion_id if @promotion_id %>",
+	           "account_id" : "<%= @account_id if @account_id %>",
+	           "media_id": "<%= @media_id if @media_id %>"
+	           },
+	    success: function(data){
+	  }
+	
+	  })
+	})
+	
+	function formatDate(year, month, day){
+	    if (year < 2000) { year = parseInt(year) + 1900; }
+	    if (month.length == 1) { month = "0" + parseInt(month); }
+	    if (day.length == 1) { day = "0" + parseInt(day); }
+	    return year + "/" + month + "/" + day;
+	}
+	
+	$('#datepick').daterangepicker({
+	    onDone: function() {
+	        var term = $('#datepick').val();
+	        var d = term.split(' - ');
+	        var f = (d[0]).split('/');
+	        var t = (d[1]).split('/');
+	        $.cookie("url_setting_start_date", formatDate(f[0], f[1], f[2]), {
+	            path: '/'
+	        });
+	        $.cookie("url_setting_end_date", formatDate(t[0], t[1], t[2]), {
+	            path: '/'
+	        });
+	
+	        reloadFlex1(".newTable04", "<%= get_urls_list_url_settings_path %>?promotion_id=" + $("#promotion_id").val() + "&account_id=" + $("#account_id").val() + "&media_id=" + $("#media_id").val());
+	    }
+	});
+	cookies_options = $.cookie("url_setting");
+	update_cookie = function(data,ele){
+		options = cookies_options.split("");
+		options[data] = (options[data] == "1") ? "0" : "1";
+		text = (options[data] == "1") ? "<img src='/assets/btn_box_dl.gif' >" : "<img src='/assets/btn_box_add.gif' >";
+		$(ele).html(text);
+		options = options.join("");
+		cookies_options = options;
+	}
+	$(document).on('click', "#change_cookie", function(){
+		console.log(cookies_options);
+		$.cookie("url_setting",cookies_options);
+		so = 0;
+		for (var i=0;i<colums.length;i++){
+			if (cookies_options[i] == "1"){
+				showColumn(".newTable04", i, true);
+			} else{
+				showColumn(".newTable04", i, false);
+			}
+		 }
 
-  })
-})
-
-function formatDate(year, month, day){
-    if (year < 2000) { year = parseInt(year) + 1900; }
-    if (month.length == 1) { month = "0" + parseInt(month); }
-    if (day.length == 1) { day = "0" + parseInt(day); }
-    return year + "/" + month + "/" + day;
-}
-
-$('#datepick').daterangepicker({
-    onDone: function() {
-        var term = $('#datepick').val();
-        var d = term.split(' - ');
-        var f = (d[0]).split('/');
-        var t = (d[1]).split('/');
-        $.cookie("s", formatDate(f[0], f[1], f[2]), {
-            path: '/'
-        });
-        $.cookie("e", formatDate(t[0], t[1], t[2]), {
-            path: '/'
-        });
-
-        reloadFlex1(".newTable04", "<%= get_urls_list_url_settings_path %>?promotion_id=" + $("#promotion_id").val() + "&account_id=" + $("#account_id").val() + "&media_id=" + $("#media_id").val());
-    }
+	    reloadFlex1(".newTable04", "<%= get_urls_list_url_settings_path %>?promotion_id=" + $("#promotion_id").val() + "&account_id=" + $("#account_id").val() + "&media_id=" + $("#media_id").val());
+	    default_url_options = $("#inline_cv_logs").html();
+		$("#clicklogs").colorbox.close();
+	});
+	$(document).on('click', "#not_change_cookie", function(){
+		cookies_options = $.cookie("coptions");
+		$("#inline_cv_logs").html(default_url_options);
+		$("#clicklogs").colorbox.close();
+	})
+	
+	$("#show_option").click(function(){
+		$.colorbox({
+        	width: "725",
+            inline: true,
+            escKey: false,
+            overlayClose: false,
+            href: "#inline_cv_logs",
+            height:"630"
+		});
+	})
 });
 </script>
 <script type="text/javascript">
@@ -120,3 +169,23 @@ $(window).resize(function() {
         <!-- #uploadArea -->
         <table style="display:none" class="newTable04 fixTable d-none"></table>
     <!-- /#container end -->
+<<<<<<< HEAD
+<div style='display:none'>
+<div id="inline_cv_logs">
+	<ul>
+	    <% Settings.url_options.each_with_index do |option, index|%>
+	    	<li>
+	        	<p class="check_txt"><%= option %></p>
+	        	<div>
+	          		<%= link_to cookies[:url_setting][index] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('#{index}',this)"%>
+	        	</div>
+	      	</li>
+		<% end %>
+	</ul>
+		<div class="submit_area">
+	  		<button id="change_cookie" style="border: 0px"><img src="/assets/btn_done.gif" alt="完成"></button>
+	  		<button id="not_change_cookie" style="border: 0px"><img src="/assets/btn_cancel.gif" alt="完成"></button>
+		</div>
+
+</div>
+</div>
