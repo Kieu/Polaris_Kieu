@@ -1,6 +1,7 @@
 <div id="popup_prevent">
   <script src="http://demo.tutorialzine.com/2010/12/better-confirm-box-jquery-css3/jquery.confirm/jquery.confirm.js"></script>
  <script type="text/javascript">
+
 $(function(){
     $("a").click(function(event){
        var href = ($(this).attr('href'));
@@ -9,13 +10,13 @@ $(function(){
             'message'	: '<%= render partial: "layouts/popup" %>',
             'buttons'	: {
                 'Yes'	: {
-                    'class'	: 'blue',
+                    'class'	: 'popup_yes',
                     'action': function(){
                         location.href = href;
                     }
                 },
                 'No'	: {
-                    'class'	: 'gray',
+                    'class'	: 'popup_no',
                     'action': function(){}	// Nothing to do in this case. You can as well omit the action property.
                 }
             }
