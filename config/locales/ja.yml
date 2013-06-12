@@ -51,7 +51,7 @@ ja:
               greater_than: ! 'クライント名(英語) %{count}より大きい値にしてください。'
               greater_than_or_equal_to: ! 'クライント名(英語) %{count}以上の値にしてください。'
               inclusion: クライント名(英語) 正しい値が選択されていません。
-              invalid: クライント名(英語) は英数字で記載して下さい
+              invalid: クライント名(英語) を英数字で記載して下さい
               less_than: ! 'クライント名(英語) %{count}より小さい値にしてください。'
               less_than_or_equal_to: ! 'クライント名(英語) %{count}以下の値にしてください。'
               not_a_number: クライント名(英語) 数値で入力してください。
@@ -67,11 +67,11 @@ ja:
               blank: "電話番号を入力して下さい"
               invalid: 電話番号が無効です
             person_charge:
-              blank: "ご担当者様 入力して下さい"
+              blank: "ご担当者様 を入力して下さい"
               too_long: ! 'ご担当者様 %{count}の文字数をオーバーしています'
               too_short: ! 'ご担当者様 %{count}文字以上で入力してください。'
             person_sale:
-              blank: "担当営業 入力して下さい"
+              blank: "担当営業 を入力して下さい"
               too_long: ! '担当営業 %{count}の文字数をオーバーしています'
               too_short: ! '担当営業 %{count}文字以上で入力してください。'
         user:
@@ -123,8 +123,8 @@ ja:
               wrong_length: ! 'ユーザー名(英語) %{count}文字で入力してください。'
               acceptance: ユーザー名(英語) チェックボックスを選択してください。
             email: 
-              blank: "メールアドレス 入力してください。"
-              invalid: メールアドレス 正しく入力して下さい。
+              blank: "メールアドレス を入力して下さい"
+              invalid: メールアドレス を正しく入力して下さい。
               taken: メールアドレス すでに登録されています。
             company_id:
               blank: "会社名 を入力して下さい"
@@ -521,8 +521,8 @@ ja:
     privacy_policy: "プライバシーポリシー"
     porporate_information: "企業情報"
   login:
-    email: "メールアドレス"
-    pw: "パスワード"
+    email: "メールアドレス: "
+    pw: "パスワード: "
     choose_lang:
       label: "言語選択"
       ja: "日本語"
@@ -535,90 +535,90 @@ ja:
     crumb_edit: "クライアント編集"
     crumb_add: "クライアント登録"
     crumb_list: "リクルート（ゼクシィ）"
-    client_name: "クライアント名："
-    roman_name: "クライント名(英語)："
+    client_name: "クライアント名： "
+    roman_name: "クライント名(英語)： "
     tel: "電話番号："
-    person_charge: "ご担当者様："
-    person_sale: "担当営業："
+    person_charge: "ご担当者様： "
+    person_sale: "担当営業： "
     contract_flg:
       label: "ご契約プラン："
-      standard_plan: "スタンダードプラン"
-      premium_plan: "プレミアムプラン(月額5万円)"
+      standard_plan: " スタンダードプラン"
+      premium_plan: " プレミアムプラン(月額5万円)"
     contract_type:
       label: "利用規約："
-      unrecovered: "未回収"
-      been_recovered: "回収済み"
+      unrecovered: " 未回収"
+      been_recovered: " 回収済み"
     user_information: "ユーザー情報"
     delete: "削除"
     flash_messages:
-      success: "クライアント登録が完了しました"
-      update: "クライアント編集が完了しました"
+      success: " クライアント登録が完了しました"
+      update: " クライアント編集が完了しました"
       success_error: "Can not create user for client ja"
       update_error: "Can not update user for client ja"
   agency:
     crumb_edit: "代理店編集"
     crumb_add: "代理店登録"
     crumb_list: ""
-    agency_name: "代理店名"
-    roman_name: "代理店名(英語)"
+    agency_name: "代理店名: "
+    roman_name: "代理店名(英語): "
     flash_messages:
-      success: "代理店登録が完了しました"
-      update: "代理店編集が完了しました"
+      success: " 代理店登録が完了しました"
+      update: " 代理店編集が完了しました"
   account:
     crumb_add: "本体プロモーション"
     crumb_edit: "アカウント編集"
-    media_category: "アカウント登録"
-    media: "メディア"
-    account_name: "アカウント名"
-    roman_name: "アカウント名(英語)"
+    media_category: "メディアカテゴリ: "
+    media: "メディア: "
+    account_name: "アカウント名: "
+    roman_name: "アカウント名(英語): "
     cost: "コスト計算： 入力データ "
-    sync_account_id: "アカウントの同期"
-    sync_account_pw: "Sync account PW"
+    sync_account_id: "アカウントの同期: "
+    sync_account_pw: "Sync account PW: "
     flash_messages:
-      success: "アカウント登録が完了しました"
-      update: "アカウント編集が完了しました"
+      success: " アカウント登録が完了しました"
+      update: " アカウント編集が完了しました"
   conversion:
     crumb_add: "コンバージョン登録"
     crumb_edit: "コンバージョン編集"
     user_information: "ユーザー情報"
     delete: "削除"
-    conversion_name: "コンバージョン名"
-    roman_name: "コンバージョン名(英語)"
+    conversion_name: "コンバージョン名: "
+    roman_name: "コンバージョン名(英語): "
     conversion_category:
-      label: "成果カテゴリ"
-      web: "WEB"
-      app: "APP"
+      label: "成果カテゴリ: "
+      web: " WEB"
+      app: " APP"
       combination: " 組み合わせ"
     deduplicated:
-      label: "重複排除"
-      label1: "あり"
+      label: "重複排除: "
+      label1: " あり"
       label2: " なし"
-    unique_definition: "ユニーク定義"
+    unique_definition: "ユニーク定義: "
     flash_messages:
-      success: "コンバージョン登録が完了しました"
-      update: "コンバージョン編集が完了しました"
+      success: " コンバージョン登録が完了しました"
+      update: " コンバージョン編集が完了しました"
     option1:
       label: "<オプション①>　"
       starting_point_setting:
-        label: "起点設定"
-        configure: "設定する"
-        not_configure: "設定しない"
-      sale_unit_price: "売上単価"
+        label: "起点設定: "
+        configure: " 設定する"
+        not_configure: " 設定しない"
+      sale_unit_price: "売上単価: "
     option2:
       label: "<オプション②>"
       reward_format:
-        label: "報酬型式"
-        straight_line_type: "定額型"
-        not_set: "設定しない"
+        label: "報酬型式: "
+        straight_line_type: " 定額型"
+        not_set: " 設定しない"
     combination:
       pattern: "パターン: "
   log:
     today_text: "今日"
     crumb_click: "Clickログ"
     crumb_cv_logs: "CVログ"
-    conversion_name: "コンバージョン名"
-    media_category: "メディアカテゴリ"
-    account_name: "アカウント名"
+    conversion_name: "コンバージョン名: "
+    media_category: "メディアカテゴリ: "
+    account_name: "アカウント名: "
   cv_logs:
     label: "CVログ"
     cv_test: "CVテスト"
@@ -669,21 +669,21 @@ ja:
   promotion:
     crumb_edit: "プロモーション編集"
     crumb_add: "プロモーション登録"
-    promotion_name: "プロモーション名"
-    category: "カテゴリ"
+    promotion_name: "プロモーション名: "
+    category: "カテゴリ: "
     tracking_period:
-      label: "計測期間"
+      label: "計測期間: "
       day: "日"
     dashboard: "ダッシュボード"
     flash_messages:
-      success: "プロモーション登録が完了しました"
-      update: "プロモーション編集が完了しました"
+      success: " プロモーション登録が完了しました"
+      update: " プロモーション編集が完了しました"
   user:
     crumb_add: "ユーザー登録"
     crumb_edit: "ユーザー編集"
-    username: "ユーザー名"
-    roman_name: "ユーザー名(英語)"
-    email: "メールアドレス"
+    username: "ユーザー名: "
+    roman_name: "ユーザー名(英語): "
+    email: "メールアドレス: "
     role:
       label: "権限"
       include_blank: "権限を選択してください" 
@@ -694,16 +694,16 @@ ja:
       label: "パスワード: "
       info: "※自動で振り分けます"
     password_notification:
-      label: "パスワード通知"
-      not_notified: "通知しない"
-      to_notified: "通知する"
+      label: "パスワード通知: "
+      not_notified: " 通知しない"
+      to_notified: " 通知する"
     disabled:
-      label: "ユーザー無効化"
-      disable: "無効化にする"
+      label: "ユーザー無効化: "
+      disable: " 無効化にする"
     flash_messages:
-      success: "ユーザー登録が完了しました"
-      update: "ユーザー編集が完了しました"
-  media_categories: ["リスティング", "ディスプレイ", "アフィリエイト"]   
+      success: " ユーザー登録が完了しました"
+      update: " ユーザー編集が完了しました"
+  media_categories: [" リスティング", "ディスプレイ", "アフィリエイト"]   
   log_track_type: ["Install", "アプリ内アクション (Action in app)"]
   log_repeat_flg: ["新規 (new)", "リピート (repeat)"]
   Listing: "Listing ads"
