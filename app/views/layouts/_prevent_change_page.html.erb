@@ -6,24 +6,8 @@ $(function(){
 		$('#prevent_change').colorbox.close();
 	});
     $("a").click(function(event){
-        var elem = $(this).closest('#cautionBox');
-        $.confirm({
-            'title'		: 'Delete Confirmation',
-            'message'	: 'You are about to delete this item. <br />It cannot be restored at a later time! Continue?',
-            'buttons'	: {
-                'Yes'	: {
-                    'class'	: 'blue',
-                    'action': function(){
-                        //	elem.slideUp();
-
-                    },
-                    'No'	: {
-                        'class'	: 'gray',
-                        'action': function(){}	// Nothing to do in this case. You can as well omit the action property.
-                    }
-                }
-            }
-    });
+        //var elem = $(this).closest('#cautionBox');
+        alert('tét') ;
 });
 });
 </script>
