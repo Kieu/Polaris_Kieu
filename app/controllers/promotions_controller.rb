@@ -102,7 +102,11 @@ class PromotionsController < ApplicationController
   def download_csv
     promotion_id = params[:promotion_id].to_i
     user_id = current_user.id
-    Resque.enqueue ExportPromotionData, user_id, promotion_id
+    background_job = BackgroundJob.create
+    job_id = ExportPromotionsData.create(user_id: user_id,
+      promotion_id: promotion_id, bgj_id: background_job.id)
+    background_job.job_id = job_id
+    background_job.save!
     
     render text: "processing"
   end

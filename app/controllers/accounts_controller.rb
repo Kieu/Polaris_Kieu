@@ -1,6 +1,7 @@
 class AccountsController < ApplicationController
   before_filter :signed_in_user
   before_filter :must_super_agency
+  before_filter :must_right_object, only: [:edit, :update]
   def new
     @account = Account.new
     @promotion_id = params[:promotion_id]
@@ -91,5 +92,13 @@ class AccountsController < ApplicationController
   
   def change_medias_list
     render json: Media.active.where(media_category_id: params[:cid])
+  end
+  
+  private
+  def must_right_object
+    @account = Account.find(params[:id])
+    if current_user.agency? && !@account.promotion.client.client_users.find_by_user_id(current_user.id)
+      redirect_to promotions_path(promotion_id: params[:promotion_id], client_id: @account.promotion.client.id)
+    end
   end
 end

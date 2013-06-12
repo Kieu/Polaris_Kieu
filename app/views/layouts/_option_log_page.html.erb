@@ -14,42 +14,14 @@
   <!-- チェックボックス -->
   <div class="check-group clearfix">
     <ul>
+      <% Settings.click_options_part1.each_with_index do |option, index| %>
       <li>
-        <p class="check_txt"><%= I18n.t("click_logs.click_time")%></p>
-        <div>
-          <%= link_to cookies[:coptions][0] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('0',this)"%>
-        </div>
+        <p class="check_txt"><%= I18n.t("click_logs.#{option}")%></p>
+          <div>
+            <%= link_to cookies[:coptions][index] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('#{index}',this)"%>
+          </div>
       </li>
-      <li>
-        <p class="check_txt"><%= I18n.t("click_logs.media_name")%></p>
-        <div>
-          <%= link_to cookies[:coptions][1] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('1',this)"%>
-        </div>
-      </li>
-      <li>
-        <p class="check_txt"><%= I18n.t("click_logs.account_name")%></p>
-        <div>
-          <%= link_to cookies[:coptions][2] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('2',this)"%>
-        </div>
-      </li>
-      <li>
-        <p class="check_txt"><%= I18n.t("click_logs.campaign_name")%></p>
-        <div>
-          <%= link_to cookies[:coptions][3] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('3',this)"%>
-        </div>
-      </li>
-      <li>
-        <p class="check_txt"><%= I18n.t("click_logs.ad_group_name")%></p>
-        <div>
-          <%= link_to cookies[:coptions][4] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('4',this)"%>
-        </div>
-      </li>
-      <li>
-        <p class="check_txt"><%= I18n.t("click_logs.ad_name")%></p>
-        <div>
-          <%= link_to cookies[:coptions][5] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('5',this)"%>
-        </div>
-      </li>
+      <% end %>
     </ul>
   </div>
   <!-- /チェックボックス -->
@@ -59,42 +31,14 @@
   <!-- チェックボックス -->
   <div class="check-group clearfix">
     <ul>
+      <% Settings.click_options_part2.each_with_index do |option, index| %>
       <li>
-        <p class="check_txt"><%= I18n.t("click_logs.url")%></p>
-        <div>
-          <%= link_to cookies[:coptions][6] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('6',this)"%>
-        </div>
+        <p class="check_txt"><%= I18n.t("click_logs.#{option}")%></p>
+          <div>
+            <%= link_to cookies[:coptions][index+6] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('#{index+6}',this)"%>
+          </div>
       </li>
-      <li>
-        <p class="check_txt"><%= I18n.t("click_logs.sesid")%></p>
-        <div>
-          <%= link_to cookies[:coptions][7] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('7',this)"%>
-        </div>
-      </li>
-      <li>
-        <p class="check_txt"><%= I18n.t("click_logs.os")%></p>
-        <div>
-          <%= link_to cookies[:coptions][8] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('8',this)"%>
-        </div>
-      </li>
-      <li>
-        <p class="check_txt"><%= I18n.t("click_logs.log_state")%></p>
-        <div>
-          <%= link_to cookies[:coptions][9] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('9',this)"%>
-        </div>
-      </li>
-      <li>
-        <p class="check_txt"><%= I18n.t("click_logs.error_message")%></p>
-        <div>
-          <%= link_to cookies[:coptions][10] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('10',this)"%>
-        </div>
-      </li>
-      <li>
-        <p class="check_txt"><%= I18n.t("click_logs.error_log_view")%></p>
-        <div>
-          <input type="checkbox" name="error_table" id="error_table" checked="checked">
-        </div>
-      </li>
+      <% end %>
     </ul>
     <!-- /チェックボックス -->
   </div>

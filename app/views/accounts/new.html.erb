@@ -3,7 +3,7 @@
 <ul class="contentNavi">
     <li class="pre"><%= link_to @promotion.client.client_name, clients_path(client_id: @promotion.client.id ) %></li>
     <li>&gt;</li>
-    <li class="pre"><%= link_to @promotion.promotion_name, promotions_path(promotion_id: @promotion.client.id) %>
+    <li class="pre"><%= link_to @promotion.promotion_name, promotions_path(client_id: @promotion.client.id, promotion_id: @promotion.id) %>
       <input type="hidden" name="promotion_id" value="<%= @promotion.id %>">
     </li>
     <li>&gt;</li>
@@ -57,7 +57,7 @@
 				          </td>
 				        </tr>
 				        <th></th>
-				        <td><%= f.text_field :sync_account_pw, maxlength: 255, style: "width: 250px", placeholder: " PW: " %></td>
+				        <td><input type="password" style="width: 250px" size="255" placeholder=" PW: " name="account[sync_account_pw]" maxlength="255" id="account_sync_account_pw"></td>
 				        </tr>
         			</table>
         		</div>
@@ -86,7 +86,7 @@
         </tr>
         <tr>
         	<th></th>
-        	<td><input type="text" style="width: 250px" size="255" placeholder=" PW: " name="account[sync_account_pw]" maxlength="255" id="account_sync_account_pw"></td>
+        	<td><input type="password" style="width: 250px" size="255" placeholder=" PW: " name="account[sync_account_pw]" maxlength="255" id="account_sync_account_pw"></td>
         </tr>
 	</table>
 </div>
@@ -119,7 +119,7 @@ jQuery(document).ready(function($) {
 	            }
 	        }
 	    });
-	    if ($(this).val() < 2) {
+	    if ($(this).val() < 3) {
 	    	if ($("#account_sync_box").html() == "")
 	    		$("#account_sync_box").append($('#sync_box_add').html());
 	    } else {
@@ -135,7 +135,7 @@ jQuery(document).ready(function($) {
 	    	$("#account_sync_box").html("");
 	    }
 	});
-	if ($("#account_media_category_id").val() < 2) {
+	if ($("#account_media_category_id").val() < 3) {
     	if ($("#account_sync_box").html() == "")
     		$("#account_sync_box").append($('#sync_box_add').html());
     } else {

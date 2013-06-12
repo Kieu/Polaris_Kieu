@@ -18,10 +18,10 @@ ja:
         client:
           attributes:
             client_name:
-              blank: "クライアント名 入力してください。"
+              blank: "クライアント名を入力して下さい"
               accepted: クライアント名 受諾してください。 
               confirmation: クライアント名 確認の入力が一致しません。
-              empty: クライアント名 入力してください。
+              empty: "クライアント名を入力して下さい"
               equal_to: ! 'クライアント名 %{count}にしてください。 ' 
               even: クライアント名 偶数にしてください。
               exclusion: クライアント名 予約されています。
@@ -35,13 +35,13 @@ ja:
               not_an_integer: クライアント名 整数で入力してください。
               odd: クライアント名 奇数にしてください。
               record_invalid: クライアント名 バリデーションに失敗しました。 '%{errors}'
-              taken: クライアント名 すでに登録されています。
-              too_long: ! 'クライアント名 %{count}文字以内で入力してください。'
+              taken: クライアント名 は既に登録されています
+              too_long: ! 'クライアント名 %{count}の文字数をオーバーしています'
               too_short: ! 'クライアント名 %{count}文字以上で入力してください。'
               wrong_length: ! 'クライアント名 %{count}文字で入力してください。'
               acceptance: クライアント名 チェックボックスを選択してください。
             roman_name: 
-              blank: "クライント名(英語) 入力してください。"
+              blank: "クライアント名(英語)を入力して下さい"
               accepted: クライント名(英語) 受諾してください。 
               confirmation: クライント名(英語) 確認の入力が一致しません。 
               empty: クライント名(英語) 入力してください。
@@ -51,7 +51,7 @@ ja:
               greater_than: ! 'クライント名(英語) %{count}より大きい値にしてください。'
               greater_than_or_equal_to: ! 'クライント名(英語) %{count}以上の値にしてください。'
               inclusion: クライント名(英語) 正しい値が選択されていません。
-              invalid: クライント名(英語) 正しく入力して下さい。
+              invalid: クライント名(英語) は英数字で記載して下さい
               less_than: ! 'クライント名(英語) %{count}より小さい値にしてください。'
               less_than_or_equal_to: ! 'クライント名(英語) %{count}以下の値にしてください。'
               not_a_number: クライント名(英語) 数値で入力してください。
@@ -59,25 +59,25 @@ ja:
               odd: クライント名(英語) 奇数にしてください。
               record_invalid: クライント名(英語) バリデーションに失敗しました。 '%{errors}'
               taken: クライント名(英語) すでに登録されています。
-              too_long: ! 'クライント名(英語) %{count}文字以内で入力してください。 '
+              too_long: ! 'クライント名(英語) %{count}の文字数をオーバーしています '
               too_short: ! 'クライント名(英語) %{count}文字以上で入力してください。 '
               wrong_length: ! 'クライント名(英語) %{count}文字で入力してください。 '
               acceptance: クライント名(英語) チェックボックスを選択してください。
             tel: 
-              blank: "電話番号 入力してください。"
-              invalid: 電話番号 正しく入力して下さい。
+              blank: "電話番号を入力して下さい"
+              invalid: 電話番号が無効です
             person_charge:
-              blank: "ご担当者様 入力してください。"
-              too_long: ! 'ご担当者様 %{count}文字以内で入力してください。'
+              blank: "ご担当者様 入力して下さい"
+              too_long: ! 'ご担当者様 %{count}の文字数をオーバーしています'
               too_short: ! 'ご担当者様 %{count}文字以上で入力してください。'
             person_sale:
-              blank: "担当営業 入力してください。"
-              too_long: ! '担当営業 %{count}文字以内で入力してください。'
+              blank: "担当営業 入力して下さい"
+              too_long: ! '担当営業 %{count}の文字数をオーバーしています'
               too_short: ! '担当営業 %{count}文字以上で入力してください。'
         user:
           attributes:
             username:
-              blank: "ユーザー名 入力してください。"
+              blank: "ユーザー名 を入力して下さい"
               accepted: ユーザー名 受諾してください。 
               confirmation: ユーザー名 確認の入力が一致しません。 
               empty: ユーザー名 入力してください。
@@ -94,13 +94,13 @@ ja:
               not_an_integer: ユーザー名 整数で入力してください。
               odd: ユーザー名 奇数にしてください。
               record_invalid: ユーザー名 バリデーションに失敗しました。 '%{errors}'
-              taken: ユーザー名 すでに登録されています。
-              too_long: ! 'ユーザー名 %{count}文字以内で入力してください。'
+              taken: ユーザー名 は既に登録されています
+              too_long: ! 'ユーザー名 %{count}の文字数をオーバーしています'
               too_short: ! 'ユーザー名 %{count}文字以上で入力してください。'
               wrong_length: ! 'ユーザー名 %{count}文字で入力してください。'
               acceptance: User name チェックボックスを選択してください。
             roman_name: 
-              blank: "ユーザー名(英語) 入力してください。"
+              blank: "ユーザー名(英語) を入力して下さい"
               accepted: ユーザー名(英語) 受諾してください。 
               confirmation: ユーザー名(英語) 確認の入力が一致しません。 
               empty: ユーザー名(英語) 入力してください。
@@ -110,15 +110,15 @@ ja:
               greater_than: ! 'ユーザー名(英語) %{count}より大きい値にしてください。'
               greater_than_or_equal_to: ! 'ユーザー名(英語) %{count}以上の値にしてください。'
               inclusion: ユーザー名(英語) 正しい値が選択されていません。
-              invalid: ユーザー名(英語) 正しく入力して下さい。
+              invalid: ユーザー名(英語) は英数字で記載して下さい
               less_than: ! 'ユーザー名(英語) %{count}より小さい値にしてください。'
               less_than_or_equal_to: ! 'Client name %{count}以下の値にしてください。'
               not_a_number: ユーザー名(英語) 数値で入力してください。
               not_an_integer: ユーザー名(英語) 整数で入力してください。
               odd: ユーザー名(英語) 奇数にしてください。
               record_invalid: ユーザー名(英語) バリデーションに失敗しました。 '%{errors}'
-              taken: ユーザー名(英語) すでに登録されています。
-              too_long: ! 'ユーザー名(英語) %{count}文字以内で入力してください。'
+              taken: ユーザー名(英語) は既に登録されています
+              too_long: ! 'ユーザー名(英語) %{count}の文字数をオーバーしています'
               too_short: ! 'ユーザー名(英語) %{count}文字以上で入力してください。'
               wrong_length: ! 'ユーザー名(英語) %{count}文字で入力してください。'
               acceptance: ユーザー名(英語) チェックボックスを選択してください。
@@ -127,20 +127,20 @@ ja:
               invalid: メールアドレス 正しく入力して下さい。
               taken: メールアドレス すでに登録されています。
             company_id:
-              blank: "会社名 入力してください。"
-              too_long: ! '会社名 %{count}文字以内で入力してください。'
+              blank: "会社名 を入力して下さい"
+              too_long: ! '会社名 %{count}の文字数をオーバーしています'
               too_short: ! '会社名 %{count}文字以上で入力してください。'
             role_id:
-              blank: "権限 入力してください。"
-              too_long: ! '権限 %{count}文字以内で入力してください。'
+              blank: "権限 を入力して下さい"
+              too_long: ! '権限 %{count}の文字数をオーバーしています'
               too_short: ! '権限 %{count}文字以上で入力してください。'
         agency:
           attributes:
             agency_name:
-              blank: "代理店名 入力してください。"
+              blank: "代理店名 を入力して下さい"
               accepted: 代理店名 受諾してください。 
               confirmation: 代理店名 確認の入力が一致しません。 
-              empty: 代理店名 入力してください。
+              empty: 代理店名 を入力して下さい
               equal_to: ! '代理店名 %{count}にしてください。 ' 
               even: 代理店名 偶数にしてください。
               exclusion: 代理店名 予約されています。
@@ -154,38 +154,38 @@ ja:
               not_an_integer: 代理店名 整数で入力してください。
               odd: 代理店名 奇数にしてください。
               record_invalid: 代理店名 バリデーションに失敗しました。 '%{errors}'
-              taken: 代理店名 すでに登録されています。
-              too_long: ! '代理店名 %{count}文字以内で入力してください。'
+              taken: 代理店名 は既に登録されています
+              too_long: ! '代理店名 %{count}の文字数をオーバーしています'
               too_short: ! '代理店名 %{count}文字以上で入力してください。'
               wrong_length: ! '代理店名 %{count}文字で入力してください。'
               acceptance: 代理店名 チェックボックスを選択してください。
             roman_name: 
-              blank: "代理店名(英語) 入力してください。"
+              blank: "代理店名(英語) を入力して下さい"
               accepted: 代理店名(英語) 受諾してください。 
               confirmation: 代理店名(英語) 確認の入力が一致しません。 
-              empty: 代理店名(英語) 入力してください。
+              empty: 代理店名(英語) を入力して下さい
               equal_to: ! '代理店名 %{count}にしてください。 ' 
               even: 代理店名(英語) 偶数にしてください。
               exclusion: 代理店名(英語) 予約されています。
               greater_than: ! '代理店名(英語) %{count}より大きい値にしてください。'
               greater_than_or_equal_to: ! '代理店名(英語) %{count}以上の値にしてください。'
               inclusion: 代理店名(英語) 正しい値が選択されていません。
-              invalid: 代理店名(英語) 正しく入力して下さい。
+              invalid: 代理店名(英語) は英数字で記載して下さい
               less_than: ! '代理店名(英語) %{count}より小さい値にしてください。'
               less_than_or_equal_to: ! '代理店名 %{count}以下の値にしてください。'
               not_a_number: 代理店名(英語) 数値で入力してください。
               not_an_integer: 代理店名(英語) 整数で入力してください。
               odd: 代理店名(英語) 奇数にしてください。
               record_invalid: 代理店名(英語) バリデーションに失敗しました。 '%{errors}'
-              taken: 代理店名(英語) すでに登録されています。
-              too_long: ! '代理店名(英語) %{count}文字以内で入力してください。'
+              taken: 代理店名(英語) は既に登録されています
+              too_long: ! '代理店名(英語) %{count}の文字数をオーバーしています'
               too_short: ! '代理店名(英語) %{count}文字以上で入力してください。'
               wrong_length: ! '代理店名(英語) %{count}文字で入力してください。'
               acceptance: 代理店名(英語) チェックボックスを選択してください。
         account:
           attributes:
             account_name:
-              blank: "アカウント名 入力してください。"
+              blank: "アカウント名 を入力して下さい"
               accepted: アカウント名 受諾してください。 
               confirmation: アカウント名 確認の入力が一致しません。 
               empty: アカウント名 入力してください。
@@ -202,13 +202,13 @@ ja:
               not_an_integer: アカウント名 整数で入力してください。
               odd: アカウント名 奇数にしてください。
               record_invalid: アカウント名 バリデーションに失敗しました。 '%{errors}'
-              taken: アカウント名 すでに登録されています。
-              too_long: ! 'アカウント名 %{count}文字以内で入力してください。'
+              taken: アカウント名 は既に登録されています
+              too_long: ! 'アカウント名 %{count}の文字数をオーバーしています'
               too_short: ! 'アカウント名 %{count}文字以上で入力してください。'
               wrong_length: ! 'アカウント名 %{count}文字で入力してください。'
               acceptance: アカウント名 チェックボックスを選択してください。
             roman_name: 
-              blank: "ユーザー名(英語) 入力してください。"
+              blank: "ユーザー名(英語) を入力して下さい"
               accepted: ユーザー名(英語) 受諾してください。 
               confirmation: ユーザー名(英語) 確認の入力が一致しません。 
               empty: ユーザー名(英語) 入力してください。
@@ -218,20 +218,20 @@ ja:
               greater_than: ! 'ユーザー名(英語) %{count}より大きい値にしてください。'
               greater_than_or_equal_to: ! 'ユーザー名(英語) %{count}以上の値にしてください。'
               inclusion: ユーザー名(英語) 正しい値が選択されていません。
-              invalid: ユーザー名(英語) 正しく入力して下さい。
+              invalid: ユーザー名(英語) は英数字で記載して下さい
               less_than: ! 'ユーザー名(英語) %{count}より小さい値にしてください。'
               less_than_or_equal_to: ! 'Client name %{count}以下の値にしてください。'
               not_a_number: ユーザー名(英語) 数値で入力してください。
               not_an_integer: ユーザー名(英語) 整数で入力してください。
               odd: ユーザー名(英語) 奇数にしてください。
               record_invalid: ユーザー名(英語) バリデーションに失敗しました。 '%{errors}'
-              taken: ユーザー名(英語) すでに登録されています。
-              too_long: ! 'ユーザー名(英語) %{count}文字以内で入力してください。'
+              taken: ユーザー名(英語) は既に登録されています
+              too_long: ! 'ユーザー名(英語) %{count}の文字数をオーバーしています'
               too_short: ! 'ユーザー名(英語) %{count}文字以上で入力してください。'
               wrong_length: ! 'ユーザー名(英語) %{count}文字で入力してください。'
               acceptance: ユーザー名(英語) チェックボックスを選択してください。
             media_id: 
-              blank: "メディア 入力してください。"
+              blank: "メディア を選択してください"
               accepted: メディア 受諾してください。 
               confirmation: メディア 確認の入力が一致しません。 
               empty: メディア 入力してください。
@@ -248,13 +248,13 @@ ja:
               not_an_integer: メディア 整数で入力してください。
               odd: メディア 奇数にしてください。
               record_invalid: メディア バリデーションに失敗しました。 '%{errors}'
-              taken: メディア すでに登録されています。
-              too_long: ! 'メディア %{count}文字以内で入力してください。'
+              taken: メディア は既に登録されています
+              too_long: ! 'メディア %{count}の文字数をオーバーしています'
               too_short: ! 'メディア %{count}文字以上で入力してください。'
               wrong_length: ! 'メディア %{count}文字で入力してください。'
               acceptance: ユーザー名(英語) チェックボックスを選択してください。
             media_category_id:
-              blank: "メディアカテゴリ 入力してください。"
+              blank: "メディアカテゴリ を入力して下さい"
               accepted: メディアカテゴリ 受諾してください。 
               confirmation: メディアカテゴリ 確認の入力が一致しません。 
               empty: メディアカテゴリ 入力してください。
@@ -271,13 +271,13 @@ ja:
               not_an_integer: メディアカテゴリ 整数で入力してください。
               odd: メディアカテゴリ 奇数にしてください。
               record_invalid: メディアカテゴリ バリデーションに失敗しました。 '%{errors}'
-              taken: メディアカテゴリ すでに登録されています。
-              too_long: ! 'メディアカテゴリ %{count}文字以内で入力してください。'
+              taken: メディアカテゴリ は既に登録されています
+              too_long: ! 'メディアカテゴリ %{count}の文字数をオーバーしています'
               too_short: ! 'メディアカテゴリ %{count}文字以上で入力してください。'
               wrong_length: ! 'メディアカテゴリ %{count}文字で入力してください。'
               acceptance: メディアカテゴリ チェックボックスを選択してください。
             cost: 
-              blank: "コスト計算 入力してください。"
+              blank: "コスト計算 を入力して下さい"
               accepted: コスト計算 受諾してください。 
               confirmation: コスト計算 確認の入力が一致しません。 
               empty: コスト計算 入力してください。
@@ -294,61 +294,61 @@ ja:
               not_an_integer: コスト計算 整数で入力してください。
               odd: コスト計算 奇数にしてください。
               record_invalid: コスト計算 バリデーションに失敗しました。 '%{errors}'
-              taken: コスト計算 すでに登録されています。
-              too_long: ! 'コスト計算 %{count}文字以内で入力してください。'
+              taken: コスト計算 は既に登録されています
+              too_long: ! 'コスト計算 %{count}の文字数をオーバーしています'
               too_short: ! 'コスト計算 %{count}文字以上で入力してください。'
               wrong_length: ! 'コスト計算 %{count}文字で入力してください。'
               acceptance: コスト計算 チェックボックスを選択してください。
-            sync_account_id: 
-              blank: "Sync account ID can't be blank"
-              accepted: Sync account ID must be accepted 
-              confirmation: Sync account ID doesn't match confirmation 
-              empty: Sync account ID can't be empty
-              equal_to: ! 'Sync account ID must be equal to %{count} ' 
-              even: Sync account ID must be even
-              exclusion: Sync account ID is reserved
-              greater_than: ! 'Sync account ID must be greater than %{count}'
-              greater_than_or_equal_to: ! 'Sync account ID must be greater than or equal to %{count}'
-              inclusion: Sync account ID is not included in the list
-              invalid: Sync account ID is invalid
-              less_than: ! 'Sync account ID must be less than %{count}'
-              less_than_or_equal_to: ! 'Sync account ID must be less than or equal to %{count}'
-              not_a_number: Sync account ID is not a number
-              not_an_integer: Sync account ID is not a interger
-              odd: Sync account ID must be odd
+            sync_account_id:
+              blank: "Sync account ID を入力して下さい"
+              accepted: Sync account ID 受諾してください。 
+              confirmation: Sync account ID 確認の入力が一致しません。 
+              empty: Sync account ID 入力してください。
+              equal_to: ! 'Sync account ID %{count}にしてください。 ' 
+              even: Sync account ID 偶数にしてください。
+              exclusion: Sync account ID 予約されています。
+              greater_than: ! 'Sync account ID %{count}より大きい値にしてください。'
+              greater_than_or_equal_to: ! 'Sync account ID %{count}以上の値にしてください。'
+              inclusion: Sync account ID 正しい値が選択されていません。
+              invalid: Sync account ID  正しく入力して下さい。
+              less_than: ! 'Sync account ID %{count}より小さい値にしてください。'
+              less_than_or_equal_to: ! 'Sync account ID %{count}以下の値にしてください。'
+              not_a_number: Sync account ID 数値で入力してください。
+              not_an_integer: Sync account ID 整数で入力してください。
+              odd: Sync account ID 奇数にしてください。
               record_invalid: Sync account ID バリデーションに失敗しました。 '%{errors}'
-              taken: Sync account ID すでに登録されています。
-              too_long: ! 'Sync account ID is too long (maximum is %{count} characters)'
-              too_short: ! 'Sync account ID is too short (minimum is %{count} characters)'
-              wrong_length: ! 'Sync account ID is the wrong length (should be %{count} characters)'
-              acceptance: Sync account ID must be accepted
+              taken: Sync account ID は既に登録されています
+              too_long: ! 'Sync account ID %{count}の文字数をオーバーしています'
+              too_short: ! 'Sync account ID %{count}文字以上で入力してください。'
+              wrong_length: ! 'Sync account ID %{count}文字で入力してください。'
+              acceptance: Sync account ID チェックボックスを選択してください。
             sync_account_pw: 
-              blank: "Sync account password can't be blank"
-              accepted: Sync account password must be accepted 
-              confirmation: Sync account password doesn't match confirmation 
-              empty: Sync account password can't be empty
-              equal_to: ! 'Sync account password must be equal to %{count} ' 
-              even: Sync account password must be even
-              exclusion: Sync account password is reserved
-              greater_than: ! 'Sync account password must be greater than %{count}'
-              greater_than_or_equal_to: ! 'Sync account password must be greater than or equal to %{count}'
-              inclusion: Sync account password is not included in the list
-              invalid: Sync account password is invalid
-              less_than: ! 'Sync account password must be less than %{count}'
-              less_than_or_equal_to: ! 'Sync account password must be less than or equal to %{count}'
-              not_a_number: Sync account password is not a number
-              not_an_integer: Sync account password is not a interger
-              odd: Sync account password must be odd
+              blank: "Sync account password を入力して下さい"
+              accepted: Sync account password 受諾してください。 
+              confirmation: Sync account password 確認の入力が一致しません。 
+              empty: Sync account ID 入力してください。
+              equal_to: ! 'Sync account password %{count}にしてください。 ' 
+              even: Sync account ID 偶数にしてください。
+              exclusion: Sync account ID 予約されています。
+              greater_than: ! 'Sync account password %{count}より大きい値にしてください。'
+              greater_than_or_equal_to: ! 'Sync account password %{count}以上の値にしてください。'
+              inclusion: Sync account password 正しい値が選択されていません。
+              invalid: Sync account password  正しく入力して下さい。
+              less_than: ! 'Sync account password %{count}より小さい値にしてください。'
+              less_than_or_equal_to: ! 'Sync account password %{count}以下の値にしてください。'
+              not_a_number: Sync account password 数値で入力してください。
+              not_an_integer: Sync account password 整数で入力してください。
+              odd: Sync account password 奇数にしてください。
               record_invalid: Sync account password バリデーションに失敗しました。 '%{errors}'
-              taken: Sync account password すでに登録されています。
-              too_long: ! 'Sync account password is too long (maximum is %{count} characters)'
-              too_short: ! 'Sync account password is too short (minimum is %{count} characters)'
-              wrong_length: ! 'Sync account password is the wrong length (should be %{count} characters)'
-              acceptance: Sync account password must be accepted
+              taken: Sync account password は既に登録されています
+              too_long: ! 'Sync account password %{count}の文字数をオーバーしています'
+              too_short: ! 'Sync account password %{count}文字以上で入力してください。'
+              wrong_length: ! 'Sync account password %{count}文字で入力してください。'
+              acceptance: Sync account password チェックボックスを選択してください。
         conversion:
           attributes:
             conversion_name:
-              blank: "コンバージョン名 入力してください。"
+              blank: "コンバージョン名 を選択してください"
               accepted: コンバージョン名 受諾してください。 
               confirmation: コンバージョン名 確認の入力が一致しません。 
               empty: コンバージョン名 入力してください。
@@ -365,13 +365,13 @@ ja:
               not_an_integer: コンバージョン名 整数で入力してください。
               odd: コンバージョン名 奇数にしてください。
               record_invalid: コンバージョン名 バリデーションに失敗しました。 '%{errors}'
-              taken: コンバージョン名 すでに登録されています。
-              too_long: ! 'コンバージョン名 %{count}文字以内で入力してください。'
+              taken: コンバージョン名 は既に登録されています
+              too_long: ! 'コンバージョン名 %{count}の文字数をオーバーしています'
               too_short: ! 'コンバージョン名 %{count}文字以上で入力してください。'
               wrong_length: ! 'コンバージョン名 %{count}文字で入力してください。'
               acceptance: コンバージョン名 チェックボックスを選択してください。
             roman_name: 
-              blank: "コンバージョン名(英語) 入力してください。"
+              blank: "コンバージョン名(英語) を入力して下さい"
               accepted: コンバージョン名(英語) 受諾してください。 
               confirmation: コンバージョン名(英語) 確認の入力が一致しません。 
               empty: コンバージョン名(英語) 入力してください。
@@ -381,20 +381,20 @@ ja:
               greater_than: ! 'コンバージョン名(英語) %{count}より大きい値にしてください。'
               greater_than_or_equal_to: ! 'コンバージョン名(英語) %{count}以上の値にしてください。'
               inclusion: コンバージョン名(英語) 正しい値が選択されていません。
-              invalid: コンバージョン名(英語) 正しく入力して下さい。
+              invalid: コンバージョン名(英語) は英数字で記載して下さい
               less_than: ! 'コンバージョン名(英語) %{count}より小さい値にしてください。'
               less_than_or_equal_to: ! 'コンバージョン名(英語) %{count}以下の値にしてください。'
               not_a_number: コンバージョン名(英語) 数値で入力してください。
               not_an_integer: コンバージョン名(英語) 整数で入力してください。
               odd: コンバージョン名(英語) 奇数にしてください。
               record_invalid: コンバージョン名(英語) バリデーションに失敗しました。 '%{errors}'
-              taken: コンバージョン名(英語) すでに登録されています。
-              too_long: ! 'コンバージョン名(英語) %{count}文字以内で入力してください。'
+              taken: コンバージョン名(英語) は既に登録されています
+              too_long: ! 'コンバージョン名(英語) %{count}の文字数をオーバーしています'
               too_short: ! 'コンバージョン名(英語) %{count}文字以上で入力してください。'
               wrong_length: ! 'コンバージョン名(英語) %{count}文字で入力してください。'
               acceptance: コンバージョン名(英語) チェックボックスを選択してください。
             sale_unit_price: 
-              blank: "売上単価 入力してください。"
+              blank: "売上単価 を入力して下さい"
               accepted: 売上単価 受諾してください。 
               confirmation: 売上単価 確認の入力が一致しません。 
               empty: 売上単価 入力してください。
@@ -411,15 +411,15 @@ ja:
               not_an_integer: 売上単価 整数で入力してください。
               odd: 売上単価 奇数にしてください。
               record_invalid: 売上単価 バリデーションに失敗しました。 '%{errors}'
-              taken: 売上単価 すでに登録されています。
-              too_long: ! '売上単価 %{count}文字以内で入力してください。'
+              taken: 売上単価 は既に登録されています
+              too_long: ! '売上単価 %{count}の文字数をオーバーしています'
               too_short: ! '売上単価 %{count}文字以上で入力してください。'
               wrong_length: ! '売上単価 %{count}文字で入力してください。'
               acceptance: 売上単価 チェックボックスを選択してください。
         promotion:
           attributes:
             promotion_name:
-              blank: "プロモーション名 入力してください。"
+              blank: "プロモーション名 を入力して下さい"
               accepted: プロモーション名 受諾してください。 
               confirmation: プロモーション名 確認の入力が一致しません。 
               empty: プロモーション名 入力してください。
@@ -436,13 +436,13 @@ ja:
               not_an_integer: プロモーション名 整数で入力してください。
               odd: プロモーション名 奇数にしてください。
               record_invalid: プロモーション名 バリデーションに失敗しました。 '%{errors}'
-              taken: プロモーション名 すでに登録されています。
-              too_long: ! 'プロモーション名 %{count}文字以内で入力してください。'
+              taken: プロモーション名 は既に登録されています
+              too_long: ! 'プロモーション名 %{count}の文字数をオーバーしています'
               too_short: ! 'プロモーション名 %{count}文字以上で入力してください。'
               wrong_length: ! 'プロモーション名 %{count}文字で入力してください。'
               acceptance: プロモーション名 チェックボックスを選択してください。
             roman_name: 
-              blank: "ユーザー名(英語) 入力してください。"
+              blank: "ユーザー名(英語) を入力して下さい"
               accepted: ユーザー名(英語) 受諾してください。 
               confirmation: ユーザー名(英語) 確認の入力が一致しません。 
               empty: ユーザー名(英語) 入力してください。
@@ -452,20 +452,20 @@ ja:
               greater_than: ! 'ユーザー名(英語) %{count}より大きい値にしてください。'
               greater_than_or_equal_to: ! 'ユーザー名(英語) %{count}以上の値にしてください。'
               inclusion: ユーザー名(英語) 正しい値が選択されていません。
-              invalid: ユーザー名(英語) 正しく入力して下さい。
+              invalid: ユーザー名(英語) は英数字で記載して下さい
               less_than: ! 'ユーザー名(英語) %{count}より小さい値にしてください。'
               less_than_or_equal_to: ! 'Client name %{count}以下の値にしてください。'
               not_a_number: ユーザー名(英語) 数値で入力してください。
               not_an_integer: ユーザー名(英語) 整数で入力してください。
               odd: ユーザー名(英語) 奇数にしてください。
               record_invalid: ユーザー名(英語) バリデーションに失敗しました。 '%{errors}'
-              taken: ユーザー名(英語) すでに登録されています。
-              too_long: ! 'ユーザー名(英語) %{count}文字以内で入力してください。'
+              taken: ユーザー名(英語) は既に登録されています
+              too_long: ! 'ユーザー名(英語) %{count}の文字数をオーバーしています'
               too_short: ! 'ユーザー名(英語) %{count}文字以上で入力してください。'
               wrong_length: ! 'ユーザー名(英語) %{count}文字で入力してください。'
               acceptance: ユーザー名(英語) チェックボックスを選択してください。
             promotion_category_id: 
-              blank: "カテゴリ 入力してください。"
+              blank: "カテゴリを選択してください"
               accepted: カテゴリ 受諾してください。 
               confirmation: カテゴリ 確認の入力が一致しません。 
               empty: カテゴリ 入力してください。
@@ -482,13 +482,13 @@ ja:
               not_an_integer: カテゴリ 整数で入力してください。
               odd: カテゴリ 奇数にしてください。
               record_invalid: カテゴリ バリデーションに失敗しました。 '%{errors}'
-              taken: カテゴリ すでに登録されています。
-              too_long: ! 'カテゴリ %{count}文字以内で入力してください。'
+              taken: カテゴリ は既に登録されています
+              too_long: ! 'カテゴリ %{count}の文字数をオーバーしています'
               too_short: ! 'カテゴリ %{count}文字以上で入力してください。'
               wrong_length: ! 'カテゴリ %{count}文字で入力してください。'
               acceptance: カテゴリ チェックボックスを選択してください。
         tracking_period: 
-              blank: "計測期間 入力してください。"
+              blank: "計測期間 を入力して下さい"
               accepted: 計測期間 受諾してください。 
               confirmation: 計測期間 確認の入力が一致しません。 
               empty: 計測期間 入力してください。
@@ -499,14 +499,14 @@ ja:
               greater_than_or_equal_to: ! '計測期間 %{count}以上の値にしてください。'
               inclusion: 計測期間 正しい値が選択されていません。
               invalid: 計測期間  正しく入力して下さい。
-              less_than: ! '計測期間 %{count}より小さい値にしてください。'
-              less_than_or_equal_to: ! '計測期間 %{count}以下の値にしてください。'
+              less_than: ! '計測期間 %{count}１日以降９０日以下で記入下さい'
+              less_than_or_equal_to: ! '計測期間 %{count}１日以降９０日以下で記入下さい'
               not_a_number: 計測期間 数値で入力してください。
               not_an_integer: 計測期間 整数で入力してください。
               odd: 計測期間 奇数にしてください。
               record_invalid: 計測期間 バリデーションに失敗しました。 '%{errors}'
-              taken: 計測期間 すでに登録されています。
-              too_long: ! '計測期間 %{count}文字以内で入力してください。'
+              taken: 計測期間 は既に登録されています
+              too_long: ! '計測期間 %{count}の文字数をオーバーしています'
               too_short: ! '計測期間 %{count}文字以上で入力してください。'
               wrong_length: ! '計測期間 %{count}文字で入力してください。'
               acceptance: 計測期間 チェックボックスを選択してください。
@@ -551,8 +551,8 @@ ja:
     user_information: "ユーザー情報"
     delete: "削除"
     flash_messages:
-      success: "クライアント登録が完了しました。"
-      update: "クライアント編集が完了しました。"
+      success: "クライアント登録が完了しました"
+      update: "クライアント編集が完了しました"
       success_error: "Can not create user for client ja"
       update_error: "Can not update user for client ja"
   agency:
@@ -562,8 +562,8 @@ ja:
     agency_name: "代理店名"
     roman_name: "代理店名(英語)"
     flash_messages:
-      success: "代理店登録が完了しました。"
-      update: "代理店編集が完了しました。"
+      success: "代理店登録が完了しました"
+      update: "代理店編集が完了しました"
   account:
     crumb_add: "本体プロモーション"
     crumb_edit: "アカウント編集"
@@ -575,8 +575,8 @@ ja:
     sync_account_id: "アカウントの同期"
     sync_account_pw: "Sync account PW"
     flash_messages:
-      success: "アカウント登録が完了しました。"
-      update: "アカウント編集が完了しました。"
+      success: "アカウント登録が完了しました"
+      update: "アカウント編集が完了しました"
   conversion:
     crumb_add: "コンバージョン登録"
     crumb_edit: "コンバージョン編集"
@@ -594,6 +594,9 @@ ja:
       label1: "あり"
       label2: " なし"
     unique_definition: "ユニーク定義"
+    flash_messages:
+      success: "コンバージョン登録が完了しました"
+      update: "コンバージョン編集が完了しました"
     option1:
       label: "<オプション①>　"
       starting_point_setting:
@@ -673,8 +676,8 @@ ja:
       day: "日"
     dashboard: "ダッシュボード"
     flash_messages:
-      success: "プロモーション登録が完了しました。"
-      update: "プロモーション編集が完了しました。"
+      success: "プロモーション登録が完了しました"
+      update: "プロモーション編集が完了しました"
   user:
     crumb_add: "ユーザー登録"
     crumb_edit: "ユーザー編集"
@@ -683,7 +686,7 @@ ja:
     email: "メールアドレス"
     role:
       label: "権限"
-      include_blank: "選択してください" 
+      include_blank: "権限を選択してください" 
     company_name: "会社名"
     password:
       label: "パスワード: "
@@ -696,8 +699,8 @@ ja:
       label: "ユーザー無効化"
       disable: "無効化にする"
     flash_messages:
-      success: "アカウント登録が完了しました。"
-      update: "アカウント編集が完了しました"
+      success: "ユーザー登録が完了しました"
+      update: "ユーザー編集が完了しました"
   media_categories: ["リスティング", "ディスプレイ", "アフィリエイト"]   
   log_track_type: ["Install", "アプリ内アクション (Action in app)"]
   log_repeat_flg: ["新規 (new)", "リピート (repeat)"]

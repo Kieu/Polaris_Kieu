@@ -45,6 +45,7 @@
 }
 #confirmBox h1,
 #confirmBox p{
+    background: url("/assets/header_pop_bg.jpg") repeat-x;
 	font:26px/1 'Cuprum','Lucida Sans Unicode', 'Lucida Grande', sans-serif;
 	text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6);
 	color:#666;

@@ -1,17 +1,5 @@
-<script type="text/javascript">
-  function render_ios(){
-    $('#method_area').html('<%=j render "app_install_ios", f: f %>');
-  }
-  function render_android(){
-    $('#method_area').html('<%=j render "app_install_android", f: f %>');
-  }
-  function render_fb_app_id(){
-    $('#facebook_app_id').html('<%=j render "app_install_fb_app_id", f: f %>');
-  }
-  function render_android(){
-    $('#facebook_app_id').html('');
-  }
-</script>
+
+<table>
 <tr>
   <th><%= f.label "OS指定：" %></th>
   <td colspan="2"><label>
@@ -45,10 +33,20 @@
   <td colspan="2">&nbsp;</td>
 </tr>
 <tr id="method_area">
-  <%= render "app_install_ios", f: f %>
+  <%= 
+	  if(@conversion.os==1)
+	  	render "app_install_android", f: f 
+	  else	
+	  	render "app_install_ios", f: f
+	  end
+	  %>
 </tr>
 <tr id="fb_app_id">
-  <%= render "app_install_fb_app_id", f: f %>
+  <%= 
+	  if(@conversion.conversion_mode!=2)
+	  	render "app_install_fb_app_id", f: f
+	  end
+	  %>
 </tr>
 <tr>
   <th><%= f.label "ユニーク定義：" %></th>
@@ -77,3 +75,4 @@
     <%= f.radio_button :reward_form, 1 %>定率型
   </label></td>
 </tr>
+</table>

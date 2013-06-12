@@ -1,15 +1,21 @@
 <script type="text/javascript">
-  ChiliBook.recipeFolder = "./lib/chili/";
+  //ChiliBook.recipeFolder = "./lib/chili/";
   $(document).ready(function (){
     $("#current_rev").html("v"+$.mcDropdown.version);
-    $("#category").mcDropdown("#categorymenu");
-    $("#category2").mcDropdown("#categorymenu2");
+    //$("#category").mcDropdown("#categorymenu");
+    //$("#category2").mcDropdown("#categorymenu2");
   });
-
+  function get_category(id='') {
+	$('#current_cv').val(id);
+	console.log($('#current_cv').val());
+	$.colorbox({width:"580px", inline:true, href:"#inline_logs"});
+  }
   $(function() {
     $('#ui-tab').tabs();
   });
 </script>
+
+
 <% content_for :stylesheet_includes do %>
   <%= stylesheet_link_tag "css/common" %>
     <%= stylesheet_link_tag "css/conversion" %>
@@ -44,15 +50,39 @@
     </ul>
     <div id="fragment-1">
       <%= form_for @conversion do |f| %>
+      <script type="text/javascript">
+		  function render_ios(){
+		    $('#method_area').html('<%=j render "app_install_ios", f: f %>');
+		  }
+		  function render_android(){
+			$('#method_area').html('<%=j render "app_install_android", f: f %>');
+		  }
+		  function render_fb_app_id(){
+		    $('#fb_app_id').html('');
+		    $('#fb_app_id').html('<%=j render "app_install_fb_app_id", f: f %>');
+		  }
+		  function remove_fb_app_id() {
+		  	$('#fb_app_id').html('');
+		  }
+		</script>
         <script type="text/javascript">
           function render_web(){
+            $('#category_area').html('');
             $('#category_area').html('<%=j render "web", f: f %>');
           }
           function render_app(){
             $('#category_area').html('<%=j render "app", f: f %>');
           }
           function render_combination(){
+            $('#category_area').html('');
             $('#category_area').html('<%=j render "combination", f: f %>');
+          }
+          function check_track_method() {
+          	if($("#conversion_track_method_3").is(':checked')) {
+          		$("#url").removeAttr('disabled');
+          	} else {
+          		$("#url").attr('disabled','disabled');
+          	}
           }
         </script>
         <form>
@@ -90,7 +120,17 @@
               </tbody>
             </table>
             <table class="client_info" id="category_area">
-              <%= render "web", f: f %>
+              <%= 
+              case @conversion.conversion_category
+              when 2
+              		render "render_combination", f: f
+              when 1
+              		render "app", f: f
+              else
+              		render "web", f: f
+              end
+               
+              %>
             </table>
             <div class="submit_area">
               <input type="image" src="/assets/btn_done.gif" id="btn_done">

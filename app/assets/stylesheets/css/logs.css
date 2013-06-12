@@ -154,7 +154,6 @@ table.user_add tbody td {
 	}
 	
 	/* 隠しコンテンツのCSS */
-	/*position: absolute;を記述する*/
 	.f_box {
 		position: relative;
 
@@ -322,5 +321,3 @@ table.user_add tbody td {
 .w_box {
 	min-width: 1200px;
 }	
-
-
