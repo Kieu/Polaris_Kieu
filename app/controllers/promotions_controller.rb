@@ -6,9 +6,6 @@ class PromotionsController < ApplicationController
     :index, :new, :create]
 
   def index
-    if @array_promotion.count > 0
-      @promotion_id = params[:promotion_id].blank? ? @array_promotion.first[:id] :
-        params[:promotion_id]
       
       @promotion = @array_promotion.find(@promotion_id)
       @start_date = params[:start_date].present? ? params[:start_date] :
@@ -43,7 +40,6 @@ class PromotionsController < ApplicationController
       end
       @select_left = params[:left].present? ? params[:left] : "COST"
       @select_right = params[:right].present? ? params[:right] : "click"
-    end
   end
 
   def new
@@ -80,9 +76,9 @@ class PromotionsController < ApplicationController
   end
 
   def delete_promotion
+    @promotion = @array_promotion.find(params[:promotion_id])
     @promotion.delete
-    flash[:error] = "Promotion deleted"
-    redirect_to promotions_path(client_id: @promotion.client_id)
+    render text: "ok"    
   end
   
   def change_data
@@ -145,5 +141,8 @@ class PromotionsController < ApplicationController
       redirect_to clients_path
     end
     @array_promotion = @client.promotions.active.order_by_promotion_name
+    redirect_to clients_path if @array_promotion.length == 0
+    @promotion_id = params[:promotion_id].blank? ? @array_promotion.first[:id] :
+        params[:promotion_id]
   end
 end
