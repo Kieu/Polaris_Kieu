@@ -19,7 +19,7 @@ client_user:
 media:
   deleted: 1
   active: 0
-MAX_LENGTH_NAME: 30
+MAX_LENGTH_NAME: 27
 media_category:
   1: 'Listing'
   2: 'Display'
