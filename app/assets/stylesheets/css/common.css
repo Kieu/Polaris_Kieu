@@ -277,7 +277,8 @@ table.sidebar tbody td {
     height: 28px;
     padding-left: 3px;
     vertical-align: middle;
-    width: 210px;
+    width: 400px;
+    display:block;
 }
 
 
