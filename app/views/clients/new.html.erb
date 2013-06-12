@@ -1,6 +1,6 @@
 <%= stylesheet_link_tag "css/common" %>
 <p class="h2"><%= I18n.t("client.crumb_add") %></p>
-<%= render "layouts/prevent_change_page" %>
+<%= render "layouts/prevent_change_page_new" %>
 <% if flash[:error] %>
     <div><%= flash[:error] %></div>
 <% end %>

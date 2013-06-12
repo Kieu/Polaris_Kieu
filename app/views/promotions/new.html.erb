@@ -1,4 +1,4 @@
-<%= stylesheet_link_tag "css/promotion" %>
+<%= render "layouts/prevent_change_page_new" %>
 <%= stylesheet_link_tag "css/common" %>
 <% if flash[:error] %>
   <div><%= flash[:error] %></div>
@@ -40,9 +40,7 @@
       </table>
       <div class="submit_area">
         <input type="image" src="/assets/btn_done.gif" id="btn_done">
-        <p><%= link_to raw('<img align="right" alt="キャンセル" src="/assets/btn_cancel.gif">'), promotions_path %></p>
+        <p><%= link_to raw('<img align="right" alt="キャンセル" src="/assets/btn_cancel.gif">'), promotions_path(client_id: @client_id) %></p>
       </div>
     </div><!-- /."regist_form end-->
 <% end %>
-
-
