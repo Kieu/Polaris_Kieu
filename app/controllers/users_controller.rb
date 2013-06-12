@@ -22,7 +22,7 @@ class UsersController < ApplicationController
       if @user.client?
         ClientUser.create(client_id: @user.company_id, user_id: @user.id)
       end
-      flash[:success] = "User was successfully created"
+      flash[:success] = I18n.t("user.flash_messages.success")
       if @user.password_flg == 0
         UserMailer.send_password(@user, @user.password).deliver
       end
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
     @user.attributes = params[:user]
     if @user.valid?
       @user.save!
-      flash[:success] = "Update successfull"
+      flash[:success] = I18n.t("user.flash_messages.update")
       redirect_to users_path
     else
       render :edit
@@ -56,7 +56,7 @@ class UsersController < ApplicationController
   end
 
   def get_users_list
-    rows = get_rows(User.order_by_roman_name.page(params[:page]).per(params[:rp]))
+    rows = get_rows(User.order('role_id').page(params[:page]).per(params[:rp]))
     render json: {page: params[:page], total: User.count, rows: rows}
   end
 
@@ -79,11 +79,10 @@ class UsersController < ApplicationController
         end
       end
       link = user.id == current_user.id ?
-         "" : "<a href='users/#{user.id}/edit'>Edit</a>"
-      rows << {"id" => user.id, "cell" => {"link" => link,
-        "roman_name" => user.roman_name, 
-        "username" => user.username, "company" => company,
-        "email" => user.email, "role_id" => user.role.role_name}}
+         "" : "<a href='users/#{user.id}/edit'>#{view_context.image_tag("/assets/img_edit.png")}</a>"
+      rows << {id: user.id, cell: {
+               link: link, roman_name: user.roman_name, username: user.username, company: company,
+               email: user.email, role: user.role.role_name}}
     end
     rows
   end

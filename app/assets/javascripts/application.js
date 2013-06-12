@@ -12,12 +12,39 @@
 //
 //= require jquery-1.8
 //= require jquery_ujs
-//= require_tree .
+//= require_directory .
+$(function(){
+    $('#clients_list').slimScroll({
+        color: '#0087A9',
+        size: '8px',
+        alwaysVisible: false
+    });
+    $('#promotions_list').slimScroll({
+        color: '#0087A9',
+        size: '8px',
+        alwaysVisible: false
+    });
+    $('#conversions_list').slimScroll({
+        color: '#0087A9',
+        size: '8px',
+        alwaysVisible: false
+    });
+    $('.entrydate_box').slimScroll({
+        color: '#0087A9',
+        size: '8px',
+        alwaysVisible: false
+    });
+    $('.inprogress').slimScroll({
+        color: '#0087A9',
+        size: '8px',
+        alwaysVisible: false
+    });
+});
 var auto_refresh = setInterval(
     function ()
     {
         $('.notification').load('/background_jobs/notification').fadeIn("slow");
-    }, 10000); // refresh every 10000 milliseconds
+    }, 30000); // refresh every 10000 milliseconds
 function index_of(haystack, needle) {
     for (var i = 0, l = haystack.length; i < l; ++i) {
         if( haystack[i].value === needle ) {
@@ -26,6 +53,7 @@ function index_of(haystack, needle) {
     }
     return -1;
 }
+
 
 function reloadFlex(obj, urlAction, id, current_active, cname, maxlength) {
 	$(obj)
@@ -44,6 +72,7 @@ function reloadFlex(obj, urlAction, id, current_active, cname, maxlength) {
     
 }
 function ajaxCommon(urlAction, id, current_active, cname,arr_inner) {
+    //($this).preventDefault();
     location.href = urlAction;
     return;
     if (prevent == true){
@@ -81,7 +110,7 @@ function ajaxCommon(urlAction, id, current_active, cname,arr_inner) {
 			inline: true,
 			escKey: false,
 			overlayClose: false,
-			href: "#prevent_change",
+			href: "#prevent_change"
 		})
     }else{
     	var array_inner = arr_inner.split(',');
@@ -116,7 +145,6 @@ function reloadFlex1(obj, urlAction) {
     }).flexReload();
 }
 function draw_chart(data_left, data_right, left, right, categories){
-	console.log(data_left);
 	chart = new Highcharts.Chart({ // 以下、chartオブジェクトに渡す引数
 		chart: {
 			renderTo: 'sample-chart', // どの要素にグラフを描画するかを指定
@@ -162,14 +190,14 @@ function draw_chart(data_left, data_right, left, right, categories){
 				this.x +': '+ this.y +' 度';
 			}
 		},
-		series: [{ // データ系列を指定
-			name: left,
-			data: data_left,
-			color: "#FF1493"
-			},{
-			name: right,
-			data: data_right,
-			color: "#32CF32"
+		series: [{
+				name: left,
+				data: data_left,
+				color: "#32CF32"
+			},{ // データ系列を指定
+				name: right,
+				data: data_right,
+				color: "#FF1493"
 			}]
 		});
 }

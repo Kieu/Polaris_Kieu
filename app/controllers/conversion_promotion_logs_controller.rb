@@ -1,9 +1,17 @@
+require "resque"
 class ConversionPromotionLogsController < ApplicationController
 before_filter :signed_in_user
 before_filter :set_cookies
 
 def index
   @promotion = Promotion.find(params[:promotion_id])
+  if current_user.client?
+    @client_id = current_user.company_id
+  else
+    @client_id =@promotion.client_id
+  end
+  @promotions = @client_id.blank? ? Array.new :
+      Promotion.get_by_client(@client_id).order_by_promotion_name
 end
 
 def get_conversion_logs_list
@@ -18,6 +26,13 @@ def get_conversion_logs_list
   render json: {page: params[:page], total: count, rows: rows}
 end
 
+
+def download_csv
+    Resque.enqueue ExportConversionLogsData, current_user.id, params[:promotion_id].to_i, params[:conversion_id], params[:media_category_id], params[:account_id], cookies[:s], cookies[:e], cookies[:ser]
+    
+    render text: "processing"
+end
+
 def get_rows conversion_logs
   accounts = Account.select("id, account_name")
   medias = Media.select("id, media_name")
@@ -25,13 +40,14 @@ def get_rows conversion_logs
   ad_groups = DisplayGroup.select("id, name")
   ads = DisplayAd.select("id, name")
   conversions = Conversion.select("id, conversion_name")
+  conversion_categories = [I18n.t("conversion.conversion_category.web"), I18n.t("conversion.conversion_category.app"), I18n.t("conversion.conversion_category.combination")]
   rows = Array.new
   conversion_logs.each do |conversion_log|
     rows << {id: conversion_log.id, cell:{conversion_utime: conversion_log.conversion_utime,
                                           conversion_id: conversions.find_by_id(conversion_log.conversion_id).conversion_name,
-                                          conversion_category: conversion_log.conversion_category,
-                                          tracking_type: conversion_log.conversion_type,
-                                          cv_type: conversion_log.repeat_flg,
+                                          conversion_category: conversion_categories[conversion_log.conversion_category.to_i],
+                                          tracking_type: I18n.t("log_track_type")[conversion_log.track_type.to_i],
+                                          cv_type: I18n.t("log_del_flg")[conversion_log.repeat_flg.to_i],
                                           approval_status: conversion_log.approval_status,
                                           media_id: medias.find_by_id(conversion_log.media_id).media_name, 
                                           account_id: accounts.find_by_id(conversion_log.account_id).account_name, 

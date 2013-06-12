@@ -1,6 +1,6 @@
 class Client < ActiveRecord::Base
   VALID_PHONE_NUMBER_REGEX = /^\+{0,1}\d+[\d]+$/
-  VALID_ROMAN_NAME_REGEX = /^[A-Z_a-z][A-Za-z_0-9]*$/
+  VALID_ROMAN_NAME_REGEX = /^[A-Z_\-a-z][A-Za-z_\-0-9]*$/
   attr_accessible :client_name, :roman_name, :tel, :department_name,
     :contract_flg, :contract_type, :person_charge, :person_sale,
     :create_user_id, :update_user_id, :del_flg
@@ -11,9 +11,10 @@ class Client < ActiveRecord::Base
   validates :client_name, presence: true, uniqueness: {case_sensitive: false},
     length: {maximum: 255}
   validates :roman_name, presence: true, uniqueness: {case_sensitive: false},
-    length: {maximum: 255}, format: {with: VALID_ROMAN_NAME_REGEX}
-  validates :tel, presence: true, length: {maximum: 15},
-    format: {with: VALID_PHONE_NUMBER_REGEX}, uniqueness: true
+    length: {maximum: 255}
+  validates :roman_name, format: {with: VALID_ROMAN_NAME_REGEX}, if: -> client { client.roman_name.present?}
+  validates :tel, presence: true, length: {maximum: 15}
+  validates :tel, format: {with: VALID_PHONE_NUMBER_REGEX}, if: -> client { client.tel.present?}
   validates :contract_flg, presence: true
   validates :contract_type, presence: true
   validates :person_charge, presence: true, length: {maximum: 255}

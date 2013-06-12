@@ -1,0 +1,65 @@
+@charset "UTF-8";
+/* CSS Document */
+
+
+
+
+/* ファンシーボックス内のチェックボックス
+============================================  */
+div.check-group {
+	float: left;
+	margin-left: 22px;
+	margin-top: 7px;
+	width: 220px;
+}
+div.check-group2 {
+	margin-left: 22px!important;
+	width: 230px!important;
+}
+div.check-group li {
+	padding: 0 0 34px;
+}
+div.check-group input {
+}
+div.check-group label {
+	background: url("../images/btn_box_add.gif") no-repeat scroll 0 0 transparent;
+	float: right;
+	height: 28px;
+	padding: 0 5px;
+	text-indent: -9999px;
+	width: 55px;
+}
+div.check-group div:first-child label {
+	-webkit-border-top-left-radius: 7px;
+	-webkit-border-bottom-left-radius: 7px;
+	-moz-border-radius-topleft: 7px;
+	-moz-border-radius-bottomleft: 7px;
+}
+div.check-group div:last-child label {
+	-webkit-border-top-right-radius: 7px;
+	-webkit-border-bottom-right-radius: 7px;
+	-moz-border-radius-topright: 7px;
+	-moz-border-radius-bottomright: 7px;
+}
+div.check-group label.checked {
+	background: url("../images/btn_box_dl.gif") no-repeat scroll 0 0 transparent;
+	float: right;
+	height: 28px;
+	padding: 0 5px;
+	text-indent: -9999px;
+	width: 55px;
+}
+ div.check-group label::-moz-selection, div.check-group label::selection {
+ background: transparent;
+}
+.check_txt {
+	float:left;
+}
+
+
+.box02 .f_arrow{
+    background: url("../images/icon_arrow.png") no-repeat scroll 100px center / 12px auto transparent;
+    padding: 1px 0 1px 14px;
+    text-align: left;
+    text-indent: 0;
+	}

@@ -57,4 +57,15 @@ class ApplicationController < ActionController::Base
     render file: 'public/500.html', status: :not_found
   end
 
+  # convert integer to 36 decimal
+  def make_mpv media_category_id, promotion_id, account_id, redirect_infomation_id
+    account_id = account_id.to_s(36)
+    promotion_id = promotion_id.to_s(36)
+    
+    media_category_id = media_category_id.to_s(36)
+    redirect_infomation_id = redirect_infomation_id.to_s(36)
+
+    mpv = medisa_category_id + "." + promotion_id + "." + account_id + "." + redirect_infomation_id
+    return mpv
+  end
 end

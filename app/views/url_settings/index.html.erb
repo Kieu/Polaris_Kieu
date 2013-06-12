@@ -1,0 +1,122 @@
+<%= stylesheet_link_tag "css/common", :media => "all" %>
+<input type= "hidden" id="promotion_id" value="<%= @promotion_id %> "/>
+<input type= "hidden" id="account_id" value="<%= @account_id %> "/>
+<input type= "hidden" id="media_id" value="<%= @media_id %> "/>
+<div class="date">今日<br />
+  <input id="datepick" type="text" readonly="readonly" value="<%= cookies[:s] + " - " + cookies[:e] %>" name="datepick">&#9660;
+  <a class="fancybox mt-10 fl-l" rel="gallery" href="#"><img src="/assets/btn_dl_option.gif" /></a>
+  <a href="#" class="mt-10 fl-r" id="download_csv"><img src="/assets/btn_dl_csv.gif" /></a>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+    $(".newTable04").flexigrid({
+        url: "<%= get_urls_list_url_settings_path %>?promotion_id=" + $("#promotion_id").val() + "&account_id=" + $("#account_id").val() + "&media_id=" + $("#media_id").val(),
+        dataType: 'json',
+        editOption : true,
+        deleteOption : true,
+        onSuccess : function(){tableResize();},
+        resizable : false,
+        striped : true,
+        colModel : [
+            {display: 'Edit', name : 'edit_button', width : 'auto', sortable : false, align: 'center'},
+            {display: 'Ad Id', name : 'ad_id', width : 'auto', sortable : false, align: 'center'},
+            {display: 'Campaign name', name : 'campaign_name', width : 'auto', sortable : false, align: 'center'},
+            {display: 'Group name', name : 'group_name', width : 'auto', sortable : false, align: 'center'},
+            {display: 'Ad name', name : 'ad_name', width : 'auto', sortable : false, align: 'center'},
+            {display: 'Creative', name : 'creative', width : 'auto', sortable : false, align: 'center'},
+            {display: 'URL', name : 'url', width : 'auto', sortable : false, align: 'center'},
+            {display: 'Copy', name : 'copy', width : 'auto', sortable : false, align: 'center'},
+            {display: 'Delete', name : 'delete_check', width : 'auto', sortable : false, align: 'center'}
+            ],
+        usepager: true,
+        title: 'Url List',
+        useRp: true,
+        id: 1,
+        promotion_id: 1,
+        media_id: 1,
+        account_id: 1,
+        rp: 10,
+        showTableToggleBtn: true,
+        height: 250
+    });
+})
+</script>
+<script type="text/javascript">
+$('#download_csv').click(function(){
+  $.ajax({
+    type: "POST",
+    url: "<%= download_csv_url_settings_path %>",
+    data: {"promotion_id" : "<%= @promotion_id if @promotion_id %>",
+           "account_id" : "<%= @account_id if @account_id %>",
+           "media_id": "<%= @media_id if @media_id %>"
+           },
+    success: function(data){
+  }
+
+  })
+})
+
+function formatDate(year, month, day){
+    if (year < 2000) { year = parseInt(year) + 1900; }
+    if (month.length == 1) { month = "0" + parseInt(month); }
+    if (day.length == 1) { day = "0" + parseInt(day); }
+    return year + "/" + month + "/" + day;
+}
+
+$('#datepick').daterangepicker({
+    onDone: function() {
+        var term = $('#datepick').val();
+        var d = term.split(' - ');
+        var f = (d[0]).split('/');
+        var t = (d[1]).split('/');
+        $.cookie("s", formatDate(f[0], f[1], f[2]), {
+            path: '/'
+        });
+        $.cookie("e", formatDate(t[0], t[1], t[2]), {
+            path: '/'
+        });
+
+        reloadFlex1(".newTable04", "<%= get_urls_list_url_settings_path %>?promotion_id=" + $("#promotion_id").val() + "&account_id=" + $("#account_id").val() + "&media_id=" + $("#media_id").val());
+    }
+});
+</script>
+<script type="text/javascript">
+$(window).resize(function() {
+    tableResize();
+});
+</script>
+<%= flash[:error] %>
+        <div class="contentNavi">
+            <ul>
+                <li class="pre"><%= @client_name %></li>
+                <li>&gt;</li>
+                <li class="pre"><%= @promotion_name %></li>
+                <li>&gt;</li>
+                <li>URL Setting/<%= @media_name %>/<%= @account_name%></li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+        <div id="uploadArea">
+          <%= form_for Import.new, html: {multipart: true} do |f| %>
+            <table class="file_upload">
+                <tr>
+                  <td colspan="2"><%= f.file_field :csv %></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><input type="radio" name="upload" checked="checked" />
+                      追加</td>
+                  <td><input type="radio" name="upload" />
+                      新規(存外)</td>
+                  <td>
+                    <input type="image" src="/assets/btn_upload.gif">
+                  </td>
+                </tr>
+            </table>
+            <p class="dl"><small>アップロードファイルフォーマットのダウンロード</small></p>
+            <p class="bold">入稿リクエストを受け付けました。</p>
+          <% end %>
+        </div>
+        <!-- #uploadArea -->
+        <table style="display:none" class="newTable04 fixTable d-none"></table>
+    <!-- /#container end -->

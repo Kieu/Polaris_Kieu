@@ -2,6 +2,10 @@ PolarisManage::Application.routes.draw do
   resources :promotions do
     get "search", on: :collection
     post "delete_promotion", to: "promotions#delete_promotion", on: :collection
+    post "get_promotions_report", on: :collection
+    post "download_csv", on: :collection
+    post "change_data", on: :collection
+    get "promotion_table", on: :collection
   end
   resources :users do
     get "change_lang", on: :collection
@@ -19,40 +23,35 @@ PolarisManage::Application.routes.draw do
   resources :agencies do
     post "get_agencies_list", on: :collection
   end
-  resources :promotions do
-    post "get_promotions_report", on: :collection
-    post "download_csv", on: :collection
-  end
   resources :sessions, only: [:new, :create, :destroy] do
     post "resend_password", on: :collection
   end
-  
   match "/signin",  to: "sessions#new"
   match "/signout", to: "sessions#destroy", via: :delete
-
   root to: "clients#index"
-  
   resources :accounts, only: [:new, :create, :edit, :update] do
     post "change_medias_list", on: :collection
   end
-  resources :click_logs do
+  resources :click_logs, only: [:index] do
     post "get_logs_list", on: :collection
+    get "download_csv", on: :collection
   end
- resources :click_logs do
-    post "get_logs_list", on: :collection
- end
- resources :conversion_promotion_logs, only: [:index] do
+  resources :conversion_promotion_logs, only: [:index] do
     post "get_conversion_logs_list", on: :collection 
- end
- resources :background_jobs do
+    get "download_csv", on: :collection
+  end
+  resources :url_settings do
+    post "get_urls_list", on: :collection
+    post "download_csv", on: :collection
+  end
+  resources :background_jobs do
     get "upload", on: :collection
     get "download", on: :collection
     get "inprogress", on: :collection
     get "notification", on: :collection
+    post "kill_job", to: "background_jobs#kill_job", on: :collection
   end
- resources :conversion_promotion_logs, only: [:index] do
-    post "get_conversion_logs_list", on: :collection 
-  end
+  resources :imports
   mount Resque::Server, at: '/resque'
   # The priority is based upon order of creation:
   # first created -> highest priority.

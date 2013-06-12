@@ -170,10 +170,36 @@ namespace :master do
     end
   end
 
-  desc "Create Promotion"
-  task create_promotion: :environment do
-    (1..200).each do |num|
-      Promotion.create!(promotion_name: "Promotion#{num}", client_id: 1, tracking_period: 30, agency_id: 1, del_flg: 0, roman_name: "Promotion#{num}", update_user_id: 1, promotion_category_id: 1)
+  desc "Create Conversion"
+  task create_conversion: :environment do
+    Conversion.destroy_all
+    (1..10).each do |num|
+      Conversion.create!({id: num, conversion_name: "conversion_#{num}",
+        roman_name: "conversion_#{num}", promotion_id: 1, conversion_category: 0,
+        duplicate: 0, unique_def: 2, start_point: 0, sale_unit_price: 100,
+        reward_form: 0, create_user_id: 1, del_flg: 0}, without_protection: true)
+    end
+  end
+
+  desc "Create Redirect Infomations"
+  task create_redirect_infomation: :environment do
+    (1..20).each do |num|
+      RedirectInfomation.create!(mpv: "1.1.1.#{num}", client_id: 1, promotion_id: num, media_category_id: 1, media_id: 1, account_id: 1, campaign_id: 1, group_id: 1,
+                                 unit_id: 1, creative_id: 1, click_unit: 13, del_flg: 0)
+    end
+  end
+
+  desc "Create Redirect URL"
+  task create_redirect_url: :environment do
+    (1..10).each do |num|
+      RedirectUrl.create!(mpv: "1.1.1.1", url: "http://domain/click/?mpv=MPV&cid=Client ID&pid=Promotion ID_x000D_#{num}", rate: 12, name: "url_#{num}")
+    end
+  end
+
+  desc "Create Creative"
+  task create_creative: :environment do
+    (1..10).each do |num|
+      Creative.create!(ad_id: 1, creative_name: "creative_#{num}", image: 'image1.gif', create_user_id: 1)
     end
   end
 end

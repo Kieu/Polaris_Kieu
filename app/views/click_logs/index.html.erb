@@ -1,89 +1,34 @@
-<link rel="stylesheet" href="/assets/css/logs.css" type="text/css" media="screen"  />
+<%= stylesheet_link_tag "css/logs" %>
+<%= stylesheet_link_tag "css/colorbox" %>
+<%= stylesheet_link_tag "css/common" %>
+<%= stylesheet_link_tag "css/box_inner_log" %>
 <% if flash[:error] %>
 	<div><%= flash[:error] %></div>
 <% end %>
-
-<div id="popup" style="display: none">
-	<div id="list_options" style="width: 400px;">
-		<div id="result_list">
-			<table>
-				<tr>
-					<td colspan="2"><%= link_to "Show All", "javascript:void(0)", onclick: "update_cookies()"%></td>
-				</tr>
-				<tr>
-					<td>Click Time</td>
-					<td><%= link_to cookies[:coptions][0] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('0',this)"%></td>
-				</tr>
-				<tr>
-					<td>Media Name</td>
-					<td><%= link_to cookies[:coptions][1] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('1',this)"%></td>
-				</tr>
-				<tr>
-					<td>Account name</td>
-					<td><%= link_to cookies[:coptions][2] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('2',this)"%></td>
-				</tr>
-				<tr>
-					<td>Campaign Name</td>
-					<td><%= link_to cookies[:coptions][3] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('3',this)"%></td>
-				</tr>
-				<tr>
-					<td>Ad Group Name</td>
-					<td><%= link_to cookies[:coptions][4] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('4',this)"%></td>
-				</tr>
-				<tr>
-					<td>Ad Name</td>
-					<td><%= link_to cookies[:coptions][5] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('5',this)"%></td>
-				</tr>
-				<tr>
-					<td>URL</td>
-					<td><%= link_to cookies[:coptions][6] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('6',this)"%></td>
-				</tr>
-				<tr>
-					<td>SESID</td>
-					<td><%= link_to cookies[:coptions][7] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('7',this)"%></td>
-				</tr>
-				<tr>
-					<td>OS</td>
-					<td><%= link_to cookies[:coptions][8] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('8',this)"%></td>
-				</tr>
-				<tr>
-					<td>OK/NG</td>
-					<td><%= link_to cookies[:coptions][9] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('9',this)"%></td>
-				</tr>
-				<tr>
-					<td>Error Message</td>
-					<td><%= link_to cookies[:coptions][10] == "0" ? "Add" : "Delete", "javascript:void(0)", onclick: "update_cookie('10',this)"%></td>
-				</tr>
-				<tr>
-					<td>Show data from Error table</td>
-					<td><input type="checkbox" name="error_table" id="error_table" checked="checked"></td>
-				</tr>
-			</table>
-		</div>
-		<button id="change_cookie">Ok</button>
-		<button id="not_change_cookie">Cancel</button>
-	</div>
-</div>
+<% content_for :sidebar do %>
+    <%= render partial: "layouts/sidebar", locals: {object: @promotions} %>
+<% end %>
+<%= render partial: "layouts/option_log_page" %>
 
 <ul class="contentNavi">
-	<li class="pre"><%= link_to @promotion.client.client_name, clients_path(id: @promotion.client.id) %> </li>
+	<li class="pre"><%= link_to @promotion.client.client_name, clients_path(client_id: @promotion.client.id) %> </li>
 	<li>&gt;</li>
-	<li><%= link_to @promotion.promotion_name, promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %></li>
+	<li><%= link_to @promotion.promotion_name, promotions_path(promotion_id: @promotion.id) %></li>
 	<li>&gt;</li>
-	<li>本体プロモーション</li>
+	<li><%= I18n.t("log.crumb_click")%></li>
 </ul>
 <div class="area_block">
 	<div class="selectarea">
 		<ul>
-			<li> メディアカテゴリ
-				<%= select_tag 'media_category_id', "<option value = "">All</option><option value = 0 >Listing ad</option><option value = 1 >Display ad</option><option value = 2 >Affiliate</option>".html_safe, class: "input-text" %>
+			<li> <%= I18n.t("log.media_category")%>
+				<%= select_tag 'media_category_id', "<option value = "">All</option><option value = 1 >Listing ad</option><option value = 2 >Display ad</option><option value = 3 >Affiliate</option>".html_safe, class: "input-text" %>
 			</li>
-			<li> アカウント名
-				<%= select_tag 'account_id', content_tag(:option,'All',:value=>"")+options_from_collection_for_select(Account.where(promotion_id: params[:id]).order(:account_name), 'id', 'account_name'), class: "input-text" %> <br>
+			<li> <%= I18n.t("log.account_name")%>
+				<%= select_tag 'account_id', content_tag(:option,'All',:value=>"")+options_from_collection_for_select(Account.where(promotion_id: params[:promotion_id]).order(:account_name), 'id', 'account_name'), class: "input-text" %> <br>
 			</li>
 		</ul>
 	</div>
-	<div class="date">今日<br />
+	<div class="date"><%= I18n.t("log.today_text")%><br />
 		<input id="datepick" type="text" readonly="readonly" value="<%= cookies[:cs] + " - " + cookies[:ce] %>" name="datepick">&#9660;</div>
 </div>
 <div class="clear"></div>
@@ -96,7 +41,7 @@
 			<% end %>
 		</li>
 		<li class="ui-tabs-selected">
-			<%= link_to(click_logs_path(id: @promotion.id)) do %>
+			<%= link_to(click_logs_path(promotion_id: @promotion.id)) do %>
 			  <span>clickログ</span>
 			<% end %>
 		</li>
@@ -107,12 +52,12 @@
 		<div id="fragment-2" class="ui-tabs-panel">
 			<div id="graph">
 				<div class="fl-r">
-					<p><a id = "show_option"><img src="/assets/btn_dl_option.gif"  /></a></p>
-					<p><a href="#"><img src="/assets/btn_dl_report.gif"  /></a></p>
+					<p><a class="inline_logs" href="#inline_logs"><img src="/assets/btn_dl_option.gif"  /></a></p>
+					<p><a id="download_csv"><img src="/assets/btn_dl_report.gif"  /></a></p>
 				</div>
 			</div>
 			<div class="w_box">
-			<table id="clicklogs" class="newTable06 fixTable large" ></table>
+			<table id="clicklogs" class="newTable06 fixTable d-none" style="background: grey" ></table>
 			</div>
 			
 		</div>
@@ -124,23 +69,34 @@
 	function showColumn(tbl, colIndex, visible) {
 	    $(tbl).flexToggleCol(colIndex, visible);
 	}
+	$('#download_csv').click(function(){
+        $.ajax({
+            url: "<%= download_csv_click_logs_path %>",
+            data: {"promotion_id" : "<%= @promotion.id if @promotion %>",
+            	   "media_cateory_id": $("#media_category_id").val(),
+            	   "account_id": $("#account_id").val()},
+            method: "post",
+            success: function(data){
+            }
+
+        })
+    })
 	jQuery(document).ready(function($) {
 		$(".newTable06").flexigrid({
 			url: "<%= get_logs_list_click_logs_path %>",
-			ptionGet : "4",
 			dataType: 'json',
 			colModel : [
-				{display: 'Click Time', name : 'click_utime', width : 100, sortable : true, align: 'center', hide: <%= cookies[:coptions][0] == "0" ? 1 : 0 %>},
-				{display: 'Media Name:', name : 'media_id', width : 200, sortable : true, align: 'center', hide: <%= cookies[:coptions][1] == "0" ? 1 : 0 %>},
-				{display: 'Account Name', name : 'account_id', width : 200, sortable : true, align: 'center', hide: <%= cookies[:coptions][2] == "0" ? 1 : 0 %>},
-				{display: 'Campaign Name', name : 'campaign_id', width : 200, sortable : true, align: 'center', hide: <%= cookies[:coptions][3] == "0" ? 1 : 0 %>},
-				{display: 'Ad Group Name', name : 'group_id', width : 200, sortable : true, align: 'center', hide: <%= cookies[:coptions][4] == "0" ? 1 : 0 %>},
-				{display: 'Ad Name', name : 'unit_id', width : 200, sortable : true, align: 'center', hide: <%= cookies[:coptions][5] == "0" ? 1 : 0 %>},
-				{display: 'URL', name : 'redirect_url', width : 100, sortable : true, align: 'center', hide: <%= cookies[:coptions][6] == "0" ? 1 : 0 %>},
-				{display: 'SESID', name : 'session_id', width : 100, sortable : true, align: 'center', hide: <%= cookies[:coptions][7] == "0" ? 1 : 0 %>},
-				{display: 'OS', name : 'device_category', width : 100, sortable : true, align: 'center', hide: <%= cookies[:coptions][8] == "0" ? 1 : 0 %>},
-				{display: 'OK/NG', name : 'state', width : 100, sortable : true, align: 'center', hide: <%= cookies[:coptions][9] == "0" ? 1 : 0 %>},
-				{display: 'Error Message', name : 'error_code', width : 100, sortable : true, align: 'center', hide: <%= cookies[:coptions][10] == "0" ? 1 : 0 %>},
+				{display: 'Click Time', name : 'click_utime', sortable : true, with:'auto',align: 'center', hide: <%= cookies[:coptions][0] == "0" ? 1 : 0 %>},
+				{display: 'Media Name:', name : 'media_id', sortable : false,  with:'auto',align: 'center', hide: <%= cookies[:coptions][1] == "0" ? 1 : 0 %>},
+				{display: 'Account Name', name : 'account_id', sortable : false,  with:'auto',align: 'center', hide: <%= cookies[:coptions][2] == "0" ? 1 : 0 %>},
+				{display: 'Campaign Name', name : 'campaign_id', sortable : false,  with:'auto',align: 'center', hide: <%= cookies[:coptions][3] == "0" ? 1 : 0 %>},
+				{display: 'Ad Group Name', name : 'group_id', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][4] == "0" ? 1 : 0 %>},
+				{display: 'Ad Name', name : 'unit_id', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][5] == "0" ? 1 : 0 %>},
+				{display: 'URL', name : 'redirect_url', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][6] == "0" ? 1 : 0 %>},
+				{display: 'SESID', name : 'session_id', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][7] == "0" ? 1 : 0 %>},
+				{display: 'OS', name : 'device_category', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][8] == "0" ? 1 : 0 %>},
+				{display: 'OK/NG', name : 'state', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][9] == "0" ? 1 : 0 %>},
+				{display: 'Error Message', name : 'error_code', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][10] == "0" ? 1 : 0 %>},
 				],
 				preProcess : function (json) {
 	            var results = new Array();
@@ -171,20 +127,17 @@
 			rp: 10,
 			resizable : false,
 			optionGet : "5",
-			query: <%=params[:id]%>, 
+			query: <%=params[:promotion_id]%>,
 			showTableToggleBtn: true,
 			height: 200,
 			onSuccess: function() {
-				tableResize();
+                tableResize();
 				$('tr#row-0 td:nth-child('+(1+'n-'+(11))+')').remove();
-				$('tr#row-0').append("<td colspan='11'><div class='group_header'>Listing ad</div></td>");
-				
+                $('tr#row-0').after("<div class='group_header'>Listing ad</div>");
 				$('tr#row-1 td:nth-child('+(1+'n-'+(11))+')').remove();
-				$('tr#row-1').append("<td colspan='11'><div class='group_header'>Display ad</div></td>");
-				
+                $('tr#row-1').after("<div class='group_header'>Display ad</div>");
 				$('tr#row-2 td:nth-child('+(1+'n-'+(11))+')').remove();
-				$('tr#row-2').append("<td colspan='11'><div class='group_header'>Affiliate</div></td>");
-				
+                $('tr#row-2').after("<div class='group_header'>Affiliate</div>");
 			}
 		});
 		
@@ -233,33 +186,20 @@
 		$("#account_id").change(function(){
 			reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?cid=" + $("#media_category_id").val() + "&account_id=" + $(this).val());
 		});
-		
-		
-		
-	
-	
+
 	//$('tr#row-g1 td:nth-child('+(11+'n-'+(11))+')').remove();
 	//$('tr#row-g1').append("<td colspan='11'>aaaaa</td>";
 	$('tr#row-g1 td:nth-child('+(1+'n-'+(11))+')').remove();
 	$('tr#row-g1').append("<td colspan='11'>aaaaa</td>");
 	var colums = ["click_utime", "media_id", "account_id", "campaign_id", "ad_group_id", "ad_id", "redirect_url", "session_id", "device_category", "state", "error_code"]
 	
-	$("#show_option").click(function(){
-		$.colorbox({
-			width: "50%",
-			height: "70%",
-			inline: true,
-			escKey: false,
-			overlayClose: false,
-			href: "#list_options"
-		});
-	})
+
 	cookies_options = $.cookie("coptions");
 	update_cookie = function(data,ele){
 		options = cookies_options.split("");
 		options[data] = (options[data] == "1") ? "0" : "1";
-		text = (options[data] == "1") ? "Delete" : "Add";
-		$(ele).text(text);
+		text = (options[data] == "1") ? "<img src='/assets/btn_box_dl.gif' >" : "<img src='/assets/btn_box_add.gif' >";
+		$(ele).html(text);
 		options = options.join("");
 		cookies_options = options;
 
@@ -303,5 +243,10 @@
 		$("#clicklogs").colorbox.close();
 	})
 	
+</script>
+<script type="text/javascript">
+    $(window).resize(function() {
+        tableResize();
+    });
 </script>
 <div style="clear:both"></div>

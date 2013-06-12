@@ -1,0 +1,159 @@
+<div style='display:none'>
+<div id="inline_logs">
+<div class="f_box">
+<p class="f_box_title"><%= I18n.t("click_logs.label")%></p>
+<p class="f_category_title1"><%= I18n.t("click_logs.display_item")%></p>
+<div class="box02">
+  <ul id="tab_logs">
+    <li class="present"><p class="f_arrow"><%= I18n.t("click_logs.usually")%></p></li>
+  </ul>
+</div>
+<div id="page1">
+<div class="box03">
+  <p class="box3_txt"><%= link_to I18n.t("click_logs.show_all"), "javascript:void(0)", onclick: "update_cookies()"%> </p>
+  <!-- チェックボックス -->
+  <div class="check-group clearfix">
+    <ul>
+      <li>
+        <p class="check_txt"><%= I18n.t("click_logs.click_time")%></p>
+        <div>
+          <%= link_to cookies[:coptions][0] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('0',this)"%>
+        </div>
+      </li>
+      <li>
+        <p class="check_txt"><%= I18n.t("click_logs.media_name")%></p>
+        <div>
+          <%= link_to cookies[:coptions][1] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('1',this)"%>
+        </div>
+      </li>
+      <li>
+        <p class="check_txt"><%= I18n.t("click_logs.account_name")%></p>
+        <div>
+          <%= link_to cookies[:coptions][2] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('2',this)"%>
+        </div>
+      </li>
+      <li>
+        <p class="check_txt"><%= I18n.t("click_logs.campaign_name")%></p>
+        <div>
+          <%= link_to cookies[:coptions][3] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('3',this)"%>
+        </div>
+      </li>
+      <li>
+        <p class="check_txt"><%= I18n.t("click_logs.ad_group_name")%></p>
+        <div>
+          <%= link_to cookies[:coptions][4] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('4',this)"%>
+        </div>
+      </li>
+      <li>
+        <p class="check_txt"><%= I18n.t("click_logs.ad_name")%></p>
+        <div>
+          <%= link_to cookies[:coptions][5] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('5',this)"%>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <!-- /チェックボックス -->
+</div>
+<div class="box01">
+  <p class="box3_txt"><%= link_to I18n.t("click_logs.show_all"), "javascript:void(0)", onclick: "update_cookies()"%> </p>
+  <!-- チェックボックス -->
+  <div class="check-group clearfix">
+    <ul>
+      <li>
+        <p class="check_txt"><%= I18n.t("click_logs.url")%></p>
+        <div>
+          <%= link_to cookies[:coptions][6] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('6',this)"%>
+        </div>
+      </li>
+      <li>
+        <p class="check_txt"><%= I18n.t("click_logs.sesid")%></p>
+        <div>
+          <%= link_to cookies[:coptions][7] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('7',this)"%>
+        </div>
+      </li>
+      <li>
+        <p class="check_txt"><%= I18n.t("click_logs.os")%></p>
+        <div>
+          <%= link_to cookies[:coptions][8] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('8',this)"%>
+        </div>
+      </li>
+      <li>
+        <p class="check_txt"><%= I18n.t("click_logs.log_state")%></p>
+        <div>
+          <%= link_to cookies[:coptions][9] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('9',this)"%>
+        </div>
+      </li>
+      <li>
+        <p class="check_txt"><%= I18n.t("click_logs.error_message")%></p>
+        <div>
+          <%= link_to cookies[:coptions][10] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('10',this)"%>
+        </div>
+      </li>
+      <li>
+        <p class="check_txt"><%= I18n.t("click_logs.error_log_view")%></p>
+        <div>
+          <input type="checkbox" name="error_table" id="error_table" checked="checked">
+        </div>
+      </li>
+    </ul>
+    <!-- /チェックボックス -->
+  </div>
+</div>
+</div>
+<div class="submit_area">
+  <button id="change_cookie" style="border: 0px"><img src="/assets/btn_done.gif" alt="完成"></button>
+  <button id="not_change_cookie" style="border: 0px"><img src="/assets/btn_cancel.gif" alt="完成"></button>
+</div>
+</div>
+</div>
+</div>
+<script>
+    $(document).ready(function(){
+        $(".inline_logs").colorbox({inline:true, width:"725", height:"630" });
+    });
+var tab = {
+init:
+function(){
+var tabs = this.setup.tabs;
+var pages = this.setup.pages;
+
+for(i=0; i<pages.length; i++) {
+if(i !== 0) pages[i].style.display = 'none';
+tabs[i].onclick = function(){tab.showpage(this); return false; };
+}
+},
+
+showpage: function(obj){
+var tabs = this.setup.tabs;
+var pages = this.setup.pages;
+var num;
+
+for(num=0; num<tabs.length; num++) {
+if(tabs[num] === obj) break;
+}
+
+for(var i=0; i<pages.length; i++) {
+if(i == num) {
+pages[num].style.display = 'block';
+tabs[num].className = 'present';
+}
+else{
+pages[i].style.display = 'none';
+tabs[i].className = null;
+}
+}
+}
+}
+
+// <![CDATA[
+
+tab.setup = {
+    tabs: document.getElementById('tab_logs').getElementsByTagName('li'),
+
+    pages: [
+        document.getElementById('page1')
+    ]
+} //オブジェクトをセット
+tab.init(); //起動！
+// ]]>
+</script>

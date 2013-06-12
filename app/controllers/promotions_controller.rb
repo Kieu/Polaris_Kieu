@@ -9,19 +9,22 @@ class PromotionsController < ApplicationController
     if current_user.client?
       @client_id = current_user.company_id  
     else
-      @client_id = params[:client_id] if params[:client_id]
+      @promotion = Promotion.find(params[:promotion_id])
+      @client_id = @promotion.client_id
     end
 
     @array_promotion = @client_id.blank? ? Array.new :
-      Promotion.get_by_client(@client_id).order_by_promotion_name
+      Promotion.get_by_client(@client_id).active.order_by_promotion_name
     if @array_promotion.count > 0
       @promotion_id = params[:promotion_id].blank? ? @array_promotion.first[:id] :
         params[:promotion_id]
     
       @promotion = @array_promotion.find_by_id(@promotion_id)
       if @promotion
-        start_date = params[:start_date].present? ? params[:start_date] : Date.today.at_beginning_of_month.strftime("%Y/%m/%d").to_s
-        end_date = params[:end_date].present? ? params[:end_date] : Date.today.strftime("%Y/%m/%d").to_s
+        @start_date = params[:start_date].present? ? params[:start_date] :
+          Date.today.at_beginning_of_month.strftime("%Y/%m/%d").to_s
+        @end_date = params[:end_date].present? ? params[:end_date] :
+          Date.today.strftime("%Y/%m/%d").to_s
         cookies[:promotion] = "111111" unless cookies[:promotion].present?
         @promotion.conversions.each do |conversion|
           cookies[("conversion" + conversion.id.to_s).to_sym] = "1111111111" unless
@@ -31,24 +34,20 @@ class PromotionsController < ApplicationController
         @promotion_name = Promotion.find(@promotion_id).promotion_name
         
         @conversions = @promotion.conversions
-        @promotion_results = Hash.new
+        
+        @media_list = Media.get_media_list
+        @account_list = Account.get_account_list(@promotion_id, @media_list)
+        
         @promotion_results = DailySummaryAccount
-          .get_promotion_summary(@promotion_id,start_date, end_date)
-        
-        @conversions_results = Hash.new
+          .get_promotion_summary(@promotion_id, @start_date, @end_date)
         @conversions_results = DailySummaryAccConversion
-          .get_conversions_summary(@promotion_id,start_date, end_date)
-        
+          .get_conversions_summary(@promotion_id, @start_date, @end_date)
         @promotion_data = Array.new
         date_arrange = Array.new
   
-        # just for test
-        conversion_id = 1;
-        
-  
         @promotion_data, date_arrange =
-          DailySummaryAccount.get_promotion_data(@promotion_id,
-            conversion_id, start_date, end_date)
+          DailySummaryAccount.get_promotion_data(@promotion_id, @start_date,
+            @end_date)
         @array_category = Array.new
         date_arrange.each do |date|
           @array_category << date.to_date.strftime("%m/%d")
@@ -66,6 +65,13 @@ class PromotionsController < ApplicationController
   end
 
   def new
+    if current_user.client?
+      @client_id = current_user.company_id
+    else
+      @client_id = params[:client_id] if params[:client_id]
+    end
+    @promotions = @client_id.blank? ? Array.new :
+        Promotion.get_by_client(@client_id).order_by_promotion_name
     @client = Client.find(params[:client_id])
     @promotion = Promotion.new
   end
@@ -85,6 +91,13 @@ class PromotionsController < ApplicationController
   end
 
   def edit
+    if current_user.client?
+      @client_id = current_user.company_id
+    else
+      @client_id =@promotion.client_id
+    end
+    @promotions = @client_id.blank? ? Array.new :
+        Promotion.get_by_client(@client_id).order_by_promotion_name
   end
 
   def update
@@ -102,6 +115,24 @@ class PromotionsController < ApplicationController
     flash[:error] = "Promotion deleted"
     redirect_to promotions_path(client_id: @promotion.client_id)
   end
+  
+  def change_data
+    results = Hash.new
+    client_id = params[:client_id]
+    promotion_id = params[:promotion_id]
+    start_date = params[:start_date]
+    end_date = params[:end_date]
+    results[:promotion_data], date_arrange =
+      DailySummaryAccount.get_promotion_data(promotion_id, start_date,
+        end_date)
+    results[:array_category] = Array.new
+    date_arrange.each do |date|
+      results[:array_category] << date.to_date.strftime("%m/%d")
+    end
+    respond_to do |format|
+      format.json{render json: results}
+    end
+  end
 
   def download_csv
     promotion_id = params[:promotion_id].to_i
@@ -110,29 +141,27 @@ class PromotionsController < ApplicationController
     
     render text: "processing"
   end
-
-  def draw_graph(promotion_data, date_arrange, select_left, select_right)
-    @array_category = Array.new
-    date_arrange.each do |date|
-      @array_category << date.to_date.strftime("%m/%d")
-    end
-    binding.pry
-    @chart = LazyHighCharts::HighChart.new('graph') do |f|
-      
-      f.series(type: 'spline', name: "#{select_left}",
-             data: promotion_data[select_left],
-             color: '#008B8B')
-      f.series(type: 'spline', name: "#{select_right}",
-             data: promotion_data[select_right],
-             color: '#FFA500')
-      f.legend(align: "right", verticalAlign: "top", y: 0, x: -50,
-             layout: 'vertical', borderWidth: 0)
-      f.xAxis(type: 'date',dateTimeLabelFormats: {day: '%e. %b', month: '%e. %b'},
-            categories: @array_category, labels: {rotation: -45,
-              style: {color: '#6D869F', font: '12px Helvetical'}})
-      f.yAxis(min: 0, title: '')
-    end
-    
+  
+  def promotion_table
+    @promotion_id = params[:promotion_id]
+    @client_id = params[:client_id]
+    @promotion = Promotion.find(@promotion_id)
+    start_date = params[:start_date].present? ? params[:start_date] :
+      Date.today.at_beginning_of_month.strftime("%Y/%m/%d").to_s
+    end_date = params[:end_date].present? ? params[:end_date] :
+      Date.today.strftime("%Y/%m/%d").to_s
+    @client_name = Client.find(@client_id).client_name
+    @promotion_name = @promotion.promotion_name
+    @conversions = @promotion.conversions
+        
+    @media_list = Media.get_media_list
+    @account_list = Account.get_account_list(@promotion_id, @media_list)
+        
+    @promotion_results = DailySummaryAccount
+      .get_promotion_summary(@promotion_id, start_date, end_date)
+    @conversions_results = DailySummaryAccConversion
+      .get_conversions_summary(@promotion_id,start_date, end_date)
+    render layout: false
   end
 
   private

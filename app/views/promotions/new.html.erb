@@ -1,22 +1,48 @@
-<%= link_to @client.client_name, client_path(@client) %> > Promotion Registration
-
+<%= stylesheet_link_tag "css/promotion" %>
+<%= stylesheet_link_tag "css/common" %>
 <% if flash[:error] %>
   <div><%= flash[:error] %></div>
 <% end %>
-
+<% content_for :sidebar do %>
+    <%= render partial: "layouts/sidebar", locals: {object: @promotions} %>
+<% end %>
+  <ul class="contentNavi">
+    <li class="pre"><%= link_to @client.client_name, client_path(@client) %></li>
+    <li>&gt;</li>
+    <li><%= I18n.t("promotion.crumb_add")%></li>
+  </ul>
+  <div class="clear"></div>
 <%= form_for(@promotion) do |f| %>
-  <%= hidden_field_tag :client_id, params[:client_id] %>
-  <%= f.label "Promotion name" %>
-  <%= f.text_field :promotion_name, maxlength: 255, style: "width: 250px" %><br />
-  <%= f.label "Roman name" %>
-  <%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %><br />
-  <%= f.label "Category" %>
-  <%= f.select :promotion_category_id,
-    t(".category").each_with_index.map {|name, index| [name,index]} %><br />
-  <%= f.label "Tracking period" %>
-  <%= f.text_field :tracking_period, maxlength: 2, style: "width: 250px" %><br />
-  <%= f.submit %>
-  <%= link_to 'Cancel', promotions_path(client_id: @client.id) %>
+    <%= hidden_field_tag :client_id, params[:client_id] %>
+    <div class="regist_form">
+      <table class="client_info">
+        <tbody>
+        <tr>
+          <th><%= f.label "Promotion name" %></th>
+          <td><%= f.text_field :promotion_name, maxlength: 255, style: "width: 250px" %></td>
+        </tr>
+        <tr>
+          <th><%= f.label "Roman name" %></th>
+          <td><%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %></td>
+        </tr>
+        <tr>
+          <th><%= f.label "Category" %></th>
+          <td>
+            <%= f.select :promotion_category_id,
+                         t(".category").each_with_index.map {|name, index| [name,index]} %>
+          </td>
+        </tr>
+        <tr>
+          <th><%= f.label "Tracking period" %></th>
+          <td><%= f.text_field :tracking_period, maxlength: 2, style: "width: 250px" %></td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="submit_area">
+        <input type="image" src="/assets/btn_done.gif" id="btn_done">
+        <p><%= link_to raw('<img align="right" alt="キャンセル" src="/assets/btn_cancel.gif">'), promotions_path %></p>
+      </div>
+    </div><!-- /."regist_form end-->
 <% end %>
 
-<%= link_to "Promotion registration", new_promotion_path(client_id: @client.id) %>
+

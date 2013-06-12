@@ -6,285 +6,35 @@
    client/index.html  [右固定/左可変]
    ========================================================================== */
 
-*{
-	padding: 0;
-	margin: 0;
-}
-
-img{
-	border: 0;
-}
-
-body {
-font-family:'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ',Meiryo,'ＭＳ Ｐゴシック',sans-serif;
-color: #3d3d3d;
-font-size: 14px;
-line-height: 1.1em;
-}
-
-a:hover{
-	opacity:0.7;
-}
-
-p img:hover{
-	opacity:0.7;
-}
-
 #wrapper{
-	margin: 0 auto;
-	width: 100%;
+    margin: 0 auto;
+    width: 100%;
 }
-
-#header{
-height: 50px;
-/*background-color: #f1f1f1;  ログイン画面のみ */
-}
-
-#headerInner{
-	margin: 0 auto;
-	width: 95%;
-}
-
-#headerInner h1{
-	height: 50px;
-	width: 130px;
-	float: left;
-	text-indent: -9999px;
-	background: url(/assets/logo_polaris.png) no-repeat;
-	background-position: 0 13px;
-}
-
-#personal{
-	width:400px;
-	margin: 0;
-	padding: 0;
-	float:right;
-	margin-top: 13px;
-}
-
-
-p.h2{
-	font-size: 16px;
-	font-weight: bold;
-	color: #3e5869;
-}
-
-#personal ul{
-}
-
-#personal ul li{
-	margin:0;
-	padding:0;
-	display:inline;
-}
-
-#personal ul li a{
-	color: #F60;
-}
-
-#personal ul li img:hover{
-	opacity:0.7
-}
-
-#personal ul li p{
-	display:inline;
-}
-
-#nav{
-	clear: both;
-	width: 100%;
-	height: 38px;
-	background-color: #0087a9;
-}
-
-#navInner{
-	margin: 0 auto;
-	width: 95%;
-	height: 38px;
-	}
-
-.nav ul{
-	width:570px;
-	overflow:hidden;
-	position:relative;
-}
-
-.nav ul li{
-	margin: 0;
-	padding: 0;
-	height:38px;
-	float:left;
-}
-
-.nav ul li a{
-	opacity:10;
-}
-
-.nav ul li img{
-	display:block;
-}
-
-.nav ul li a{
-	display:block;
-}
-
 
 #container{
-	width: 100%;
-	float: right;
-	margin-left: -310px;
+    width: 100%;
+    float: right;
+    margin-left: -310px;
 }
 
 
 #contents{
-	position: relative;
-	margin: 0 40px 0 310px;
-	border-left: 2px solid #c1c1c1;
-	min-height:510px;
+    position: relative;
+    margin: 0 40px 0 310px;
+    border-left: 2px solid #c1c1c1;
+    min-height:510px;
 }
 
 #inner{
-	padding: 25px 0 20px 30px;
+    padding: 25px 0 20px 30px;
 }
 
 #inner p.client_name{
-	font-size: 16px;
-	font-weight: bold;
-	color: #3e5869;
+    font-size: 16px;
+    font-weight: bold;
+    color: #3e5869;
 }
 
-#sidebar{
-	width: 250px;
-	min-height:500px;
-	float: left;
-	margin-left: 50px;
-}
-
-#clienetlist_box{
-	min-height: 315px;
-	margin-top: 20px;
-	margin-right: 10px;
-	margin-bottom: 20px;
-	-webkit-border-radius: 8px;
-	-moz-border-radius: 8px;
-	border-radius: 8px;
-	background-color: #f1f1f1;
-}
-
-	
-#clienetlist_box dl{
-	padding:10px;
-}
-
-#searchform{
-	width: 225px;
-	background: url(/assets/img_search_form.gif) left top no-repeat;
-	display: block;
-	height: 35px;
-	position: relative;
-	background-position: -2px 0;
-}
-#keywords{
-	width: 170px;
-	position: absolute;
-	top: 4px;
-	left: 15px;
-	border: 1px solid #FFF;
-	color:#aaa;
-}
-
-#keywords:focus {
-	color:#333;
-}
-
-
-#searchBtn{
-	position: absolute;
-	top: 7px;
-	left: 193px;
-}
-
-table.sidebar{
-	width: 240px;
-    overflow-y: scroll;
-    max-height: 400px;
-}
-
-table.sidebar tbody{
-	width:240px;
-}
-
-table.sidebar tbody tr{
-	height: 28px;
-	width:240px;
-	border-bottom: 1px solid #c1c1c1;
-}
-
-table.sidebar tbody th.edit{
-	height:28px;
-	width:25px;
-	text-indent: -9999px;
-	background-image: url(/assets/img_edit.png);
-}
-
-table.sidebar tbody th a{
-	opacity: 0.7;
-	display:block;
-	width: 25px;
-	height: 28px;
-}
-
-table.sidebar tbody td a{
-	text-decoration:none;
-	color: #3e5869;
-}
-
-table.sidebar tbody td{
-	font-size: 14px;
-	font-weight: bold;
-	color: #3e5869;
-	vertical-align: middle;
-	height: 28px;
-	width:210px;
-	padding-left: 3px;
-}
-
-#footer{
-	clear: both;
-	margin: 0 auto;
-	border-top:#0b8eb0 1px solid;
-	width: 95%;
-	font-size:12px;	
-	text-align: center;
-}
-
-#footerInner{
-	margin: 15px 0 20px;
-}
-
-#footerInner ul{
-}
-
-#footerInner ul li{
-	color: #0b8eb0;
-	font-weight: bold;
-	text-decoration: underline;
-	padding: 15px;
-	display: inline;
-}
-
-#footerInner ul li a{
-	color: #0b8eb0;
-}
-
-#copyright{
-	font-size:12px;
-}
-
-#copyright p{
-	display: inline;
-	vertical-align: top;
-}
 
 
 
@@ -293,128 +43,138 @@ table.sidebar tbody td{
    ========================================================================== */
 
 #inner p.regist{
-	font-size: 16px;
-	color: #3e5869;
+    font-size: 16px;
+    color: #3e5869;
 }
 
 .regist_form{
-	width: 630px;
-	margin: 15px 0 0 0;
-	background-color: #f1f1f1;
-	border: 1px solid #b6b6b6;
-	min-height: 460px;
+    width: 630px;
+    margin: 15px 0 0 0;
+    background-color: #f1f1f1;
+    border: 1px solid #b6b6b6;
+    min-height: 460px;
 }
 
 .regist_form table.client_info{
-	letter-spacing: 0.1em;
-	width: 610px;
-	margin: 12px 0 23px 10px;
+    letter-spacing: 0.1em;
+    width: 610px;
+    margin: 12px 0 23px 10px;
 }
 
 .regist_form table.client_info tbody{
-	font-size:16px;
-	width: 610px;
-	letter-spacing: -0.3px;
+    font-size:16px;
+    width: 610px;
+    letter-spacing: -0.3px;
 }
 
 .regist_form table.client_info tbody tr{
-	border-bottom-style: none;
-	height: 45px;
+    border-bottom-style: none;
+    height: 45px;
 }
 
 .regist_form table.client_info tbody th{
-	font-weight: bold;
-	text-align: right;
-	width: 175px;
+    font-weight: bold;
+    text-align: right;
+    width: 175px;
 }
 
 .regist_form table.client_info tbody td{
-	font-weight: bold;
-	padding-left: 10px;
+    font-weight: bold;
+    padding-left: 10px;
 }
 
 .regist_form .input-text{
-	padding-left: 5px;
-	font-weight: normal;
-	width: 285px;
+    padding-left: 5px;
+    font-weight: normal;
+    width: 285px;
 }
 
 .submit_area{
-	margin: auto;
-	width: 380px;
-	margin-bottom: 18px;
-	margin-top: 33px;
+    margin: auto;
+    width: 380px;
+    margin-bottom: 18px;
+    margin-top: 33px;
 }
 
 .submit_area p{
-	display:inline;
+    display:inline;
 }
 
 .user_info_add{
-	width:450px;
-	margin-left: 35px;
+    width:450px;
+    margin-left: 35px;
 }
 .user_info_add p{
-	margin-bottom: 0;
+    margin-bottom: 0;
 }
 .user_info_add input{
-	font-weight: normal;
-	width: 300px;
-	height: 30px;
-	margin-right: 10px;
+    font-weight: normal;
+    width: 300px;
+    height: 30px;
+    margin-right: 10px;
 }
 .user_info_add img{
-	vertical-align:bottom;
+    vertical-align:bottom;
 }
 
 #btn_submit{
-	text-indent:-9999px;
+    text-indent:-9999px;
     width: 169px;
     height: 44px;
-    background: url(//btn_done.gif) left top no-repeat;
+    background: url(../images/btn_done.gif) left top no-repeat;
 }
 #btn_submit:hover{
-	opacity:0.7;
+    opacity:0.7;
 }
 
- 
+
 /* ==========================================================================
    client/edit.html [右固定/左固定]
    ========================================================================== */
 table.user_add{
-	width: 580px;
-	margin-left: 35px;
+    width: 580px;
+    margin-left: 35px;
 }
 .user_info_add p{
-	font-weight: bold;
-	font-size: 16px;
-	margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
 }
 table.user_add tbody tr{
-	height: 22px;
+    height: 22px;
 }
 
 table.user_add tbody th{
-	width: 170px;
+    width: 170px;
 }
 
 table.user_add tbody td{
-	font-weight: bold;
-	padding-left:5px;
+    font-weight: bold;
+    padding-left:5px;
 }
 table.user_add.input-text{
-	padding-left: 5px;
+    padding-left: 5px;
 }
-table.sidebar tbody td a.active {
-    text-decoration: underline;
+
+.cell1{
+    width: 170px;
 }
-div#clients_list{
-    overflow-y: scroll;
-    max-height: 300px;
-    overflow-x: hidden;
+.cell2{
+    width:240px;
 }
-div#promotions_list{
-    overflow-y: scroll;
-    max-height: 300px;
-    overflow-x: hidden;
+.cell3{
+    width:80px;
 }
+.cell4{
+    width:40px;
+}
+
+/* ==========================================================================
+   表JS
+   ========================================================================== */
+
+.flexigrid div.bDiv td{
+    font-size: 16px;
+    white-space: nowrap;
+}
+	

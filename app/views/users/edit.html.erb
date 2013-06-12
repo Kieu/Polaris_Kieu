@@ -1,33 +1,32 @@
 <%= render "layouts/prevent_change_page" %>
-<%= stylesheet_link_tag "css/user" %>
+<%= stylesheet_link_tag "css/users_new" %>
 <%= stylesheet_link_tag "css/common" %>
-<%= stylesheet_link_tag "css/reset" %>
 <%= flash[:success] if flash[:success] %>
 <div id="user_form">
-  <p class="h2">Edit User</p>
+  <p class="h2"><%= I18n.t("user.crumb_edit") %></p>
   <%= form_for(@user) do |f| %>
       <table>
         <tbody>
         <tr>
-          <th><%= f.label "User name：" %></th>
+          <th><%= f.label I18n.t("user.username") %></th>
           <td colspan="2"><%= f.text_field :username, maxlength: 255, style: "width: 200px" %></td>
         </tr>
         <tr>
-          <th><%= f.label "Roman name：" %></th>
+          <th><%= f.label I18n.t("user.roman_name") %></th>
           <td colspan="2"><%= f.text_field :roman_name, maxlength: 255, style: "width: 200px" %></td>
         </tr>
         <tr>
-          <th> <%= f.label "Email：" %></th>
+          <th> <%= f.label I18n.t("user.email") %></th>
           <td colspan="2"><%= f.text_field :email, maxlength: 255, style: "width: 200px" %></td>
         </tr>
         <tr>
-          <th> <%= f.label "Role：" %></th>
+          <th> <%= f.label I18n.t("user.role.label") %></th>
           <td colspan="2">
             <%= text_field_tag :role_id, @user.role.role_name, disabled: true %>
           </td>
         </tr>
         <tr>
-          <th><%= f.label "会社名：" %></th>
+          <th><%= f.label I18n.t("user.company_name") %></th>
           <td colspan="2">
             <% if @user.client? %>
                 <%= text_field_tag :company_id, Client.find(@user.company_id).client_name, disabled: true %>
@@ -36,22 +35,22 @@
             <% end %>
         </tr>
         <tr>
-          <th> <%= f.label "Password" %></th>
+          <th> <%= f.label I18n.t("user.password.label") %></th>
           <td colspan="2">*******************</td>
         </tr>
         <tr>
-          <th>パスワード通知：</th>
-          <td><%= f.radio_button :password_flg, "0", disabled: true %> 通知しない</td>
-          <td><%= f.radio_button :password_flg, "1", disabled: true %> 通知する</td>
+          <th><%= f.label I18n.t("user.password_notification.label") %></th>
+          <td><%= f.radio_button :password_flg, "1", disabled: true %> <%= f.label I18n.t("user.password_notification.not_notified") %></td>
+          <td><%= f.radio_button :password_flg, "0", disabled: true %> <%= f.label I18n.t("user.password_notification.to_notified") %></td>
         </tr>
         <tr>
-          <th><%= f.label "Disable User" %></th>
+          <th><%= f.label I18n.t("user.disabled.label") %></th>
           <td>
               <% if @user.status == Settings.user.deactive %>
                   <input type="checkbox" id = "disable_button" checked="checked">
               <% else %>
                   <input type="checkbox" id = "disable_button">
-              <% end %>
+              <% end %><%= I18n.t("user.disabled.disable") %>
           </td>
         </tr>
         </tbody>
