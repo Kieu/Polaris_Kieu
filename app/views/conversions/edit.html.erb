@@ -34,7 +34,9 @@
     <%= link_to @promotion.promotion_name, promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %>
   </li>
   <li>&gt;</li>
-  <li><li><%= I18n.t("conversion.crumb_edit")%></li></li>
+  <li><%= I18n.t("conversion.crumb_edit")%></li>
+  <li>/</li>
+  <li><%= @conversion.conversion_name%></li>
 </ul>
 <div class="clear"></div>
 <div id="conversion_inner">

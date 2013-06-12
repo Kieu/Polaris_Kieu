@@ -9,6 +9,8 @@
     <li><%= link_to @promotion.promotion_name, promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %></li>
     <li> &gt; </li>
     <li><%= I18n.t("promotion.crumb_edit")%></li>
+    <li> / </li>
+    <li><%= @promotion.promotion_name %></li>
   </ul>
   <div class="clear"></div>
 <%= form_for(@promotion) do |f| %>

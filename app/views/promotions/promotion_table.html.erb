@@ -144,12 +144,14 @@
             <td><%= account.account_name %></td>
             <% Settings.promotions_sums.each_with_index do |option, index2|%>
             	<% val = @promotion_results["account"+account.id.to_s+"_promotion"] %>
+            	<% val = val.nil? ? "0" : val[option] %>
+            	<% val = val.nil? ? "#DIV/0" : val %>
             	<% if option == "click_through_ratio" %>
-					<%= content_tag(:td, (val.nil? ? "0" : val[option]).to_s + "%") if cookies[:promotion][index2] == "1" %>
+					<%= content_tag(:td, val.to_s + "%") if cookies[:promotion][index2] == "1" %>
 				<% elsif option == "cost_per_click" || option == "cost_sum" %>
-					<%= content_tag(:td, "¥" + (val.nil? ? "0" : val[option]).to_s) if cookies[:promotion][index2] == "1" %>
+					<%= content_tag(:td, "¥" + val.to_s) if cookies[:promotion][index2] == "1" %>
 				<% else %>
-					<%= content_tag(:td, val.nil? ? "0" : val[option]) if cookies[:promotion][index2] == "1" %>
+					<%= content_tag(:td, val) if cookies[:promotion][index2] == "1" %>
 				<% end %>
 			<% end %>
 			<% @conversions.each do |conversion|%>
