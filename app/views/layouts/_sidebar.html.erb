@@ -46,7 +46,7 @@
                         <% elsif params[:controller] == "conversion_promotion_logs" %>
                             <%= link_to promotion.promotion_name, "javascript:void(0)", class: "promotion_name active", id: "#{promotion.id}", onclick: "ajaxCommon('#{conversion_promotion_logs_path(promotion_id: promotion.id)}', '##{promotion.id}', '.promotion_name', '#promotion_name','#inner')" %>
                         <% else %>
-                            <%= link_to promotion.promotion_name, "javascript:void(0)", class: "promotion_name active", id: "#{promotion.id}", onclick: "ajaxCommon('#{promotions_path(promotion_id: promotion.id)}', '##{promotion.id}', '.promotion_name', '#promotion_name','#inner')" %>
+                            <%= link_to promotion.promotion_name, "javascript:void(0)", class: "promotion_name active", id: "#{promotion.id}", onclick: "ajaxCommon('#{promotions_path(promotion_id: promotion.id, client_id: params[:client_id])}', '##{promotion.id}', '.promotion_name', '#promotion_name','#inner')" %>
                         <% end %>
                       </td>
                   <% else %>
@@ -56,7 +56,7 @@
                         <% elsif params[:controller] == "conversion_promotion_logs" %>
                             <%= link_to promotion.promotion_name, "javascript:void(0)", class: "promotion_name", id: "#{promotion.id}", onclick: "ajaxCommon('#{conversion_promotion_logs_path(promotion_id: promotion.id)}', '##{promotion.id}', '.promotion_name', '#promotion_name','#inner')" %>
                         <% else %>
-                            <%= link_to promotion.promotion_name, "javascript:void(0)", class: "promotion_name", id: "#{promotion.id}", onclick: "ajaxCommon('#{promotions_path(promotion_id: promotion.id)}', '##{promotion.id}', '.promotion_name', '#promotion_name','#inner')" %>
+                            <%= link_to promotion.promotion_name, "javascript:void(0)", class: "promotion_name", id: "#{promotion.id}", onclick: "ajaxCommon('#{promotions_path(promotion_id: promotion.id, client_id: params[:client_id])}', '##{promotion.id}', '.promotion_name', '#promotion_name','#inner')" %>
                         <% end %>  </td>
                   <% end %>
                 </tr>

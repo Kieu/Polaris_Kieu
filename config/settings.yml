@@ -47,3 +47,4 @@ conversions_options: ["CV(first)", "CV(repeat)", "CV", "CVR", "CPA", "ASSIST", "
 promotions_sums: ["imp_count", "click_count", "click_through_ratio", "cost_sum", "cost_per_mille", "cost_per_click"]
 conversions_sums: ["first_cv_count", "repeat_cv_count", "total_cv_count", "conversion_rate", "click_per_action", "assist_count", "sales", "roas", "profit", "roi"]
 conversions_graph: ["CV(first)", "CV(repeat)", "CV", "CVR", "CPA", "ASSIST"]
+url_options: ["Edit", "Ad Id", "Campain Name", "Group Name", "Ad Name", "Creative", "Url", "Last Modified", "Copy", "Delete"]

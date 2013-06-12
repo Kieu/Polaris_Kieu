@@ -144,7 +144,7 @@ p.dl {
 .box01 {
     background-color: #FFFFFF;
     border: 2px solid #C4C4C4;
-    height: 250px;
+    height: 450px;
     left: 50px;
     position: absolute;
     top: 90px;
@@ -274,7 +274,7 @@ div.check-group {
     width: 190px;
 }
 div.check-group li {
-    padding: 0 0 34px;
+    padding: 0 0 15px;
 }
 div.check-group input {
     display: none;
