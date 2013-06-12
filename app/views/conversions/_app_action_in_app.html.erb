@@ -1,3 +1,83 @@
+<table>
+<tbody><tr>
+  <th class="disabled"><label for="conversion_OS指定：">Os指定：</label></th>
+  <td class="disabled" colspan="2"><label>
+    <input type="radio" value="0" name="conversion1[os]" id="conversion_os_0" disabled="disabled">iOS
+  </label></td>
+  <td class="disabled" colspan="2"><label>
+    <input type="radio" value="1" name="conversion1[os]" id="conversion_os_1" disabled="disabled">Android
+  </label></td>
+</tr>
+<tr>
+  <th class="disabled"><label for="conversion_計測媒体：">計測媒体：</label></th>
+  <td class="disabled"><label>
+    <input type="radio" value="0" name="conversion1[conversion_mode]" id="conversion_conversion_mode_0" disabled="disabled">全て
+  </label></td>
+  <td class="disabled"><label>
+    <input type="radio" value="1" name="conversion1[conversion_mode]" id="conversion_conversion_mode_1" disabled="disabled">Facebookのみ
+  </label></td>
+  <td class="disabled"><label>
+    <input type="radio" value="2" name="conversion1[conversion_mode]" id="conversion_conversion_mode_2" disabled="disabled">その他広告
+  </label></td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <th class="disabled"><a href="#"><img src="/assets/icon_help.gif"></a><label for="conversion_重複排除：">重複排除：</label></th>
+  <td class="disabled"><label>
+    <input type="radio" value="0" name="conversion1[duplicate]" id="conversion_duplicate_0" disabled="disabled">あり
+  </label></td>
+  <td class="disabled"><label>
+    <input type="radio" value="1" name="conversion1[duplicate]" id="conversion_duplicate_1" disabled="disabled">なし
+  </label></td>
+  <td colspan="2">&nbsp;</td>
+</tr>
+<tr>
+  <th class="disabled"><label for="conversion_計測方法：">計測方法：</label></th>
+  <td class="disabled" id="method_install_referrer"><label>
+    <input type="radio" value="0" name="conversion1[track_method]" id="conversion_track_method_0" disabled="disabled">Install Referrer
+  </label></td>
+  <td class="disabled"><label>
+    <input type="radio" value="1" name="conversion1[track_method]" id="conversion_track_method_1" disabled="disabled">White
+  </label></td>
+  <td class="disabled"><label>
+    <input type="radio" value="2" name="conversion1[track_method]" id="conversion_track_method_2" disabled="disabled">Welcome
+  </label></td>
+  <td class="disabled" colspan="2"><label>
+    <input type="radio" value="3" name="conversion1[track_method]" id="conversion_track_method_3" disabled="disabled">custom</label>
+    <input type="text" size="30" placeholder="URL必須" name="conversion1[url]" id="url" disabled="disabled" class="urlBox">
+  </td>
+</tr>
+<tr>
+  <th><%= f.label "セッション" %><br /><%= f.label "保持期間：" %></th>
+  <td colspan="4">
+    <%= f.text_field :session_period, maxlength: 2, class: "ta-r", placeholder: "90" %>日
+  </td>
+</tr>
+<tr>
+  <th><%= f.label "ユニーク定義：" %></th>
+  <td colspan="4">
+    <%= f.select :unique_def, t("conversions.unique_definition").each_with_index.map {|name, index| [name, index]} %>
+  </td>
+</tr>
+<tr>
+  <th>&lt;オプション&gt;<br /><%= f.label "売上単価：" %></th>
+  <td colspan="4"><br />
+    <%= f.text_field :sale_unit_price, placeholder: "￥" %>
+  </td>
+</tr>
+<tr>
+  <th><%= f.label "報酬型式：" %></th>
+  <td colspan="2"><label>
+    <%= f.radio_button :reward_form, 0 %>定額型
+  </label></td>
+  <td colspan="2"><label>
+    <%= f.radio_button :reward_form, 1 %>定率型
+  </label></td>
+</tr>
+</tbody></table>
+
+
+<!--table>
 <tr>
   <th class="disabled"><%= f.label "OS指定：" %></th>
   <td colspan="2" class="disabled"><label>
@@ -73,3 +153,4 @@
     <%= f.radio_button :reward_form, 1 %>定率型
   </label></td>
 </tr>
+</table-->

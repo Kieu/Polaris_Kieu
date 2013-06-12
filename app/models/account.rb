@@ -13,12 +13,12 @@ class Account < ActiveRecord::Base
   validates :cost, format: {with: VALID_NUMBER_REGEX}, if: -> account { account.cost.present?}
   validates :sync_flg, presence: true,  length: {maximum: 1} , if: -> account { account.sync_flg.present?}
   validates :sync_flg, format: {with: VALID_NUMBER_REGEX}, if: -> account { account.sync_flg.present?}
-  validates :account_name, presence: true, length: {maximum: 255}, uniqueness: {case_sensitive: false}
-  validates :roman_name, presence: true, length: {maximum: 255}, uniqueness: {case_sensitive: false}
+  validates :account_name, presence: true, length: {maximum: 255}, uniqueness: {case_sensitive: false, scope: :promotion_id}
+  validates :roman_name, presence: true, length: {maximum: 255}, uniqueness: {case_sensitive: false, scope: :promotion_id}
   validates :roman_name, format: {with: VALID_ROMAN_NAME_REGEX}, if: -> account { account.roman_name.present?}
-  validates :sync_account_id, presence: true, length: {maximum: 255}
+  validates :sync_account_id, presence: true, length: {maximum: 255}, if: :check_sync
   validates :sync_account_id, uniqueness: {case_sensitive: false}, if: :check_sync, if: -> account {account.sync_account_id.present?} 
-  validates :sync_account_pw, presence: true, length: {maximum: 255}
+  validates :sync_account_pw, presence: true, length: {maximum: 255}, if: :check_sync
   validates :sync_account_pw, uniqueness: {case_sensitive: false}, if: :check_sync, if: -> account {account.sync_account_pw.present?}
   
   has_many :daily_summary_accounts
