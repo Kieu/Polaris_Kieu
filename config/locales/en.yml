@@ -664,6 +664,8 @@ en:
       label: "Role"
       include_blank: "Please select" 
     company_name: "Conpany name"
+    company_id:
+      include_blank: "Please select"
     password:
       label: "password:"
       info: "※Automatically create"

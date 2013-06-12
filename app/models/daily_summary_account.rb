@@ -115,10 +115,10 @@ class DailySummaryAccount < ActiveRecord::Base
       .where("DATE_FORMAT(report_ymd, '%Y/%m/%d') between '#{start_date}' and '#{end_date}'")
       .select("sum(imp_count) as imp_count")
       .select("sum(click_count) as click_count")
-      .select("round((click_count/imp_count)*100,3) as click_through_ratio")
+      .select("round(sum(click_count)/sum(imp_count)*100,3) as click_through_ratio")
       .select("sum(cost_sum) as cost_sum")
-      .select("round(cost_sum/click_count,3) as cost_per_click")
-      .select("round(cost_sum/imp_count*1000,3) as cost_per_mille")
+      .select("round(sum(cost_sum)/sum(click_count),3) as cost_per_click")
+      .select("round(sum(cost_sum)/sum(imp_count)*1000,3) as cost_per_mille")
       
     category_data = total_data.group(:media_category_id)
       .select(:media_category_id)

@@ -688,6 +688,8 @@ ja:
       label: "権限"
       include_blank: "権限を選択してください" 
     company_name: "会社名"
+    company_id:
+      include_blank: "会社名を選択してください"
     password:
       label: "パスワード: "
       info: "※自動で振り分けます"
