@@ -28,7 +28,16 @@ end
 
 
 def download_csv
-    Resque.enqueue ExportConversionLogsData, current_user.id, params[:promotion_id].to_i, params[:conversion_id], params[:media_category_id], params[:account_id], cookies[:s], cookies[:e], cookies[:ser]
+    background_job = BackgroundJob.create
+    job_id = ExportConversionLogsData.create(user_id: current_user.id,
+      promotion_id: params[:promotion_id].to_i,
+      conversion_id: params[:conversion_id].to_i,
+      media_category_id: params[:media_category_id].to_i,
+      account_id: params[:account_id].to_i, start_date: cookies[:s],
+      end_date: cookies[:e], show_error: cookies[:ser],
+      bgj_id: background_job.id)
+    background_job.job_id = job_id
+    background_job.save!
     
     render text: "processing"
 end
