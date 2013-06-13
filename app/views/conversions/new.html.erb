@@ -65,9 +65,11 @@
 		  function render_fb_app_id(){
 		    $('#fb_app_id').html('');
 		    $('#fb_app_id').html('<%=j render "app_install_fb_app_id", f: f %>');
+		    $('#judging_box').html('<%=j render "app_install_judging", f: f %>');
 		  }
 		  function remove_fb_app_id() {
 		  	$('#fb_app_id').html('');
+		  	$('#judging_box').html('');
 		  }
           function render_web(){
             $('#category_area').html('');
