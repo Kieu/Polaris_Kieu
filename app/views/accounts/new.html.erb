@@ -20,7 +20,7 @@
         <tr>
           <th> <%= f.label t("account.media_category") %></th>
           <td><%= f.select :media_category_id,
-                         Settings.media_category.each_with_index.map {|name, index| [t(name[1]), index+1]}, class: "input-text" %>
+                         Settings.media_category.each_with_index.map {|name, index| [t(name[1]), index+1]}, selected: "8" , class: "input-text" %>
           </td>
         </tr>
         <tr>
@@ -31,7 +31,7 @@
         </tr>
         <tr>
           <th><%= f.label t("account.account_name") %></th>
-          <td> <%= f.text_field :account_name, maxlength: 15, style: "width: 250px" %>  </td>
+          <td> <%= f.text_field :account_name, maxlength: 255, style: "width: 250px" %>  </td>
         </tr>
         <tr>
           <th><%= f.label t("account.roman_name") %></th>
