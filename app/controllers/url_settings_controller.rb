@@ -62,7 +62,7 @@ class UrlSettingsController < ApplicationController
     account_id = params[:account_id]
     media_id = params[:media_id]
     controller = params[:controller]
-    Resque.enqueue ExportUrlData, start_date, end_date, user_id, 
+    Resque.create ExportUrlData, start_date, end_date, user_id, 
                                   promotion_id, account_id, media_id, controller
     
     render text: "processing"
