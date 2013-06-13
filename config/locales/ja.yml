@@ -573,6 +573,8 @@ ja:
     roman_name: "アカウント名(英語): "
     cost: "コスト計算： 入力データ x"
     sync_account_id: "アカウントの同期: "
+    synchronism: "同期"
+    fractured: "同期停止"
     sync_account_pw: "Sync account PW: "
     flash_messages:
       success: " アカウント登録が完了しました"
@@ -614,6 +616,7 @@ ja:
           custom: 
             label: " Custom"
             url: " URL必須"
+          install_referrer: " Install Referrer"
         app_id:
           label: "アプリID: "
           facebook: "(Facebook): "
@@ -626,6 +629,10 @@ ja:
           label: "報酬型式: "
           straight_line_type: "  定額型"
           declining_balance_type: " 定率型"
+        session:
+          label: "セッション: "
+          retention: " 保持期間 "
+          day: "日"
       combination: " 組み合わせ"
     deduplicated:
       label: "重複排除: "

@@ -20,7 +20,7 @@
         <tr>
           <th> <%= f.label t("account.media_category") %></th>
           <td><%= f.select :media_category_id,
-                         Settings.media_category.each_with_index.map {|name, index| [t(name[1]), index+1]}, class: "input-text" %>
+                         Settings.media_category.each_with_index.map {|name, index| [t(name[1]), index+1]}, selected: "8" , class: "input-text" %>
           </td>
         </tr>
         <tr>
@@ -31,7 +31,7 @@
         </tr>
         <tr>
           <th><%= f.label t("account.account_name") %></th>
-          <td> <%= f.text_field :account_name, maxlength: 15, style: "width: 250px" %>  </td>
+          <td> <%= f.text_field :account_name, maxlength: 255, style: "width: 250px" %>  </td>
         </tr>
         <tr>
           <th><%= f.label t("account.roman_name") %></th>
@@ -47,8 +47,8 @@
         			<table>
         				<tr>
 				          <th><%= f.label t("account.sync_account_id") %></th>
-				          <td><%= f.radio_button :sync_flg, 1, onclick: "active_sync_box();" %> <%= I18n.t("client.contract_type.unrecovered") %>
-				            <%= f.radio_button :sync_flg, 0, onclick: "disable_sync_box();" %> <%= I18n.t("client.contract_type.been_recovered") %></td>
+				          <td><%= f.radio_button :sync_flg, 1 , {checked: true} %> <%= I18n.t("account.synchronism") %>
+				            <%= f.radio_button :sync_flg, 0 %> <%= I18n.t("account.fractured") %></td>
 				        </tr>
 				        <tr>
 				          <th></th>
