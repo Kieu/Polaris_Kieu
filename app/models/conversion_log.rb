@@ -86,18 +86,18 @@ class ConversionLog < ActiveRecord::Base
 
     if(cv_id.present?)  
       where_clause += " AND conversion_id = ?"
-      params += [cv_id.to_i]
-      params1 += [cv_id.to_i]
+      params += [cv_id]
+      params1 += [cv_id]
     end
     if(media_category_id.present?)  
       where_clause += " AND media_category_id = ?"
-      params += [media_category_id.to_i]
-      params1 += [media_category_id.to_i]
+      params += [media_category_id]
+      params1 += [media_category_id]
     end
     if(account_id.present?)  
       where_clause += " AND account_id = ?"
-      params += [account_id.to_i]
-      params1 += [account_id.to_i]
+      params += [account_id]
+      params1 += [account_id]
     end
     if show_error=="1"
       sql_str = "(select #{field} from conversion_#{id}_logs  where DATE_FORMAT(created_at, '%Y/%m/%d') BETWEEN ? AND ? #{where_clause}) union all
