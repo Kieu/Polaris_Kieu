@@ -54,7 +54,7 @@
     <%= f.select :unique_def, t("conversions.unique_definition").each_with_index.map {|name, index| [name, index]} %>
   </td>
 </tr>
-<tr>
+<tr id="judging_box">
   <th><%= I18n.t("conversion.conversion_category.app.option.label")%><br /><%= I18n.t("conversion.conversion_category.app.option.judging")%></th>
   <td colspan="4"><label>
     <br /><%= f.check_box :judging %><%= I18n.t("conversion.conversion_category.app.option.configure")%>
