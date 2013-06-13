@@ -35,6 +35,7 @@ class BackgroundJobsController < ApplicationController
     if current_user.id==job.user_id
       #send signed for job
      Resque::Plugins::Status::Hash.kill(job.job_id)
+     render :text => 'kill job'
     end
   end
 end
