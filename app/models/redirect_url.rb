@@ -30,7 +30,7 @@ class RedirectUrl < ActiveRecord::Base
                    on r_info.mpv = r_url.mpv
               inner join display_campaigns as camp on camp.id = r_info.campaign_id
               inner join display_groups as d_group on d_group.id = r_info.group_id
-              inner join display_ads as ad on ad.id = r_info.group_id
+              inner join display_ads as ad on ad.id = r_info.unit_id
               inner join creatives as creative on creative.id = r_info.creative_id
             WHERE
               r_info.promotion_id = #{promotion_id}
