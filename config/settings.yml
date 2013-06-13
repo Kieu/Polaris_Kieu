@@ -52,3 +52,7 @@ cv_options_part1: ["conversion_time", "conversion_name", "conversion_category", 
 cv_options_part2: ["verify", "suid", "session_id","os", "repeat", "log_state", "sales", "profit", "volume", "others", "error_message"]
 click_options_part1: ["click_time", "media_name", "account_name","campaign_name", "ad_group_name", "ad_name"]
 click_options_part2: ["url", "sesid", "os","log_state", "error_message"]
+conversion_kind:
+  1: 'cv_kind1'
+  2: 'cv_kind2'
+  3: 'cv_kind3'

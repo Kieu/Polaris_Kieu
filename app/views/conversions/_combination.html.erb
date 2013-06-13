@@ -54,6 +54,7 @@
 						      	</li>
 							
 							<% end %>
+							</ul>
 						</td>
 						<td width="50%">
 							<div id="kind_box">
@@ -62,7 +63,6 @@
 						</td>
 					</tr>
 				</table>
-		 	</ul>
 		</div>	  
 			
 		
@@ -74,6 +74,7 @@
     <th><%= f.label I18n.t("conversion.combination.pattern") %></th>
     <td>
       <table id="cv_category">
+      	<% if !@cv_list || @cv_list.count <= 0 %>
       	<tr>
       		<td><select name="op[]" class="ta-c mcdropdown_spacing" style="display:none">
 		      <option value="+">+</option>
@@ -88,6 +89,29 @@
       			<input type="hidden" name="cv[]" id="cv1" />
       		</td>
       	</tr>
+      	<% end %>
+      	<% 
+      	if @cv_list && @cv_list.count > 0 %>
+      		<tr><td colspan="2"><input type="hidden" name="cv_num" id="cv_num" value="<%= @cv_list.count %>" /></td></tr>
+	    <%    	
+	      	@cv_list.each do |idx, cv|%>
+	      	<tr>
+	      		<td><select name="op[]" class="ta-c mcdropdown_spacing" id="op#{idx}">
+			      <option value="+">+</option>
+			      <option value="-">−</option>
+			      <option value="x">×</option>
+			      <option value="÷">÷</option>
+			    </select></td>
+	      		<td>
+	      			<input type="text" name="category<%= idx + 1 %>" onclick="get_category(<%= idx+1 %>);" id="category<%= idx+1 %>" value="<%= cv['name']%>" />
+	      			<input type="hidden" name="cv_kind[]" id="cv_kind<%= idx + 1 %>" value="<%= @cv_kind_list[idx]['id']%>" />
+	      			<input type="hidden" name="cv[]" value="<%= cv['id']%>" id="cv#{idx}" />
+	      		</td>
+	      	</tr>	
+      	<%
+      		end 
+      	end
+      	%>
      </table>
      <table>	
       	<tr>
