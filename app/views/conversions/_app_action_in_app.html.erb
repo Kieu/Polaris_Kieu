@@ -1,77 +1,77 @@
 <table>
 <tbody><tr>
-  <th class="disabled"><label for="conversion_OS指定：">Os指定：</label></th>
+  <th class="disabled"><label for="conversion_OS指定："><%= I18n.t("conversion.conversion_category.app.os.label") %></label></th>
   <td class="disabled" colspan="2"><label>
-    <input type="radio" value="0" name="conversion1[os]" id="conversion_os_0" disabled="disabled">iOS
+    <input type="radio" value="0" name="conversion1[os]" id="conversion_os_0" disabled="disabled"><%= I18n.t("conversion.conversion_category.app.os.ios") %>
   </label></td>
   <td class="disabled" colspan="2"><label>
-    <input type="radio" value="1" name="conversion1[os]" id="conversion_os_1" disabled="disabled">Android
+    <input type="radio" value="1" name="conversion1[os]" id="conversion_os_1" disabled="disabled"><%= I18n.t("conversion.conversion_category.app.os.android") %>
   </label></td>
 </tr>
 <tr>
-  <th class="disabled"><label for="conversion_計測媒体：">計測媒体：</label></th>
+  <th class="disabled"><label for="conversion_計測媒体："><%= I18n.t("conversion.conversion_category.app.conversion_mode.label") %></label></th>
   <td class="disabled"><label>
-    <input type="radio" value="0" name="conversion1[conversion_mode]" id="conversion_conversion_mode_0" disabled="disabled">全て
+    <input type="radio" value="0" name="conversion1[conversion_mode]" id="conversion_conversion_mode_0" disabled="disabled"><%= I18n.t("conversion.conversion_category.app.conversion_mode.all") %>
   </label></td>
   <td class="disabled"><label>
-    <input type="radio" value="1" name="conversion1[conversion_mode]" id="conversion_conversion_mode_1" disabled="disabled">Facebookのみ
+    <input type="radio" value="1" name="conversion1[conversion_mode]" id="conversion_conversion_mode_1" disabled="disabled"><%= I18n.t("conversion.conversion_category.app.conversion_mode.facebook") %>
   </label></td>
   <td class="disabled"><label>
-    <input type="radio" value="2" name="conversion1[conversion_mode]" id="conversion_conversion_mode_2" disabled="disabled">その他広告
+    <input type="radio" value="2" name="conversion1[conversion_mode]" id="conversion_conversion_mode_2" disabled="disabled"><%= I18n.t("conversion.conversion_category.app.conversion_mode.other") %>
   </label></td>
   <td>&nbsp;</td>
 </tr>
 <tr>
-  <th class="disabled"><a href="#"><img src="/assets/icon_help.gif"></a><label for="conversion_重複排除：">重複排除：</label></th>
+  <th class="disabled"><a href="#"><img src="/assets/icon_help.gif"></a><label for="conversion_重複排除："><%= I18n.t("conversion.conversion_category.app.duplicate.label") %></label></th>
   <td class="disabled"><label>
-    <input type="radio" value="0" name="conversion1[duplicate]" id="conversion_duplicate_0" disabled="disabled">あり
+    <input type="radio" value="0" name="conversion1[duplicate]" id="conversion_duplicate_0" disabled="disabled"><%= I18n.t("conversion.conversion_category.app.duplicate.label1") %>
   </label></td>
   <td class="disabled"><label>
-    <input type="radio" value="1" name="conversion1[duplicate]" id="conversion_duplicate_1" disabled="disabled">なし
+    <input type="radio" value="1" name="conversion1[duplicate]" id="conversion_duplicate_1" disabled="disabled"><%= I18n.t("conversion.conversion_category.app.duplicate.label2") %>
   </label></td>
   <td colspan="2">&nbsp;</td>
 </tr>
 <tr>
-  <th class="disabled"><label for="conversion_計測方法：">計測方法：</label></th>
+  <th class="disabled"><label for="conversion_計測方法："><%= I18n.t("conversion.conversion_category.app.track_method.label") %></label></th>
   <td class="disabled" id="method_install_referrer"><label>
-    <input type="radio" value="0" name="conversion1[track_method]" id="conversion_track_method_0" disabled="disabled">Install Referrer
+    <input type="radio" value="0" name="conversion1[track_method]" id="conversion_track_method_0" disabled="disabled"><%= I18n.t("conversion.conversion_category.app.track_method.install_referrer") %>
   </label></td>
   <td class="disabled"><label>
-    <input type="radio" value="1" name="conversion1[track_method]" id="conversion_track_method_1" disabled="disabled">White
+    <input type="radio" value="1" name="conversion1[track_method]" id="conversion_track_method_1" disabled="disabled"><%= I18n.t("conversion.conversion_category.app.track_method.white") %>
   </label></td>
   <td class="disabled"><label>
-    <input type="radio" value="2" name="conversion1[track_method]" id="conversion_track_method_2" disabled="disabled">Welcome
+    <input type="radio" value="2" name="conversion1[track_method]" id="conversion_track_method_2" disabled="disabled"><%= I18n.t("conversion.conversion_category.app.track_method.welcome") %>
   </label></td>
   <td class="disabled" colspan="2"><label>
-    <input type="radio" value="3" name="conversion1[track_method]" id="conversion_track_method_3" disabled="disabled">custom</label>
-    <input type="text" size="30" placeholder="URL必須" name="conversion1[url]" id="url" disabled="disabled" class="urlBox">
+    <input type="radio" value="3" name="conversion1[track_method]" id="conversion_track_method_3" disabled="disabled"><%= I18n.t("conversion.conversion_category.app.track_method.custom.label") %></label>
+    <input type="text" size="30" placeholder="<%= I18n.t("conversion.conversion_category.app.track_method.custom.url") %>" name="conversion1[url]" id="url" disabled="disabled" class="urlBox">
   </td>
 </tr>
 <tr>
-  <th><%= f.label "セッション" %><br /><%= f.label "保持期間：" %></th>
+  <th><%= f.label I18n.t("conversion.conversion_category.app.session.label") %><br /><%= f.label I18n.t("conversion.conversion_category.app.session.retention") %></th>
   <td colspan="4">
-    <%= f.text_field :session_period, maxlength: 2, class: "ta-r", placeholder: "90" %>日
+    <%= f.text_field :session_period, maxlength: 2, class: "ta-r", placeholder: "90" %><%= I18n.t("conversion.conversion_category.app.session.day")%>
   </td>
 </tr>
 <tr>
-  <th><%= f.label "ユニーク定義：" %></th>
+  <th><%= f.label t("conversion.unique_definition") %></th>
   <td colspan="4">
     <%= f.select :unique_def, t("conversions.unique_definition").each_with_index.map {|name, index| [name, index]} %>
   </td>
 </tr>
 <tr>
-  <th>&lt;オプション&gt;<br /><%= f.label "売上単価：" %></th>
+  <th><%= I18n.t("conversion.conversion_category.app.option.label")%><br /><%= f.label I18n.t("conversion.conversion_category.app.sale_unit_price") %></th>
   <td colspan="4"><br />
     <%= f.text_field :sale_unit_price, placeholder: "￥" %>
   </td>
 </tr>
 <tr>
-  <th><%= f.label "報酬型式：" %></th>
+  <th><%= f.label t("conversion.conversion_category.app.reward_form.label") %></th>
   <td colspan="2"><label>
-    <%= f.radio_button :reward_form, 0 %>定額型
+    <%= f.radio_button :reward_form, 0 %><%= I18n.t("conversion.conversion_category.app.reward_form.straight_line_type")%>
   </label></td>
   <td colspan="2"><label>
-    <%= f.radio_button :reward_form, 1 %>定率型
+    <%= f.radio_button :reward_form, 1 %><%= I18n.t("conversion.conversion_category.app.reward_form.declining_balance_type")%>
   </label></td>
 </tr>
 </tbody></table>
