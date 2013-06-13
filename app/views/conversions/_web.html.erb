@@ -33,7 +33,7 @@
   <tr>
     <th><%= I18n.t("conversion.option2.label") %><br /><%= f.label I18n.t("conversion.option2.reward_format.label") %></th>
     <td colspan="2"><br /><label>
-      <%= f.radio_button :reward_form, 0 %><%= I18n.t("conversion.option2.reward_format.straight_line_type") %>
+      <%= f.radio_button :reward_form, 0, checked: true %><%= I18n.t("conversion.option2.reward_format.straight_line_type") %>
     </label></td>
     <td colspan="2"><br /><label>
       <%= f.radio_button :reward_form, 1 %><%= I18n.t("conversion.option2.reward_format.not_set")%>

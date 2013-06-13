@@ -16,10 +16,10 @@
   <tr>
     <th><%= f.label I18n.t("conversion.conversion_category.app.track_type.label") %></th>
     <td colspan="2"><label>
-      <%= f.radio_button :track_type, 0, checked: true, onclick: "render_install();" %><%=I18n.t("conversion.conversion_category.app.track_type.install")%>
+      <%= f.radio_button :track_type, 0, checked: true, disabled: (@conversion.track_type!=0) ? true: false, onclick: "render_install();" %>Install
     </label></td>
     <td colspan="2"><label>
-      <%= f.radio_button :track_type, 1, onclick: "render_action_in_app();" %><%=I18n.t("conversion.conversion_category.app.track_type.app_action")%>
+      <%= f.radio_button :track_type, 1, disabled: (@conversion.track_type!=1) ? true: false, onclick: "render_action_in_app();" %>アプリ内アクション
     </label></td>
   </tr>
   <tr>

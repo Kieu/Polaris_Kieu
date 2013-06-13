@@ -5,7 +5,13 @@
     $("#current_rev").html("v"+$.mcDropdown.version);
     $("#category").mcDropdown("#categorymenu");
     $("#category2").mcDropdown("#categorymenu2");
+    
   });
+  function get_category(id='') {
+	$('#current_cv').val(id);
+	console.log($('#current_cv').val());
+	$.colorbox({width:"580px", inline:true, href:"#inline_logs"});
+  }
 
   $(function() {
     $('#ui-tab').tabs();
@@ -80,20 +86,33 @@
                 <tr>
                   <th><%= f.label "成果カテゴリ：" %></th>
                   <td><label>
-                    <%= f.radio_button :conversion_category, 0, checked: true, onclick: "render_web();" %>WEB
+                    <%= f.radio_button :conversion_category, 0, checked: true, disabled: (@conversion.conversion_category!=0) ? true: false, onclick: "render_web();" %>WEB
                   </label></td>
                   <td><label>
-                    <%= f.radio_button :conversion_category, 1, onclick: "render_app();" %>APP
+                    <%= f.radio_button :conversion_category, 1, disabled: (@conversion.conversion_category!=1) ? true: false, onclick: "render_app();" %>APP
                   </label></td>
                   <td><label>
-                    <%= f.radio_button :conversion_category, 2, onclick: "render_combination();" %>組み合わせ
+                    <%= f.radio_button :conversion_category, 2, disabled: (@conversion.conversion_category!=2) ? true: false, onclick: "render_combination();" %>組み合わせ
                   </label></td>
                   <td>&nbsp;</td>
                 </tr>
               </tbody>
             </table>
             <table class="client_info" id="category_area">
-              <%= render "web", f: f %>
+            	<tr><td>
+              <%= 
+              case @conversion.conversion_category
+              when 2
+              		render "combination", f: f
+              when 1
+              		render "app", f: f
+              else
+              		render "web", f: f
+              end
+               
+              %>
+              </td>
+              </tr>
             </table>
             <div class="submit_area">
               <input type="image" src="/assets/btn_done.gif" id="btn_done">
