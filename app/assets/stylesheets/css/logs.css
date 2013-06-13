@@ -175,26 +175,14 @@ table.user_add tbody td {
     text-decoration: none;
     width: 515px;
 	}
-.f_box, img {
-    float: right;
-}
+
 	
 .f_box a:link { color: #404040; }
 .f_box a:visited { color: #404040; }
 .f_box a:hover { color: #404040; }
 .f_box a:active { color: #404040; }
 	
-	.f_box_title {
-		border: 1px solid #efefef;
-	  background-color: #545454;
-    color: #FFFFFF;
-    font-size: 18px;
-    height: 33px;
-    padding: 10px 0 0 20px;
-    position: absolute;
-    text-align: left;
-    width: 703px;
-	}
+
 	.f_box_title2 {
   background-color: #545454;
     border: 1px solid #EFEFEF;
