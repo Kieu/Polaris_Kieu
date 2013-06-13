@@ -8,7 +8,7 @@
 	      						 "<input type='text' name='category"+ $("#cv_num").val() + "' id='category"+ $("#cv_num").val() + "' value='' onclick='get_category(" + $("#cv_num").val() + ");' /></td></tr>");
 	}
 	
-	function set_value(name, id, kind='') {
+	function set_value(name, id, kind) {
 		$('#cv' + $('#current_cv').val()).val(id);
 		$('#cv_kind' + $('#current_cv').val()).val(kind);
 		$('#category' + $('#current_cv').val()).val(name);
@@ -96,12 +96,16 @@
 	    <%    	
 	      	@cv_list.each do |idx, cv|%>
 	      	<tr>
-	      		<td><select name="op[]" class="ta-c mcdropdown_spacing" id="op#{idx}">
+	      		<td>
+	      		<% if idx>0 %>	
+	      		<select name="op[]" class="ta-c mcdropdown_spacing" id="op#{idx}">
 			      <option value="+">+</option>
 			      <option value="-">−</option>
 			      <option value="x">×</option>
 			      <option value="÷">÷</option>
-			    </select></td>
+			    </select>
+			    <% end %>
+			    </td>
 	      		<td>
 	      			<input type="text" name="category<%= idx + 1 %>" onclick="get_category(<%= idx+1 %>);" id="category<%= idx+1 %>" value="<%= cv['name']%>" />
 	      			<input type="hidden" name="cv_kind[]" id="cv_kind<%= idx + 1 %>" value="<%= @cv_kind_list[idx]['id']%>" />
