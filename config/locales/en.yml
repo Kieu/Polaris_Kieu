@@ -685,3 +685,5 @@ en:
   Listing: "Listing ads"
   Display: "Display ads"
   Affiliate: "Affiliate" 
+  log_error_messages: ["[None]", "No redirect information", "Request parameters not correct", "DB error [*not yet use]", "Redirection information has been deleted"]
+  log_cv_error_messages: ["[None]", "None conversion setting", "Request parameters not correct", "DB error [*not yet use]", "No session cookie information", "None click", "Deduplication", "Unique constraint violation"]

@@ -120,7 +120,7 @@
 	                total : json.total
 	            };
 	        },
-		    sortname: "unit_id",
+		    sortname: "click_utime",
 	        sortorder: "desc",
 			usepager: true,
 			useRp: true,
@@ -132,12 +132,12 @@
 			height: 200,
 			onSuccess: function() {
                 tableResize();
-				$('tr#row-0 td:nth-child('+(1+'n-'+(11))+')').remove();
-                $('tr#row-0').after("<div class='group_header'>Listing ad</div>");
 				$('tr#row-1 td:nth-child('+(1+'n-'+(11))+')').remove();
-                $('tr#row-1').after("<div class='group_header'>Display ad</div>");
+                $('tr#row-1').after("<div class='group_header'>Listing ad</div>");
 				$('tr#row-2 td:nth-child('+(1+'n-'+(11))+')').remove();
-                $('tr#row-2').after("<div class='group_header'>Affiliate</div>");
+                $('tr#row-2').after("<div class='group_header'>Display ad</div>");
+				$('tr#row-3 td:nth-child('+(1+'n-'+(11))+')').remove();
+                $('tr#row-4').after("<div class='group_header'>Affiliate</div>");
 			}
 		});
 		
