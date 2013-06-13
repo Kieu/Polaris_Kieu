@@ -56,7 +56,7 @@ class ConversionLog < ActiveRecord::Base
     field = "*, 'OK' as log_state, null as error_code"
     field_error = "*,null as access_time,null as access_ymd, null as parent_conversion_id,null as send_url,null as send_utime, null as repeat_flg, null as repeat_proccessed_flg, 'NG' as log_state "
 
-    field_1 = "*, null as media_category_id,
+    field_organic = "*, null as media_category_id,
                     null as media_id,
                     null as account_id,
                     null as campaign_id,
@@ -101,14 +101,14 @@ class ConversionLog < ActiveRecord::Base
     if show_error=="1"
       sql_str = "(select #{field} from conversion_#{id}_logs  where DATE_FORMAT(created_at, '%Y/%m/%d') BETWEEN ? AND ? #{where_clause}) union all
                                        (select #{field_error} from conversion_error_#{id}_logs where DATE_FORMAT(created_at, '%Y/%m/%d') BETWEEN ? AND ? #{where_clause}) union all
-                                       (select #{field_1} from conversion_organic_#{id}_logs)
+                                       (select #{field_organic} from conversion_organic_#{id}_logs)
 
                                        ORDER BY media_category_id "
                                         
       params += params1
     else
       sql_str = "(select #{field} from conversion_#{id}_logs  where DATE_FORMAT(created_at, '%Y/%m/%d') BETWEEN ? AND ? #{where_clause}) union all
-                                       (select #{field_1} from conversion_organic_#{id}_logs)
+                                       (select #{field_organic} from conversion_organic_#{id}_logs)
                                        ORDER BY media_category_id "
                                         
     end                                    
