@@ -4,15 +4,20 @@
     $("#current_rev").html("v"+$.mcDropdown.version);
     //$("#category").mcDropdown("#categorymenu");
     //$("#category2").mcDropdown("#categorymenu2");
+    function add_category() {
+		$("#cv_num").val(parseInt($("#cv_num").val()) + 1);
+		$("#cv_category").append("<tr><td><select name='op[]'  class='ta-c mcdropdown_spacing'>"+
+								 "<option value='+'>+</option><option value='-'>−</option><option value='x'>×</option><option value='÷'>÷</option></select></td>" +
+								 "<td><input type='hidden' name='cv[]' id='cv" + $("#cv_num").val() + "' value='' />" +
+								 "<input type='hidden' name='cv_kind[]' id='cv_kind" + $("#cv_num").val() + "' value='' />" + 
+	      						 "<input type='text' name='category"+ $("#cv_num").val() + "' id='category"+ $("#cv_num").val() + "' value='' onclick='get_category(" + $("#cv_num").val() + ");' /></td></tr>");
+	}
   });
-  function get_category(id='') {
+  
+  function get_category(id) {
 	$('#current_cv').val(id);
-	console.log($('#current_cv').val());
 	$.colorbox({width:"580px", inline:true, href:"#inline_logs"});
   }
-  $(function() {
-    $('#ui-tab').tabs();
-  });
 </script>
 
 
@@ -64,8 +69,6 @@
 		  function remove_fb_app_id() {
 		  	$('#fb_app_id').html('');
 		  }
-		</script>
-        <script type="text/javascript">
           function render_web(){
             $('#category_area').html('');
             $('#category_area').html('<%=j render "web", f: f %>');
@@ -120,6 +123,8 @@
               </tbody>
             </table>
             <table class="client_info" id="category_area">
+            	<tr>
+            		<td>
               <%= 
               case @conversion.conversion_category
               when 2
@@ -131,6 +136,8 @@
               end
                
               %>
+              </td>
+              </tr>
             </table>
             <div class="submit_area">
               <input type="image" src="/assets/btn_done.gif" id="btn_done">
