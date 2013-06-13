@@ -83,8 +83,9 @@
         $.ajax({
             url: "<%= download_csv_conversion_promotion_logs_path %>",
             data: {"promotion_id" : "<%= @promotion.id if @promotion %>",
-                "media_cateory_id": $("#media_category_id").val(),
-                "account_id": $("#account_id").val()},
+                "media_category_id": $("#media_category_id").val(),
+                "account_id": $("#account_id").val(),
+                "conversion_id": $("#conversion_id").val()},
             method: "post",
             success: function(data){
             }
