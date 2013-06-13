@@ -25,8 +25,8 @@ class ClickLogsController < ApplicationController
     background_job = BackgroundJob.create
     job_id = ExportClickLogsData.create(user_id: current_user.id,
       promotion_id: params[:promotion_id].to_i,
-      media_category_id: params[:media_category_id].to_i,
-      account_id: params[:account_id].to_i, start_date: cookies[:cs],
+      media_category_id: params[:media_category_id],
+      account_id: params[:account_id], start_date: cookies[:cs],
       end_date: cookies[:ce], show_error: cookies[:ser],
       bgj_id: background_job.id)
     background_job.job_id = job_id
