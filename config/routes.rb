@@ -26,12 +26,9 @@ PolarisManage::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy] do
     post "resend_password", on: :collection
   end
-  
   match "/signin",  to: "sessions#new"
   match "/signout", to: "sessions#destroy", via: :delete
-
   root to: "clients#index"
-  
   resources :accounts, only: [:new, :create, :edit, :update] do
     post "change_medias_list", on: :collection
   end
@@ -39,21 +36,23 @@ PolarisManage::Application.routes.draw do
     post "get_logs_list", on: :collection
     get "download_csv", on: :collection
   end
- resources :conversion_promotion_logs, only: [:index] do
+  resources :conversion_promotion_logs, only: [:index] do
     post "get_conversion_logs_list", on: :collection 
     get "download_csv", on: :collection
- end
-
- resources :url_settings do
-  post "get_urls_list", on: :collection
-  post "download_csv", on: :collection
- end
- resources :background_jobs do
+  end
+  resources :url_settings do
+    post "get_urls_list", on: :collection
+    post "download_csv", on: :collection
+  end
+  resources :background_jobs do
     get "upload", on: :collection
     get "download", on: :collection
     get "inprogress", on: :collection
     get "notification", on: :collection
+    get "download_file", on: :collection
+    get "kill_job", to: "background_jobs#kill_job", on: :collection
   end
+  resources :imports
   mount Resque::Server, at: '/resque'
   # The priority is based upon order of creation:
   # first created -> highest priority.

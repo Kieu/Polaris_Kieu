@@ -10,18 +10,19 @@ class Conversion < ActiveRecord::Base
   validates :roman_name, presence: true, uniqueness: {scope: :promotion_id}
   validates :conversion_category, presence: true
   validates :track_type, presence: true, if: :check_app
-  validates :session_period, presence: true, if: :check_track_type
+  validates :session_period, presence: true, if: :check_track_type1
   validates :unique_def, presence: true, if: :check_conversion_category
-  validates :os, presence: true, if: :check_app
-  validates :conversion_mode, presence: true, if: :check_app
-  validates :duplicate, presence: true, if: :check_conversion_category
-  validates :track_method, presence: true, if: :check_app
+  validates :os, presence: true, if: :check_track_type
+  validates :conversion_mode, presence: true, if: :check_track_type
+  validates :duplicate, presence: true, if: :check_track_type
+  validates :track_method, presence: true, if: :check_track_type
   validates :facebook_app_id, presence: true, if: :check_conversion_mode
   validates :start_point, presence: true, if: :check_web
   validates :conversion_combine, presence: true, if: :check_combination
   validates :url, presence: true, if: :check_track_method
 
   scope :order_by_conversion_name, ->{order :conversion_name}
+  scope :order_by_id, ->{order :id}
   scope :get_by_promotion_id, lambda {|promotion_id| where(promotion_id: promotion_id)}
   def create_mv
     mv = ""
@@ -57,6 +58,10 @@ class Conversion < ActiveRecord::Base
   end
 
   def check_track_type
+    track_type == 0
+  end
+
+  def check_track_type1
     track_type == 1
   end
 

@@ -1,15 +1,16 @@
-<%= render "layouts/prevent_change_page" %>
-<%= stylesheet_link_tag "css/promotion" %>
+<%= render "layouts/prevent_change_page_edit" %>
 <%= stylesheet_link_tag "css/common" %>
 <% content_for :sidebar do %>
-    <%= render partial: "layouts/sidebar", locals: {object: @promotions} %>
+    <%= render partial: "layouts/sidebar", locals: {object: @array_promotion} %>
 <% end %>
   <ul class="contentNavi">
     <li class="pre"><%= link_to @promotion.client.client_name, client_path(@promotion.client_id) %></li>
     <li> &gt; </li>
-    <li><%= link_to @promotion.promotion_name, promotion_path(@promotion) %></li>
+    <li><%= link_to @promotion.promotion_name, promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %></li>
     <li> &gt; </li>
     <li><%= I18n.t("promotion.crumb_edit")%></li>
+    <li> / </li>
+    <li><%= @promotion.promotion_name %></li>
   </ul>
   <div class="clear"></div>
 <%= form_for(@promotion) do |f| %>
@@ -39,46 +40,39 @@
         </tbody>
       </table>
       <div class="submit_area2">
-        <input type="image" src="/assets/btn_done.gif" id="btn_done"><p><%= link_to raw('<img align="right" alt="delete" src="/assets/btn_del.gif">'), "#inline_content" %></p>
-        <p><%= link_to raw('<img align="right" alt="キャンセル" src="/assets/btn_cancel.gif">'), promotions_path(client_id: @promotion.client_id) %></p>
+      	<%= image_submit_tag("/assets/btn_done.gif", id: "btn_done") %>
+        <p><%= link_to image_tag("/assets/btn_cancel.gif", align: "right", alt: "キャンセル"), promotions_path(promotion_id: @promotion.id, client_id: @client_id) %></p>
+        <p><button id="promotion_delete"><img align="right" alt="delete" src="/assets/btn_del.gif" ></button></p>
          </div>
     </div><!-- /."regist_form end-->
+    <input type="hidden" name="client_id" value="<%= @client_id %>" />
     <% end %>
-
-
-<div style='display:none'>
-  <div id='inline_content' style='padding:10px; background:#fff;'>
-    <div>Promotion name: <%= @promotion.promotion_name %></div>
-    <div>You want to delete?</div>
-    <button id="del_ok">Delete</button>
-    <button id="del_cancel">Cancel</button>
-  </div>
-  <div id="del_success">
-    <div>Deleted!</div>
-  </div>
-</div>
-
-
 <script type="text/javascript">
-  $(".inline").colorbox({
-    width: "30%",
-    inline: true,
-    escKey: false,
-    overlayClose: false,
-  });
-
-  $("#del_ok").click(function(){
-    $.ajax({
-      url: "<%= delete_promotion_promotions_path %>",
-      method: "POST",
-      data: "id=" + "<%= @promotion.id %>",
-      success: function(data){
-        location.href = "/promotions"
-      }
-    })
-  })
-
-  $("#del_cancel").click(function(){
-    $(".inline").colorbox.close();
-  })
+$(function(){
+	$("#promotion_delete").click(function(e){
+		e.preventDefault();
+	  	$.confirm({
+			'message'	: '<%= render partial: "layouts/popup_new" %>',
+		    'buttons'	: {
+		    	'OK'	: {
+		        	'class'	: 'popup_yes',
+		            'action': function(){
+		            	$.ajax({
+							url: "<%= delete_promotion_promotions_path %>",
+							type: "POST",
+							data: "promotion_id=" + "<%= @promotion.id %>" + "&client_id=" + "<%= @client_id %>",
+							success: function(data){
+								location.href = "/promotions?client_id=<%= @client_id %>"
+							}
+						})
+					}
+				},
+		        'Cancel'	: {
+		        	'class'	: 'popup_no',
+		            'action': function(){}	// Nothing to do in this case. You can as well omit the action property.
+				}
+			}
+		});
+	});
+})
 </script>

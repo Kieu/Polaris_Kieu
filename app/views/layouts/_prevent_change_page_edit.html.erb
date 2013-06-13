@@ -1,0 +1,27 @@
+<div id="popup_prevent">
+<script type="text/javascript">
+
+$(function(){
+    $("a").click(function(event){
+       var href = ($(this).attr('href'));
+        event.preventDefault();
+        $.confirm({
+            'message'	: '<%= render partial: "layouts/popup_edit" %>',
+            'buttons'	: {
+                'OK'	: {
+                    'class'	: 'popup_yes',
+                    'action': function(){
+                        location.href = href;
+                    }
+                },
+                'Cancel'	: {
+                    'class'	: 'popup_no',
+                    'action': function(){}	// Nothing to do in this case. You can as well omit the action property.
+                }
+            }
+        });
+    });
+})
+</script>
+
+</div>

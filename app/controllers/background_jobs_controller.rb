@@ -1,8 +1,15 @@
 class BackgroundJobsController < ApplicationController
   before_filter :signed_in_user
-  before_filter :must_super_agency
   layout false
-
+  # Stream a file that has already been generated and stored on disk
+  def download_file
+    job = BackgroundJob.find(params[:id])
+    if current_user.id==job.user_id
+      controller_path = job.controller.to_s
+      path = Rails.root + '/public/file.csv'
+      send_data(path, :filename => "#{job.filename}", :type => "text/csv")
+    end
+  end
   def download
     @jobs = BackgroundJob.where(:user_id => current_user.id,:type_view => 'download',:status =>'1')
     render "background_jobs/new"
@@ -22,5 +29,14 @@ class BackgroundJobsController < ApplicationController
   def inprogress
     @jobs = BackgroundJob.where(:user_id => current_user.id,:status => '0')
     render "background_jobs/inprogress"
+  end
+  def kill_job
+    job = BackgroundJob.find(params[:id])
+    if current_user.id==job.user_id
+      #send signed for job
+    status = Resque::Plugins::Status::Hash.get(job.job_id)
+     #@raise_error = Resque::Plugins::Status::Hash.kill(job.job_id)
+     render :text => status.options
+    end
   end
 end

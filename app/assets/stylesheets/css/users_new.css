@@ -16,7 +16,7 @@
     position: relative;
 }
 #inner {
-    padding: 20px 0 20px 15px;
+
 }
 #user_form {
     height: 580px;
@@ -84,4 +84,7 @@ disabled {
 }
 .disabled {
     color: #999999;
+}
+#user_company_id option{
+  width: 250px;
 }

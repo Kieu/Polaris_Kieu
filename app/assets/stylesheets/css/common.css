@@ -19,10 +19,44 @@ font-size: 14px;
 a:hover{
 	opacity:0.7;
 }
-
+/*#promotion_tables {
+    width: 100%;
+    overflow: hidden;
+    overflow-x:scroll ;
+}
+*/
 /*p img:hover{
 	opacity:0.7;
 }*/
+
+#cautionBox{
+    margin:0 auto;
+    width: 500px;
+    height: 220px;
+    -webkit-border-radius: 13px;
+    -moz-border-radius: 13px;
+    border-radius: 13px;
+    background-color: #f1f1f1;
+    border: 4px #333 solid;
+}
+
+#cautionBox p.del_message{
+    margin: auto;
+    margin-bottom: 10px;
+    width: 420px;
+}
+
+#cautionBox .clientName{
+    font-weight: bold;
+    margin: 0 auto;
+    text-align: center;
+    color: #F63;
+    width: 200px;
+    height: 30px;
+    border-bottom: 1px solid #F63;
+    border-top: 1px solid #F63;
+    padding-top: 10px;
+}
 
 .clear{
 	clear:both;
@@ -243,10 +277,25 @@ table.sidebar tbody td {
     height: 28px;
     padding-left: 3px;
     vertical-align: middle;
-    width: 210px;
+    width: 400px;
+    display:block;
 }
 
-
+.ui-autocomplete {
+    max-height: 200px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+    background: #F1F1F1;
+    border: 1px solid gray;
+}
+/* IE 6 doesn't support max-height
+* we use height instead, but this forces the menu to always be this tall
+*/
+* html .ui-autocomplete {
+    height: 200px;
+    background: #F1F1F1;
+}
 
 /* ==========================================================================
     フッター

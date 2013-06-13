@@ -1,79 +1,101 @@
-<!-- 組み合わせ選択 -->
+<script type="text/javascript">
+	function add_category() {
+		$("#cv_num").val(parseInt($("#cv_num").val()) + 1);
+		$("#cv_category").append("<tr><td><select name='op[]'  class='ta-c mcdropdown_spacing'>"+
+								 "<option value='+'>+</option><option value='-'>−</option><option value='x'>×</option><option value='÷'>÷</option></select></td>" +
+								 "<td><input type='hidden' name='cv[]' id='cv" + $("#cv_num").val() + "' value='' />" +
+								 "<input type='hidden' name='cv_kind[]' id='cv_kind" + $("#cv_num").val() + "' value='' />" + 
+	      						 "<input type='text' name='category"+ $("#cv_num").val() + "' id='category"+ $("#cv_num").val() + "' value='' onclick='get_category(" + $("#cv_num").val() + ");' /></td></tr>");
+	}
+	
+	function set_value(name, id, kind='') {
+		$('#cv' + $('#current_cv').val()).val(id);
+		$('#cv_kind' + $('#current_cv').val()).val(kind);
+		$('#category' + $('#current_cv').val()).val(name);
+		$("#inline_logs").colorbox.close();
+	}
+	function change_kind_box(id) {
+		$('#kind_box').html($('#cv_box'+id).html());
+	}
+</script>
+
+<div style='display:none'>
+	<div id="inline_logs">
+		<div id="page1">
+				<table width="100%">
+					<tr>
+						<td width="50%">
+							<input type="hidden" value="" id="current_cv" name="current_cv" />
+							<ul>
+							<% @conversions.each do |conversion|%>
+								<li>
+							        <div>
+							          <%= link_to conversion.conversion_name, "javascript:void(0)", onclick: "change_kind_box(#{conversion.id});"%>
+							        </div>
+							        <div id="cv_box<%= conversion.id %>" style="display: none">
+							        	<ul>
+											<li>
+										        <div>
+										          <%= link_to "CV kind 1", "javascript:void(0)", onclick: "set_value('#{conversion.conversion_name}', #{conversion.id}, 1);"%>
+										        </div>
+									      	</li>
+									      	<li>
+										        <div>
+										          <%= link_to "CV kind 2", "javascript:void(0)", onclick: "set_value('#{conversion.conversion_name}', #{conversion.id}, 2);"%>
+										        </div>
+									      	</li>
+									      	<li>
+										        <div>
+										          <%= link_to "CV kind 3", "javascript:void(0)", onclick: "set_value('#{conversion.conversion_name}', #{conversion.id}, 3);"%>
+										        </div>
+									      	</li>
+										</ul>
+							       	</div>
+						      	</li>
+							
+							<% end %>
+						</td>
+						<td width="50%">
+							<div id="kind_box">
+							
+							</div>
+						</td>
+					</tr>
+				</table>
+		 	</ul>
+		</div>	  
+			
+		
+		
+	</div>
+</div>
 <tbody>
   <tr>
     <th><%= f.label I18n.t("conversion.combination.pattern") %></th>
     <td>
-      <input type="text" name="category" id="category" value="成果設定1" />
-      <ul id="categorymenu" class="mcdropdown_menu">
-        <li rel="1">CV1アプリダウンロード
-          <ul>
-            <li rel="2">CV</li>
-            <li rel="5">CV（初回）</li>
-            <li rel="6">CV（リピート）</li>
-          </ul>
-        </li>
-        <li rel="1">CV2式場予約（APP）
-          <ul>
-            <li rel="2">CV</li>
-            <li rel="5">CV（初回）</li>
-            <li rel="6">CV（リピート）</li>
-          </ul>
-        </li>
-        <li rel="1">CV3式場予約（WEB）
-          <ul>
-            <li rel="2">CV</li>
-            <li rel="5">CV（初回）</li>
-            <li rel="6">CV（リピート）</li>
-          </ul>
-        </li>
-        <li rel="1">CV4資料請求（WEB）
-          <ul>
-            <li rel="2">CV</li>
-            <li rel="5">CV（初回）</li>
-            <li rel="6">CV（リピート）</li>
-          </ul>
-        </li>
-      </ul>
-    </td>
-    <td><select  class="ta-c mcdropdown_spacing">
-      <option>&nbsp;</option>
-      <option>+</option>
-      <option>−</option>
-      <option>×</option>
-      <option>÷</option>
-    </select></td>
-    <td>
-      <input type="text" name="category" id="category2" value="成果設定2" />
-      <ul id="categorymenu2" class="mcdropdown_menu">
-        <li rel="1">CV1アプリダウンロード
-          <ul>
-            <li rel="2">CV</li>
-            <li rel="5">CV（初回）</li>
-            <li rel="6">CV（リピート）</li>
-          </ul>
-        </li>
-        <li rel="1">CV2式場予約（APP）
-          <ul>
-            <li rel="2">CV</li>
-            <li rel="5">CV（初回）</li>
-            <li rel="6">CV（リピート）</li>
-          </ul>
-        </li>
-        <li rel="1">CV3式場予約（WEB）
-          <ul>
-            <li rel="2">CV</li>
-            <li rel="5">CV（初回）</li>
-            <li rel="6">CV（リピート）</li>
-          </ul>
-        </li>
-        <li rel="1">CV4資料請求（WEB）
-          <ul>
-            <li rel="2">CV</li>
-            <li rel="5">CV（初回）</li>
-            <li rel="6">CV（リピート）</li>
-          </ul>
-        </li>
-      </ul>
+      <table id="cv_category">
+      	<tr>
+      		<td><select name="op[]" class="ta-c mcdropdown_spacing" style="display:none">
+		      <option value="+">+</option>
+		      <option value="-">−</option>
+		      <option value="x">×</option>
+		      <option value="÷">÷</option>
+		    </select></td>
+      		<td>
+      			<input type="text" name="category1" id="category1" onclick="get_category(1);" value="" />
+      			<input type="hidden" name="cv_num" id="cv_num" value="1" />
+      			<input type="hidden" name="cv_kind[]" id="cv_kind1" />
+      			<input type="hidden" name="cv[]" id="cv1" />
+      		</td>
+      	</tr>
+     </table>
+     <table>	
+      	<tr>
+      		<td colspan="2">
+      			<input type="button" value="Add" onclick="add_category();">
+      		</td>
+      	</tr>
+      </table>
     </td>
     <td></td>
   </tr>

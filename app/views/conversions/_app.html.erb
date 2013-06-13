@@ -1,23 +1,38 @@
 <!-- APP選択 -->
 <script type="text/javascript">
   function render_install(){
+    $('#app_type_area').html('');
     $('#app_type_area').html('<%=j render "app_install", f: f %>');
   }
   function render_action_in_app(){
+    $('#app_type_area').html('');
     $('#app_type_area').html('<%=j render "app_action_in_app", f: f %>');
   }
+  
 </script>
+
+
 <tbody>
   <tr>
-    <th><%= f.label "計測タイプ：" %></th>
+    <th><%= f.label I18n.t("conversion.conversion_category.app.track_type.label") %></th>
     <td colspan="2"><label>
-      <%= f.radio_button :track_type, 0, checked: true, onclick: "render_install();" %>Install
+      <%= f.radio_button :track_type, 0, checked: true, onclick: "render_install();" %><%=I18n.t("conversion.conversion_category.app.track_type.install")%>
     </label></td>
     <td colspan="2"><label>
-      <%= f.radio_button :track_type, 1, onclick: "render_action_in_app();" %>アプリ内アクション
+      <%= f.radio_button :track_type, 1, onclick: "render_action_in_app();" %><%=I18n.t("conversion.conversion_category.app.track_type.app_action")%>
     </label></td>
   </tr>
+  <tr>
+  	<td colspan="5">	
+	<div class="client_info" id="app_type_area">
+	  <%= 
+	  if(@conversion.track_type==1)
+	  	render "app_action_in_app", f: f 
+	  else	
+	  	render "app_install", f: f
+	  end
+	  %>
+	</div>
+	</td>
+  </tr>
 </tbody>
-<div id="app_type_area">
-  <%= render "app_install", f: f %>
-</div>

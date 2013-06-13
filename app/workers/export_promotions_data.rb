@@ -1,59 +1,58 @@
 require 'csv'
 
 # export promotion data table from promotion screen to csv file
-class ExportPromotionData
-  @queue = :default
+class ExportPromotionsData
+  include Resque::Plugins::Status
+  @queue = :export_promotions
 
-  def self.perform user_id, promotion_id
-
+  def perform
     # make file name
     # file name fomat: {user_id}_export_promotion_{current_date}.csv
-  	file_name = user_id.to_s + "_" + Settings.EXPORT_PROMOTION + Date.today.to_s + Settings.file_type.CSV
+  	file_name = options['user_id'].to_s + "_" + Settings.EXPORT_PROMOTION + 
+      Date.today.to_s + Settings.file_type.CSV
 
     # initial this task
-    background_job = BackgroundJob.new
-    background_job.user_id = user_id
+    background_job = BackgroundJob.find(options['bgj_id'])
+    background_job.user_id = options['user_id']
     background_job.filename = file_name
     background_job.type_view = Settings.type_view.DOWNLOAD
     background_job.status = Settings.job_status.PROCESSING
     background_job.save!
     
-    @promotion_id = promotion_id
-
     # store csv file on server
     # path: doc/promotion_export
     path_file = Settings.export_promotion_path + file_name
-    @array_results = Hash.new
+    array_results = Hash.new
 
     begin
       # get total for each media_category
       Settings.media_category.each do |category|
         Settings.promotions_sums.each_with_index do |sum, index|
-          @array_results[category[1]+"_"+Settings.promotions_options[index]+"_total"] = DailySummaryAccount
-            .where(promotion_id: @promotion_id)
+          array_results[category[1]+"_"+Settings.promotions_options[index]+"_total"] =
+            DailySummaryAccount.where(promotion_id: options['promotion_id'])
             .where(media_category_id: category[0].to_s).sum(sum)
             
           Media.where(media_category_id: category[0].to_s).each_with_index do |media, index1|
             media.accounts.each_with_index do |account, index2|
-              @array_results[account.account_name+"_"+Settings.promotions_options[index]] = DailySummaryAccount
-                .where(promotion_id: @promotion_id)
-                .where(media_category_id: category[0].to_s)
-                .where(account_id: account.id).sum(sum)
+              array_results[account.account_name+"_"+Settings.promotions_options[index]] = 
+                DailySummaryAccount.where(promotion_id: options['promotion_id']).
+                where(media_category_id: category[0].to_s).
+                where(account_id: account.id).sum(sum)
             end
           end
         end
       end
 
       # get row data
-      array_data_row = DailySummaryAccConversion.get_conversions_summary(@promotion_id)
+      array_data_row = DailySummaryAccConversion.get_conversions_summary(options['promotion_id'])
       account_col = ["Media", "Account", "Imp", "Click", "CTR", "CPC", "CPM", "COST"]
-      array_conversion = Conversion.where(promotion_id: @promotion_id)
+      array_conversion = Conversion.where(promotion_id: options['promotion_id'])
       
       array_medium = Array.new
       array_conversion_col = Array.new
       (1..8).each do
-          array_medium << ""
-          array_conversion_col << ""
+        array_medium << ""
+        array_conversion_col << ""
       end
 
       # initial count num
@@ -88,12 +87,14 @@ class ExportPromotionData
           array_media_category_total << media_category[1]
           array_media_category_total << "total"
           Settings.promotions_options.each do |col_val|
-            array_media_category_total << @array_results[media_category[1] + "_" + col_val + "_total"]
+            array_media_category_total << @array_results[media_category[1] +
+              "_" + col_val + "_total"]
           end
           
           array_conversion.each do |conversion_element|
             Settings.conversions_options.each do |conversion_col|
-              array_media_category_total << array_data_row[media_category[1] + "_conversion#{conversion_element.id}" + "_" + conversion_col]
+              array_media_category_total << array_data_row[media_category[1] +
+                "_conversion#{conversion_element.id}" + "_" + conversion_col]
             end
           end
           
@@ -114,18 +115,16 @@ class ExportPromotionData
 
               array_conversion.each do |conversion_element|
                 Settings.conversions_options.each do |conversion_col|
-                  record_data << array_data_row[account.account_name + "_conversion#{conversion_element.id}" + "_" + conversion_col]
+                  record_data << array_data_row[account.account_name +
+                    "_conversion#{conversion_element.id}" + "_" + conversion_col]
                 end
               end
-              
               # write data row
               csv << record_data.unshift(media.media_name)
             end
-
           end
         end
       end
-      
       # success case
       background_job.status = Settings.job_status.SUCCESS
       background_job.save!
@@ -133,10 +132,7 @@ class ExportPromotionData
       # false case
       background_job.status = Settings.job_status.FALSE
       background_job.save!   
-    ensure
-        
+    ensure 
     end
-    
   end
-
 end

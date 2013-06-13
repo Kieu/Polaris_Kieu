@@ -48,7 +48,7 @@ class UrlSettingsController < ApplicationController
       
       rows << { id: url['redirect_url_id'], cell: {edit_button: edit_button, ad_id: url['ad_id'], campaign_name: url['campaign_name'],
                group_name: url['group_name'], ad_name: url['ad_name'], creative: creative, url: url['url'], copy: copy_button,
-               delete_check: delete_check}}
+               delete_check: delete_check, last_modified: url['last_modified'] }}
     end
 
     rows
@@ -62,16 +62,21 @@ class UrlSettingsController < ApplicationController
     account_id = params[:account_id]
     media_id = params[:media_id]
     controller = params[:controller]
-    Resque.create ExportUrlData, start_date, end_date, user_id, 
-                                  promotion_id, account_id, media_id, controller
+    
+    background_job = BackgroundJob.create
+    job_id = ExportUrlData.create(start_date: start_date, end_date: end_date,
+      user_id: user_id, promotion_id: promotion_id, account_id: account_id,
+      media_id: media_id, controller: controller, bgj_id: background_job.id)
+    background_job.job_id = job_id
+    background_job.save!
     
     render text: "processing"
   end
   private
   def set_cookies
     time = Time.new
-    cookies[:s] = "#{time.year}/#{time.month}/01" if !cookies[:s] 
-    cookies[:e] = "#{time.year}/#{time.month}/#{time.day}" if !cookies[:e]
-    cookies[:ser] = "1" if !cookies[:ser]
+    cookies[:url_setting_start_date] = Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d") if !cookies[:url_setting_start_date] 
+    cookies[:url_setting_end_date] = Date.yesterday.strftime("%Y/%m/%d") if !cookies[:url_setting_end_date]
+    cookies[:url_setting] = "1111111111" if !cookies[:url_setting]
   end
 end

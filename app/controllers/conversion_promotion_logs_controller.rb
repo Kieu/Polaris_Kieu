@@ -28,7 +28,16 @@ end
 
 
 def download_csv
-    Resque.enqueue ExportConversionLogsData, current_user.id, params[:promotion_id].to_i, params[:conversion_id], params[:media_category_id], params[:account_id], cookies[:s], cookies[:e], cookies[:ser]
+    background_job = BackgroundJob.create
+    job_id = ExportConversionLogsData.create(user_id: current_user.id,
+      promotion_id: params[:promotion_id].to_i,
+      conversion_id: params[:conversion_id].to_i,
+      media_category_id: params[:media_category_id].to_i,
+      account_id: params[:account_id].to_i, start_date: cookies[:s],
+      end_date: cookies[:e], show_error: cookies[:ser],
+      bgj_id: background_job.id)
+    background_job.job_id = job_id
+    background_job.save!
     
     render text: "processing"
 end
@@ -65,9 +74,9 @@ def get_rows conversion_logs
                                           sales: conversion_log.sales,
                                           volume: conversion_log.volume,
                                           others: conversion_log.others,
-                                          error_message: conversion_log.error_message,
-                                          error_log_view: conversion_log.error_log_view,
-                                          media_category_id: conversion_log.media_category_id
+                                          error_code: I18n.t("log_cv_error_messages")[conversion_log.error_code.to_i],
+                                          media_category_id: conversion_log.media_category_id,
+                                          profit: conversion_log.profit
                                            }}
   end
   rows
@@ -75,10 +84,10 @@ end
 
 private
   def set_cookies
-    cookies[:options] = "111111111111111000100000" if !cookies[:options]
+    cookies[:cv_options] = "111111111111111000100000" if !cookies[:cv_options]
     time = Time.new
-    cookies[:s]="#{time.year}/#{time.month}/01" if !cookies[:s] 
-    cookies[:e]="#{time.year}/#{time.month}/#{time.day}" if !cookies[:e]
+    cookies[:s]=Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d") if !cookies[:s] 
+    cookies[:e]=Date.yesterday.strftime("%Y/%m/%d") if !cookies[:e]
     cookies[:ser] = "1" if !cookies[:ser]
   end
 end

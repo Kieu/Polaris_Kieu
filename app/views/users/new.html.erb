@@ -1,3 +1,4 @@
+<%= render "layouts/prevent_change_page_edit" %>
 <%= stylesheet_link_tag "css/users_new" %>
 <%= stylesheet_link_tag "css/common" %>
 <%= flash[:success] if flash[:success] %>
@@ -25,7 +26,7 @@
         <tr>
           <th><%= f.label t("user.company_name") %></th>
           <td colspan="2">
-            <%= f.collection_select :company_id, Client.all, :id, :client_name, {}, {:class => 'input-text'} %></td>
+            <%= f.collection_select :company_id, Client.where(id: 0), :id, :client_name, {include_blank: t("user.company_id.include_blank")} , {:class => 'input-text'} %></td>
         </tr>
         <tr>
           <th><%= I18n.t("user.password.label") %></th>
@@ -33,8 +34,8 @@
         </tr>
         <tr>
           <th><%= I18n.t("user.password_notification.label") %></th>
-          <td><%= f.radio_button :password_flg, "0", checked: true %> <%= I18n.t("user.password_notification.not_notified") %></td>
-          <td><%= f.radio_button :password_flg, "1" %> <%= I18n.t("user.password_notification.to_notified") %></td>
+          <td><%= f.radio_button :password_flg, "1", checked: true %> <%= I18n.t("user.password_notification.not_notified") %></td>
+          <td><%= f.radio_button :password_flg, "0" %> <%= I18n.t("user.password_notification.to_notified") %></td>
         </tr>
         </tbody>
       </table>
@@ -59,6 +60,10 @@
                 last_choice = id;
                 return;
             }
+            if (id==""){
+            	$("#user_company_id").html("<option value><%= t('user.company_id.include_blank') %></option>");
+            	return;
+            }
             last_choice = id;
             name_data = (id == "2") ? "Client" : "Agency";
             $.ajax({
@@ -66,7 +71,7 @@
                 url: "<%= change_company_list_users_path %>",
                 data: "model=" + name_data,
                 success: function (data) {
-                    $("#user_company_id").html("");
+                    $("#user_company_id").html("<option value><%= t('user.company_id.include_blank') %></option>");
                     for (var i = 0; i < data.length; i++) {
                         name = (name_data == "Client") ? data[i].client_name : data[i].agency_name;
                         option = "<option value='" + data[i].id + "'>" + name + "</option>";

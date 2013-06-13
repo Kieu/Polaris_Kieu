@@ -128,6 +128,7 @@ en:
             email: 
               blank: "Email address can't be blank"
               invalid: Email address is invalid
+              taken: Email すでに登録されています。
             company_id:
               blank: "Person in charge can't be blank"
               too_long: ! 'Person in charge is too long (maximum is %{count} characters)'
@@ -500,138 +501,228 @@ en:
     privacy_policy: "Privacy Policy"
     porporate_information: "Porporate information"
   login:
-    email: "Email address"
-    pw: "Password"
+    email: "Email address: "
+    pw: "Password: "
     choose_lang:
-      label: "Choose Language"
+      label: "Choose Language: "
       ja: "Japanese"
       en: "English"
     forgor_pw: "Forgot Password"
     announcements: "Announcements"
-    captcha: "Captcha"
+    captcha: "Captcha: "
     notice: "Please enter the email address of the account at the time of issuance, the authentication characters that are displayed. Issue a password, and raise the guide. "
   client:
     crumb_edit: "Client Edit"
     crumb_add: "Add Client"
     crumb_list: "Client list"
-    client_name: "Client name en"
-    roman_name: "Roman name"
-    tel: "Contact"
-    person_charge: "Person in charge"
-    person_sale: "Person sales"
+    client_name: "Client name: "
+    roman_name: "Roman name: "
+    tel: "Contact: "
+    person_charge: "Person in charge: "
+    person_sale: "Person sales: "
     contract_flg:
-      label: "Use policy"
-      standard_plan: "Standard Plan"
-      premium_plan: "Premium Plan (¥ 50,000 per month)"
+      label: "Use policy: "
+      standard_plan: " Standard Plan"
+      premium_plan: " Premium Plan (¥ 50,000 per month)"
     contract_type:
-      label: "Plan type"
-      unrecovered: "Unrecovered"
-      been_recovered: "Been recovered"
+      label: "Plan type: "
+      unrecovered: " Unrecovered"
+      been_recovered: " Been recovered"
     user_information: "User information"
     delete: "Delete"
     flash_messages:
-      success: "Client is created successful"
-      update: "Client is updated successful"
-      success_error: "Can not create user for client"
-      update_error: "Can not update user for client"
+      success: " Client is created successful"
+      update: " Client is updated successful"
+      success_error: " Can not create user for client"
+      update_error: " Can not update user for client"
   agency:
     crumb_edit: "Agency Edit"
     crumb_add: "Agency Add"
-    agency_name: "Agency name"
-    roman_name: "Roman name"
+    agency_name: "Agency name: "
+    roman_name: "Roman name: "
     flash_messages:
-      success: "Agency is created successful"
-      update: "Agency is updated successful"
+      success: " Agency is created successful"
+      update: " Agency is updated successful"
   account:
     crumb_add: "Account Add"
     crumb_edit: "Account Edit"
-    media_category: "Media category"
-    media: "Media"
-    account_name: "Account name"
-    roman_name: "Roman name"
-    cost: "Cost calculation： Input data "
-    sync_account_id: "Sync account ID"
-    sync_account_pw: "Sync account PW"
+    media_category: "Media category: "
+    media: "Media: "
+    account_name: "Account name: "
+    roman_name: "Roman name: "
+    cost: "Cost calculation： Input data x"
+    sync_account_id: "Sync account ID: "
+    sync_account_pw: "Sync account PW: "
     flash_messages:
-      success: "Account is created successful"
-      update: "Account is updated successful"
+      success: " Account is created successful"
+      update: " Account is updated successful"
   conversion:
     crumb_add: "Add Conversion"
     crumb_edit: "Edit Conversion"
+    tag_acquisition: Tag acquisition
     user_information: "User information"
     delete: "Delete"
-    conversion_name: "Conversion name"
-    roman_name: "Roman name"
+    conversion_name: "Conversion name: "
+    roman_name: "Roman name: "
     conversion_category:
-      label: "Conversion category"
-      web: "WEB"
-      app: "APP"
-      combination: "Combination"
+      label: "Conversion category: "
+      web: " WEB"
+      app:
+        label: " APP"
+        track_type:
+          label: "Track type: "
+          install: " install"
+          app_action: "App Action"
+        os:
+          label:  "OS-Specific: "
+          ios: " iOS"
+          android: " Android"
+        conversion_mode:
+          label:  "Conversion mode: "
+          all: " All"
+          facebook: " Only Facebook"
+          other: " Other ads"
+        duplicate:
+          label: "Duplicate: "
+          label1: " Yes"
+          label2: " No"
+        track_method:
+          label: "Track method: "
+          white: " White"
+          welcome: " Welcome"
+          custom: 
+            label: " Custom"
+            url: "URL required"
+        app_id:
+          label: "App id "
+          facebook: "(Facebook): "
+        option:
+          label: "<Option>: "
+          judging: " Examination flag: "
+          configure: " Configure"
+        sale_unit_price: "Sales Unit Price: "
+        reward_form:
+          label: "Reward form: "
+          straight_line_type: " Straight-line type"
+          declining_balance_type: " Declining-balance type"
+      combination: " Combination"
     deduplicated:
-      label: "Deduplicated"
-      label1: "yes"
-      label2: "no"
-    unique_definition: "Unique definition"
+      label: "Deduplicated: "
+      label1: " Yes"
+      label2: " No"
+    unique_definition: "Unique definition: "
     option1:
       label: "<Option①>　"
       starting_point_setting:
-        label: "Starting point setting"
-        configure: "Configure"
-        not_configure: "Not configure"
-      sale_unit_price: "Sale unit price"
+        label: "Starting point setting: "
+        configure: " Configure"
+        not_configure: " Not configure"
+      sale_unit_price: "Sale unit price: "
     option2:
       label: "<Option②>"
       reward_format:
-        label: "Reward format"
-        straight_line_type: "Straight line type"
-        not_set: "Not set"
+        label: "Reward format: "
+        straight_line_type: " Straight line type"
+        not_set: " Not set"
     combination:
-      pattern: "Pattern"
+      pattern: "Pattern: "
+      add: "Add"
   log:
     today_text: "Today"
-    crumb_click: "List Click_logs"
-    crumb_cv_logs: "List Conversion logs"
+    crumb_click: "Click_logs"
+    crumb_cv_logs: "Conversion logs"
     conversion_name: "Conversion name"
     media_category: "Media category"
     account_name: "Account name"
+  cv_logs:
+    label: "Logs"
+    cv_test: "CV test"
+    display_item: "Display item"
+    usually: "Usually"
+    show_all: "Show All"
+    conversion_time: "Conversion Times"
+    conversion_name: "Conversion Name"
+    conversion_category: "Conversion Category"
+    tracking_type: "Tracking Type"
+    cv_type: "Conversion type"
+    media_approval: "Media Approval"
+    media: "Media"
+    account: "Account"
+    campaign: "Campaign"
+    ad_group: "Ad Group name"
+    ad_name: "Ad Name"
+    click_time: "Click Times"
+    verify: "Verify"
+    suid: "SUID"
+    session_id: "Session ID"
+    os: "OS"
+    repeat: "Repeat"
+    log_state: "OK/NG"
+    sales: "Sales"
+    profit: "Profit"
+    volume: "Volume"
+    others: "Others"
+    error_message: "Error Message"
+    error_log_view: "Show data from Error table"
+  click_logs:
+    label: Clicks
+    display_item: Display item
+    usually: Usually
+    show_all: "Show All"
+    click_time: "Click Time"
+    media_name: Media Name
+    account_name: Account name
+    campaign_name: Campaign Name
+    ad_group_name: Ad Group Name
+    ad_name: Ad Name
+    url: URL
+    sesid: SESID
+    os: OS
+    log_state: OK/NG
+    error_message: Error Message
+    error_log_view: Show data from Error table
   promotion:
     crumb_edit: "Promotion edit"
     crumb_add: "Promotion add"
-    promotion_name: "Promotion name"
-    category: "Category"
+    promotion_name: "Promotion name: "
+    category: "Category: "
     tracking_period:
-      label: "Tracking period"
+      label: "Tracking period: "
       day: "Day"
-    dashboard: "Dashboard"
+    dashboard: "Dashboard: "
     flash_messages:
-      success: "Promotion is created successful"
-      update: "Promotion is updated successful"
+      success: " Promotion is created successful"
+      update: " Promotion is updated successful"
   user:
     crumb_add: "Add User"
     crumb_edit: "User edit"
-    username: "User name"
-    roman_name: "roman_name"
-    email: "Email address"
+    username: "User name: "
+    roman_name: "Roman name: "
+    email: "Email address: "
     role:
       label: "Role"
       include_blank: "Please select" 
     company_name: "Conpany name"
+    company_id:
+      include_blank: "Please select"
     password:
-      label: "password:"
+      label: "password: "
       info: "※Automatically create"
     password_notification:
-      label: "Password notification"
-      not_notified: "Not notified"
-      to_notified: "To notified"
+      label: "Password notification: "
+      not_notified: " Not notified"
+      to_notified: " To notified"
     disabled:
-      label: "User disabled"
-      disable: "i want to disable"
+      label: "User disabled: "
+      disable: " I want to disable"
     flash_messages:
-      success: "User is created successful en"
-      update: "User is updated successful en"
+      success: " User is created successful en"
+      update: " User is updated successful en"
   media_categories: ["Listing ad", "Display ad", "affiliate"]
   log_track_type: ["Install", "アプリ内アクション (Action in app)"]
   log_repeat_flg: ["新規 (new)", "リピート (repeat)"]
   Listing: "Listing ads"
   Display: "Display ads"
   Affiliate: "Affiliate" 
+  log_error_messages: ["[None]", "No redirect information", "Request parameters not correct", "DB error [*not yet use]", "Redirection information has been deleted"]
+  log_cv_error_messages: ["[None]", "None conversion setting", "Request parameters not correct", "DB error [*not yet use]", "No session cookie information", "None click", "Deduplication", "Unique constraint violation"]

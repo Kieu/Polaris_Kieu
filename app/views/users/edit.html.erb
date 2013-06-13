@@ -1,5 +1,5 @@
-<%= render "layouts/prevent_change_page" %>
-<%= stylesheet_link_tag "css/user" %>
+<%= render "layouts/prevent_change_page_edit" %>
+<%= stylesheet_link_tag "css/users_new" %>
 <%= stylesheet_link_tag "css/common" %>
 <%= flash[:success] if flash[:success] %>
 <div id="user_form">
@@ -26,7 +26,7 @@
           </td>
         </tr>
         <tr>
-          <th><%= f.label I18n.t("user.company") %></th>
+          <th><%= f.label I18n.t("user.company_name") %></th>
           <td colspan="2">
             <% if @user.client? %>
                 <%= text_field_tag :company_id, Client.find(@user.company_id).client_name, disabled: true %>
@@ -40,8 +40,8 @@
         </tr>
         <tr>
           <th><%= f.label I18n.t("user.password_notification.label") %></th>
-          <td><%= f.radio_button :password_flg, "0", disabled: true %> <%= f.label I18n.t("user.password_notification.not_notified") %></td>
-          <td><%= f.radio_button :password_flg, "1", disabled: true %> <%= f.label I18n.t("user.password_notification.to_notified") %></td>
+          <td><%= f.radio_button :password_flg, "1", disabled: true %> <%= f.label I18n.t("user.password_notification.not_notified") %></td>
+          <td><%= f.radio_button :password_flg, "0", disabled: true %> <%= f.label I18n.t("user.password_notification.to_notified") %></td>
         </tr>
         <tr>
           <th><%= f.label I18n.t("user.disabled.label") %></th>
@@ -50,8 +50,8 @@
                   <input type="checkbox" id = "disable_button" checked="checked">
               <% else %>
                   <input type="checkbox" id = "disable_button">
-              <% end %>
-          </td> <%= I18n.t("user.disabled.disable") %>
+              <% end %><%= I18n.t("user.disabled.disable") %>
+          </td>
         </tr>
         </tbody>
       </table>

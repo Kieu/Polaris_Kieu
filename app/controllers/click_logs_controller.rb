@@ -22,7 +22,15 @@ class ClickLogsController < ApplicationController
   end  
   
   def download_csv
-    Resque.enqueue ExportClickLogsData, current_user.id, params[:promotion_id].to_i, params[:media_category_id], params[:account_id], cookies[:cs], cookies[:ce], cookies[:ser]
+    background_job = BackgroundJob.create
+    job_id = ExportClickLogsData.create(user_id: current_user.id,
+      promotion_id: params[:promotion_id].to_i,
+      media_category_id: params[:media_category_id].to_i,
+      account_id: params[:account_id].to_i, start_date: cookies[:cs],
+      end_date: cookies[:ce], show_error: cookies[:ser],
+      bgj_id: background_job.id)
+    background_job.job_id = job_id
+    background_job.save!
     
     render text: "processing"
   end
@@ -39,7 +47,7 @@ class ClickLogsController < ApplicationController
       rows << {id: log.id, cell: {click_utime: log.click_utime, media_id: medias.find(log.media_id).media_name, media_category_id: log.media_category_id,
               account_id: accounts.find(log.account_id).account_name, campaign_id: display_campaigns.find(log.campaign_id).name, group_id: display_groups.find(log.group_id).name,
               unit_id: display_ads.find(log.unit_id).name, redirect_url: log.redirect_url, session_id: log.session_id,
-              device_category: os[log.device_category.to_i], state: log.state, error_code: log.error_code}}
+              device_category: os[log.device_category.to_i], state: log.state, error_code: I18n.t("log_error_messages")[log.error_code.to_i]}}
     end
     rows
   end  
@@ -47,7 +55,7 @@ class ClickLogsController < ApplicationController
   def set_cookie
     cookies[:coptions]="11111101010" if !cookies[:coptions]
     time = Time.new
-    cookies[:cs]="#{time.year}/#{time.month}/01" if !cookies[:cs] 
-    cookies[:ce]="#{time.year}/#{time.month}/#{time.day}" if !cookies[:ce]   
+    cookies[:cs]=Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d") if !cookies[:cs] 
+    cookies[:ce]=Date.yesterday.strftime("%Y/%m/%d") if !cookies[:ce]   
   end
 end

@@ -22,7 +22,7 @@
   </li>
   <li>&gt;</li>
   <li class="pre">
-    <%= link_to @promotion.promotion_name, promotion_path(@promotion) %>
+    <%= link_to @promotion.promotion_name, promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %>
   </li>
   <li>&gt;</li>
   <li>コンバージョン設定</li>
@@ -41,4 +41,3 @@
     </div>
   </div>
 </div>
-<%= link_to "New conversion", new_conversion_path(promotion_id: @promotion.id) %>

@@ -1,9 +1,30 @@
 <%= stylesheet_link_tag "css/common" %>
 <%= stylesheet_link_tag "css/accounts" %>
+<div id="sync_box_add" style="display: none">
+	<table>
+		<tr>
+          <th><label for="account_アカウントの同期"><%= t("account.sync_account_id") %></label></th>
+          <td><input type="radio" value="1" name="account[sync_flg]" id="account_sync_flg_1" checked="checked"> <%= I18n.t("client.contract_type.unrecovered") %>
+            <input type="radio" value="0" name="account[sync_flg]" id="account_sync_flg_0"> <%= I18n.t("client.contract_type.been_recovered") %></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td>
+            <input type="text" style="width: 250px" size="255" placeholder=" ID: " name="account[sync_account_id]" maxlength="255" id="account_sync_account_id">
+          </td>
+        </tr>
+        <tr>
+        	<th></th>
+        	<td><input type="password" style="width: 250px" size="255" placeholder=" PW: " name="account[sync_account_pw]" maxlength="255" id="account_sync_account_pw"></td>
+        </tr>
+	</table>
+</div>
 <ul class="contentNavi">
-    <li class="pre"><%= link_to @promotion.client.client_name, clients_path %></li>
+    <li class="pre"><%= link_to @promotion.client.client_name, clients_path(client_id: @promotion.client.id ) %></li>
     <li>&gt;</li>
-    <li class="pre"><%= link_to @promotion.promotion_name, promotions_path %></li>
+    <li class="pre"><%= link_to @promotion.promotion_name, promotions_path(client_id: @promotion.client.id, promotion_id: @promotion.id) %>
+      <input type="hidden" name="promotion_id" value="<%= @promotion.id %>">
+    </li>
     <li>&gt;</li>
     <li><%= I18n.t("account.crumb_add") %></li>
 </ul>
@@ -51,11 +72,11 @@
 				        <tr>
 				          <th></th>
 				          <td>
-				            <%= f.text_field :sync_account_id, maxlength: 255, style: "width: 250px", placeholder: " ID: " %>
+				            <%= f.text_field :sync_account_id, maxlength: 255, style: "width: 250px", placeholder: " ID: 2" %>
 				          </td>
 				        </tr>
 				        <th></th>
-				        <td><%= f.text_field :sync_account_pw, maxlength: 255, style: "width: 250px", placeholder: " PW: " %></td>
+				        <td><input type="password" style="width: 250px" size="255" placeholder=" PW: " name="account[sync_account_pw]" maxlength="255" id="account_sync_account_pw"></td>
 				        </tr>
         			</table>
         		</div>
@@ -64,30 +85,12 @@
       </table>
       <div class="submit_area">
         <input type="image" id="btn_submit" src="/assets/btn_done.gif">
-        <%= link_to raw('<img align="right" alt="キャンセル" src="/assets/btn_cancel.gif">'), promotions_path %>
+        <%= link_to raw('<img align="right" alt="キャンセル" src="/assets/btn_cancel.gif">'), promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %>
       </div>
       <input type="hidden" name="promotion_id" value="<%= @promotion.id %>">
 <% end %>
 
-<div id="sync_box_add" style="display: none">
-	<table>
-		<tr>
-          <th><label for="account_アカウントの同期"><%= t("account.sync_account_id") %></label></th>
-          <td><input type="radio" value="1" name="account[sync_flg]" id="account_sync_flg_1" checked="checked"> <%= I18n.t("client.contract_type.unrecovered") %>
-            <input type="radio" value="0" name="account[sync_flg]" id="account_sync_flg_0"> <%= I18n.t("client.contract_type.been_recovered") %></td>
-        </tr>
-        <tr>
-          <th></th>
-          <td>
-            <input type="text" style="width: 250px" size="255" placeholder=" ID: " name="account[sync_account_id]" maxlength="255" id="account_sync_account_id">
-          </td>
-        </tr>
-        <tr>
-        	<th></th>
-        	<td><input type="text" style="width: 250px" size="255" placeholder=" PW: " name="account[sync_account_pw]" maxlength="255" id="account_sync_account_pw"></td>
-        </tr>
-	</table>
-</div>
+
 </div>
 <script type="text/javascript">
 jQuery(document).ready(function($) {
@@ -117,7 +120,7 @@ jQuery(document).ready(function($) {
 	            }
 	        }
 	    });
-	    if ($(this).val() < 2) {
+	    if ($(this).val() < 3) {
 	    	if ($("#account_sync_box").html() == "")
 	    		$("#account_sync_box").append($('#sync_box_add').html());
 	    } else {
@@ -133,7 +136,7 @@ jQuery(document).ready(function($) {
 	    	$("#account_sync_box").html("");
 	    }
 	});
-	if ($("#account_media_category_id").val() < 2) {
+	if ($("#account_media_category_id").val() < 3) {
     	if ($("#account_sync_box").html() == "")
     		$("#account_sync_box").append($('#sync_box_add').html());
     } else {

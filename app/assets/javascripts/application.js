@@ -29,6 +29,16 @@ $(function(){
         size: '8px',
         alwaysVisible: false
     });
+    $('.entrydate_box').slimScroll({
+        color: '#0087A9',
+        size: '8px',
+        alwaysVisible: false
+    });
+    $('.inprogress').slimScroll({
+        color: '#0087A9',
+        size: '8px',
+        alwaysVisible: false
+    });
 });
 var auto_refresh = setInterval(
     function ()
@@ -62,6 +72,7 @@ function reloadFlex(obj, urlAction, id, current_active, cname, maxlength) {
     
 }
 function ajaxCommon(urlAction, id, current_active, cname,arr_inner) {
+    //($this).preventDefault();
     location.href = urlAction;
     return;
     if (prevent == true){

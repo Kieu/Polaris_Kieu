@@ -12,7 +12,16 @@
 	<li>&gt;</li>
 	<li><%= @promotion_name %></li>
 </ul>
-
+ <script>
+     $(function(){
+         $('#tab').slimScroll({
+             color: '#0087A9',
+             size: '8px',
+             alwaysVisible: false,
+             height:'350px'
+         });
+     });
+ </script>
 <div class="date">今日<br />
 <div id="datepicker">
 <%= @start_date %>~<%= @end_date %>&#9660;</div>
@@ -126,7 +135,7 @@
 				</div>
 			</div>
 			<div class="box02">
-				<ul id="tab">
+				<ul id="tab" style="height: 350px; overflow: hidden;">
 					<% @conversions.each_with_index do |conversion, index| %>
 						<% if index == 0%>
 							<li class="present"><p class="f_arrow">CV<%=index +1 %><span class=><%= conversion.conversion_name%></span></p></li>
@@ -312,8 +321,14 @@
 	<% @conversions.each do |conversion| %>
 		<% Settings.conversions_graph.each do |option| %>
 			data["<%= conversion.id %>" + "_" + "<%= option %>"] = [];
-			<% @promotion_data[conversion.id.to_s + "_" + option].each do |data| %>
-				data["<%= conversion.id %>" + "_" + "<%= option %>"].push(parseInt("<%= data%>"));
+			<% if @promotion_data[conversion.id.to_s + "_" + option] %>
+				<% @promotion_data[conversion.id.to_s + "_" + option].each do |data| %>
+					data["<%= conversion.id %>" + "_" + "<%= option %>"].push(parseInt("<%= data%>"));
+				<% end %>
+			<% else %>
+				<% @array_category.each do |_| %>
+					data["<%= conversion.id %>" + "_" + "<%= option %>"].push(0);
+				<% end %>
 			<% end %>
 		<% end %>
 	<% end %>
@@ -363,15 +378,22 @@
                 	dataType: "json",
                 	data: "client_id=" + "<%= @client_id %>" + "&promotion_id=" + "<%= @promotion_id %>" + "&start_date=" + start_date + "&end_date=" + end_date,
                 	success: function(all_data){
+                		categories = all_data["array_category"];
 						<% Settings.promotions_options.each do |option| %>
 							data["<%= option %>"] = all_data["promotion_data"]["<%= option %>"];
 						<% end %>
 						<% @conversions.each do |conversion| %>
 							<% Settings.conversions_graph.each do |option| %>
-								data["<%= conversion.id %>" + "_" + "<%= option %>"] = all_data["promotion_data"]["<%= conversion.id%>"+"_"+"<%= option %>"];
+								if (typeof all_data["promotion_data"]["<%= conversion.id%>"+"_"+"<%= option %>"] == "undefined"){
+									data["<%= conversion.id %>" + "_" + "<%= option %>"] = [];
+									for (var i=0;i<categories.length;i++){
+										data["<%= conversion.id %>" + "_" + "<%= option %>"].push(0) ;	
+									}
+								}else{
+									data["<%= conversion.id %>" + "_" + "<%= option %>"] = all_data["promotion_data"]["<%= conversion.id%>"+"_"+"<%= option %>"];
+								}
 							<% end %>
 						<% end %>
-						categories = all_data["array_category"];
 						draw_chart(data[left], data[right], left, right, categories);
 	            	}
 				})

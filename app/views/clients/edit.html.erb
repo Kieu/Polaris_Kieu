@@ -1,5 +1,5 @@
 <%= stylesheet_link_tag "css/common" %>
-<%= render "layouts/prevent_change_page" %>
+<%= render "layouts/prevent_change_page_edit" %>
 <% content_for :sidebar do %>
 	<%= render partial: "layouts/sidebar", locals: {object: @clients} %>
 <% end %>
@@ -58,15 +58,14 @@
         	<%
         		user = client_user.user
         		if user.client?
-        			
         			company = Client.find(user.company_id).client_name
         		else
         			company = Agency.find(user.company_id).agency_name
         		end
         	%>
             <tr>
-              <th><%= short_name(user.username) %>(<%= company %>)</th>
-              <td><%= user.email %></td>
+              <th><%= short_name(user.username) %>(<%= short_name(company) %>)</th>
+              <td><%= short_name(user.email) %></td>
               <td><%= user.role.role_name %></td>
               <td><input type="checkbox" name="del_user_<%= user.id %>">
                 <input type="hidden" name="users_id[]" value="<%= user.id %>"></td>
@@ -91,12 +90,12 @@
         <% User.active.each do |user|%>
         <%
         if user.client?
-			company = Client.find(user.company_id).client_name
+          company = Client.find(user.company_id).client_name
         else
         	company = Agency.find(user.company_id).agency_name
         end
         %>
-        list_user.push({"label": "<%= short_name(user.username) %>", "value": "<%= user.id %>", "email": "<%= user.email %>", "role": "<%= user.role.role_name %>", "company": "<%= company %>"});
+        list_user.push({"label": "<%= short_name(user.username) %>", "value": "<%= user.id %>", "email": "<%= short_name(user.email) %>", "role": "<%= user.role.role_name %>", "company": "<%= short_name(company) %>"});
         <% end %>
         $(list_ignore_user).each(function (i, data) {
             list_user.splice(index_of(list_user, data.value), 1);
