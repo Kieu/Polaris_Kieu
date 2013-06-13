@@ -45,7 +45,7 @@ class AccountsController < ApplicationController
       render :edit
     else
       flash[:error] = I18n.t("account.flash_messages.success")
-      redirect_to promotions_path(promotion_id: @promotion_id)
+      redirect_to promotions_path(promotion_id: @promotion_id, client_id: @promotion.client.id)
     end
   end
   def create
