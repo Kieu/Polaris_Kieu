@@ -31,7 +31,10 @@ class BackgroundJobsController < ApplicationController
     render "background_jobs/inprogress"
   end
   def kill_job
-    @job = BackgroundJob.find(params[:id])
-    Resque::Plugins::Status::Hash.kill(@job.job_id)
+    job = BackgroundJob.find(params[:id])
+    if current_user.id==job.user_id
+      #send signed for job
+     Resque::Plugins::Status::Hash.kill(job.job_id)
+    end
   end
 end

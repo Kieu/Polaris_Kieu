@@ -2,7 +2,6 @@
   <ul class="entrydate_box">
   <% if @jobs %>
     <% @jobs.each_with_index do |job, index| %>
-
             <li>
               <table class="entrydate_table">
                 <tr>
@@ -15,11 +14,20 @@
                   <td colspan="4"> リクルート(ゼクシィ) > 本体プロモーション > Google Network / Google リマーケティング</td>
                 </tr>
               </table>
-              <p class="btn_cancel"><a href="#"><img src="/assets/btn_cancel.gif"/></a></p>
+              <p class="btn_cancel"><a href="#" id='/background_jobs/kill_job?id=<%= job.id %>'><img src="/assets/btn_cancel.gif"/></a></p>
             </li>
-
     <% end %>
 <% end %>
   </ul>
 </div>
+<script>
+  /*  $.ajax({
+        url: "/background_jobs/kill_job?id=<%= job.id %>",
+        context: document.body
+    }).done(function() {
+                $(this).addClass("done");
+            });
+            */
+
+</script>
 
