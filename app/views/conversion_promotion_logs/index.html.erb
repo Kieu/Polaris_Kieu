@@ -117,7 +117,7 @@
     {display: 'Profit', name : 'profit', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("cv_options")[19] == "1") ? false : true},
     {display: 'Volume', name : 'volume', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("cv_options")[20] == "1") ? false : true},
     {display: 'Others', name : 'others', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("cv_options")[21] == "1") ? false : true},
-    {display: 'Error message', name : 'error_message', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("cv_options")[22] == "1") ? false : true}
+    {display: 'Error message', name : 'error_code', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("cv_options")[22] == "1") ? false : true}
 			],
 				preProcess : function (json) {
 	            var results = new Array();
@@ -158,14 +158,14 @@
 		height: 300,
 		onSuccess: function() {
             tableResize();
-			$('tr#row-0 td:nth-child('+(1+'n-'+(24))+')').remove();
-            $('tr#row-0').after("<div class='group_header'>Listing ad</div>");
-
 			$('tr#row-1 td:nth-child('+(1+'n-'+(24))+')').remove();
-            $('tr#row-1').after("<div class='group_header'>Display ad</div>");
+            $('tr#row-1').after("<div class='group_header'>Listing ad</div>");
 
 			$('tr#row-2 td:nth-child('+(1+'n-'+(24))+')').remove();
-            $('tr#row-2').after("<div class='group_header'>Affiliate</div>");
+            $('tr#row-2').after("<div class='group_header'>Display ad</div>");
+
+			$('tr#row-3 td:nth-child('+(1+'n-'+(24))+')').remove();
+            $('tr#row-3').after("<div class='group_header'>Affiliate</div>");
 
 			$('tr#row-1000 td:nth-child('+(1+'n-'+(24))+')').remove();
             $('tr#row-1000').after("<div class='group_header'>Oganic</div>");
