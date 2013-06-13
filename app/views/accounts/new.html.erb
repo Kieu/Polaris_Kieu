@@ -50,7 +50,7 @@
         </tr>
         <tr>
           <th><%= f.label t("account.account_name") %></th>
-          <td> <%= f.text_field :account_name, maxlength: 255, style: "width: 250px" %>  </td>
+          <td> <%= f.text_field :account_name, maxlength: 15, style: "width: 250px" %>  </td>
         </tr>
         <tr>
           <th><%= f.label t("account.roman_name") %></th>
@@ -58,7 +58,7 @@
         </tr>
         <tr>
           <th><%= f.label t("account.cost") %></th>
-          <td><%= f.text_field :cost, maxlength: 255, value: 100, style: "width: 50px" %> %</td>
+          <td><%= f.text_field :cost, maxlength: 3, value: 100, style: "width: 50px" %> %</td>
         </tr>
         <tr>
         	<td colspan="2">
@@ -143,7 +143,7 @@ jQuery(document).ready(function($) {
     	$("#account_sync_box").html("");
     }
     
-    if ($("#account_media_id").val() < 6) {
+    if ($("#account_media_id").val() < 7) {
     	if ($("#account_sync_box").html() == "")
     		$("#account_sync_box").append($('#sync_box_add').html());
     } else {

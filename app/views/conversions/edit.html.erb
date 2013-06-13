@@ -86,13 +86,13 @@
                 <tr>
                   <th><%= f.label "成果カテゴリ：" %></th>
                   <td><label>
-                    <%= f.radio_button :conversion_category, 0, checked: true, disabled: (@conversion.conversion_category!=0) ? true: false, onclick: "render_web();" %>WEB
+                    <%= f.radio_button :conversion_category, 0, checked: true, disabled: (params[:action]=="edit" && @conversion.conversion_category!=0) ? true : false, onclick: "render_web();" %>WEB
                   </label></td>
                   <td><label>
-                    <%= f.radio_button :conversion_category, 1, disabled: (@conversion.conversion_category!=1) ? true: false, onclick: "render_app();" %>APP
+                    <%= f.radio_button :conversion_category, 1, disabled: (params[:action]=="edit" && @conversion.conversion_category!=1) ? true : false, onclick: "render_app();" %>APP
                   </label></td>
                   <td><label>
-                    <%= f.radio_button :conversion_category, 2, disabled: (@conversion.conversion_category!=2) ? true: false, onclick: "render_combination();" %>組み合わせ
+                    <%= f.radio_button :conversion_category, 2, disabled: (params[:action]=="edit" && @conversion.conversion_category!=2) ? true : false, onclick: "render_combination();" %>組み合わせ
                   </label></td>
                   <td>&nbsp;</td>
                 </tr>
