@@ -53,7 +53,7 @@ class ConversionLog < ActiveRecord::Base
 
   def self.get_logs id, cv_id, media_category_id, account_id, start_date, end_date, show_error
     
-    field = "*, 'OK' as log_state, null as error_message"
+    field = "*, 'OK' as log_state, null as error_code"
     field_error = "*,null as access_time,null as access_ymd, null as parent_conversion_id,null as send_url,null as send_utime, null as repeat_flg, null as repeat_proccessed_flg, 'NG' as log_state "
 
     field_oganic = "*, null as media_category_id,
@@ -77,7 +77,7 @@ class ConversionLog < ActiveRecord::Base
                     null as send_url,
                     null as send_utime,
                     'OGANIC' as log_state,
-                    null as error_message"
+                    null as error_code"
     
     set_table_name "conversion_#{id}_logs"  
     where_clause = ""
