@@ -95,7 +95,7 @@
 		url: "<%= get_conversion_logs_list_conversion_promotion_logs_path %>",
 		dataType: 'json',
 		colModel : [ 
-	{display: '<%= I18n.t("cv_logs.conversion_time")%>', name : 'conversion_utime', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("cv_options")[0] == "1") ? false : true},
+	{display: '<%= I18n.t("cv_logs.conversion_time")%>', name : 'conversion_utime', width : 'auto', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("cv_options")[0] == "1") ? false : true},
 	{display: '<%= I18n.t("cv_logs.conversion_name")%>', name : 'conversion_id', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("cv_options")[1] == "1") ? false : true},
     {display: '<%= I18n.t("cv_logs.conversion_category")%>', name : 'conversion_category', width : 'auto', sortable : true, align: 'center', hide: ($.cookie("cv_options")[2] == "1") ? false : true},
     {display: '<%= I18n.t("cv_logs.tracking_type")%>', name : 'tracking_type', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("cv_options")[3] == "1") ? false : true},
@@ -158,14 +158,14 @@
 		height: 300,
 		onSuccess: function() {
             tableResize();
-			$('tr#row-0 td:nth-child('+(1+'n-'+(24))+')').remove();
-            $('tr#row-0').after("<div class='group_header'>Listing ad</div>");
-
 			$('tr#row-1 td:nth-child('+(1+'n-'+(24))+')').remove();
-            $('tr#row-1').after("<div class='group_header'>Display ad</div>");
+            $('tr#row-1').after("<div class='group_header'>Listing ad</div>");
 
 			$('tr#row-2 td:nth-child('+(1+'n-'+(24))+')').remove();
-            $('tr#row-2').after("<div class='group_header'>Affiliate</div>");
+            $('tr#row-2').after("<div class='group_header'>Display ad</div>");
+
+			$('tr#row-3 td:nth-child('+(1+'n-'+(24))+')').remove();
+            $('tr#row-3').after("<div class='group_header'>Affiliate</div>");
 
 			$('tr#row-1000 td:nth-child('+(1+'n-'+(24))+')').remove();
             $('tr#row-1000').after("<div class='group_header'>Oganic</div>");

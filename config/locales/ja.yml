@@ -565,13 +565,13 @@ ja:
       success: " 代理店登録が完了しました"
       update: " 代理店編集が完了しました"
   account:
-    crumb_add: "本体プロモーション"
+    crumb_add: "アカウント登録"
     crumb_edit: "アカウント編集"
     media_category: "メディアカテゴリ: "
     media: "メディア: "
     account_name: "アカウント名: "
     roman_name: "アカウント名(英語): "
-    cost: "コスト計算： 入力データ "
+    cost: "コスト計算： 入力データ x"
     sync_account_id: "アカウントの同期: "
     sync_account_pw: "Sync account PW: "
     flash_messages:
@@ -580,6 +580,7 @@ ja:
   conversion:
     crumb_add: "コンバージョン登録"
     crumb_edit: "コンバージョン編集"
+    tag_acquisition: タグ取得
     user_information: "ユーザー情報"
     delete: "削除"
     conversion_name: "コンバージョン名: "
@@ -587,7 +588,44 @@ ja:
     conversion_category:
       label: "成果カテゴリ: "
       web: " WEB"
-      app: " APP"
+      app:
+        label: " APP"
+        track_type:
+          label: "計測タイプ：: "
+          install: " Install"
+          app_action: "アプリ内アクション"
+        os:
+          label:  "OS指定: "
+          ios: " iOS"
+          android: " Android"
+        conversion_mode:
+          label:  "計測媒体: "
+          all: " 全て"
+          facebook: " Facebookのみ"
+          other: " その他広告"
+        duplicate:
+          label: "重複排除: "
+          label1: " あり"
+          label2: " なし"
+        track_method:
+          label: "計測方法: "
+          white: " White"
+          welcome: " Welcome"
+          custom: 
+            label: " Custom"
+            url: " URL必須"
+        app_id:
+          label: "アプリID: "
+          facebook: "(Facebook): "
+        option:
+          label: "<オプション>: "
+          judging: "審査フラグ: "
+          configure: " 設定する"
+        sale_unit_price: "売上単価: "
+        reward_form:
+          label: "報酬型式: "
+          straight_line_type: "  定額型"
+          declining_balance_type: " 定率型"
       combination: " 組み合わせ"
     deduplicated:
       label: "重複排除: "
@@ -612,6 +650,7 @@ ja:
         not_set: " 設定しない"
     combination:
       pattern: "パターン: "
+      add: "Add"
   log:
     today_text: "今日"
     crumb_click: "Clickログ"
@@ -709,3 +748,5 @@ ja:
   Listing: "Listing ads"
   Display: "Display ads"
   Affiliate: "Affiliate" 
+  log_error_messages: ["[無し]", "リダイレクト情報なし", "リクエストパラメータ不正", "DBエラー [*未使用]", "削除済みのリダイレクト情報"]
+  log_cv_error_messages: ["[無し]", "該当コンバージョン設定なし", "リクエストパラメータ不正", "DBエラー [*未使用]", "cookieセッション情報なし", "該当クリックなし", "重複排除", "ユニーク制約違反"]

@@ -74,7 +74,7 @@ def get_rows conversion_logs
                                           sales: conversion_log.sales,
                                           volume: conversion_log.volume,
                                           others: conversion_log.others,
-                                          error_message: conversion_log.error_message,
+                                          error_code: I18n.t("log_cv_error_messages")[conversion_log.error_code.to_i],
                                           media_category_id: conversion_log.media_category_id,
                                           profit: conversion_log.profit
                                            }}

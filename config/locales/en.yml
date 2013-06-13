@@ -550,7 +550,7 @@ en:
     media: "Media: "
     account_name: "Account name: "
     roman_name: "Roman name: "
-    cost: "Cost calculation： Input data "
+    cost: "Cost calculation： Input data x"
     sync_account_id: "Sync account ID: "
     sync_account_pw: "Sync account PW: "
     flash_messages:
@@ -559,6 +559,7 @@ en:
   conversion:
     crumb_add: "Add Conversion"
     crumb_edit: "Edit Conversion"
+    tag_acquisition: Tag acquisition
     user_information: "User information"
     delete: "Delete"
     conversion_name: "Conversion name: "
@@ -566,7 +567,44 @@ en:
     conversion_category:
       label: "Conversion category: "
       web: " WEB"
-      app: " APP"
+      app:
+        label: " APP"
+        track_type:
+          label: "Track type: "
+          install: " install"
+          app_action: "App Action"
+        os:
+          label:  "OS-Specific: "
+          ios: " iOS"
+          android: " Android"
+        conversion_mode:
+          label:  "Conversion mode: "
+          all: " All"
+          facebook: " Only Facebook"
+          other: " Other ads"
+        duplicate:
+          label: "Duplicate: "
+          label1: " Yes"
+          label2: " No"
+        track_method:
+          label: "Track method: "
+          white: " White"
+          welcome: " Welcome"
+          custom: 
+            label: " Custom"
+            url: "URL required"
+        app_id:
+          label: "App id "
+          facebook: "(Facebook): "
+        option:
+          label: "<Option>: "
+          judging: " Examination flag: "
+          configure: " Configure"
+        sale_unit_price: "Sales Unit Price: "
+        reward_form:
+          label: "Reward form: "
+          straight_line_type: " Straight-line type"
+          declining_balance_type: " Declining-balance type"
       combination: " Combination"
     deduplicated:
       label: "Deduplicated: "
@@ -588,10 +626,11 @@ en:
         not_set: " Not set"
     combination:
       pattern: "Pattern: "
+      add: "Add"
   log:
     today_text: "Today"
-    crumb_click: "List Click_logs"
-    crumb_cv_logs: "List Conversion logs"
+    crumb_click: "Click_logs"
+    crumb_cv_logs: "Conversion logs"
     conversion_name: "Conversion name"
     media_category: "Media category"
     account_name: "Account name"
@@ -685,3 +724,5 @@ en:
   Listing: "Listing ads"
   Display: "Display ads"
   Affiliate: "Affiliate" 
+  log_error_messages: ["[None]", "No redirect information", "Request parameters not correct", "DB error [*not yet use]", "Redirection information has been deleted"]
+  log_cv_error_messages: ["[None]", "None conversion setting", "Request parameters not correct", "DB error [*not yet use]", "No session cookie information", "None click", "Deduplication", "Unique constraint violation"]

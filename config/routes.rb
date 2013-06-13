@@ -50,7 +50,7 @@ PolarisManage::Application.routes.draw do
     get "inprogress", on: :collection
     get "notification", on: :collection
     get "download_file", on: :collection
-    post "kill_job", to: "background_jobs#kill_job", on: :collection
+    get "kill_job", to: "background_jobs#kill_job", on: :collection
   end
   resources :imports
   mount Resque::Server, at: '/resque'
