@@ -34,11 +34,11 @@ PolarisManage::Application.routes.draw do
   end
   resources :click_logs, only: [:index] do
     post "get_logs_list", on: :collection
-    get "download_csv", on: :collection
+    post "download_csv", on: :collection
   end
   resources :conversion_promotion_logs, only: [:index] do
     post "get_conversion_logs_list", on: :collection 
-    get "download_csv", on: :collection
+    post "download_csv", on: :collection
   end
   resources :url_settings do
     post "get_urls_list", on: :collection

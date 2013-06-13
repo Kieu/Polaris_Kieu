@@ -4,10 +4,9 @@ class BackgroundJobsController < ApplicationController
   # Stream a file that has already been generated and stored on disk
   def download_file
     job = BackgroundJob.find(params[:id])
-    if current_user.id==job.user_id
-      controller_path = job.controller.to_s
-      path = Rails.root + '/public/file.csv'
-      send_data(path, :filename => "#{job.filename}", :type => "text/csv")
+    if current_user.id == job.user_id
+      path = "#{Rails.root}/#{job.filepath}"
+      send_file(path, filename: job.filename, type: "text/csv")
     end
   end
   def download

@@ -75,7 +75,7 @@
             data: {"promotion_id" : "<%= @promotion.id if @promotion %>",
             	   "media_category_id": $("#media_category_id").val(),
             	   "account_id": $("#account_id").val()},
-            method: "post",
+            type: "post",
             success: function(data){
             }
 
