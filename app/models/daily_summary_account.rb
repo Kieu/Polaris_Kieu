@@ -109,9 +109,9 @@ class DailySummaryAccount < ActiveRecord::Base
     return array_result, date_range
   end
   
-  def self.get_promotion_summary promotion_id, start_date, end_date
+  def self.get_table_data promotion_id, start_date, end_date
     results = Hash.new
-    total_data = DailySummaryAccount.where(promotion_id: promotion_id)
+    promotion_data = DailySummaryAccount.where(promotion_id: promotion_id)
       .where("DATE_FORMAT(report_ymd, '%Y/%m/%d') between '#{start_date}' and '#{end_date}'")
       .select("sum(imp_count) as imp_count")
       .select("sum(click_count) as click_count")
@@ -119,20 +119,105 @@ class DailySummaryAccount < ActiveRecord::Base
       .select("sum(cost_sum) as cost_sum")
       .select("round(sum(cost_sum)/sum(click_count),3) as cost_per_click")
       .select("round(sum(cost_sum)/sum(imp_count)*1000,3) as cost_per_mille")
-      
-    category_data = total_data.group(:media_category_id)
-      .select(:media_category_id)
-      
-    all_data = total_data.group(:account_id).select(:account_id)
+      .group(:account_id).select(:account_id).select(:media_category_id)
     
-    category_data.each do |data|
-      results[Settings.media_category[data.media_category_id]+"_total"] = data
-    end
+    conversions_data = DailySummaryAccConversion.where(promotion_id: promotion_id)
+      .group(:conversion_id).select("sum(total_cv_count) as total_cv_count")
+      .select("sum(first_cv_count) as first_cv_count")
+      .select("sum(repeat_cv_count) as repeat_cv_count")
+      .select("sum(assist_count) as assist_count")
+      .select("sum(sales) as sales")
+      .select("sum(profit) as profit")
+      .select(:conversion_id)
+      .where("DATE_FORMAT(daily_summary_acc_conversions.report_ymd, '%Y/%m/%d') between '#{start_date}' and '#{end_date}'")
+      .group(:account_id)
+      .select(:account_id)
+      .select(:report_ymd)
+    
+    begin
+      connection.execute("DROP TEMPORARY TABLE IF EXISTS table1")
+      connection.execute("DROP TEMPORARY TABLE IF EXISTS table2")
+      connection.execute("CREATE TEMPORARY TABLE table1 (" + conversions_data.to_sql + ")")
+      connection.execute("CREATE TEMPORARY TABLE table2 (" + promotion_data.to_sql + ")")
       
-    all_data.each do |data|
-      results["account"+data.account_id.to_s+"_promotion"] = data
+      all_data = ActiveRecord::Base.connection.select_all("select *, round(total_cv_count/click_count*100,3) as conversion_rate, " +
+        " round(cost_sum/total_cv_count,3) as click_per_action, round(sales/cost_sum*100,3) as roas, round((profit-cost_sum)/cost_sum*100,3) as roi" +
+        " from table1 left join table2 on table1.account_id=table2.account_id")
+        
+      total_promotion_data = ActiveRecord::Base.connection.select_all("select sum(imp_count) as imp_count, sum(click_count) as click_count, " +
+        "round(sum(click_count)/sum(imp_count)*100,3) as click_through_ratio, " +
+        "sum(cost_sum) as cost_sum, " +
+        "round(sum(cost_sum)/sum(click_count),3) as cost_per_click, " +
+        "round(sum(cost_sum)/sum(imp_count)*1000,3) as cost_per_mille" +
+        " from table1 left join table2 on table1.account_id=table2.account_id")
+        
+      total_conversions_data = ActiveRecord::Base.connection.select_all("select sum(first_cv_count) as first_cv_count, " +
+        "sum(total_cv_count) as total_cv_count, " +
+        "sum(repeat_cv_count) as repeat_cv_count, " +
+        "sum(assist_count) as assist_count, " +
+        "sum(sales) as sales, " +
+        "sum(profit) as profit, " +
+        "table1. conversion_id, " +
+        "round(sum(total_cv_count)/sum(click_count)*100,3) as conversion_rate, " +
+        "round(sum(cost_sum)/sum(total_cv_count),3) as click_per_action, " +
+        "round(sum(sales)/sum(cost_sum)*100,3) as roas, " +
+        "round((sum(profit)-sum(cost_sum))/sum(cost_sum)*100,3) as roi" +
+        " from table1 left join table2 on table1.account_id=table2.account_id" +
+        " group by table1.conversion_id")
+        
+      category_promotion_data = ActiveRecord::Base.connection.select_all("select sum(imp_count) as imp_count, sum(click_count) as click_count, " +
+        "round(sum(click_count)/sum(imp_count)*100,3) as click_through_ratio, " +
+        "sum(cost_sum) as cost_sum, " +
+        "round(sum(cost_sum)/sum(click_count),3) as cost_per_click, " +
+        "round(sum(cost_sum)/sum(imp_count)*1000,3) as cost_per_mille, " +
+        "table2.media_category_id" +
+        " from table1 left join table2 on table1.account_id=table2.account_id" +
+        " group by table2.media_category_id")
+        
+      category_conversions_data = ActiveRecord::Base.connection.select_all("select sum(first_cv_count) as first_cv_count, " +
+        "sum(total_cv_count) as total_cv_count, " +
+        "sum(repeat_cv_count) as repeat_cv_count, " +
+        "sum(assist_count) as assist_count, " +
+        "sum(sales) as sales, " +
+        "sum(profit) as profit, " +
+        "round(sum(total_cv_count)/sum(click_count)*100,3) as conversion_rate, " +
+        "round(sum(cost_sum)/sum(total_cv_count),3) as click_per_action, " +
+        "round(sum(sales)/sum(cost_sum)*100,3) as roas, " +
+        "round((sum(profit)-sum(cost_sum))/sum(cost_sum)*100,3) as roi, " +
+        "table2.media_category_id," +
+        "table1.conversion_id" +
+        " from table1 left join table2 on table1.account_id=table2.account_id" +
+        " group by table2.media_category_id, table1.conversion_id")
+      
+      all_data.each do |data|
+        results["account"+data["account_id"].to_s+"_promotion"] = Array.new
+        results["account"+data["account_id"].to_s+"_conversion" + data["conversion_id"].to_s] = Array.new
+        Settings.promotions_sums.each do |option|
+          results["account"+data["account_id"].to_s+"_promotion"] << data[option]
+        end
+        
+        Settings.conversions_sums.each do |option|
+          results["account"+data["account_id"].to_s+"_conversion" + data["conversion_id"].to_s] << data[option]
+        end
+      end
+      
+      category_promotion_data.each do |data|
+        results[Settings.media_category[data["media_category_id"]]+"_total"] = data
+      end
+      
+      category_conversions_data.each do |data|
+        results[Settings.media_category[data["media_category_id"]]+ "_conversion" + data["conversion_id"].to_s+ "_total"] = data
+      end
+      
+      results["total_promotion"] = total_promotion_data[0]
+      total_conversions_data.each do |data|
+        results["total_conversion"+data["conversion_id"].to_s] = data
+      end
+    ensure
+      connection.execute("DROP TEMPORARY TABLE IF EXISTS table1")
+      connection.execute("DROP TEMPORARY TABLE IF EXISTS table2")
     end
-    results["total"] = total_data[0]
+    
     results
   end
 end

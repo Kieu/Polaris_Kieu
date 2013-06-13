@@ -6,7 +6,7 @@ class PromotionsController < ApplicationController
     :index, :new, :create]
 
   def index
-      
+    if @array_promotion.length > 0
       @promotion = @array_promotion.find(@promotion_id)
       @start_date = params[:start_date].present? ? params[:start_date] :
         Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d")
@@ -25,9 +25,8 @@ class PromotionsController < ApplicationController
       @account_list = Account.get_account_list(@promotion_id, @media_list)
         
       @promotion_results = DailySummaryAccount
-        .get_promotion_summary(@promotion_id, @start_date, @end_date)
-      @conversions_results = DailySummaryAccConversion
-        .get_conversions_summary(@promotion_id, @start_date, @end_date)
+        .get_table_data(@promotion_id, @start_date, @end_date)
+
       @promotion_data = Array.new
       date_arrange = Array.new
   
@@ -40,6 +39,7 @@ class PromotionsController < ApplicationController
       end
       @select_left = params[:left].present? ? params[:left] : "COST"
       @select_right = params[:right].present? ? params[:right] : "click"
+    end
   end
 
   def new
@@ -121,15 +121,13 @@ class PromotionsController < ApplicationController
       Date.today.strftime("%Y/%m/%d").to_s
     @client_name = Client.find(@client_id).client_name
     @promotion_name = @promotion.promotion_name
-    @conversions = @promotion.conversions
+    @conversions = @promotion.conversions.order_by_id
         
     @media_list = Media.get_media_list
     @account_list = Account.get_account_list(@promotion_id, @media_list)
         
     @promotion_results = DailySummaryAccount
-      .get_promotion_summary(@promotion_id, start_date, end_date)
-    @conversions_results = DailySummaryAccConversion
-      .get_conversions_summary(@promotion_id,start_date, end_date)
+      .get_table_data(@promotion_id, start_date, end_date)
     render layout: false
   end
 
@@ -145,8 +143,10 @@ class PromotionsController < ApplicationController
       redirect_to clients_path
     end
     @array_promotion = @client.promotions.active.order_by_promotion_name
-    redirect_to clients_path if @array_promotion.length == 0
-    @promotion_id = params[:promotion_id].blank? ? @array_promotion.first[:id] :
+    #redirect_to clients_path if @array_promotion.length == 0 && current_user.super? 
+    if @array_promotion.length > 0
+      @promotion_id = params[:promotion_id].blank? ? @array_promotion.first[:id] :
         params[:promotion_id]
+    end
   end
 end
