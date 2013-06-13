@@ -84,17 +84,17 @@ class ConversionLog < ActiveRecord::Base
     params = [start_date, end_date]
     params1 = [start_date, end_date]
 
-    if(cv_id.present?)  
+    if(cv_id.present?)
       where_clause += " AND conversion_id = ?"
       params += [cv_id]
       params1 += [cv_id]
     end
-    if(media_category_id.present?)  
+    if(media_category_id.present?)
       where_clause += " AND media_category_id = ?"
       params += [media_category_id]
       params1 += [media_category_id]
     end
-    if(account_id.present?)  
+    if(account_id.present?)
       where_clause += " AND account_id = ?"
       params += [account_id]
       params1 += [account_id]
