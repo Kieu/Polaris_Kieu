@@ -1,8 +1,6 @@
 class ChangeColumnDb < ActiveRecord::Migration
   def change
   	remove_column :redirect_urls, :create_time
-  	remove_column :redirect_urls, :created_at
-  	remove_column :redirect_urls, :updated_at
 
   	add_column :redirect_infomations, :create_user_id, :integer, limit: 11
   	add_column :redirect_infomations, :update_user_id, :integer, limit: 11
