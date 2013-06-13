@@ -3,12 +3,12 @@
   <%= f.radio_button :track_method, 0, checked: true, onclick: "check_track_method();" %>Install Referrer
 </td>
 <td>
-  <%= f.radio_button :track_method, 1, onclick: "check_track_method();" %>White
+  <%= f.radio_button :track_method, 1, onclick: "check_track_method();" %><%= I18n.t("conversion.conversion_category.app.track_method.white") %>
 </td>
 <td>
-  <%= f.radio_button :track_method, 2, onclick: "check_track_method();" %>Welcome
+  <%= f.radio_button :track_method, 2, onclick: "check_track_method();" %><%= I18n.t("conversion.conversion_category.app.track_method.welcome") %>
 </td>
 <td colspan="2">
-  <%= f.radio_button :track_method, 3, onclick: "check_track_method();" %>custom
-  <%= f.text_field :url, id: "url", class: "urlBox", placeholder: "URL必須", :disabled => 'disabled' %>
+  <%= f.radio_button :track_method, 3, onclick: "check_track_method();" %><%= I18n.t("conversion.conversion_category.app.track_method.custom.label") %>
+  <%= f.text_field :url, id: "url", class: "urlBox", placeholder: I18n.t("conversion.conversion_category.app.track_method.custom.url"), :disabled => 'disabled' %>
 </td>
