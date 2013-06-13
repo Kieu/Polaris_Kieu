@@ -53,10 +53,10 @@ class ConversionLog < ActiveRecord::Base
 
   def self.get_logs id, cv_id, media_category_id, account_id, start_date, end_date, show_error
     
-    field = "*, 'OK' as log_state, null as error_message"
+    field = "*, 'OK' as log_state, null as error_code"
     field_error = "*,null as access_time,null as access_ymd, null as parent_conversion_id,null as send_url,null as send_utime, null as repeat_flg, null as repeat_proccessed_flg, 'NG' as log_state "
 
-    field_oganic = "*, null as media_category_id,
+    field_organic = "*, null as media_category_id,
                     null as media_id,
                     null as account_id,
                     null as campaign_id,
@@ -77,23 +77,24 @@ class ConversionLog < ActiveRecord::Base
                     null as send_url,
                     null as send_utime,
                     'OGANIC' as log_state,
-                    null as error_message"
+                    null as error_code"
     
     set_table_name "conversion_#{id}_logs"  
     where_clause = ""
     params = [start_date, end_date]
     params1 = [start_date, end_date]
-    if(cv_id.present?)  
+
+    if(cv_id.present?)
       where_clause += " AND conversion_id = ?"
       params += [cv_id]
       params1 += [cv_id]
     end
-    if(media_category_id.present?)  
+    if(media_category_id.present?)
       where_clause += " AND media_category_id = ?"
       params += [media_category_id]
       params1 += [media_category_id]
     end
-    if(account_id.present?)  
+    if(account_id.present?)
       where_clause += " AND account_id = ?"
       params += [account_id]
       params1 += [account_id]
@@ -101,14 +102,14 @@ class ConversionLog < ActiveRecord::Base
     if show_error=="1"
       sql_str = "(select #{field} from conversion_#{id}_logs  where DATE_FORMAT(created_at, '%Y/%m/%d') BETWEEN ? AND ? #{where_clause}) union all
                                        (select #{field_error} from conversion_error_#{id}_logs where DATE_FORMAT(created_at, '%Y/%m/%d') BETWEEN ? AND ? #{where_clause}) union all
-                                       (select #{field_oganic} from conversion_organic_#{id}_logs)
+                                       (select #{field_organic} from conversion_organic_#{id}_logs)
 
                                        ORDER BY media_category_id "
                                         
       params += params1
     else
       sql_str = "(select #{field} from conversion_#{id}_logs  where DATE_FORMAT(created_at, '%Y/%m/%d') BETWEEN ? AND ? #{where_clause}) union all
-                                       (select #{field_oganic} from conversion_organic_#{id}_logs)
+                                       (select #{field_organic} from conversion_organic_#{id}_logs)
                                        ORDER BY media_category_id "
                                         
     end                                    

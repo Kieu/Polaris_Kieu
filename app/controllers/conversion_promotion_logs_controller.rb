@@ -31,9 +31,9 @@ def download_csv
     background_job = BackgroundJob.create
     job_id = ExportConversionLogsData.create(user_id: current_user.id,
       promotion_id: params[:promotion_id].to_i,
-      conversion_id: params[:conversion_id].to_i,
-      media_category_id: params[:media_category_id].to_i,
-      account_id: params[:account_id].to_i, start_date: cookies[:s],
+      conversion_id: params[:conversion_id],
+      media_category_id: params[:media_category_id],
+      account_id: params[:account_id], start_date: cookies[:s],
       end_date: cookies[:e], show_error: cookies[:ser],
       bgj_id: background_job.id)
     background_job.job_id = job_id
@@ -56,7 +56,7 @@ def get_rows conversion_logs
                                           conversion_id: conversions.find_by_id(conversion_log.conversion_id).conversion_name,
                                           conversion_category: conversion_categories[conversion_log.conversion_category.to_i],
                                           tracking_type: I18n.t("log_track_type")[conversion_log.track_type.to_i],
-                                          cv_type: I18n.t("log_del_flg")[conversion_log.repeat_flg.to_i],
+                                          cv_type: I18n.t("log_repeat_flg")[conversion_log.repeat_flg.to_i],
                                           approval_status: conversion_log.approval_status,
                                           media_id: medias.find_by_id(conversion_log.media_id).media_name, 
                                           account_id: accounts.find_by_id(conversion_log.account_id).account_name, 

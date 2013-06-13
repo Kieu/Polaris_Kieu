@@ -73,7 +73,7 @@
         $.ajax({
             url: "<%= download_csv_click_logs_path %>",
             data: {"promotion_id" : "<%= @promotion.id if @promotion %>",
-            	   "media_cateory_id": $("#media_category_id").val(),
+            	   "media_category_id": $("#media_category_id").val(),
             	   "account_id": $("#account_id").val()},
             method: "post",
             success: function(data){
@@ -86,17 +86,17 @@
 			url: "<%= get_logs_list_click_logs_path %>",
 			dataType: 'json',
 			colModel : [
-				{display: 'Click Time', name : 'click_utime', sortable : true, with:'auto',align: 'center', hide: <%= cookies[:coptions][0] == "0" ? 1 : 0 %>},
-				{display: 'Media Name:', name : 'media_id', sortable : false,  with:'auto',align: 'center', hide: <%= cookies[:coptions][1] == "0" ? 1 : 0 %>},
-				{display: 'Account Name', name : 'account_id', sortable : false,  with:'auto',align: 'center', hide: <%= cookies[:coptions][2] == "0" ? 1 : 0 %>},
-				{display: 'Campaign Name', name : 'campaign_id', sortable : false,  with:'auto',align: 'center', hide: <%= cookies[:coptions][3] == "0" ? 1 : 0 %>},
-				{display: 'Ad Group Name', name : 'group_id', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][4] == "0" ? 1 : 0 %>},
-				{display: 'Ad Name', name : 'unit_id', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][5] == "0" ? 1 : 0 %>},
-				{display: 'URL', name : 'redirect_url', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][6] == "0" ? 1 : 0 %>},
-				{display: 'SESID', name : 'session_id', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][7] == "0" ? 1 : 0 %>},
-				{display: 'OS', name : 'device_category', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][8] == "0" ? 1 : 0 %>},
-				{display: 'OK/NG', name : 'state', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][9] == "0" ? 1 : 0 %>},
-				{display: 'Error Message', name : 'error_code', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][10] == "0" ? 1 : 0 %>},
+				{display: '<%= I18n.t("click_logs.click_time")%>', name : 'click_utime', sortable : true, with:'auto',align: 'center', hide: <%= cookies[:coptions][0] == "0" ? 1 : 0 %>},
+				{display: '<%= I18n.t("click_logs.media_name")%>', name : 'media_id', sortable : false,  with:'auto',align: 'center', hide: <%= cookies[:coptions][1] == "0" ? 1 : 0 %>},
+				{display: '<%= I18n.t("click_logs.account_name")%>', name : 'account_id', sortable : false,  with:'auto',align: 'center', hide: <%= cookies[:coptions][2] == "0" ? 1 : 0 %>},
+				{display: '<%= I18n.t("click_logs.campaign_name")%>', name : 'campaign_id', sortable : false,  with:'auto',align: 'center', hide: <%= cookies[:coptions][3] == "0" ? 1 : 0 %>},
+				{display: '<%= I18n.t("click_logs.ad_group_name")%>', name : 'group_id', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][4] == "0" ? 1 : 0 %>},
+				{display: '<%= I18n.t("click_logs.ad_name")%>', name : 'unit_id', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][5] == "0" ? 1 : 0 %>},
+				{display: '<%= I18n.t("click_logs.url")%>', name : 'redirect_url', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][6] == "0" ? 1 : 0 %>},
+				{display: '<%= I18n.t("click_logs.sesid")%>', name : 'session_id', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][7] == "0" ? 1 : 0 %>},
+				{display: '<%= I18n.t("click_logs.os")%>', name : 'device_category', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][8] == "0" ? 1 : 0 %>},
+				{display: '<%= I18n.t("click_logs.log_state")%>', name : 'state', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][9] == "0" ? 1 : 0 %>},
+				{display: '<%= I18n.t("click_logs.error_message")%>', name : 'error_code', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][10] == "0" ? 1 : 0 %>},
 				],
 				preProcess : function (json) {
 	            var results = new Array();
