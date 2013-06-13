@@ -6,7 +6,6 @@ class BackgroundJobsController < ApplicationController
     job = BackgroundJob.find(params[:id])
     if current_user.id==job.user_id
       controller_path = job.controller.to_s
-      //path = Rails.root + '/'+ Settings.controller_path + job.filename
       path = Rails.root + '/public/file.csv'
       send_data(path, :filename => "#{job.filename}", :type => "text/csv")
     end
