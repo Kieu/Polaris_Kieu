@@ -1,16 +1,15 @@
 class SessionsController < ApplicationController
-  require "feedzirra"
+  require 'nokogiri'
+  require 'open-uri'
   
   def new
-    @feed = Feedzirra::Feed.
-    fetch_and_parse("http://rss.asahi.com/rss/asahi/newsheadlines.rdf")
+    page = Nokogiri::HTML(open("http://www.septeni.co.jp/"))
+    @feed = page.css('div#feed')[0]
     @press_release = PressRelease.all
   end
 
   def create
     @errors = Array.new
-    #@feed = Feedzirra::Feed.
-    #fetch_and_parse("http://rss.asahi.com/rss/asahi/newsheadlines.rdf")
     page = Nokogiri::HTML(open("http://www.septeni.co.jp/"))
     @feed = page.css('div#feed')[0]
     @press_release = PressRelease.all
@@ -51,8 +50,8 @@ class SessionsController < ApplicationController
   end
   
   def resend_password
-    @feed = Feedzirra::Feed.
-    fetch_and_parse("http://rss.asahi.com/rss/asahi/newsheadlines.rdf")
+    page = Nokogiri::HTML(open("http://www.septeni.co.jp/"))
+    @feed = page.css('div#feed')[0]
     @press_release = PressRelease.all
     @form_errors = Array.new
     user = User.find_by_email(params[:email])
