@@ -22,7 +22,7 @@ class Conversion < ActiveRecord::Base
   validates :start_point, presence: true, if: :check_web
   validates :conversion_combine, presence: true, if: :check_combination
   validates :url, presence: true, if: :check_track_method
-  validates :sale_unit_price, :numericality => { :only_integer => true}, if: :check_conversion_category
+  validates :sale_unit_price, :numericality => { :only_integer => true}, if: :check_sales?
   
   scope :order_by_conversion_name, ->{order :conversion_name}
   scope :order_by_id, ->{order :id}
@@ -78,5 +78,9 @@ class Conversion < ActiveRecord::Base
   
   def check_fb_id_valid
     conversion_mode == 0 || conversion_mode == 1  
+  end
+  
+  def check_sales?
+    !sale_unit_price.blank? 
   end
 end
