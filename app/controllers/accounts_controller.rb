@@ -26,7 +26,7 @@ class AccountsController < ApplicationController
     
     @account.attributes = params[:account]
     @account.update_user_id = current_user.id
-    if !@account.sync_flg
+    if @account.sync_flg == 0
       @account.sync_account_id = ""
       @account.sync_account_pw = ""
     end
@@ -54,7 +54,7 @@ class AccountsController < ApplicationController
     if flash[:error]
       render :edit
     else
-      flash[:error] = I18n.t("account.flash_messages.success")
+      flash[:error] = I18n.t("account.flash_messages.update")
       redirect_to promotions_path(promotion_id: @promotion_id, client_id: @promotion.client.id)
     end
   end
