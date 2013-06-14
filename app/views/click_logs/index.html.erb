@@ -17,7 +17,7 @@
 	<li>&gt;</li>
 	<li><%= I18n.t("log.crumb_click")%></li>
 </ul>
-<div class="area_block">
+<div>
 	<div class="selectarea">
 		<ul>
 			<li> <%= I18n.t("log.media_category")%>
@@ -75,7 +75,7 @@
             data: {"promotion_id" : "<%= @promotion.id if @promotion %>",
             	   "media_category_id": $("#media_category_id").val(),
             	   "account_id": $("#account_id").val()},
-            method: "post",
+            type: "post",
             success: function(data){
             }
 

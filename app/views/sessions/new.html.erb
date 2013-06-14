@@ -11,11 +11,7 @@
       <div class="infoboxHeadtxt">
         <p class="bold"><%= I18n.t("login.announcements")%></p>
       </div>
-      <% @feed.entries.each do |entry| %>
-          <ul>
-            <li><a href="<%= raw entry.url %>"><%= raw entry.title %></a></li>
-          </ul>
-      <% end %>
+     <%= raw @feed %>
     </div>
 
     <div id="pressbox">

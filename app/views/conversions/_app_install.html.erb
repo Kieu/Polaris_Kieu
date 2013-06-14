@@ -3,7 +3,7 @@
 <tr>
   <th><%= f.label I18n.t("conversion.conversion_category.app.os.label") %></th>
   <td colspan="2"><label>
-    <%= f.radio_button :os, 0, checked: true, onclick: "render_ios();" %><%= I18n.t("conversion.conversion_category.app.os.ios")%>
+    <%= f.radio_button :os, 2, checked: true, onclick: "render_ios();" %><%= I18n.t("conversion.conversion_category.app.os.ios")%>
   </label></td>
   <td colspan="2"><label>
     <%= f.radio_button :os, 1, onclick: "render_android();" %><%= I18n.t("conversion.conversion_category.app.os.android")%>
@@ -63,13 +63,13 @@
 <tr>
   <th><%= f.label I18n.t("conversion.conversion_category.app.sale_unit_price") %></th>
   <td colspan="4">
-    <%= f.text_field :sale_unit_price, placeholder: "￥" %>
+    <%= f.text_field :sale_unit_price, maxlength: 255, placeholder: "￥" %>
   </td>
 </tr>
 <tr>
   <th><%= f.label I18n.t("conversion.conversion_category.app.reward_form.label") %></th>
   <td colspan="2"><label>
-    <%= f.radio_button :reward_form, 0 %><%= I18n.t("conversion.conversion_category.app.reward_form.straight_line_type") %>
+    <%= f.radio_button :reward_form, 0, checked: true %><%= I18n.t("conversion.conversion_category.app.reward_form.straight_line_type") %>
   </label></td>
   <td colspan="2"><label>
     <%= f.radio_button :reward_form, 1 %><%= I18n.t("conversion.conversion_category.app.reward_form.declining_balance_type") %>

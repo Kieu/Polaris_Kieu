@@ -1,7 +1,7 @@
 class ImportsController < ApplicationController
   def create
     @import = Import.new(params[:import])
-    @import.change_file_name(current_user.id)
+    @import.change_file_name(current_user.id) unless params[:import].nil?
     if @import.save
       background_job = BackgroundJob.new
       background_job.user_id = current_user.id
@@ -10,7 +10,6 @@ class ImportsController < ApplicationController
       background_job.status = Settings.job_status.PROCESSING
       background_job.controller = params[:controller]
       background_job.save!
-
       if params[:type] == 'insert'
         job_id = ImportUrlData.create(file: @import.csv.url,
                  bgj_id: background_job.id, type: params[:type], user_id: current_user.id,

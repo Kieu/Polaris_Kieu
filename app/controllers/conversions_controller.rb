@@ -11,6 +11,7 @@ class ConversionsController < ApplicationController
   def new
     @conversion = Conversion.new
     @conversions = Conversion.where(promotion_id: params[:promotion_id])
+    @conversion.session_period = Settings.conversion_session_period_default
   end
 
   def create
@@ -31,6 +32,7 @@ class ConversionsController < ApplicationController
            end   
       end
     end
+    
     @conversion.conversion_combine = conversion_combine
     if @conversion.save
       @conversion.create_mv
@@ -44,6 +46,7 @@ class ConversionsController < ApplicationController
 
   def edit
     @conversions = Conversion.where(promotion_id: params[:promotion_id])
+    @conversion.session_period = Settings.conversion_session_period_default
     if (@conversion.conversion_combine.present?)
       combine = @conversion.conversion_combine.split('|')
       @cv_list = Hash.new

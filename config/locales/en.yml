@@ -501,8 +501,8 @@ en:
     privacy_policy: "Privacy Policy"
     porporate_information: "Porporate information"
   login:
-    email: "Email address: "
-    pw: "Password: "
+    email: "Email address"
+    pw: "Password"
     choose_lang:
       label: "Choose Language: "
       ja: "Japanese"
@@ -550,8 +550,11 @@ en:
     media: "Media: "
     account_name: "Account name: "
     roman_name: "Roman name: "
-    cost: "Cost calculation： Input data x"
+    cost: "Cost calculation： "
+    input_data: "Input data x"
     sync_account_id: "Sync account ID: "
+    synchronism: "Synchronism"
+    fractured: "Fractured"
     sync_account_pw: "Sync account PW: "
     flash_messages:
       success: " Account is created successful"
@@ -593,6 +596,7 @@ en:
           custom: 
             label: " Custom"
             url: "URL required"
+          install_referrer: " Install Referrer"
         app_id:
           label: "App id "
           facebook: "(Facebook): "
@@ -605,6 +609,10 @@ en:
           label: "Reward form: "
           straight_line_type: " Straight-line type"
           declining_balance_type: " Declining-balance type"
+        session:
+          label: "Session: "
+          retention: "Retention: "
+          day: "Days"
       combination: " Combination"
     deduplicated:
       label: "Deduplicated: "

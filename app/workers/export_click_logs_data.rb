@@ -9,19 +9,20 @@ class ExportClickLogsData
     # make file name
     # file name fomat: {user_id}_export_click_logs_{current_date}.csv
   	file_name = options['user_id'].to_s + "_" + Settings.EXPORT_CLICK_LOGS + 
-      Date.today.to_s + Settings.file_type.CSV
+      "_" + Time.now.to_i.to_s + Settings.file_type.CSV
+    path_file = Settings.export_click_logs_path + file_name
 
     # initial this task
     background_job = BackgroundJob.find(options['bgj_id'])
     background_job.user_id = options['user_id']
     background_job.filename = file_name
+    background_job.filepath = path_file
     background_job.type_view = Settings.type_view.DOWNLOAD
     background_job.status = Settings.job_status.PROCESSING
     background_job.save!
     
     # store csv file on server
     # path: doc/click_logs_export
-    path_file = Settings.export_click_logs_path + file_name
 
     begin
       header_col = ["Click Time", "click ID", "Client name", "Promotion", "Media",

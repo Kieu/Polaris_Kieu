@@ -14,7 +14,7 @@
 	<li>&gt;</li>
 	<li><%= I18n.t("log.crumb_cv_logs")%></li>
 </ul>
-<div class="area_block">
+<div>
 	<div class="selectarea">
 		<ul>
 			<li> <%= I18n.t("log.conversion_name")%>
@@ -55,7 +55,7 @@
 				</div>
 			</div>
 			
-			<table id="cvlogs"class="newTable06 fixTable d-none" style="background: grey" ></table>
+			<div style='width: 2000px'><table id="cvlogs"class="newTable06 fixTable d-none" style="background: grey" ></table> </div>
 			
 			
 		</div>
@@ -86,7 +86,7 @@
                 "media_category_id": $("#media_category_id").val(),
                 "account_id": $("#account_id").val(),
                 "conversion_id": $("#conversion_id").val()},
-            method: "post",
+            type: "post",
             success: function(data){
             }
 

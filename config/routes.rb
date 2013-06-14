@@ -27,18 +27,18 @@ PolarisManage::Application.routes.draw do
     post "resend_password", on: :collection
   end
   match "/signin",  to: "sessions#new"
-  match "/signout", to: "sessions#destroy", via: :delete
+  match "/signout", to: "sessions#signout"
   root to: "clients#index"
   resources :accounts, only: [:new, :create, :edit, :update] do
     post "change_medias_list", on: :collection
   end
   resources :click_logs, only: [:index] do
     post "get_logs_list", on: :collection
-    get "download_csv", on: :collection
+    post "download_csv", on: :collection
   end
   resources :conversion_promotion_logs, only: [:index] do
     post "get_conversion_logs_list", on: :collection 
-    get "download_csv", on: :collection
+    post "download_csv", on: :collection
   end
   resources :url_settings do
     post "get_urls_list", on: :collection

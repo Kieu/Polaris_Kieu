@@ -1,3 +1,4 @@
+<%= render "layouts/prevent_change_page_new" %>
 <%= stylesheet_link_tag "css/common" %>
 <%= stylesheet_link_tag "css/accounts" %>
 <ul class="contentNavi">
@@ -20,18 +21,18 @@
         <tr>
           <th> <%= f.label t("account.media_category") %></th>
           <td><%= f.select :media_category_id,
-                         Settings.media_category.each_with_index.map {|name, index| [t(name[1]), index+1]}, class: "input-text" %>
+                         Settings.media_category.each_with_index.map {|name, index| [t(name[1]), index+1]} , class: "input-text" %>
           </td>
         </tr>
         <tr>
           <th><%= f.label t("account.media") %></th>
           <td>
-            <%= select_tag 'account[media_id]', options_from_collection_for_select(@medias, 'id', 'media_name'), class: "input-select" %>
+            <%= select_tag 'account[media_id]', options_from_collection_for_select(@medias, 'id', 'media_name', (@account.media_id) ? @account.media_id : ''), class: "input-select" %>
           </td>
         </tr>
         <tr>
           <th><%= f.label t("account.account_name") %></th>
-          <td> <%= f.text_field :account_name, maxlength: 15, style: "width: 250px" %>  </td>
+          <td> <%= f.text_field :account_name, maxlength: 255, style: "width: 250px" %>  </td>
         </tr>
         <tr>
           <th><%= f.label t("account.roman_name") %></th>
@@ -39,7 +40,7 @@
         </tr>
         <tr>
           <th><%= f.label t("account.cost") %></th>
-          <td><%= f.text_field :cost, maxlength: 255, value: 100, style: "width: 50px" %> %</td>
+          <td><%= f.text_field :cost, maxlength: 255, value: @account.cost, style: "width: 50px" %> %</td>
         </tr>
         <tr>
         	<td colspan="2">
@@ -47,17 +48,19 @@
         			<table>
         				<tr>
 				          <th><%= f.label t("account.sync_account_id") %></th>
-				          <td><%= f.radio_button :sync_flg, 1, onclick: "active_sync_box();" %> <%= I18n.t("client.contract_type.unrecovered") %>
-				            <%= f.radio_button :sync_flg, 0, onclick: "disable_sync_box();" %> <%= I18n.t("client.contract_type.been_recovered") %></td>
+				          <td><%= f.radio_button :sync_flg, 1, checked: true, onclick: "active_sync_box();" %> <%= I18n.t("account.synchronism") %>
+				            <%= f.radio_button :sync_flg, 0, onclick: "disable_sync_box();" %> <%= I18n.t("account.fractured") %></td>
 				        </tr>
 				        <tr>
 				          <th></th>
 				          <td>
-				            <%= f.text_field :sync_account_id, maxlength: 255, style: "width: 250px", placeholder: " ID: 2" %>
+				            <%= f.text_field :sync_account_id, maxlength: 255, style: "width: 250px", placeholder: " ID: " %>
 				          </td>
 				        </tr>
+				        <tr>
 				        <th></th>
-				        <td><input type="password" style="width: 250px" size="255" placeholder=" PW: " name="account[sync_account_pw]" maxlength="255" id="account_sync_account_pw"></td>
+				        <td>
+				        	<%= f.password_field :sync_account_pw, maxlength: 255, style: "width: 250px", placeholder: " PW: " %>
 				        </tr>
         			</table>
         		</div>
@@ -69,14 +72,12 @@
         <%= link_to raw('<img align="right" alt="キャンセル" src="/assets/btn_cancel.gif">'), promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %>
       </div>
       <input type="hidden" name="promotion_id" value="<%= @promotion.id %>">
-<% end %>
-
-
-</div>
 <script type="text/javascript">
 function disable_sync_box() {
 	$("#account_sync_account_id").attr('disabled', true);
 	$("#account_sync_account_pw").attr('disabled', true);
+	$("#account_sync_account_pw").val('');
+	$("#account_sync_account_id").val('');
 }
 function active_sync_box() {
 	$("#account_sync_account_id").removeAttr('disabled');
@@ -98,7 +99,7 @@ jQuery(document).ready(function($) {
 	        }
 	    });
 	    if ($(this).val() < 3) {
-	    		$("#account_sync_box").html('<%=j render "sync_box"%>');
+	    		$("#account_sync_box").html('<%=j render "sync_box", f: f%>');
 	    } else {
 	    	$("#account_sync_box").html("");
 	    }
@@ -106,23 +107,28 @@ jQuery(document).ready(function($) {
 	
 	$("#account_media_id").change(function() {
 		if ($(this).val() < 7) {
-	    		$("#account_sync_box").html('<%=j render "sync_box"%>');
+	    		$("#account_sync_box").html('<%=j render "sync_box", f: f%>');
 	    } else {
 	    	$("#account_sync_box").html("");
 	    }
 	});
 	if ($("#account_media_category_id").val() < 3) {
-    		$("#account_sync_box").html('<%=j render "sync_box"%>');
+    		$("#account_sync_box").html('<%=j render "sync_box", f: f%>');
     } else {
     	$("#account_sync_box").html("");
     }
     
     if ($("#account_media_id").val() < 7) {
-    		$("#account_sync_box").html('<%=j render "sync_box"%>');
+    		//$("#account_sync_box").html('<%=j render "sync_box", f:f%>');
     } else {
     	$("#account_sync_box").html("");
     }
 });
 
 	
-</script>
+</script>      
+<% end %>
+
+
+</div>
+

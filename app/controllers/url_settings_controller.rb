@@ -62,12 +62,11 @@ class UrlSettingsController < ApplicationController
     promotion_id = params[:promotion_id]
     account_id = params[:account_id]
     media_id = params[:media_id]
-    controller = params[:controller]
     
     background_job = BackgroundJob.create
     job_id = ExportUrlData.create(start_date: start_date, end_date: end_date,
       user_id: user_id, promotion_id: promotion_id, account_id: account_id,
-      media_id: media_id, controller: controller, bgj_id: background_job.id)
+      media_id: media_id, bgj_id: background_job.id)
     background_job.job_id = job_id
     background_job.save!
     

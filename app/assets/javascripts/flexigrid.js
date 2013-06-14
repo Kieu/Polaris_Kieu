@@ -188,6 +188,7 @@
                 $(g.bDiv).css({
                     height: 'auto'
                 });
+                $(g.bDiv).css('min-height','350px');
             },
             dragStart: function (dragtype, e, obj) { //default drag function start
                 if (dragtype == 'colresize' && p.colResize === true) {//column resize

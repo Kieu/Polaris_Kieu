@@ -49,7 +49,7 @@
   <div id="ui-tab">
     <ul class="ui-tabs-nav">
       <li><a href="#fragment-1"><span><%= I18n.t("conversion.crumb_edit")%></span></a></li>
-      <li class="disabled"><span>タグ取得</span></li>
+      <li class="disabled"><span><%= I18n.t("conversion.tag_acquisition")%></span></li>
     </ul>
     <div id="fragment-1">
       <%= form_for @conversion do |f| %>
@@ -70,29 +70,29 @@
             <table class="client_info">
               <tbody>
                 <tr>
-                  <th><%= f.label "コンバージョン名：" %></th>
+                  <th><%= f.label I18n.t("conversion.conversion_name") %></th>
                   <td colspan="4">
                     <%= f.text_field :conversion_name, maxlength: 255, id: "name", class: "input-text" %>
                   </td>
                 </tr>
                 <tr>
                   <th>
-                    <%= f.label "コンバージョン名" %><br /><%= f.label "(英語)：" %>
+                    <%= f.label I18n.t("conversion.roman_name") %><br />
                   </th>
                   <td colspan="4"><br />
                     <%= f.text_field :roman_name, maxlength: 255, id: "name_e", class: "input-text" %>
                   </td>
                 </tr>
                 <tr>
-                  <th><%= f.label "成果カテゴリ：" %></th>
+                  <th><%= f.label I18n.t("conversion.conversion_category.label") %></th>
                   <td><label>
-                    <%= f.radio_button :conversion_category, 0, checked: true, disabled: (params[:action]=="edit" && @conversion.conversion_category!=0) ? true : false, onclick: "render_web();" %>WEB
+                    <%= f.radio_button :conversion_category, 1, checked: true, disabled: (params[:action]=="edit" && @conversion.conversion_category!=1) ? true : false, onclick: "render_web();" %><%= I18n.t("conversion.conversion_category.web") %>
                   </label></td>
                   <td><label>
-                    <%= f.radio_button :conversion_category, 1, disabled: (params[:action]=="edit" && @conversion.conversion_category!=1) ? true : false, onclick: "render_app();" %>APP
+                    <%= f.radio_button :conversion_category, 2, disabled: (params[:action]=="edit" && @conversion.conversion_category!=2) ? true : false, onclick: "render_app();" %><%= I18n.t("conversion.conversion_category.app.label") %>
                   </label></td>
                   <td><label>
-                    <%= f.radio_button :conversion_category, 2, disabled: (params[:action]=="edit" && @conversion.conversion_category!=2) ? true : false, onclick: "render_combination();" %>組み合わせ
+                    <%= f.radio_button :conversion_category, 3, disabled: (params[:action]=="edit" && @conversion.conversion_category!=3) ? true : false, onclick: "render_combination();" %><%= I18n.t("conversion.conversion_category.combination") %>
                   </label></td>
                   <td>&nbsp;</td>
                 </tr>
@@ -102,9 +102,9 @@
             	<tr><td>
               <%= 
               case @conversion.conversion_category
-              when 2
+              when 3
               		render "combination", f: f
-              when 1
+              when 2
               		render "app", f: f
               else
               		render "web", f: f
