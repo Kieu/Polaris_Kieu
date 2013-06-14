@@ -32,6 +32,7 @@ class ConversionsController < ApplicationController
            end   
       end
     end
+    
     @conversion.conversion_combine = conversion_combine
     if @conversion.save
       @conversion.create_mv
