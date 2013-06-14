@@ -54,7 +54,7 @@ class SessionsController < ApplicationController
   end
   def resend_password
     page = Nokogiri::HTML(open("http://www.septeni.co.jp/"))
-    @feed = page.css('.listset')
+    @feed = page.css('div > #feed > ul > li')
     @press_release = PressRelease.all
     @form_errors = Array.new
     user = User.find_by_email(params[:email])
