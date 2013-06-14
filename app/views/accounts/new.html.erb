@@ -76,6 +76,8 @@
 function disable_sync_box() {
 	$("#account_sync_account_id").attr('disabled', true);
 	$("#account_sync_account_pw").attr('disabled', true);
+	$("#account_sync_account_pw").val('');
+	$("#account_sync_account_id").val('');
 }
 function active_sync_box() {
 	$("#account_sync_account_id").removeAttr('disabled');
