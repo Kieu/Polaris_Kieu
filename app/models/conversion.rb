@@ -20,8 +20,9 @@ class Conversion < ActiveRecord::Base
   validates :start_point, presence: true, if: :check_web
   validates :conversion_combine, presence: true, if: :check_combination
   validates :url, presence: true, if: :check_track_method
-  validates :sale_unit_price, presence: true, if: :check_app
-  
+  validates :sale_unit_price, presence: true, if: :check_web
+  validates :sale_unit_price, :numericality => true, if: :check_web
+
   scope :order_by_conversion_name, ->{order :conversion_name}
   scope :order_by_id, ->{order :id}
   scope :get_by_promotion_id, lambda {|promotion_id| where(promotion_id: promotion_id)}
