@@ -5,8 +5,6 @@ class UrlSettingsController < ApplicationController
   before_filter :set_cookies
   before_filter :signed_in_user
 	def index
-		#mpv = make_mpv media_category_id, promotion_id, account_id, redirect_infomation_id
-
     @promotion_id = params[:promotion_id]
     @account_id = params[:account_id]
     @promotion = Promotion.where(id: @promotion_id).select('client_id, promotion_name')
