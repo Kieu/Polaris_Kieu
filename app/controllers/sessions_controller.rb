@@ -9,8 +9,10 @@ class SessionsController < ApplicationController
 
   def create
     @errors = Array.new
-    @feed = Feedzirra::Feed.
-    fetch_and_parse("http://rss.asahi.com/rss/asahi/newsheadlines.rdf")
+    #@feed = Feedzirra::Feed.
+    #fetch_and_parse("http://rss.asahi.com/rss/asahi/newsheadlines.rdf")
+    page = Nokogiri::HTML(open("http://www.septeni.co.jp/"))
+    @feed = page.css('div#feed')[0]
     @press_release = PressRelease.all
     user = User.find_by_email(params[:session][:email])
     if user
