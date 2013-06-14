@@ -1,3 +1,4 @@
+<%= render "layouts/prevent_change_page_edit" %>
 <%= stylesheet_link_tag "css/common" %>
 <%= stylesheet_link_tag "css/accounts" %>
 <ul class="contentNavi">
@@ -35,7 +36,7 @@
         </tr>
         <tr>
           <th><%= f.label t("account.cost") %></th>
-          <td ><%= f.text_field :cost, maxlength: 255, value: 100, style: "width: 50px" %> %</td>
+          <td ><%= f.text_field :cost, maxlength: 255, value: @account.cost, style: "width: 50px" %> %</td>
         </tr>
         <tr>
           <th><%= f.label t("account.sync_account_id") %></th>
