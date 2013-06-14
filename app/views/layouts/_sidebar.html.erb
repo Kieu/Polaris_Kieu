@@ -70,9 +70,9 @@
                 <tr>
                   <th class="edit"><%= link_to "", "#", class: "edit", id: "edit#{conversion.id}" if current_user.super? || current_user.agency? %></th>
                   <% if (params[:promotion_id] && conversion.id == params[:promotion_id].to_i) || (!params[:promotion_id] && index == 0) %>
-                      <td><%= link_to short_name(conversion.conversion_name), "#{conversions_path(promotion_id: conversion.id)}", class: "conversion_name active", id: "#{conversion.id}" %></td>
+                      <td><%= link_to short_name(conversion.conversion_name), "#{edit_conversions_path(conversion)}?promotion_id=#{params[:promotion_id]}", class: "conversion_name active", id: "#{conversion.id}" %></td>
                   <% else %>
-                      <td><%= link_to short_name(conversion.conversion_name), "#{conversions_path(promotion_id: conversion.id)}", class: "conversion_name", id: "#{conversion.id}" %></td>
+                      <td><%= link_to short_name(conversion.conversion_name), "#{edit_conversions_path(conversion)}?promotion_id=#{params[:promotion_id]}", class: "conversion_name", id: "#{conversion.id}" %></td>
                   <% end %>
                 </tr>
             <% end %>
