@@ -1,3 +1,4 @@
+<%= javascript_include_tag "js/toprss" %>
 <% if @errors && @errors.count > 0 %>
     <script type="text/javascript">
         $("#resend_password_form").show();
@@ -11,7 +12,7 @@
       <div class="infoboxHeadtxt">
         <p class="bold"><%= I18n.t("login.announcements")%></p>
       </div>
-     <%= raw @feed %>
+      <div id="feed"></div>
     </div>
 
     <div id="pressbox">

@@ -3,15 +3,15 @@ class SessionsController < ApplicationController
   require 'open-uri'
   
   def new
-    page = Nokogiri::HTML(open("http://www.septeni.co.jp/"))
-    @feed = page
+   # page = Nokogiri::HTML(open("http://www.septeni.co.jp/"))
+   # @feed = page.css('.listset')
     @press_release = PressRelease.all
   end
 
   def create
     @errors = Array.new
-    page = Nokogiri::HTML(open("http://www.septeni.co.jp/"))
-    @feed = page
+   # page = Nokogiri::HTML(open("http://www.septeni.co.jp/"))
+    #@feed = page.css('.listset')
     @press_release = PressRelease.all
     user = User.find_by_email(params[:session][:email])
     if user
@@ -53,8 +53,8 @@ class SessionsController < ApplicationController
     redirect_to root_url
   end
   def resend_password
-    page = Nokogiri::HTML(open("http://www.septeni.co.jp/"))
-    @feed = page
+   # page = Nokogiri::HTML(open("http://www.septeni.co.jp/"))
+    #@feed = page.css('div > #feed > ul > li')
     @press_release = PressRelease.all
     @form_errors = Array.new
     user = User.find_by_email(params[:email])
