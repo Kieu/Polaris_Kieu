@@ -89,7 +89,7 @@
 	</ul>
 	<div class="fl-r">
 		<p><%= link_to image_tag("/assets/btn_dl_option.gif"), "javascript:void(0)", id: "show_option" %></p>
-		<p><%= link_to image_tag("/assets/btn_dl_report.gif"), "javascript:void(0)", id: "download_csv" %></p>
+		<p><%= link_to image_tag("/assets/btn_dl_report.gif"), "javascript:void(0)", id: "download_csv_promotion" %></p>
 	</div>
 </div>
 <div class="clear"></div>
@@ -416,11 +416,10 @@
                 	success: function(html){
 						$("#promotion_tables").html(html);
                         $('#promotion_table').each(function() {
-                            var $table = $(this);
-
-                            var $button = $("<button type='button' class='export_promotion'>");
-                            $button.text("Export to spreadsheet");
-                            $button.insertAfter($table);
+                            var $table = $('#download_csv_promotion');
+                            var $button = $("<img src='/assets/btn_dl_report.gif' alt='Btn_dl_report'>");
+                            //$button.text("Export to spreadsheet");
+                            $button.append($table);
 
                             $button.click(function() {
                                 var csv = $table.table2CSV({delivery:'value'});

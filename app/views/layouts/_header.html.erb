@@ -12,11 +12,10 @@
             }
         });
         $('#promotion_table').each(function() {
-            var $table = $(this);
-
-            var $button = $("<button type='button' class='export_promotion'>");
-            $button.text("Export to spreadsheet");
-            $button.insertAfter($table);
+            var $table = $('#download_csv_promotion');
+            var $button = $("<img src='/assets/btn_dl_report.gif' alt='Btn_dl_report'>");
+            //$button.text("Export to spreadsheet");
+            $button.append($table);
 
             $button.click(function() {
                 var csv = $table.table2CSV({delivery:'value'});
