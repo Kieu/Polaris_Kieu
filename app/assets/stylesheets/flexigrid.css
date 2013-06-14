@@ -7,6 +7,12 @@
     overflow:hidden;
     color:#000
 }
+.flexigrid div.bdiv a, a:visited
+{
+    color: #0087A9;
+    outline: medium none;
+    text-decoration: none;
+}
 .flexigrid.hideBody {
     height:26px!important;
     border-bottom:1px solid #ccc
