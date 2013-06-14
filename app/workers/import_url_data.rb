@@ -36,7 +36,6 @@ class ImportUrlData
     promotion_id = options['promotion_id'].to_i
     account_id = options['account_id'].to_i
     media_category_id = options['media_category_id'].to_i
-    redirect_infomation_id = 1
     media_id = options['media_id'].to_i
     type = options['type']
     user_id = options['user_id']
@@ -54,7 +53,6 @@ class ImportUrlData
 
     # create mpv
     mpv = media_category_id.to_s(36) + "." + promotion_id.to_s(36) + "." + account_id.to_s(36)
-                            # "." + redirect_infomation_id.to_s(36)
 
      # file fomat: {process_id}_error.txt
      error_file = Settings.error_url_path + "#{job_id}_error.txt"
@@ -488,7 +486,7 @@ class ImportUrlData
        error_num += 1
        error.write("Line #{line_num}: REDIRECT_URL2, NAME2, RATE2 have typed together or blank together. \n")
      end
-     
+
      # REDIRECT_URL3 ==============================================
      row[REDIRECT_URL3] = row[REDIRECT_URL3].to_s.strip
 
