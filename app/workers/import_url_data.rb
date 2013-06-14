@@ -85,6 +85,7 @@ class ImportUrlData
          array_redirect_url = Array.new
          array_ad_id_insert = Array.new
          array_ad_name_insert = Array.new
+         array_double_data = Hash.new
          num = 1
          error_num = 0
          line_num = 0
@@ -117,7 +118,7 @@ class ImportUrlData
              array_ad_id_insert, array_ad_name_insert, 
              array_creative_id = validate_data_input num, error_num, row, error, array_identifer, 
                                                      array_ad_id_insert, array_ad_name_insert, 
-                                                     array_creative_id, line_num
+                                                     array_creative_id, line_num, array_double_data
              # start insert data to DB
              if error_num == 0
                current_time = Time.now.strftime("%Y-%m-%d %H:%M:%S")
@@ -312,7 +313,7 @@ class ImportUrlData
 
   def validate_data_input num, error_num, row, error, 
                                array_identifer, array_ad_id_insert, 
-                               array_ad_name_insert, array_creative_id, line_num
+                               array_ad_name_insert, array_creative_id, line_num, array_double_data
      
      # LAST_MODIFIED field
      row[LAST_MODIFIED] = row[LAST_MODIFIED].to_s.strip
@@ -391,6 +392,17 @@ class ImportUrlData
         error_num += 1
         error.write("Line #{line_num}: Ad name is not typed. \n")
 
+     end
+
+     # check double [Campaign name] [group name] [ad name]
+     key_str = "#{row[CAMPAIGN_NAME]}_#{row[GROUP_NAME]}_#{row[AD_NAME]}"
+     
+     if !array_double_data[key_str]
+       array_double_data[key_str] = line_num.to_s
+     else
+       array_double_data[key_str] += "," + line_num.to_s
+       error_num += 1
+       error.write("Line #{array_double_data[key_str]}: Campaing name, Group name, and Ad name are overlapped. \n")
      end
 
      # CREATIVE_ID field
