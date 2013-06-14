@@ -50,7 +50,7 @@
 <tr>
   <th><%= f.label I18n.t("conversion.conversion_category.app.session.label") %><br /><%= f.label I18n.t("conversion.conversion_category.app.session.retention") %></th>
   <td colspan="4">
-    <%= f.text_field :session_period, maxlength: 2, class: "ta-r", placeholder: "90" %><%= I18n.t("conversion.conversion_category.app.session.day")%>
+    <%= f.text_field :session_period, maxlength: 2, class: "ta-r", value: @conversion.session_period %><%= I18n.t("conversion.conversion_category.app.session.day")%>
   </td>
 </tr>
 <tr>
@@ -68,7 +68,7 @@
 <tr>
   <th><%= f.label t("conversion.conversion_category.app.reward_form.label") %></th>
   <td colspan="2"><label>
-    <%= f.radio_button :reward_form, 0 %><%= I18n.t("conversion.conversion_category.app.reward_form.straight_line_type")%>
+    <%= f.radio_button :reward_form, 0, checked: true %><%= I18n.t("conversion.conversion_category.app.reward_form.straight_line_type")%>
   </label></td>
   <td colspan="2"><label>
     <%= f.radio_button :reward_form, 1 %><%= I18n.t("conversion.conversion_category.app.reward_form.declining_balance_type")%>

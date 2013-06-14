@@ -56,3 +56,5 @@ conversion_kind:
   1: 'cv_kind1'
   2: 'cv_kind2'
   3: 'cv_kind3'
+conversion_session_period_default: 90
+account_cost_default: 100
