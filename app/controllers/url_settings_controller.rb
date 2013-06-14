@@ -9,7 +9,6 @@ class UrlSettingsController < ApplicationController
 
     @promotion_id = 1
     @account_id = 1
-    @media_id = 1
     @promotion = Promotion.where(id: @promotion_id).select('client_id, promotion_name')
     @promotion_name = @promotion.first['promotion_name']
     @client_id = @promotion.first['client_id']
@@ -17,7 +16,9 @@ class UrlSettingsController < ApplicationController
     @account = Account.where(id: @account_id).select('media_id, account_name')
     @account_name = @account.first['account_name']
     @media_id = @account.first['media_id']
-    @media_name = Media.where(id: @media_id).select('media_name').first['media_name']
+    @media_result = Media.where(id: @media_id).select('media_name, media_category_id')
+    @media_name = @media_result.first['media_name']
+    @media_category_id = @media_result.first['media_category_id']
 	end
   
   def get_urls_list

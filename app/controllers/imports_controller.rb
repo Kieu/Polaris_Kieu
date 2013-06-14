@@ -10,8 +10,21 @@ class ImportsController < ApplicationController
       background_job.status = Settings.job_status.PROCESSING
       background_job.controller = params[:controller]
       background_job.save!
-      job_id = ImportUrl.create(file: @import.csv.url,
-        bgj_id: background_job.id, type: params[:type])
+
+      if params[:type] == 'insert'
+        job_id = ImportUrlData.create(file: @import.csv.url,
+                 bgj_id: background_job.id, type: params[:type], user_id: current_user.id,
+                 promotion_id: params[:promotion_id], account_id: params[:account_id], 
+                 media_id: params[:media_id], client_id: params[:client_id], 
+                 media_category_id: params[:media_category_id])
+      else
+        job_id = UpdateUrlData.create(file: @import.csv.url,
+                 bgj_id: background_job.id, type: params[:type], user_id: current_user.id,
+                 promotion_id: params[:promotion_id], account_id: params[:account_id], 
+                 media_id: params[:media_id], client_id: params[:client_id], 
+                 media_category_id: params[:media_category_id])
+      end
+      
       background_job.job_id = job_id
       background_job.save!
       flash[:error] = "upload success"

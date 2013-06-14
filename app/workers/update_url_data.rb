@@ -2,9 +2,9 @@ require 'csv'
 require 'uri'
 
 # export promotion data table from promotion screen to csv file
-class ImportUrlData
+class UpdateUrlData
   include Resque::Plugins::Status
-  @queue = :import_url_data
+  @queue = :update_url_data
   # define column in sv file
   LAST_MODIFIED = 0
   AD_ID = 1
@@ -542,6 +542,7 @@ class ImportUrlData
        error_num += 1
        error.write("Line #{line_num}: REDIRECT_URL4, NAME4, RATE4 have typed together or blank together. \n")
      end
+
      # REDIRECT_URL5 ==============================================
      row[REDIRECT_URL5] = row[REDIRECT_URL5].to_s.strip
      
