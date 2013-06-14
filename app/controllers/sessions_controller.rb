@@ -1,17 +1,16 @@
 class SessionsController < ApplicationController
-  require 'nokogiri'
-  require 'open-uri'
+  require "feedzirra"
   
   def new
-   # page = Nokogiri::HTML(open("http://www.septeni.co.jp/"))
-   # @feed = page.css('.listset')
+    @feed = Feedzirra::Feed
+    fetch_and_parse("http://www.septeni-holdings.co.jp/cp.xml")
     @press_release = PressRelease.all
   end
 
   def create
     @errors = Array.new
-   # page = Nokogiri::HTML(open("http://www.septeni.co.jp/"))
-    #@feed = page.css('.listset')
+    @feed = Feedzirra::Feed
+    fetch_and_parse("http://www.septeni-holdings.co.jp/cp.xml")
     @press_release = PressRelease.all
     user = User.find_by_email(params[:session][:email])
     if user
@@ -48,13 +47,10 @@ class SessionsController < ApplicationController
     sign_out
     redirect_to root_url
   end
-  def signout
-    sign_out
-    redirect_to root_url
-  end
+
   def resend_password
-   # page = Nokogiri::HTML(open("http://www.septeni.co.jp/"))
-    #@feed = page.css('div > #feed > ul > li')
+    @feed = Feedzirra::Feed
+    fetch_and_parse("http://www.septeni-holdings.co.jp/cp.xml")
     @press_release = PressRelease.all
     @form_errors = Array.new
     user = User.find_by_email(params[:email])
