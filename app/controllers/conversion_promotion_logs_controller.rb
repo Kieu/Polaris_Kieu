@@ -49,13 +49,14 @@ def get_rows conversion_logs
   ad_groups = DisplayGroup.select("id, name")
   ads = DisplayAd.select("id, name")
   conversions = Conversion.select("id, conversion_name")
-  conversion_categories = [I18n.t("conversion.conversion_category.web"), I18n.t("conversion.conversion_category.app"), I18n.t("conversion.conversion_category.combination")]
+  conversion_categories = [I18n.t("conversion.conversion_category.web"), I18n.t("conversion.conversion_category.app.label"), I18n.t("conversion.conversion_category.combination")]
+  os = [I18n.t("conversion.conversion_category.app.os.android"), I18n.t("conversion.conversion_category.app.os.ios")]
   rows = Array.new
   conversion_logs.each do |conversion_log|
     rows << {id: conversion_log.id, cell:{conversion_utime: conversion_log.conversion_utime,
                                           conversion_id: conversions.find_by_id(conversion_log.conversion_id).conversion_name,
-                                          conversion_category: conversion_categories[conversion_log.conversion_category.to_i],
-                                          tracking_type: I18n.t("log_track_type")[conversion_log.track_type.to_i],
+                                          conversion_category: conversion_categories[conversion_log.conversion_category.to_i-1],
+                                          tracking_type: I18n.t("log_track_type")[conversion_log.track_type.to_i-1],
                                           cv_type: I18n.t("log_repeat_flg")[conversion_log.repeat_flg.to_i],
                                           approval_status: conversion_log.approval_status,
                                           media_id: medias.find_by_id(conversion_log.media_id).media_name, 
@@ -68,7 +69,7 @@ def get_rows conversion_logs
                                           verify: conversion_log.verify,
                                           suid: conversion_log.suid,
                                           session_id: conversion_log.session_id,
-                                          os: conversion_log.device_category,
+                                          os: os[conversion_log.device_category.to_i-1],
                                           repeat: conversion_log.repeat_proccessed_flg,
                                           log_state: conversion_log.log_state,
                                           sales: conversion_log.sales,
