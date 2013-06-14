@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     news = Nokogiri::HTML(open("http://www.septeni.co.jp/news/news/index.html"))
     @feed = news.css('div.boxin')[0]
     press_release = Nokogiri::HTML(open("http://www.septeni.co.jp/news/pressrelease/index.html"))
-    @press_release = news.css('div.boxin')[0]
+    @press_release = press_release.css('div.boxin')[0]
   end
 
   def create
@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
     news = Nokogiri::HTML(open("http://www.septeni.co.jp/news/news/index.html"))
     @feed = news.css('div.boxin')[0]
     press_release = Nokogiri::HTML(open("http://www.septeni.co.jp/news/pressrelease/index.html"))
-    @press_release = news.css('div.boxin')[0]
+    @press_release = press_release.css('div.boxin')[0]
     user = User.find_by_email(params[:session][:email])
     if user
       if user.can_login?
@@ -55,7 +55,7 @@ class SessionsController < ApplicationController
     news = Nokogiri::HTML(open("http://www.septeni.co.jp/news/news/index.html"))
     @feed = news.css('div.boxin')[0]
     press_release = Nokogiri::HTML(open("http://www.septeni.co.jp/news/pressrelease/index.html"))
-    @press_release = news.css('div.boxin')[0]
+    @press_release = press_release.css('div.boxin')[0]
     @form_errors = Array.new
     user = User.find_by_email(params[:email])
     if verify_recaptcha
