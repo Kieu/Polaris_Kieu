@@ -12,6 +12,7 @@ class ConversionsController < ApplicationController
     @conversion = Conversion.new
     @conversions = Conversion.where(promotion_id: params[:promotion_id])
     @conversion.session_period = Settings.conversion_session_period_default
+    @promotion = Promotion.find(params[:promotion_id])
   end
 
   def create
