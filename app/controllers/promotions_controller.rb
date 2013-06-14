@@ -24,15 +24,9 @@ class PromotionsController < ApplicationController
       @media_list = Media.get_media_list
       @account_list = Account.get_account_list(@promotion_id, @media_list)
         
-      @promotion_results = DailySummaryAccount
+      @promotion_results, @promotion_data, date_arrange = DailySummaryAccount
         .get_table_data(@promotion_id, @start_date, @end_date)
-
-      @promotion_data = Array.new
-      date_arrange = Array.new
   
-      @promotion_data, date_arrange =
-        DailySummaryAccount.get_promotion_data(@promotion_id, @start_date,
-          @end_date)
       @array_category = Array.new
       date_arrange.each do |date|
         @array_category << date.to_date.strftime("%m/%d")
@@ -83,17 +77,30 @@ class PromotionsController < ApplicationController
   
   def change_data
     results = Hash.new
-    client_id = params[:client_id]
-    promotion_id = params[:promotion_id]
-    start_date = params[:start_date]
-    end_date = params[:end_date]
-    results[:promotion_data], date_arrange =
-      DailySummaryAccount.get_promotion_data(promotion_id, start_date,
-        end_date)
+    @client_id = params[:client_id]
+    @promotion_id = params[:promotion_id]
+    @promotion = Promotion.find(@promotion_id)
+    @start_date = params[:start_date]
+    @end_date = params[:end_date]
+    
+    @client_name = Client.find(@client_id).client_name
+    @promotion_name = @promotion.promotion_name
+    @conversions = @promotion.conversions.order_by_id
+        
+    @media_list = Media.get_media_list
+    @account_list = Account.get_account_list(@promotion_id, @media_list)
+        
+    @promotion_results, @promotion_data, date_arrange = DailySummaryAccount
+        .get_table_data(@promotion_id, @start_date, @end_date)
+    
+    results[:promotion_data] = @promotion_data
+    
     results[:array_category] = Array.new
     date_arrange.each do |date|
       results[:array_category] << date.to_date.strftime("%m/%d")
     end
+    
+    results[:html] = render_to_string "promotions/promotion_table", :layout => false
     respond_to do |format|
       format.json{render json: results}
     end
@@ -112,23 +119,6 @@ class PromotionsController < ApplicationController
   end
   
   def promotion_table
-    @promotion_id = params[:promotion_id]
-    @client_id = params[:client_id]
-    @promotion = Promotion.find(@promotion_id)
-    start_date = params[:start_date].present? ? params[:start_date] :
-      Date.today.at_beginning_of_month.strftime("%Y/%m/%d").to_s
-    end_date = params[:end_date].present? ? params[:end_date] :
-      Date.today.strftime("%Y/%m/%d").to_s
-    @client_name = Client.find(@client_id).client_name
-    @promotion_name = @promotion.promotion_name
-    @conversions = @promotion.conversions.order_by_id
-        
-    @media_list = Media.get_media_list
-    @account_list = Account.get_account_list(@promotion_id, @media_list)
-        
-    @promotion_results = DailySummaryAccount
-      .get_table_data(@promotion_id, start_date, end_date)
-    render layout: false
   end
 
   private

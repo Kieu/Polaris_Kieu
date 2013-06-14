@@ -113,6 +113,12 @@
                 <li  <%if params[:controller] == "users"%>class="current"<% end %>><%= link_to raw('<img src="/assets/nav/nav_03_user_off.gif" width="142" height="38" alt="ユーザーリスト" />'), "#{users_path}", class: "user_class_header" %></li>
                 <li  <%if params[:controller] == "media"%>class="current"<% end %>><a href="#"><img src="/assets/nav/nav_04_media_off.gif" width="142" height="38" alt="メディアリスト" /></a></li>
             <% end %>
+        <% else %>
+        	<% if params[:controller] == "promotions" %>
+        		<% if @promotion_id %>
+        			<li class="current"><%= link_to raw('<img src="/assets/nav/nav_01_promotion_off.gif" alt="代理店リスト" />'),  "#{promotions_path}?promotion_id=#{@promotion_id}&client_id=#{@client_id}", class: "promotion_class_header" %>
+        		<% end %>
+        	<% end %>
         <% end %>
       </ul>
     </div><!-- /.nav-->
