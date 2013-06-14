@@ -12,7 +12,7 @@
         <p class="bold"><%= I18n.t("login.announcements")%></p>
       </div>
       news
-      <% raw @feed.each do |feed| %>
+      <% @feed.each do |feed| %>
           <ul>
             <li><span><%= feed.published %></span></li>
             <li><%= feed.content %> </li>
