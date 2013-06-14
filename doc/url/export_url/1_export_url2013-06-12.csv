@@ -1,9 +1,0 @@
-Export Url data
-Time range: 2013/6/01 - 2013/6/12
-""
-""
-Ad Id,Campaign name,Group name,Ad name,Creative,URL,Last modified
-1,Campaign 1,Group 1,Ad 1,text_1,http://domain/click/?mpv=MPV&cid=Client ID&pid=Promotion ID_x000D_,
-1,Campaign 1,Group 1,Ad 1,text_1,http://domain/click/?mpv=MPV&cid=Client ID&pid=Promotion ID_x000D_1,
-1,Campaign 1,Group 1,Ad 1,text_1,http://domain/click/?mpv=MPV&cid=Client ID&pid=Promotion ID_x000D_4,
-1,Campaign 1,Group 1,Ad 1,text_1,http://domain/click/?mpv=MPV&cid=Client ID&pid=Promotion ID_x000D_9,

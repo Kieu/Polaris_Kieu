@@ -232,6 +232,11 @@ class ImportUrlData
          # false case
          background_job.status = Settings.job_status.SUCCESS
          background_job.save!
+         
+         if error_num == 0
+           File.delete(error_file)
+         end
+         
        rescue
          background_job = BackgroundJob.find(options['bgj_id'])
          # false case
@@ -241,9 +246,7 @@ class ImportUrlData
        end
      end
 
-     #CSV.foreach(path) do |row|
-       #binding.pry
-     #end  
+     File.delete(data_file)
   end
 
   private
