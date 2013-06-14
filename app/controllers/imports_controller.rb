@@ -1,7 +1,7 @@
 class ImportsController < ApplicationController
   def create
     @import = Import.new(params[:import])
-    @import.change_file_name(current_user.id)
+    @import.change_file_name(current_user.id) unless params[:import].nil?
     if @import.save
       background_job = BackgroundJob.new
       background_job.user_id = current_user.id

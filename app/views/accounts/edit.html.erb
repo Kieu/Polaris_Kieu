@@ -1,3 +1,4 @@
+<%= render "layouts/prevent_change_page_edit" %>
 <%= stylesheet_link_tag "css/common" %>
 <%= stylesheet_link_tag "css/accounts" %>
 <ul class="contentNavi">
@@ -5,7 +6,9 @@
     <li>&gt;</li>
     <li class="pre"><%= link_to @promotion.promotion_name, promotions_path(client_id: @promotion.client.id, promotion_id: @promotion.id) %>
     <li>&gt;</li>
-    <li><%= I18n.t("account.crumb_edit") %>/<%= t("media_categories")[@account.media_category_id]%>/<%= @account.media.media_name%> </li>
+    <li><%= I18n.t("account.crumb_edit") %>/<%= t(Settings.media_category[@account.media_category_id])%>/<%= @account.media.media_name%> </li>
+    <li>&gt;</li>
+    <li><%= @account.account_name%> </li>
 </ul>
         
 <% if flash[:success] %>
@@ -35,7 +38,7 @@
         </tr>
         <tr>
           <th><%= f.label t("account.cost") %></th>
-          <td ><%= f.text_field :cost, maxlength: 255, value: 100, style: "width: 50px" %> %</td>
+          <td ><%= f.text_field :cost, maxlength: 255, value: @account.cost, style: "width: 50px" %> %</td>
         </tr>
         <tr>
           <th><%= f.label t("account.sync_account_id") %></th>
@@ -49,7 +52,7 @@
           </td>
         </tr>
         <th></th>
-        <td><input type="password" style="width: 250px" size="255" placeholder=" PW: " name="account[sync_account_pw]" maxlength="255" id="account_sync_account_pw"></td>
+        <td><%= f.password_field :sync_account_pw, maxlength: 255,value: @account.sync_account_pw, style: "width: 250px", placeholder: " PW: " %></td>
         </tr>
       </table>
       <div class="submit_area">
