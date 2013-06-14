@@ -48,7 +48,10 @@ class SessionsController < ApplicationController
     sign_out
     redirect_to root_url
   end
-  
+  def signout
+    sign_out
+    redirect_to root_url
+  end
   def resend_password
     page = Nokogiri::HTML(open("http://www.septeni.co.jp/"))
     @feed = page.css('div#feed')[0]
