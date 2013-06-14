@@ -4,7 +4,7 @@ class AccountsController < ApplicationController
   before_filter :must_right_object, only: [:edit, :update]
   def new
     @account = Account.new
-    @account.cost = 100
+    @account.cost = Settings.account_cost_default
     @promotion_id = params[:promotion_id]
     @promotion = Promotion.find_by_id(@promotion_id)
     @medias = Media.active.where(media_category_id: 1)
@@ -61,7 +61,6 @@ class AccountsController < ApplicationController
   def create
     
     @account = Account.new(params[:account])
-    
     @medias = Media.active.where(media_category_id: @account.media_category_id)
     @promotion_id = params[:promotion_id]
     #get promotion by id
@@ -91,7 +90,6 @@ class AccountsController < ApplicationController
       end
       if flash[:error]
         @account.media_id = params[:account][:media_id]
-        
         render "new", promotion_id: @promotion_id
       else
         flash[:error] = I18n.t("account.flash_messages.success")

@@ -1,4 +1,6 @@
 class Conversion < ActiveRecord::Base
+  VALID_NUMBER_REGEX = /^\d+$/
+  
   attr_accessible :conversion_category, :conversion_combine, :conversion_mode,
     :conversion_name, :duplicate, :facebook_app_id, :judging, :os, :reward_form,
     :roman_name, :sale_unit_price, :session_period, :start_point, :track_method,
@@ -16,11 +18,11 @@ class Conversion < ActiveRecord::Base
   validates :conversion_mode, presence: true, if: :check_track_type
   validates :duplicate, presence: true, if: :check_track_type
   validates :track_method, presence: true, if: :check_track_type
-  validates :facebook_app_id, presence: true, if: :check_conversion_mode
+  validates :facebook_app_id, presence: true, if: :check_fb_id_valid
   validates :start_point, presence: true, if: :check_web
   validates :conversion_combine, presence: true, if: :check_combination
   validates :url, presence: true, if: :check_track_method
-  validates :sale_unit_price, presence: true, if: :check_app
+  validates :sale_unit_price, :numericality => { :only_integer => true}, if: :check_conversion_category
   
   scope :order_by_conversion_name, ->{order :conversion_name}
   scope :order_by_id, ->{order :id}
@@ -43,19 +45,19 @@ class Conversion < ActiveRecord::Base
 
   private
   def check_conversion_category
-    conversion_category == 0 || conversion_category == 1
+    conversion_category == 1 || conversion_category == 2
   end
 
   def check_web
-    conversion_category == 0
-  end
-
-  def check_app
     conversion_category == 1
   end
 
-  def check_combination
+  def check_app
     conversion_category == 2
+  end
+
+  def check_combination
+    conversion_category == 3
   end
 
   def check_track_type
@@ -72,5 +74,9 @@ class Conversion < ActiveRecord::Base
 
   def check_conversion_mode
     conversion_mode == 2
+  end
+  
+  def check_fb_id_valid
+    conversion_mode == 0 || conversion_mode == 1  
   end
 end
