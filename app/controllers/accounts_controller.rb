@@ -22,8 +22,6 @@ class AccountsController < ApplicationController
     @promotion_id = params[:promotion_id]
     @promotion = Promotion.find_by_id(@promotion_id)
     @client_id = @promotion.client.id
-    @account.create_user_id = current_user.id
-    
     @account.attributes = params[:account]
     @account.update_user_id = current_user.id
     if @account.sync_flg == 0
