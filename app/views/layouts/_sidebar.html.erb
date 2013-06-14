@@ -38,7 +38,7 @@
           <table class="sidebar">
             <% object.each_with_index do |promotion, index| %>
                 <tr>
-                  <th class="edit"><%= link_to "", "#{edit_promotion_path(promotion)}?client_id=#{params[:client_id]}", class: "edit", id: "edit#{promotion.id}" if current_user.super? || current_user.agency? %></th>
+                  <th class="edit"><%= link_to "", "#{edit_promotion_path(promotion)}?client_id=#{Promotion.find(promotion.id).client.id}", class: "edit", id: "edit#{promotion.id}" if current_user.super? || current_user.agency? %></th>
                   <% if (params[:promotion_id] && promotion.id == params[:promotion_id].to_i) || (!params[:promotion_id] && index == 0) %>
                       <td>
                         <% if params[:controller] == "click_logs" %>
@@ -68,11 +68,11 @@
           <table class="sidebar">
             <% object.each_with_index do |conversion, index| %>
                 <tr>
-                  <th class="edit"><%= link_to "", "#", class: "edit", id: "edit#{conversion.id}" if current_user.super? || current_user.agency? %></th>
+                  <th class="edit"><%= link_to "", "#{edit_conversion_path(conversion)}?promotion_id=#{params[:promotion_id]}", class: "edit", id: "edit#{conversion.id}" if current_user.super? || current_user.agency? %></th>
                   <% if (params[:promotion_id] && conversion.id == params[:promotion_id].to_i) || (!params[:promotion_id] && index == 0) %>
-                      <td><%= link_to short_name(conversion.conversion_name), "#{conversions_path(promotion_id: conversion.id)}", class: "conversion_name active", id: "#{conversion.id}" %></td>
+                      <td><%= link_to short_name(conversion.conversion_name), "#{edit_conversion_path(conversion)}?promotion_id=#{params[:promotion_id]}", class: "conversion_name active", id: "#{conversion.id}" %></td>
                   <% else %>
-                      <td><%= link_to short_name(conversion.conversion_name), "#{conversions_path(promotion_id: conversion.id)}", class: "conversion_name", id: "#{conversion.id}" %></td>
+                      <td><%= link_to short_name(conversion.conversion_name), "#{edit_conversion_path(conversion)}?promotion_id=#{params[:promotion_id]}", class: "conversion_name", id: "#{conversion.id}" %></td>
                   <% end %>
                 </tr>
             <% end %>

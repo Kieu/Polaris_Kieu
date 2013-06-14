@@ -146,6 +146,11 @@ $(window).resize(function() {
         <div class="clear"></div>
         <div id="uploadArea">
           <%= form_for Import.new, html: {multipart: true} do |f| %>
+            <input type="hidden" name="promotion_id" value="<%= @promotion_id %>"/>
+            <input type="hidden" name="account_id" value="<%= @account_id %>"/>
+            <input type="hidden" name="media_id" value="<%= @media_id %>"/>
+            <input type="hidden" name="client_id" value="<%= @client_id %>"/>
+            <input type="hidden" name="media_category_id" value="<%= @media_category_id %>"/>
             <table class="file_upload">
                 <tr>
                   <td colspan="2"><%= f.file_field :csv %></td>

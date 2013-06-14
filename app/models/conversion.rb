@@ -22,7 +22,7 @@ class Conversion < ActiveRecord::Base
   validates :start_point, presence: true, if: :check_web
   validates :conversion_combine, presence: true, if: :check_combination
   validates :url, presence: true, if: :check_track_method
-  validates :sale_unit_price, :numericality => { :only_integer => true}, if: :check_sales?
+  validates :sale_unit_price, length: {maximum: 255}, :numericality => { :only_integer => true}, if: :check_sales?
   
   scope :order_by_conversion_name, ->{order :conversion_name}
   scope :order_by_id, ->{order :id}
@@ -61,11 +61,11 @@ class Conversion < ActiveRecord::Base
   end
 
   def check_track_type
-    track_type == 0
+    track_type == 1
   end
 
   def check_track_type1
-    track_type == 1
+    track_type == 2
   end
 
   def check_track_method
