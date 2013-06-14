@@ -418,7 +418,8 @@
                         $('#promotion_table').each(function() {
                             var $table = $(this);
                             var $button = $("<img src='/assets/btn_dl_report.gif' alt='Btn_dl_report'>");
-                            $button.insertAfter($table);
+                            $('#download_csv_promotion').html($button);
+                           // $button.insertAfter($table);
 
                             $button.click(function() {
                                 var csv = $table.table2CSV({delivery:'value'});
