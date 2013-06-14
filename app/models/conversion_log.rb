@@ -51,7 +51,6 @@ class ConversionLog < ActiveRecord::Base
   end
 
   def self.get_logs id, cv_id, media_category_id, account_id, start_date, end_date, show_error
-    
     field = "*, 'OK' as log_state, null as error_code"
     field_error = "*,null as access_time,null as access_ymd, null as parent_conversion_id,null as send_url,null as send_utime, null as repeat_flg, null as repeat_proccessed_flg, 'NG' as log_state "
 
