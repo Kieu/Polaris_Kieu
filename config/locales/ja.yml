@@ -10,6 +10,33 @@ ja:
       category: ["IT/メディア/アプリ", "AV/家電", "食品/飲料/消費材", "流通/小売/通販", "金融", "通信", "不動産", "人材", "自動車", "サービス", "その他"]
   conversions:
     unique_definition: ["１回のみ", "無制限", "１日１回", "７日１回", "２８日１回", "月内１回"]
+  error_message_url_import:
+    not_format_csv: "ファイル形式がCSVではありません。"
+    differrent_format: "ファイルフォーマットが変更されています。"
+    too_long: "データの行数は1,000,000行以内として下さい。"
+    ad_too_long: "広告IDは文字数の上限255文字を超えています"
+    ad_id_already_used: "指定の広告IDは既に使われています"
+    ad_id_invalid: "指定の広告IDに不正な文字が入っています"
+    ad_id_used_same_file: "指定の広告IDが同ファイル内で使われています"
+    campaign_too_long: "キャンペーンは文字数の上限255文字を超えています"
+    campaign_name_not_type: "キャンペーン名が入力されておりません"
+    group_name_too_long: "グループ名は文字数の上限255文字を超えています"
+    group_name_not_type: "グループ名が入力されておりません"
+    ad_name_not_type: "広告名は文字数の上限255文字を超えています"
+    name_overlapped: "キャンペーン名、グループ名、広告名が重複しています。"
+    creative_id_half_width: "クリエイティブIDは半角数字で入力してください。"
+    creative_id_too_long: "クリエイティブIDは20文字以内で入力してください。"
+    creative_id_not_exist: "指定のクリエイティブIDが存在しません"
+    unit_click_price_half_width: "クリック単価は半角数字で入力してください。"
+    leave_url_column_blank: "計測用URL欄は空欄にして下さい"
+    url_not_specified: "リンク先★にURLが指定されていません"
+    title_too_long: "タイトル★は文字数の上限255文字を超えています"
+    title_not_type: "タイトル★が記入されておりません"
+    transition_rake_half_width: "遷移割合★は半角数字で入力してください。"
+    ad_name_already_used: "指定の広告名は既に使われています"
+    transition_rake_altogether: "遷移割合の合計は１００となるようにして下さい"
+    registering_complete: "URLの新規登録を受付ました"
+    edit_url_complete: "URLの編集を受け付けました"
   activerecord:
     attributes:
       client:
@@ -100,28 +127,28 @@ ja:
               wrong_length: ! 'ユーザー名 %{count}文字で入力してください。'
               acceptance: User name チェックボックスを選択してください。
             roman_name: 
-              blank: "アカウント名(英語)を英数字で入力して下さい"
-              accepted: アカウント名(英語) 受諾してください。 
-              confirmation: アカウント名(英語) 確認の入力が一致しません。 
-              empty: アカウント名(英語) 入力してください。
-              equal_to: ! 'アカウント名(英語) %{count}にしてください。 ' 
-              even: アカウント名(英語) 偶数にしてください。
-              exclusion: アカウント名(英語) 予約されています。
-              greater_than: ! 'アカウント名(英語) %{count}より大きい値にしてください。'
-              greater_than_or_equal_to: ! 'アカウント名(英語) %{count}以上の値にしてください。'
-              inclusion: アカウント名(英語) 正しい値が選択されていません。
-              invalid: アカウント名(英語) は英数字で記載して下さい
-              less_than: ! 'アカウント名(英語) %{count}より小さい値にしてください。'
-              less_than_or_equal_to: ! 'アカウント名 %{count}以下の値にしてください。'
-              not_a_number: アカウント名(英語) 数値で入力してください。
-              not_an_integer: アカウント名(英語) 整数で入力してください。
-              odd: アカウント名(英語) 奇数にしてください。
-              record_invalid: アカウント名(英語) バリデーションに失敗しました。 '%{errors}'
-              taken: アカウント名(英語) は既に登録されています
-              too_long: ! 'アカウント名(英語) %{count}の文字数をオーバーしています'
-              too_short: ! 'アカウント名(英語) %{count}文字以上で入力してください。'
-              wrong_length: ! 'アカウント名(英語) %{count}文字で入力してください。'
-              acceptance: アカウント名(英語) チェックボックスを選択してください。
+              blank: "ユーザー名(英語) を入力して下さい"
+              accepted: ユーザー名(英語) 受諾してください。 
+              confirmation: ユーザー名(英語) 確認の入力が一致しません。 
+              empty: ユーザー名(英語) 入力してください。
+              equal_to: ! 'ユーザー名(英語) %{count}にしてください。 ' 
+              even: ユーザー名(英語) 偶数にしてください。
+              exclusion: ユーザー名(英語) 予約されています。
+              greater_than: ! 'ユーザー名(英語) %{count}より大きい値にしてください。'
+              greater_than_or_equal_to: ! 'ユーザー名(英語) %{count}以上の値にしてください。'
+              inclusion: ユーザー名(英語) 正しい値が選択されていません。
+              invalid: ユーザー名(英語) は英数字で記載して下さい
+              less_than: ! 'ユーザー名(英語) %{count}より小さい値にしてください。'
+              less_than_or_equal_to: ! 'ユーザー名 %{count}以下の値にしてください。'
+              not_a_number: ユーザー名(英語) 数値で入力してください。
+              not_an_integer: ユーザー名(英語) 整数で入力してください。
+              odd: ユーザー名(英語) 奇数にしてください。
+              record_invalid: ユーザー名(英語) バリデーションに失敗しました。 '%{errors}'
+              taken: ユーザー名(英語) は既に登録されています
+              too_long: ! 'ユーザー名(英語) %{count}の文字数をオーバーしています'
+              too_short: ! 'ユーザー名(英語) %{count}文字以上で入力してください。'
+              wrong_length: ! 'ユーザー名(英語) %{count}文字で入力してください。'
+              acceptance: ユーザー名(英語) チェックボックスを選択してください。
             email: 
               blank: "メールアドレス を入力して下さい"
               invalid: メールアドレス を正しく入力して下さい。
@@ -732,9 +759,9 @@ ja:
     roman_name: "ユーザー名(英語): "
     email: "メールアドレス: "
     role:
-      label: "権限"
+      label: "権限: "
       include_blank: "権限を選択してください" 
-    company_name: "会社名"
+    company_name: "会社名: "
     company_id:
       include_blank: "会社名を選択してください"
     password:
