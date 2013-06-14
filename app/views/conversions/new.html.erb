@@ -37,7 +37,11 @@
 <% end %>
 <ul class="contentNavi">
   <li class="pre">
+<<<<<<< HEAD
     <%= link_to short_name(@promotion.client.client_name), client_path(@promotion.client_id) %>
+=======
+    <%= link_to short_name(@promotion.client.client_name), client_path(client_id: @promotion.client_id) %>
+>>>>>>> d06f9da... Update romajiname
   </li>
   <li>&gt;</li>
   <li class="pre">
