@@ -5,6 +5,7 @@ class Import < ActiveRecord::Base
     path: ":rails_root/doc/url/import_url/:basename.:extension",
     url: "doc/url/import_url/:basename.:extension"
 
+  validates_attachment_presence :csv, presence: true
   validates_attachment_content_type :csv, content_type: ['text/csv']
   validates_attachment_size :csv, less_than: 20.megabytes
 
