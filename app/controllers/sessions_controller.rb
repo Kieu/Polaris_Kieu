@@ -2,15 +2,13 @@ class SessionsController < ApplicationController
   require "feedzirra"
   
   def new
-    @feed = Feedzirra::Feed.
-    fetch_and_parse("http://www.septeni-holdings.co.jp/cp.xml")
+    @feed = Feedzirra::Feed.fetch_and_parse("http://www.septeni-holdings.co.jp/cp.xml")
     @press_release = PressRelease.all
   end
 
   def create
     @errors = Array.new
-    @feed = Feedzirra::Feed.
-    fetch_and_parse("http://www.septeni-holdings.co.jp/cp.xml")
+    @feed = Feedzirra::Feed.fetch_and_parse("http://www.septeni-holdings.co.jp/cp.xml")
     @press_release = PressRelease.all
     user = User.find_by_email(params[:session][:email])
     if user
@@ -49,8 +47,7 @@ class SessionsController < ApplicationController
   end
 
   def resend_password
-    @feed = Feedzirra::Feed.
-    fetch_and_parse("http://www.septeni-holdings.co.jp/cp.xml")
+    @feed = Feedzirra::Feed.fetch_and_parse("http://www.septeni-holdings.co.jp/cp.xml")
     @press_release = PressRelease.all
     @form_errors = Array.new
     user = User.find_by_email(params[:email])
