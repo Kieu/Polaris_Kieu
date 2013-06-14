@@ -1,17 +1,15 @@
-<table>
-	<tr>
-	  <th><label for="account_アカウントの同期"><%= t("account.sync_account_id") %></label></th>
-	  <td><input type="radio" value="1" name="account[sync_flg]" onclick="active_sync_box();" id="account_sync_flg_1" checked="checked"> <%= I18n.t("client.contract_type.unrecovered") %>
-	    <input type="radio" value="0" name="account[sync_flg]" id="account_sync_flg_0" onclick="disable_sync_box();"> <%= I18n.t("client.contract_type.been_recovered") %></td>
-	</tr>
-	<tr>
-	  <th></th>
-	  <td>
-	    <input type="text" style="width: 250px" size="255" placeholder=" ID: " name="account[sync_account_id]" maxlength="255" id="account_sync_account_id">
-	  </td>
-	</tr>
-	<tr>
-		<th></th>
-		<td><input type="password" style="width: 250px" size="255" placeholder=" PW: " name="account[sync_account_pw]" maxlength="255" id="account_sync_account_pw"></td>
-	</tr>
-</table>
+<tr>
+  <th><%= f.label t("account.sync_account_id") %></th>
+  <td><%= f.radio_button :sync_flg, 1, checked: true %> <%= I18n.t("account.synchronism") %>
+    <%= f.radio_button :sync_flg, 0 %> <%= I18n.t("account.fractured") %></td>
+</tr>
+<tr>
+  <th></th>
+  <td>
+    <%= f.text_field :sync_account_id, maxlength: 255, value: @account.cost, style: "width: 250px", placeholder: " ID: 2" %>
+  </td>
+</tr>
+<tr>
+<th></th>
+<td><%= f.password_field :sync_account_pw, maxlength: 255, style: "width: 250px", placeholder: " PW: " %></td>
+</tr>
