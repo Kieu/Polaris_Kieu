@@ -4,14 +4,14 @@ class SessionsController < ApplicationController
   
   def new
     page = Nokogiri::HTML(open("http://www.septeni.co.jp/"))
-    @feed = page.css('div#feed')[0]
+    @feed = page.css('div#feed[ul]')[0]
     @press_release = PressRelease.all
   end
 
   def create
     @errors = Array.new
     page = Nokogiri::HTML(open("http://www.septeni.co.jp/"))
-    @feed = page.css('div#feed')[0]
+    @feed = page.css('div#feed[ul]')[0]
     @press_release = PressRelease.all
     user = User.find_by_email(params[:session][:email])
     if user
@@ -54,7 +54,7 @@ class SessionsController < ApplicationController
   end
   def resend_password
     page = Nokogiri::HTML(open("http://www.septeni.co.jp/"))
-    @feed = page.css('div#feed')[0]
+    @feed = page.css('div#feed[ul]')[0]
     @press_release = PressRelease.all
     @form_errors = Array.new
     user = User.find_by_email(params[:email])
