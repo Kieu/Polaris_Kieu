@@ -3,8 +3,7 @@ class SessionsController < ApplicationController
   require 'open-uri'
   
   def new
-    page = Nokogiri::HTML(open("http://www.septeni.co.jp/news/news/index.html"))
-    puts pape.css
+    page = Nokogiri::HTML(open("http://www.septeni.co.jp/"))
     @feed = page.css('div#feed')[0]
     @press_release = PressRelease.all
   end
@@ -12,7 +11,6 @@ class SessionsController < ApplicationController
   def create
     @errors = Array.new
     page = Nokogiri::HTML(open("http://www.septeni.co.jp/"))
-    puts pape.css
     @feed = page.css('div#feed')[0]
     @press_release = PressRelease.all
     user = User.find_by_email(params[:session][:email])
@@ -53,7 +51,6 @@ class SessionsController < ApplicationController
   
   def resend_password
     page = Nokogiri::HTML(open("http://www.septeni.co.jp/"))
-    puts pape.css
     @feed = page.css('div#feed')[0]
     @press_release = PressRelease.all
     @form_errors = Array.new
