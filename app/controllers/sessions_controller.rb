@@ -1,17 +1,14 @@
 class SessionsController < ApplicationController
-  require 'nokogiri'
-  require 'open-uri'
+  require "feedzirra"
   
   def new
-    page = Nokogiri::HTML(open("http://www.septeni.co.jp/"))
-    @feed = page.css('.listset')
+    @feed = Feedzirra::Feed.fetch_and_parse("http://www.septeni-holdings.co.jp/cp.xml")
     @press_release = PressRelease.all
   end
 
   def create
     @errors = Array.new
-    page = Nokogiri::HTML(open("http://www.septeni.co.jp/"))
-    @feed = page.css('.listset')
+    @feed = Feedzirra::Feed.fetch_and_parse("http://www.septeni-holdings.co.jp/cp.xml")
     @press_release = PressRelease.all
     user = User.find_by_email(params[:session][:email])
     if user
@@ -52,9 +49,9 @@ class SessionsController < ApplicationController
     sign_out
     redirect_to root_url
   end
+
   def resend_password
-    page = Nokogiri::HTML(open("http://www.septeni.co.jp/"))
-    @feed = page.css('div > #feed > ul > li')
+    @feed = Feedzirra::Feed.fetch_and_parse("http://www.septeni-holdings.co.jp/cp.xml")
     @press_release = PressRelease.all
     @form_errors = Array.new
     user = User.find_by_email(params[:email])
@@ -63,10 +60,10 @@ class SessionsController < ApplicationController
         user.password = SecureRandom.urlsafe_base64(6)
         user.save
         UserMailer.send_password(user, user.password).deliver
-        flash[:send_success] = "Send password ok"
+        flash[:send_success] = I18n.t("login.send_success")
         redirect_to signin_path
       else
-        @form_errors << "Email not found"
+        @form_errors << I18n.t("login.captcha_email_not_found")
         render :new
       end
     else
