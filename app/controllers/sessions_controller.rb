@@ -50,6 +50,10 @@ class SessionsController < ApplicationController
     sign_out
     redirect_to root_url
   end
+  def signout
+    sign_out
+    redirect_to root_url
+  end
   
   def resend_password
     news = Nokogiri::HTML(open("http://www.septeni.co.jp/news/news/index.html"))
