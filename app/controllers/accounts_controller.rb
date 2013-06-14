@@ -4,24 +4,32 @@ class AccountsController < ApplicationController
   before_filter :must_right_object, only: [:edit, :update]
   def new
     @account = Account.new
+    @account.cost = 100
     @promotion_id = params[:promotion_id]
     @promotion = Promotion.find_by_id(@promotion_id)
     @medias = Media.active.where(media_category_id: 1)
+    @client_id = @promotion.client.id
   end
   
   def edit
     @account = Account.find(params[:id])
     @promotion_id = params[:promotion_id]
     @promotion = Promotion.find_by_id(@promotion_id)
+    @client_id = @promotion.client.id
   end
   def update
     @account = Account.find(params[:id])
     @promotion_id = params[:promotion_id]
     @promotion = Promotion.find_by_id(@promotion_id)
+    @client_id = @promotion.client.id
     @account.create_user_id = current_user.id
     
     @account.attributes = params[:account]
     @account.update_user_id = current_user.id
+    if !@account.sync_flg
+      @account.sync_account_id = ""
+      @account.sync_account_pw = ""
+    end
     if @account.valid?
       ActiveRecord::Base.transaction do
         if @account.save
@@ -58,6 +66,7 @@ class AccountsController < ApplicationController
     @promotion_id = params[:promotion_id]
     #get promotion by id
     @promotion = Promotion.find_by_id(@promotion_id)
+    @client_id = @promotion.client.id
     @account.create_user_id = current_user.id
     if !@account.sync_flg
       @account.sync_account_id = ""
@@ -89,9 +98,8 @@ class AccountsController < ApplicationController
         redirect_to promotions_path(promotion_id: @promotion_id, client_id: @promotion.client.id)
       end
     else
+
       render "new", promotion_id: @promotion_id
-      @account.media_id = params[:account][:media_id]
-      
     end
   end
   
