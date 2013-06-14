@@ -45,6 +45,10 @@ class SessionsController < ApplicationController
     sign_out
     redirect_to root_url
   end
+  def signout
+    sign_out
+    redirect_to root_url
+  end
 
   def resend_password
     @feed = Feedzirra::Feed.fetch_and_parse("http://www.septeni-holdings.co.jp/cp.xml")
