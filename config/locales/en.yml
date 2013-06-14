@@ -501,8 +501,8 @@ en:
     privacy_policy: "Privacy Policy"
     porporate_information: "Porporate information"
   login:
-    email: "Email address: "
-    pw: "Password: "
+    email: "Email address"
+    pw: "Password"
     choose_lang:
       label: "Choose Language: "
       ja: "Japanese"
@@ -550,7 +550,8 @@ en:
     media: "Media: "
     account_name: "Account name: "
     roman_name: "Roman name: "
-    cost: "Cost calculation： Input data x"
+    cost: "Cost calculation： "
+    input_data: "Input data x"
     sync_account_id: "Sync account ID: "
     synchronism: "Synchronism"
     fractured: "Fractured"
