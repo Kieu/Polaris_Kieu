@@ -24,11 +24,12 @@ $(function(){
         size: '8px',
         alwaysVisible: false
     });
-    $('#conversions_list').slimScroll({
+  /*  $('#conversions_list').slimScroll({
         color: '#0087A9',
         size: '8px',
         alwaysVisible: false
     });
+    */
     $('.entrydate_box').slimScroll({
         color: '#0087A9',
         size: '8px',
@@ -90,7 +91,7 @@ function ajaxCommon(urlAction, id, current_active, cname,arr_inner) {
             	}
             	$("#dvloader").css('display','none');
 				$('input#keywords').quicksearch('div#clients_list tr', {
-	        		"selector": "a.client_name"
+	        		"selector": "a.client_name_search"
 				});
 				$('input#keywords').quicksearch('div#promotions_list tr', {
 					"selector": "a.promotion_name"
@@ -127,7 +128,7 @@ function ajaxCommon(urlAction, id, current_active, cname,arr_inner) {
             	}
             	$("#dvloader").css('display','none');
 				$('input#keywords').quicksearch('div#clients_list tr', {
-	        		"selector": "a.client_name"
+	        		"selector": "a.client_name_search"
 				});
 				$('input#keywords').quicksearch('div#promotions_list tr', {
 					"selector": "a.promotion_name"
