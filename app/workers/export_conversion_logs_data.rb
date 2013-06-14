@@ -51,7 +51,7 @@ class ExportConversionLogsData
         select("id, name")
       os = {1 => "Android", 2 => "iOS", 9 => "Other"}
       cv_categories = {0 => I18n.t('conversion.conversion_category.web'),
-        1 => I18n.t('conversion.conversion_category.app'),
+        1 => I18n.t('conversion.conversion_category.app.label'),
         2 => I18n.t('conversion.conversion_category.combination')}
       CSV.open(path_file, "wb") do |csv|
         # make header for CSV file
@@ -59,11 +59,11 @@ class ExportConversionLogsData
         rows.each do |row|
           csv << [row.conversion_utime, conversions.find(row.conversion_id).conversion_name,
             cv_categories[conversions.find(row.conversion_id).conversion_category],
-            I18n.t("log_track_type")[row.track_type], I18n.t("log_repeat_flg")[row.repeat_flg],
+            I18n.t("log_track_type")[row.track_type.to_i], I18n.t("log_repeat_flg")[row.repeat_flg.to_i],
             row.id, row.parent_conversion_id, row.approval_status, client_name,
             promotion.promotion_name, medias.find(row.media_id).media_name,
             accounts.find(row.account_id).account_name, display_campaigns.find(row.campaign_id).name,
-            display_groups.find(row.group_id).name, display_ads.find(row.unit_id),
+            display_groups.find(row.group_id).name, display_ads.find(row.unit_id).name,
             row.redirect_url, row.click_time, row.click_referrer, row.sales,
             row.volume, row.others, row.verify, row.suid,row.session_id,
             os[row.device_category], row.repeat_proccessed_flg, row.log_state,
