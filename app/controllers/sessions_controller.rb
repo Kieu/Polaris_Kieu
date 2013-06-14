@@ -63,10 +63,10 @@ class SessionsController < ApplicationController
         user.password = SecureRandom.urlsafe_base64(6)
         user.save
         UserMailer.send_password(user, user.password).deliver
-        flash[:send_success] = "Send password ok"
+        flash[:send_success] = I18n.t("login.send_success")
         redirect_to signin_path
       else
-        @form_errors << "Email not found"
+        @form_errors << I18n.t("login.captcha_email_not_found")
         render :new
       end
     else

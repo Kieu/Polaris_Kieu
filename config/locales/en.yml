@@ -5,7 +5,7 @@ en:
   hello: "Hello world"
   recaptcha:
     errors:
-      incorrect-captcha-sol: "Wrong captcha"
+      incorrect-captcha-sol: " Certification letters that you have typed are different. Please re-enter them"
   promotions:
     new:
       category: ["IT/Media/App", "AV/Consumer electronics", "Food/Beverage/Consumer Goods", "Distribution/retail/mail order", "Finance", "Communication", "Real estate", "Human resources", "automobile", "Service", "Others"]
@@ -538,6 +538,8 @@ en:
     announcements: "Announcements"
     captcha: "Captcha: "
     notice: "Please enter the email address of the account at the time of issuance, the authentication characters that are displayed. Issue a password, and raise the guide. "
+    captcha_email_not_found: "入力頂いたアドレスでアカウント開設した履歴がございません "
+    send_success: "We have sent the password to your e-mail adress. Please confirm it."
   client:
     crumb_edit: "Client Edit"
     crumb_add: "Add Client"
