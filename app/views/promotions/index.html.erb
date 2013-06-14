@@ -290,6 +290,16 @@
 	        <% end %>
             $('#list_options').colorbox.close();
             $("#list_options").html(default_list_options);
+            pages = [];
+			<% @conversions.each_with_index do |conversion, index| %>
+				pages.push(document.getElementById('page' + "<%= index+1 %>"))
+			<% end %>
+    		tab.setup = {
+        		tabs: document.getElementById('tab').getElementsByTagName('li'),
+
+        		pages: pages
+    			} //オブジェクトをセット
+    		tab.init(); //起動！
         })
 		$(".btn_details").droppy();
     	$('div.check-group input').each(function(){
