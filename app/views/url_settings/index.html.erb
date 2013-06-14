@@ -106,7 +106,7 @@ $(function() {
 			}
 		 }
 
-	    reloadFlex1(".newTable04", "<%= get_urls_list_url_settings_path %>?promotion_id=" + $("#promotion_id").val() + "&account_id=" + $("#account_id").val() + "&media_id=" + $("#media_id").val());
+	    reloadFlex1(".newTable04", "<%= get_urls_list_url_settings_path %>?promotion_id=<%= @promotion_id %>&account_id=<%= @account_id%>&media_id=<%= @media_id%>";
 	    default_url_options = $("#inline_cv_logs").html();
 		$("#clicklogs").colorbox.close();
 	});
