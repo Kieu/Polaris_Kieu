@@ -23,7 +23,7 @@ PolarisManage::Application.routes.draw do
   resources :agencies do
     post "get_agencies_list", on: :collection
   end
-  resources :sessions, only: [:new, :create, :destroy, :signout] do
+  resources :sessions, only: [:new, :create, :destroy] do
     post "resend_password", on: :collection
   end
   match "/signin",  to: "sessions#new"
