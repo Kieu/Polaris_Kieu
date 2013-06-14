@@ -100,28 +100,28 @@ ja:
               wrong_length: ! 'ユーザー名 %{count}文字で入力してください。'
               acceptance: User name チェックボックスを選択してください。
             roman_name: 
-              blank: "ユーザー名(英語) を入力して下さい"
-              accepted: ユーザー名(英語) 受諾してください。 
-              confirmation: ユーザー名(英語) 確認の入力が一致しません。 
-              empty: ユーザー名(英語) 入力してください。
-              equal_to: ! 'Client name %{count}にしてください。 ' 
-              even: ユーザー名(英語) 偶数にしてください。
-              exclusion: ユーザー名(英語) 予約されています。
-              greater_than: ! 'ユーザー名(英語) %{count}より大きい値にしてください。'
-              greater_than_or_equal_to: ! 'ユーザー名(英語) %{count}以上の値にしてください。'
-              inclusion: ユーザー名(英語) 正しい値が選択されていません。
-              invalid: ユーザー名(英語) は英数字で記載して下さい
-              less_than: ! 'ユーザー名(英語) %{count}より小さい値にしてください。'
-              less_than_or_equal_to: ! 'Client name %{count}以下の値にしてください。'
-              not_a_number: ユーザー名(英語) 数値で入力してください。
-              not_an_integer: ユーザー名(英語) 整数で入力してください。
-              odd: ユーザー名(英語) 奇数にしてください。
-              record_invalid: ユーザー名(英語) バリデーションに失敗しました。 '%{errors}'
-              taken: ユーザー名(英語) は既に登録されています
-              too_long: ! 'ユーザー名(英語) %{count}の文字数をオーバーしています'
-              too_short: ! 'ユーザー名(英語) %{count}文字以上で入力してください。'
-              wrong_length: ! 'ユーザー名(英語) %{count}文字で入力してください。'
-              acceptance: ユーザー名(英語) チェックボックスを選択してください。
+              blank: "アカウント名(英語)を英数字で入力して下さい"
+              accepted: アカウント名(英語) 受諾してください。 
+              confirmation: アカウント名(英語) 確認の入力が一致しません。 
+              empty: アカウント名(英語) 入力してください。
+              equal_to: ! 'アカウント名(英語) %{count}にしてください。 ' 
+              even: アカウント名(英語) 偶数にしてください。
+              exclusion: アカウント名(英語) 予約されています。
+              greater_than: ! 'アカウント名(英語) %{count}より大きい値にしてください。'
+              greater_than_or_equal_to: ! 'アカウント名(英語) %{count}以上の値にしてください。'
+              inclusion: アカウント名(英語) 正しい値が選択されていません。
+              invalid: アカウント名(英語) は英数字で記載して下さい
+              less_than: ! 'アカウント名(英語) %{count}より小さい値にしてください。'
+              less_than_or_equal_to: ! 'アカウント名 %{count}以下の値にしてください。'
+              not_a_number: アカウント名(英語) 数値で入力してください。
+              not_an_integer: アカウント名(英語) 整数で入力してください。
+              odd: アカウント名(英語) 奇数にしてください。
+              record_invalid: アカウント名(英語) バリデーションに失敗しました。 '%{errors}'
+              taken: アカウント名(英語) は既に登録されています
+              too_long: ! 'アカウント名(英語) %{count}の文字数をオーバーしています'
+              too_short: ! 'アカウント名(英語) %{count}文字以上で入力してください。'
+              wrong_length: ! 'アカウント名(英語) %{count}文字で入力してください。'
+              acceptance: アカウント名(英語) チェックボックスを選択してください。
             email: 
               blank: "メールアドレス を入力して下さい"
               invalid: メールアドレス を正しく入力して下さい。
@@ -208,28 +208,28 @@ ja:
               wrong_length: ! 'アカウント名 %{count}文字で入力してください。'
               acceptance: アカウント名 チェックボックスを選択してください。
             roman_name: 
-              blank: "ユーザー名(英語) を入力して下さい"
-              accepted: ユーザー名(英語) 受諾してください。 
-              confirmation: ユーザー名(英語) 確認の入力が一致しません。 
-              empty: ユーザー名(英語) 入力してください。
-              equal_to: ! 'Client name %{count}にしてください。 ' 
-              even: ユーザー名(英語) 偶数にしてください。
-              exclusion: ユーザー名(英語) 予約されています。
-              greater_than: ! 'ユーザー名(英語) %{count}より大きい値にしてください。'
-              greater_than_or_equal_to: ! 'ユーザー名(英語) %{count}以上の値にしてください。'
-              inclusion: ユーザー名(英語) 正しい値が選択されていません。
-              invalid: ユーザー名(英語) は英数字で記載して下さい
-              less_than: ! 'ユーザー名(英語) %{count}より小さい値にしてください。'
-              less_than_or_equal_to: ! 'Client name %{count}以下の値にしてください。'
-              not_a_number: ユーザー名(英語) 数値で入力してください。
-              not_an_integer: ユーザー名(英語) 整数で入力してください。
-              odd: ユーザー名(英語) 奇数にしてください。
-              record_invalid: ユーザー名(英語) バリデーションに失敗しました。 '%{errors}'
-              taken: ユーザー名(英語) は既に登録されています
-              too_long: ! 'ユーザー名(英語) %{count}の文字数をオーバーしています'
-              too_short: ! 'ユーザー名(英語) %{count}文字以上で入力してください。'
-              wrong_length: ! 'ユーザー名(英語) %{count}文字で入力してください。'
-              acceptance: ユーザー名(英語) チェックボックスを選択してください。
+              blank: "アカウント名(英語) を入力して下さい"
+              accepted: アカウント名(英語) 受諾してください。 
+              confirmation: アカウント名(英語) 確認の入力が一致しません。 
+              empty: アカウント名(英語) 入力してください。
+              equal_to: ! 'アカウント名(英語) %{count}にしてください。 ' 
+              even: アカウント名(英語) 偶数にしてください。
+              exclusion: アカウント名(英語) 予約されています。
+              greater_than: ! 'アカウント名(英語) %{count}より大きい値にしてください。'
+              greater_than_or_equal_to: ! 'アカウント名(英語) %{count}以上の値にしてください。'
+              inclusion: アカウント名(英語) 正しい値が選択されていません。
+              invalid: アカウント名(英語) は英数字で記載して下さい
+              less_than: ! 'アカウント名(英語) %{count}より小さい値にしてください。'
+              less_than_or_equal_to: ! 'アカウント名(英語) %{count}以下の値にしてください。'
+              not_a_number: アカウント名(英語) 数値で入力してください。
+              not_an_integer: アカウント名(英語) 整数で入力してください。
+              odd: アカウント名(英語) 奇数にしてください。
+              record_invalid: アカウント名(英語) バリデーションに失敗しました。 '%{errors}'
+              taken: アカウント名(英語) は既に登録されています
+              too_long: ! 'アカウント名(英語) %{count}の文字数をオーバーしています'
+              too_short: ! 'アカウント名(英語) %{count}文字以上で入力してください。'
+              wrong_length: ! 'アカウント名(英語) %{count}文字で入力してください。'
+              acceptance: アカウント名(英語) チェックボックスを選択してください。
             media_id: 
               blank: "メディア を選択してください"
               accepted: メディア 受諾してください。 
@@ -290,7 +290,7 @@ ja:
               invalid: コスト計算  正しく入力して下さい。
               less_than: ! 'コスト計算 %{count}より小さい値にしてください。'
               less_than_or_equal_to: ! 'コスト計算 %{count}以下の値にしてください。'
-              not_a_number: コスト計算 数値で入力してください。
+              not_a_number: コスト計算を数値で入力してください
               not_an_integer: コスト計算 整数で入力してください。
               odd: コスト計算 奇数にしてください。
               record_invalid: コスト計算 バリデーションに失敗しました。 '%{errors}'
@@ -300,51 +300,51 @@ ja:
               wrong_length: ! 'コスト計算 %{count}文字で入力してください。'
               acceptance: コスト計算 チェックボックスを選択してください。
             sync_account_id:
-              blank: "Sync account ID を入力して下さい"
-              accepted: Sync account ID 受諾してください。 
-              confirmation: Sync account ID 確認の入力が一致しません。 
-              empty: Sync account ID 入力してください。
-              equal_to: ! 'Sync account ID %{count}にしてください。 ' 
-              even: Sync account ID 偶数にしてください。
-              exclusion: Sync account ID 予約されています。
-              greater_than: ! 'Sync account ID %{count}より大きい値にしてください。'
-              greater_than_or_equal_to: ! 'Sync account ID %{count}以上の値にしてください。'
-              inclusion: Sync account ID 正しい値が選択されていません。
-              invalid: Sync account ID  正しく入力して下さい。
-              less_than: ! 'Sync account ID %{count}より小さい値にしてください。'
-              less_than_or_equal_to: ! 'Sync account ID %{count}以下の値にしてください。'
-              not_a_number: Sync account ID 数値で入力してください。
-              not_an_integer: Sync account ID 整数で入力してください。
-              odd: Sync account ID 奇数にしてください。
-              record_invalid: Sync account ID バリデーションに失敗しました。 '%{errors}'
-              taken: Sync account ID は既に登録されています
-              too_long: ! 'Sync account ID %{count}の文字数をオーバーしています'
-              too_short: ! 'Sync account ID %{count}文字以上で入力してください。'
-              wrong_length: ! 'Sync account ID %{count}文字で入力してください。'
-              acceptance: Sync account ID チェックボックスを選択してください。
+              blank: "アカウントID を入力して下さい"
+              accepted: アカウントID 受諾してください。 
+              confirmation: アカウントID 確認の入力が一致しません。 
+              empty: アカウントID 入力してください。
+              equal_to: ! 'アカウントID %{count}にしてください。 ' 
+              even: アカウントID 偶数にしてください。
+              exclusion: アカウントID 予約されています。
+              greater_than: ! 'アカウントID %{count}より大きい値にしてください。'
+              greater_than_or_equal_to: ! 'アカウントID %{count}以上の値にしてください。'
+              inclusion: アカウントID 正しい値が選択されていません。
+              invalid: アカウントID  正しく入力して下さい。
+              less_than: ! 'アカウントID %{count}より小さい値にしてください。'
+              less_than_or_equal_to: ! 'アカウントID %{count}以下の値にしてください。'
+              not_a_number: アカウントID 数値で入力してください。
+              not_an_integer: アカウントID 整数で入力してください。
+              odd: アカウントID 奇数にしてください。
+              record_invalid: アカウントID バリデーションに失敗しました。 '%{errors}'
+              taken: アカウントID は既に登録されています
+              too_long: ! 'アカウントID %{count}の文字数をオーバーしています'
+              too_short: ! 'アカウントID %{count}文字以上で入力してください。'
+              wrong_length: ! 'アカウントID %{count}文字で入力してください。'
+              acceptance: アカウントID チェックボックスを選択してください。
             sync_account_pw: 
-              blank: "Sync account password を入力して下さい"
-              accepted: Sync account password 受諾してください。 
-              confirmation: Sync account password 確認の入力が一致しません。 
-              empty: Sync account ID 入力してください。
-              equal_to: ! 'Sync account password %{count}にしてください。 ' 
-              even: Sync account ID 偶数にしてください。
-              exclusion: Sync account ID 予約されています。
-              greater_than: ! 'Sync account password %{count}より大きい値にしてください。'
-              greater_than_or_equal_to: ! 'Sync account password %{count}以上の値にしてください。'
-              inclusion: Sync account password 正しい値が選択されていません。
-              invalid: Sync account password  正しく入力して下さい。
-              less_than: ! 'Sync account password %{count}より小さい値にしてください。'
-              less_than_or_equal_to: ! 'Sync account password %{count}以下の値にしてください。'
-              not_a_number: Sync account password 数値で入力してください。
-              not_an_integer: Sync account password 整数で入力してください。
-              odd: Sync account password 奇数にしてください。
-              record_invalid: Sync account password バリデーションに失敗しました。 '%{errors}'
-              taken: Sync account password は既に登録されています
-              too_long: ! 'Sync account password %{count}の文字数をオーバーしています'
-              too_short: ! 'Sync account password %{count}文字以上で入力してください。'
-              wrong_length: ! 'Sync account password %{count}文字で入力してください。'
-              acceptance: Sync account password チェックボックスを選択してください。
+              blank: "アカウントPW を入力して下さい"
+              accepted: アカウントPW 受諾してください。 
+              confirmation: アカウントPW 確認の入力が一致しません。 
+              empty: アカウントPW 入力してください。
+              equal_to: ! 'アカウントPW %{count}にしてください。 ' 
+              even: アカウントPW 偶数にしてください。
+              exclusion: アカウントPW 予約されています。
+              greater_than: ! 'アカウントPW %{count}より大きい値にしてください。'
+              greater_than_or_equal_to: ! 'アカウントPW %{count}以上の値にしてください。'
+              inclusion: アカウントPW 正しい値が選択されていません。
+              invalid: アカウントPW 正しく入力して下さい。
+              less_than: ! 'アカウントPW %{count}より小さい値にしてください。'
+              less_than_or_equal_to: ! 'アカウントPW %{count}以下の値にしてください。'
+              not_a_number: アカウントPW 数値で入力してください。
+              not_an_integer: アカウントPW 整数で入力してください。
+              odd: アカウントPW 奇数にしてください。
+              record_invalid: アカウントPW バリデーションに失敗しました。 '%{errors}'
+              taken: アカウントPW は既に登録されています
+              too_long: ! 'アカウントPW %{count}の文字数をオーバーしています'
+              too_short: ! 'アカウントPW %{count}文字以上で入力してください。'
+              wrong_length: ! 'アカウントPW %{count}文字で入力してください。'
+              acceptance: アカウントPW チェックボックスを選択してください。
         conversion:
           attributes:
             conversion_name:
@@ -442,28 +442,28 @@ ja:
               wrong_length: ! 'プロモーション名 %{count}文字で入力してください。'
               acceptance: プロモーション名 チェックボックスを選択してください。
             roman_name: 
-              blank: "ユーザー名(英語) を入力して下さい"
-              accepted: ユーザー名(英語) 受諾してください。 
-              confirmation: ユーザー名(英語) 確認の入力が一致しません。 
-              empty: ユーザー名(英語) 入力してください。
+              blank: "プロモーション名(英語) を入力して下さい"
+              accepted: プロモーション名(英語) 受諾してください。 
+              confirmation: プロモーション名(英語) 確認の入力が一致しません。 
+              empty: プロモーション名(英語) 入力してください。
               equal_to: ! 'Client name %{count}にしてください。 ' 
-              even: ユーザー名(英語) 偶数にしてください。
-              exclusion: ユーザー名(英語) 予約されています。
-              greater_than: ! 'ユーザー名(英語) %{count}より大きい値にしてください。'
-              greater_than_or_equal_to: ! 'ユーザー名(英語) %{count}以上の値にしてください。'
-              inclusion: ユーザー名(英語) 正しい値が選択されていません。
-              invalid: ユーザー名(英語) は英数字で記載して下さい
-              less_than: ! 'ユーザー名(英語) %{count}より小さい値にしてください。'
-              less_than_or_equal_to: ! 'Client name %{count}以下の値にしてください。'
-              not_a_number: ユーザー名(英語) 数値で入力してください。
-              not_an_integer: ユーザー名(英語) 整数で入力してください。
-              odd: ユーザー名(英語) 奇数にしてください。
-              record_invalid: ユーザー名(英語) バリデーションに失敗しました。 '%{errors}'
-              taken: ユーザー名(英語) は既に登録されています
-              too_long: ! 'ユーザー名(英語) %{count}の文字数をオーバーしています'
-              too_short: ! 'ユーザー名(英語) %{count}文字以上で入力してください。'
-              wrong_length: ! 'ユーザー名(英語) %{count}文字で入力してください。'
-              acceptance: ユーザー名(英語) チェックボックスを選択してください。
+              even: プロモーション名(英語) 偶数にしてください。
+              exclusion: プロモーション名(英語) 予約されています。
+              greater_than: ! 'プロモーション名(英語) %{count}より大きい値にしてください。'
+              greater_than_or_equal_to: ! 'プロモーション名(英語) %{count}以上の値にしてください。'
+              inclusion: プロモーション名(英語) 正しい値が選択されていません。
+              invalid: プロモーション名(英語) は英数字で記載して下さい
+              less_than: ! 'プロモーション名(英語) %{count}より小さい値にしてください。'
+              less_than_or_equal_to: ! 'プロモーション名(英語) %{count}以下の値にしてください。'
+              not_a_number: プロモーション名(英語) 数値で入力してください。
+              not_an_integer: プロモーション名(英語) 整数で入力してください。
+              odd: プロモーション名(英語) 奇数にしてください。
+              record_invalid: プロモーション名(英語) バリデーションに失敗しました。 '%{errors}'
+              taken: プロモーション名(英語) は既に登録されています
+              too_long: ! 'プロモーション名(英語) %{count}の文字数をオーバーしています'
+              too_short: ! 'プロモーション名(英語) %{count}文字以上で入力してください。'
+              wrong_length: ! 'プロモーション名(英語) %{count}文字で入力してください。'
+              acceptance: プロモーション名(英語) チェックボックスを選択してください。
             promotion_category_id: 
               blank: "カテゴリを選択してください"
               accepted: カテゴリ 受諾してください。 
@@ -521,8 +521,8 @@ ja:
     privacy_policy: "プライバシーポリシー"
     porporate_information: "企業情報"
   login:
-    email: "メールアドレス: "
-    pw: "パスワード: "
+    email: "メールアドレス"
+    pw: "パスワード"
     choose_lang:
       label: "言語選択"
       ja: "日本語"
@@ -571,7 +571,8 @@ ja:
     media: "メディア: "
     account_name: "アカウント名: "
     roman_name: "アカウント名(英語): "
-    cost: "コスト計算： 入力データ x"
+    cost: "コスト計算： "
+    input_data: "入力データ x"
     sync_account_id: "アカウントの同期: "
     synchronism: "同期"
     fractured: "同期停止"
