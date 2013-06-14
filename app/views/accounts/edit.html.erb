@@ -20,12 +20,15 @@
       <table class="account_info">
         <tr>
           <th> <%= f.label t("account.media_category") %></th>
-          <td ><input type="text" name="media_category" value="<%= t(Settings.media_category[@account.media_category_id])%>" disabled="disabled"></td>
+          <td >
+          	<input type="hidden" name="meida_category_id" id="meida_category_id" value="<%= @account.media_category_id %>" />
+          	<input type="text" name="media_category" value="<%= t(Settings.media_category[@account.media_category_id])%>" disabled="disabled"></td>
         </tr>
         <tr>
           <th><%= f.label t("account.media") %></th>
           <td >
-          	<input type="text" name="media_id" value="<%= @account.media.media_name%>" disabled="disabled">
+          	<input type="hidden" name="media_id" id="media_id" value="<%= @account.media_id %>" />
+          	<input type="text" name="xmedia_id" value="<%= @account.media.media_name%>" disabled="disabled">
             </td>
         </tr>
         <tr>
@@ -41,19 +44,29 @@
           <td ><%= f.text_field :cost, maxlength: 255, value: @account.cost, style: "width: 50px" %> %</td>
         </tr>
         <tr>
-          <th><%= f.label t("account.sync_account_id") %></th>
-          <td><%= f.radio_button :sync_flg, 1 , :checked=>true%> <%= I18n.t("account.synchronism") %>
-            <%= f.radio_button :sync_flg, 0 %> <%= I18n.t("account.fractured") %></td>
-        </tr>
-        <tr>
-          <th></th>
-          <td>
-            <%= f.text_field :sync_account_id, maxlength: 255, style: "width: 250px", placeholder: " ID: " %>
-          </td>
-        </tr>
-        <th></th>
-        <td><%= f.password_field :sync_account_pw, maxlength: 255,value: @account.sync_account_pw, style: "width: 250px", placeholder: " PW: " %></td>
-        </tr>
+        	<td colspan="2">
+        		<div id="account_sync_box">
+        			<table>
+        				<tr>
+				          <th><%= f.label t("account.sync_account_id") %></th>
+				          <td><%= f.radio_button :sync_flg, 1, checked: true, onclick: "active_sync_box();" %> <%= I18n.t("account.synchronism") %>
+				            <%= f.radio_button :sync_flg, 0, onclick: "disable_sync_box();" %> <%= I18n.t("account.fractured") %></td>
+				        </tr>
+				        <tr>
+				          <th></th>
+				          <td>
+				            <%= f.text_field :sync_account_id, maxlength: 255, style: "width: 250px", placeholder: " ID: " %>
+				          </td>
+				        </tr>
+				        <tr>
+				        <th></th>
+				        <td>
+				        	<%= f.password_field :sync_account_pw, maxlength: 255, value: @account.sync_account_pw, style: "width: 250px", placeholder: " PW: " %>
+				        </tr>
+        			</table>
+        		</div>
+        	</td>
+        </tr> 
       </table>
       <div class="submit_area">
         <input type="image" id="btn_submit" src="/assets/btn_done.gif" >
@@ -61,9 +74,18 @@
       </div>
     </div>
     <input type="hidden" name="promotion_id" value="<%= @promotion.id %>">
-<% end %>
-</div>
 <script type="text/javascript">
+function disable_sync_box() {
+	$("#account_sync_account_id").attr('disabled', true);
+	$("#account_sync_account_pw").attr('disabled', true);
+	$("#account_sync_account_pw").val('');
+	$("#account_sync_account_id").val('');
+}
+function active_sync_box() {
+	$("#account_sync_account_id").removeAttr('disabled');
+	$("#account_sync_account_pw").removeAttr('disabled');
+}
+
 jQuery(document).ready(function($) {
 	$("#account_sync_flg_0").click(function() {
 		if ($("#account_sync_flg_0").is(':checked')) {
@@ -82,5 +104,16 @@ jQuery(document).ready(function($) {
 		$("#account_sync_account_id").attr('disabled','disabled');
 		$("#account_sync_account_pw").attr('disabled','disabled');
 	}	
+if ($('#media_id').val() < 7) {
+	$("#account_sync_box").html('<%=j render "sync_box", f: f%>');
+} else {
+	$("#account_sync_box").html("");
+	console.log('sss');
+}
+
+
 });	
-</script>	
+</script>    
+<% end %>
+</div>
+	
