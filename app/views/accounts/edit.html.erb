@@ -8,7 +8,7 @@
     <li>&gt;</li>
     <li><%= I18n.t("account.crumb_edit") %>/<%= t(Settings.media_category[@account.media_category_id])%>/<%= @account.media.media_name%> </li>
     <li>&gt;</li>
-    <li><%= @account.account_name%> </li>
+    <li><%= short_name(@account.account_name)%> </li>
 </ul>
         
 <% if flash[:success] %>
@@ -38,7 +38,7 @@
         </tr>
         <tr>
           <th><%= f.label t("account.cost") %></th>
-          <td ><%= f.text_field :cost, maxlength: 255, value: @account.cost, style: "width: 50px" %> %</td>
+          <td ><%= I18n.t("account.input_data") %><%= f.text_field :cost, maxlength: 255, value: @account.cost, style: "width: 50px" %> %</td>
         </tr>
         <tr>
           <th><%= f.label t("account.sync_account_id") %></th>
