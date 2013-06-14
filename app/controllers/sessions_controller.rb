@@ -3,18 +3,16 @@ class SessionsController < ApplicationController
   require 'open-uri'
   
   def new
-    news = Nokogiri::HTML(open("http://www.septeni.co.jp/news/news/index.html"))
-    @feed = news.css('div.boxin')[0]
-    press_release = Nokogiri::HTML(open("http://www.septeni.co.jp/news/pressrelease/index.html"))
-    @press_release = press_release.css("li[target='_blank']")
+    page = Nokogiri::HTML(open("http://www.septeni.co.jp/"))
+    @feed = page.css('div#feed')[0]
+    @press_release = PressRelease.all
   end
 
   def create
     @errors = Array.new
-    news = Nokogiri::HTML(open("http://www.septeni.co.jp/news/news/index.html"))
-    @feed = news.css('div.boxin')[0]
-    press_release = Nokogiri::HTML(open("http://www.septeni.co.jp/news/pressrelease/index.html"))
-    @press_release = press_release.css("li[target='_blank']")
+    page = Nokogiri::HTML(open("http://www.septeni.co.jp/"))
+    @feed = page.css('div#feed')[0]
+    @press_release = PressRelease.all
     user = User.find_by_email(params[:session][:email])
     if user
       if user.can_login?
@@ -50,16 +48,11 @@ class SessionsController < ApplicationController
     sign_out
     redirect_to root_url
   end
-  def signout
-    sign_out
-    redirect_to root_url
-  end
   
   def resend_password
-    news = Nokogiri::HTML(open("http://www.septeni.co.jp/news/news/index.html"))
-    @feed = news.css('div.boxin')[0]
-    press_release = Nokogiri::HTML(open("http://www.septeni.co.jp/news/pressrelease/index.html"))
-    @press_release = press_release.css("li[target='_blank']")
+    page = Nokogiri::HTML(open("http://www.septeni.co.jp/"))
+    @feed = page.css('div#feed')[0]
+    @press_release = PressRelease.all
     @form_errors = Array.new
     user = User.find_by_email(params[:email])
     if verify_recaptcha

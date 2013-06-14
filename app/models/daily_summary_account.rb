@@ -170,7 +170,7 @@ class DailySummaryAccount < ActiveRecord::Base
         "sum(assist_count) as assist_count, " +
         "sum(sales) as sales, " +
         "sum(profit) as profit, " +
-        "round(sum(total_cv_count)/table5.imp_count*100,1) as conversion_rate, " +
+        "round(sum(total_cv_count)/table5.click_count*100,1) as conversion_rate, " +
         "round(table5.cost_sum/sum(total_cv_count),3) as click_per_action, " +
         "round(sum(sales)/table5.cost_sum*100,3) as roas, " +
         "round((sum(profit)-table5.cost_sum)/table5.cost_sum*100,3) as roi " +

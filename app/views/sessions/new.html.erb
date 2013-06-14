@@ -19,7 +19,12 @@
         <p class="bold">プレスリリース</p>
       </div>
 
-      <%= raw @press_release %>
+      <% @press_release.each do |press| %>
+          <ul>
+            <li><span><%= press.release_time %></span></li>
+            <li><%= press.content %> </li>
+          </ul>
+      <% end %>
     </div>
 <% end %>
 <script type="text/javascript">
