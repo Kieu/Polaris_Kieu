@@ -13,14 +13,22 @@
     <% if params[:controller] == "clients" %>
         <div id="clients_list">
           <table class="sidebar">
-            <% object.each_with_index do |client, index| %>
+            <%
+             if object && object.count >0
+             object.each_with_index do |client, index| %>
                 <tr>
                   <th class="edit"><%= link_to "", "#{edit_client_path(client)}", class: "edit", id: "edit#{client.id}" if current_user.super? %></th>
                   <% if params[:action] == "index" %>
                       <% if (params[:client_id] && client.id == params[:client_id].to_i) || (!params[:client_id] && index == 0) %>
-                          <td><%= link_to short_name(client.client_name), "javascript:void(0)", class: "client_name active", id: "#{client.id}", onclick: "reloadFlex('.newTable06', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{client.id}', '.client_name', '#client_name', #{Settings.MAX_LENGTH_NAME})" %></td>
+                          <td><%= link_to short_name(client.client_name), "javascript:void(0)", class: "client_name active", id: "#{client.id}", onclick: "reloadFlex('.newTable06', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{client.id}', '.client_name', '#client_name', #{Settings.MAX_LENGTH_NAME})" %>
+                          	<%= link_to client.client_name, "javascript:void(0)", class: "client_name_search", id: "search#{client.id}" %>
+                          	
+                          </td>
                       <% else %>
-                          <td><%= link_to short_name(client.client_name), "javascript:void(0)", class: "client_name", id: "#{client.id}", onclick: "reloadFlex('.newTable06', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{client.id}', '.client_name', '#client_name', #{Settings.MAX_LENGTH_NAME})" %></td>
+                          <td><%= link_to short_name(client.client_name), "javascript:void(0)", class: "client_name", id: "#{client.id}", onclick: "reloadFlex('.newTable06', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{client.id}', '.client_name', '#client_name', #{Settings.MAX_LENGTH_NAME})" %>
+                              <%= link_to client.client_name, "javascript:void(0)", class: "client_name_search", id: "search#{client.id}" %>
+                          		
+                          </td>
                       <% end %>
                   <% else %>
                       <% if (params[:id] && client.id == params[:id].to_i) || (!params[:id] && index == 0) %>
@@ -30,7 +38,8 @@
                       <% end %>
                   <% end %>
                 </tr>
-            <% end %>
+            <% end 
+            end %>
           </table>
         </div>
     <% elsif params[:controller] == "promotions" || params[:controller] == "click_logs" || params[:controller] == "conversion_promotion_logs" %>
@@ -66,7 +75,9 @@
     <% elsif params[:controller] == "conversions" %>
         <div id="conversions_list">
           <table class="sidebar">
-            <% object.each_with_index do |conversion, index| %>
+            <% 
+            if object && object.count > 0
+            object.each_with_index do |conversion, index| %>
                 <tr>
                   <th class="edit"><%= link_to "", "#", class: "edit", id: "edit#{conversion.id}" if current_user.super? || current_user.agency? %></th>
                   <% if (params[:promotion_id] && conversion.id == params[:promotion_id].to_i) || (!params[:promotion_id] && index == 0) %>
@@ -75,7 +86,8 @@
                       <td><%= link_to short_name(conversion.conversion_name), "#{conversions_path(promotion_id: conversion.id)}", class: "conversion_name", id: "#{conversion.id}" %></td>
                   <% end %>
                 </tr>
-            <% end %>
+            <% end
+            end%>
           </table>
         </div>
     <% end %>

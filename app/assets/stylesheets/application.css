@@ -382,3 +382,6 @@ ul.ui-autocomplete{
     overflow: scroll;
     height:310px;
 }
+.client_name_search {
+	display: none;
+}
