@@ -12,16 +12,17 @@ class Conversion < ActiveRecord::Base
   validates :roman_name, presence: true, uniqueness: {scope: :promotion_id}
   validates :conversion_category, presence: true
   validates :track_type, presence: true, if: :check_app
-  validates :session_period, presence: true, if: :check_track_type1
+  validates :session_period, presence: true, :numericality => true, if: :check_track_type1
+  validates_inclusion_of :session_period, :in => 1..90
   validates :unique_def, presence: true, if: :check_conversion_category
   validates :os, presence: true, if: :check_track_type
   validates :conversion_mode, presence: true, if: :check_track_type
   validates :duplicate, presence: true, if: :check_track_type
   validates :track_method, presence: true, if: :check_track_type
-  validates :facebook_app_id, presence: true, if: :check_fb_id_valid
+  validates :facebook_app_id, length: {maximum: 255}, presence: true, if: :check_fb_id_valid
   validates :start_point, presence: true, if: :check_web
   validates :conversion_combine, presence: true, if: :check_combination
-  validates :url, presence: true, if: :check_track_method
+  validates :url, length: {maximum: 255}, presence: true, if: :check_track_method
   validates :sale_unit_price, length: {maximum: 255}, :numericality => { :only_integer => true}, if: :check_sales?
   
   scope :order_by_conversion_name, ->{order :conversion_name}
@@ -83,4 +84,5 @@ class Conversion < ActiveRecord::Base
   def check_sales?
     !sale_unit_price.blank? 
   end
+  
 end
