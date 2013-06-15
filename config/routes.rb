@@ -43,6 +43,7 @@ PolarisManage::Application.routes.draw do
   resources :url_settings do
     post "get_urls_list", on: :collection
     post "download_csv", on: :collection
+    get "download_template", on: :collection
   end
   resources :background_jobs do
     get "upload", on: :collection
