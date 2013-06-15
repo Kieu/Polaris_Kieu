@@ -6,7 +6,7 @@ TIMEOUT=${TIMEOUT-60}
 APP_ROOT=/home/polaris
 PID=/var/run/unicorn.pid
 CMD="cd $APP_ROOT; bundle exec unicorn -D -c $APP_ROOT/config/unicorn.rb -E production"
-AS_USER=andy
+AS_USER=root
 set -u
 
 OLD_PIN="$PID.oldbin"
