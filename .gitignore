@@ -18,6 +18,8 @@
 db/schema.rb
 Gemfile.lock
 config/database.yml
+config/unicorn.rb
+config/unicorn_init.sh
 coverage/*
 solr/*
 sass-cache/*

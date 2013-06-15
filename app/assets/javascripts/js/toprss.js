@@ -14,27 +14,27 @@ function initialize() {
       /*htmlstr += '<h2><a href="' + result.feed.link + '">' + result.feed.title + '</a></h2>';
       htmlstr += "<p>" + result.feed.description + "</p>";*/
 
-     htmlstr += "<ul>";
+    // htmlstr += "<ul>";
       for (var i = 0; i < result.feed.entries.length; i++) {
         var entry = result.feed.entries[i];
 				
 				var is_publicities = /publicities/.test(entry.link);
 				
-        htmlstr += "<li class=" + (is_publicities ? 'txtlist2' : 'txtlist') + ">" + (is_publicities ? "<span class=listset>" : "<a href='" + entry.link + "' target=_blank><span class=listset>");
+        htmlstr += "<ul class=" + (is_publicities ? 'txtlist2' : 'txtlist') + ">" + (is_publicities ? "" : "<a href='" + entry.link + "' target=_blank>");
 				
 				 var strdate = createDateString(entry.publishedDate);
 				  var test = createDateString(entry.author);
 					
 					var categorie = entry.categories[i];
 				 
-        htmlstr += "<span class=listdate>" + strdate + "</span>";
+        htmlstr += "<li class=listdate>" + strdate + "</li>";
 				
-        htmlstr += '<span class=listtit>' + entry.title + '</span>' + (is_publicities ? '' : '</a>');
+        htmlstr += '<li class=listtit>' + entry.title + '</li>' + (is_publicities ? '' : '</a>');
 
        
-        htmlstr += "</span></li>"
+        htmlstr += "</ul>"
       }
-      htmlstr += "</ul>";
+     // htmlstr += "</ul>";
 
        container.innerHTML = htmlstr;
     }else{
