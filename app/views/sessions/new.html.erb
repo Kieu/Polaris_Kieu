@@ -11,11 +11,11 @@
       <div class="infoboxHeadtxt">
         <p class="bold"><%= I18n.t("login.announcements")%></p>
       </div>
-      news
+      news1
       <% @feed.each do |feed| %>
           <ul>
-            <li><span><%= feed.published %></span></li>
-            <li><%= feed.content %> </li>
+
+            <li><%= feed %> </li>
           </ul>
       <% end %>
     </div>
