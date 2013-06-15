@@ -735,7 +735,6 @@ button.ui-button::-moz-focus-inner {
 }
 .ui-tabs .ui-tabs-nav {
     margin: 0;
-    padding: .2em .2em 0;
 }
 .ui-tabs .ui-tabs-nav li {
     list-style: none;
