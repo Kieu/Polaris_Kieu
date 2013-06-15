@@ -24,7 +24,6 @@
 				<%= select_tag 'media_category_id', "<option value = "">All</option><option value = 1 >Listing ad</option><option value = 2 >Display ad</option><option value = 3 >Affiliate</option>".html_safe, class: "input-text" %>
 			</li>
 			<li> <%= I18n.t("log.account_name")%>
-				<% binding.pry %>
 				<%= select_tag 'account_id', content_tag(:option,'All',:value=>"")+options_from_collection_for_select(short_name(Account.where(promotion_id: params[:promotion_id]).order(:account_name).first['account_name']), 'id', 'account_name'), class: "input-text" %> <br>
 			</li>
 		</ul>
