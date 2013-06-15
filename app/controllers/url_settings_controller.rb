@@ -31,6 +31,11 @@ class UrlSettingsController < ApplicationController
     render json: {page: params[:page], total: count, rows: rows}
   end
 
+  def download_template
+    path_to_file = "#{Rails.root}/" + Settings.URL_TEMPLATE_FILE
+    send_file(path_to_file, filename: "aaaaa.csv", type: "text/csv")
+  end
+
   def get_rows url_data
     rows = Array.new
     url_data.each do |url|
