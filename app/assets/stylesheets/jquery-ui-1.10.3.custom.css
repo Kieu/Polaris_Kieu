@@ -748,7 +748,6 @@ button.ui-button::-moz-focus-inner {
     white-space: nowrap;
 }
 .ui-tabs .ui-tabs-nav li a {
-    float: left;
     padding: .5em 1em;
     text-decoration: none;
 }
