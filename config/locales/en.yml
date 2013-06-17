@@ -283,29 +283,29 @@ en:
               too_short: ! 'Media name is too short (minimum is %{count} characters)'
               wrong_length: ! 'Media name is the wrong length (should be %{count} characters)'
               acceptance: Roman name must be accepted
-            cost: 
-              blank: "Cost can't be blank"
-              accepted: Cost must be accepted 
-              confirmation: Cost doesn't match confirmation 
-              empty: Cost can't be empty
-              equal_to: ! 'Media name must be equal to %{count} ' 
-              even: Cost must be even
-              exclusion: Cost is reserved
-              greater_than: ! 'Cost must be greater than %{count}'
-              greater_than_or_equal_to: ! 'Cost must be greater than or equal to %{count}'
-              inclusion: Cost is not included in the list
-              invalid: Cost  is invalid
-              less_than: ! 'Cost must be less than %{count}'
-              less_than_or_equal_to: ! 'Cost must be less than or equal to %{count}'
-              not_a_number: Cost is not a number
-              not_an_integer: Cost is not a interger
-              odd: Cost must be odd
-              record_invalid: Cost バリデーションに失敗しました。 '%{errors}'
-              taken: Cost すでに登録されています。
-              too_long: ! 'Cost is too long (maximum is %{count} characters)'
-              too_short: ! 'Cost is too short (minimum is %{count} characters)'
-              wrong_length: ! 'Cost is the wrong length (should be %{count} characters)'
-              acceptance: Cost must be accepted
+            margin: 
+              blank: "Margin can't be blank"
+              accepted: Margin must be accepted 
+              confirmation: Margin doesn't match confirmation 
+              empty: Margin can't be empty
+              equal_to: ! 'Margin must be equal to %{count} ' 
+              even: Margin must be even
+              exclusion: Margin is reserved
+              greater_than: ! 'Margin must be greater than %{count}'
+              greater_than_or_equal_to: ! 'Margin must be greater than or equal to %{count}'
+              inclusion: Margin is not included in the list
+              invalid: Margin  is invalid
+              less_than: ! 'Margin must be less than %{count}'
+              less_than_or_equal_to: ! 'Margin must be less than or equal to %{count}'
+              not_a_number: Margin is not a number
+              not_an_integer: Margin is not a interger
+              odd: Margin must be odd
+              record_invalid: Margin バリデーションに失敗しました。 '%{errors}'
+              taken: Margin すでに登録されています。
+              too_long: ! 'Margin is too long (maximum is %{count} characters)'
+              too_short: ! 'Margin is too short (minimum is %{count} characters)'
+              wrong_length: ! 'Margin is the wrong length (should be %{count} characters)'
+              acceptance: Margin must be accepted
             sync_account_id: 
               blank: "Sync account ID can't be blank"
               accepted: Sync account ID must be accepted 
@@ -626,7 +626,7 @@ en:
     media: "Media: "
     account_name: "Account name: "
     roman_name: "Roman name: "
-    cost: "Cost calculation： "
+    margin: "Margin calculation： "
     input_data: "Input data x"
     sync_account_id: "Sync account ID: "
     synchronism: "Synchronism"

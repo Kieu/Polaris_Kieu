@@ -303,7 +303,7 @@ ja:
               too_short: ! 'メディアカテゴリ %{count}文字以上で入力してください。'
               wrong_length: ! 'メディアカテゴリ %{count}文字で入力してください。'
               acceptance: メディアカテゴリ チェックボックスを選択してください。
-            cost: 
+            margin: 
               blank: "コスト計算 を入力して下さい"
               accepted: コスト計算 受諾してください。 
               confirmation: コスト計算 確認の入力が一致しません。 
@@ -647,7 +647,7 @@ ja:
     media: "メディア: "
     account_name: "アカウント名: "
     roman_name: "アカウント名(英語): "
-    cost: "コスト計算： "
+    margin: "コスト計算： "
     input_data: "入力データ x"
     sync_account_id: "アカウントの同期: "
     synchronism: "同期"

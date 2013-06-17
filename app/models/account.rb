@@ -3,15 +3,15 @@ class Account < ActiveRecord::Base
   VALID_FLOAT_REGEX = /^\d+\.\d+$/
   VALID_ROMAN_NAME_REGEX = /^[A-Z_\-\ a-z][A-Za-z_\-\ 0-9]*$/
   
-  attr_accessible :cost, :create_user_id, :media_id, :promotion_id, :account_name, :roman_name,
+  attr_accessible :margin, :create_user_id, :media_id, :promotion_id, :account_name, :roman_name,
                   :sync_account_id, :sync_account_pw, :sync_flg, :update_user_id, :media_category_id
   
   validates :promotion_id, presence: true
   validates :promotion_id, format: {with: VALID_NUMBER_REGEX}, if: -> account { account.promotion_id.present?}
   validates :media_id, presence: true
   validates :media_id, format: {with: VALID_NUMBER_REGEX}, if: -> account { account.media_id.present?}
-  validates :cost, presence: true, length: {maximum: 255}
-  validates :cost, :numericality => true, if: -> account { account.cost.present?}
+  validates :margin, presence: true, length: {maximum: 255}
+  validates :margin, :numericality => true, if: -> account { account.margin.present?}
   validates :sync_flg, presence: true,  length: {maximum: 1} , if: -> account { account.sync_flg.present?}
   validates :sync_flg, format: {with: VALID_NUMBER_REGEX}, if: -> account { account.sync_flg.present?}
   validates :account_name, presence: true, length: {maximum: 255}, uniqueness: {case_sensitive: false, scope: :promotion_id}
