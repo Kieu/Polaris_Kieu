@@ -33,7 +33,7 @@ class UrlSettingsController < ApplicationController
 
   def download_template
     path_to_file = "#{Rails.root}/" + Settings.URL_TEMPLATE_FILE
-    send_file(path_to_file, filename: "aaaaa.csv", type: "text/csv")
+    send_file(path_to_file, filename: "template_import_url.csv", type: "text/csv")
   end
 
   def get_rows url_data
