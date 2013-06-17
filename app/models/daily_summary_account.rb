@@ -1,4 +1,5 @@
 class DailySummaryAccount < ActiveRecord::Base
+  establish_connection :log_db_development
   attr_accessible :promotion_id, :media_category_id, :cost_per_click,
     :account_id, :media_id, :imp_count, :click_count, :cost_sum,
     :click_through_ratio, :report_ymd, :create_time, :cost_per_mille
@@ -6,7 +7,6 @@ class DailySummaryAccount < ActiveRecord::Base
   def self.get_table_data promotion_id, start_date, end_date
     results = Hash.new
     array_result = Hash.new
-      
     total_promotion_data = DailySummaryAccount.where(promotion_id: promotion_id)
       .where("DATE_FORMAT(report_ymd, '%Y/%m/%d') between '#{start_date}' and '#{end_date}'")
       .select("sum(imp_count) as imp_count")
@@ -47,8 +47,7 @@ class DailySummaryAccount < ActiveRecord::Base
       connection.execute("DROP TEMPORARY TABLE IF EXISTS table4")
       connection.execute("CREATE TEMPORARY TABLE table3 (" + total_promotion_data.to_sql + ")")
       connection.execute("CREATE TEMPORARY TABLE table4 (" + total_conversions_data.to_sql + ")")
-      
-      promotion_conversions_data = ActiveRecord::Base.connection.select_all("select table1.account_id, table1.conversion_id, " +
+      promotion_conversions_data = connection.select_all("select table1.account_id, table1.conversion_id, " +
         "table1.total_cv_count, table1.first_cv_count, table1.repeat_cv_count, " +
         "table1.assist_count, table1.sales, table1.profit, " +
         "round(total_cv_count/click_count*100,1) as conversion_rate, " +
@@ -57,7 +56,7 @@ class DailySummaryAccount < ActiveRecord::Base
 
       connection.execute("DROP TEMPORARY TABLE IF EXISTS table5")
       connection.execute("CREATE TEMPORARY TABLE table5 (" + category_promotion_data.to_sql + ")")
-      category_conversions_data = ActiveRecord::Base.connection.select_all("select table1.conversion_id, table2.media_category_id, " +
+      category_conversions_data = connection.select_all("select table1.conversion_id, table2.media_category_id, " +
         "sum(total_cv_count) as total_cv_count, " +
         "sum(first_cv_count) as first_cv_count, " +
         "sum(repeat_cv_count) as repeat_cv_count, " +
@@ -71,7 +70,7 @@ class DailySummaryAccount < ActiveRecord::Base
         " from table1 left join table2 on table1.account_id=table2.account_id left join table5 on table5.media_category_id=table2.media_category_id  " +
         " group by table1.conversion_id, table2.media_category_id")
       
-      total_conversions = ActiveRecord::Base.connection.select_all("select table4.conversion_id, " +
+      total_conversions = connection.select_all("select table4.conversion_id, " +
         "round(total_cv_count/click_count*100,1) as conversion_rate, " +
         "round(cost_sum/total_cv_count,3) as click_per_action, " +
         "round(sales/cost_sum*100,3) as roas, " +
