@@ -4,13 +4,11 @@
     <%= render partial: "layouts/sidebar", locals: {object: @array_promotion} %>
 <% end %>
   <ul class="contentNavi">
-    <li class="pre"><%= link_to @promotion.client.client_name, client_path(@promotion.client_id) %></li>
-    <li> &gt; </li>
-    <li><%= link_to @promotion.promotion_name, promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %></li>
+    <li class="pre"><%= link_to @promotion.client.client_name, clients_path(client_id: @promotion.client_id) %></li>
     <li> &gt; </li>
     <li><%= I18n.t("promotion.crumb_edit")%></li>
     <li> / </li>
-    <li><%= @promotion.promotion_name %></li>
+    <li><%= @promotion_name %></li>
   </ul>
   <div class="clear"></div>
 <%= form_for(@promotion) do |f| %>
@@ -33,9 +31,10 @@
                          selected: @promotion.promotion_category_id %>
           </td>
         </tr>
-        <tr>
+        <tr style="vertical-align: top;">
           <th><%= f.label "Tracking period" %></th>
-          <td><%= f.text_field :tracking_period, maxlength: 2, style: "width: 250px" %> 日</td>
+          <td style="width: 250px"><%= f.text_field :tracking_period, maxlength: 2, style: "width: 250px" %> </td>
+          <td style="padding-left: 0"> 日</td>
         </tr>
         </tbody>
       </table>
@@ -46,6 +45,7 @@
          </div>
     </div><!-- /."regist_form end-->
     <input type="hidden" name="client_id" value="<%= @client_id %>" />
+    <input type="hidden" name="promotion_name" value="<%= @promotion_name %>" />
     <% end %>
 <script type="text/javascript">
 $(function(){

@@ -56,10 +56,12 @@ class PromotionsController < ApplicationController
 
   def edit
     @promotion = @array_promotion.find(params[:id])
+    @promotion_name = @promotion.promotion_name
   end
 
   def update
     @promotion = @array_promotion.find(params[:id])
+    @promotion_name = params[:promotion_name]
     @promotion.update_user_id = current_user.id
     if @promotion.update_attributes(params[:promotion])
       flash[:error] = "Promotion updated"

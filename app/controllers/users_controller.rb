@@ -41,7 +41,11 @@ class UsersController < ApplicationController
     @user.update_user_id = current_user.id
     @user.attributes = params[:user]
     if @user.valid?
-      @user.save!
+      if (@user.active? && params[:deactive] == "on") || (!@user.active? && !params[:deactive])
+        @user.toggle_enabled
+      else
+        @user.save!
+      end
       flash[:success] = I18n.t("user.flash_messages.update")
       redirect_to users_path
     else
