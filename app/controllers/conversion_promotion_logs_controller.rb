@@ -12,6 +12,15 @@ def index
   end
   @promotions = @client_id.blank? ? Array.new :
       Promotion.get_by_client(@client_id).order_by_promotion_name
+
+  @array_conversion = Conversion.where(promotion_id: @promotion.id).order(:conversion_name).select("id")
+                           .select("CASE WHEN LENGTH(conversion_name) > #{Settings.MAX_LENGTH_NAME}
+                                   THEN SUBSTRING(conversion_name, 1, #{Settings.MAX_LENGTH_NAME})
+                                    ELSE  conversion_name END as conversion_name ")
+   @array_account = Account.order(:account_name).select("id")
+                           .select("CASE WHEN LENGTH(account_name) > #{Settings.MAX_LENGTH_NAME}
+                                   THEN SUBSTRING(account_name, 1, #{Settings.MAX_LENGTH_NAME})
+                                    ELSE  account_name END as account_name ")
 end
 
 def get_conversion_logs_list

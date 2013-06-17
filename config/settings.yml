@@ -61,3 +61,5 @@ conversion_kind:
   3: 'cv_kind3'
 conversion_session_period_default: 90
 account_cost_default: 100
+URL_TEMPLATE_FILE: 'doc/url/template_import_url/template_import_url.csv'
+DOMAIN_SUBMIT_URL: 'http://domain/click/?'
