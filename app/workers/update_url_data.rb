@@ -36,7 +36,6 @@ class UpdateUrlData
     promotion_id = options['promotion_id'].to_i
     account_id = options['account_id'].to_i
     media_category_id = options['media_category_id'].to_i
-    redirect_infomation_id = 1
     media_id = options['media_id'].to_i
     type = options['type']
     user_id = options['user_id']
@@ -49,12 +48,10 @@ class UpdateUrlData
     job_id = BackgroundJob.where(id: options['bgj_id']).select('job_id').first['job_id']
 
     # make header insert string sql
-    insert_ad_str, insert_redirect_info_str, 
-    insert_redirect_url_str, insert_campaign_str, insert_group_str =  make_header_insert_sql type
+    insert_redirect_url_str, delete_url_sql =  make_header_insert_sql type
 
     # create mpv
     mpv = media_category_id.to_s(36) + "." + promotion_id.to_s(36) + "." + account_id.to_s(36)
-                            # "." + redirect_infomation_id.to_s(36)
 
      # file fomat: {process_id}_error.txt
      error_file = Settings.error_url_path + "#{job_id}_error.txt"
@@ -87,6 +84,8 @@ class UpdateUrlData
          array_redirect_url = Array.new
          array_ad_id_insert = Array.new
          array_ad_name_insert = Array.new
+         array_double_data = Hash.new
+         insert_redirect_info_str = " "
          num = 1
          error_num = 0
          line_num = 0
@@ -117,9 +116,10 @@ class UpdateUrlData
              # validate data input
              row, error_num, array_identifer, 
              array_ad_id_insert, array_ad_name_insert, 
-             array_creative_id = validate_data_input num, error_num, row, error, array_identifer, 
+             array_creative_id, current_mpv = validate_data_input num, error_num, row, error, array_identifer, 
                                                      array_ad_id_insert, array_ad_name_insert, 
-                                                     array_creative_id, line_num
+                                                     array_creative_id, line_num, array_double_data,
+                                                     mpv, client_id, promotion_id
              # start insert data to DB
              if error_num == 0
                current_time = Time.now.strftime("%Y-%m-%d %H:%M:%S")
@@ -128,56 +128,20 @@ class UpdateUrlData
                  num = 0
                  comma_sql = ""
                end
+              
+              delete_url_sql += "
+                                and mpv = '#{current_mpv}' 
 
-               # insert campaign
-               campaign_obj = DisplayCampaign.new
-               campaign_obj.name = row[CAMPAIGN_NAME]
-               campaign_obj.client_id = client_id
-               campaign_obj.promotion_id = promotion_id
-               campaign_obj.account_id = account_id
-               campaign_obj.create_user_id = current_time
-               campaign_obj.create_at = user_id
-               campaign_obj.save!
-
-               # insert group
-               group_obj = DisplayGroup.new
-               group_obj.name = row[GROUP_NAME]
-               group_obj.client_id = client_id
-               group_obj.promotion_id = promotion_id
-               group_obj.account_id = account_id
-               group_obj.display_campaign_id = campaign_obj.id
-               group_obj.create_user_id = current_time
-               group_obj.create_at = user_id
-               group_obj.save!
-
-               # insert group
-               ad_obj = DisplayAd.new
-               if row[AD_ID] != ""
-                ad_obj.identifier = row[AD_ID]
-               end
-               
-               ad_obj.name = row[AD_NAME]
-               ad_obj.client_id = client_id
-               ad_obj.promotion_id = promotion_id
-               ad_obj.account_id = account_id
-               ad_obj.display_campaign_id = campaign_obj.id
-               ad_obj.display_group_id = group_obj.id
-               ad_obj.create_user_id = current_time
-               ad_obj.create_at = user_id
-               ad_obj.save!
-
-               if row[AD_ID] == ""
-                 ad_obj.identifier = ad_obj.id
-                 ad_obj.save!
-               end
-
-               current_mpv = mpv + "." + ad_obj.id.to_s(36)
+                                "
                # insert redirect infomation
-               insert_redirect_info_str += "('#{current_mpv}', #{client_id}, #{promotion_id}, #{media_category_id},
-                                           #{media_id}, #{account_id}, #{campaign_obj.id}, #{group_obj.id}, #{ad_obj.id}, #{row[CREATIVE_ID]},
-                                           #{row[CLICK_UNIT]}, '#{row[COMMENT]}', '#{current_time}', #{user_id} ) #{comma_sql}
+               insert_redirect_info_str += "
+                                            update redirect_infomation set creative_id = #{row[CREATIVE_ID]},
+                                                                      comment = '#{row[COMMENT]}',
+                                                                      click_unit = #{row[CLICK_UNIT]}
+                                                              where mpv = '#{current_mpv}'
+                                                                      ;
 
-                                       "
+                                            "
                # insert url
                insert_redirect_url_str += "('#{current_mpv}', '#{row[REDIRECT_URL1]}', #{row[RATE1]}, '#{row[NAME1]}',
                                              '#{current_time}', #{user_id} ) #{comma_sql}
@@ -211,9 +175,15 @@ class UpdateUrlData
                                             "
                end
 
+                
                if num == Settings.RECORD_NUM_PER_INSERT || (row_number == 0)
                  result = ActiveRecord::Base.connection.execute(insert_redirect_info_str)
+                 # delete all redirect URL before insert
+                 result = ActiveRecord::Base.connection.execute(delete_url_sql)
                  result = ActiveRecord::Base.connection.execute(insert_redirect_url_str)
+                 # make header insert string sql
+                 insert_redirect_info_str = " "
+                 insert_redirect_url_str, delete_url_sql =  make_header_insert_sql type
                end
 
              end
@@ -234,6 +204,11 @@ class UpdateUrlData
          # false case
          background_job.status = Settings.job_status.SUCCESS
          background_job.save!
+         
+         if error_num == 0
+           File.delete(error_file)
+         end
+         
        rescue
          background_job = BackgroundJob.find(options['bgj_id'])
          # false case
@@ -243,9 +218,7 @@ class UpdateUrlData
        end
      end
 
-     #CSV.foreach(path) do |row|
-       #binding.pry
-     #end  
+     File.delete(data_file)
   end
 
   private
@@ -261,57 +234,26 @@ class UpdateUrlData
   end
 
   def make_header_insert_sql type
-    update_str = " , create_at, create_user_id "
-    if(type == 'update')
-      update_str = " , update_at, update_user_id "
-    end
-
-    insert_ad_str = "
-                  insert into display_ads
-                   (identifier, name, client_id, promotion_id, account_id, display_campaign_id,
-                          display_group_id, del_flg #{update_str} )
-                  values
-
-                 "
-
-    insert_redirect_info_str = "
-                  insert into redirect_infomations 
-                   (mpv, client_id, promotion_id, media_category_id, media_id, account_id,
-                          campaign_id, group_id, unit_id, creative_id, click_unit,
-                          comment #{update_str} )
-                  values
-                  "
-
+    update_str = " , update_at, update_user_id "
     insert_redirect_url_str = "
                   insert into redirect_urls 
                    (mpv, url, rate, name #{update_str} )
                   values
 
                   "
-    insert_campaign_str = "
-                  insert into display_campaigns 
-                   (name, client_id, promotion_id, account_id,
-                          del_flg #{update_str} )
-                  values
-
-                  "
-
-    insert_group_str = "
-                  insert into display_groups 
-                   (name, client_id, promotion_id, account_id, display_campaign_id,
-                          del_flg #{update_str} )
-                  values
-
-                  "
-    return insert_ad_str, insert_redirect_info_str, 
-           insert_redirect_url_str, insert_campaign_str, 
-           insert_group_str
+    
+    delete_url_sql = "
+                     delete * from redirect_urls where
+                     1 = 1
+                     "
+    return insert_redirect_url_str, delete_url_sql
   end
 
 
   def validate_data_input num, error_num, row, error, 
-                               array_identifer, array_ad_id_insert, 
-                               array_ad_name_insert, array_creative_id, line_num
+                          array_identifer, array_ad_id_insert, 
+                          array_ad_name_insert, array_creative_id, line_num, array_double_data,
+                          mpv, client_id, promotion_id
      
      # LAST_MODIFIED field
      row[LAST_MODIFIED] = row[LAST_MODIFIED].to_s.strip
@@ -319,11 +261,6 @@ class UpdateUrlData
      # AD_ID field
      row[AD_ID] = row[AD_ID].to_s.strip
      if row[AD_ID] != ""
-       if row[AD_ID].length > 255
-         error_num += 1
-         error.write("Line #{line_num}: Ad ID needs to be less than 255 letters. \n")
-       end
-
        if array_identifer.include?(row[AD_ID].to_i)
          error_num += 1
          error.write("Line #{line_num}: The Ad ID is already used. \n")
@@ -347,39 +284,21 @@ class UpdateUrlData
      
      # CAMPAIGN_NAME field
      row[CAMPAIGN_NAME] = row[CAMPAIGN_NAME].to_s.strip
-     if row[CAMPAIGN_NAME] != ""
-        if row[CAMPAIGN_NAME].length > 255
-          error_num += 1
-          error.write("Line #{line_num}: Campaign needs to be less than 255 letters. \n")
-        end
-
-     else
+     if row[CAMPAIGN_NAME] == ""
         error_num += 1
         error.write("Line #{line_num}: Campaign name is not typed. \n")
-
      end
      
      # GROUP_NAME
      row[GROUP_NAME] = row[GROUP_NAME].to_s.strip
-     if row[GROUP_NAME] != ""
-        if row[GROUP_NAME].length > 255
-          error_num += 1
-          error.write("Line #{line_num}: Group name needs to be less than 255 letters. \n")
-        end
-     else
+     if row[GROUP_NAME] == ""
         error_num += 1
         error.write("Line #{line_num}: Group name is not typed. \n")
-
      end
 
      # AD_NAME
      row[AD_NAME] = row[AD_NAME].to_s.strip
      if row[AD_NAME] != ""
-        if row[AD_NAME].length > 255
-          error_num += 1
-          error.write("Line #{line_num}: Ad name needs to be less than 255 letters. \n")
-        end
-        
         if array_ad_name_insert.count > 0 && array_ad_name_insert.include?(row[AD_NAME])
           error_num += 1
           error.write("Line #{line_num}: The Ad ID is already used. \n")
@@ -390,6 +309,30 @@ class UpdateUrlData
         error_num += 1
         error.write("Line #{line_num}: Ad name is not typed. \n")
 
+     end
+
+     # check submit URL
+     # make current_mpv
+     current_ad_id = DisplayAd.where(identifier: row[AD_ID]).select('id').first['id']
+     current_mpv = mpv + "." + current_ad_id.to_s(36)
+
+     # make current submit_url
+     current_submit_url = Settings.DOMAIN_SUBMIT_URL + "mpv=#{current_mpv}&plrs_cid=#{client_id}&plrs_pid=#{promotion_id}"
+     row[SUBMIT_URL] = row[SUBMIT_URL].to_s.strip
+     if (row[SUBMIT_URL] != "") && (row[SUBMIT_URL] != current_submit_url)
+       error_num += 1
+       error.write("Line #{line_num}: Campaing name, Group name, Ad name, measuring URL cannot be changed. \n")
+     end
+
+     # check double [Campaign name] [group name] [ad name]
+     key_str = "#{row[CAMPAIGN_NAME]}_#{row[GROUP_NAME]}_#{row[AD_NAME]}"
+     
+     if !array_double_data[key_str]
+       array_double_data[key_str] = line_num.to_s
+     else
+       array_double_data[key_str] += "," + line_num.to_s
+       error_num += 1
+       error.write("Line #{array_double_data[key_str]}: Campaing name, Group name, and Ad name are overlapped. \n")
      end
 
      # CREATIVE_ID field
@@ -422,13 +365,6 @@ class UpdateUrlData
          error_num += 1
          error.write("Line #{line_num}: Please type unit click price with half-width characters. \n")
        end
-     end
-
-     # SUBMIT URL field
-     row[SUBMIT_URL] = row[SUBMIT_URL].to_s.strip
-     if row[SUBMIT_URL] != ""
-       error_num += 1
-       error.write("Line #{line_num}: Please leave the measuring URL column blank. \n")
      end
 
      # REDIRECT_URL1 ==============================================
@@ -488,7 +424,7 @@ class UpdateUrlData
        error_num += 1
        error.write("Line #{line_num}: REDIRECT_URL2, NAME2, RATE2 have typed together or blank together. \n")
      end
-     
+
      # REDIRECT_URL3 ==============================================
      row[REDIRECT_URL3] = row[REDIRECT_URL3].to_s.strip
 
@@ -542,7 +478,6 @@ class UpdateUrlData
        error_num += 1
        error.write("Line #{line_num}: REDIRECT_URL4, NAME4, RATE4 have typed together or blank together. \n")
      end
-
      # REDIRECT_URL5 ==============================================
      row[REDIRECT_URL5] = row[REDIRECT_URL5].to_s.strip
      
@@ -576,7 +511,7 @@ class UpdateUrlData
        error.write("Line #{line_num}: Transition rate needs to be 100 altogether. \n")
      end
 
-     return row, error_num, array_identifer, array_ad_id_insert, array_ad_name_insert, array_creative_id
+     return row, error_num, array_identifer, array_ad_id_insert, array_ad_name_insert, array_creative_id, current_mpv
   end
 
 end
