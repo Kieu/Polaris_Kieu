@@ -8,7 +8,7 @@ class CreateAccounts < ActiveRecord::Migration
       t.string :account_name
       t.string :roman_name
       t.integer :sync_flg
-      t.integer :cost
+      t.integer :margin
       t.integer :create_user_id
       t.integer :update_user_id
 

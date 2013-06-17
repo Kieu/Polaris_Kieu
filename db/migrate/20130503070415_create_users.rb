@@ -7,10 +7,10 @@ class CreateUsers < ActiveRecord::Migration
       t.string :email
       t.string :company
       t.integer :role_id
-      t.integer :password_flg
+      t.string :password_flg, limit: 1
       t.string :language
       t.datetime :last_login
-      t.integer :status, default: 0
+      t.string :status, limit: 1
       t.integer :create_user_id
       t.integer :update_user_id
 
