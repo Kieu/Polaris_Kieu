@@ -247,6 +247,7 @@ DEPENDENCIES
   pry-stack_explorer
   rails (= 3.2.13)
   rails_config
+  raindrops (>= 0.10.0)
   recaptcha
   redis
   resque
