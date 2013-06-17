@@ -5,10 +5,8 @@ class ImportsController < ApplicationController
     if @import.save
       background_job = BackgroundJob.new
       background_job.user_id = current_user.id
-      background_job.filename = @import.csv_file_name
       background_job.type_view = Settings.type_view.UPLOAD
       background_job.status = Settings.job_status.PROCESSING
-      background_job.controller = params[:controller]
       background_job.save!
       if params[:type] == 'insert'
         job_id = ImportUrlData.create(file: @import.csv.url,
