@@ -109,7 +109,7 @@ div.check-group li {
     padding: 0 0 0px;
 }
 div.check-group input {
-    display: none;
+    /*display: none;*/
 }
 div.check-group label {
     background: url("/assets/btn_box_add.gif") no-repeat scroll 0 0 transparent;
