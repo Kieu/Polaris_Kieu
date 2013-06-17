@@ -13,6 +13,7 @@ class AccountsController < ApplicationController
   
   def edit
     @account = Account.find(params[:id])
+    @account_name = Account.find(params[:id]).account_name
     @promotion_id = params[:promotion_id]
     @promotion = Promotion.find_by_id(@promotion_id)
     @client_id = @promotion.client.id
@@ -50,6 +51,7 @@ class AccountsController < ApplicationController
       flash[:error] = I18n.t("account.flash_messages.success_error")
     end
     if flash[:error]
+      @account_name = Account.find(params[:id]).account_name
       render :edit
     else
       flash[:error] = I18n.t("account.flash_messages.update")
