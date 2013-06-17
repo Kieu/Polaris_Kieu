@@ -13,8 +13,6 @@ class ApplicationController < ActionController::Base
   
   before_filter :set_locale
 
-  notify = BackgroundJob.where(:user_id => current_user.id,:status => '0').size
-
   def signed_in_user
     redirect_to signin_url, notice: "Please sign in." unless signed_in?
   end
@@ -30,6 +28,10 @@ class ApplicationController < ActionController::Base
   def record_not_found
     #render :text => "404 Not Found", :status => 404
     render 'public/404', :status => :not_found
+  end
+
+  def set_notify
+    notify = BackgroundJob.where(:user_id => current_user.id,:status => '0').size
   end
 
   private
