@@ -17,12 +17,7 @@
 	<li>&gt;</li>
 	<li><%= I18n.t("log.crumb_click")%></li>
 </ul>
-<% 
-  array_account = Account.where(promotion_id: params[:promotion_id]).order(:account_name).select("id")
-                           .select("CASE WHEN LENGTH(account_name) > #{Settings.MAX_LENGTH_NAME}
-                                   THEN SUBSTRING(account_name, 1, #{Settings.MAX_LENGTH_NAME})
-                                    ELSE  account_name END as account_name ")
-%>
+
 <div>
 	<div class="selectarea">
 		<ul>
@@ -30,7 +25,7 @@
 				<%= select_tag 'media_category_id', "<option value = "">All</option><option value = 1 >Listing ad</option><option value = 2 >Display ad</option><option value = 3 >Affiliate</option>".html_safe, class: "input-text" %>
 			</li>
 			<li> <%= I18n.t("log.account_name")%>
-				<%= select_tag 'account_id', content_tag(:option,'All',:value=>"")+options_from_collection_for_select(array_account, 'id', 'account_name'), class: "input-text" %> <br>
+				<%= select_tag 'account_id', content_tag(:option,'All',:value=>"")+options_from_collection_for_select(@array_account, 'id', 'account_name'), class: "input-text" %> <br>
 			</li>
 		</ul>
 	</div>
