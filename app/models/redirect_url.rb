@@ -23,7 +23,7 @@ class RedirectUrl < ActiveRecord::Base
               ,r_url.name as url_name
               ,creative.image as creative
               ,creative.text as creative_text
-              ,creative.type as creative_type
+              ,creative.display_type as creative_type
               ,DATE_FORMAT(r_url.update_at, '%Y/%m/%d %h:%i:%s') as last_modified
             FROM  redirect_urls as r_url
               inner join redirect_infomations as r_info
