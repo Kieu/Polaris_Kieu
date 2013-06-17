@@ -138,9 +138,9 @@
 				<ul id="tab" style="height: 350px; overflow: hidden;">
 					<% @conversions.each_with_index do |conversion, index| %>
 						<% if index == 0%>
-							<li class="present"><p class="f_arrow">CV<%=index +1 %><span class=><%= conversion.conversion_name%></span></p></li>
+							<li class="present"><p class="f_arrow">CV<%=index +1 %><span style="font-size: 80%"><%= conversion.conversion_name%></span></p></li>
 						<% else %>
-							<li><p class="f_arrow">CV<%=index +1 %><span class=><%= conversion.conversion_name%></span></p></li>
+							<li><p class="f_arrow">CV<%=index +1 %><span style="font-size: 80%"><%= conversion.conversion_name%></span></p></li>
 						<% end %>
 					<% end %>
 				</ul>
