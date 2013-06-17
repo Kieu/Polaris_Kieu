@@ -44,7 +44,6 @@ class PromotionsController < ApplicationController
     @promotion = Promotion.new(params[:promotion])
     @promotion.create_user_id = current_user.id
     @promotion.client_id = params[:client_id]
-    @promotion.agency_id = current_user.company_id
     if @promotion.save
       flash[:error] = "Promotion created"
       redirect_to new_promotion_path(client_id: params[:client_id])
