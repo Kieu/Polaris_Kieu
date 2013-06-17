@@ -8,6 +8,12 @@
     text-decoration:underline;
     padding: 2px 0;
 }
+
+  a.bread_scrumb_link {
+  	color: #F63;
+    text-decoration:none;
+    padding: 2px 0;
+  }
  </style>
 <div class="date">今日<br />
   <input id="datepick" type="text" readonly="readonly" value="<%= cookies[:url_setting_start_date] + " - " + cookies[:url_setting_end_date] %>" name="datepick">&#9660;
@@ -145,9 +151,9 @@ $(window).resize(function() {
 <%= flash[:error] %>
         <div class="contentNavi">
             <ul>
-                <li class="pre"><%= @client_name %></li>
+                <li class="pre"><a class="bread_scrumb_link" href="<%= clients_path%>?client_id=<%= @client_id%>"><%= @client_name %></a></li>
                 <li>&gt;</li>
-                <li class="pre"><%= @promotion_name %></li>
+                <li class="pre"><a class="bread_scrumb_link" href="<%= promotions_path%>?client_id=<%= @client_id%>&promotion_id=<%= @promotion_id %>"><%= @promotion_name %></a></li>
                 <li>&gt;</li>
                 <li>URL Setting/<%= @media_name %>/<%= @account_name%></li>
             </ul>
