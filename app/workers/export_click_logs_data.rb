@@ -10,7 +10,7 @@ class ExportClickLogsData
     # file name fomat: {user_id}_export_click_logs_{current_date}.csv   Settings.EXPORT_CLICK_LOGS
     promotion = Promotion.find(options['promotion_id'])
     file_name = options['user_id'].to_s + "_" + promotion.promotion_name + "_click_" +
-    Time.now.strftime("Ymd") + Settings.file_type.CSV
+    Time.now.strftime("%Y%m%d") + Settings.file_type.CSV
     path_file = Settings.export_click_logs_path + file_name
 
     # initial this task

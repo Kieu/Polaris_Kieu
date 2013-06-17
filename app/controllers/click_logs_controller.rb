@@ -11,7 +11,7 @@ class ClickLogsController < ApplicationController
       @client_id =@promotion.client_id
     end
     @promotions = @client_id.blank? ? Array.new :
-        Promotion.get_by_client(@client_id).order_by_promotion_name
+        Promotion.active.get_by_client(@client_id).order_by_promotion_name
 
     @array_account = Account.where(promotion_id: params[:promotion_id]).order(:account_name).select("id")
                            .select("CASE WHEN LENGTH(account_name) > #{Settings.MAX_LENGTH_NAME}

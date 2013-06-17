@@ -9,8 +9,7 @@ class ExportConversionLogsData
     # make file name
     # file name fomat: {user_id}_export_cv_logs_{current_date}.csv    Settings.EXPORT_CV_LOGS
     promotion = Promotion.find(options['promotion_id'])
-    file_name = options['user_id'].to_s + "_" + promotion.promotion_name + "_cv_" + 
-    Time.now.strftime("Ymd") + Settings.file_type.CSV
+    file_name = options['user_id'].to_s + "_" + promotion.promotion_name + "_cv_" + Time.now.strftime("%Y%m%d") + Settings.file_type.CSV
     path_file = Settings.export_conversion_logs_path + file_name
 
     # initial this task
@@ -36,7 +35,7 @@ class ExportConversionLogsData
                     "Reception log", "Send log", "Send date time", "Error message"]
       rows = ConversionLog.get_logs(options['promotion_id'], options['conversion_id'],
         options['media_category_id'], options['account_id'], options['start_date'],
-        options['end_date'], options['show_error'])
+        options['end_date'], '1')
 
 
       client_name = promotion.client.client_name
@@ -51,16 +50,17 @@ class ExportConversionLogsData
       display_campaigns = DisplayCampaign.where(promotion_id: options['promotion_id']).
         select("id, name")
       os = {1 => "Android", 2 => "iOS", 9 => "Other"}
-      cv_categories = {0 => I18n.t('conversion.conversion_category.web'),
-        1 => I18n.t('conversion.conversion_category.app.label'),
-        2 => I18n.t('conversion.conversion_category.combination')}
+      cv_categories = {1 => I18n.t('conversion.conversion_category.web'),
+        2 => I18n.t('conversion.conversion_category.app.label'),
+        3 => I18n.t('conversion.conversion_category.combination')}
+        conversion_categories = [I18n.t("conversion.conversion_category.web"), I18n.t("conversion.conversion_category.app.label"), I18n.t("conversion.conversion_category.combination")]
       CSV.open(path_file, "wb") do |csv|
         # make header for CSV file
         csv << header_col
         rows.each do |row|
           csv << [row.conversion_utime, conversions.find(row.conversion_id).conversion_name,
-            cv_categories[row.conversion_id],
-            I18n.t("log_track_type")[row.track_type.to_i], I18n.t("log_repeat_flg")[row.repeat_flg.to_i],
+            conversion_categories[row.conversion_category.to_i-1],
+            I18n.t("log_track_type")[row.track_type.to_i-1], I18n.t("log_repeat_flg")[row.repeat_flg.to_i],
             row.id, row.parent_conversion_id, row.approval_status, client_name,
             promotion.promotion_name, medias.find(row.media_id).media_name,
             accounts.find(row.account_id).account_name, display_campaigns.find(row.campaign_id).name,
@@ -69,7 +69,7 @@ class ExportConversionLogsData
             row.volume, row.others, row.verify, row.suid,row.session_id,
             os[row.device_category.to_i], row.repeat_proccessed_flg, row.log_state,
             row.user_agent, row.remote_ip, row.referrer, row.media_session_id,
-            row.mark, row.request_uri, row.send_url, row.send_utime, I18n.t("log_cv_error_messages")[(row.error_code) ? row.error_code : 0]]
+            row.mark, row.request_uri, row.send_url, row.send_utime, I18n.t("log_cv_error_messages")[row.error_code.to_i]]
         end
       end
       # success case
