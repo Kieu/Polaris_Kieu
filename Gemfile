@@ -55,6 +55,7 @@ gem "jquery-rails"
 
 # Use unicorn as the app server
 gem 'unicorn'
+gem "raindrops", ">= 0.10.0"
 
 # Deploy with Capistrano
 # gem 'capistrano'
