@@ -40,8 +40,8 @@
           <td ><%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %></td>
         </tr>
         <tr>
-          <th><%= f.label t("account.cost") %></th>
-          <td ><%= I18n.t("account.input_data") %><%= f.text_field :cost, maxlength: 255, value: @account.cost, style: "width: 50px" %> %</td>
+          <th><%= f.label I18n.t("account.margin") %></th>
+          <td ><%= I18n.t("account.input_data") %><%= f.text_field :margin, maxlength: 255, value: @account.margin, style: "width: 50px" %> %</td>
         </tr>
         <tr>
         	<td colspan="2">

@@ -4,7 +4,7 @@ class AccountsController < ApplicationController
   before_filter :must_right_object, only: [:edit, :update]
   def new
     @account = Account.new
-    @account.cost = Settings.account_cost_default
+    @account.margin = Settings.account_cost_default
     @promotion_id = params[:promotion_id]
     @promotion = Promotion.find_by_id(@promotion_id)
     @medias = Media.active.where(media_category_id: 1)
@@ -36,7 +36,7 @@ class AccountsController < ApplicationController
           time = Time.new
           @margin.report_ymd = "#{time.year}#{time.month}#{time.day}"
           @margin.account_id = @account.id
-          @margin.margin_rate = @account.cost
+          @margin.margin_rate = @account.margin
           @margin.create_user_id = current_user.id
           @margin.update_user_id = current_user.id
           @margin.create_time = time
