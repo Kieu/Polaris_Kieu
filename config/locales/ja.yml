@@ -443,6 +443,52 @@ ja:
               too_short: ! '売上単価 %{count}文字以上で入力してください。'
               wrong_length: ! '売上単価 %{count}文字で入力してください。'
               acceptance: 売上単価 チェックボックスを選択してください。
+            url:
+              blank: "URL を入力して下さい"
+              accepted: URL 受諾してください。 
+              confirmation: URL 確認の入力が一致しません。 
+              empty: URL 入力してください。
+              equal_to: ! 'URL %{count}にしてください。 ' 
+              even: URL 偶数にしてください。
+              exclusion: URL  予約されています。
+              greater_than: ! 'URL %{count}より大きい値にしてください。'
+              greater_than_or_equal_to: ! 'URL %{count}以上の値にしてください。'
+              inclusion: URL 正しい値が選択されていません。
+              invalid: URL  正しく入力して下さい。
+              less_than: ! 'URL %{count}より小さい値にしてください。'
+              less_than_or_equal_to: ! 'URL %{count}以下の値にしてください。'
+              not_a_number: URL 数値で入力してください。
+              not_an_integer: URL 整数で入力してください。
+              odd: URL 奇数にしてください。
+              record_invalid: URL バリデーションに失敗しました。 '%{errors}'
+              taken: URL は既に登録されています
+              too_long: ! 'URL %{count}の文字数をオーバーしています'
+              too_short: ! 'URL %{count}文字以上で入力してください。'
+              wrong_length: ! 'URL %{count}文字で入力してください。'
+              acceptance: URL チェックボックスを選択してください。
+            facebook_app_id:
+              blank: "Facebook app を入力して下さい"
+              accepted: Facebook app 受諾してください。 
+              confirmation: Facebook app 確認の入力が一致しません。 
+              empty: Facebook app 入力してください。
+              equal_to: ! 'Facebook app %{count}にしてください。 ' 
+              even: Facebook app 偶数にしてください。
+              exclusion: Facebook app  予約されています。
+              greater_than: ! 'Facebook app %{count}より大きい値にしてください。'
+              greater_than_or_equal_to: ! 'Facebook app %{count}以上の値にしてください。'
+              inclusion: Facebook app 正しい値が選択されていません。
+              invalid: Facebook app  正しく入力して下さい。
+              less_than: ! 'Facebook app %{count}より小さい値にしてください。'
+              less_than_or_equal_to: ! 'Facebook app %{count}以下の値にしてください。'
+              not_a_number: Facebook app 数値で入力してください。
+              not_an_integer: Facebook app 整数で入力してください。
+              odd: Facebook app 奇数にしてください。
+              record_invalid: Facebook app バリデーションに失敗しました。 '%{errors}'
+              taken: Facebook app は既に登録されています
+              too_long: ! 'Facebook app %{count}の文字数をオーバーしています'
+              too_short: ! 'Facebook app %{count}文字以上で入力してください。'
+              wrong_length: ! 'Facebook app %{count}文字で入力してください。'
+              acceptance: Facebook app チェックボックスを選択してください。
         promotion:
           attributes:
             promotion_name:
@@ -514,7 +560,7 @@ ja:
               too_short: ! 'カテゴリ %{count}文字以上で入力してください。'
               wrong_length: ! 'カテゴリ %{count}文字で入力してください。'
               acceptance: カテゴリ チェックボックスを選択してください。
-        tracking_period: 
+            tracking_period: 
               blank: "計測期間 を入力して下さい"
               accepted: 計測期間 受諾してください。 
               confirmation: 計測期間 確認の入力が一致しません。 
@@ -556,6 +602,7 @@ ja:
       en: "英語"
     forgor_pw: "PWを忘れた場合の画面"
     announcements: "お知らせ"
+    press_release: "プレスリリース"
     captcha: "キャプチャ"
     notice: "アカウント発行時のメールアドレスと、表示されている認証文字を入力してください。パスワードを発行し、ご案内さし上げます。"
     captcha_email_not_found: "入力頂いたアドレスでアカウント開設した履歴がございません "

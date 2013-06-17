@@ -10,9 +10,11 @@ class Promotion < ActiveRecord::Base
   has_many :accounts
 
   validates :promotion_name, presence: true, uniqueness: {scope: :client_id}
-  validates :roman_name, presence: true, uniqueness: {scope: :client_id}, format: {with: VALID_ROMAN_NAME_REGEX}
+  validates :roman_name, presence: true, uniqueness: {scope: :client_id}
+  validates :roman_name, format: {with: VALID_ROMAN_NAME_REGEX}, if: -> promotion { promotion.roman_name.present?}
   validates :promotion_category_id, presence: true
-  validates :tracking_period, presence: true, inclusion: {in: 1..90}
+  validates :tracking_period, presence: true
+  validates :tracking_period, inclusion: {in: 1..90}, if: -> promotion { promotion.tracking_period.present?}
   validates :client_id, presence: true
   validates :agency_id, presence: true
 

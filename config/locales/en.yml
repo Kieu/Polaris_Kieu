@@ -423,6 +423,52 @@ en:
               too_short: ! 'Sale unit price is too short (minimum is %{count} characters)'
               wrong_length: ! 'Sale unit price is the wrong length (should be %{count} characters)'
               acceptance: Sale unit price must be accepted
+            url:
+              blank: "URL can't be blank"
+              accepted: URL must be accepted 
+              confirmation: URL doesn't match confirmation 
+              empty: URL can't be empty
+              equal_to: ! 'URL must be equal to %{count} ' 
+              even: URL must be even
+              exclusion: URL  is reserved
+              greater_than: ! 'URL must be greater than %{count}'
+              greater_than_or_equal_to: ! 'URL must be greater than or equal to %{count}'
+              inclusion: URL is not included in the list
+              invalid: URL  is invalid
+              less_than: ! 'URL must be less than %{count}'
+              less_than_or_equal_to: ! 'URL must be less than or equal to %{count}'
+              not_a_number: URL is not a number
+              not_an_integer: URL is not a interger
+              odd: URL must be odd
+              record_invalid: URL バリデーションに失敗しました。 '%{errors}'
+              taken: URL すでに登録されています。
+              too_long: ! 'URL is too long (maximum is %{count} characters)'
+              too_short: ! 'URL is too short (minimum is %{count} characters)'
+              wrong_length: ! 'URL is the wrong length (should be %{count} characters)'
+              acceptance: URL must be accepted
+            facebook_app_id:
+              blank: "URL can't be blank"
+              accepted: Facebook app must be accepted 
+              confirmation: Facebook app doesn't match confirmation 
+              empty: Facebook app can't be empty
+              equal_to: ! 'Facebook app must be equal to %{count} ' 
+              even: Facebook app must be even
+              exclusion: Facebook app  is reserved
+              greater_than: ! 'Facebook app must be greater than %{count}'
+              greater_than_or_equal_to: ! 'Facebook app must be greater than or equal to %{count}'
+              inclusion: Facebook app is not included in the list
+              invalid: Facebook app  is invalid
+              less_than: ! 'Facebook app must be less than %{count}'
+              less_than_or_equal_to: ! 'Facebook app must be less than or equal to %{count}'
+              not_a_number: Facebook app is not a number
+              not_an_integer: Facebook app is not a interger
+              odd: Facebook app must be odd
+              record_invalid: Facebook app バリデーションに失敗しました。 '%{errors}'
+              taken: Facebook app すでに登録されています。
+              too_long: ! 'Facebook app is too long (maximum is %{count} characters)'
+              too_short: ! 'Facebook app is too short (minimum is %{count} characters)'
+              wrong_length: ! 'Facebook app is the wrong length (should be %{count} characters)'
+              acceptance: Facebook app must be accepted
         promotion:
           attributes:
             promotion_name:
@@ -536,9 +582,10 @@ en:
       en: "English"
     forgor_pw: "Forgot Password"
     announcements: "Announcements"
+    press_release: "Press release"
     captcha: "Captcha: "
     notice: "Please enter the email address of the account at the time of issuance, the authentication characters that are displayed. Issue a password, and raise the guide. "
-    captcha_email_not_found: "入力頂いたアドレスでアカウント開設した履歴がございません "
+    captcha_email_not_found: "There is no history that you have opened an account with the address "
     send_success: "We have sent the password to your e-mail adress. Please confirm it."
   client:
     crumb_edit: "Client Edit"

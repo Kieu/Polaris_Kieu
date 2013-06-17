@@ -9,7 +9,7 @@ class ExportConversionLogsData
     # make file name
     # file name fomat: {user_id}_export_cv_logs_{current_date}.csv    Settings.EXPORT_CV_LOGS
     promotion = Promotion.find(options['promotion_id'])
-  	file_name = options['user_id'].to_s + "_" + promotion.promotion_name +"_cv_"
+  	file_name = options['user_id'].to_s + "_" + promotion.promotion_name + "_cv_"
     + Time.now.strftime("Ymd") + Settings.file_type.CSV
     path_file = Settings.export_conversion_logs_path + file_name
 
