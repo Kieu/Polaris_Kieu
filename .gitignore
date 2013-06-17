@@ -13,7 +13,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
-#/doc/
+/doc/
 /public/assets/*
 db/schema.rb
 Gemfile.lock
