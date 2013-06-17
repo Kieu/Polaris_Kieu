@@ -41,11 +41,11 @@ $(function(){
         alwaysVisible: false
     });
 });
-var auto_refresh = setInterval(
-    function ()
-    {
-        $('.notification').load('/background_jobs/notification').fadeIn("slow");
-    }, 30000); // refresh every 10000 milliseconds
+// var auto_refresh = setInterval(
+    // function ()
+    // {
+        // $('.notification').load('/background_jobs/notification').fadeIn("slow");
+    // }, 30000); // refresh every 10000 milliseconds
 function index_of(haystack, needle) {
     for (var i = 0, l = haystack.length; i < l; ++i) {
         if( haystack[i].value === needle ) {
