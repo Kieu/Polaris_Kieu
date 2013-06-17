@@ -29,16 +29,18 @@ class ApplicationController < ActionController::Base
     #render :text => "404 Not Found", :status => 404
     render 'public/404', :status => :not_found
   end
-  
-  private
-  def set_locale
-    I18n.locale = cookies[:locale] || I18n.default_locale
-  end
 
   def set_notify
     @notify = BackgroundJob.where(:user_id => current_user.id,:status => '0').size
     render :text => @notify
   end
+
+  private
+  def set_locale
+    I18n.locale = cookies[:locale] || I18n.default_locale
+  end
+
+
   JS_ESCAPE_MAP = {
                     '\\'    => '\\\\',
                     '</'    => '<\/',
