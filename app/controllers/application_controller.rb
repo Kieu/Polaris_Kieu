@@ -12,7 +12,9 @@ class ApplicationController < ActionController::Base
 
   
   before_filter :set_locale
-  
+
+  notify = BackgroundJob.where(:user_id => current_user.id,:status => '0').size
+
   def signed_in_user
     redirect_to signin_url, notice: "Please sign in." unless signed_in?
   end
@@ -33,7 +35,6 @@ class ApplicationController < ActionController::Base
   private
   def set_locale
     I18n.locale = cookies[:locale] || I18n.default_locale
-    notify = BackgroundJob.where(:user_id => current_user.id,:status => '0').size
   end
 
 
