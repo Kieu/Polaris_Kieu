@@ -1,4 +1,4 @@
-class CreateMedia < ActiveRecord::Migration
+class CreateMedias < ActiveRecord::Migration
   def change
     create_table :media do |t|
       t.integer :id, limit: 11
