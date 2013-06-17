@@ -47,9 +47,9 @@
           <th><%= f.label I18n.t("user.disabled.label") %></th>
           <td>
               <% if @user.status == Settings.user.deactive %>
-                  <input type="checkbox" id = "disable_button" checked="checked">
+                  <input type="checkbox" id = "disable_button" checked="checked" name="deactive">
               <% else %>
-                  <input type="checkbox" id = "disable_button">
+                  <input type="checkbox" id = "disable_button" name="deactive">
               <% end %><%= I18n.t("user.disabled.disable") %>
           </td>
         </tr>
@@ -83,55 +83,45 @@
 </div>
 <script type="text/javascript">
 	$(function(){
-		$("#cancel").click(function(e){
-			e.preventDefault();
-			$.colorbox({
-				width: "30%",
-				inline: true,
-				escKey: false,
-				overlayClose: false,
-				href: "#prevent_change",
-			})
-		})
 		check = $("#disable_button").is(':checked')? true : false;
-		$("#disable_button").click(function(e){
-			if (check){
-				enable = $.colorbox({
-					width: "30%",
-					inline: true,
-					escKey: false,
-					href: "#enabled",
-					overlayClose: false,
-					onClosed: function(){
-						$("#disable_button").attr("checked",check);
-					}
-				});
-			}else{
-				disable = $.colorbox({
-					width: "30%",
-					inline: true,
-					escKey: false,
-					href: "#disabled",
-					overlayClose: false,
-					onClosed: function(){
-						$("#disable_button").attr("checked",check);
-					}
-				});
-			}
-		})
 		$(".cancel_popup").click(function(){
 			$("#enabled").colorbox.close();
 			$("#disabled").colorbox.close();
 		})
 		$(".ok_popup").click(function(){
-			$.ajax({
-				type: "POST",
-				url: "<%= enable_disable_user_users_path %>",
-				data: "id=<%= @user.id%>",
-				success: function(data){
-					location.href = "<%= users_path %>";
+			$(".edit_user").submit();
+		})
+		
+		$("#btn_submit").click(function(e){
+			e.preventDefault();
+			checked = $("#disable_button").is(':checked')? true : false;
+			if (check != checked){
+				if (checked){
+					disable = $.colorbox({
+						width: "30%",
+						inline: true,
+						escKey: false,
+						href: "#disabled",
+						overlayClose: false,
+						onClosed: function(){
+							$("#disable_button").attr("checked",check);
+						}
+					});
+				}else{
+					enable = $.colorbox({
+						width: "30%",
+						inline: true,
+						escKey: false,
+						href: "#enabled",
+						overlayClose: false,
+						onClosed: function(){
+							$("#disable_button").attr("checked",check);
+						}
+					});
 				}
-			});
+			}else{
+				$(".edit_user").submit();
+			}
 		})
 	})
 </script>
