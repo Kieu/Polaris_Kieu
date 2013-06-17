@@ -556,6 +556,7 @@ ja:
       en: "英語"
     forgor_pw: "PWを忘れた場合の画面"
     announcements: "お知らせ"
+    press_release: "プレスリリース"
     captcha: "キャプチャ"
     notice: "アカウント発行時のメールアドレスと、表示されている認証文字を入力してください。パスワードを発行し、ご案内さし上げます。"
     captcha_email_not_found: "入力頂いたアドレスでアカウント開設した履歴がございません "
