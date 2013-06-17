@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_notify
-    notify = BackgroundJob.where(:user_id => current_user.id,:status => '0').size
+    @notify = BackgroundJob.where(:user_id => current_user.id,:status => '0').size
   end
 
   private
