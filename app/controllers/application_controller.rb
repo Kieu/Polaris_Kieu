@@ -34,7 +34,10 @@ class ApplicationController < ActionController::Base
   def set_locale
     I18n.locale = cookies[:locale] || I18n.default_locale
   end
-  
+
+  def set_notify
+    @notify = BackgroundJob.where(:user_id => current_user.id,:status => '0').size
+  end
   JS_ESCAPE_MAP = {
                     '\\'    => '\\\\',
                     '</'    => '<\/',
