@@ -30,14 +30,10 @@ class ApplicationController < ActionController::Base
     render 'public/404', :status => :not_found
   end
 
-  def set_notify
-    @notify = BackgroundJob.where(:user_id => current_user.id,:status => '0').size
-    render :text => @notify
-  end
-
   private
   def set_locale
     I18n.locale = cookies[:locale] || I18n.default_locale
+    notify = BackgroundJob.where(:user_id => current_user.id,:status => '0').size
   end
 
 
