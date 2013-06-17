@@ -36,6 +36,7 @@ top: -11px;
 cursor: pointer;
 text-align: right;
 line-height: 25px;
+    z-index: -1;
     }
 #dvloader {
     z-index: 5000;
