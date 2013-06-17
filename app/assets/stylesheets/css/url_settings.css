@@ -72,11 +72,6 @@ p.dl{
 .errorArea {
     margin-top:30px;
 }
-p.dl {
-    color: #F63;
-    text-decoration:underline;
-    padding: 2px 0;
-}
 
 #content {
     width: 665px;
