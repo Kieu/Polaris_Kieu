@@ -1,6 +1,6 @@
 class CreateMedias < ActiveRecord::Migration
   def change
-    create_table :media do |t|
+    create_table :medias do |t|
       t.integer :id, limit: 11
       t.integer :media_category_id, limit: 11
       t.string :media_name, limit: 255
