@@ -77,7 +77,7 @@ h1 {
     padding: 10px;
     border-bottom: #dadada solid 1px;
 }
-ul.txtlist ul:hover
+ul.txtlist li:hover
 {
     background: red !important;
 }
