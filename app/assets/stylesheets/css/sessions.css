@@ -254,16 +254,18 @@ select {
     font-weight:bold;
 }
 .arrow1{
-    background-image: url("../images/login/arrow1.gif");
+    background-image: url("/assets/login/arrow1.gif");
     background-repeat: no-repeat;
     background-position: right center;
     padding-right: 13px;
     margin-right: 3px;
+    cursor: pointer;
 }
 .arrow2{
-    background-image: url("../images/login/arrow2.gif");
+    background-image: url("/assets/login/arrow2.gif");
     background-repeat: no-repeat;
     background-position: right center;
     padding-right: 13px;
     margin-right: 3px;
+    cursor: pointer;
 }
