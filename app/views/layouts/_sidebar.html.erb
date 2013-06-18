@@ -1,3 +1,4 @@
+<% object = object.all %>
 <div id="sidebar">
   <div id="clienetlist_box">
     <dl>
@@ -47,25 +48,25 @@
           <table class="sidebar">
             <% object.each_with_index do |promotion, index| %>
                 <tr>
-                  <th class="edit"><%= link_to "", "#{edit_promotion_path(promotion)}?client_id=#{Promotion.find(promotion.id).client.id}", class: "edit", id: "edit#{promotion.id}" if current_user.super? || current_user.agency? %></th>
+                  <th class="edit"><%= link_to "", "#{edit_promotion_path(promotion)}?client_id=#{@client_id}", class: "edit", id: "edit#{promotion['id']}" if current_user.super? || current_user.agency? %></th>
                   <% if (params[:promotion_id] && promotion.id == params[:promotion_id].to_i) || (!params[:promotion_id] && index == 0) %>
                       <td>
                         <% if params[:controller] == "click_logs" %>
-                            <%= link_to short_name(promotion.promotion_name), "#{click_logs_path(promotion_id: promotion.id)}", class: "promotion_name active", id: "#{promotion.id}" %>
+                            <%= link_to short_name(promotion.promotion_name), "#{click_logs_path(promotion_id: promotion['id'])}", class: "promotion_name active", id: "#{promotion['id']}" %>
                         <% elsif params[:controller] == "conversion_promotion_logs" %>
                             <%= link_to short_name(promotion.promotion_name), "#{conversion_promotion_logs_path(promotion_id: promotion.id)}", class: "promotion_name active", id: "#{promotion.id}" %>
                         <% else %>
-                            <%= link_to short_name(promotion.promotion_name), "#{promotions_path(promotion_id: promotion.id, client_id: params[:client_id])}", class: "promotion_name active", id: "#{promotion.id}" %>
+                            <%= link_to short_name(promotion.promotion_name), "#{promotions_path(promotion_id: promotion['id'], client_id: params[:client_id])}", class: "promotion_name active", id: "#{promotion['id']}" %>
                         <% end %>
                       </td>
                   <% else %>
                       <td>
                         <% if params[:controller] == "click_logs" %>
-                            <%= link_to short_name(promotion.promotion_name), "#{click_logs_path(promotion_id: promotion.id)}", class: "promotion_name", id: "#{promotion.id}" %>
+                            <%= link_to short_name(promotion.promotion_name), "#{click_logs_path(promotion_id: promotion['id'])}", class: "promotion_name", id: "#{promotion['id']}" %>
                         <% elsif params[:controller] == "conversion_promotion_logs" %>
                             <%= link_to short_name(promotion.promotion_name), "#{conversion_promotion_logs_path(promotion_id: promotion.id)}", class: "promotion_name", id: "#{promotion.id}" %>
                         <% else %>
-                            <%= link_to short_name(promotion.promotion_name), "#{promotions_path(promotion_id: promotion.id, client_id: params[:client_id])}", class: "promotion_name", id: "#{promotion.id}" %>
+                            <%= link_to short_name(promotion.promotion_name), "#{promotions_path(promotion_id: promotion['id'], client_id: params[:client_id])}", class: "promotion_name", id: "#{promotion['id']}" %>
                         <% end %>  </td>
                   <% end %>
                 </tr>
