@@ -38,24 +38,13 @@ class DailySummaryAccount < ActiveRecord::Base
     
       
     begin
-      connection.execute("DROP TEMPORARY TABLE IF EXISTS table1")
-      connection.execute("DROP TEMPORARY TABLE IF EXISTS table2")
-      connection.execute("CREATE TEMPORARY TABLE table1 (" + conversions_data.to_sql + ")")
-      connection.execute("CREATE TEMPORARY TABLE table2 (" + promotion_data.to_sql + ")")
-      
-      connection.execute("DROP TEMPORARY TABLE IF EXISTS table3")
-      connection.execute("DROP TEMPORARY TABLE IF EXISTS table4")
-      connection.execute("CREATE TEMPORARY TABLE table3 (" + total_promotion_data.to_sql + ")")
-      connection.execute("CREATE TEMPORARY TABLE table4 (" + total_conversions_data.to_sql + ")")
       promotion_conversions_data = connection.select_all("select table1.account_id, table1.conversion_id, " +
         "table1.total_cv_count, table1.first_cv_count, table1.repeat_cv_count, " +
         "table1.assist_count, table1.sales, table1.profit, " +
         "round(total_cv_count/click_count*100,1) as conversion_rate, " +
         " round(cost_sum/total_cv_count,3) as click_per_action, round(sales/cost_sum*100,3) as roas, round((profit-cost_sum)/cost_sum*100,3) as roi" +
-        " from table1 left join table2 on table1.account_id=table2.account_id")
+        " from (#{conversions_data.to_sql}) as table1 left join (#{promotion_data.to_sql}) as table2 on table1.account_id=table2.account_id")
 
-      connection.execute("DROP TEMPORARY TABLE IF EXISTS table5")
-      connection.execute("CREATE TEMPORARY TABLE table5 (" + category_promotion_data.to_sql + ")")
       category_conversions_data = connection.select_all("select table1.conversion_id, table2.media_category_id, " +
         "sum(total_cv_count) as total_cv_count, " +
         "sum(first_cv_count) as first_cv_count, " +
@@ -67,7 +56,7 @@ class DailySummaryAccount < ActiveRecord::Base
         "round(table5.cost_sum/sum(total_cv_count),3) as click_per_action, " +
         "round(sum(sales)/table5.cost_sum*100,3) as roas, " +
         "round((sum(profit)-table5.cost_sum)/table5.cost_sum*100,3) as roi " +
-        " from table1 left join table2 on table1.account_id=table2.account_id left join table5 on table5.media_category_id=table2.media_category_id  " +
+        " from (#{conversions_data.to_sql}) as table1 left join (#{promotion_data.to_sql}) as table2 on table1.account_id=table2.account_id left join (#{category_promotion_data.to_sql}) as table5 on table5.media_category_id=table2.media_category_id  " +
         " group by table1.conversion_id, table2.media_category_id")
       
       total_conversions = connection.select_all("select table4.conversion_id, " +
@@ -81,7 +70,7 @@ class DailySummaryAccount < ActiveRecord::Base
         "assist_count, " +
         "sales, " +
         "profit, table4.report_ymd" +
-        " from table3 join table4")
+        " from (#{total_promotion_data.to_sql}) as table3 join (#{total_conversions_data.to_sql}) as table4")
         
       promotion_conversions_data.each do |data|
         results["account"+data["account_id"].to_s+"_conversion" + data["conversion_id"].to_s] = data
@@ -150,12 +139,6 @@ class DailySummaryAccount < ActiveRecord::Base
           end
         end
       end
-    ensure
-      connection.execute("DROP TEMPORARY TABLE IF EXISTS table1")
-      connection.execute("DROP TEMPORARY TABLE IF EXISTS table2")
-      connection.execute("DROP TEMPORARY TABLE IF EXISTS table3")
-      connection.execute("DROP TEMPORARY TABLE IF EXISTS table4")
-      connection.execute("DROP TEMPORARY TABLE IF EXISTS table5")
     end
     return results, array_result, date_range
   end
