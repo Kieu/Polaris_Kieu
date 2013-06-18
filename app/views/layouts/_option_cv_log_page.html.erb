@@ -10,43 +10,43 @@
 </div>
 <div id="page1">
 <div class="box03">
-  <p class="box3_txt"><button id="display_all"><%= I18n.t("cv_logs.show_all")%></button>
+  <p class="box3_txt"><a href "" id="display_all"><%= I18n.t("cv_logs.show_all")%></a>
   <!-- チェックボックス -->
   <div class="check-group clearfix">
-    <ul>
+    <table width="90%">
       <% Settings.cv_options_part1.each_with_index do |option, index|%>
-      <li>
-        <p class="check_txt"><%= I18n.t("cv_logs.#{option}") %></p>
-        <div>
-          <%= link_to cookies[:cv_options][index] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('#{index}',this)"%>
-        </div>
-      </li>
+      <tr>
+        <td class="check_txt"><%= I18n.t("cv_logs.#{option}") %></td>
+        <td align=right>
+          <%= link_to cookies[:cv_options][index] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", id: "cv_logs_#{index}", onclick: "update_cookie('#{index}',this)"%>
+        </td>
+      </tr>
       <% end %>
-    </ul>
+    </table>
   </div>
   <!-- /チェックボックス -->
 </div>
 <div class="box01">
-  <p class="box3_txt"><%= link_to I18n.t("cv_logs.show_all"), "javascript:void(0)", onclick: "update_cookies()"%> </p>
+  <p class="box3_txt">&nbsp;</p>
   <!-- チェックボックス -->
   <div class="check-group clearfix">
-    <ul>
+    <table width="90%">
 
       <% Settings.cv_options_part2.each_with_index do |option, index|%>
-      <li>
-        <p class="check_txt"><%= I18n.t("cv_logs.#{option}") %></p>
-        <div>
+      <tr>
+        <td class="check_txt"><%= I18n.t("cv_logs.#{option}") %></td>
+        <td align=right>
           <%= link_to cookies[:cv_options][index+12] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('#{index+12}',this)"%>
-        </div>
-      </li>
+        </td>
+      </tr>
       <% end %>
-      <li>
-        <p class="check_txt"><%= I18n.t("cv_logs.error_log_view")%></p>
-        <div>
+      <tr>
+        <td class="check_txt"><%= I18n.t("cv_logs.error_log_view")%></td>
+        <td align=center >
           <input type="checkbox" name="error_table" id="error_table" checked="checked">
-        </div>
-      </li>
-    </ul>
+        </td>
+      </tr>
+    </table>
     <!-- /チェックボックス -->
   </div>
 </div>

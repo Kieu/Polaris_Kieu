@@ -9,29 +9,29 @@
         <tbody>
         <tr>
           <th><%= f.label t("user.username") %></th>
-          <td colspan="2"><%= f.text_field :username, maxlength: 255, style: "width: 200px" %></td>
+          <td colspan="2"><%= f.text_field :username, maxlength: 255, style: "width: 200px",tabindex: 1 %></td>
         </tr>
         <tr>
           <th><%= f.label t("user.roman_name") %></th>
-          <td colspan="2"><%= f.text_field :roman_name, maxlength: 255, style: "width: 200px" %></td>
+          <td colspan="2"><%= f.text_field :roman_name, maxlength: 255, style: "width: 200px",tabindex: 2 %></td>
         </tr>
         <tr>
           <th> <%= f.label t("user.email") %></th>
-          <td colspan="2"><%= f.text_field :email, maxlength: 255, style: "width: 200px" %></td>
+          <td colspan="2"><%= f.text_field :email, maxlength: 255, style: "width: 200px",tabindex: 3 %></td>
         </tr>
         <tr>
           <th> <%= f.label t("user.role.label") %></th>
-          <td colspan="2"><%= f.collection_select :role_id, Role.all, :id, :role_name, {include_blank: t("user.role.include_blank")},{:class => 'input-text'} %></td>
+          <td colspan="2"><%= f.collection_select :role_id, Role.all, :id, :role_name, {include_blank: t("user.role.include_blank")},{:class => 'input-text',tabindex: 4} %></td>
         </tr> 
         <tr>
           <th><%= f.label t("user.company_name") %></th>
           <td colspan="2">
           	<% if @user.role_id && !@user.client? %>
-            	<%= f.collection_select :company_id, Agency.all, :id, :agency_name, {include_blank: t("user.company_id.include_blank")} , {:class => 'input-text'} %>
+            	<%= f.collection_select :company_id, Agency.all, :id, :agency_name, {include_blank: t("user.company_id.include_blank")} , {:class => 'input-text',tabindex: 5} %>
             <% elsif @user.role_id %>
-            	<%= f.collection_select :company_id, Client.active.all, :id, :client_name, {include_blank: t("user.company_id.include_blank")} , {:class => 'input-text'} %>
+            	<%= f.collection_select :company_id, Client.active.all, :id, :client_name, {include_blank: t("user.company_id.include_blank")} , {:class => 'input-text',tabindex: 5} %>
             <% else %>
-            	<%= f.collection_select :company_id, Client.where(id: 0), :id, :client_name, {include_blank: t("user.company_id.include_blank")} , {:class => 'input-text'} %>
+            	<%= f.collection_select :company_id, Client.where(id: 0), :id, :client_name, {include_blank: t("user.company_id.include_blank")} , {:class => 'input-text',tabindex: 5} %>
             <% end %>
             </td>
             	
@@ -42,15 +42,15 @@
         </tr>
         <tr>
           <th><%= I18n.t("user.password_notification.label") %></th>
-          <td><%= f.radio_button :password_flg, "0", checked: true %> <%= I18n.t("user.password_notification.not_notified") %></td>
-          <td><%= f.radio_button :password_flg, "1" %> <%= I18n.t("user.password_notification.to_notified") %></td>
+          <td><%= f.radio_button :password_flg, "0", checked: true, tabindex: 6 %> <%= I18n.t("user.password_notification.not_notified") %></td>
+          <td><%= f.radio_button :password_flg, "1", tabindex: 7 %> <%= I18n.t("user.password_notification.to_notified") %></td>
         </tr>
         </tbody>
       </table>
       <div class="submit_area">
-        <input type="image" id="btn_submit" src="/assets/btn_done.gif" name="commit">
+        <input type="image" id="btn_submit" src="/assets/btn_done.gif" name="commit" tabindex = "8">
 
-        <p><%= link_to raw('<img align="right" alt="キャンセル" src="/assets/btn_cancel.gif">'), users_path %></p>
+        <p><%= link_to image_tag("/assets/btn_cancel.gif",align: "right", alt: "キャンセル", tabindex:9), users_path %></p>
       </div>
       </form>
   <% end %>

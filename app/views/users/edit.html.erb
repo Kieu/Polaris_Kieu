@@ -9,15 +9,15 @@
         <tbody>
         <tr>
           <th><%= f.label I18n.t("user.username") %></th>
-          <td colspan="2"><%= f.text_field :username, maxlength: 255, style: "width: 200px" %></td>
+          <td colspan="2"><%= f.text_field :username, maxlength: 255, style: "width: 200px",tabindex: 1 %></td>
         </tr>
         <tr>
           <th><%= f.label I18n.t("user.roman_name") %></th>
-          <td colspan="2"><%= f.text_field :roman_name, maxlength: 255, style: "width: 200px" %></td>
+          <td colspan="2"><%= f.text_field :roman_name, maxlength: 255, style: "width: 200px",tabindex: 2 %></td>
         </tr>
         <tr>
           <th> <%= f.label I18n.t("user.email") %></th>
-          <td colspan="2"><%= f.text_field :email, maxlength: 255, style: "width: 200px" %></td>
+          <td colspan="2"><%= f.text_field :email, maxlength: 255, style: "width: 200px",tabindex: 3 %></td>
         </tr>
         <tr>
           <th> <%= f.label I18n.t("user.role.label") %></th>
@@ -40,24 +40,24 @@
         </tr>
         <tr>
           <th><%= f.label I18n.t("user.password_notification.label") %></th>
-          <td><%= f.radio_button :password_flg, "1", disabled: true %> <%= f.label I18n.t("user.password_notification.not_notified") %></td>
-          <td><%= f.radio_button :password_flg, "0", disabled: true %> <%= f.label I18n.t("user.password_notification.to_notified") %></td>
+          <td><%= f.radio_button :password_flg, "0", disabled: true %> <%= f.label I18n.t("user.password_notification.not_notified") %></td>
+          <td><%= f.radio_button :password_flg, "1", disabled: true %> <%= f.label I18n.t("user.password_notification.to_notified") %></td>
         </tr>
         <tr>
           <th><%= f.label I18n.t("user.disabled.label") %></th>
           <td>
               <% if @user.status == Settings.user.deactive %>
-                  <input type="checkbox" id = "disable_button" checked="checked" name="deactive">
+                  <input type="checkbox" id = "disable_button" checked="checked" name="deactive" tabindex= "4">
               <% else %>
-                  <input type="checkbox" id = "disable_button" name="deactive">
+                  <input type="checkbox" id = "disable_button" name="deactive" tabindex= "4">
               <% end %><%= I18n.t("user.disabled.disable") %>
           </td>
         </tr>
         </tbody>
       </table>
       <div class="submit_area">
-        <input type="image" id="btn_submit" src="/assets/btn_done.gif">
-        <%= link_to raw('<img align="right" alt="キャンセル" src="/assets/btn_cancel.gif">'), users_path %>
+        <input type="image" id="btn_submit" src="/assets/btn_done.gif" tabindex= "5">
+        <%= link_to image_tag("/assets/btn_cancel.gif",align: "right", alt: "キャンセル", tabindex:6), users_path %>
       </div>
       </form>
   <% end %>
