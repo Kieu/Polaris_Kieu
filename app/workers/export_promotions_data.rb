@@ -14,7 +14,9 @@ class ExportPromotionsData
     start_date = options['start_date']
     end_date = options['end_date']
 
-  	file_name = job_id.to_s + "_" + Settings.EXPORT_PROMOTION + 
+    promotion_name = Promotion.where(id: options['promotion_id']).select(" promotion_name").first['promotion_name']
+
+  	file_name = options['user_id'].to_s + "_" + promotion_name + 
       "_" + Time.now.strftime("%Y%m%d_%H%M%S") + Settings.file_type.CSV
     path_file = Settings.export_promotion_path + file_name
 
