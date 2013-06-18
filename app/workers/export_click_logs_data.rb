@@ -8,13 +8,13 @@ class ExportClickLogsData
   def perform
     # make file name
     # file name fomat: {user_id}_export_click_logs_{current_date}.csv   Settings.EXPORT_CLICK_LOGS
-    promotion_name = Promotion.where(id: options['promotion_id']).select("promotion_name").first['promotion_name']
-    file_name = options['user_id'].to_s + "_" + promotion_name + "_click_" +
-    Time.now.strftime("%Y%m%d%H%M%S") + Settings.file_type.CSV
-    path_file = Settings.export_click_logs_path + file_name
-    file_name = promotion_name + "_click_" +
-    Time.now.strftime("%Y%m%d%H%M%S") + Settings.file_type.CSV
-    
+    promotion = Promotion.find(options['promotion_id'])
+    file_name = promotion.promotion_name + "_click_" +
+    Time.now.strftime("%Y%m%d") + Settings.file_type.CSV
+    path_file = Settings.export_click_logs_path + options['user_id'].to_s + "_" + file_name
+    if File.exist?(path_file)
+      return
+    end
     # initial this task
      background_job = BackgroundJob.find(options['bgj_id'])
      background_job.user_id = options['user_id']
