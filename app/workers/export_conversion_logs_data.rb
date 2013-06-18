@@ -11,7 +11,9 @@ class ExportConversionLogsData
     promotion = Promotion.find(options['promotion_id'])
     file_name = options['user_id'].to_s + "_" + promotion.promotion_name + "_cv_" + Time.now.strftime("%Y%m%d") + Settings.file_type.CSV
     path_file = Settings.export_conversion_logs_path + file_name
-
+    if File.exist?(path_file)
+      return
+    end
     # initial this task
     background_job = BackgroundJob.find(options['bgj_id'])
     background_job.user_id = options['user_id']
@@ -49,11 +51,8 @@ class ExportConversionLogsData
         select("id, name")
       display_campaigns = DisplayCampaign.where(promotion_id: options['promotion_id']).
         select("id, name")
-      os = {1 => "Android", 2 => "iOS", 9 => "Other"}
-      cv_categories = {1 => I18n.t('conversion.conversion_category.web'),
-        2 => I18n.t('conversion.conversion_category.app.label'),
-        3 => I18n.t('conversion.conversion_category.combination')}
-        conversion_categories = [I18n.t("conversion.conversion_category.web"), I18n.t("conversion.conversion_category.app.label"), I18n.t("conversion.conversion_category.combination")]
+      os = [I18n.t("conversion.conversion_category.app.os.android"), I18n.t("conversion.conversion_category.app.os.ios")]
+      conversion_categories = [I18n.t("conversion.conversion_category.web"), I18n.t("conversion.conversion_category.app.label"), I18n.t("conversion.conversion_category.combination")]
       CSV.open(path_file, "wb") do |csv|
         # make header for CSV file
         csv << header_col
@@ -67,7 +66,7 @@ class ExportConversionLogsData
             display_groups.find(row.group_id).name, display_ads.find(row.unit_id).name,
             row.redirect_url, row.click_time, row.click_referrer, row.sales,
             row.volume, row.others, row.verify, row.suid,row.session_id,
-            os[row.device_category.to_i], row.repeat_proccessed_flg, row.log_state,
+            os[row.device_category.to_i-1], row.repeat_proccessed_flg, row.log_state,
             row.user_agent, row.remote_ip, row.referrer, row.media_session_id,
             row.mark, row.request_uri, row.send_url, row.send_utime, I18n.t("log_cv_error_messages")[row.error_code.to_i]]
         end

@@ -78,7 +78,7 @@ class AccountsController < ApplicationController
           time = Time.new
           @margin.report_ymd = "#{time.year}#{time.month}#{time.day}"
           @margin.account_id = @account.id
-          @margin.margin_rate = @account.cost
+          @margin.margin_rate = @account.margin
           @margin.create_user_id = current_user.id
           @margin.create_time = time
           @margin.update_time = time

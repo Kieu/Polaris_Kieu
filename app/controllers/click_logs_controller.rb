@@ -28,12 +28,20 @@ class ClickLogsController < ApplicationController
   
   def download_csv
     background_job = BackgroundJob.create
+    # job_id = ExportClickLogsData.create(user_id: current_user.id,
+      # promotion_id: params[:promotion_id].to_i,
+      # media_category_id: params[:media_category_id],
+      # account_id: params[:account_id], start_date: cookies[:cs],
+      # end_date: cookies[:ce], show_error: cookies[:ser],
+      # bgj_id: background_job.id)
+      
     job_id = ExportClickLogsData.create(user_id: current_user.id,
       promotion_id: params[:promotion_id].to_i,
-      media_category_id: params[:media_category_id],
-      account_id: params[:account_id], start_date: cookies[:cs],
-      end_date: cookies[:ce], show_error: cookies[:ser],
+      media_category_id: '',
+      account_id: '', start_date: '',
+      end_date: '', show_error: '1',
       bgj_id: background_job.id)
+      
     background_job.job_id = job_id
     background_job.save!
     
@@ -58,8 +66,7 @@ class ClickLogsController < ApplicationController
   end  
   
   def set_cookie
-    cookies[:coptions]="11111101010" if !cookies[:coptions]
-    time = Time.new
+    cookies[:coptions]=Settings.cookie_click_log_default if !cookies[:coptions]
     cookies[:cs]=Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d") if !cookies[:cs] 
     cookies[:ce]=Date.yesterday.strftime("%Y/%m/%d") if !cookies[:ce]   
   end

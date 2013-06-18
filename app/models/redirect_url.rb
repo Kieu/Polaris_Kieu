@@ -22,9 +22,9 @@ class RedirectUrl < ActiveRecord::Base
               ,r_url.url as url
               ,r_url.name as url_name
               ,creative.image as creative
-              ,creative.text as creative_text
+              ,creative.content as creative_text
               ,creative.display_type as creative_type
-              ,DATE_FORMAT(r_url.update_at, '%Y/%m/%d %h:%i:%s') as last_modified
+              ,DATE_FORMAT(r_url.updated_at, '%Y/%m/%d %h:%i:%s') as last_modified
             FROM  redirect_urls as r_url
               inner join redirect_infomations as r_info
                    on r_info.mpv = r_url.mpv
@@ -36,7 +36,7 @@ class RedirectUrl < ActiveRecord::Base
               r_info.promotion_id = #{promotion_id}
               and r_info.account_id = #{account_id}
               and r_info.media_id = #{media_id}
-              and DATE_FORMAT(r_url.create_at, '%Y/%m/%d') between DATE_FORMAT('#{start_date}', '%Y/%m/%d')
+              and DATE_FORMAT(r_url.created_at, '%Y/%m/%d') between DATE_FORMAT('#{start_date}', '%Y/%m/%d')
                                      and DATE_FORMAT('#{end_date}', '%Y/%m/%d')
             GROUP BY r_url.url , camp.id, d_group.id, ad.id
             ORDER BY ad.name, camp.name, d_group.name

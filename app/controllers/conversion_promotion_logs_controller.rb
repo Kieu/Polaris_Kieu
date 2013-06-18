@@ -103,8 +103,7 @@ end
 
 private
   def set_cookies
-    cookies[:cv_options] = "111111111111111000100000" if !cookies[:cv_options]
-    time = Time.new
+    cookies[:cv_options] = Settings.cookie_cv_log_default if !cookies[:cv_options]
     cookies[:s]=Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d") if !cookies[:s] 
     cookies[:e]=Date.yesterday.strftime("%Y/%m/%d") if !cookies[:e]
     cookies[:ser] = "1" if !cookies[:ser]
