@@ -109,7 +109,7 @@
 			<p class="f_category_title2">成果</p>
 
 			<div class="box01">
-				<p class="box01_txt">全て追加する </p>
+				<p class="box01_txt" id="show_all">全て追加する </p>
 				<div class="check-group clearfix">
 					<ul>
 						<% Settings.promotions_options.each_with_index do |option, index|%>
@@ -430,6 +430,10 @@
 			}
         });
     });
+    
+    $("#show_all").click(function(){
+    	$.cookie("promotion", "111111");
+    })
 </script>
 <% else %>
     <ul class="contentNavi">
