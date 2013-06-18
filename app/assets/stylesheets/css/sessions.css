@@ -77,7 +77,7 @@ h1 {
     padding: 10px;
     border-bottom: #dadada solid 1px;
 }
-#infobox ul a:hover {
+#infobox#feed ul a:hover {
     background: red;
 }
 #infobox ul.last-child {
