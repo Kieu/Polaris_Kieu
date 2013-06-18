@@ -823,7 +823,7 @@ ja:
       to_notified: " 通知する"
     disabled:
       label: "ユーザー無効化: "
-      disable: " 無効化にする"
+      disable: "無効にする"
     flash_messages:
       success: " ユーザー登録が完了しました"
       update: " ユーザー編集が完了しました"
