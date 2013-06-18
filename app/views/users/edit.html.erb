@@ -72,14 +72,6 @@
 			Role: <%= @user.role.role_name %>
 		</p>
 	</div>
-	<div id="enabled">
-		<p class="del_message" style="margin-top:20px;">
-			User can login again</br>
-			Username: <%= @user.username %></br>
-			Email: <%= @user.email %></br>
-			Role: <%= @user.role.role_name %>
-		</p>
-	</div>
 </div>
 <script type="text/javascript">
 	$(function(){
@@ -96,38 +88,22 @@
 					$.confirm({
 			            'message'	: $("#disabled").html(),
 			            'buttons'	: {
-			                'OK'	: {
+			                "<%= I18n.t('popup.cancel') %>"	: {
+			                    'class'	: 'popup_no',
+			                    'action': function(){
+			                    	$("#disable_button").attr("checked",check);
+			                    }	
+			                },
+			                "<%= I18n.t('popup.disable') %>"	: {
 			                    'class'	: 'popup_yes',
 			                    'action': function(){
 			                        $(".edit_user").submit();
 			                    }
 			                },
-			                'Cancel'	: {
-			                    'class'	: 'popup_no',
-			                    'action': function(){
-			                    	$("#disable_button").attr("checked",check);
-			                    }	
-			                }
 			            }
         			});
 				}else{
-					$.confirm({
-			            'message'	: $("#enabled").html(),
-			            'buttons'	: {
-			                'OK'	: {
-			                    'class'	: 'popup_yes',
-			                    'action': function(){
-			                        $(".edit_user").submit();
-			                    }
-			                },
-			                'Cancel'	: {
-			                    'class'	: 'popup_no',
-			                    'action': function(){
-			                    	$("#disable_button").attr("checked",check);
-			                    }	
-			                }
-			            }
-        			});
+					$(".edit_user").submit();
 				}
 			}else{
 				$(".edit_user").submit();
