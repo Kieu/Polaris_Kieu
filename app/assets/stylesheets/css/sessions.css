@@ -77,6 +77,10 @@ h1 {
     padding: 10px;
     border-bottom: #dadada solid 1px;
 }
+#infobox ul a:hover {
+    padding: 10px;
+    background: darkgrey;
+}
 #infobox ul.last-child {
     border-bottom-style: none;
 }
