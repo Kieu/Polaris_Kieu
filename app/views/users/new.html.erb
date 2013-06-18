@@ -21,7 +21,14 @@
         </tr>
         <tr>
           <th> <%= f.label t("user.role.label") %></th>
-          <td colspan="2"><%= f.collection_select :role_id, Role.all, :id, :role_name, {include_blank: t("user.role.include_blank")},{:class => 'input-text',tabindex: 4} %></td>
+          <td colspan="2">
+          	<select class="input-text" id="user_role_id" name="user[role_id]" tabindex="4">
+          		<option value=""><%= I18n.t("user.role.include_blank") %></option>
+				<option value="2">Client</option>
+				<option value="3">Agency</option>
+				<option value="1">Super</option>
+			</select>
+          </td>
         </tr> 
         <tr>
           <th><%= f.label t("user.company_name") %></th>

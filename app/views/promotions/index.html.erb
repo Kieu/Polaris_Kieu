@@ -118,10 +118,10 @@
 								<div>
 									<% if cookies[:promotion][index] == "1" %>
 										<input type="checkbox" value="c1p" checked="checked" name="check" id="checbox<%= index+1 %>">
-										<label for="checkbox<%= index+1 %>" class="checked" onclick="update_cookie_promotion('<%= index %>')">Check</label>
+										<label for="checkbox<%= index+1 %>" class="checked promotion_option" onclick="update_cookie_promotion('<%= index %>')">Check</label>
 									<% else %>
 										<input type="checkbox" value="c1" name="check" id="checbox<%= index+1 %>">
-										<label for="checkbox<%= index+1 %>" class onclick="update_cookie_promotion('<%= index %>')">Check</label>
+										<label for="checkbox<%= index+1 %>" class="promotion_option" onclick="update_cookie_promotion('<%= index %>')">Check</label>
 									<% end %>
 								</div>
 							</li>
@@ -437,7 +437,11 @@
     });
     
     $("#show_all").click(function(){
-    	$.cookie("promotion", "111111");
+    	cookies_options = "111111";
+    	$(".promotion_option").addClass("checked");
+    	$(".promotion_option").each(function(){
+    		$(this).prev('input').attr("checked",'checked');
+    	})
     })
 </script>
 <% else %>
