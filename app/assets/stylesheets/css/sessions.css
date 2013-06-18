@@ -77,9 +77,9 @@ h1 {
     padding: 10px;
     border-bottom: #dadada solid 1px;
 }
-.txtlist ul:hover
+ul.txtlist ul:hover
 {
-    background: red;
+    background: red !important;
 }
 #infobox ul.last-child {
     border-bottom-style: none;
