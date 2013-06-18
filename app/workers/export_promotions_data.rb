@@ -19,6 +19,7 @@ class ExportPromotionsData
   	file_name = options['user_id'].to_s + "_" + promotion_name + 
       "_" + Time.now.strftime("%Y%m%d_%H%M%S") + Settings.file_type.CSV
     path_file = Settings.export_promotion_path + file_name
+    file_name = promotion_name + "_" + Time.now.strftime("%Y%m%d_%H%M%S") + Settings.file_type.CSV
 
     # initial this task
     background_job = BackgroundJob.find(options['bgj_id'])
