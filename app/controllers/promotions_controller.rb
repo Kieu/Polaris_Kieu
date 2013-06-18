@@ -1,6 +1,9 @@
 require "resque"
 class PromotionsController < ApplicationController
-
+  before_filter :signed_in_user
+  before_filter :must_super_agency, except: [:index, :change_data, :download_csv]
+  before_filter :must_right_object, only: [:edit, :update, :delete_promotion,
+    :index, :new, :create]
 
   def index
     if @array_promotion.length > 0
