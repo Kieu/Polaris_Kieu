@@ -22,6 +22,10 @@
 	top: 5px;
 	left: 31px;
 }
+.txtlist ul:hover
+{
+  background: red;
+}
 #personal {
 	width:450px;
 	margin: 0;
