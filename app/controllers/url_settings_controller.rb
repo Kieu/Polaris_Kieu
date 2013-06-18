@@ -66,8 +66,8 @@ class UrlSettingsController < ApplicationController
   end
 
   def download_csv
-    start_date = cookies[:s]
-    end_date = cookies[:e]
+    start_date = params[:start_date]
+    end_date = params[:end_date]
     user_id = current_user.id
     promotion_id = params[:promotion_id]
     account_id = params[:account_id]

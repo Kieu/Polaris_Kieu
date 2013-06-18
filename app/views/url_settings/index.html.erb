@@ -67,12 +67,18 @@ $(function() {
 	    $(tbl).flexToggleCol(colIndex, visible);
 	}
 	$('#download_csv').click(function(){
+      var term = $('#datepick').val();
+      var d = term.split(' - ');
+      start_date = d[0];
+      end_date = d[1];
 	  $.ajax({
 	    type: "POST",
 	    url: "<%= download_csv_url_settings_path %>",
 	    data: {"promotion_id" : "<%= @promotion_id if @promotion_id %>",
 	           "account_id" : "<%= @account_id if @account_id %>",
-	           "media_id": "<%= @media_id if @media_id %>"
+               "media_id" : "<%= @account_id if @media_id %>",
+	           "start_date": start_date,
+               "end_date": end_date
 	           },
 	    success: function(data){
 	  	}
