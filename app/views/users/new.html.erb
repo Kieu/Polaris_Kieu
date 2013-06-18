@@ -54,6 +54,38 @@
             location.href = "<%= users_path %>";
         })
         last_choice = $("#user_role_id").val();
+        var selected = '';
+        <% if @user.company_id && @user.company_id.to_i > 0 %>
+            selected = <%= @user.company_id%>;
+        <% end %>
+        id = $('#user_role_id').val();
+            if ((id == 1 && last_choice == 3) || (id == 3 && last_choice == 1)) {
+                last_choice = id;
+                return;
+            }
+            if (id==""){
+              $("#user_company_id").html("<option value><%= t('user.company_id.include_blank') %></option>");
+              return;
+            }
+            last_choice = id;
+            name_data = (id == "2") ? "Client" : "Agency";
+            $.ajax({
+                type: "POST",
+                url: "<%= change_company_list_users_path %>",
+                data: "model=" + name_data,
+                success: function (data) {
+                    $("#user_company_id").html("<option value><%= t('user.company_id.include_blank') %></option>");
+                    for (var i = 0; i < data.length; i++) {
+                        name = (name_data == "Client") ? data[i].client_name : data[i].agency_name;
+                        if (selected == data[i].id)
+                          option = "<option selected='selected' value='" + data[i].id + "'>" + name + "</option>";
+                        else
+                          option = "<option value='" + data[i].id + "'>" + name + "</option>";  
+                        $("#user_company_id").append(option);
+                    }
+                }
+            });
+
         $("#user_role_id").change(function () {
             id = $(this).val();
             if ((id == 1 && last_choice == 3) || (id == 3 && last_choice == 1)) {
