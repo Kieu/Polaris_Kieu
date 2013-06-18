@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'csv'
 
 # export promotion data table from promotion screen to csv file
@@ -84,10 +85,13 @@ class ExportPromotionsData
             if current_data_promotion != nil
               array_medium << current_data_promotion['imp_count'].to_s
               array_medium << current_data_promotion['click_count'].to_s
-              array_medium << current_data_promotion['click_through_ratio'].to_s
-              array_medium << current_data_promotion['cost_sum'].to_s
+              click_through_ratio = current_data_promotion['click_through_ratio'].to_s + "%"
+              array_medium << click_through_ratio
+              cost_sum = '¥' + (current_data_promotion['cost_sum'].to_s)
+              array_medium << cost_sum
               array_medium << current_data_promotion['cost_per_mille'].to_s
-              array_medium << current_data_promotion['cost_per_click'].to_s
+              cost_per_click = '¥' + (current_data_promotion['cost_per_click'].to_s)
+              array_medium << cost_per_click
             else
               array_medium << nil
               array_medium << nil
@@ -97,20 +101,27 @@ class ExportPromotionsData
               array_medium << nil
             end
             
-
             (1..cnt).each do |current_index|
               current_data_conversion = array_data_row[index_to_get_data_row]["account#{account.id}_conversion#{current_index}"]
               if current_data_conversion != nil
                 array_medium << current_data_conversion['total_cv_count'].to_s
                 array_medium << current_data_conversion['first_cv_count'].to_s
                 array_medium << current_data_conversion['repeat_cv_count'].to_s
-                array_medium << current_data_conversion['conversion_rate'].to_s
-                array_medium << current_data_conversion['click_per_action'].to_s
+                conversion_rate = current_data_conversion['conversion_rate'].to_s + "%"
+                array_medium << conversion_rate
+                click_per_action = '¥' + (current_data_conversion['click_per_action'].to_s)
+                array_medium << click_per_action
                 array_medium << current_data_conversion['assist_count'].to_s
-                array_medium << current_data_conversion['sales'].to_s
-                array_medium << current_data_conversion['roas'].to_s
-                array_medium << current_data_conversion['profit'].to_s
+                sales = '¥' + (current_data_conversion['sales'].to_s)
+                array_medium << sales
+                roas = current_data_conversion['roas'].to_s + "%"
+                array_medium << roas
+                profit = '¥' + (current_data_conversion['profit'].to_s)
+                array_medium << profit
+                roi = (current_data_conversion['roi'].to_s) + "%"
+                array_medium << roi
               else
+                array_medium << nil
                 array_medium << nil
                 array_medium << nil
                 array_medium << nil

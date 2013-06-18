@@ -175,12 +175,17 @@
 </div>
 <script type="text/javascript">
     $('#download_csv').click(function(){
+    	var term = $('#datepicker').val();
+        var d = term.split(' - ');
+        start_date = d[0];
+        end_date = d[1];
+        
         $.ajax({
         	type: "POST",
             url: "<%= download_csv_promotions_path %>",
             data: {"promotion_id" : "<%= @promotion.id if @promotion %>",
-                    "start_date": "<%= @start_date if @start_date %>",
-                    "end_date": "<%= @end_date if @end_date %>"
+                    "start_date": start_date,
+                    "end_date": end_date
                    },
             success: function(data){
             }
