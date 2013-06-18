@@ -37,7 +37,7 @@ type_view:
 job_status:
   PROCESSING: '0'
   SUCCESS: '1'
-  FALSE: '2'
+  WRONG: '2'
 file_type:
   CSV: '.csv'
 export_promotion_path: 'doc/promotion_export/'

@@ -6,6 +6,7 @@ class ExportPromotionsData
   @queue = :export_promotions
 
   def perform
+    binding.pry
     # make file name
     # file name fomat: {job_id}_export_promotion_{current_date}.csv
     # get job_id
@@ -13,9 +14,12 @@ class ExportPromotionsData
     start_date = options['start_date']
     end_date = options['end_date']
 
-  	file_name = job_id.to_s + "_" + Settings.EXPORT_PROMOTION + 
+    promotion_name = Promotion.where(id: options['promotion_id']).select(" promotion_name").first['promotion_name']
+
+  	file_name = options['user_id'].to_s + "_" + promotion_name + 
       "_" + Time.now.strftime("%Y%m%d_%H%M%S") + Settings.file_type.CSV
     path_file = Settings.export_promotion_path + file_name
+    file_name = promotion_name + "_" + Time.now.strftime("%Y%m%d_%H%M%S") + Settings.file_type.CSV
 
     # initial this task
     background_job = BackgroundJob.find(options['bgj_id'])
@@ -130,9 +134,8 @@ class ExportPromotionsData
       background_job.save!
     rescue
       # false case
-      background_job.status = Settings.job_status.FALSE
-      background_job.save!   
-    ensure 
+      background_job.status = Settings.job_status.WRONG
+      background_job.save!
     end
   end
 end

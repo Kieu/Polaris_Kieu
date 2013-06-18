@@ -63,7 +63,7 @@ class ImportUrlData
            background_job = BackgroundJob.find(options['bgj_id'])
 
            # false case
-           background_job.status = Settings.job_status.FALSE
+           background_job.status = Settings.job_status.WRONG
            background_job.save!
 
            exit
@@ -76,7 +76,7 @@ class ImportUrlData
            background_job = BackgroundJob.find(options['bgj_id'])
 
            # false case
-           background_job.status = Settings.job_status.FALSE
+           background_job.status = Settings.job_status.WRONG
            background_job.save!
            exit
          end
@@ -113,6 +113,10 @@ class ImportUrlData
            CSV.foreach(data_file) do |row|
              row_number -= 1
              line_num += 1
+             if(line_num == 1)
+               next
+             end
+             
              # validate data input
              row, error_num, array_identifer, 
              array_ad_id_insert, array_ad_name_insert, 
@@ -187,6 +191,7 @@ class ImportUrlData
                                              '#{current_time}', #{user_id} ) #{comma_sql}
 
                                             "
+                 num += 1
                end
 
                if row[REDIRECT_URL3] != ""
@@ -194,6 +199,7 @@ class ImportUrlData
                                              '#{current_time}', #{user_id} ) #{comma_sql}
 
                                             "
+                 num += 1
                end
 
                if row[REDIRECT_URL4] != ""
@@ -201,6 +207,7 @@ class ImportUrlData
                                              '#{current_time}', #{user_id} ) #{comma_sql}
 
                                             "
+                 num += 1
                end
 
                if row[REDIRECT_URL5] != ""
@@ -208,6 +215,7 @@ class ImportUrlData
                                              '#{current_time}', #{user_id} ) #{comma_sql}
 
                                             "
+                 num += 1
                end
 
                if num == Settings.RECORD_NUM_PER_INSERT || (row_number == 0)
@@ -226,7 +234,7 @@ class ImportUrlData
            if error_num > 0
              background_job = BackgroundJob.find(options['bgj_id'])
              # false case
-             background_job.status = Settings.job_status.FALSE
+             background_job.status = Settings.job_status.WRONG
              background_job.save!
              raise ActiveRecord::Rollback
            end
@@ -244,7 +252,7 @@ class ImportUrlData
        rescue
          background_job = BackgroundJob.find(options['bgj_id'])
          # false case
-         background_job.status = Settings.job_status.FALSE
+         background_job.status = Settings.job_status.WRONG
          background_job.save!
          error.write("Unexpected error: file uploading failed. Please try againg or contact the customer service. \n")
        end
