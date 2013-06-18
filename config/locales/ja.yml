@@ -749,6 +749,10 @@ ja:
     display_item: "表示項目"
     usually: "通常"
     show_all: "全て追加する"
+    all: "すべて表示"
+    listing_ad: "リスティング"
+    display_ad: "ディスプレイ"
+    affiliate: "アフィリエイト"
     conversion_time: "成果発生日時"
     conversion_name: "コンバージョン名"
     conversion_category: "コンバージョン種別"
@@ -778,6 +782,7 @@ ja:
     display_item: 表示項目
     usually: 通常
     show_all: "全て追加する"
+    all: "すべて表示"
     click_time: "時間をクリック"
     media_name: メディア名
     account_name: アカウント名
