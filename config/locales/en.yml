@@ -725,6 +725,10 @@ en:
     display_item: "Display item"
     usually: "Usually"
     show_all: "Show All"
+    all: "All"
+    listing_ad: "Listing ad"
+    display_ad: "Display ad"
+    affiliate: "Affiliate"
     conversion_time: "Conversion Times"
     conversion_name: "Conversion Name"
     conversion_category: "Conversion Category"
@@ -754,6 +758,10 @@ en:
     display_item: Display item
     usually: Usually
     show_all: "Show All"
+    all: "All"
+    listing_ad: "Listing ad"
+    display_ad: "Display ad"
+    affiliate: "Affiliate"
     click_time: "Click Time"
     media_name: Media Name
     account_name: Account name
