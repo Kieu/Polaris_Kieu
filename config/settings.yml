@@ -11,8 +11,8 @@ user:
   deactive: 1
   active: 0
 promotion:
-  deleted: 1
-  active: 0
+  deleted: "1"
+  active: "0"
 client_user:
   deleted: 1
   active: 0
