@@ -34,28 +34,31 @@
     <% if signed_in? %>
     <div id="personal">
       <ul>
-        <li><p>　<img src="/assets/head_pict.gif" />　<%= short_name(current_user.username)%></p></li>
-        <li><p>｜<a href="#"><span><%= link_to I18n.t("layout.logout"), signout_path, method: 'delete' %></span></a></p></li>
-      </ul>
-    </div><!-- /#personal end -->
-     <div id="notification" style="float:right;right:190px;position: absolute;top:22px">
-       <button class="fancybox mt-0 fl-l inline cboxElement" rel="gallery" href="#inline_content"><span class="notification"><%= @notify %></span></button>
+        <li>
+          <div id="notification" style="display: inline;position: relative;top:8px">
+          <button class="fancybox mt-0 fl-l inline cboxElement" rel="gallery" href="#inline_content"><span class="notification"><%= @notify %></span></button>
 
-            <div style='display:none'>
-              <div id='inline_content'>
-                <div class="f_box">
-                  <div id="tabs">
+          <div style='display:none'>
+            <div id='inline_content'>
+              <div class="f_box">
+                <div id="tabs">
                   <ul>
                     <li style="width: 200px"><a href="/background_jobs/inprogress">実行中</a></li>
                     <li style="width: 200px"><a href="/background_jobs/download">ダウンロードリスト</a></li>
                     <li style="width: 200px"><a href="/background_jobs/upload">アップロードリスト</a></li>
                   </ul>
-                  </div>
-                  </div>
                 </div>
               </div>
+            </div>
+          </div>
 
         </div>
+        </li>
+        <li><p>　<img src="/assets/head_pict.gif" />　<%= short_name(current_user.username)%></p></li>
+        <li><p>｜<a href="#"><span><%= link_to I18n.t("layout.logout"), signout_path, method: 'delete' %></span></a></p></li>
+      </ul>
+    </div><!-- /#personal end -->
+
     <% end %>
   </div><!-- /#headerInner end -->
 </div><!-- /#header -->
