@@ -27,10 +27,10 @@ a:hover {
     color:#005ddc;
     text-decoration:underline;
 }
-ul .txtlist :hover
-{
-     background: red;
+ul a:hover {
+    background:red;
 }
+
 .error {
     color:#ff0000;
 }
