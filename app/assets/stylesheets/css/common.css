@@ -28,7 +28,10 @@ a:hover{
 /*p img:hover{
 	opacity:0.7;
 }*/
-
+#promotion_delete
+{
+   border: 0px;
+}
 #cautionBox{
     margin:0 auto;
     width: 500px;
