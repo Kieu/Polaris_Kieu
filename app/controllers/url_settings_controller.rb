@@ -20,8 +20,8 @@ class UrlSettingsController < ApplicationController
 	end
   
   def get_urls_list
-    start_date = cookies[:s]
-    end_date = cookies[:e]
+    start_date = params[:start_date]
+    end_date = params[:end_date]
     url_data = Array.new
     url_data = RedirectUrl.get_url_data(params[:promotion_id], params[:account_id], params[:media_id],
                                  params[:page], params[:rp], start_date, end_date)
@@ -32,8 +32,15 @@ class UrlSettingsController < ApplicationController
   end
 
   def download_template
-    path_to_file = "#{Rails.root}/" + Settings.URL_TEMPLATE_FILE
-    send_file(path_to_file, filename: "template_import_url.csv", type: "text/csv")
+    if cookies[:locale] == 'ja'
+      path_to_file = "#{Rails.root}/" + Settings.URL_TEMPLATE_FILE.JP
+    else
+      path_to_file = "#{Rails.root}/" + Settings.URL_TEMPLATE_FILE.EN
+    end
+    
+    account_name = Account.where(id: params[:account_id]).select('roman_name').first['roman_name']
+    file_name = account_name + "_URL_" + Time.now.strftime("%Y%m%d") + Settings.file_type.CSV
+    send_file(path_to_file, filename: file_name, type: "text/csv")
   end
 
   def get_rows url_data
@@ -59,8 +66,8 @@ class UrlSettingsController < ApplicationController
   end
 
   def download_csv
-    start_date = cookies[:s]
-    end_date = cookies[:e]
+    start_date = params[:start_date]
+    end_date = params[:end_date]
     user_id = current_user.id
     promotion_id = params[:promotion_id]
     account_id = params[:account_id]

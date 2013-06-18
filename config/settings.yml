@@ -62,7 +62,9 @@ conversion_kind:
   3: 'cv_kind3'
 conversion_session_period_default: 90
 account_cost_default: 100
-URL_TEMPLATE_FILE: 'doc/url/template_import_url/template_import_url.csv'
+URL_TEMPLATE_FILE: 
+   EN: 'doc/url/template_import_url/template_import_url_en.csv'
+   JP: 'doc/url/template_import_url/template_import_url_jp.csv'
 DOMAIN_SUBMIT_URL: 'http://domain/click/?'
 cookie_click_log_default: '11111101010'
 cookie_cv_log_default: '111111111111111000100000'

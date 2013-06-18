@@ -7,10 +7,13 @@ class ExportUrlData
 
   def perform
     # make file name
-    # file name fomat: {user_id}_export_url_{current_date}.csv
+    account_name = Account.where(id: options['account_id']).select("roman_name").first['roman_name']
+    # file name fomat: {account_romaji_name}_export_url_{current_date}.csv
     file_name = options['user_id'].to_s + "_" + Settings.EXPORT_URL +
-      "_" + Time.now.to_i.to_s + Settings.file_type.CSV
+      "_" + Time.now.strftime("%Y%m%d") + Settings.file_type.CSV
     path_file = Settings.export_url_path + file_name
+    file_name = account_name.to_s + "_" + Settings.EXPORT_URL +
+      "_" + Time.now.strftime("%Y%m%d") + Settings.file_type.CSV
 
     # initial this task
     background_job = BackgroundJob.find(options['bgj_id'])
@@ -20,7 +23,6 @@ class ExportUrlData
     background_job.type_view = Settings.type_view.DOWNLOAD
     background_job.status = Settings.job_status.PROCESSING
     background_job.save!
-    
     begin
       url_data = Array.new
       url_data = RedirectUrl.get_url_data(options['promotion_id'], options['account_id'],

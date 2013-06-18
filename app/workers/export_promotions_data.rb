@@ -14,7 +14,7 @@ class ExportPromotionsData
     start_date = options['start_date']
     end_date = options['end_date']
 
-    promotion_name = Promotion.where(id: options['promotion_id']).select(" promotion_name").first['promotion_name']
+    promotion_name = Promotion.where(id: options['promotion_id']).select("promotion_name").first['promotion_name']
 
   	file_name = options['user_id'].to_s + "_" + promotion_name + 
       "_" + Time.now.strftime("%Y%m%d_%H%M%S") + Settings.file_type.CSV
@@ -38,6 +38,10 @@ class ExportPromotionsData
       
       # get row data
       index_to_get_data_row = 0
+      if  start_date || end_date
+        start_date = Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d")
+        end_date = Date.yesterday.strftime("%Y/%m/%d")
+      end
       array_data_row = DailySummaryAccount.get_table_data(options['promotion_id'], start_date, end_date)
       account_col = ["Media", "Account name", "Imp", "Click", "CTR", "COST",
                      "CPM", "CPC"]

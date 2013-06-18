@@ -22,8 +22,12 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
+    var term = $('#datepick').val();
+    var d = term.split(' - ');
+    start_date = d[0];
+    end_date = d[1];
     $(".newTable04").flexigrid({
-        url: "<%= get_urls_list_url_settings_path %>?promotion_id=" + $("#promotion_id").val() + "&account_id=" + $("#account_id").val() + "&media_id=" + $("#media_id").val(),
+        url: "<%= get_urls_list_url_settings_path %>?promotion_id=" + $("#promotion_id").val() + "&account_id=" + $("#account_id").val() + "&media_id=" + $("#media_id").val() + "&start_date=" + start_date + "&end_date=" + end_date,
         dataType: 'json',
         editOption : true,
         deleteOption : true,
@@ -63,12 +67,18 @@ $(function() {
 	    $(tbl).flexToggleCol(colIndex, visible);
 	}
 	$('#download_csv').click(function(){
+      var term = $('#datepick').val();
+      var d = term.split(' - ');
+      start_date = d[0];
+      end_date = d[1];
 	  $.ajax({
 	    type: "POST",
 	    url: "<%= download_csv_url_settings_path %>",
 	    data: {"promotion_id" : "<%= @promotion_id if @promotion_id %>",
 	           "account_id" : "<%= @account_id if @account_id %>",
-	           "media_id": "<%= @media_id if @media_id %>"
+               "media_id" : "<%= @account_id if @media_id %>",
+	           "start_date": start_date,
+               "end_date": end_date
 	           },
 	    success: function(data){
 	  	}
@@ -183,7 +193,7 @@ $(window).resize(function() {
             </table>
             <p style="cursor: pointer;">
             	<small>
-                  <a class="dl" href="<%= download_template_url_settings_path %>">アップロードファイルフォーマットのダウンロード</a>
+                  <a class="dl" href="<%= download_template_url_settings_path %>?account_id=<%= @account_id%>">アップロードファイルフォーマットのダウンロード</a>
                 <small></p>
             <p class="bold">入稿リクエストを受け付けました。</p>
           <% end %>
