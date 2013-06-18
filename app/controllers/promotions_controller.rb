@@ -140,7 +140,7 @@ class PromotionsController < ApplicationController
     end
     @client = Client.find(@client_id)    
     if current_user.agency? && !@client.client_users.find_by_user_id(current_user.id)
-      redirect_to clients_path
+     # redirect_to clients_path
     end
     @array_promotion = @client.promotions.active.order_by_promotion_name
     #redirect_to clients_path if @array_promotion.length == 0 && current_user.super? 
