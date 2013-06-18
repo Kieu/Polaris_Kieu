@@ -22,8 +22,12 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
+    var term = $('#datepick').val();
+    var d = term.split(' - ');
+    start_date = d[0];
+    end_date = d[1];
     $(".newTable04").flexigrid({
-        url: "<%= get_urls_list_url_settings_path %>?promotion_id=" + $("#promotion_id").val() + "&account_id=" + $("#account_id").val() + "&media_id=" + $("#media_id").val(),
+        url: "<%= get_urls_list_url_settings_path %>?promotion_id=" + $("#promotion_id").val() + "&account_id=" + $("#account_id").val() + "&media_id=" + $("#media_id").val() + "&start_date=" + start_date + "&end_date=" + end_date,
         dataType: 'json',
         editOption : true,
         deleteOption : true,
