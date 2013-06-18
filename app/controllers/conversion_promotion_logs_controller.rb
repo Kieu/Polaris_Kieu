@@ -94,7 +94,12 @@ def get_rows conversion_logs
 end
 
 def change_medias_list
-    render json: Media.active.where(media_category_id: params[:cid])
+    if params[:cid].to_i > 0
+      render json: Account.where(media_category_id: params[:cid])
+    else
+      render json: Account.all
+    end
+
 end
 
 private

@@ -776,7 +776,7 @@ ja:
     volume: "Volume"
     others: "Others"
     error_message: "エラーメッセージ"
-    error_log_view: "エラーテーブルを表示"
+    error_log_view: "エラーログ表示"
   click_logs:
     label: Clickログ
     display_item: 表示項目
@@ -794,7 +794,7 @@ ja:
     os: OS
     log_state: OK/NG
     error_message: エラーメッセージ
-    error_log_view: エラーテーブルを表示
+    error_log_view: エラーログ表示
   promotion:
     crumb_edit: "プロモーション編集"
     crumb_add: "プロモーション登録"
