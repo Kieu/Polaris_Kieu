@@ -102,13 +102,18 @@ jQuery(document).ready(function($) {
 		$("#account_sync_account_id").attr('disabled','disabled');
 		$("#account_sync_account_pw").attr('disabled','disabled');
 	}	
-if ($('#media_id').val() < 7) {
-	$("#account_sync_box").html('<%=j render "sync_box", f: f%>');
+
+if ($("#account_media_category_id").val() < 3) {
+    		$("#account_sync_box").html('<%=j render "sync_box", f: f%>');
+    } else {
+    	$("#account_sync_box").html("");
+    }
+    
+if ($("#account_media_id").val() < 7) {
+		//$("#account_sync_box").html('<%=j render "sync_box", f:f%>');
 } else {
 	$("#account_sync_box").html("");
-	console.log('sss');
 }
-
 
 });	
 </script>    
