@@ -7,7 +7,7 @@
     <%= render partial: "layouts/sidebar", locals: {object: @array_promotion} %>
 <% end %>
   <ul class="contentNavi">
-    <li class="pre"><%= link_to @client.client_name, client_path(@client.id) %></li>
+    <li class="pre"><%= link_to @client.client_name, clients_path(client_id: @client.id) %></li>
     <li>&gt;</li>
     <li><%= I18n.t("promotion.crumb_add")%></li>
   </ul>

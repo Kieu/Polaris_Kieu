@@ -23,7 +23,7 @@ class UsersController < ApplicationController
         ClientUser.create(client_id: @user.company_id, user_id: @user.id)
       end
       flash[:success] = I18n.t("user.flash_messages.success")
-      if @user.password_flg == 0
+      if @user.password_flg == "1"
         UserMailer.send_password(@user, @user.password).deliver
       end
       redirect_to new_user_path

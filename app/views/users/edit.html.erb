@@ -66,18 +66,26 @@
 <div style='display:none'>
 	<div id="disabled">
 		<p class="del_message" style="margin-top:20px;">
-			User can not login again</br>
-			Username: <%= @user.username %></br>
-			Email: <%= @user.email %></br>
-			Role: <%= @user.role.role_name %>
+			【注意】下記、ユーザーを無効にしようとしています。</br>
+			このユーザーではログイン出来なくなってしまいますが、</br>
+			問題ないでしょうか。</br>
+			------------------------------------------------------------------------------</br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ユーザー名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <%= @user.username %></br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;メールアドレス&nbsp;&nbsp;: <%= @user.email %></br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;権限&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ：<%= @user.role.role_name %></br>
+			------------------------------------------------------------------------------</br>
 		</p>
 	</div>
 	<div id="enabled">
 		<p class="del_message" style="margin-top:20px;">
-			User can login again</br>
-			Username: <%= @user.username %></br>
-			Email: <%= @user.email %></br>
-			Role: <%= @user.role.role_name %>
+			【注意】下記、ユーザーの無効化を削除しようとしています。</br>
+			このユーザーでログインが出来るようになりますが、</br>
+			問題ないでしょうか。</br>
+			------------------------------------------------------------------------------</br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ユーザー名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <%= @user.username %></br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;メールアドレス&nbsp;&nbsp;: <%= @user.email %></br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;権限&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ：<%= @user.role.role_name %></br>
+			------------------------------------------------------------------------------</br>
 		</p>
 	</div>
 </div>
@@ -96,36 +104,36 @@
 					$.confirm({
 			            'message'	: $("#disabled").html(),
 			            'buttons'	: {
-			                'OK'	: {
+			                "<%= I18n.t('popup.cancel') %>"	: {
+			                    'class'	: 'popup_no',
+			                    'action': function(){
+			                    	$("#disable_button").attr("checked",check);
+			                    }	
+			                },
+			                "<%= I18n.t('popup.disable') %>"	: {
 			                    'class'	: 'popup_yes',
 			                    'action': function(){
 			                        $(".edit_user").submit();
 			                    }
 			                },
-			                'Cancel'	: {
-			                    'class'	: 'popup_no',
-			                    'action': function(){
-			                    	$("#disable_button").attr("checked",check);
-			                    }	
-			                }
 			            }
         			});
 				}else{
 					$.confirm({
 			            'message'	: $("#enabled").html(),
 			            'buttons'	: {
-			                'OK'	: {
+			                "<%= I18n.t('popup.cancel') %>"	: {
+			                    'class'	: 'popup_no',
+			                    'action': function(){
+			                    	$("#disable_button").attr("checked",check);
+			                    }	
+			                },
+			                "<%= I18n.t('popup.enable') %>"	: {
 			                    'class'	: 'popup_yes',
 			                    'action': function(){
 			                        $(".edit_user").submit();
 			                    }
 			                },
-			                'Cancel'	: {
-			                    'class'	: 'popup_no',
-			                    'action': function(){
-			                    	$("#disable_button").attr("checked",check);
-			                    }	
-			                }
 			            }
         			});
 				}

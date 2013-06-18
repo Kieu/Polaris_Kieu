@@ -38,22 +38,14 @@ end
 
 def download_csv
     background_job = BackgroundJob.create
-    # job_id = ExportConversionLogsData.create(user_id: current_user.id,
-      # promotion_id: params[:promotion_id].to_i,
-      # conversion_id: params[:conversion_id],
-      # media_category_id: params[:media_category_id],
-      # account_id: params[:account_id], start_date: cookies[:s],
-      # end_date: cookies[:e], show_error: cookies[:ser],
-      # bgj_id: background_job.id)
-#       
-    job_id = ExportConversionLogsData.create(user_id: current_user.id,
-      promotion_id: params[:promotion_id].to_i,
-      conversion_id: '',
-      media_category_id: '',
-      account_id: '', start_date: '',
-      end_date: cookies[:e], show_error: '1',
-      bgj_id: background_job.id)
-      
+     job_id = ExportConversionLogsData.create(user_id: current_user.id,
+       promotion_id: params[:promotion_id].to_i,
+       conversion_id: params[:conversion_id],
+       media_category_id: params[:media_category_id],
+       account_id: params[:account_id], start_date: cookies[:s],
+       end_date: cookies[:e], show_error: cookies[:ser],
+       bgj_id: background_job.id)
+       
     background_job.job_id = job_id
     background_job.save!
     

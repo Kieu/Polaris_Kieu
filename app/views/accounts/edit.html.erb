@@ -21,7 +21,7 @@
         <tr>
           <th> <%= f.label t("account.media_category") %></th>
           <td >
-          	<input type="hidden" name="meida_category_id" id="meida_category_id" value="<%= @account.media_category_id %>" />
+          	<input type="hidden" name="media_category_id" id="media_category_id" value="<%= @account.media_category_id %>" />
           	<input type="text" name="media_category" value="<%= t(Settings.media_category[@account.media_category_id])%>" disabled="disabled"></td>
         </tr>
         <tr>
@@ -98,18 +98,23 @@ jQuery(document).ready(function($) {
 		}	
 	});
 	
-	if ($("#account_sync_flg_0").is(':checked')) {
+	
+if ($("#media_category_id").val() < 3) {
+    		$("#account_sync_box").html('<%=j render "sync_box", f: f%>');
+    } else {
+    	$("#account_sync_box").html("");
+    }
+    
+if ($("#media_id").val() < 7) {
+		$("#account_sync_box").html('<%=j render "sync_box", f:f%>');
+} else {
+	$("#account_sync_box").html("");
+}
+if ($("#account_sync_flg_0").is(':checked')) {
+		
 		$("#account_sync_account_id").attr('disabled','disabled');
 		$("#account_sync_account_pw").attr('disabled','disabled');
 	}	
-if ($('#media_id').val() < 7) {
-	$("#account_sync_box").html('<%=j render "sync_box", f: f%>');
-} else {
-	$("#account_sync_box").html("");
-	console.log('sss');
-}
-
-
 });	
 </script>    
 <% end %>

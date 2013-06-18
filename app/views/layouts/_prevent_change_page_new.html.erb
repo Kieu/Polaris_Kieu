@@ -8,15 +8,15 @@ $(function(){
         $.confirm({
             'message'	: '<%= render partial: "layouts/popup_new" %>',
             'buttons'	: {
-                'OK'	: {
+            	"<%= I18n.t('popup.cancel') %>"	: {
+                    'class'	: 'popup_no',
+                    'action': function(){}	// Nothing to do in this case. You can as well omit the action property.
+                },
+                "<%= I18n.t('popup.ok') %>"	: {
                     'class'	: 'popup_yes',
                     'action': function(){
                         location.href = href;
                     }
-                },
-                'Cancel'	: {
-                    'class'	: 'popup_no',
-                    'action': function(){}	// Nothing to do in this case. You can as well omit the action property.
                 }
             }
         });

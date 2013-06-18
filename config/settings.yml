@@ -20,6 +20,7 @@ media:
   deleted: '1'
   active: '0'
 MAX_LENGTH_NAME: 27
+MAX_CONVERSION_NAME: 16
 media_category:
   1: 'Listing'
   2: 'Display'

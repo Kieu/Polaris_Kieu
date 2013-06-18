@@ -47,14 +47,29 @@
     <input type="hidden" name="client_id" value="<%= @client_id %>" />
     <input type="hidden" name="promotion_name" value="<%= @promotion_name %>" />
     <% end %>
+<div id="popup_delete" style="display: none">
+	<p class="del_message" style="margin-top:20px;">
+		【注意】下記、プロモーションを削除しようとしています。</br></br>
+		このまま削除をした場合、このプロモーションに関連づけられた</br>
+		全てのデータが消えてしまいますが、問題ないでしょうか。</br>
+		------------------------------------------------------------------------------</br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;クライアント名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：<%= @client.client_name %>　様 </br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;プロモーション名：<%= @promotion_name %> </br>
+		------------------------------------------------------------------------------</br>
+	</p>
+</div>
 <script type="text/javascript">
 $(function(){
 	$("#promotion_delete").click(function(e){
 		e.preventDefault();
 	  	$.confirm({
-			'message'	: '<%= render partial: "layouts/popup_new" %>',
+			'message'	: $("#popup_delete").html(),
 		    'buttons'	: {
-		    	'OK'	: {
+		    	"<%= I18n.t('popup.cancel') %>"	: {
+		        	'class'	: 'popup_no',
+		            'action': function(){}	// Nothing to do in this case. You can as well omit the action property.
+				},
+		    	"<%= I18n.t('popup.delete') %>"	: {
 		        	'class'	: 'popup_yes',
 		            'action': function(){
 		            	$.ajax({
@@ -66,10 +81,6 @@ $(function(){
 							}
 						})
 					}
-				},
-		        'Cancel'	: {
-		        	'class'	: 'popup_no',
-		            'action': function(){}	// Nothing to do in this case. You can as well omit the action property.
 				}
 			}
 		});
