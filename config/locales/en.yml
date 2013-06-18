@@ -752,7 +752,7 @@ en:
     volume: "Volume"
     others: "Others"
     error_message: "Error Message"
-    error_log_view: "Show data from Error table"
+    error_log_view: "Show error logs"
   click_logs:
     label: Clicks
     display_item: Display item
@@ -773,7 +773,7 @@ en:
     os: OS
     log_state: OK/NG
     error_message: Error Message
-    error_log_view: Show data from Error table
+    error_log_view: Show error logs
   promotion:
     crumb_edit: "Promotion edit"
     crumb_add: "Promotion add"

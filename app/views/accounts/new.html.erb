@@ -91,10 +91,10 @@ jQuery(document).ready(function($) {
 	        url: "<%= change_medias_list_accounts_path %>",
 	        data: "cid=" + $(this).val(),
 	        success: function (data) {
-	            $("#account_media_id").html("");
+	            $("#account_id").html("");
 	            for (var i = 0; i < data.length; i++) {
 	                option = "<option value='" + data[i].id + "'>" + data[i].media_name + "</option>";
-	                $("#account_media_id").append(option);
+	                $("#account_id").append(option);
 	            }
 	        }
 	    });
