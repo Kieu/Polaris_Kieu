@@ -18,13 +18,13 @@
 	<div class="selectarea">
 		<ul>
 			<li> <%= I18n.t("log.conversion_name")%>
-				<%= select_tag 'conversion_id', content_tag(:option,I18n.t("click_logs.all"),:value=>"") + options_from_collection_for_select(@array_conversion, 'id', 'conversion_name'), class: "input-text"%>
+				<%= select_tag 'conversion_id', content_tag(:option,I18n.t("cv_logs.all"),:value=>"") + options_from_collection_for_select(@array_conversion, 'id', 'conversion_name'), class: "input-text"%>
 			</li>
 			<li> <%= I18n.t("log.media_category")%>
-				<%= select_tag 'media_category_id', "<option value = "">#{I18n.t("click_logs.all")}</option><option value = 1 >#{I18n.t("click_logs.listing_ad")}</option><option value = 2 >#{I18n.t("click_logs.display_ad")}</option><option value = 3 >#{I18n.t("click_logs.affiliate")}</option>".html_safe, class: "input-text" %>
+				<%= select_tag 'media_category_id', "<option value = "">#{I18n.t("cv_logs.all")}</option><option value = 1 >#{I18n.t("cv_logs.listing_ad")}</option><option value = 2 >#{I18n.t("cv_logs.display_ad")}</option><option value = 3 >#{I18n.t("cv_logs.affiliate")}</option>".html_safe, class: "input-text" %>
 			</li>
 			<li> <%= I18n.t("log.account_name")%>
-				<%= select_tag 'account_id',content_tag(:option,I18n.t("click_logs.all"),:value=>"")+ options_from_collection_for_select(@array_account, 'id', 'account_name'), class: "input-text" %>
+				<%= select_tag 'account_id',content_tag(:option,I18n.t("cv_logs.all"),:value=>"")+ options_from_collection_for_select(@array_account, 'id', 'account_name'), class: "input-text" %>
 			</li>
 		</ul>
 	</div>
@@ -273,11 +273,8 @@
 	        data: "cid=" + $(this).val(),
 	        success: function (data) {
 	            $("#account_id").html("");
-	            if ($("#media_category_id").val() == '') {
-	            	option = "<option value=''>All</option>";
-	                $("#account_id").append(option);
-	            }
-
+            	option = "<option value=''><%= I18n.t("click_logs.all") %></option>";
+                $("#account_id").append(option);
 	            for (var i = 0; i < data.length; i++) {
 	                option = "<option value='" + data[i].id + "'>" + data[i].account_name + "</option>";
 	                $("#account_id").append(option);
