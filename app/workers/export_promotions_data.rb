@@ -7,9 +7,14 @@ class ExportPromotionsData
 
   def perform
     # make file name
-    # file name fomat: {user_id}_export_promotion_{current_date}.csv
-  	file_name = options['user_id'].to_s + "_" + Settings.EXPORT_PROMOTION + 
-      "_" + Time.now.to_i.to_s + Settings.file_type.CSV
+    # file name fomat: {job_id}_export_promotion_{current_date}.csv
+    # get job_id
+    job_id = BackgroundJob.where(id: options['bgj_id']).select('job_id').first['job_id']
+    start_date = options['start_date']
+    end_date = options['end_date']
+
+  	file_name = job_id.to_s + "_" + Settings.EXPORT_PROMOTION + 
+      "_" + Time.now.strftime("%Y%m%d_%H%M%S") + Settings.file_type.CSV
     path_file = Settings.export_promotion_path + file_name
 
     # initial this task
@@ -20,110 +25,104 @@ class ExportPromotionsData
     background_job.type_view = Settings.type_view.DOWNLOAD
     background_job.status = Settings.job_status.PROCESSING
     background_job.save!
-    
+
     # store csv file on server
     # path: doc/promotion_export
     array_results = Hash.new
 
     begin
-      # get total for each media_category
-      Settings.media_category.each do |category|
-        Settings.promotions_sums.each_with_index do |sum, index|
-          array_results[category[1]+"_"+Settings.promotions_options[index]+"_total"] =
-            DailySummaryAccount.where(promotion_id: options['promotion_id'])
-            .where(media_category_id: category[0].to_s).sum(sum)
-            
-          Media.where(media_category_id: category[0].to_s).each_with_index do |media, index1|
-            media.accounts.each_with_index do |account, index2|
-              array_results[account.account_name+"_"+Settings.promotions_options[index]] = 
-                DailySummaryAccount.where(promotion_id: options['promotion_id']).
-                where(media_category_id: category[0].to_s).
-                where(account_id: account.id).sum(sum)
-            end
-          end
-        end
-      end
-
+      
       # get row data
-      array_data_row = DailySummaryAccConversion.get_conversions_summary(options['promotion_id'])
-      account_col = ["Media", "Account", "Imp", "Click", "CTR", "CPC", "CPM", "COST"]
+      index_to_get_data_row = 0
+      array_data_row = DailySummaryAccount.get_table_data(options['promotion_id'], start_date, end_date)
+      account_col = ["Media", "Account name", "Imp", "Click", "CTR", "COST",
+                     "CPM", "CPC"]
+
       array_conversion = Conversion.where(promotion_id: options['promotion_id'])
       
-      array_medium = Array.new
-      array_conversion_col = Array.new
-      (1..8).each do
-        array_medium << ""
-        array_conversion_col << ""
-      end
-
       # initial count num
       cnt = 1
 
       # create csv header file
       array_conversion.each do |conversion_element|
-        account_col << conversion_element.conversion_name
-        array_medium << "CV#{cnt}"
-        Settings.conversions_options.each do |val|
-          array_conversion_col << val + "#{cnt}"
-        end
-
-        (1..9).each do
-          account_col << ""
-          array_medium << ""
-        end
+        account_col << "CV#{cnt}"
+        account_col << "CV#{cnt}(first)"
+        account_col << "CV#{cnt}(repeat)"
+        account_col << "CVR#{cnt}"
+        account_col << "CPA#{cnt}"
+        account_col << "ASSIST#{cnt}"
+        account_col << "SALES#{cnt}"
+        account_col << "ROAS#{cnt}"
+        account_col << "PROFIT#{cnt}"
+        account_col << "ROI#{cnt}"
 
         cnt += 1
       end
 
+      cnt = cnt - 1
       CSV.open(path_file, "wb") do |csv|
 
         # make header for CSV file
         csv << account_col
-        csv << array_medium
-        csv << array_conversion_col
 
         # start write content of promotion to file
-        Settings.media_category.each do |media_category|
-          array_media_category_total = Array.new
-          array_media_category_total << media_category[1]
-          array_media_category_total << "total"
-          Settings.promotions_options.each do |col_val|
-            array_media_category_total << @array_results[media_category[1] +
-              "_" + col_val + "_total"]
-          end
-          
-          array_conversion.each do |conversion_element|
-            Settings.conversions_options.each do |conversion_col|
-              array_media_category_total << array_data_row[media_category[1] +
-                "_conversion#{conversion_element.id}" + "_" + conversion_col]
+        media_list = Media.where(" del_flg = 0")
+        account_num = 1
+        media_list.each do |media|
+          account_list = Account.where(" promotion_id = #{options['promotion_id']}
+                                      and media_id = #{media.id}")
+                                .select(" id, account_name, media_id")
+
+          account_list.each do |account|
+            array_medium = Array.new
+            current_data_promotion = array_data_row[index_to_get_data_row]["account#{account.id}_promotion"]
+            array_medium << media.media_name
+            array_medium << account.account_name
+            if current_data_promotion != nil
+              array_medium << current_data_promotion.imp_count.to_s
+              array_medium << current_data_promotion.click_count.to_s
+              array_medium << current_data_promotion.click_through_ratio.to_s
+              array_medium << current_data_promotion.cost_sum.to_s
+              array_medium << current_data_promotion.cost_per_mille.to_s
+              array_medium << current_data_promotion.cost_per_click.to_s
+            else
+              array_medium << nil
+              array_medium << nil
+              array_medium << nil
+              array_medium << nil
+              array_medium << nil
+              array_medium << nil
             end
-          end
-          
-          # write header file to csv
-          csv << array_media_category_total
+            
 
-          # make data row
-          array_medias = Media.where(media_category_id: media_category[0])
-          array_medias.each do |media|
-            array_accounts = Account.where(media_id: media.id)
-            array_accounts.each do |account|
-              record_data = Array.new
-              record_data << account.account_name
-
-              Settings.promotions_options.each do |col_val|
-                record_data << @array_results[account.account_name + "_" + col_val]
+            (1..cnt).each do |current_index|
+              current_data_conversion = array_data_row[index_to_get_data_row]["account#{account.id}_conversion#{current_index}"]
+              if current_data_conversion != nil
+                array_medium << current_data_conversion.total_cv_count.to_s
+                array_medium << current_data_conversion.first_cv_count.to_s
+                array_medium << current_data_conversion.repeat_cv_count.to_s
+                array_medium << current_data_conversion.conversion_rate.to_s
+                array_medium << current_data_conversion.click_per_action.to_s
+                array_medium << current_data_conversion.assist_count.to_s
+                array_medium << current_data_conversion.sales.to_s
+                array_medium << current_data_conversion.roas.to_s
+                array_medium << current_data_conversion.profit.to_s
+              else
+                array_medium << nil
+                array_medium << nil
+                array_medium << nil
+                array_medium << nil
+                array_medium << nil
+                array_medium << nil
+                array_medium << nil
+                array_medium << nil
+                array_medium << nil
               end
-
-              array_conversion.each do |conversion_element|
-                Settings.conversions_options.each do |conversion_col|
-                  record_data << array_data_row[account.account_name +
-                    "_conversion#{conversion_element.id}" + "_" + conversion_col]
-                end
-              end
-              # write data row
-              csv << record_data.unshift(media.media_name)
             end
+            
+            csv << array_medium
           end
+
         end
       end
       # success case

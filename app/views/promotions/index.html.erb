@@ -84,7 +84,7 @@
 	</ul>
 	<div class="fl-r">
 		<p><%= link_to image_tag("/assets/btn_dl_option.gif"), "javascript:void(0)", id: "show_option" %></p>
-		<p><%= link_to image_tag("/assets/btn_dl_report.gif"), "#", id: "download_csv_promotion" %></p>
+		<p><%= link_to image_tag("/assets/btn_dl_report.gif"), "#", id: "download_csv" %></p>
 	</div>
 </div>
 <div class="clear"></div>
@@ -178,7 +178,10 @@
         $.ajax({
         	type: "POST",
             url: "<%= download_csv_promotions_path %>",
-            data: {"promotion_id" : "<%= @promotion.id if @promotion %>"},
+            data: {"promotion_id" : "<%= @promotion.id if @promotion %>",
+                    "start_date": "<%= @start_date if @start_date %>",
+                    "end_date": "<%= @end_date if @end_date %>"
+                   },
             success: function(data){
             }
 
@@ -420,20 +423,6 @@
 							<% end %>
 						<% end %>
 						draw_chart(data[left], data[right], left, right, categories);
-
-						$("#promotion_tables").html(all_data["html"]);
-						$('#promotion_table').each(function() {
-                            var $table = $(this);
-                            var $button = $("<img src='/assets/btn_dl_report.gif' alt='Btn_dl_report'>");
-                            $('#download_csv_promotion').html($button);
-                           // $button.insertAfter($table);
-
-                            $button.click(function() {
-                                var csv = $table.table2CSV({delivery:'value'});
-                                window.location.href = 'data:text/csv;charset=UTF-8,'
-                                        + encodeURIComponent(csv);
-                            });
-                        });
                       $("#datepicker").text(start_date + "~" + end_date + "▼");
 	            	}
 				})

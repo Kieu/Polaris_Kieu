@@ -108,11 +108,20 @@ class PromotionsController < ApplicationController
   end
 
   def download_csv
+    start_date = params[:start_date]
+    end_date = params[:end_date]
     promotion_id = params[:promotion_id].to_i
     user_id = current_user.id
     background_job = BackgroundJob.create
+    background_job.user_id = user_id
+    background_job.type_view = Settings.type_view.DOWNLOAD
+    background_job.status = Settings.job_status.PROCESSING
+    background_job.save!
+
     job_id = ExportPromotionsData.create(user_id: user_id,
-      promotion_id: promotion_id, bgj_id: background_job.id)
+             promotion_id: promotion_id, bgj_id: background_job.id, start_date: start_date,
+             end_date: end_date)
+    
     background_job.job_id = job_id
     background_job.save!
     
