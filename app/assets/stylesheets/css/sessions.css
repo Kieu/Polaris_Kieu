@@ -29,6 +29,8 @@ a:hover {
 }
 .ta-c {
     text-align: center;
+    float: left;
+    padding-left: 17px;
     color:#005ddc;
     text-decoration:underline;
 }
