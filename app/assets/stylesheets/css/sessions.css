@@ -5,14 +5,7 @@
 /* ==========================================================================
    login page [左可変/右固定]
    ========================================================================== */
-#feed ul a {
-    background: url("/assets/newstxtborder.jpg") no-repeat scroll left bottom transparent;
-    color: #000000;
-    display: block;
-    padding-bottom: 11px;
-    padding-top: 12px;
-    width: 363px;
-}
+
 * {
     padding: 0;
     margin: 0;
@@ -28,12 +21,16 @@ a:hover {
     opacity:0.7;
 }
 .ta-c {
-    float: left;
     text-align: center;
-    margin-left: 60px;
+    float: left;
+    padding-left: 17px;
     color:#005ddc;
     text-decoration:underline;
 }
+ul a:hover {
+    background:red;
+}
+
 .error {
     color:#ff0000;
 }

@@ -12,15 +12,17 @@ class ExportClickLogsData
     file_name = options['user_id'].to_s + "_" + promotion.promotion_name + "_click_" +
     Time.now.strftime("%Y%m%d") + Settings.file_type.CSV
     path_file = Settings.export_click_logs_path + file_name
-
+    if File.exist?(path_file)
+      return
+    end
     # initial this task
-    background_job = BackgroundJob.find(options['bgj_id'])
-    background_job.user_id = options['user_id']
-    background_job.filename = file_name
-    background_job.filepath = path_file
-    background_job.type_view = Settings.type_view.DOWNLOAD
-    background_job.status = Settings.job_status.PROCESSING
-    background_job.save!
+     background_job = BackgroundJob.find(options['bgj_id'])
+     background_job.user_id = options['user_id']
+     background_job.filename = file_name
+     background_job.filepath = path_file
+     background_job.type_view = Settings.type_view.DOWNLOAD
+     background_job.status = Settings.job_status.PROCESSING
+     background_job.save!
     
     # store csv file on server
     # path: doc/click_logs_export
@@ -54,17 +56,17 @@ class ExportClickLogsData
                   display_campaigns.find(row.campaign_id).name, display_groups.find(row.group_id).name,
                   display_ads.find(row.unit_id).name, row.click_url, row.redirect_url,
                   row.session_id, row.media_session_id, row.device_category, row.user_agent,
-                  row.remote_ip, row.referrer, row.mark, row.state, row.error_code]
+                  row.remote_ip, row.referrer, row.mark, row.state, I18n.t("log_error_messages")[row.error_code.to_i]]
         end
       end
 
       # success case
-      background_job.status = Settings.job_status.SUCCESS
-      background_job.save!
+       background_job.status = Settings.job_status.SUCCESS
+       background_job.save!
     rescue
       # false case
-      background_job.status = Settings.job_status.FALSE
-      background_job.save!   
+       background_job.status = Settings.job_status.FALSE
+       background_job.save!   
     ensure  
     end
   end

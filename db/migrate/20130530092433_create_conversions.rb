@@ -1,27 +1,27 @@
 class CreateConversions < ActiveRecord::Migration
   def change
     create_table :conversions do |t|
-      t.integer :promotion_id
-      t.string :conversion_name
-      t.string :roman_name
-      t.integer :conversion_category
-      t.integer :duplicate
-      t.integer :unique_def
-      t.integer :start_point
-      t.integer :sale_unit_price
-      t.integer :reward_form
-      t.integer :os
-      t.integer :conversion_mode
-      t.integer :facebook_app_id
-      t.integer :judging
-      t.integer :track_type
-      t.integer :track_method
+      t.integer :promotion_id, limit: 11
+      t.string :conversion_name, limit: 255
+      t.string :roman_name, limit: 255
+      t.column :conversion_category, "char(1)"
+      t.column :duplicate, "char(1)"
+      t.column :unique_def, "char(2)"
+      t.column :start_point, "char(1)"
+      t.integer :sale_unit_price, limit: 11
+      t.column :reward_form, "char(1)"
+      t.column :os, "char(1)"
+      t.column :conversion_mode, "char(1)"
+      t.column :facebook_app_id, "bigint(20)"
+      t.column :judging, "char(1)"
+      t.column :track_type, "char(1)"
+      t.column :track_method, "char(1)"
       t.text :url
-      t.integer :session_period
+      t.integer :session_period, limit: 11
       t.text :conversion_combine
-      t.integer :create_user_id
-      t.integer :update_user_id
-      t.integer :del_flg, default: 0
+      t.integer :create_user_id, limit: 11
+      t.integer :update_user_id, limit: 11
+      t.string :mv, limit: 255
 
       t.timestamps
     end

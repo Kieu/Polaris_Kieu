@@ -64,30 +64,26 @@
 </div>
 
 <div style='display:none'>
-	<div id="disabled" style='padding:10px; background:#fff;'>
-		<div>User can not login again</div>
-		<div>Username: <%= @user.username %></div>
-		<div>Email: <%= @user.email %></div>
-		<div>Role: <%= @user.role.role_name %></div>
-		<button class="ok_popup">Ok</button>
-		<button class="cancel_popup">Cancel</button>
+	<div id="disabled">
+		<p class="del_message" style="margin-top:20px;">
+			User can not login again</br>
+			Username: <%= @user.username %></br>
+			Email: <%= @user.email %></br>
+			Role: <%= @user.role.role_name %>
+		</p>
 	</div>
-	<div id="enabled" style='padding:10px; background:#fff;'>
-		<div>User can login again</div>
-		<div>Username: <%= @user.username %></div>
-		<div>Email: <%= @user.email %></div>
-		<div>Role: <%= @user.role.role_name %></div>
-		<button class="ok_popup">Ok</button>
-		<button class="cancel_popup">Cancel</button>
+	<div id="enabled">
+		<p class="del_message" style="margin-top:20px;">
+			User can login again</br>
+			Username: <%= @user.username %></br>
+			Email: <%= @user.email %></br>
+			Role: <%= @user.role.role_name %>
+		</p>
 	</div>
 </div>
 <script type="text/javascript">
 	$(function(){
 		check = $("#disable_button").is(':checked')? true : false;
-		$(".cancel_popup").click(function(){
-			$("#enabled").colorbox.close();
-			$("#disabled").colorbox.close();
-		})
 		$(".ok_popup").click(function(){
 			$(".edit_user").submit();
 		})
@@ -97,27 +93,41 @@
 			checked = $("#disable_button").is(':checked')? true : false;
 			if (check != checked){
 				if (checked){
-					disable = $.colorbox({
-						width: "30%",
-						inline: true,
-						escKey: false,
-						href: "#disabled",
-						overlayClose: false,
-						onClosed: function(){
-							$("#disable_button").attr("checked",check);
-						}
-					});
+					$.confirm({
+			            'message'	: $("#disabled").html(),
+			            'buttons'	: {
+			                'OK'	: {
+			                    'class'	: 'popup_yes',
+			                    'action': function(){
+			                        $(".edit_user").submit();
+			                    }
+			                },
+			                'Cancel'	: {
+			                    'class'	: 'popup_no',
+			                    'action': function(){
+			                    	$("#disable_button").attr("checked",check);
+			                    }	
+			                }
+			            }
+        			});
 				}else{
-					enable = $.colorbox({
-						width: "30%",
-						inline: true,
-						escKey: false,
-						href: "#enabled",
-						overlayClose: false,
-						onClosed: function(){
-							$("#disable_button").attr("checked",check);
-						}
-					});
+					$.confirm({
+			            'message'	: $("#enabled").html(),
+			            'buttons'	: {
+			                'OK'	: {
+			                    'class'	: 'popup_yes',
+			                    'action': function(){
+			                        $(".edit_user").submit();
+			                    }
+			                },
+			                'Cancel'	: {
+			                    'class'	: 'popup_no',
+			                    'action': function(){
+			                    	$("#disable_button").attr("checked",check);
+			                    }	
+			                }
+			            }
+        			});
 				}
 			}else{
 				$(".edit_user").submit();

@@ -600,7 +600,8 @@ ja:
       label: "言語選択"
       ja: "日本語"
       en: "英語"
-    forgor_pw: "PWを忘れた場合の画面"
+    forgor_pw: "Passwordを忘れた場合はコチラ"
+    forgor_pw1: "Passwordを入力してログインするならコチラ"
     announcements: "お知らせ"
     press_release: "プレスリリース"
     captcha: "キャプチャ"
@@ -648,7 +649,7 @@ ja:
     account_name: "アカウント名: "
     roman_name: "アカウント名(英語): "
     margin: "コスト計算： "
-    input_data: "入力データ x"
+    input_data: "入力データ"
     sync_account_id: "アカウントの同期: "
     synchronism: "同期"
     fractured: "同期停止"
@@ -822,7 +823,7 @@ ja:
       to_notified: " 通知する"
     disabled:
       label: "ユーザー無効化: "
-      disable: " 無効化にする"
+      disable: "無効にする"
     flash_messages:
       success: " ユーザー登録が完了しました"
       update: " ユーザー編集が完了しました"
