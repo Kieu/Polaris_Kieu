@@ -68,9 +68,9 @@ describe SessionsController do
     end
   end
 
-  describe "DELETE destroy" do
+  describe "#signout" do
     before {session[:user_id] = user.id}
-    before {delete :destroy}
+    before {post :signout}
 
     describe "destroy current session" do
       subject {session[:user_id]}

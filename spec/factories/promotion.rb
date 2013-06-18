@@ -5,6 +5,6 @@ FactoryGirl.define do
     promotion_category_id 1
     tracking_period 10
     client_id 1
-    agency_id 1
+    del_flg Settings.promotion.active
   end
 end
