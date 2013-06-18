@@ -128,7 +128,7 @@
             	<tr>
             		<td>
               <%= 
-              case @conversion.conversion_category
+              case @conversion.conversion_category.to_i
               when 3
               		render "combination", f: f
               when 2

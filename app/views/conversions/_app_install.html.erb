@@ -34,7 +34,7 @@
 </tr>
 <tr id="method_area">
   <%= 
-	  if(@conversion.os==1)
+	  if(@conversion.os.to_i==1)
 	  	render "app_install_android", f: f 
 	  else	
 	  	render "app_install_ios", f: f
@@ -43,7 +43,7 @@
 </tr>
 <tr id="fb_app_id">
   <%= 
-	  if(@conversion.conversion_mode!=2)
+	  if(@conversion.conversion_mode.to_i!=2)
 	  	render "app_install_fb_app_id", f: f
 	  end
 	  %>
