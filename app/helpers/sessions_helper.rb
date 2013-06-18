@@ -1,6 +1,5 @@
 module SessionsHelper
   def sign_in user
-    user.last_login = Time.now
     user.save
     user.remove_block_login if user.block_login_user
     session[:user_id] = user.id
