@@ -22,10 +22,10 @@
 	<div class="selectarea">
 		<ul>
 			<li> <%= I18n.t("log.media_category")%>
-				<%= select_tag 'media_category_id', "<option value = "">All</option><option value = 1 >Listing ad</option><option value = 2 >Display ad</option><option value = 3 >Affiliate</option>".html_safe, class: "input-text" %>
+				<%= select_tag 'media_category_id', "<option value = "">#{I18n.t("click_logs.all")}</option><option value = 1 >Listing ad</option><option value = 2 >Display ad</option><option value = 3 >Affiliate</option>".html_safe, class: "input-text" %>
 			</li>
 			<li> <%= I18n.t("log.account_name")%>
-				<%= select_tag 'account_id', content_tag(:option,'All',:value=>"")+options_from_collection_for_select(@array_account, 'id', 'account_name'), class: "input-text" %> <br>
+				<%= select_tag 'account_id', content_tag(:option,I18n.t("click_logs.all"),:value=>"")+options_from_collection_for_select(@array_account, 'id', 'account_name'), class: "input-text" %> <br>
 			</li>
 		</ul>
 	</div>

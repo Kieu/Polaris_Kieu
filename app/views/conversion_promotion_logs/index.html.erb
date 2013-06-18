@@ -18,13 +18,13 @@
 	<div class="selectarea">
 		<ul>
 			<li> <%= I18n.t("log.conversion_name")%>
-				<%= select_tag 'conversion_id', content_tag(:option,'All',:value=>"") + options_from_collection_for_select(@array_conversion, 'id', 'conversion_name'), class: "input-text"%>
+				<%= select_tag 'conversion_id', content_tag(:option,I18n.t("click_logs.all"),:value=>"") + options_from_collection_for_select(@array_conversion, 'id', 'conversion_name'), class: "input-text"%>
 			</li>
 			<li> <%= I18n.t("log.media_category")%>
-				<%= select_tag 'media_category_id', "<option value = "">All</option><option value = 1 >Listing ad</option><option value = 2 >Display ad</option><option value = 3 >Affiliate</option>".html_safe, class: "input-text" %>
+				<%= select_tag 'media_category_id', "<option value = "">#{I18n.t("click_logs.all")}</option><option value = 1 >#{I18n.t("click_logs.listing_ad")}</option><option value = 2 >#{I18n.t("click_logs.display_ad")}</option><option value = 3 >#{I18n.t("click_logs.affiliate")}</option>".html_safe, class: "input-text" %>
 			</li>
 			<li> <%= I18n.t("log.account_name")%>
-				<%= select_tag 'account_id',content_tag(:option,'All',:value=>"")+ options_from_collection_for_select(@array_account, 'id', 'account_name'), class: "input-text" %>
+				<%= select_tag 'account_id',content_tag(:option,I18n.t("click_logs.all"),:value=>"")+ options_from_collection_for_select(@array_account, 'id', 'account_name'), class: "input-text" %>
 			</li>
 		</ul>
 	</div>
@@ -226,8 +226,9 @@
 
 	$("#display_all").click(function(){
 		$.cookie("cv_options", '111111111111111111111111');
+		cookies_options = $.cookie("cv_options");
+		$("#cv_logs_0").attr("src","/assets/btn_box_add.gif");
 		location.href = location.href;
-		
 	})
 
 </script>
@@ -245,6 +246,18 @@
 	})
 
 	$("#media_category_id").change(function(){
+		$.ajax({
+	        type: "POST",
+	        url: "<%= change_medias_list_conversion_promotion_logs_path %>",
+	        data: "cid=" + $(this).val(),
+	        success: function (data) {
+	            $("#account_id").html("");
+	            for (var i = 0; i < data.length; i++) {
+	                option = "<option value='" + data[i].id + "'>" + data[i].media_name + "</option>";
+	                $("#account_id").append(option);
+	            }
+	        }
+	    });
 		media_category_id = $(this).val();
 		reloadFlex1("#cvlogs","<%= get_conversion_logs_list_conversion_promotion_logs_path %>?cv_id=" + $("#conversion_id").val() + "&account_id=" + $("#account_id").val() + "&media_category_id=" + $(this).val());
 	})
@@ -291,6 +304,7 @@
                 reloadFlex1("#cvlogs", "<%= get_conversion_logs_list_conversion_promotion_logs_path %>?cv_id=" + $("#media_category_id").val() + "&account_id=" + $("#account_id").val() + "&media_category_id=" + $("#media_category_id").val());
             }
         });
+
 </script>
 <script type="text/javascript">
     $(window).resize(function() {
