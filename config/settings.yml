@@ -8,17 +8,17 @@ role:
   AGENCY: 3
   CLIENT: 2
 user:
-  deactive: 1
-  active: 0
+  deactive: '1'
+  active: '0'
 promotion:
-  deleted: 1
-  active: 0
+  deleted: '1'
+  active: '0'
 client_user:
-  deleted: 1
-  active: 0
+  deleted: '1'
+  active: '0'
 media:
-  deleted: 1
-  active: 0
+  deleted: '1'
+  active: '0'
 MAX_LENGTH_NAME: 27
 media_category:
   1: 'Listing'
