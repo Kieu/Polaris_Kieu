@@ -62,7 +62,7 @@ class UpdateUrlData
            background_job = BackgroundJob.find(options['bgj_id'])
 
            # false case
-           background_job.status = '2'
+           background_job.status = Settings.job_status.FALSE
            background_job.save!
 
            exit
@@ -194,7 +194,7 @@ class UpdateUrlData
            if error_num > 0
              background_job = BackgroundJob.find(options['bgj_id'])
              # false case
-             background_job.status = '2'
+             background_job.status = Settings.job_status.FALSE
              background_job.save!
              raise ActiveRecord::Rollback
            end
@@ -202,7 +202,7 @@ class UpdateUrlData
          # commit transation
          background_job = BackgroundJob.find(options['bgj_id'])
          # false case
-         background_job.status = '1'
+         background_job.status = Settings.job_status.SUCCESS
          background_job.save!
          
          if error_num == 0
@@ -212,7 +212,7 @@ class UpdateUrlData
        rescue
          background_job = BackgroundJob.find(options['bgj_id'])
          # false case
-         background_job.status = '2'
+         background_job.status = Settings.job_status.FALSE
          background_job.save!
          error.write("Unexpected error: file uploading failed. Please try againg or contact the customer service. \n")
        end

@@ -21,7 +21,7 @@ class ExportClickLogsData
      background_job.filename = file_name
      background_job.filepath = path_file
      background_job.type_view = Settings.type_view.DOWNLOAD
-     background_job.status = '0'
+     background_job.status = Settings.job_status.PROCESSING
      background_job.save!
     
     # store csv file on server
@@ -61,11 +61,11 @@ class ExportClickLogsData
       end
 
       # success case
-       background_job.status = '1'
+       background_job.status = Settings.job_status.SUCCESS
        background_job.save!
     rescue
       # false case
-       background_job.status = '2'
+       background_job.status = Settings.job_status.FALSE
        background_job.save!   
     ensure  
     end
