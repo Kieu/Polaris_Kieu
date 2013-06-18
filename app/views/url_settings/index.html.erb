@@ -183,7 +183,7 @@ $(window).resize(function() {
             </table>
             <p style="cursor: pointer;">
             	<small>
-                  <a class="dl" href="<%= download_template_url_settings_path %>">アップロードファイルフォーマットのダウンロード</a>
+                  <a class="dl" href="<%= download_template_url_settings_path %>?account_id=<%= @account_id%>">アップロードファイルフォーマットのダウンロード</a>
                 <small></p>
             <p class="bold">入稿リクエストを受け付けました。</p>
           <% end %>
