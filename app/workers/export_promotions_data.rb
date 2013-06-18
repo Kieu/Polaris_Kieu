@@ -6,6 +6,7 @@ class ExportPromotionsData
   @queue = :export_promotions
 
   def perform
+    binding.pry
     # make file name
     # file name fomat: {job_id}_export_promotion_{current_date}.csv
     # get job_id
@@ -130,9 +131,8 @@ class ExportPromotionsData
       background_job.save!
     rescue
       # false case
-      background_job.status = Settings.job_status.FALSE
-      background_job.save!   
-    ensure 
+      background_job.status = Settings.job_status.WRONG
+      background_job.save!
     end
   end
 end

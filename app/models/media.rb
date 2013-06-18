@@ -8,7 +8,7 @@ class Media < ActiveRecord::Base
 
   def self.get_media_list
     results = Hash.new
-    all_media = Media.all
+    all_media = Media.active.all
     Settings.media_category.each do |category|
       results[category[1]+"_media"] = Array.new
     end
