@@ -28,7 +28,7 @@ class ExportPromotionsData
     background_job.type_view = Settings.type_view.DOWNLOAD
     background_job.status = Settings.job_status.PROCESSING
     background_job.save!
-    
+
     # store csv file on server
     # path: doc/promotion_export
     array_results = Hash.new
@@ -82,12 +82,12 @@ class ExportPromotionsData
             array_medium << media.media_name
             array_medium << account.account_name
             if current_data_promotion != nil
-              array_medium << current_data_promotion.imp_count.to_s
-              array_medium << current_data_promotion.click_count.to_s
-              array_medium << current_data_promotion.click_through_ratio.to_s
-              array_medium << current_data_promotion.cost_sum.to_s
-              array_medium << current_data_promotion.cost_per_mille.to_s
-              array_medium << current_data_promotion.cost_per_click.to_s
+              array_medium << current_data_promotion['imp_count'].to_s
+              array_medium << current_data_promotion['click_count'].to_s
+              array_medium << current_data_promotion['click_through_ratio'].to_s
+              array_medium << current_data_promotion['cost_sum'].to_s
+              array_medium << current_data_promotion['cost_per_mille'].to_s
+              array_medium << current_data_promotion['cost_per_click'].to_s
             else
               array_medium << nil
               array_medium << nil
@@ -101,15 +101,15 @@ class ExportPromotionsData
             (1..cnt).each do |current_index|
               current_data_conversion = array_data_row[index_to_get_data_row]["account#{account.id}_conversion#{current_index}"]
               if current_data_conversion != nil
-                array_medium << current_data_conversion.total_cv_count.to_s
-                array_medium << current_data_conversion.first_cv_count.to_s
-                array_medium << current_data_conversion.repeat_cv_count.to_s
-                array_medium << current_data_conversion.conversion_rate.to_s
-                array_medium << current_data_conversion.click_per_action.to_s
-                array_medium << current_data_conversion.assist_count.to_s
-                array_medium << current_data_conversion.sales.to_s
-                array_medium << current_data_conversion.roas.to_s
-                array_medium << current_data_conversion.profit.to_s
+                array_medium << current_data_conversion['total_cv_count'].to_s
+                array_medium << current_data_conversion['first_cv_count'].to_s
+                array_medium << current_data_conversion['repeat_cv_count'].to_s
+                array_medium << current_data_conversion['conversion_rate'].to_s
+                array_medium << current_data_conversion['click_per_action'].to_s
+                array_medium << current_data_conversion['assist_count'].to_s
+                array_medium << current_data_conversion['sales'].to_s
+                array_medium << current_data_conversion['roas'].to_s
+                array_medium << current_data_conversion['profit'].to_s
               else
                 array_medium << nil
                 array_medium << nil

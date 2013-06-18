@@ -1,7 +1,7 @@
 require "resque"
 class PromotionsController < ApplicationController
   before_filter :signed_in_user
-  before_filter :must_super_agency, except: [:index]
+  before_filter :must_super_agency, except: [:index, :change_data]
   before_filter :must_right_object, only: [:edit, :update, :delete_promotion,
     :index, :new, :create]
 
