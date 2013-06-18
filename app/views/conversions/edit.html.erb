@@ -5,17 +5,17 @@
     $("#current_rev").html("v"+$.mcDropdown.version);
     $("#category").mcDropdown("#categorymenu");
     $("#category2").mcDropdown("#categorymenu2");
-    
   });
-  function get_category(id='') {
+  function get_category(id) {
 	$('#current_cv').val(id);
-	console.log($('#current_cv').val());
 	$.colorbox({width:"580px", inline:true, href:"#inline_logs"});
   }
-
-  $(function() {
-    $('#ui-tab').tabs();
-  });
+  
+  if($("#conversion_track_method_3").is(':checked')) {
+  		$("#url").removeAttr('disabled');
+  	} else {
+  		$("#url").attr('disabled','disabled');
+  	}
 </script>
 <% content_for :stylesheet_includes do %>
   <%= stylesheet_link_tag "css/common" %>
@@ -63,6 +63,27 @@
           function render_combination(){
             $('#category_area').html('<%=j render "combination", f: f %>');
           }
+          
+          function render_android(){
+			$('#method_area').html('<%=j render "app_install_android", f: f %>');
+		  }
+		  function render_fb_app_id(){
+		    $('#fb_app_id').html('');
+		    $('#fb_app_id').html('<%=j render "app_install_fb_app_id", f: f %>');
+		    $('#judging_box').html('<%=j render "app_install_judging", f: f %>');
+		  }
+		  function remove_fb_app_id() {
+		  	$('#fb_app_id').html('');
+		  	$('#judging_box').html('');
+		  }
+		  function check_track_method() {
+          	if($("#conversion_track_method_3").is(':checked')) {
+          		$("#url").removeAttr('disabled');
+          	} else {
+          		$("#url").attr('disabled','disabled');
+          	}
+          }
+          
         </script>
         <form>
           <%= hidden_field_tag :promotion_id, params[:promotion_id] %>

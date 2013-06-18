@@ -83,7 +83,8 @@ class ConversionsController < ApplicationController
     end
     @conversion.conversion_combine = conversion_combine
     @conversion.update_user_id = current_user.id
-    if @conversion.update_attributes(params[:conversion])
+    @conversion.attributes = params[:conversion]
+    if @conversion.save
       flash[:error] = "Conversion updated"
       redirect_to conversions_path(promotion_id: @conversion.promotion_id)
     else
