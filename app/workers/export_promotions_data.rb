@@ -6,7 +6,6 @@ class ExportPromotionsData
   @queue = :export_promotions
 
   def perform
-    binding.pry
     # make file name
     # file name fomat: {job_id}_export_promotion_{current_date}.csv
     # get job_id
