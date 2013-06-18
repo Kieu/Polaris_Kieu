@@ -223,12 +223,33 @@
 		//location.href = location.href;
 		$("#cvlogs").colorbox.close();
 	})
-
-	$("#display_all").click(function(){
+	$(document).on('click', "#display_all", function(){
 		$.cookie("cv_options", '111111111111111111111111');
 		cookies_options = $.cookie("cv_options");
-		$("#cv_logs_0").attr("src","/assets/btn_box_add.gif");
-		location.href = location.href;
+		//$("#cv_logs_0").attr("src","/assets/btn_box_add.gif");
+		//location.href = location.href;
+		$('#current_box').html($('#checkall_box').html());
+		reloadFlex1("#cvlogs","<%= get_conversion_logs_list_conversion_promotion_logs_path %>?cv_id=" + $("#conversion_id").val() + "&account_id=" + $("#account_id").val() + "&media_category_id=" + $("#media_category_id").val());
+
+	})
+	$(document).on('click', "#redisplay_all", function(){
+		$.cookie("cv_options", '111111111111111111111111');
+		cookies_options = $.cookie("cv_options");
+		//$("#cv_logs_0").attr("src","/assets/btn_box_add.gif");
+		//location.href = location.href;
+		$('#current_box').html($('#checkall_box').html());
+		reloadFlex1("#cvlogs","<%= get_conversion_logs_list_conversion_promotion_logs_path %>?cv_id=" + $("#conversion_id").val() + "&account_id=" + $("#account_id").val() + "&media_category_id=" + $("#media_category_id").val());
+	})
+
+	$("#delete_all").click(function(){
+		$.cookie("cv_options", '111111111111111000100000');
+		cookies_options = $.cookie("cv_options");
+		//$("#cv_logs_0").attr("src","/assets/btn_box_add.gif");
+		//location.href = location.href;
+		$('#current_box').hide();
+		$('#checkall_box').show();
+		reloadFlex1("#cvlogs","<%= get_conversion_logs_list_conversion_promotion_logs_path %>?cv_id=" + $("#conversion_id").val() + "&account_id=" + $("#account_id").val() + "&media_category_id=" + $("#media_category_id").val());
+		
 	})
 
 </script>
@@ -252,8 +273,13 @@
 	        data: "cid=" + $(this).val(),
 	        success: function (data) {
 	            $("#account_id").html("");
+	            if ($("#media_category_id").val() == '') {
+	            	option = "<option value=''>All</option>";
+	                $("#account_id").append(option);
+	            }
+
 	            for (var i = 0; i < data.length; i++) {
-	                option = "<option value='" + data[i].id + "'>" + data[i].media_name + "</option>";
+	                option = "<option value='" + data[i].id + "'>" + data[i].account_name + "</option>";
 	                $("#account_id").append(option);
 	            }
 	        }
