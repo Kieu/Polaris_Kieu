@@ -31,6 +31,7 @@ a:hover{
 #promotion_delete
 {
    border: 0px;
+   cursor: pointer;
 }
 #cautionBox{
     margin:0 auto;
