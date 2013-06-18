@@ -7,7 +7,7 @@ FactoryGirl.define do
     account_name "adfb001"
     roman_name "adfb-001"
     sync_flg 1
-    cost 100
+    margin 100
     create_user_id 1
     update_user_id 1
   end

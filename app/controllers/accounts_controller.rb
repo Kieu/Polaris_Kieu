@@ -65,7 +65,7 @@ class AccountsController < ApplicationController
     @promotion_id = params[:promotion_id]
     #get promotion by id
     @promotion = Promotion.find_by_id(@promotion_id)
-    @client_id = @promotion.client.id
+    @client_id = @promotion.client_id
     @account.create_user_id = current_user.id
     if !@account.sync_flg
       @account.sync_account_id = ""
@@ -93,7 +93,7 @@ class AccountsController < ApplicationController
         render "new", promotion_id: @promotion_id
       else
         flash[:error] = I18n.t("account.flash_messages.success")
-        redirect_to promotions_path(promotion_id: @promotion_id, client_id: @promotion.client.id)
+        redirect_to promotions_path(promotion_id: @promotion_id, client_id: @promotion.client_id)
       end
     else
 

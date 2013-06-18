@@ -53,12 +53,6 @@ class UsersController < ApplicationController
     end
   end
   
-  def enable_disable_user
-    user = User.find_by_id(params[:id])
-    user.toggle_enabled
-    render text: "ok"
-  end
-
   def get_users_list
     rows = get_rows(User.order('role_id').page(params[:page]).per(params[:rp]))
     render json: {page: params[:page], total: User.count, rows: rows}

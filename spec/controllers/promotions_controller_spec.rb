@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe PromotionsController do
-  let!(:user_super) {FactoryGirl.create(:user_super)}
-  let!(:user_client) {FactoryGirl.create(:user_client)}
   let!(:client) {FactoryGirl.create(:client)}
-  let!(:promotion) {FactoryGirl.create(:promotion)}
+  let!(:user_super) {FactoryGirl.create(:user_super)}
+  let!(:user_client) {FactoryGirl.create(:user_client, company_id: client.id)}
+  let!(:promotion) {FactoryGirl.create(:promotion, client_id: client.id)}
 
   let(:promotion_name) {"promotion01"}
   let(:roman_name) {"promotion01"}
@@ -14,22 +14,16 @@ describe PromotionsController do
 
   let(:action_create) do
     post :create, promotion: {promotion_name: promotion_name, roman_name: roman_name,
-      promotion_category_id: promotion_category_id, tracking_period: tracking_period,
-      agency_id: user_super.company_id}, client_id: client.id
+      promotion_category_id: promotion_category_id, tracking_period: tracking_period},
+      client_id: client.id
   end
   let(:action_update) do
-    put :update, id: promotion.id, promotion: {promotion_name: name_to_change}
+    put :update, client_id: promotion.client_id, id: promotion.id, promotion: {promotion_name: name_to_change}
   end
 
   context "when user don't login" do
     describe "GET index" do
-      before {get :index}
-      subject {response}
-      it {should redirect_to signin_path}
-    end
-
-    describe "GET show" do
-      before {get :show, id: promotion.id}
+      before {get :index, client_id: client.id}
       subject {response}
       it {should redirect_to signin_path}
     end
@@ -47,7 +41,7 @@ describe PromotionsController do
     end
 
     describe "GET edit" do
-      before {get :edit, id: promotion.id}
+      before {get :edit, id: promotion.id, client_id: promotion.client_id}
       subject {response}
       it {should redirect_to signin_path}
     end
@@ -59,7 +53,7 @@ describe PromotionsController do
     end
 
     describe "delete logically" do
-      before {post :delete_promotion, id: promotion.id}
+      before {post :delete_promotion, promotion_id: promotion.id, client_id: promotion.client_id}
       subject {response}
       it {should redirect_to signin_path}
     end
@@ -70,13 +64,7 @@ describe PromotionsController do
       before {session[:user_id] = user_client.id}
 
       describe "GET index" do
-        before {get :index}
-        subject {response}
-        it {should render_template :index}
-      end
-
-      describe "GET show" do
-        before {get :show, id: promotion.id}
+        before {get :index, client_id: client.id}
         subject {response}
         it {should render_template :index}
       end
@@ -94,7 +82,7 @@ describe PromotionsController do
       end
 
       describe "GET edit" do
-        before {get :edit, id: promotion.id}
+        before {get :edit, id: promotion.id, client_id: promotion.client_id}
         subject {response}
         it {should redirect_to promotions_path}
       end
@@ -106,7 +94,7 @@ describe PromotionsController do
       end
 
       describe "delete logically" do
-        before {post :delete_promotion, id: promotion.id}
+        before {post :delete_promotion, promotion_id: promotion.id, client_id: promotion.client_id}
         subject {response}
         it {should redirect_to promotions_path}
       end
@@ -148,7 +136,7 @@ describe PromotionsController do
       end
 
       describe "GET edit" do
-        before {get :edit, id: promotion.id}
+        before {get :edit, id: promotion.id, client_id: promotion.client_id}
         subject {response}
         it {should render_template :edit}
       end
@@ -185,16 +173,11 @@ describe PromotionsController do
       end
 
       describe "delete logically" do
-        before {post :delete_promotion, id: promotion.id}
+        before {post :delete_promotion, promotion_id: promotion.id, client_id: promotion.client_id}
 
         describe "set del_flg to deleted" do
           subject {promotion.reload.del_flg}
           it {should eq Settings.promotion.deleted}
-        end
-
-        describe "redirect to action index" do
-          subject {response}
-          it {should redirect_to action: :index, client_id: promotion.client_id}
         end
       end
     end

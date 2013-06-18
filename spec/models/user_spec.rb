@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe User do
-  let(:user) {FactoryGirl.create(:user_super)}
+  let!(:user) {FactoryGirl.create(:user_super)}
   it {should respond_to(:username)}
   it {should respond_to(:roman_name)}
   it {should respond_to(:email)}
@@ -94,6 +94,23 @@ describe User do
           user.block_login_user.block_at_time.should eq(nil)
         end
       end
+    end
+  end
+
+  describe "#toggle_enabled" do
+    let!(:client) {FactoryGirl.create(:client)}
+    let!(:client_user) {FactoryGirl.create(:client_user,
+      client_id: client.id, user_id: user.id)}
+    before {user.toggle_enabled}
+
+    describe "set status to deactive" do
+      subject {user.reload.status}
+      it {should eq Settings.user.deactive}
+    end
+
+    describe "set client_user status to deleted" do
+      subject {client_user.reload.del_flg}
+      it {should eq Settings.client_user.deleted}
     end
   end
 end

@@ -9,7 +9,7 @@ describe Account do
   it {should respond_to(:account_name)}
   it {should respond_to(:roman_name)}
   it {should respond_to(:sync_flg)}
-  it {should respond_to(:cost)}
+  it {should respond_to(:margin)}
   it {should respond_to(:create_user_id)}
   it {should respond_to(:update_user_id)}
 
@@ -42,7 +42,7 @@ describe Account do
     end
     
     describe "when cost is not present" do
-      before {account.cost = " "}
+      before {account.margin = " "}
       it {should_not be_valid}
     end
   end

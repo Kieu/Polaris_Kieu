@@ -54,12 +54,6 @@ describe UsersController do
       subject {response}
       it {should redirect_to signin_path}
     end
-
-    describe "enabe disable user" do
-      before {post :enable_disable_user, id: user_client.id}
-      subject {response}
-      it {should redirect_to signin_path}
-    end
   end
 
   context "when user logged in" do
@@ -92,12 +86,6 @@ describe UsersController do
 
       describe "PUT update" do
         before {action_update}
-        subject {response}
-        it {should redirect_to root_path}
-      end
-
-      describe "enabe disable user" do
-        before {post :enable_disable_user, id: user_client.id}
         subject {response}
         it {should redirect_to root_path}
       end
@@ -186,20 +174,6 @@ describe UsersController do
             subject {response}
             it {should render_template :edit}
           end
-        end
-      end
-
-      describe "enabe disable user" do
-        before {post :enable_disable_user, id: user_client.id}
-
-        describe "set status to deactive" do
-          subject {user_client.reload.status}
-          it {should eq Settings.user.deactive}
-        end
-
-        describe "set client_user status to deleted" do
-          subject {client_user.reload.del_flg}
-          it {should eq Settings.client_user.deleted}
         end
       end
     end
