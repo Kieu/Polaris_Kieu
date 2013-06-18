@@ -8,6 +8,8 @@ $(document).ready(function () {
         $("#accordion01_inner").slideToggle('slow');
         $('#passwd').toggleClass("arrow1");
         $('#passwd').toggleClass("arrow2");
+        $('#passwd').text('<%= I18n.t("login.forgor_pw")%>');
+        $('#passwd').text('<%= I18n.t("login.forgor_pw1")%>');
 
     })
 

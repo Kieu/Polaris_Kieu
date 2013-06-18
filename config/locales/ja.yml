@@ -601,6 +601,7 @@ ja:
       ja: "日本語"
       en: "英語"
     forgor_pw: "Passwordを忘れた場合はコチラ"
+    forgor_pw1: "Passwordを入力してログインするならコチラ"
     announcements: "お知らせ"
     press_release: "プレスリリース"
     captcha: "キャプチャ"
