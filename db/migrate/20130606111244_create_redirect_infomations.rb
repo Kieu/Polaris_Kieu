@@ -7,16 +7,16 @@ class CreateRedirectInfomations < ActiveRecord::Migration
       t.integer :media_category_id, limit: 11
       t.integer :media_id, limit: 11
       t.integer :account_id, limit: 11
-      t.integer :campaign_id, limit: 20
-      t.integer :group_id, limit: 20
-      t.integer :unit_id, limit: 20
-      t.integer :creative_id, limit: 20
+      t.column :campaign_id, "bigint(20)"
+      t.column :group_id, "bigint(20)"
+      t.column :unit_id, "bigint(20)"
+      t.column :creative_id, "bigint(20)"
       t.integer :click_unit, limit: 11
       t.text :comment
-      t.string :del_flg, limit: 1
-      t.datetime :create_at
+      t.column :del_flg, "char(1)"
+      t.datetime :created_at
       t.integer :create_usr_id, limit: 11
-      t.datetime :update_at
+      t.datetime :updated_at
       t.integer :update_usr_id, limit: 11
     end
   end

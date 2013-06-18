@@ -7,8 +7,8 @@ class CreateRedirectUrls < ActiveRecord::Migration
       t.string :name, limit: 255
       t.integer :create_user_id, limit: 11
       t.integer :update_user_id, limit: 11
-      t.datetime :create_time
-      t.datetime :update_time
+      t.datetime :created_at
+      t.datetime :updated_at
     end
   end
 end

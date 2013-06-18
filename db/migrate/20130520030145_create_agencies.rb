@@ -1,10 +1,10 @@
 class CreateAgencies < ActiveRecord::Migration
   def change
     create_table :agencies do |t|
-      t.string :agency_name
-      t.string :roman_name
-      t.integer :create_user_id
-      t.integer :update_user_id
+      t.string :agency_name, limit: 255
+      t.string :roman_name, limit: 255
+      t.integer :create_user_id, limit: 11
+      t.integer :update_user_id, limit: 11
 
       t.timestamps
     end
