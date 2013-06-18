@@ -431,5 +431,9 @@
     });
 </script>
 <% else %>
-  <b> No data</b>
+    <ul class="contentNavi">
+      <li class="pre"><a href="/clients?client_id=<%=@client_id%>"><%= @client_name %></a></li>
+      <li>&gt;</li>
+      <li>No data</li>
+    </ul>
 <% end %>
