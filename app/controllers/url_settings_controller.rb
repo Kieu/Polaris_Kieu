@@ -20,8 +20,8 @@ class UrlSettingsController < ApplicationController
 	end
   
   def get_urls_list
-    start_date = cookies[:s]
-    end_date = cookies[:e]
+    start_date = params[:start_date]
+    end_date = params[:end_date]
     url_data = Array.new
     url_data = RedirectUrl.get_url_data(params[:promotion_id], params[:account_id], params[:media_id],
                                  params[:page], params[:rp], start_date, end_date)
