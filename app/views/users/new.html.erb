@@ -81,6 +81,7 @@
             }
             last_choice = id;
             name_data = (id == "2") ? "Client" : "Agency";
+            $("#user_company_id").attr("disabled","disabled");
             $.ajax({
                 type: "POST",
                 url: "<%= change_company_list_users_path %>",
@@ -92,6 +93,7 @@
                         option = "<option value='" + data[i].id + "'>" + name + "</option>";
                         $("#user_company_id").append(option);
                     }
+                    $("#user_company_id").removeAttr("disabled");
                 }
             });
         })
