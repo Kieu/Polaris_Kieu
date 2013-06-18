@@ -38,6 +38,10 @@ class ExportPromotionsData
       
       # get row data
       index_to_get_data_row = 0
+      if  start_date || end_date
+        start_date = Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d")
+        end_date = Date.yesterday.strftime("%Y/%m/%d")
+      end
       array_data_row = DailySummaryAccount.get_table_data(options['promotion_id'], start_date, end_date)
       account_col = ["Media", "Account name", "Imp", "Click", "CTR", "COST",
                      "CPM", "CPC"]
