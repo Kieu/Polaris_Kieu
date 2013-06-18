@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   VALID_ROMAN_NAME_REGEX = /^[A-Z_\-\ a-z][A-Za-z_\-\ 0-9]*$/
 
   attr_accessible :username, :roman_name, :email, :company_id, :role_id,
-    :password_flg, :language
+    :password_flg
 
   belongs_to :role
   has_many :client_users

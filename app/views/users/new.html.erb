@@ -26,7 +26,15 @@
         <tr>
           <th><%= f.label t("user.company_name") %></th>
           <td colspan="2">
-            <%= f.collection_select :company_id, Client.where(id: 0), :id, :client_name, {include_blank: t("user.company_id.include_blank")} , {:class => 'input-text'} %></td>
+          	<% if @user.role_id && !@user.client? %>
+            	<%= f.collection_select :company_id, Agency.all, :id, :agency_name, {include_blank: t("user.company_id.include_blank")} , {:class => 'input-text'} %>
+            <% elsif @user.role_id %>
+            	<%= f.collection_select :company_id, Client.active.all, :id, :client_name, {include_blank: t("user.company_id.include_blank")} , {:class => 'input-text'} %>
+            <% else %>
+            	<%= f.collection_select :company_id, Client.where(id: 0), :id, :client_name, {include_blank: t("user.company_id.include_blank")} , {:class => 'input-text'} %>
+            <% end %>
+            </td>
+            	
         </tr>
         <tr>
           <th><%= I18n.t("user.password.label") %></th>
@@ -34,8 +42,8 @@
         </tr>
         <tr>
           <th><%= I18n.t("user.password_notification.label") %></th>
-          <td><%= f.radio_button :password_flg, "1", checked: true %> <%= I18n.t("user.password_notification.not_notified") %></td>
-          <td><%= f.radio_button :password_flg, "0" %> <%= I18n.t("user.password_notification.to_notified") %></td>
+          <td><%= f.radio_button :password_flg, "0", checked: true %> <%= I18n.t("user.password_notification.not_notified") %></td>
+          <td><%= f.radio_button :password_flg, "1" %> <%= I18n.t("user.password_notification.to_notified") %></td>
         </tr>
         </tbody>
       </table>
@@ -54,38 +62,6 @@
             location.href = "<%= users_path %>";
         })
         last_choice = $("#user_role_id").val();
-        var selected = '';
-        <% if @user.company_id && @user.company_id.to_i > 0 %>
-            selected = <%= @user.company_id%>;
-        <% end %>
-        id = $('#user_role_id').val();
-            if ((id == 1 && last_choice == 3) || (id == 3 && last_choice == 1)) {
-                last_choice = id;
-                return;
-            }
-            if (id==""){
-              $("#user_company_id").html("<option value><%= t('user.company_id.include_blank') %></option>");
-              return;
-            }
-            last_choice = id;
-            name_data = (id == "2") ? "Client" : "Agency";
-            $.ajax({
-                type: "POST",
-                url: "<%= change_company_list_users_path %>",
-                data: "model=" + name_data,
-                success: function (data) {
-                    $("#user_company_id").html("<option value><%= t('user.company_id.include_blank') %></option>");
-                    for (var i = 0; i < data.length; i++) {
-                        name = (name_data == "Client") ? data[i].client_name : data[i].agency_name;
-                        if (selected == data[i].id)
-                          option = "<option selected='selected' value='" + data[i].id + "'>" + name + "</option>";
-                        else
-                          option = "<option value='" + data[i].id + "'>" + name + "</option>";  
-                        $("#user_company_id").append(option);
-                    }
-                }
-            });
-
         $("#user_role_id").change(function () {
             id = $(this).val();
             if ((id == 1 && last_choice == 3) || (id == 3 && last_choice == 1)) {
