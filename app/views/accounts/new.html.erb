@@ -40,7 +40,7 @@
         </tr>
         <tr>
           <th><%= f.label t("account.margin") %></th>
-          <td><%= I18n.t("account.input_data") %><%= f.text_field :margin, maxlength: 255, value: @account.margin, style: "width: 50px" %> %</td>
+          <td><%= I18n.t("account.input_data") %> &nbsp; × <%= f.text_field :margin, maxlength: 255, value: @account.margin, style: "width: 80px; text-align: right" %> %</td>
         </tr>
         <tr>
         	<td colspan="2">

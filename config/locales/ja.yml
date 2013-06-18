@@ -649,7 +649,7 @@ ja:
     account_name: "アカウント名: "
     roman_name: "アカウント名(英語): "
     margin: "コスト計算： "
-    input_data: "入力データ x"
+    input_data: "入力データ"
     sync_account_id: "アカウントの同期: "
     synchronism: "同期"
     fractured: "同期停止"
