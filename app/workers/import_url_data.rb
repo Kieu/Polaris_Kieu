@@ -66,7 +66,7 @@ class ImportUrlData
           background_job.status = Settings.job_status.WRONG
           background_job.save!
 
-          exit
+          exit 1
         end
 
         row_number = CSV.readlines(data_file).size
@@ -78,7 +78,7 @@ class ImportUrlData
           # false case
           background_job.status = Settings.job_status.WRONG
           background_job.save!
-          exit
+          exit 1
         end
         array_ads = Array.new
         array_redirect_info = Array.new
@@ -263,9 +263,7 @@ class ImportUrlData
         error.write("Unexpected error: file uploading failed. Please try againg or contact the customer service. \n")
       end
     end
-    if error_num > 0
     File.delete(data_file)
-    end
   end
 
   private
