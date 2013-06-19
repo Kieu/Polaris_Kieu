@@ -85,7 +85,7 @@
         	company = Agency.find(user.company_id).agency_name
         end
         %>
-        list_user.push({"label": "<%= short_name(user.username) %>", "value": "<%= user.id %>", "email": "<%= short_name(user.email) %>", "role": "<%= user.role.role_name %>", "company": "<%= short_name(company) %>"});
+        list_user.push({"label": "<%= short_ja_name(user.username) %>", "value": "<%= user.id %>", "email": "<%= short_en_name(user.email) %>", "role": "<%= user.role.role_name %>", "company": "<%= short_en_name(company) %>"});
         <% end %>
         $("#tags").autocomplete({
             source: list_user,

@@ -25,10 +25,10 @@ class ImportsController < ApplicationController
       background_job.job_id = job_id
       background_job.save!
       flash[:error] = t("url.flash_messages.success")
-      redirect_to url_settings_path + "?promotion_id=#{params[:promotion_id]}&account_id=#{params[:account_id]}"
+      redirect_to url_settings_path(promotion_id: params[:promotion_id], account_id: params[:account_id])
     else
       flash[:error] = "Upload false"
-      render "url_settings?promotion_id=#{params[:promotion_id]}&account_id=#{params[:account_id]}"
+      redirect_to url_settings_path(promotion_id: params[:promotion_id], account_id: params[:account_id])
     end
   end
 end
