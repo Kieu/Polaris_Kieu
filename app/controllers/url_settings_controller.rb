@@ -28,10 +28,10 @@ class UrlSettingsController < ApplicationController
     end
     
     url_data = Array.new
-    url_data = RedirectUrl.get_url_data(params[:promotion_id], params[:account_id], params[:media_id],
+    url_data, total_row = RedirectUrl.get_url_data(params[:promotion_id], params[:account_id], params[:media_id],
                                  params[:page], params[:rp], start_date, end_date)
     rows = get_rows url_data, params[:promotion_id], params[:client_id]
-    count = url_data.count
+    count = total_row[0]['totalCount']
 
     render json: {page: params[:page], total: count, rows: rows}
   end
@@ -45,7 +45,7 @@ class UrlSettingsController < ApplicationController
     
     account_name = Account.where(id: params[:account_id]).select('roman_name').first['roman_name']
     file_name = account_name + "_URL_" + Time.now.strftime("%Y%m%d") + Settings.file_type.CSV
-    send_file(path_to_file, filename: file_name, type: "text/csv")
+    send_file(path_to_file, filename: file_name, type: "text/csv; charset=utf-8")
   end
 
   def get_rows url_data, promotion_id, client_id

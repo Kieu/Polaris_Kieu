@@ -45,15 +45,12 @@ $(document).ready(function() {
             {display: 'URL', name : 'url', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][6] == "0" ? 1 : 0 %>},
             {display: 'Note', name : 'note', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][7] == "0" ? 1 : 0 %>},
             {display: 'Last Modified', name : 'last_modified', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][7] == "0" ? 1 : 0 %>},
-            {display: 'Delete', name : 'delete_check', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][9] == "0" ? 1 : 0 %>},
+            {display: 'Delete', name : 'delete_check', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][9] == "0" ? 1 : 0 %>}
             ],
         usepager: true,
         title: 'Url List',
         useRp: true,
         id: 1,
-        promotion_id: 1,
-        media_id: 1,
-        account_id: 1,
         rp: 10,
         showTableToggleBtn: true,
         height: 250
