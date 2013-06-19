@@ -37,22 +37,22 @@
             </td>
         </tr>
         <tr>
-          <th><%= f.label t("client.contract_type.label") %></th>
-          <td><%= f.radio_button :contract_type, 0, {checked: true} %> <%= I18n.t("client.contract_type.unrecovered") %></td>
-          <td> <%= f.radio_button :contract_type, 1 %> <%= I18n.t("client.contract_type.been_recovered") %>
+          <th>
+            <%= f.label t("client.contract_flg.label") %> </th>
+          <td><%= f.radio_button :contract_flg, 0 %> <%= I18n.t("client.contract_type.unrecovered") %></td>
+          <td> <%= f.radio_button :contract_flg, 1, {checked: true} %> <%= I18n.t("client.contract_type.been_recovered") %>
           </td>
         </tr>
         <tr>
-          <th>
-            <%= f.label t("client.contract_flg.label") %> </th>
-          <td><%= f.radio_button :contract_flg, 0, {checked: true} %> <%= I18n.t("client.contract_flg.standard_plan") %></td>
-          <td> <%= f.radio_button :contract_flg, 1 %> <%= I18n.t("client.contract_flg.premium_plan") %>
+          <th><%= f.label t("client.contract_type.label") %></th>
+          <td><%= f.radio_button :contract_type, 0, {checked: true} %> <%= I18n.t("client.contract_flg.standard_plan") %></td>
+          <td> <%= f.radio_button :contract_type, 1 %> <%= I18n.t("client.contract_flg.premium_plan") %>
           </td>
         </tr>
       </table>
       <div class="user_info_add">
         <p><%= I18n.t("client.user_information") %>▼</p>
-        <input id="tags" placeholder="search" maxlength="255"/>
+        <input id="tags" placeholder="<%= I18n.t("client.user_search") %>" maxlength="255"/>
       </div>
 
       <table id="user_list" class="user_add">

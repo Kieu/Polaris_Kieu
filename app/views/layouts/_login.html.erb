@@ -73,7 +73,10 @@ $(document).ready(function () {
       <% if @form_errors && @form_errors.count > 0 %>
           <% @form_errors.each do |error| %>
               <div>
-                <div><span class="text-validationError"><%= error %></span></div>
+              	<% error = error.split(I18n.t("login.split")) %>
+              	<% error.each do |e|%>
+                	<div><span class="text-validationError"><%= e + I18n.t("login.split") %></span></div>
+                <% end %>
               </div>
           <% end %>
           <script type="text/javascript">
