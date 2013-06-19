@@ -199,7 +199,7 @@ table.user_add tbody td {
 .f_category_title1{
   color: #404040;
     font-size: 16px;
-    left: 49px;
+    left: 20px;
     position: absolute;
     top: 63px;
 	
@@ -219,10 +219,10 @@ table.user_add tbody td {
     background-color: #FFFFFF;
     border: 2px solid #C4C4C4;
     height: 455px;
-     left: 434px;
+     left: 375px;
     position: absolute;
     top: 90px;
-    width: 250px;
+    width: 325px;
 		
 		}
 	.box02{
@@ -248,15 +248,28 @@ table.user_add tbody td {
 		padding:0 0 0 0;
 		
 		}	
-		
+		.box031{
+    background-color: #FFFFFF;
+    border: 2px solid #C4C4C4;
+    height: 455px;
+     left: 20px;
+    position: absolute;
+    top: 90px;
+    width: 520px;
+		}	
+		.box3_txt{
+    color: #E76813;
+    padding: 5px 0 0 160px;
+		}		
+				
 		.box03{
     background-color: #FFFFFF;
     border: 2px solid #C4C4C4;
     height: 455px;
-     left: 182px;
+     left: 20px;
     position: absolute;
     top: 90px;
-    width: 250px;
+    width: 325px;
 		}	
 		.box3_txt{
     color: #E76813;

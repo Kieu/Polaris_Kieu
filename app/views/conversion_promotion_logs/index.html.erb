@@ -29,7 +29,9 @@
 		</ul>
 	</div>
 	<div class="date"><%= I18n.t("log.today_text")%><br />
-		<input id="datepick" type="text" readonly="readonly" value="<%= cookies[:s] + " - " + cookies[:e] %>" name="datepick">&#9660;</div>
+		<div id="datepicker">
+		<%= @start_date %>~<%= @end_date %>&#9660;</div>
+	</div>
 </div>
 <div class="clear"></div>
 <div id="conversion_inner">
@@ -76,6 +78,17 @@
 	<!--/タブ切り替え-->
 </div>
 <script type="text/javascript">
+	var term = $('#datepicker').val();
+    var d = term.split(' - ');
+    if (d[0])
+    	start_date = d[0];
+    else
+    	start_date = <%= @start_date %>
+    if (d[1])
+    	end_date = d[1];
+    else
+    	end_date = <%= @end_date %>
+
    function showColumn(tbl, colIndex, visible) {
         $(tbl).flexToggleCol(colIndex, visible);
     }
@@ -86,6 +99,8 @@
                 "media_category_id": $("#media_category_id").val(),
                 "account_id": $("#account_id").val(),
                 "conversion_id": $("#conversion_id").val()},
+                "start_date": start_date,
+            	"end_date": end_date,
             type: "post",
             success: function(data){
             }
@@ -93,7 +108,7 @@
         })
     })
 	$("#cvlogs").flexigrid({
-		url: "<%= get_conversion_logs_list_conversion_promotion_logs_path %>?media_category_id=" + $('#media_category_id').val() + "&account_id=" + $('#media_category_id').val() + "&media_id=" + $('#media_id').val(),
+		url: "<%= get_conversion_logs_list_conversion_promotion_logs_path %>?media_category_id=" + $('#media_category_id').val() + "&account_id=" + $('#media_category_id').val() + "&media_id=" + $('#media_id').val() + "&start_date=#{@start_date}"  + "&end_date=#{@end_date}",
 		dataType: 'json',
 		colModel : [ 
 	{display: '<%= I18n.t("cv_logs.conversion_time")%>', name : 'conversion_utime', width : 'auto', width : 'auto', sortable : true, align: 'center',hide: ($.cookie("cv_options")[0] == "1") ? false : true},
@@ -210,15 +225,18 @@
 			}
 		}
 		if ($("#error_table").is(':checked')) {
+			console.log('checked');
 	    	$.cookie("ser",1);
 	    	
 	    } else {
+	    	console.log('unchecked');
 	    	$.cookie("ser",0);
 	    }
-	    reloadFlex1("#cvlogs","<%= get_conversion_logs_list_conversion_promotion_logs_path %>?cv_id=" + $("#conversion_id").val() + "&account_id=" + $("#account_id").val() + "&media_category_id=" + $("#media_category_id").val());
+	    reloadFlex1("#cvlogs","<%= get_conversion_logs_list_conversion_promotion_logs_path %>?cv_id=" + $("#conversion_id").val() + "&account_id=" + $("#account_id").val() + "&media_category_id=" + $("#media_category_id").val() + "&start_date=" + start_date + "&end_date=" + end_date);
 		$("#cvlogs").colorbox.close();
 	});
 	$("#not_change_cookie").click(function(){
+		$('#current_box').html('<%=j render "layouts/option_cv_default" %>');
 		cookies_options = $.cookie("cv_options");
 		//location.href = location.href;
 		$("#cvlogs").colorbox.close();
@@ -228,8 +246,8 @@
 		cookies_options = $.cookie("cv_options");
 		//$("#cv_logs_0").attr("src","/assets/btn_box_add.gif");
 		//location.href = location.href;
-		$('#current_box').html($('#checkall_box').html());
-		reloadFlex1("#cvlogs","<%= get_conversion_logs_list_conversion_promotion_logs_path %>?cv_id=" + $("#conversion_id").val() + "&account_id=" + $("#account_id").val() + "&media_category_id=" + $("#media_category_id").val());
+		$('#current_box').html('<%=j render "layouts/option_cv_checkall" %>');
+		reloadFlex1("#cvlogs","<%= get_conversion_logs_list_conversion_promotion_logs_path %>?cv_id=" + $("#conversion_id").val() + "&account_id=" + $("#account_id").val() + "&media_category_id=" + $("#media_category_id").val() + "&start_date=" + start_date + "&end_date=" + end_date);
 
 	})
 	$(document).on('click', "#redisplay_all", function(){
@@ -237,8 +255,8 @@
 		cookies_options = $.cookie("cv_options");
 		//$("#cv_logs_0").attr("src","/assets/btn_box_add.gif");
 		//location.href = location.href;
-		$('#current_box').html($('#checkall_box').html());
-		reloadFlex1("#cvlogs","<%= get_conversion_logs_list_conversion_promotion_logs_path %>?cv_id=" + $("#conversion_id").val() + "&account_id=" + $("#account_id").val() + "&media_category_id=" + $("#media_category_id").val());
+		$('#current_box').html('<%=j render "layouts/option_cv_checkall" %>');
+		reloadFlex1("#cvlogs","<%= get_conversion_logs_list_conversion_promotion_logs_path %>?cv_id=" + $("#conversion_id").val() + "&account_id=" + $("#account_id").val() + "&media_category_id=" + $("#media_category_id").val() + "&start_date=" + start_date + "&end_date=" + end_date);
 	})
 
 	$("#delete_all").click(function(){
@@ -248,7 +266,7 @@
 		//location.href = location.href;
 		$('#current_box').hide();
 		$('#checkall_box').show();
-		reloadFlex1("#cvlogs","<%= get_conversion_logs_list_conversion_promotion_logs_path %>?cv_id=" + $("#conversion_id").val() + "&account_id=" + $("#account_id").val() + "&media_category_id=" + $("#media_category_id").val());
+		reloadFlex1("#cvlogs","<%= get_conversion_logs_list_conversion_promotion_logs_path %>?cv_id=" + $("#conversion_id").val() + "&account_id=" + $("#account_id").val() + "&media_category_id=" + $("#media_category_id").val() + "&start_date=" + start_date + "&end_date=" + end_date);
 		
 	})
 
@@ -263,7 +281,7 @@
 
 	$("#conversion_id").change(function(){
 		conversion_id = $(this).val();
-		reloadFlex1("#cvlogs","<%= get_conversion_logs_list_conversion_promotion_logs_path %>?cv_id=" + $(this).val() + "&account_id=" + $("#account_id").val() + "&media_category_id=" + $("#media_category_id").val());
+		reloadFlex1("#cvlogs","<%= get_conversion_logs_list_conversion_promotion_logs_path %>?cv_id=" + $(this).val() + "&account_id=" + $("#account_id").val() + "&media_category_id=" + $("#media_category_id").val() + "&start_date=" + start_date + "&end_date=" + end_date);
 	})
 
 	$("#media_category_id").change(function(){
@@ -282,11 +300,11 @@
 	        }
 	    });
 		media_category_id = $(this).val();
-		reloadFlex1("#cvlogs","<%= get_conversion_logs_list_conversion_promotion_logs_path %>?cv_id=" + $("#conversion_id").val() + "&account_id=" + $("#account_id").val() + "&media_category_id=" + $(this).val());
+		reloadFlex1("#cvlogs","<%= get_conversion_logs_list_conversion_promotion_logs_path %>?cv_id=" + $("#conversion_id").val() + "&account_id=" + $("#account_id").val() + "&media_category_id=" + $(this).val() + "&start_date=" + start_date + "&end_date=" + end_date);
 	})
 
 	$("#account_id").change(function(){
-		reloadFlex1("#cvlogs","<%= get_conversion_logs_list_conversion_promotion_logs_path %>?cv_id=" + $("#conversion_id").val() + "&account_id=" + $(this).val() + "&media_category_id=" + $("#media_category_id").val());
+		reloadFlex1("#cvlogs","<%= get_conversion_logs_list_conversion_promotion_logs_path %>?cv_id=" + $("#conversion_id").val() + "&account_id=" + $(this).val() + "&media_category_id=" + $("#media_category_id").val() + "&start_date=" + start_date + "&end_date=" + end_date);
 	})
 
 	// ------datepicker-------
@@ -294,37 +312,19 @@
 		 if (year < 2000) { year = parseInt(year) + 1900; }
 		 if (month.length == 1) { month = "0" + parseInt(month); }
 		 if (day.length == 1) { day = "0" + parseInt(day); }
-		 // if(lang===langJP){
-		  // return year + "/" + month + "/" + day;
-		 // }else{
-		  //return month + "/" + day + "/" + year;
-		  return year + "/" + month + "/" + day;
-		 //}
+		 return year + month + day;
 		}
-		$('#datepick').daterangepicker({
+		$('#datepicker').daterangepicker({
     		lang: $('#lang').val(),
             onDone: function() {
-                var term = $('#datepick').val();
+                var term = $('#datepicker').val();
                 var d = term.split(' - ');
-                var f = (d[0]).split('/');
-                var t = (d[1]).split('/');
-                // if ($('#lang').val() === langJP) {
-                    // $.cookie("s", formatDate(f[0], f[1], f[2], langJP), {
-                        // path: '/'
-                    // });
-                    // $.cookie("e", formatDate(t[0], t[1], t[2], langJP), {
-                        // path: '/'
-                    // });
-                // } else {
-                    $.cookie("s", formatDate(f[0], f[1], f[2]), {
-                        path: '/'
-                    });
-                    $.cookie("e", formatDate(t[0], t[1], t[2]), {
-                        path: '/'
-                    });
-                //}
+                start_date = d[0];
+                end_date = d[1];
                 
-                reloadFlex1("#cvlogs", "<%= get_conversion_logs_list_conversion_promotion_logs_path %>?cv_id=" + $("#media_category_id").val() + "&account_id=" + $("#account_id").val() + "&media_category_id=" + $("#media_category_id").val());
+                $("#datepicker").text(start_date + "~" + end_date + "▼");
+                
+                reloadFlex1("#cvlogs", "<%= get_conversion_logs_list_conversion_promotion_logs_path %>?cv_id=" + $("#media_category_id").val() + "&account_id=" + $("#account_id").val() + "&media_category_id=" + $("#media_category_id").val() + "&start_date=" + start_date + "&end_date=" + end_date);
             }
         });
 
