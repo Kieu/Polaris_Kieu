@@ -15,7 +15,11 @@ a.bread_scrumb_link {
 </style>
 <% if @array_promotion.count > 0 %>
 <ul class="contentNavi">
-	<li class="pre"><a class="bread_scrumb_link" href="/clients?client_id=<%=@client_id%>"><%= @client_name %></a></li>
+	<% if current_user.super? %>
+		<li class="pre"><a class="bread_scrumb_link" href="/clients?client_id=<%=@client_id%>"><%= short_en_name(@client_name) %></a></li>
+	<% else %>
+		<li class="pre"><%= short_en_name(@client_name) %></li>
+	<% end %>
 	<li>&gt;</li>
 	<li><%= @promotion_name %></li>
 </ul>
