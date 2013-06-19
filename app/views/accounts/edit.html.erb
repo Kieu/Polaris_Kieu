@@ -41,7 +41,7 @@
         </tr>
         <tr>
           <th><%= f.label I18n.t("account.margin") %></th>
-          <td ><%= I18n.t("account.input_data") %>&nbsp; &nbsp; &nbsp; &nbsp;<%= f.text_field :margin, maxlength: 255, value: @account.margin, style: "width: 80px" %> %</td>
+          <td ><%= I18n.t("account.input_data") %> &nbsp; × <%= f.text_field :margin, maxlength: 255, value: @account.margin, style: "width: 80px" %></td><td id="percent" style="margin-left: -68px; position: absolute; margin-top: 12px;">%</td>
         </tr>
         <tr>
         	<td colspan="2">
@@ -75,6 +75,9 @@
     </div>
     <input type="hidden" name="promotion_id" value="<%= @promotion.id %>">
 <script type="text/javascript">
+  <% if @account.errors[:margin].count > 0%>
+    $("#percent").css("margin-top","0");
+  <% end %>
 function disable_sync_box() {
 	$("#account_sync_account_id").attr('disabled', true);
 	$("#account_sync_account_pw").attr('disabled', true);

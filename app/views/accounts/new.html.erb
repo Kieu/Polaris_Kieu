@@ -21,26 +21,26 @@
         <tr>
           <th> <%= f.label t("account.media_category") %></th>
           <td><%= f.select :media_category_id,
-                         Settings.media_category.each_with_index.map {|name, index| [t(name[1]), index+1]} , class: "input-text" %>
+                         Settings.media_category.each_with_index.map {|name, index| [t(name[1]), index+1]} , class: "input-text", class: "prevent_change" %>
           </td>
         </tr>
         <tr>
           <th><%= f.label t("account.media") %></th>
           <td>
-            <%= select_tag 'account[media_id]', options_from_collection_for_select(@medias, 'id', 'media_name', (@account.media_id) ? @account.media_id : ''), class: "input-select" %>
+            <%= select_tag 'account[media_id]', options_from_collection_for_select(@medias, 'id', 'media_name', (@account.media_id) ? @account.media_id : ''), class: "input-select", class: "prevent_change" %>
           </td>
         </tr>
         <tr>
           <th><%= f.label t("account.account_name") %></th>
-          <td> <%= f.text_field :account_name, maxlength: 255, style: "width: 250px" %>  </td>
+          <td> <%= f.text_field :account_name, maxlength: 255, style: "width: 250px", class: "prevent_change" %>  </td>
         </tr>
         <tr>
           <th><%= f.label t("account.roman_name") %></th>
-          <td><%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %></td>
+          <td><%= f.text_field :roman_name, maxlength: 255, style: "width: 250px", class: "prevent_change" %></td>
         </tr>
         <tr>
           <th><%= f.label t("account.margin") %></th>
-          <td><%= I18n.t("account.input_data") %> &nbsp; × <%= f.text_field :margin, maxlength: 255, value: @account.margin, style: "width: 80px; text-align: right" %> %</td>
+          <td><%= I18n.t("account.input_data") %> &nbsp; × <%= f.text_field :margin, maxlength: 255, value: @account.margin, style: "width: 80px; text-align: right", class: "prevent_change" %></td><td id="percent" style="margin-left: -68px; position: absolute; margin-top: 12px;">%</td>
         </tr>
         <tr>
         	<td colspan="2">
@@ -48,19 +48,19 @@
         			<table>
         				<tr>
 				          <th><%= f.label t("account.sync_account_id") %></th>
-				          <td><%= f.radio_button :sync_flg, 1, checked: true, onclick: "active_sync_box();" %> <%= I18n.t("account.synchronism") %>
-				            <%= f.radio_button :sync_flg, 0, onclick: "disable_sync_box();" %> <%= I18n.t("account.fractured") %></td>
+				          <td><%= f.radio_button :sync_flg, 1, checked: true, onclick: "active_sync_box();", class: "prevent_change" %> <%= I18n.t("account.synchronism") %>
+				            <%= f.radio_button :sync_flg, 0, onclick: "disable_sync_box();", class: "prevent_change" %> <%= I18n.t("account.fractured") %></td>
 				        </tr>
 				        <tr>
 				          <th></th>
 				          <td>
-				            <%= f.text_field :sync_account_id, maxlength: 255, style: "width: 250px", placeholder: " ID: " %>
+				            <%= f.text_field :sync_account_id, maxlength: 255, style: "width: 250px", placeholder: " ID: ", class: "prevent_change" %>
 				          </td>
 				        </tr>
 				        <tr>
 				        <th></th>
 				        <td>
-				        	<%= f.password_field :sync_account_pw, maxlength: 255, style: "width: 250px", placeholder: " PW: " %>
+				        	<%= f.password_field :sync_account_pw, maxlength: 255, style: "width: 250px", placeholder: " PW: ", class: "prevent_change" %>
 				        </tr>
         			</table>
         		</div>
@@ -84,6 +84,9 @@ function active_sync_box() {
 	$("#account_sync_account_pw").removeAttr('disabled');
 }
 jQuery(document).ready(function($) {
+  <% if @account.errors[:margin].count > 0%>
+    $("#percent").css("margin-top","0");
+  <% end %>
 	
 	$("#account_media_category_id").change(function(){
 		$.ajax({

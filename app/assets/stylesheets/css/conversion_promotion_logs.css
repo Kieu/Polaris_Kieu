@@ -87,6 +87,14 @@
     top: 90px;
     width: 200px;
 }
+#display_all{
+    text-align: right;
+    color: #E76813;
+}
+#redisplay_all{
+    text-align: right;
+    color: #E76813;
+}
 .submit_area_option {
     left: 200px;
     position: absolute;
