@@ -15,7 +15,6 @@
 /tmp
 /doc/
 /public/assets/*
-config/redis/*
 db/schema.rb
 Gemfile.lock
 config/database.yml
