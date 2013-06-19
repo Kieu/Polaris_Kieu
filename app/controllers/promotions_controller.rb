@@ -110,6 +110,11 @@ class PromotionsController < ApplicationController
   def download_csv
     start_date = params[:start_date]
     end_date = params[:end_date]
+    if  !start_date || !end_date
+      start_date = Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d")
+      end_date = Date.yesterday.strftime("%Y/%m/%d")
+    end
+
     promotion_id = params[:promotion_id].to_i
     user_id = current_user.id
     background_job = BackgroundJob.create
