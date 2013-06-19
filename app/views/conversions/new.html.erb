@@ -56,6 +56,11 @@
     <div id="fragment-1">
       <%= form_for @conversion do |f| %>
       <script type="text/javascript">
+      ck = $("#conversion_track_method_3").attr('checked').val;
+      alert(ck);
+      if($("#conversion_track_method_3").is(':checked')) {
+              $("#url").removeAttr('disabled');
+            }
 		  function render_ios(){
 		    $('#method_area').html('<%=j render "app_install_ios", f: f %>');
 		  }
