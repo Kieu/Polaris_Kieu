@@ -24,12 +24,12 @@ $(function(){
         size: '8px',
         alwaysVisible: false
     });
-  /*  $('#conversions_list').slimScroll({
+    $('#conversions_list').slimScroll({
         color: '#0087A9',
         size: '8px',
         alwaysVisible: false
     });
-    */
+
     $('.entrydate_box').slimScroll({
         color: '#0087A9',
         size: '8px',
