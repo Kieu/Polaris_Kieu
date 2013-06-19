@@ -6,17 +6,19 @@
 <%= stylesheet_link_tag "css/colorbox" %>
 
 <%= stylesheet_link_tag "css/box_inner_promotion" %>
+<style>
+a.bread_scrumb_link {
+	color: #F63;
+	text-decoration:none;
+	padding: 2px 0;
+}
+</style>
 <% if @array_promotion.count > 0 %>
 <ul class="contentNavi">
-	<li class="pre"><a href="/clients?client_id=<%=@client_id%>"><%= @client_name %></a></li>
+	<li class="pre"><a class="bread_scrumb_link" href="/clients?client_id=<%=@client_id%>"><%= @client_name %></a></li>
 	<li>&gt;</li>
 	<li><%= @promotion_name %></li>
 </ul>
- <script>
-     $(function(){
-         
-     });
- </script>
 <div class="date">今日<br />
 <div id="datepicker">
 <%= @start_date %>~<%= @end_date %>&#9660;</div>
@@ -26,7 +28,7 @@
 	<ul class="btn_details" id="">
 		<li> <a href="#"> <p><span>■</span><span id="chart_left">ご利用金額</span> ▼</p> </a>
 			<ul>
-				<li> <a href="">掲載結果</a>
+				<li> <a href="javascript:void(0)">掲載結果</a>
 					<ul>
 						<li><a href="javascript:void(0)" class="metric_click_left">imp</a></li>
 						<li><a href="javascript:void(0)" class="metric_click_left">click</a></li>
@@ -39,7 +41,7 @@
 				<li><a href="javascript:void(0)">成果</a>
 					<ul>
 						<% @conversions.each do |conversion| %>
-							<li><a href="javascript:void(0)"><%= conversion.conversion_name %></a>
+							<li><a href="javascript:void(0)"><%= short_ja_name(conversion.conversion_name) %></a>
 								<ul>
 									<% Settings.conversions_graph.each do |option| %>
 										<li><a href="javascript:void(0)" class="result_click_left" id="conversion_left_<%= conversion.id %>"><%= option %></a></li>
@@ -69,7 +71,7 @@
 				<li><a href="javascript:void(0)">成果</a>
 					<ul>
 						<% @conversions.each do |conversion| %>
-							<li><a href="javascript:void(0)"><%= conversion.conversion_name %></a>
+							<li><a href="javascript:void(0)"><%= short_ja_name(conversion.conversion_name) %></a>
 								<ul>
 									<% Settings.conversions_graph.each do |option| %>
 										<li><a href="javascript:void(0)" class="result_click_right" id="conversion_right_<%= conversion.id %>"><%= option %></a></li>

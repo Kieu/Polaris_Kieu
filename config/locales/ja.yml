@@ -857,3 +857,6 @@ ja:
     flash_messages: 
       success: "入稿リクエストを受け付けました。"
     no_data: "※入稿された広告がありません。"
+  Promotion Name: "プロジェクト名"
+  Page: "ページ"
+  of: "の"

@@ -16,7 +16,7 @@
             url: "<%= get_promotions_list_clients_path %>" + "?id=<%= @client.id if @client %>",
             dataType: 'json',
             colModel: [
-                {display: 'promotion_name', name: 'promotion_name', width: 'auto', sortable: false, align: 'left'}
+                {display: '<%= I18n.t("Promotion Name") %>', name: 'promotion_name', width: 'auto', sortable: false, align: 'left'}
             ],
             sortname: "promotion_name",
             sortorder: "desc",
@@ -27,6 +27,8 @@
             showTableToggleBtn: true,
             resizable: false,
             optionGet: "1",
+            pagetext: "<%= I18n.t("Page") %>",
+			outof: "<%= I18n.t("of") %>", 
             onSuccess: function () {
                 tableResize();
                 checkrow();
