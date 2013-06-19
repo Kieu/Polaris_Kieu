@@ -10,19 +10,20 @@
 <script type="text/javascript">
 	$(".newTable04").flexigrid({
 		url: "<%= get_agencies_list_agencies_path %>",
-        editOption : true,
-        deleteOption : true,
-        onSuccess : function(){tableResize();},
-        resizable : false,
-        striped : true,
+    editOption : true,
+    deleteOption : true,
+    onSuccess : function(){tableResize();},
+    resizable : false,
+    striped : true,
+    pagetext: "<%= I18n.t("Page") %>",
+    outof: "<%= I18n.t("of") %>", 
 		dataType: 'json',
-		colModel : [
-			{display: '', name : 'link', width : '60', sortable : false, align: 'center'},
-			{display: 'agency_name', name : 'agency_name', width : 'auto', sortable : false, align: 'center'},
-			{display: 'roman_name', name : 'roman_name', width : 'auto', sortable : false, align: 'center'}
-			],
-	    sortname: "roman_name",
-        sortorder: "desc",
+		colModel: [
+      {display: '', name : 'link', width : '60', sortable : false, align: 'center'},
+      {display: "<%= I18n.t('agency.agency_name') %>", name : 'agency_name', width : 'auto', sortable : false, align: 'center'},
+      {display: "<%= I18n.t('agency.roman_name') %>", name : 'roman_name', width : 'auto', sortable : false, align: 'center'}],
+    sortname: "roman_name",
+    sortorder: "desc",
 		usepager: true,
 		title: 'Agency list',
 		useRp: true,
