@@ -211,16 +211,16 @@ $(window).resize(function() {
           <!-- チェックボックス -->
           <p class="box4_txt">全て追加する </p>
           <div class="check-group check-group2 clearfix">
-            <ul>
+            <table>
               <% Settings.url_options.each_with_index do |option, index|%>
-                  <li>
-                    <p class="check_txt"><%= option %></p>
-                    <div>
+                  <tr>
+                    <td class="check_txt"><%= option %></td>
+                    <td align='right'>
                       <%= link_to cookies[:url_setting][index] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('#{index}',this)"%>
-                    </div>
-                  </li>
+                    </td>
+                  </tr>
               <% end %>
-            </ul>
+            </table>
             <div class="submit_area2">
               <button id="change_cookie" style="border: 0px"><img src="/assets/btn_done.gif" alt="完成"></button>
               <button id="not_change_cookie" style="border: 0px"><img src="/assets/btn_cancel.gif" alt="完成"></button>
