@@ -38,10 +38,12 @@ class PromotionsController < ApplicationController
 
   def new
     @promotion = Promotion.new
+    @prevent = "0"
   end
 
   def create
     @promotion = Promotion.new(params[:promotion])
+    @prevent = "1"
     @promotion.create_user_id = current_user.id
     @promotion.client_id = params[:client_id]
     if @promotion.save
@@ -54,12 +56,14 @@ class PromotionsController < ApplicationController
   end
 
   def edit
+    @prevent = "0"
     @promotion = @array_promotion.find(params[:id])
     params[:promotion_id] = params[:id]
     @promotion_name = @promotion.promotion_name
   end
 
   def update
+    @prevent = "1"
     @promotion = @array_promotion.find(params[:id])
     params[:promotion_id] = params[:id]
     @promotion_name = params[:promotion_name]
