@@ -113,7 +113,11 @@ $(function() {
 	            path: '/'
 	        });
 	
-	        reloadFlex1(".newTable04", "<%= get_urls_list_url_settings_path %>?promotion_id=" + $("#promotion_id").val() + "&account_id=" + $("#account_id").val() + "&media_id=" + $("#media_id").val());
+          var term = $('#datepick').val();
+          var d = term.split(' - ');
+          start_date = d[0];
+          end_date = d[1];
+	        reloadFlex1(".newTable04", "<%= get_urls_list_url_settings_path %>?promotion_id=" + $("#promotion_id").val() + "&account_id=" + $("#account_id").val() + "&media_id=" + $("#media_id").val() + "&start_date=" + start_date + "&end_date=" + end_date);
 	    }
 	});
 	cookies_options = $.cookie("url_setting");
