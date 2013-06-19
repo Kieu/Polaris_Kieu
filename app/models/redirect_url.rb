@@ -11,7 +11,7 @@ class RedirectUrl < ActiveRecord::Base
   end
   
 	sql = "
-	    SELECT 
+	    SELECT  SQL_CALC_FOUND_ROWS
               camp.name as campaign_name
               ,d_group.name as group_name
               ,ad.name as ad_name
@@ -22,6 +22,7 @@ class RedirectUrl < ActiveRecord::Base
               ,r_url.url as url
               ,r_url.name as url_name
               ,r_url.mpv as mpv
+              ,r_info.comment as comment
               ,creative.image as creative
               ,creative.content as creative_text
               ,creative.display_type as creative_type
@@ -44,7 +45,8 @@ class RedirectUrl < ActiveRecord::Base
 	"
   sql = sql + limit_string
 	result = ActiveRecord::Base.connection.select_all(sql)
-
-	return result
+  
+  cal_total_row = ActiveRecord::Base.connection.select_all('SELECT FOUND_ROWS() as totalCount')
+	return result, cal_total_row
   end
 end

@@ -28,13 +28,13 @@ $(function(){
       <table>
         <tbody>
         <tr>
-          <th><%= f.label t("agency.agency_name") %></th>
+          <th><%= f.label t("agency.agency_name") %>:</th>
           <td colspan="2">
             <%= f.text_field :agency_name, maxlength: 255, style: "width: 250px", class: "prevent_change" %>
           </td>
         </tr>
         <tr>
-          <th> <%= f.label t("agency.roman_name") %></th>
+          <th> <%= f.label t("agency.roman_name") %>:</th>
           <td colspan="2">
             <%= f.text_field :roman_name, maxlength: 255, style: "width: 250px", class: "prevent_change" %>
           </td>
