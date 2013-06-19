@@ -6,7 +6,7 @@
     <% content_for :sidebar do %>
         <%= render partial: "layouts/sidebar", locals: {object: @clients} %>
     <% end %>
-    <p class="h2" id="client_name"><%= short_name(@client.client_name) %></p>
+    <p class="h2" id="client_name"><%= short_ja_name(@client.client_name) %></p>
     <% if current_user.super? %>
         <img id='create_promotion' src="/assets/btn_promotion_regist.gif" onclick="create()" style="display: none">
     <% end %>
@@ -16,7 +16,7 @@
             url: "<%= get_promotions_list_clients_path %>" + "?id=<%= @client.id if @client %>",
             dataType: 'json',
             colModel: [
-                {display: 'promotion_name', name: 'promotion_name', width: 'auto', sortable: false, align: 'left'}
+                {display: '<%= I18n.t("Promotion Name") %>', name: 'promotion_name', width: 'auto', sortable: false, align: 'left'}
             ],
             sortname: "promotion_name",
             sortorder: "desc",
@@ -27,6 +27,8 @@
             showTableToggleBtn: true,
             resizable: false,
             optionGet: "1",
+            pagetext: "<%= I18n.t("Page") %>",
+			outof: "<%= I18n.t("of") %>", 
             onSuccess: function () {
                 tableResize();
                 checkrow();

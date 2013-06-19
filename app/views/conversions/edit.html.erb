@@ -42,14 +42,14 @@
   <li>&gt;</li>
   <li><%= I18n.t("conversion.crumb_edit")%></li>
   <li>/</li>
-  <li><%= short_name(@conversion.conversion_name)%></li>
+  <li><%= short_ja_name(@conversion.conversion_name)%></li>
 </ul>
 <div class="clear"></div>
 <div id="conversion_inner">
   <div id="ui-tab">
     <ul class="ui-tabs-nav">
       <li><a href="#fragment-1"><span><%= I18n.t("conversion.crumb_edit")%></span></a></li>
-      <li class="disabled"><span><%= I18n.t("conversion.tag_acquisition")%></span></li>
+      <li><a href="/conversions/<%= @conversion.id%>/get_tag?promotion_id=<%= @conversion.promotion_id %>"><span><%= I18n.t("conversion.tag_acquisition")%></span></a></li>
     </ul>
     <div id="fragment-1">
       <%= form_for @conversion do |f| %>

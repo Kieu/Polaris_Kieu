@@ -38,8 +38,7 @@ class ExportConversionLogsData
                     "Reception log", "Send log", "Send date time", "Error message"]
       rows = ConversionLog.get_logs(options['promotion_id'], options['conversion_id'],
         options['media_category_id'], options['account_id'], options['start_date'],
-        options['end_date'], '1')
-
+        options['end_date'],options['show_error'] )
 
       client_name = promotion.client.client_name
       conversions = Conversion.where(promotion_id: options['promotion_id'])
@@ -58,7 +57,7 @@ class ExportConversionLogsData
         # make header for CSV file
         csv << header_col
         rows.each do |row|
-          csv << [row.conversion_utime, conversions.find(row.conversion_id).conversion_name,
+         csv << [row.conversion_utime, conversions.find(row.conversion_id).conversion_name,
             conversion_categories[row.conversion_category.to_i-1],
             I18n.t("log_track_type")[row.track_type.to_i-1], I18n.t("log_repeat_flg")[row.repeat_flg.to_i],
             row.id, row.parent_conversion_id, row.approval_status, client_name,
@@ -72,7 +71,7 @@ class ExportConversionLogsData
             row.mark, row.request_uri, row.send_url, row.send_utime, I18n.t("log_cv_error_messages")[row.error_code.to_i]]
         end
       end
-      # success case
+      #success case
       background_job.status = Settings.job_status.SUCCESS
       background_job.save!
     rescue

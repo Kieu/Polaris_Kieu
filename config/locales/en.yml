@@ -447,7 +447,7 @@ en:
               wrong_length: ! 'URL is the wrong length (should be %{count} characters)'
               acceptance: URL must be accepted
             facebook_app_id:
-              blank: "URL can't be blank"
+              blank: "Facebook can't be blank"
               accepted: Facebook app must be accepted 
               confirmation: Facebook app doesn't match confirmation 
               empty: Facebook app can't be empty
@@ -595,17 +595,17 @@ en:
     crumb_edit: "Client Edit"
     crumb_add: "Add Client"
     crumb_list: "Client list"
-    client_name: "Client name "
-    roman_name: "Roman name"
-    tel: "Contact "
-    person_charge: "Person in charge "
-    person_sale: "Person sales "
+    client_name: "Client name： "
+    roman_name: "Roman name： "
+    tel: "Contact： "
+    person_charge: "Person in charge： "
+    person_sale: "Person sales： "
     contract_flg:
-      label: "Use policy "
+      label: "Use policy： "
       standard_plan: " Standard Plan"
       premium_plan: " Premium Plan (¥ 50,000 per month)"
     contract_type:
-      label: "Plan type "
+      label: "Plan type： "
       unrecovered: " Unrecovered"
       been_recovered: " Been recovered"
     user_information: "User information"
@@ -835,3 +835,6 @@ en:
     flash_messages:
       success: "I have received a draft request."
     no_data: "No data"
+  Promotion Name: "Promotion Name"
+  Page: "Page"
+  of: "of"

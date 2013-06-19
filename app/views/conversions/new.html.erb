@@ -37,11 +37,11 @@
 <% end %>
 <ul class="contentNavi">
   <li class="pre">
-    <%= link_to short_name(@promotion.client.client_name), clients_path(client_id: @promotion.client.id) %>
+    <%= link_to short_ja_name(@promotion.client.client_name), clients_path(client_id: @promotion.client.id) %>
   </li>
   <li>&gt;</li>
   <li class="pre">
-    <%= link_to short_name(@promotion.promotion_name), promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %>
+    <%= link_to short_ja_name(@promotion.promotion_name), promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %>
   </li>
   <li>&gt;</li>
   <li><%= I18n.t("conversion.crumb_add")%></li>
@@ -56,6 +56,11 @@
     <div id="fragment-1">
       <%= form_for @conversion do |f| %>
       <script type="text/javascript">
+      ck = $("#conversion_track_method_3").attr('checked').val;
+      alert(ck);
+      if($("#conversion_track_method_3").is(':checked')) {
+              $("#url").removeAttr('disabled');
+            }
 		  function render_ios(){
 		    $('#method_area').html('<%=j render "app_install_ios", f: f %>');
 		  }

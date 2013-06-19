@@ -1,8 +1,8 @@
 class ConversionsController < ApplicationController
   before_filter :signed_in_user
   before_filter :must_super_agency
-  before_filter :get_promotion, only: [:index, :new, :edit]
-  before_filter :get_conversion, only: [:edit, :update]
+  before_filter :get_promotion, only: [:index, :new, :edit, :get_tag]
+  before_filter :get_conversion, only: [:edit, :update, :get_tag]
   before_filter :get_list_conversions
 
   def index
@@ -91,6 +91,9 @@ class ConversionsController < ApplicationController
       @promotion = Promotion.find(params[:promotion_id])
       render :edit
     end
+  end
+
+  def get_tag
   end
 
   private
