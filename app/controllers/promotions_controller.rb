@@ -47,7 +47,7 @@ class PromotionsController < ApplicationController
     @promotion.create_user_id = current_user.id
     @promotion.client_id = params[:client_id]
     if @promotion.save
-      flash[:error] = "Promotion created"
+      flash[:error] = I18n.t("promotion.flash_messages.success")
       redirect_to new_promotion_path(client_id: params[:client_id])
     else
       @client = Client.find(params[:client_id])
@@ -69,7 +69,7 @@ class PromotionsController < ApplicationController
     @promotion_name = params[:promotion_name]
     @promotion.update_user_id = current_user.id
     if @promotion.update_attributes(params[:promotion])
-      flash[:error] = "Promotion updated"
+      flash[:error] = I18n.t("promotion.flash_messages.update")
       redirect_to promotions_path(client_id: @promotion.client_id)
     else
       render :edit

@@ -12,11 +12,11 @@ $(function(){
     <%= render partial: "layouts/sidebar", locals: {object: @array_promotion} %>
 <% end %>
   <ul class="contentNavi">
-    <li class="pre"><%= link_to @promotion.client.client_name, clients_path(client_id: @promotion.client_id) %></li>
+    <li class="pre"><%= link_to short_ja_name(@promotion.client.client_name), clients_path(client_id: @promotion.client_id) %></li>
     <li> &gt; </li>
     <li><%= I18n.t("promotion.crumb_edit")%></li>
     <li> / </li>
-    <li><%= @promotion_name %></li>
+    <li><%= short_ja_name(@promotion_name) %></li>
   </ul>
   <div class="clear"></div>
 <%= form_for(@promotion) do |f| %>
@@ -60,8 +60,8 @@ $(function(){
 		このまま削除をした場合、このプロモーションに関連づけられた</br>
 		全てのデータが消えてしまいますが、問題ないでしょうか。</br>
 		------------------------------------------------------------------------------</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;クライアント名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：<%= @client.client_name %>　様 </br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;プロモーション名：<%= @promotion_name %> </br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;クライアント名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：<%= short_ja_name(@client.client_name) %>　様 </br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;プロモーション名：<%= short_ja_name(@promotion_name) %> </br>
 		------------------------------------------------------------------------------</br>
 	</p>
 </div>
