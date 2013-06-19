@@ -247,6 +247,7 @@ class ImportUrlData
           background_job.filepath = data_file
         else
           background_job.status = Settings.job_status.WRONG
+          background_job.filepath = data_file
 
         end
         background_job.save!
