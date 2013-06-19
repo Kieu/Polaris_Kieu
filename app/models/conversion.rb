@@ -25,8 +25,7 @@ class Conversion < ActiveRecord::Base
   validates :conversion_combine, presence: true, if: :check_combination
   validates :url, length: {maximum: 255}, presence: true, if: :check_track_method
   validates :sale_unit_price, length: {maximum: 10}, :numericality => { :only_integer => true}, if: :check_sales?
-  validates_inclusion_of :sale_unit_price, :in => 1..2147483647, if: :check_sales?
-  
+  # validates_inclusion_of :sale_unit_price, :in => 1..2147483647, if: :check_sales?, if: -> conversion { conversion.sale_unit_price.is_a? Integer)
   scope :order_by_conversion_name, ->{order :conversion_name}
   scope :order_by_id, ->{order :id}
   scope :get_by_promotion_id, lambda {|promotion_id| where(promotion_id: promotion_id)}
@@ -72,7 +71,7 @@ class Conversion < ActiveRecord::Base
   end
 
   def check_track_method
-    track_method == 3
+    track_method.to_i == 3
   end
 
   def check_conversion_mode
@@ -86,5 +85,5 @@ class Conversion < ActiveRecord::Base
   def check_sales?
     !sale_unit_price.blank? 
   end
-  
+
 end

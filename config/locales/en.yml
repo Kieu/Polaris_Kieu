@@ -447,7 +447,7 @@ en:
               wrong_length: ! 'URL is the wrong length (should be %{count} characters)'
               acceptance: URL must be accepted
             facebook_app_id:
-              blank: "URL can't be blank"
+              blank: "Facebook can't be blank"
               accepted: Facebook app must be accepted 
               confirmation: Facebook app doesn't match confirmation 
               empty: Facebook app can't be empty
