@@ -19,6 +19,10 @@
 .notification p {
     position: absolute;
 }
+.underline_text
+{
+    text-decoration: underline;
+}
 .notification
 {
 background: url(/assets/display_upload.gif) left top no-repeat;
