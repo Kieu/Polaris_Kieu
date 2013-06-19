@@ -91,3 +91,11 @@ disabled{
 .disabled{
 	color: #999;
 }
+/* redefine style of _ALL_ flexigrid column titles */
+.flexigrid div.hDiv th div {
+	text-align: center !important;
+}
+/* redefine style by name for _ALL_ flexigrid */
+.flexigrid div.hDiv th[abbr="sign"] div {
+	text-align: left !important;
+}
