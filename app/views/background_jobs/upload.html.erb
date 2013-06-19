@@ -9,7 +9,7 @@
                 <td class="file_name"><%=job.filename%></td>
                 <td class="capacity">298MB</td>
                 <td class="daily">05/10/12:50</td>
-                <td class="c_orange">アップロード中</td>
+                <td class="c_orange"><% if job.status == '1' %>作成中<%end%></td>
               </tr>
               <tr>
                 <td colspan="4"> リクルート(ゼクシィ) > 本体プロモーション > Google Network / Google リマーケティング</td>
