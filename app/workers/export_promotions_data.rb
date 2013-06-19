@@ -101,8 +101,8 @@ class ExportPromotionsData
               array_medium << nil
             end
             
-            (1..cnt).each do |current_index|
-              current_data_conversion = array_data_row[index_to_get_data_row]["account#{account.id}_conversion#{current_index}"]
+            array_conversion.each do |conversion|
+              current_data_conversion = array_data_row[index_to_get_data_row]["account#{account.id}_conversion#{conversion.id}"]
               if current_data_conversion != nil
                 array_medium << current_data_conversion['total_cv_count'].to_s
                 array_medium << current_data_conversion['first_cv_count'].to_s
