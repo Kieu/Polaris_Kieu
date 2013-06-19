@@ -1,7 +1,8 @@
 @charset "UTF-8";
 /* CSS Document */
 
-
+.div.check-group li {
+}
 .f_box2 {
     background-color: #EFEFEF;
     color: #404040;
@@ -28,17 +29,12 @@
     text-align: left;
     width: 493px;
 }
-.submit_area2 {
-    float: left;
-    left: 200px;
-    position: absolute;
-    top: 565px;
-}
+
 .submit_area2 {
     float: left;
     left: 85px;
     position: absolute;
-    top: 530px;
+    top: 500px;
     width: 400px;
 }
 .submit_area2 img {
@@ -47,7 +43,7 @@
 .box04 {
     background-color: #FFFFFF;
     border: 2px solid #C4C4C4;
-    height: 330px;
+    height: 400px;
     left: 120px;
     position: absolute;
     top: 90px;
