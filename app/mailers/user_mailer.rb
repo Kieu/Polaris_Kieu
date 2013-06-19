@@ -4,7 +4,7 @@ class UserMailer < ActionMailer::Base
   def send_password user, password
     @user = user
     @password = password
-    mail(to: user.email, subject: Settings.mailer.send_password_subject) do |format|
+    mail(to: user['email'], subject: Settings.mailer.send_password_subject) do |format|
       format.html
       format.text
     end
