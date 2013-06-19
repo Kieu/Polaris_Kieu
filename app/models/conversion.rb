@@ -47,27 +47,27 @@ class Conversion < ActiveRecord::Base
 
   private
   def check_conversion_category
-    conversion_category == 1 || conversion_category == 2
+    conversion_category.to_i == 1 || conversion_category.to_i == 2
   end
 
   def check_web
-    conversion_category == 1
+    conversion_category.to_i == 1
   end
 
   def check_app
-    conversion_category == 2
+    conversion_category.to_i == 2
   end
 
   def check_combination
-    conversion_category == 3
+    conversion_category.to_i == 3
   end
 
   def check_track_type
-    track_type == 1
+    track_type.to_i == 1
   end
 
   def check_track_type1
-    conversion_category == 2 && track_type == 2
+    conversion_category.to_i == 2 && track_type.to_i == 2
   end
 
   def check_track_method
@@ -75,11 +75,11 @@ class Conversion < ActiveRecord::Base
   end
 
   def check_conversion_mode
-    conversion_mode == 2
+    conversion_mode.to_i == 2
   end
   
   def check_fb_id_valid
-    conversion_mode != 2
+    conversion_category.to_i == 2 && conversion_mode.to_i != 2
   end
   
   def check_sales?

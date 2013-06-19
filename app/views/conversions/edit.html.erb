@@ -1,4 +1,3 @@
-
 <script type="text/javascript">
   ChiliBook.recipeFolder = "./lib/chili/";
   $(document).ready(function (){
@@ -17,6 +16,7 @@
   		$("#url").attr('disabled','disabled');
   	}
 </script>
+<%= render "layouts/prevent_change_page_edit" %>
 <% content_for :stylesheet_includes do %>
   <%= stylesheet_link_tag "css/common" %>
     <%= stylesheet_link_tag "css/conversion" %>
