@@ -2,6 +2,9 @@
 <% if flash[:error] %>
     <div><%= flash[:error] %></div>
 <% end %>
+<style type="text/css">
+   .flexigrid div.hDiv th div {text-align: center !important;}
+ </style>
 <% if @clients.count > 0 %>
     <% content_for :sidebar do %>
         <%= render partial: "layouts/sidebar", locals: {object: @clients} %>
