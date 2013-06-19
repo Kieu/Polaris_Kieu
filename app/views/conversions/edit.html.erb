@@ -33,7 +33,7 @@
 <% end %>
 <ul class="contentNavi">
   <li class="pre">
-    <%= link_to @promotion.client.client_name, client_path(client_id: @promotion.client_id) %>
+    <%= link_to @promotion.client.client_name, clients_path(client_id: @promotion.client_id) %>
   </li>
   <li>&gt;</li>
   <li class="pre">
