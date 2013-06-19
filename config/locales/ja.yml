@@ -639,8 +639,8 @@ ja:
     crumb_edit: "代理店編集"
     crumb_add: "代理店登録"
     crumb_list: ""
-    agency_name: "代理店名"
-    roman_name: "代理店名(英語)"
+    agency_name: "代理店名: "
+    roman_name: "代理店名(英語): "
     flash_messages:
       success: " 代理店登録が完了しました"
       update: " 代理店編集が完了しました"
@@ -814,20 +814,20 @@ ja:
   user:
     crumb_add: "ユーザー登録"
     crumb_edit: "ユーザー編集"
-    username: "ユーザー名 "
-    roman_name: "ユーザー名(英語) "
-    email: "メールアドレス "
+    username: "ユーザー名: "
+    roman_name: "ユーザー名(英語): "
+    email: "メールアドレス: "
     role:
-      label: "権限 "
+      label: "権限: "
       include_blank: "権限を選択してください" 
-    company_name: "会社名 "
+    company_name: "会社名: "
     company_id:
       include_blank: "会社名を選択してください"
     password:
-      label: "パスワード "
+      label: "パスワード: "
       info: "※自動で振り分けます"
     password_notification:
-      label: "パスワード通知 "
+      label: "パスワード通知: "
       not_notified: " 通知しない"
       to_notified: " 通知する"
     disabled:
