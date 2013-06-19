@@ -153,4 +153,8 @@
 	<% if @conversion.errors[:url].count > 0%>
 	    $("#url").removeAttr('disabled');
 	  <% end %>
+	  <% if @conversion.conversion_mode.to_i == 2%>
+	  $('#judging_box').html('');
+	  $('#fb_app_id').html('');
+	  <% end %>
 </script>

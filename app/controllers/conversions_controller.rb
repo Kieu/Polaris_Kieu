@@ -16,6 +16,7 @@ class ConversionsController < ApplicationController
   end
 
   def create
+    
     @conversion = Conversion.new(params[:conversion])
     @conversion.create_user_id = current_user.id
     @conversion.promotion_id = params[:promotion_id]
@@ -84,6 +85,7 @@ class ConversionsController < ApplicationController
     @conversion.conversion_combine = conversion_combine
     @conversion.update_user_id = current_user.id
     @conversion.attributes = params[:conversion]
+    
     if @conversion.save
       flash[:error] = "Conversion updated"
       redirect_to conversions_path(promotion_id: @conversion.promotion_id)
