@@ -15,7 +15,7 @@
                 <td colspan="4"> リクルート(ゼクシィ) > 本体プロモーション > Google Network / Google リマーケティング</td>
               </tr>
             </table>
-            <p class="btn_cancel"><% if job.status == 2 %> <a href="/background_jobs/download_file?id=<%= job.id %>">show error </a><%else%>sucess <%=job.status%><%end%></p>
+            <p class="btn_cancel"><% if job.status == '2' %> <a href="/background_jobs/download_file?id=<%= job.id %>">show error </a><%else%>sucess<%end%></p>
           </li>
 
     <% end %>
