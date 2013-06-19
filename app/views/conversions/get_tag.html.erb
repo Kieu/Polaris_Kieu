@@ -33,7 +33,7 @@
       <li><a href="#get_tag"><span><%= I18n.t("conversion.tag_acquisition")%></span></a></li>
     </ul>
     <div id="get_tag">
-      <% if @conversion.conversion_category == "1" %>
+      <% if @conversion.conversion_category == "2" %>
         <div id="sdk_download">
           SDK download
           <table border="1">
@@ -63,7 +63,7 @@
             </tr>
           </table>
         </div>
-      <% elsif @conversion.conversion_category == "2" %>
+      <% elsif @conversion.conversion_category == "1" %>
         <div id="tracking_tag">
           Tracking tag
           <table border="1">
