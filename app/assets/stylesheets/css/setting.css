@@ -2,6 +2,7 @@
 /* CSS Document */
 
 .div.check-group li {
+    padding: 0px;
 }
 .f_box2 {
     background-color: #EFEFEF;
@@ -32,10 +33,10 @@
 
 .submit_area2 {
     float: left;
-    left: 85px;
+    left: -30px;
     position: absolute;
-    top: 500px;
-    width: 400px;
+    top: 450px;
+    width: 360px;
 }
 .submit_area2 img {
     float: left;
