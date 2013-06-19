@@ -639,8 +639,8 @@ ja:
     crumb_edit: "代理店編集"
     crumb_add: "代理店登録"
     crumb_list: ""
-    agency_name: "代理店名: "
-    roman_name: "代理店名(英語): "
+    agency_name: "代理店名"
+    roman_name: "代理店名(英語)"
     flash_messages:
       success: " 代理店登録が完了しました"
       update: " 代理店編集が完了しました"
