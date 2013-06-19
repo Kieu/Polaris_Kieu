@@ -56,7 +56,9 @@ class UrlSettingsController < ApplicationController
       copy_button = '<a href="#"><img src="/assets/btn_copy2.gif" /></a>'
       delete_check = '<input type="checkbox" name="del_url_#{redirect_url_id}" id="#{redirect_url_id}" />'
       image = url['creative']
-      submit_url = Settings.DOMAIN_SUBMIT_URL + "mpv=#{url['mpv']}" + "&cid=#{client_id}&pid=#{promotion_id}"
+      comment = url['comment']
+      submit_url = "<div align='left' id='url_#{url['redirect_url_id']}'>" + Settings.DOMAIN_SUBMIT_URL + "mpv=#{url['mpv']}" + "&cid=#{client_id}&pid=#{promotion_id} </div>"
+      submit_url += "<div align='right'><a href='#' onClick='ClipBoard(url_#{url['redirect_url_id']});'><img src='/assets/btn_copy2.gif' /></a></div>"
       if url['creative_type'] == '1'
         creative = '<img src=' + "/assets/creative/#{image}" + '  />'
       else
@@ -64,8 +66,8 @@ class UrlSettingsController < ApplicationController
       end
       
       rows << { id: url['redirect_url_id'], cell: {edit_button: edit_button, ad_id: url['ad_id'], campaign_name: url['campaign_name'],
-               group_name: url['group_name'], ad_name: url['ad_name'], creative: creative, url: submit_url, copy: copy_button,
-               delete_check: delete_check, last_modified: url['last_modified'] }}
+               group_name: url['group_name'], ad_name: url['ad_name'], creative: creative, url: submit_url,
+               delete_check: delete_check, note: comment, last_modified: url['last_modified'] }}
     end
 
     rows
@@ -93,6 +95,6 @@ class UrlSettingsController < ApplicationController
     time = Time.new
     cookies[:url_setting_start_date] = Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d") if !cookies[:url_setting_start_date] 
     cookies[:url_setting_end_date] = Date.yesterday.strftime("%Y/%m/%d") if !cookies[:url_setting_end_date]
-    cookies[:url_setting] = "1111111011" if !cookies[:url_setting]
+    cookies[:url_setting] = "11111110011" if !cookies[:url_setting]
   end
 end
