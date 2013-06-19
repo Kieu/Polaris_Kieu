@@ -2,6 +2,10 @@
 
 $(document).ready(function () {
     $("#recaptcha_response_field").attr("tabindex","7");
+    $("#change_language").change(function(){
+    	$.cookie("locale", $(this).val());
+    	location.href = "<%= signin_path %>"
+    })
 
     //----------------------------
     $('.accordion01').click(function () {
@@ -35,9 +39,17 @@ $(document).ready(function () {
       <br/>
 
       <p class="bold"><%= I18n.t("login.choose_lang.label")%></p>
-      <select name="language" tabindex="2">
-        <option value="ja"><%= I18n.t("login.choose_lang.ja")%>　</option>
-        <option value="en"><%= I18n.t("login.choose_lang.en")%>　</option>
+      <select name="language" tabindex="2" id="change_language">
+      	<% if cookies[:locale] == "ja" %>
+        	<option value="ja" selected><%= I18n.t("login.choose_lang.ja")%>　</option>
+        <% else %>
+        	<option value="ja"><%= I18n.t("login.choose_lang.ja")%>　</option>
+        <% end %>
+        <% if cookies[:locale] == "en" %>
+        	<option value="en" selected><%= I18n.t("login.choose_lang.en")%>　</option>
+        <% else %>
+        	<option value="en"><%= I18n.t("login.choose_lang.en")%>　</option>
+        <% end %>
       </select><br/>
       <label><span class="bold"><%= I18n.t("login.pw")%></span><br/>
         <input type="password" name="session[password]" id="password" class="input-text" maxlength="255" tabindex="3"/></label>
