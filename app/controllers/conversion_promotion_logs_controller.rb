@@ -4,6 +4,10 @@ before_filter :signed_in_user
 before_filter :set_cookies
 
 def index
+  @start_date = params[:start_date].present? ? params[:start_date] :
+      Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d")
+  @end_date = params[:end_date].present? ? params[:end_date] :
+      Date.yesterday.strftime("%Y/%m/%d")
   @promotion_id = params[:promotion_id]
   @promotion = Promotion.find(@promotion_id)
   if current_user.client?
@@ -25,8 +29,8 @@ def index
 end
 
 def get_conversion_logs_list
-  start_date = cookies[:s]
-  end_date = cookies[:e]
+  start_date = params[:start_date]
+  end_date = params[:end_date]
   promotion_id = params[:query]
   @conversion_logs = ConversionLog.get_all_logs(promotion_id, params[:page], params[:rp],params[:cv_id], params[:media_category_id],
                      params[:account_id], start_date, end_date, cookies[:ser],  params[:sortname], params[:sortorder])
@@ -43,8 +47,8 @@ def download_csv
        promotion_id: params[:promotion_id].to_i,
        conversion_id: params[:conversion_id],
        media_category_id: params[:media_category_id],
-       account_id: params[:account_id], start_date: cookies[:s],
-       end_date: cookies[:e], show_error: cookies[:ser],
+       account_id: params[:account_id], start_date: params[:start_date],
+       end_date: params[:end_date], show_error: cookies[:ser],
        bgj_id: background_job.id)
        
     background_job.job_id = job_id
@@ -106,8 +110,6 @@ end
 private
   def set_cookies
     cookies[:cv_options] = Settings.cookie_cv_log_default if !cookies[:cv_options]
-    cookies[:s]=Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d") if !cookies[:s] 
-    cookies[:e]=Date.yesterday.strftime("%Y/%m/%d") if !cookies[:e]
     cookies[:ser] = "1" if !cookies[:ser]
   end
 end
