@@ -3,6 +3,11 @@ class ClickLogsController < ApplicationController
   before_filter :signed_in_user
   before_filter :set_cookie
   def index
+    @start_date = params[:start_date].present? ? params[:start_date] :
+        Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d")
+    @end_date = params[:end_date].present? ? params[:end_date] :
+        Date.yesterday.strftime("%Y/%m/%d")
+    
     @promotion_id = params[:promotion_id]
     @promotion = Promotion.find(@promotion_id)
     if current_user.client?
@@ -21,8 +26,8 @@ class ClickLogsController < ApplicationController
 
   def get_logs_list
     cookies[:options]= params[:cookie] if params[:cookie]
-    rows = get_rows(ClickLog.get_all_logs(params[:query], params[:page], params[:rp], params[:sortname], params[:sortorder], params[:cid], params[:account_id], cookies[:cs], cookies[:ce], cookies[:ser] ))
-    render json: {page: params[:page], total: ClickLog.get_log_count(params[:query].to_i, params[:cid], params[:account_id], cookies[:cs], cookies[:ce], cookies[:ser] ), rows: rows}
+    rows = get_rows(ClickLog.get_all_logs(params[:query], params[:page], params[:rp], params[:sortname], params[:sortorder], params[:cid], params[:account_id], params[:start_date], params[:end_date], cookies[:cser] ))
+    render json: {page: params[:page], total: ClickLog.get_log_count(params[:query].to_i, params[:cid], params[:account_id], params[:start_date], params[:end_date], cookies[:cser] ), rows: rows}
     
   end  
   
@@ -31,8 +36,8 @@ class ClickLogsController < ApplicationController
     job_id = ExportClickLogsData.create(user_id: current_user.id,
     promotion_id: params[:promotion_id].to_i,
     media_category_id: params[:media_category_id],
-    account_id: params[:account_id], start_date: cookies[:cs],
-    end_date: cookies[:ce], show_error: cookies[:ser],
+    account_id: params[:account_id], start_date: params[:start_date],
+    end_date: params[:end_date], show_error: cookies[:cser],
     bgj_id: background_job.id)
     
     render text: "processing"
@@ -57,7 +62,6 @@ class ClickLogsController < ApplicationController
   
   def set_cookie
     cookies[:coptions]=Settings.cookie_click_log_default if !cookies[:coptions]
-    cookies[:cs]=Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d") if !cookies[:cs] 
-    cookies[:ce]=Date.yesterday.strftime("%Y/%m/%d") if !cookies[:ce]   
+    cookies[:cser] = "1" if !cookies[:cser]
   end
 end

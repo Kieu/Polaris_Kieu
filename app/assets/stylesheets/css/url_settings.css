@@ -266,10 +266,10 @@ div.check-group {
     float: left;
     margin-left: 12px;
     margin-top: 7px;
-    width: 190px;
+    width: 250px;
 }
 div.check-group li {
-    padding: 0 0 15px;
+    padding: 0 0 0px;
 }
 div.check-group input {
     display: none;

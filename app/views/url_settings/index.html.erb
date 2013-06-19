@@ -1,4 +1,5 @@
 <%= stylesheet_link_tag "css/common", :media => "all" %>
+<%= stylesheet_link_tag "css/setting", :media => "all" %>
 <input type= "hidden" id="promotion_id" value="<%= @promotion_id %> "/>
 <input type= "hidden" id="account_id" value="<%= @account_id %> "/>
 <input type= "hidden" id="media_id" value="<%= @media_id %> "/>
@@ -141,12 +142,12 @@ $(function() {
 	
 	$("#show_option").click(function(){
 		$.colorbox({
-        	width: "725",
+        	width: "515",
             inline: true,
             escKey: false,
             overlayClose: false,
             href: "#inline_cv_logs",
-            height:"630"
+            height:"600"
 		});
 	})
 
@@ -217,29 +218,42 @@ $(window).resize(function() {
             <p style="cursor: pointer;">
             	<small>
                   <a class="dl" href="<%= download_template_url_settings_path %>?account_id=<%= @account_id%>">アップロードファイルフォーマットのダウンロード</a>
-                <small></p>
+                </small>
+            </p>
             <p class="bold"><%= flash[:error] %></p>
           <% end %>
         </div>
         <!-- #uploadArea -->
         <table style="display:none" class="newTable04 fixTable d-none"></table>
     <!-- /#container end -->
-<div style='display:none'>
-<div id="inline_cv_logs">
-	<ul>
-	    <% Settings.url_options.each_with_index do |option, index|%>
-	    	<li>
-	        	<p class="check_txt"><%= option %></p>
-	        	<div>
-	          		<%= link_to cookies[:url_setting][index] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('#{index}',this)"%>
-	        	</div>
-	      	</li>
-		<% end %>
-	</ul>
-		<div class="submit_area">
-	  		<button id="change_cookie" style="border: 0px"><img src="/assets/btn_done.gif" alt="完成"></button>
-	  		<button id="not_change_cookie" style="border: 0px"><img src="/assets/btn_cancel.gif" alt="完成"></button>
-		</div>
+  <div style='display:none'>
+    <div id='inline_cv_logs'>
+      <div class="f_box2">
+        <p class="f_box_title2">テーブル</p>
+        <p class="f_category_title2">表示項目</p>
+        <div class="box04">
+          <!-- チェックボックス -->
+          <p class="box4_txt">全て追加する </p>
+          <div class="check-group check-group2 clearfix">
+            <table width='100%'>
+              <% Settings.url_options.each_with_index do |option, index|%>
+                  <tr>
+                    <td class="check_txt"><%= option %></td>
+                    <td align='right'>
+                      <%= link_to cookies[:url_setting][index] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('#{index}',this)"%>
+                    </td>
+                  </tr>
+              <% end %>
+            </table>
+            <div class="submit_area2">
+              <button id="change_cookie" style="border: 0px"><img src="/assets/btn_done.gif" alt="完成"></button>
+              <button id="not_change_cookie" style="border: 0px"><img src="/assets/btn_cancel.gif" alt="完成"></button>
+            </div>
 
-</div>
-</div>
+          </div>
+          <!-- /チェックボックス -->
+        </div>
+
+      </div>
+    </div>
+  </div>

@@ -1,10 +1,3 @@
-<div style='display:none'>
-<div id="inline_cv_logs">
-<div class="f_box">
-<p class="f_box_title"><%= I18n.t("cv_logs.label")%></p>
-<p class="f_category_title1"><%= I18n.t("cv_logs.display_item")%></p>
-<div id="page1">
-<div id="current_box">
 <div class="box03">
   <p class="box3_txt"><div id="display_all"><%= I18n.t("cv_logs.show_all")%></div></p>
   <!-- チェックボックス -->
@@ -47,64 +40,27 @@
   </div>
 </div>
 
+<div class="box01">
+  <p class="box3_txt">&nbsp;</p>
+  <!-- チェックボックス -->
+  <div class="check-group clearfix">
+    <table width="90%">
 
+      <% Settings.cv_options_part2.each_with_index do |option, index|%>
+      <tr>
+        <td class="check_txt"><%= I18n.t("cv_logs.#{option}") %></td>
+        <td align=right>
+          <%= link_to cookies[:cv_options][index+12] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('#{index+12}',this)"%>
+        </td>
+      </tr>
+      <% end %>
+      <tr>
+        <td class="check_txt"><%= I18n.t("cv_logs.error_log_view")%></td>
+        <td align=center >
+          <input type="checkbox" name="error_table" id="error_table" checked="checked">
+        </td>
+      </tr>
+    </table>
+    <!-- /チェックボックス -->
+  </div>
 </div>
-
-</div>
-<div class="submit_area">
-  <button id="change_cookie" style="border: 0px"><img src="/assets/btn_done.gif" alt="完成"></button>
-  <button id="not_change_cookie" style="border: 0px"><img src="/assets/btn_cancel.gif" alt="完成"></button>
-</div>
-</div>
-</div>
-</div>
-<script>
-    $(document).ready(function(){
-        $(".inline_cv_logs").colorbox({inline:true, width:"725", height:"630" });
-    });
-var tab = {
-init:
-function(){
-var tabs = this.setup.tabs;
-var pages = this.setup.pages;
-
-for(i=0; i<pages.length; i++) {
-if(i !== 0) pages[i].style.display = 'none';
-tabs[i].onclick = function(){tab.showpage(this); return false; };
-}
-},
-
-showpage: function(obj){
-var tabs = this.setup.tabs;
-var pages = this.setup.pages;
-var num;
-
-for(num=0; num<tabs.length; num++) {
-if(tabs[num] === obj) break;
-}
-
-for(var i=0; i<pages.length; i++) {
-if(i == num) {
-pages[num].style.display = 'block';
-tabs[num].className = 'present';
-}
-else{
-pages[i].style.display = 'none';
-tabs[i].className = null;
-}
-}
-}
-}
-
-// <![CDATA[
-
-tab.setup = {
-    tabs: document.getElementById('tab_cv_logs').getElementsByTagName('li'),
-
-    pages: [
-        document.getElementById('page1')
-    ]
-} //オブジェクトをセット
-tab.init(); //起動！
-// ]]>
-</script>
