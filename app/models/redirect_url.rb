@@ -21,6 +21,7 @@ class RedirectUrl < ActiveRecord::Base
               ,r_url.id as redirect_url_id
               ,r_url.url as url
               ,r_url.name as url_name
+              ,r_url.mpv as mpv
               ,creative.image as creative
               ,creative.content as creative_text
               ,creative.display_type as creative_type

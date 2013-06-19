@@ -27,7 +27,7 @@ $(document).ready(function() {
     start_date = d[0];
     end_date = d[1];
     $(".newTable04").flexigrid({
-        url: "<%= get_urls_list_url_settings_path %>?promotion_id=" + $("#promotion_id").val() + "&account_id=" + $("#account_id").val() + "&media_id=" + $("#media_id").val() + "&start_date=" + start_date + "&end_date=" + end_date,
+        url: "<%= get_urls_list_url_settings_path %>?promotion_id=" + $("#promotion_id").val() + "&account_id=" + $("#account_id").val() + "&media_id=" + $("#media_id").val() + "&start_date=" + start_date + "&end_date=" + end_date + "&client_id=<%= @client_id %>",
         dataType: 'json',
         editOption : true,
         deleteOption : true,

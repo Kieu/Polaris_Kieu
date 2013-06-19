@@ -25,7 +25,7 @@ class UrlSettingsController < ApplicationController
     url_data = Array.new
     url_data = RedirectUrl.get_url_data(params[:promotion_id], params[:account_id], params[:media_id],
                                  params[:page], params[:rp], start_date, end_date)
-    rows = get_rows(url_data)
+    rows = get_rows url_data, params[:promotion_id], params[:client_id]
     count = url_data.count
 
     render json: {page: params[:page], total: count, rows: rows}
@@ -43,7 +43,7 @@ class UrlSettingsController < ApplicationController
     send_file(path_to_file, filename: file_name, type: "text/csv")
   end
 
-  def get_rows url_data
+  def get_rows url_data, promotion_id, client_id
     rows = Array.new
     url_data.each do |url|
       redirect_url_id = url['redirect_url_id']
@@ -51,6 +51,7 @@ class UrlSettingsController < ApplicationController
       copy_button = '<a href="#"><img src="/assets/btn_copy2.gif" /></a>'
       delete_check = '<input type="checkbox" name="del_url_#{redirect_url_id}" id="#{redirect_url_id}" />'
       image = url['creative']
+      submit_url = Settings.DOMAIN_SUBMIT_URL + "mpv=#{url['mpv']}" + "&cid=#{client_id}&pid=#{promotion_id}"
       if url['creative_type'] == '1'
         creative = '<img src=' + "/assets/creative/#{image}" + '  />'
       else
@@ -58,7 +59,7 @@ class UrlSettingsController < ApplicationController
       end
       
       rows << { id: url['redirect_url_id'], cell: {edit_button: edit_button, ad_id: url['ad_id'], campaign_name: url['campaign_name'],
-               group_name: url['group_name'], ad_name: url['ad_name'], creative: creative, url: url['url'], copy: copy_button,
+               group_name: url['group_name'], ad_name: url['ad_name'], creative: creative, url: submit_url, copy: copy_button,
                delete_check: delete_check, last_modified: url['last_modified'] }}
     end
 
