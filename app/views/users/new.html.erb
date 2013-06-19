@@ -24,9 +24,21 @@
           <td colspan="2">
           	<select class="input-text" id="user_role_id" name="user[role_id]" tabindex="4">
           		<option value=""><%= I18n.t("user.role.include_blank") %></option>
-				<option value="2">Client</option>
-				<option value="3">Agency</option>
-				<option value="1">Super</option>
+          		<% if @user.role_id == 2 %>
+					<option value="2" selected >Client</option>
+				<% else %>
+					<option value="2">Client</option>
+				<% end %>
+				<% if @user.role_id == 3 %>
+					<option value="3" selected>Agency</option>
+				<% else %>
+					<option value="3">Agency</option>
+				<% end %>
+				<% if @user.role_id == 1 %>
+					<option value="1" selected>Super</option>
+				<% else %>
+					<option value="1">Super</option>
+				<% end  %>
 			</select>
           </td>
         </tr> 

@@ -59,7 +59,7 @@ class SessionsController < ApplicationController
         render :new
       end
     else
-      @form_errors << flash[:recaptcha_error]
+      @form_errors << I18n.t("login.captcha_error")
       render :new
     end
   end
