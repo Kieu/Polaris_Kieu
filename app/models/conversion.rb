@@ -19,8 +19,7 @@ class Conversion < ActiveRecord::Base
   validates :conversion_mode, presence: true, if: :check_track_type
   validates :duplicate, presence: true, if: :check_track_type
   validates :track_method, presence: true, if: :check_track_type
-  validates :facebook_app_id, presence: true , if: :check_fb_id_valid
-  validates :facebook_app_id, inclusion: {in: 1..9223372036854775807}, if: :check_fb_id_valid, if: -> conversion { conversion.facebook_app_id.present?}
+  validates :facebook_app_id, :numericality => { :only_integer => true}, presence: true , if: :check_fb_id_valid
   validates :start_point, presence: true, if: :check_web
   validates :conversion_combine, presence: true, if: :check_combination
   validates :url, length: {maximum: 255}, presence: true, if: :check_track_method

@@ -12,6 +12,7 @@
 								 "<input type='hidden' name='cv_kind[]' id='cv_kind" + $("#cv_num").val() + "' value='' />" + 
 	      						 "<input type='text' name='category"+ $("#cv_num").val() + "' id='category"+ $("#cv_num").val() + "' value='' onclick='get_category(" + $("#cv_num").val() + ");' /></td></tr>");
 	}
+	
   });
   
   function get_category(id) {
@@ -157,3 +158,8 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+	<% if @conversion.errors[:url].count > 0%>
+	    $("#url").removeAttr('disabled');
+	  <% end %>
+</script>
