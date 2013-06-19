@@ -1,10 +1,10 @@
 require "resque"
 class ClickLogsController < ApplicationController
   before_filter :signed_in_user
-  before_filter :must_super_agency
   before_filter :set_cookie
   def index
-    @promotion = Promotion.find(params[:promotion_id])
+    @promotion_id = params[:promotion_id]
+    @promotion = Promotion.find(@promotion_id)
     if current_user.client?
       @client_id = current_user.company_id
     else
