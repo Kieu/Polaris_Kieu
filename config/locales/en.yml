@@ -828,3 +828,7 @@ en:
     disable: "Disable"
     delete: "Delete"
     enable: "Enable"
+  url:
+    flash_messages:
+      success: "I have received a draft request."
+    no_data: "No data"
