@@ -44,6 +44,12 @@ class ImportUrlData
     # file fomat: {user_id}_import_url_{current date}.csv
     data_file = options['file']
 
+    # get client_name, promotion_name, account_name
+    promotion_name = Promotion.where(id: promotion_id).select("roman_name").first['roman_name']
+    client_name = Client.where(id: client_id).select("roman_name").first['roman_name']
+    account_name = Account.where(id: account_id).select("roman_name").first['roman_name']
+    header_error_file = client_name + "_" + promotion_name + "_" + account_name + "_"
+
     # get job_id
     job_id = BackgroundJob.where(id: options['bgj_id']).select('job_id').first['job_id']
 
@@ -64,6 +70,8 @@ class ImportUrlData
 
           # false case
           background_job.status = Settings.job_status.WRONG
+          background_job.filename = header_error_file + Time.now.strftime("%Y%m%d") + Settings.file_type.TXT
+          background_job.filepath = error_file
           background_job.save!
 
           exit 1
@@ -77,6 +85,8 @@ class ImportUrlData
 
           # false case
           background_job.status = Settings.job_status.WRONG
+          background_job.filename = header_error_file + Time.now.strftime("%Y%m%d") + Settings.file_type.TXT
+          background_job.filepath = error_file
           background_job.save!
           exit 1
         end
@@ -235,6 +245,8 @@ class ImportUrlData
             background_job = BackgroundJob.find(options['bgj_id'])
             # false case
             background_job.status = Settings.job_status.WRONG
+            background_job.filename = header_error_file + Time.now.strftime("%Y%m%d") + Settings.file_type.TXT
+            background_job.filepath = error_file
             background_job.save!
             raise ActiveRecord::Rollback
           end
@@ -247,7 +259,8 @@ class ImportUrlData
           background_job.filepath = data_file
         else
           background_job.status = Settings.job_status.WRONG
-          background_job.filepath = data_file
+          background_job.filename = header_error_file + Time.now.strftime("%Y%m%d") + Settings.file_type.TXT
+          background_job.filepath = error_file
 
         end
         background_job.save!
@@ -259,6 +272,8 @@ class ImportUrlData
         background_job = BackgroundJob.find(options['bgj_id'])
         # false case
         background_job.status = Settings.job_status.WRONG
+        background_job.filename = header_error_file + Time.now.strftime("%Y%m%d") + Settings.file_type.TXT
+        background_job.filepath = error_file
         background_job.save!
         error.write("Unexpected error: file uploading failed. Please try againg or contact the customer service. \n")
       end
