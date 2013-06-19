@@ -159,6 +159,23 @@ $(window).resize(function() {
 });
 
 </script>
+<script type="text/javascript">
+  $(function(){
+      $("#import_csv").change(function(){
+          $("#upload_button").val($("#import_csv").val());
+      });
+      $("#upload_button").click(function(){
+          $("#import_csv").click();
+      });
+
+      $("#import_csv").change(function(){
+          $("#input_text").val($("#import_csv").val());
+      });
+      $("#input_text").click(function(){
+          $("#import_csv").click();
+      });
+  });
+</script>
         <div class="contentNavi">
             <ul>
                 <li class="pre"><a class="bread_scrumb_link" href="<%= clients_path%>?client_id=<%= @client_id%>"><%= @client_name %></a></li>
@@ -178,17 +195,24 @@ $(window).resize(function() {
             <input type="hidden" name="media_category_id" value="<%= @media_category_id %>"/>
             <table class="file_upload">
                 <tr>
-                  <td colspan="2"><%= f.file_field :csv %></td>
-                  <td></td>
-                </tr>
-                <tr>
+                  <td><a href="javascript:void(0)" id="upload_button"> 
+                         <img src="/assets/btn_file_select.gif">
+                      </a>
+                  </td>
                   <td><input type="radio" name="type" value="insert" checked="checked" />
                       追加（新規）</td>
                   <td><input type="radio" name="type" value="update"/>
                       更新（既存）</td>
+                </tr>
+                <tr>
+                  <td colspan="2" style="display:none">
+                      <input id="import_csv" type="file" name="import[csv]">
+                  </td>
+                  <td><input id="input_text" type="text"/></td>
                   <td>
                     <input type="image" src="/assets/btn_upload.gif">
                   </td>
+                  <td></td>
                 </tr>
             </table>
             <p style="cursor: pointer;">
