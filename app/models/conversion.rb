@@ -12,7 +12,6 @@ class Conversion < ActiveRecord::Base
   validates :roman_name, presence: true, uniqueness: {scope: :promotion_id}
   validates :conversion_category, presence: true
   validates :track_type, presence: true, if: :check_app
-  validates :session_period, presence: true, :numericality => true, if: :check_track_type1
   validates_inclusion_of :session_period, :in => 1..90, if: :check_track_type1
   validates :unique_def, presence: true, if: :check_conversion_category
   validates :os, presence: true, if: :check_track_type
@@ -78,7 +77,7 @@ class Conversion < ActiveRecord::Base
   end
   
   def check_fb_id_valid
-    conversion_category.to_i == 2 && conversion_mode.to_i != 2
+    conversion_category.to_i == 2 && track_type.to_i == 1 && conversion_mode.to_i != 2
   end
   
   def check_sales?

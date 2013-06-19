@@ -94,15 +94,16 @@
       	if @cv_list && @cv_list.count > 0 %>
       		<tr><td colspan="2"><input type="hidden" name="cv_num" id="cv_num" value="<%= @cv_list.count %>" /></td></tr>
 	    <%    	
-	      	@cv_list.each do |idx, cv|%>
+	      	@cv_list.each do |idx, cv|
+	      	%>
 	      	<tr>
 	      		<td>
 	      		<% if idx>0 %>	
 	      		<select name="op[]" class="ta-c mcdropdown_spacing" id="op#{idx}">
-			      <option value="+">+</option>
-			      <option value="-">−</option>
-			      <option value="x">×</option>
-			      <option value="÷">÷</option>
+			      <option value="+" <% if @op_list[idx] == '+'%> selected="selected" <% end %>>+</option>
+			      <option value="-" <% if @op_list[idx] == '-'%> selected="selected" <% end %>>−</option>
+			      <option value="x" <% if @op_list[idx] == 'x'%> selected="selected" <% end %>>×</option>
+			      <option value="÷" <% if @op_list[idx] == '÷'%> selected="selected" <% end %>>÷</option>
 			    </select>
 			    <% end %>
 			    </td>
