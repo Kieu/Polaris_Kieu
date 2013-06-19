@@ -48,7 +48,7 @@ $(function(){
         </tr>
         <tr>
           <th><%= f.label t("account.margin") %></th>
-          <td><%= I18n.t("account.input_data") %> &nbsp; × <%= f.text_field :margin, maxlength: 255, value: @account.margin, style: "width: 80px; text-align: right", class: "prevent_change" %></td><td id="percent" style="margin-left: -68px; position: absolute; margin-top: 12px;">%</td>
+          <td><%= I18n.t("account.input_data") %> &nbsp; × <%= f.text_field :margin, maxlength: 255, value: @account.margin, style: "width: 80px; text-align: right", class: "prevent_change" %></td><td id="percent" style="margin-left: -62px; position: absolute; margin-top: 13px;">%</td>
         </tr>
         <tr>
         	<td colspan="2">
@@ -93,7 +93,7 @@ function active_sync_box() {
 }
 jQuery(document).ready(function($) {
   <% if @account.errors[:margin].count > 0%>
-    $("#percent").css("margin-top","0");
+    $("#percent").css("margin-top","3px");
   <% end %>
 	
 	$("#account_media_category_id").change(function(){
