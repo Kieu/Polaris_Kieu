@@ -618,8 +618,8 @@ en:
   agency:
     crumb_edit: "Agency Edit"
     crumb_add: "Agency Add"
-    agency_name: "Agency name"
-    roman_name: "Roman name"
+    agency_name: "Agency name: "
+    roman_name: "Roman name: "
     flash_messages:
       success: " Agency is created successful"
       update: " Agency is updated successful"
@@ -793,20 +793,20 @@ en:
   user:
     crumb_add: "Add User"
     crumb_edit: "User edit"
-    username: "User name "
-    roman_name: "Roman name "
-    email: "Email address "
+    username: "User name: "
+    roman_name: "Roman name: "
+    email: "Email address: "
     role:
-      label: "Role"
+      label: "Role: "
       include_blank: "Please select" 
-    company_name: "Conpany name"
+    company_name: "Conpany name: "
     company_id:
       include_blank: "Please select"
     password:
-      label: "password "
+      label: "Password: "
       info: "※Automatically create"
     password_notification:
-      label: "Password notification "
+      label: "Password notification: "
       not_notified: " Not notified"
       to_notified: " To notified"
     disabled:
