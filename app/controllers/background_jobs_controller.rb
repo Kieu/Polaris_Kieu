@@ -14,7 +14,7 @@ class BackgroundJobsController < ApplicationController
     render "background_jobs/new"
   end
   def upload
-    @jobs = BackgroundJob.where(:user_id => current_user.id,:type_view => 'upload',:status =>'> 1')
+    @jobs = BackgroundJob.where(:user_id => current_user.id,:type_view => 'upload',:status =>[1,2])
     render "background_jobs/upload"
   end
   def index
