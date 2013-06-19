@@ -46,7 +46,7 @@
 
         }
         function create() {
-            var client_id = $('a[class="client_name active"]').attr('id');
+            var client_id = $('a[class="client_name current"]').attr('id');
             ajaxCommon('<%= new_promotion_path() %>?client_id=' + client_id, '', '', '', '#inner');
         }
     </script>
