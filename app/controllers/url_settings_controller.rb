@@ -22,6 +22,11 @@ class UrlSettingsController < ApplicationController
   def get_urls_list
     start_date = params[:start_date]
     end_date = params[:end_date]
+    if  !start_date || !end_date
+      start_date = Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d")
+      end_date = Date.yesterday.strftime("%Y/%m/%d")
+    end
+    
     url_data = Array.new
     url_data = RedirectUrl.get_url_data(params[:promotion_id], params[:account_id], params[:media_id],
                                  params[:page], params[:rp], start_date, end_date)
@@ -88,6 +93,6 @@ class UrlSettingsController < ApplicationController
     time = Time.new
     cookies[:url_setting_start_date] = Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d") if !cookies[:url_setting_start_date] 
     cookies[:url_setting_end_date] = Date.yesterday.strftime("%Y/%m/%d") if !cookies[:url_setting_end_date]
-    cookies[:url_setting] = "1111111111" if !cookies[:url_setting]
+    cookies[:url_setting] = "1111111011" if !cookies[:url_setting]
   end
 end

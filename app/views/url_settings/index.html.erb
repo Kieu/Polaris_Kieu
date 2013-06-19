@@ -120,6 +120,10 @@ $(function() {
 		cookies_options = options;
 	}
 	$(document).on('click', "#change_cookie", function(){
+    var term = $('#datepick').val();
+    var d = term.split(' - ');
+    start_date = d[0];
+    end_date = d[1];
 		$.cookie("url_setting",cookies_options);
 		so = 0;
 		for (var i=0;i<colums.length;i++){
@@ -130,7 +134,7 @@ $(function() {
 			}
 		 }
 
-	    reloadFlex1(".newTable04", "<%= get_urls_list_url_settings_path %>?promotion_id=<%= @promotion_id %>&account_id=<%= @account_id%>&media_id=<%= @media_id%>");
+	    reloadFlex1(".newTable04", "<%= get_urls_list_url_settings_path %>?promotion_id=<%= @promotion_id %>&account_id=<%= @account_id%>&media_id=<%= @media_id%>" + "&start_date=" + start_date + "&end_date=" + end_date);
 	    default_url_options = $("#inline_cv_logs").html();
 		$("#clicklogs").colorbox.close();
 	});
