@@ -73,8 +73,8 @@ class ImportUrlData
           background_job.filename = header_error_file + Time.now.strftime("%Y%m%d") + Settings.file_type.TXT
           background_job.filepath = error_file
           background_job.save!
-
-          exit 1
+          
+          return
         end
 
         row_number = CSV.readlines(data_file).size
@@ -88,7 +88,8 @@ class ImportUrlData
           background_job.filename = header_error_file + Time.now.strftime("%Y%m%d") + Settings.file_type.TXT
           background_job.filepath = error_file
           background_job.save!
-          exit 1
+          
+          return
         end
         array_ads = Array.new
         array_redirect_info = Array.new
