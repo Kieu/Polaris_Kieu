@@ -158,7 +158,6 @@ $(window).resize(function() {
 });
 
 </script>
-<%= flash[:error] %>
         <div class="contentNavi">
             <ul>
                 <li class="pre"><a class="bread_scrumb_link" href="<%= clients_path%>?client_id=<%= @client_id%>"><%= @client_name %></a></li>
@@ -195,7 +194,7 @@ $(window).resize(function() {
             	<small>
                   <a class="dl" href="<%= download_template_url_settings_path %>?account_id=<%= @account_id%>">アップロードファイルフォーマットのダウンロード</a>
                 <small></p>
-            <p class="bold">入稿リクエストを受け付けました。</p>
+            <p class="bold"><%= flash[:error] %></p>
           <% end %>
         </div>
         <!-- #uploadArea -->
