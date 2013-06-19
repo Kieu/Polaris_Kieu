@@ -12,9 +12,11 @@ class AgenciesController < ApplicationController
   end
   
   def edit
+    @prevent = "0"
   end
 
   def update
+    @prevent = "1"
     @agency.update_user_id = current_user.id
     if @agency.update_attributes(params[:agency])
       flash[:error] = I18n.t("agency.flash_messages.update")
@@ -26,9 +28,11 @@ class AgenciesController < ApplicationController
 
   def new
     @agency = Agency.new
+    @prevent = "0"
   end
 
   def create
+    @prevent = "1"
     @agency = Agency.new(params[:agency])
     @agency.create_user_id = current_user.id
     @add_flg = 0

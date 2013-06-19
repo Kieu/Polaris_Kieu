@@ -1,3 +1,11 @@
+<script type="text/javascript">
+$(function(){
+	prevent_change = "<%= @prevent %>";
+	$(".prevent_change").change(function(){
+		prevent_change = "1"
+	})
+})
+</script>
 <%= render "layouts/prevent_change_page_new" %>
 <%= stylesheet_link_tag "css/agency" %>
 <%= stylesheet_link_tag "css/common" %>
@@ -20,15 +28,15 @@
       <table>
         <tbody>
         <tr>
-          <th><%= f.label t("agency.agency_name") %></th>
+          <th><%= f.label t("agency.agency_name") %>:</th>
           <td colspan="2">
-            <%= f.text_field :agency_name, maxlength: 255, style: "width: 250px" %>
+            <%= f.text_field :agency_name, maxlength: 255, style: "width: 250px", class: "prevent_change" %>
           </td>
         </tr>
         <tr>
-          <th> <%= f.label t("agency.roman_name") %></th>
+          <th> <%= f.label t("agency.roman_name") %>:</th>
           <td colspan="2">
-            <%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %>
+            <%= f.text_field :roman_name, maxlength: 255, style: "width: 250px", class: "prevent_change" %>
           </td>
         </tr>
         </tbody>

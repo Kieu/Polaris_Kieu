@@ -618,8 +618,8 @@ en:
   agency:
     crumb_edit: "Agency Edit"
     crumb_add: "Agency Add"
-    agency_name: "Agency name "
-    roman_name: "Roman name "
+    agency_name: "Agency name"
+    roman_name: "Roman name"
     flash_messages:
       success: " Agency is created successful"
       update: " Agency is updated successful"
@@ -780,10 +780,11 @@ en:
   promotion:
     crumb_edit: "Promotion edit"
     crumb_add: "Promotion add"
-    promotion_name: "Promotion name "
-    category: "Category "
+    promotion_name: "Promotion name: "
+    roman_name: "Roman Name: "
+    category: "Category: "
     tracking_period:
-      label: "Tracking period "
+      label: "Tracking period: "
       day: "Day"
     dashboard: "Dashboard "
     flash_messages:

@@ -639,8 +639,8 @@ ja:
     crumb_edit: "代理店編集"
     crumb_add: "代理店登録"
     crumb_list: ""
-    agency_name: "代理店名 "
-    roman_name: "代理店名(英語) "
+    agency_name: "代理店名"
+    roman_name: "代理店名(英語)"
     flash_messages:
       success: " 代理店登録が完了しました"
       update: " 代理店編集が完了しました"
@@ -801,10 +801,11 @@ ja:
   promotion:
     crumb_edit: "プロモーション編集"
     crumb_add: "プロモーション登録"
-    promotion_name: "プロモーション名"
-    category: "カテゴリ"
+    promotion_name: "プロモーション名: "
+    roman_name: "プロジェクト名（英語）: "
+    category: "カテゴリ: "
     tracking_period:
-      label: "計測期間"
+      label: "計測期間: "
       day: "日"
     dashboard: "ダッシュボード"
     flash_messages:

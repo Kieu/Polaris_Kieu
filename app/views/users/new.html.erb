@@ -1,4 +1,12 @@
-<%= render "layouts/prevent_change_page_edit" %>
+<script type="text/javascript">
+$(function(){
+	prevent_change = "<%= @prevent %>";
+	$(".prevent_change").change(function(){
+		prevent_change = "1"
+	})
+})
+</script>
+<%= render "layouts/prevent_change_page_new" %>
 <%= stylesheet_link_tag "css/users_new" %>
 <%= stylesheet_link_tag "css/common" %>
 <%= flash[:success] if flash[:success] %>
@@ -8,21 +16,21 @@
       <table>
         <tbody>
         <tr>
-          <th><%= f.label t("user.username") %> : </th>
-          <td colspan="2"><%= f.text_field :username, maxlength: 255, style: "width: 200px",tabindex: 1 %></td>
+          <th><%= f.label t("user.username") %></th>
+          <td colspan="2"><%= f.text_field :username, maxlength: 255, style: "width: 200px",tabindex: 1, class: "prevent_change" %></td>
         </tr>
         <tr>
-          <th><%= f.label t("user.roman_name") %> : </th>
-          <td colspan="2"><%= f.text_field :roman_name, maxlength: 255, style: "width: 200px",tabindex: 2 %></td>
+          <th><%= f.label t("user.roman_name") %></th>
+          <td colspan="2"><%= f.text_field :roman_name, maxlength: 255, style: "width: 200px",tabindex: 2, class: "prevent_change" %></td>
         </tr>
         <tr>
-          <th> <%= f.label t("user.email") %> : </th>
-          <td colspan="2"><%= f.text_field :email, maxlength: 255, style: "width: 200px",tabindex: 3 %></td>
+          <th> <%= f.label t("user.email") %></th>
+          <td colspan="2"><%= f.text_field :email, maxlength: 255, style: "width: 200px",tabindex: 3, class: "prevent_change" %></td>
         </tr>
         <tr>
           <th> <%= f.label t("user.role.label") %> : </th>
           <td colspan="2">
-          	<select class="input-text" id="user_role_id" name="user[role_id]" tabindex="4">
+          	<select class="input-text prevent_change" id="user_role_id" name="user[role_id]" tabindex="4" >
           		<option value=""><%= I18n.t("user.role.include_blank") %></option>
           		<% if @user.role_id == 2 %>
 					<option value="2" selected >Client</option>
@@ -40,17 +48,18 @@
 					<option value="1">Super</option>
 				<% end  %>
 			</select>
+			<p><span class="text-validationError"><%= @user.errors[:role_id][0] %></span></p>
           </td>
         </tr> 
         <tr>
           <th><%= f.label t("user.company_name") %> : </th>
           <td colspan="2">
           	<% if @user.role_id && !@user.client? %>
-            	<%= f.collection_select :company_id, Agency.all, :id, :agency_name, {include_blank: t("user.company_id.include_blank")} , {:class => 'input-text',tabindex: 5} %>
+            	<%= f.collection_select :company_id, Agency.all, :id, :agency_name, {include_blank: t("user.company_id.include_blank")} , {:class => 'input-text prevent_change',tabindex: 5} %>
             <% elsif @user.role_id %>
-            	<%= f.collection_select :company_id, Client.active.all, :id, :client_name, {include_blank: t("user.company_id.include_blank")} , {:class => 'input-text',tabindex: 5} %>
+            	<%= f.collection_select :company_id, Client.active.all, :id, :client_name, {include_blank: t("user.company_id.include_blank")} , {:class => 'input-text prevent_change',tabindex: 5} %>
             <% else %>
-            	<%= f.collection_select :company_id, Client.where(id: 0), :id, :client_name, {include_blank: t("user.company_id.include_blank")} , {:class => 'input-text',tabindex: 5} %>
+            	<%= f.collection_select :company_id, Client.where(id: 0), :id, :client_name, {include_blank: t("user.company_id.include_blank")} , {:class => 'input-text prevent_change',tabindex: 5} %>
             <% end %>
             </td>
             	
@@ -60,9 +69,9 @@
           <td colspan="2"><%= I18n.t("user.password.info") %></td>
         </tr>
         <tr>
-          <th><%= I18n.t("user.password_notification.label") %> : </th>
-          <td><%= f.radio_button :password_flg, "0", checked: true, tabindex: 6 %> <%= I18n.t("user.password_notification.not_notified") %></td>
-          <td><%= f.radio_button :password_flg, "1", tabindex: 7 %> <%= I18n.t("user.password_notification.to_notified") %></td>
+          <th><%= I18n.t("user.password_notification.label") %></th>
+          <td><%= f.radio_button :password_flg, "0", checked: true, tabindex: 6, class: "prevent_change" %> <%= I18n.t("user.password_notification.not_notified") %></td>
+          <td><%= f.radio_button :password_flg, "1", tabindex: 7, class: "prevent_change" %> <%= I18n.t("user.password_notification.to_notified") %></td>
         </tr>
         </tbody>
       </table>
