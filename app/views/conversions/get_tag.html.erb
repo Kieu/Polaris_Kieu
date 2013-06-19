@@ -1,0 +1,109 @@
+<% content_for :stylesheet_includes do %>
+  <%= stylesheet_link_tag "css/common" %>
+    <%= stylesheet_link_tag "css/conversion" %>
+  <%= stylesheet_link_tag "css/ui.tabs" %>
+  <%= stylesheet_link_tag "css/jquery.mcdropdown.min" %>
+    <%= javascript_include_tag "js/jquery.chili-2.2.js" %>
+    <%= javascript_include_tag "js/jquery.bgiframe.js" %>
+    <%= javascript_include_tag "js/jquery.mcdropdown.min" %>
+<% end %>
+<%= javascript_include_tag "js/ui.core" %>
+<%= javascript_include_tag "js/ui.tabs" %>
+<% content_for :sidebar do %>
+    <%= render partial: "layouts/sidebar", locals: {object: @conversions} %>
+<% end %>
+<ul class="contentNavi">
+  <li class="pre">
+    <%= link_to @promotion.client.client_name, client_path(client_id: @promotion.client_id) %>
+  </li>
+  <li>&gt;</li>
+  <li class="pre">
+    <%= link_to @promotion.promotion_name, promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %>
+  </li>
+  <li>&gt;</li>
+  <li><%= I18n.t("conversion.tag_acquisition")%></li>
+  <li>/</li>
+  <li><%= short_ja_name(@conversion.conversion_name)%></li>
+</ul>
+<div class="clear"></div>
+<div id="conversion_inner">
+  <div id="ui-tab">
+    <ul class="ui-tabs-nav">
+      <li><a href="/conversions/<%= @conversion.id %>/edit?promotion_id=<%= @conversion.promotion_id %>"><span><%= I18n.t("conversion.crumb_edit")%></span></a></li>
+      <li><a href="#get_tag"><span><%= I18n.t("conversion.tag_acquisition")%></span></a></li>
+    </ul>
+    <div id="get_tag">
+      <% if @conversion.conversion_category == "1" %>
+        <div id="sdk_download">
+          SDK download
+          <table border="1">
+            <tr>
+              <td><button>SDK for iOS</button></td>
+              <td><button>SDK for Android</button></td>
+            </tr>
+            <tr>
+              <td><button>Unity SDK for iOS</button></td>
+              <td><button>Unity SDK for Android</button></td>
+            </tr>
+          </table>
+        </div>
+        <br /><br />
+        <div id="info">
+          Site id
+          <table border="1">
+            <tr>
+              <td>site_id</td>
+              <td id="site_id"><%= @conversion.promotion_id %></td>
+              <td><button onclick="copy_to_clipboard('site_id')">Copy</button></td>
+            </tr>
+            <tr>
+              <td>mv</td>
+              <td id="mv"><%= @conversion.mv %></td>
+              <td><button>Copy</button></td>
+            </tr>
+          </table>
+        </div>
+      <% elsif @conversion.conversion_category == "2" %>
+        <div id="tracking_tag">
+          Tracking tag
+          <table border="1">
+            <tr>
+              <td>Tracking tag</td>
+              <td id="tag">
+                <script type="text/javascript">
+                  var prot = document.location.protocol;
+                  document.write(unescape("%3Cscript type=\'text/javascript\' language=\'javascript\' src=\'"
+                    + prot + "//track.polaris-adm.com/js/conversion.js?" + (new Date().getTime()) + "\'%3E%3C/script%3E"));
+                </script>
+
+                <script type="text/javascript">
+                  var plrs_pid = <%= @conversion.promotion_id %>;
+                  var plrs_mv = <%= @conversion.mv %>;
+
+                /* 
+                  // #custom parameter
+                  var plrs_suid = "";
+                  var plrs_verify = "";
+                  var plrs_sales = "";
+                  var plrs_profit = "";
+                  var plrs_volume = "";
+                  var plrs_others = "";
+                */
+
+                　var polaris = getTrack();
+                  polaris.main();
+                </script>
+              </td>
+              <td><button>Copy</button></td>
+            </tr>
+          </table>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  function copy_to_clipboard(id) {
+    text = document.getElementById(id).innerHTML;
+  }
+</script>

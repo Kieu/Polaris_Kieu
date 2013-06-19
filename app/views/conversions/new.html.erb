@@ -37,11 +37,11 @@
 <% end %>
 <ul class="contentNavi">
   <li class="pre">
-    <%= link_to short_name(@promotion.client.client_name), clients_path(client_id: @promotion.client.id) %>
+    <%= link_to short_ja_name(@promotion.client.client_name), clients_path(client_id: @promotion.client.id) %>
   </li>
   <li>&gt;</li>
   <li class="pre">
-    <%= link_to short_name(@promotion.promotion_name), promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %>
+    <%= link_to short_ja_name(@promotion.promotion_name), promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %>
   </li>
   <li>&gt;</li>
   <li><%= I18n.t("conversion.crumb_add")%></li>
