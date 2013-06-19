@@ -636,24 +636,24 @@ ja:
     crumb_edit: "代理店編集"
     crumb_add: "代理店登録"
     crumb_list: ""
-    agency_name: "代理店名: "
-    roman_name: "代理店名(英語): "
+    agency_name: "代理店名 "
+    roman_name: "代理店名(英語) "
     flash_messages:
       success: " 代理店登録が完了しました"
       update: " 代理店編集が完了しました"
   account:
     crumb_add: "アカウント登録"
     crumb_edit: "アカウント編集"
-    media_category: "メディアカテゴリ: "
+    media_category: "メディアカテゴリ "
     media: "メディア: "
-    account_name: "アカウント名: "
-    roman_name: "アカウント名(英語): "
+    account_name: "アカウント名 "
+    roman_name: "アカウント名(英語) "
     margin: "コスト計算： "
     input_data: "入力データ"
-    sync_account_id: "アカウントの同期: "
+    sync_account_id: "アカウントの同期 "
     synchronism: "同期"
     fractured: "同期停止"
-    sync_account_pw: "Sync account PW: "
+    sync_account_pw: "Sync account PW "
     flash_messages:
       success: " アカウント登録が完了しました"
       update: " アカウント編集が完了しました"
@@ -663,32 +663,32 @@ ja:
     tag_acquisition: タグ取得
     user_information: "ユーザー情報"
     delete: "削除"
-    conversion_name: "コンバージョン名: "
-    roman_name: "コンバージョン名(英語): "
+    conversion_name: "コンバージョン名 "
+    roman_name: "コンバージョン名(英語) "
     conversion_category:
-      label: "成果カテゴリ: "
+      label: "成果カテゴリ "
       web: " WEB"
       app:
         label: " APP"
         track_type:
-          label: "計測タイプ：: "
+          label: "計測タイプ "
           install: " Install"
           app_action: "アプリ内アクション"
         os:
-          label:  "OS指定: "
+          label:  "OS指定 "
           ios: " iOS"
           android: " Android"
         conversion_mode:
-          label:  "計測媒体: "
+          label:  "計測媒体 "
           all: " 全て"
           facebook: " Facebookのみ"
           other: " その他広告"
         duplicate:
-          label: "重複排除: "
+          label: "重複排除 "
           label1: " あり"
           label2: " なし"
         track_method:
-          label: "計測方法: "
+          label: "計測方法 "
           white: " White"
           welcome: " Welcome"
           custom: 
@@ -696,37 +696,37 @@ ja:
             url: " URL必須"
           install_referrer: " Install Referrer"
         app_id:
-          label: "アプリID: "
-          facebook: "(Facebook): "
+          label: "アプリID "
+          facebook: "(Facebook) "
         option:
-          label: "<オプション>: "
-          judging: "審査フラグ: "
+          label: "<オプション> "
+          judging: "審査フラグ "
           configure: " 設定する"
-        sale_unit_price: "売上単価: "
+        sale_unit_price: "売上単価 "
         reward_form:
           label: "報酬型式: "
           straight_line_type: "  定額型"
           declining_balance_type: " 定率型"
         session:
-          label: "セッション: "
+          label: "セッション "
           retention: " 保持期間 "
           day: "日"
       combination: " 組み合わせ"
     deduplicated:
-      label: "重複排除: "
+      label: "重複排除"
       label1: " あり"
       label2: " なし"
-    unique_definition: "ユニーク定義: "
+    unique_definition: "ユニーク定義 "
     flash_messages:
       success: " コンバージョン登録が完了しました"
       update: " コンバージョン編集が完了しました"
     option1:
       label: "<オプション①>　"
       starting_point_setting:
-        label: "起点設定: "
+        label: "起点設定"
         configure: " 設定する"
         not_configure: " 設定しない"
-      sale_unit_price: "売上単価: "
+      sale_unit_price: "売上単価"
     option2:
       label: "<オプション②>"
       reward_format:
@@ -734,15 +734,15 @@ ja:
         straight_line_type: " 定額型"
         not_set: " 設定しない"
     combination:
-      pattern: "パターン: "
+      pattern: "パターン "
       add: "Add"
   log:
     today_text: "今日"
     crumb_click: "Clickログ"
     crumb_cv_logs: "CVログ"
-    conversion_name: "コンバージョン名: "
-    media_category: "メディアカテゴリ: "
-    account_name: "アカウント名: "
+    conversion_name: "コンバージョン名"
+    media_category: "メディアカテゴリ"
+    account_name: "アカウント名"
   cv_logs:
     label: "CVログ"
     cv_test: "CVテスト"
@@ -798,10 +798,10 @@ ja:
   promotion:
     crumb_edit: "プロモーション編集"
     crumb_add: "プロモーション登録"
-    promotion_name: "プロモーション名: "
-    category: "カテゴリ: "
+    promotion_name: "プロモーション名"
+    category: "カテゴリ"
     tracking_period:
-      label: "計測期間: "
+      label: "計測期間"
       day: "日"
     dashboard: "ダッシュボード"
     flash_messages:
@@ -810,24 +810,24 @@ ja:
   user:
     crumb_add: "ユーザー登録"
     crumb_edit: "ユーザー編集"
-    username: "ユーザー名: "
-    roman_name: "ユーザー名(英語): "
-    email: "メールアドレス: "
+    username: "ユーザー名 "
+    roman_name: "ユーザー名(英語) "
+    email: "メールアドレス "
     role:
-      label: "権限: "
+      label: "権限 "
       include_blank: "権限を選択してください" 
-    company_name: "会社名: "
+    company_name: "会社名 "
     company_id:
       include_blank: "会社名を選択してください"
     password:
-      label: "パスワード: "
+      label: "パスワード "
       info: "※自動で振り分けます"
     password_notification:
-      label: "パスワード通知: "
+      label: "パスワード通知 "
       not_notified: " 通知しない"
       to_notified: " 通知する"
     disabled:
-      label: "ユーザー無効化: "
+      label: "ユーザー無効化 "
       disable: "無効にする"
     flash_messages:
       success: " ユーザー登録が完了しました"

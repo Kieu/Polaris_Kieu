@@ -35,8 +35,8 @@
     <div id="personal">
       <ul>
         <li>
-          <div id="notification" style="display: inline;position: relative;top:8px">
-          <button class="fancybox mt-0 fl-l inline cboxElement" rel="gallery" href="#inline_content"><span class="notification"><%= @notify %></span></button>
+          <div id="notification" style="display: inline;position: relative;top:5px">
+          <button class="fancybox mt-0 inline cboxElement" rel="gallery" href="#inline_content"><span class="notification"><%= @notify %></span></button>
 
           <div style='display:none'>
             <div id='inline_content'>
@@ -130,10 +130,15 @@
                 <li  <%if params[:controller] == "media"%>class="current"<% end %>><a href="#"><img src="/assets/nav/nav_04_media_off.gif" width="142" height="38" alt="メディアリスト" /></a></li>
             <% end %>
         <% else %>
-        	<% if params[:controller] == "promotions" %>
+        	<% if params[:controller] == "promotions"%>
         		<% if @promotion_id %>
         			<li class="current"><%= link_to raw('<img src="/assets/nav/nav_01_promotion_off.gif" alt="代理店リスト" />'),  "#{promotions_path}?promotion_id=#{@promotion_id}&client_id=#{@client_id}", class: "promotion_class_header" %>
 					<li><%= link_to image_tag("/assets/nav/nav_04_log_off.gif",  alt: "ユーザーリスト"), "#{conversion_promotion_logs_path}?promotion_id=#{@promotion_id}", class: "log_class_header" %></li>
+        		<% end %>
+        	<% elsif params[:controller] == "conversion_promotion_logs" || params[:controller] == "click_logs" %>
+        		<% if @promotion_id %>
+        			<li><%= link_to raw('<img src="/assets/nav/nav_01_promotion_off.gif" alt="代理店リスト" />'),  "#{promotions_path}?promotion_id=#{@promotion_id}&client_id=#{@client_id}", class: "promotion_class_header" %>
+					<li class="current"><%= link_to image_tag("/assets/nav/nav_04_log_off.gif",  alt: "ユーザーリスト"), "#{conversion_promotion_logs_path}?promotion_id=#{@promotion_id}", class: "log_class_header" %></li>
         		<% end %>
         	<% end %>
         <% end %>

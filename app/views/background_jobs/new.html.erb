@@ -1,14 +1,14 @@
 <div id="download">
   <ul class="entrydate_box">
   <% if @jobs %>
-      <% @jobs.each_with_index do |job,| %>
+      <% @jobs.each_with_index do |job| %>
 
             <li>
               <table class="entrydate_table">
                 <tr>
                   <td class="file_name"><%= job.filename %></td>
-                  <td class="capacity">298MB</td>
-                  <td class="daily">05/10/12:50</td>
+                  <td class="capacity"><%= File.stat(job.filepath).size %></td>
+                  <td class="daily"><%= File.stat(job.filepath).mtime %></td>
                   <td class="c_black">完了</td>
                 </tr>
                 <tr>
