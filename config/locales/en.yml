@@ -743,7 +743,7 @@ en:
     campaign: "Campaign"
     ad_group: "Ad Group name"
     ad_name: "Ad Name"
-    click_time: "Click Times"
+    click_utime: "Click Times"
     verify: "Verify"
     suid: "SUID"
     session_id: "Session ID"
@@ -765,7 +765,7 @@ en:
     listing_ad: "Listing ad"
     display_ad: "Display ad"
     affiliate: "Affiliate"
-    click_time: "Click Time"
+    click_utime: "Click Time"
     media_name: Media Name
     account_name: Account name
     campaign_name: Campaign Name
