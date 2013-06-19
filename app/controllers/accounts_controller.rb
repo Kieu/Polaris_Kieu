@@ -4,6 +4,7 @@ class AccountsController < ApplicationController
   before_filter :must_right_object, only: [:edit, :update]
   def new
     @account = Account.new
+    @prevent = "0"
     @account.margin = Settings.account_cost_default
     @promotion_id = params[:promotion_id]
     @promotion = Promotion.find_by_id(@promotion_id)
@@ -12,6 +13,7 @@ class AccountsController < ApplicationController
   end
   
   def edit
+    @prevent = "0"
     @account = Account.find(params[:id])
     @account_name = Account.find(params[:id]).account_name
     @promotion_id = params[:promotion_id]
@@ -19,6 +21,7 @@ class AccountsController < ApplicationController
     @client_id = @promotion.client.id
   end
   def update
+    @prevent = "1"
     @account = Account.find(params[:id])
     @promotion_id = params[:promotion_id]
     @promotion = Promotion.find_by_id(@promotion_id)
@@ -59,7 +62,7 @@ class AccountsController < ApplicationController
     end
   end
   def create
-    
+    @prevent = "1"
     @account = Account.new(params[:account])
     @medias = Media.active.where(media_category_id: @account.media_category_id)
     @promotion_id = params[:promotion_id]
