@@ -7,6 +7,8 @@ class UrlSettingsController < ApplicationController
   before_filter :must_super_agency
 
 	def index
+    cookies[:url_setting_start_date] = Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d")
+    cookies[:url_setting_end_date] = Date.yesterday.strftime("%Y/%m/%d")
     @promotion_id = params[:promotion_id]
     @account_id = params[:account_id]
     @promotion = Promotion.where(id: @promotion_id).select('client_id, promotion_name')
