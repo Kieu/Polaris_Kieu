@@ -4,13 +4,23 @@ require 'time'
 class UrlSettingsController < ApplicationController
   before_filter :set_cookies
   before_filter :signed_in_user
+  before_filter :must_super_agency
+
 	def index
     @promotion_id = params[:promotion_id]
     @account_id = params[:account_id]
     @promotion = Promotion.where(id: @promotion_id).select('client_id, promotion_name')
     @promotion_name = @promotion.first['promotion_name']
     @client_id = @promotion.first['client_id']
-    @client_name = Client.where(id: @client_id).select('client_name').first['client_name']
+    @client = Client.where(id: @client_id).select('client_name, create_user_id')
+    @client_name = @client.first['client_name']
+    create_user_id = @client.first['create_user_id']
+
+    if (current_user.id != create_user_id) && (current_user.role.id == Settings.role.AGENCY)
+      render file: 'public/404.html', status: :not_found
+      return
+    end
+
     @account = Account.where(id: @account_id).select('media_id, account_name')
     @account_name = @account.first['account_name']
     @media_id = @account.first['media_id']
