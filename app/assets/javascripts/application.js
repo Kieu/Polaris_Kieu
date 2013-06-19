@@ -62,8 +62,8 @@ function reloadFlex(obj, urlAction, id, current_active, cname, maxlength) {
         url: urlAction,
         newp: 1
     }).flexReload();
-    $(current_active).removeClass('active');
-    $(id).addClass('active');
+    $(current_active).removeClass('current');
+    $(id).addClass('current');
     var txt = '';
     if ($(id).text().length > maxlength)
     	txt = $(id).text().substring(0, maxlength) + '...';

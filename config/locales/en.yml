@@ -5,7 +5,7 @@ en:
   hello: "Hello world"
   recaptcha:
     errors:
-      incorrect-captcha-sol: " Certification letters that you have typed are different. Please re-enter them"
+      incorrect-captcha-sol: "Certification letters that you have typed are different. Please re-enter them"
   promotions:
     new:
       category: ["IT/Media/App", "AV/Consumer electronics", "Food/Beverage/Consumer Goods", "Distribution/retail/mail order", "Finance", "Communication", "Real estate", "Human resources", "automobile", "Service", "Others"]
@@ -574,6 +574,7 @@ en:
     privacy_policy: "Privacy Policy"
     porporate_information: "Porporate information"
   login:
+    split: "."
     email: "Email address"
     pw: "Password"
     choose_lang:
@@ -587,8 +588,10 @@ en:
     captcha: "Captcha: "
     notice: "Please enter the email address of the account at the time of issuance, the authentication characters that are displayed. Issue a password, and raise the guide. "
     captcha_email_not_found: "There is no history that you have opened an account with the address "
+    captcha_error: "Certification letters that you have typed are different. Please re-enter them"
     send_success: "We have sent the password to your e-mail adress. Please confirm it."
   client:
+    user_search: "Search"
     crumb_edit: "Client Edit"
     crumb_add: "Add Client"
     crumb_list: "Client list"

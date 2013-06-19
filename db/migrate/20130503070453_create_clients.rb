@@ -4,8 +4,8 @@ class CreateClients < ActiveRecord::Migration
       t.string :client_name, limit: 255
       t.string :roman_name, limit: 255
       t.string :tel, limit: 255
-      t.column :contract_flg, "char(1)"
-      t.column :contract_type, "char(1)"
+      t.column :contract_flg, "char(1)", default: "1"
+      t.column :contract_type, "char(1)", default: "0"
       t.column :del_flg, "char(1)", default: "0"
       t.integer :create_user_id, limit: 11
       t.integer :update_user_id, limit: 11
