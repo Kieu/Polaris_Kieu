@@ -11,7 +11,7 @@ class Account < ActiveRecord::Base
   validates :media_id, presence: true
   validates :media_id, format: {with: VALID_NUMBER_REGEX}, if: -> account { account.media_id.present?}
   validates :margin, presence: true, length: {maximum: 255}
-  validates_inclusion_of :margin, :in => 0..100000
+  validates_inclusion_of :margin, :in => 0..100000, if: -> account { account.margin.present?}
   validates :margin, :numericality => true, if: -> account { account.margin.present?}
   validates :sync_flg, presence: true,  length: {maximum: 1} , if: -> account { account.sync_flg.present?}
   validates :sync_flg, format: {with: VALID_NUMBER_REGEX}, if: -> account { account.sync_flg.present?}
