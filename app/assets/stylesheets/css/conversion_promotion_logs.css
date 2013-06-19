@@ -88,10 +88,12 @@
     width: 200px;
 }
 #display_all{
+    margin-right: 20px;
     text-align: right;
     color: #E76813;
 }
 #redisplay_all{
+    margin-right: 20px;
     text-align: right;
     color: #E76813;
 }
