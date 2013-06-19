@@ -801,10 +801,11 @@ ja:
   promotion:
     crumb_edit: "プロモーション編集"
     crumb_add: "プロモーション登録"
-    promotion_name: "プロモーション名"
-    category: "カテゴリ"
+    promotion_name: "プロモーション名: "
+    roman_name: "プロジェクト名（英語）: "
+    category: "カテゴリ: "
     tracking_period:
-      label: "計測期間"
+      label: "計測期間: "
       day: "日"
     dashboard: "ダッシュボード"
     flash_messages:

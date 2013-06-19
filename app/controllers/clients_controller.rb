@@ -36,10 +36,12 @@ class ClientsController < ApplicationController
 
   def new
     @client = Client.new
+    @prevent = "0"
   end
 
   def create
     @client = Client.new(params[:client])
+    @prevent = "1"
     @client.create_user_id = current_user.id
 
     if @client.valid?
@@ -64,10 +66,12 @@ class ClientsController < ApplicationController
   end
 
   def edit
+    @prevent = "0"
   end
 
   def update
     @client.attributes = params[:client]
+    @prevent = "1"
     @client.update_user_id = current_user.id
     if @client.valid?
       ActiveRecord::Base.transaction do

@@ -11,10 +11,12 @@ class UsersController < ApplicationController
   
   def new
     @user = User.new
+    @prevent = "0"
   end
   
   def create
     @user = User.new(params[:user])
+    @prevent = "1"
     @user.password = SecureRandom.urlsafe_base64(6)
     @user.create_user_id = current_user.id
     if @user.valid?
@@ -34,10 +36,12 @@ class UsersController < ApplicationController
   
   def edit
     @user = User.find(params[:id])
+    @prevent = "0"
   end
   
   def update
     @user = User.find(params[:id])
+    @prevent = "1"
     @user.update_user_id = current_user.id
     @user.attributes = params[:user]
     if @user.valid?

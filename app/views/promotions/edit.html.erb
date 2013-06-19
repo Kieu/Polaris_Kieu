@@ -1,3 +1,11 @@
+<script type="text/javascript">
+$(function(){
+	prevent_change = "<%= @prevent %>";
+	$(".prevent_change").change(function(){
+		prevent_change = "1"
+	})
+})
+</script>
 <%= render "layouts/prevent_change_page_edit" %>
 <%= stylesheet_link_tag "css/common" %>
 <% content_for :sidebar do %>
@@ -16,25 +24,24 @@
       <table class="client_info">
         <tbody>
         <tr>
-          <th><%= f.label "Promotion name" %></th>
-          <td><%= f.text_field :promotion_name, maxlength: 255, style: "width: 250px" %></td>
+          <th><%= f.label I18n.t("promotion.promotion_name") %></th>
+          <td><%= f.text_field :promotion_name, maxlength: 255, style: "width: 250px", class: "prevent_change" %></td>
         </tr>
         <tr>
-          <th><%= f.label "Roman name" %></th>
-          <td><%= f.text_field :roman_name, maxlength: 255, style: "width: 250px" %></td>
+          <th><%= f.label I18n.t("promotion.roman_name") %></th>
+          <td><%= f.text_field :roman_name, maxlength: 255, style: "width: 250px", class: "prevent_change" %></td>
         </tr>
         <tr>
-          <th><%= f.label "Category" %></th>
+          <th><%= f.label I18n.t("promotion.category") %></th>
           <td>
             <%= f.select :promotion_category_id,
-                         t(".category").each_with_index.map {|name, index| [name,index]},
-                         selected: @promotion.promotion_category_id %>
+				t(".category").each_with_index.map {|name, index| [name,index]}, {}, {class: "prevent_change", selected: @promotion.promotion_category_id} %>
           </td>
         </tr>
         <tr style="vertical-align: top;">
-          <th><%= f.label "Tracking period" %></th>
-          <td style="width: 250px"><%= f.text_field :tracking_period, maxlength: 2, style: "width: 250px" %> </td>
-          <td style="padding-left: 0"> 日</td>
+          <th><%= f.label I18n.t("promotion.tracking_period.label") %></th>
+          <td style="width: 250px"><%= f.text_field :tracking_period, maxlength: 2, style: "width: 250px", class: "prevent_change" %> </td>
+          <td style="padding-left: 0"> <%= I18n.t("promotion.tracking_period.day") %></td>
         </tr>
         </tbody>
       </table>
