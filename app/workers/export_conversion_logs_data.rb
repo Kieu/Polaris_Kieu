@@ -38,7 +38,7 @@ class ExportConversionLogsData
                     "Reception log", "Send log", "Send date time", "Error message"]
       rows = ConversionLog.get_logs(options['promotion_id'], options['conversion_id'],
         options['media_category_id'], options['account_id'], options['start_date'],
-        options['end_date'], '1')
+        options['end_date'],options['show_error'] )
 
       client_name = promotion.client.client_name
       conversions = Conversion.where(promotion_id: options['promotion_id'])
