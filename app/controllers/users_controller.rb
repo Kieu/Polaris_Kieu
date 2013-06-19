@@ -26,7 +26,7 @@ class UsersController < ApplicationController
       end
       flash[:success] = I18n.t("user.flash_messages.success")
       if @user.password_flg == "1"
-        UserMailer.send_password(@user, @user.password).deliver
+        job_id = SendMail.create(user: @user, password: @user.password)
       end
       redirect_to new_user_path
     else
