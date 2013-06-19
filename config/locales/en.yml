@@ -780,10 +780,11 @@ en:
   promotion:
     crumb_edit: "Promotion edit"
     crumb_add: "Promotion add"
-    promotion_name: "Promotion name "
-    category: "Category "
+    promotion_name: "Promotion name: "
+    roman_name: "Roman Name: "
+    category: "Category: "
     tracking_period:
-      label: "Tracking period "
+      label: "Tracking period: "
       day: "Day"
     dashboard: "Dashboard "
     flash_messages:

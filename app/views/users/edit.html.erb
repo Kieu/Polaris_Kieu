@@ -1,3 +1,11 @@
+<script type="text/javascript">
+$(function(){
+	prevent_change = "<%= @prevent %>";
+	$(".prevent_change").change(function(){
+		prevent_change = "1"
+	})
+})
+</script>
 <%= render "layouts/prevent_change_page_edit" %>
 <%= stylesheet_link_tag "css/users_new" %>
 <%= stylesheet_link_tag "css/common" %>
@@ -9,15 +17,15 @@
         <tbody>
         <tr>
           <th><%= f.label I18n.t("user.username") %></th>
-          <td colspan="2"><%= f.text_field :username, maxlength: 255, style: "width: 200px",tabindex: 1 %></td>
+          <td colspan="2"><%= f.text_field :username, maxlength: 255, style: "width: 200px",tabindex: 1, class: "prevent_change" %></td>
         </tr>
         <tr>
           <th><%= f.label I18n.t("user.roman_name") %></th>
-          <td colspan="2"><%= f.text_field :roman_name, maxlength: 255, style: "width: 200px",tabindex: 2 %></td>
+          <td colspan="2"><%= f.text_field :roman_name, maxlength: 255, style: "width: 200px",tabindex: 2, class: "prevent_change" %></td>
         </tr>
         <tr>
           <th> <%= f.label I18n.t("user.email") %></th>
-          <td colspan="2"><%= f.text_field :email, maxlength: 255, style: "width: 200px",tabindex: 3 %></td>
+          <td colspan="2"><%= f.text_field :email, maxlength: 255, style: "width: 200px",tabindex: 3, class: "prevent_change" %></td>
         </tr>
         <tr>
           <th> <%= f.label I18n.t("user.role.label") %></th>
@@ -47,9 +55,9 @@
           <th><%= f.label I18n.t("user.disabled.label") %></th>
           <td>
               <% if @user.status == Settings.user.deactive %>
-                  <input type="checkbox" id = "disable_button" checked="checked" name="deactive" tabindex= "4">
+                  <input type="checkbox" id = "disable_button" checked="checked" name="deactive" tabindex= "4" class="prevent_change">
               <% else %>
-                  <input type="checkbox" id = "disable_button" name="deactive" tabindex= "4">
+                  <input type="checkbox" id = "disable_button" name="deactive" tabindex= "4" class="prevent_change">
               <% end %><%= I18n.t("user.disabled.disable") %>
           </td>
         </tr>
