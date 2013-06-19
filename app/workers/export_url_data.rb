@@ -25,7 +25,7 @@ class ExportUrlData
     background_job.save!
     begin
       url_data = Array.new
-      url_data = RedirectUrl.get_url_data(options['promotion_id'], options['account_id'],
+      url_data, total_row = RedirectUrl.get_url_data(options['promotion_id'], options['account_id'],
         options['media_id'], nil, nil, options['start_date'], options['end_date'], 'download')
       
       CSV.open(path_file, "wb") do |csv|

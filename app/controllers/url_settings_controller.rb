@@ -28,10 +28,10 @@ class UrlSettingsController < ApplicationController
     end
     
     url_data = Array.new
-    url_data = RedirectUrl.get_url_data(params[:promotion_id], params[:account_id], params[:media_id],
+    url_data, total_row = RedirectUrl.get_url_data(params[:promotion_id], params[:account_id], params[:media_id],
                                  params[:page], params[:rp], start_date, end_date)
     rows = get_rows url_data, params[:promotion_id], params[:client_id]
-    count = url_data.count
+    count = total_row[0]['totalCount']
 
     render json: {page: params[:page], total: count, rows: rows}
   end
