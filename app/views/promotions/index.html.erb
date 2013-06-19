@@ -16,12 +16,12 @@ a.bread_scrumb_link {
 <% if @array_promotion.count > 0 %>
 <ul class="contentNavi">
 	<% if current_user.super? %>
-		<li class="pre"><a class="bread_scrumb_link" href="/clients?client_id=<%=@client_id%>"><%= short_en_name(@client_name) %></a></li>
+		<li class="pre"><a class="bread_scrumb_link" href="/clients?client_id=<%=@client_id%>"><%= short_ja_name(@client_name) %></a></li>
 	<% else %>
-		<li class="pre"><%= short_en_name(@client_name) %></li>
+		<li class="pre"><%= short_ja_name(@client_name) %></li>
 	<% end %>
 	<li>&gt;</li>
-	<li><%= @promotion_name %></li>
+	<li><%= short_ja_name(@promotion_name) %></li>
 </ul>
 <div class="date">今日<br />
 <div id="datepicker">
@@ -452,8 +452,6 @@ a.bread_scrumb_link {
 </script>
 <% else %>
     <ul class="contentNavi">
-      <li class="pre"><a href="/clients?client_id=<%=@client_id%>"><%= @client_name %></a></li>
-      <li>&gt;</li>
-      <li>No data</li>
+      <li class="pre"><a class="bread_scrumb_link" href="/clients?client_id=<%=@client_id%>"><%= short_ja_name(@client.client_name) %></a></li>
     </ul>
 <% end %>
