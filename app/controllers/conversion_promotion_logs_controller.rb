@@ -4,7 +4,8 @@ before_filter :signed_in_user
 before_filter :set_cookies
 
 def index
-  @promotion = Promotion.find(params[:promotion_id])
+  @promotion_id = params[:promotion_id]
+  @promotion = Promotion.find(@promotion_id)
   if current_user.client?
     @client_id = current_user.company_id
   else
