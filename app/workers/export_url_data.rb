@@ -25,6 +25,7 @@ class ExportUrlData
     background_job.save!
     begin
       url_data = Array.new
+      total_row = Array.new
       url_data, total_row = RedirectUrl.get_url_data(options['promotion_id'], options['account_id'],
         options['media_id'], nil, nil, options['start_date'], options['end_date'], 'download')
       
@@ -33,7 +34,7 @@ class ExportUrlData
         csv << ["Time range: #{options['start_date']} - #{options['end_date']}"]
         csv << [""]
         csv << [""]
-        csv << ["Ad Id", "Campaign name", "Group name", "Ad name", "Creative", "URL", "Last modified"]
+        csv << ["Ad Id", "Campaign name", "Group name", "Ad name", "Creative", "URL", "Note", "Last modified"]
         url_data.each do |url|
           array_date_csv = Array.new
           array_date_csv << url['ad_id']
@@ -42,6 +43,7 @@ class ExportUrlData
           array_date_csv << url['ad_name']
           array_date_csv << url['creative_text']
           array_date_csv << url['url']
+          array_date_csv << url['comment']
           array_date_csv << url['last_modified']
           csv << array_date_csv
         end

@@ -41,6 +41,7 @@ job_status:
   WRONG: '2'
 file_type:
   CSV: '.csv'
+  TXT: ".txt"
 export_promotion_path: 'doc/promotion_export/'
 export_url_path: 'doc/url/export_url/'
 export_click_logs_path: 'doc/click_logs_export/'
