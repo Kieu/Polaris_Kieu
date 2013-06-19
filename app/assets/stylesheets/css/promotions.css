@@ -224,18 +224,20 @@ ul, li {
 	float: none;
 }
 .btn_details ul {
-	width: 120px;
+	width: 140px;
 		border: 1px solid #bcbfc0;
+	
 }
 .btn_details ul ul {
 	top: 0;
-	left: 121px;
+	left: 141px;
 	
 	border: 1px solid #bcbfc0;
+	
 }
 .btn_details ul a {
 	display: block;
-	width: 108px;
+	width: 128px;
 	background-color:#FFF;
 	padding: 6px;
 	color:#000;
