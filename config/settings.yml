@@ -1,6 +1,6 @@
 mailer:
   default_from: info@septeni.jp
-  send_password_subject: Polaris password
+  send_password_subject: 【Polaris事務局】パスワード発行完了
 login:
   login_block_number: 3
 role:

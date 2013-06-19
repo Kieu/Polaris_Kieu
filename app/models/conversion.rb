@@ -12,15 +12,13 @@ class Conversion < ActiveRecord::Base
   validates :roman_name, presence: true, uniqueness: {scope: :promotion_id}
   validates :conversion_category, presence: true
   validates :track_type, presence: true, if: :check_app
-  validates :session_period, presence: true, :numericality => true, if: :check_track_type1
   validates_inclusion_of :session_period, :in => 1..90, if: :check_track_type1
   validates :unique_def, presence: true, if: :check_conversion_category
   validates :os, presence: true, if: :check_track_type
   validates :conversion_mode, presence: true, if: :check_track_type
   validates :duplicate, presence: true, if: :check_track_type
   validates :track_method, presence: true, if: :check_track_type
-  validates :facebook_app_id, presence: true , if: :check_fb_id_valid
-  validates :facebook_app_id, inclusion: {in: 1..9223372036854775807}, if: :check_fb_id_valid, if: -> conversion { conversion.facebook_app_id.present?}
+  validates :facebook_app_id, :numericality => { :only_integer => true}, presence: true , if: :check_fb_id_valid
   validates :start_point, presence: true, if: :check_web
   validates :conversion_combine, presence: true, if: :check_combination
   validates :url, length: {maximum: 255}, presence: true, if: :check_track_method
@@ -79,7 +77,7 @@ class Conversion < ActiveRecord::Base
   end
   
   def check_fb_id_valid
-    conversion_category.to_i == 2 && conversion_mode.to_i != 2
+    conversion_category.to_i == 2 && track_type.to_i == 1 && conversion_mode.to_i != 2
   end
   
   def check_sales?
