@@ -5,6 +5,5 @@ redis_conf_path = Rails.root.join("config/redis", "#{Rails.env}.conf")
 redis_conf = File.read(redis_conf_path)
 port = /port.(\d+)/.match(redis_conf)[1]
 host_redis = /host_redis.(\S+)/.match(redis_conf)[1]
->>>>>>> 4ca9cb560c97743b7ce765937de957cdee05a483
 Resque.redis = Redis.new(host: host_redis, port: port)
 Resque::Plugins::Status::Hash.expire_in = (24 * 60 * 60)
