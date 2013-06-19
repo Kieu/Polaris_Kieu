@@ -16,6 +16,8 @@
 /doc/
 /public/assets/*
 config/redis/*
+config/initializers/redis.rb
+config/initializers/resque.rb
 db/schema.rb
 Gemfile.lock
 config/database.yml
