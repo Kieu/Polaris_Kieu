@@ -767,7 +767,7 @@ ja:
     campaign: "キャンペーン名"
     ad_group: "広告グループ名"
     ad_name: "広告名"
-    click_time: "クリック日時"
+    click_utime: "クリック日時"
     verify: "Verify"
     suid: "SUID"
     session_id: "Session ID"
@@ -786,7 +786,7 @@ ja:
     usually: 通常
     show_all: "全て追加する"
     all: "すべて表示"
-    click_time: "時間をクリック"
+    click_utime: "時間をクリック"
     media_name: メディア名
     account_name: アカウント名
     campaign_name: キャンペーン名

@@ -79,7 +79,7 @@ def get_rows conversion_logs
                                           campaign_id: campaigns.find_by_id(conversion_log.campaign_id).name,
                                           group_id: ad_groups.find_by_id(conversion_log.group_id).name, 
                                           unit_id: ads.find_by_id(conversion_log.unit_id).name,
-                                          click_time: conversion_log.click_time,
+                                          click_utime: Time.at(conversion_log.click_utime),
                                           sales: conversion_log.sales,
                                           verify: conversion_log.verify,
                                           suid: conversion_log.suid,
