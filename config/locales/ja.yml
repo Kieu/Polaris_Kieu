@@ -850,3 +850,7 @@ ja:
     disable: "無効にする"
     delete: "削除する"
     enable: "解除にする"
+  url:
+    flash_messages: 
+      success: "入稿リクエストを受け付けました。"
+    no_data: "※入稿された広告がありません。"
