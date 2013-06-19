@@ -43,6 +43,6 @@ class Account < ActiveRecord::Base
 
   private
   def check_sync
-    sync_flg == 1 ? true : false
+    sync_flg.to_i == 1 ? true : false
   end
 end

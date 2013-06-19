@@ -647,16 +647,16 @@ ja:
   account:
     crumb_add: "アカウント登録"
     crumb_edit: "アカウント編集"
-    media_category: "メディアカテゴリ "
+    media_category: "メディアカテゴリ: "
     media: "メディア: "
-    account_name: "アカウント名 "
-    roman_name: "アカウント名(英語) "
+    account_name: "アカウント名: "
+    roman_name: "アカウント名(英語): "
     margin: "コスト計算： "
     input_data: "入力データ"
-    sync_account_id: "アカウントの同期 "
+    sync_account_id: "アカウントの同期: "
     synchronism: "同期"
     fractured: "同期停止"
-    sync_account_pw: "Sync account PW "
+    sync_account_pw: "Sync account PW: "
     flash_messages:
       success: " アカウント登録が完了しました"
       update: " アカウント編集が完了しました"
@@ -838,9 +838,9 @@ ja:
   media_categories: [" リスティング", "ディスプレイ", "アフィリエイト"]   
   log_track_type: ["Install", "アプリ内アクション (Action in app)"]
   log_repeat_flg: ["新規 (new)", "リピート (repeat)"]
-  Listing: "Listing ads"
-  Display: "Display ads"
-  Affiliate: "Affiliate" 
+  Listing: "リスティング 広告"
+  Display: "ディスプレイ 広告"
+  Affiliate: "アフィリエイト" 
   cv_kind1: "CV Kind 1"
   cv_kind2: "CV Kind 2"
   cv_kind3: "CV Kind 3"
