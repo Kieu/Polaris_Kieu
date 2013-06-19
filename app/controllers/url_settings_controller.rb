@@ -45,7 +45,7 @@ class UrlSettingsController < ApplicationController
     
     account_name = Account.where(id: params[:account_id]).select('roman_name').first['roman_name']
     file_name = account_name + "_URL_" + Time.now.strftime("%Y%m%d") + Settings.file_type.CSV
-    send_file(path_to_file, filename: file_name, type: "text/csv")
+    send_file(path_to_file, filename: file_name, type: "text/csv; charset=utf-8")
   end
 
   def get_rows url_data, promotion_id, client_id
