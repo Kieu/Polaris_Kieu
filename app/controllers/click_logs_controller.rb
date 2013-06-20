@@ -52,7 +52,7 @@ class ClickLogsController < ApplicationController
     rows = Array.new
       if click_logs && click_logs.count > 0
         click_logs.each do |log|
-          rows << {id: log.id, cell: {click_utime: Time.at(log.click_utime.to_i), media_id: medias.find(log.media_id).media_name, media_category_id: log.media_category_id,
+          rows << {id: log.id, cell: {click_utime: Time.at(log.click_utime.to_i).strftime("%Y/%m/%d %H:%M:%S"), media_id: medias.find(log.media_id).media_name, media_category_id: log.media_category_id,
                   account_id: accounts.find(log.account_id).account_name, campaign_id: display_campaigns.find(log.campaign_id).name, group_id: display_groups.find(log.group_id).name,
                   unit_id: display_ads.find(log.unit_id).name, redirect_url: log.redirect_url, session_id: log.session_id,
                   device_category: os[log.device_category.to_i], state: log.state, error_code: I18n.t("log_error_messages")[log.error_code.to_i]}}
