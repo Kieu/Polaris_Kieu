@@ -20,6 +20,7 @@
 	$.colorbox({width:"580px", inline:true, href:"#inline_logs"});
   }
 </script>
+
 <%= render "layouts/prevent_change_page_new" %>
 
 <% content_for :stylesheet_includes do %>
@@ -95,7 +96,16 @@
           		$("#url").attr('disabled','disabled');
           	}
           }
-        </script>
+		  function render_install(){
+		    $('#app_type_area').html('');
+		    $('#app_type_area').html('<%=j render "app_install", f: f %>');
+		  }
+		  function render_action_in_app(){
+		    $('#app_type_area').html('');
+		    $('#app_type_area').html('<%=j render "app_action_in_app", f: f %>');
+		  }
+		  
+		</script>
         <form>
           <%= hidden_field_tag :promotion_id, params[:promotion_id] %>
           <div class="conversion_form">
@@ -132,8 +142,6 @@
               </tbody>
             </table>
             <table class="client_info" id="category_area">
-            	<tr>
-            		<td>
               <%= 
               case @conversion.conversion_category.to_i
               when 3
@@ -145,8 +153,6 @@
               end
                
               %>
-              </td>
-              </tr>
             </table>
             <div class="submit_area">
               <input type="image" src="/assets/btn_done.gif" id="btn_done">
