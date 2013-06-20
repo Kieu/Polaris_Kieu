@@ -1,4 +1,5 @@
 class ConversionError1Logs < ActiveRecord::Base
+  establish_connection :"log_db_#{Rails.env}"
   attr_accessible :access_time, :access_vmd, :account_id, 
   :ad_group_id, :ad_id, :campaign_id, :click_referrer, :click_time, 
   :conversion_category, :conversion_id, :conversion_type, :creative_id, 

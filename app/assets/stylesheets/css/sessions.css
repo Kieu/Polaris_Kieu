@@ -27,8 +27,8 @@ a:hover {
     color:#005ddc;
     text-decoration:underline;
 }
-ul a:hover {
-    background:red;
+.txtlist:hover {
+    background:gray;
 }
 
 .error {
@@ -77,10 +77,7 @@ h1 {
     padding: 10px;
     border-bottom: #dadada solid 1px;
 }
-ul.txtlist li:hover
-{
-    background: red !important;
-}
+
 #infobox ul.last-child {
     border-bottom-style: none;
 }
@@ -162,7 +159,7 @@ ul.txtlist li:hover
 }
 .loginbox {
     background-color: #F3F3F3;
-    height: 310px;
+    height: 260px;
     margin: 0;
     padding: 20px;
     width: 300px;
@@ -171,7 +168,7 @@ ul.txtlist li:hover
     margin: 0;
     background-color: #d7d7d7;
     width: 300px;
-    max-height: 285px;
+    /*max-height: 285px;*/
     height: auto;
     padding: 20px;
 }

@@ -1,5 +1,5 @@
 class ClickLog < ActiveRecord::Base
-  establish_connection :log_db_development
+  establish_connection :"log_db_#{Rails.env}"
   attr_accessible :access_track_server, :account_id, :group_id, :unit_id,
                   :campaign_id, :click_utime, :click_url, :click_ymd, :creative_id,
                   :device_category, :mark, :media_category_id, :media_id, :media_session_id, :mpv,
@@ -64,6 +64,8 @@ class ClickLog < ActiveRecord::Base
                where DATE_FORMAT(created_at, '%Y/%m/%d') BETWEEN ? AND ? #{where_clause}
                ORDER BY media_category_id, click_utime"
     end
+    
+    
     @logs = ClickLog.find_by_sql([sql_str] + params)
   end         
   

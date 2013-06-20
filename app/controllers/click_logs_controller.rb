@@ -7,7 +7,6 @@ class ClickLogsController < ApplicationController
         Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d")
     @end_date = params[:end_date].present? ? params[:end_date] :
         Date.yesterday.strftime("%Y/%m/%d")
-    
     @promotion_id = params[:promotion_id]
     @promotion = Promotion.find(@promotion_id)
     if current_user.client?
@@ -25,9 +24,8 @@ class ClickLogsController < ApplicationController
   end
 
   def get_logs_list
-    cookies[:options]= params[:cookie] if params[:cookie]
-    rows = get_rows(ClickLog.get_all_logs(params[:query], params[:page], params[:rp], params[:sortname], params[:sortorder], params[:cid], params[:account_id], params[:start_date], params[:end_date], cookies[:cser] ))
-    render json: {page: params[:page], total: ClickLog.get_log_count(params[:query].to_i, params[:cid], params[:account_id], params[:start_date], params[:end_date], cookies[:cser] ), rows: rows}
+    rows = get_rows(ClickLog.get_all_logs(params[:query], params[:page], params[:rp], params[:sortname], params[:sortorder], params[:cid], params[:account_id], params[:start_date].strip, params[:end_date].strip, cookies[:cser] ))
+    render json: {page: params[:page], total: ClickLog.get_log_count(params[:query].to_i, params[:cid], params[:account_id], params[:start_date].strip, params[:end_date].strip, cookies[:cser] ), rows: rows}
     
   end  
   
@@ -36,14 +34,15 @@ class ClickLogsController < ApplicationController
     job_id = ExportClickLogsData.create(user_id: current_user.id,
     promotion_id: params[:promotion_id].to_i,
     media_category_id: params[:media_category_id],
-    account_id: params[:account_id], start_date: params[:start_date],
-    end_date: params[:end_date], show_error: cookies[:cser],
+    account_id: params[:account_id], start_date: params[:start_date].strip,
+    end_date: params[:end_date].strip, show_error: cookies[:cser],
     bgj_id: background_job.id)
     
     render text: "processing"
   end
   private
   def get_rows click_logs
+    
     medias = Media.select("id, media_name")
     display_groups = DisplayGroup.where(promotion_id: params[:query]).select("id, name")
     display_ads = DisplayAd.where(promotion_id: params[:query]).select("id, name")
@@ -51,12 +50,14 @@ class ClickLogsController < ApplicationController
     accounts = Account.where(promotion_id: params[:query]).select("id,account_name")
     os = {1 => "Android", 2 => "iOS", 9 => "Other"}
     rows = Array.new
-    click_logs.each do |log|
-      rows << {id: log.id, cell: {click_utime: log.click_utime, media_id: medias.find(log.media_id).media_name, media_category_id: log.media_category_id,
-              account_id: accounts.find(log.account_id).account_name, campaign_id: display_campaigns.find(log.campaign_id).name, group_id: display_groups.find(log.group_id).name,
-              unit_id: display_ads.find(log.unit_id).name, redirect_url: log.redirect_url, session_id: log.session_id,
-              device_category: os[log.device_category.to_i], state: log.state, error_code: I18n.t("log_error_messages")[log.error_code.to_i]}}
-    end
+      if click_logs && click_logs.count > 0
+        click_logs.each do |log|
+          rows << {id: log.id, cell: {click_utime: Time.at(log.click_utime.to_i).strftime("%Y/%m/%d %H:%M:%S"), media_id: medias.find(log.media_id).media_name, media_category_id: log.media_category_id,
+                  account_id: accounts.find(log.account_id).account_name, campaign_id: display_campaigns.find(log.campaign_id).name, group_id: display_groups.find(log.group_id).name,
+                  unit_id: display_ads.find(log.unit_id).name, redirect_url: log.redirect_url, session_id: log.session_id,
+                  device_category: os[log.device_category.to_i], state: log.state, error_code: I18n.t("log_error_messages")[log.error_code.to_i]}}
+        end
+      end
     rows
   end  
   

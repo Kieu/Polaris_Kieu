@@ -9,20 +9,20 @@ class ExportConversionLogsData
     # make file name
     # file name fomat: {user_id}_export_cv_logs_{current_date}.csv    Settings.EXPORT_CV_LOGS
     promotion = Promotion.find(options['promotion_id'])
-    file_name = promotion.promotion_name + "_cv_" +
-    Time.now.strftime("%Y%m%d%H%M%S") + Settings.file_type.CSV
-    path_file = Settings.export_conversion_logs_path + options['user_id'].to_s + "_" + file_name
+    file_name = promotion.promotion_name + "_CV_" +
+    Time.now.strftime("%Y%m%d_%H%M%S") + Settings.file_type.CSV
+    path_file = Settings.export_conversion_logs_path + file_name
     if File.exist?(path_file)
       return
     end
     # initial this task
-    background_job = BackgroundJob.find(options['bgj_id'])
-    background_job.user_id = options['user_id']
-    background_job.filename = file_name
-    background_job.filepath = path_file
-    background_job.type_view = Settings.type_view.DOWNLOAD
-    background_job.status = Settings.job_status.PROCESSING
-    background_job.save!
+     background_job = BackgroundJob.find(options['bgj_id'])
+     background_job.user_id = options['user_id']
+     background_job.filename = file_name
+     background_job.filepath = path_file
+     background_job.type_view = Settings.type_view.DOWNLOAD
+     background_job.status = Settings.job_status.PROCESSING
+     background_job.save!
     
     # store csv file on server
     # path: doc/conversion_logs_export
@@ -57,27 +57,27 @@ class ExportConversionLogsData
         # make header for CSV file
         csv << header_col
         rows.each do |row|
-         csv << [row.conversion_utime, conversions.find(row.conversion_id).conversion_name,
+         csv << [Time.at(row.conversion_utime).strftime("%Y/%m/%d %H:%M:%S"), conversions.find(row.conversion_id).conversion_name,
             conversion_categories[row.conversion_category.to_i-1],
             I18n.t("log_track_type")[row.track_type.to_i-1], I18n.t("log_repeat_flg")[row.repeat_flg.to_i],
             row.id, row.parent_conversion_id, row.approval_status, client_name,
             promotion.promotion_name, medias.find(row.media_id).media_name,
             accounts.find(row.account_id).account_name, display_campaigns.find(row.campaign_id).name,
             display_groups.find(row.group_id).name, display_ads.find(row.unit_id).name,
-            row.redirect_url, row.click_time, row.click_referrer, row.sales,
+            row.redirect_url, Time.at(row.click_utime).strftime("%Y/%m/%d %H:%M:%S"), row.click_referrer, row.sales,
             row.volume, row.others, row.verify, row.suid,row.session_id,
             os[row.device_category.to_i-1], row.repeat_proccessed_flg, row.log_state,
             row.user_agent, row.remote_ip, row.referrer, row.media_session_id,
-            row.mark, row.request_uri, row.send_url, row.send_utime, I18n.t("log_cv_error_messages")[row.error_code.to_i]]
+            row.mark, row.request_uri, row.send_url, Time.at(row.send_utime).strftime("%Y/%m/%d %H:%M:%S"), I18n.t("log_cv_error_messages")[row.error_code.to_i]]
         end
       end
       #success case
-      background_job.status = Settings.job_status.SUCCESS
-      background_job.save!
+       background_job.status = Settings.job_status.SUCCESS
+       background_job.save!
     rescue
       # false case
-      background_job.status = Settings.job_status.FALSE
-      background_job.save!   
+       background_job.status = Settings.job_status.FALSE
+       background_job.save!   
     ensure
     end
   end

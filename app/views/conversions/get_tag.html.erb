@@ -34,69 +34,74 @@
     </ul>
     <div id="get_tag">
       <% if @conversion.conversion_category == "2" %>
-        <div id="sdk_download">
-          SDK download
-          <table border="1">
-            <tr>
-              <td><button>SDK for iOS</button></td>
-              <td><button>SDK for Android</button></td>
-            </tr>
-            <tr>
-              <td><button>Unity SDK for iOS</button></td>
-              <td><button>Unity SDK for Android</button></td>
-            </tr>
-          </table>
-        </div>
-        <br /><br />
-        <div id="info">
-          Site id
-          <table border="1">
-            <tr>
-              <td>site_id</td>
-              <td id="site_id"><%= @conversion.promotion_id %></td>
-              <td><button onclick="copy_to_clipboard('site_id')">Copy</button></td>
-            </tr>
-            <tr>
-              <td>mv</td>
-              <td id="mv"><%= @conversion.mv %></td>
-              <td><button onclick="copy_to_clipboard('mv')">Copy</button></td>
-            </tr>
-          </table>
+        <div id="fragment-2">
+          <div class="conversion_form">
+            <div class="tag">
+              <p>▼ SDKダウンロード</p>
+              <a href="#"><img src="/assets/btn_sdk_01.gif" /></a>
+              <a href="#"><img src="/assets/btn_sdk_02.gif" /></a>
+              <a href="#"><img src="/assets/btn_sdk_03.gif" /></a>
+              <a href="#"><img src="/assets/btn_sdk_04.gif" /></a>
+            </div>
+            <div class="tag">
+              <p>▼ 設定情報</p>
+              <table border="0" class="setting_info">
+                <tbody>
+                  <tr>
+                    <th>site id</th>
+                    <td id="site_id"><%= @conversion.promotion_id %></td>
+                    <td class="copy_button last-child"><a href="#" onclick="copy_to_clipboard('site_id')"><img src="/assets/btn_copy.gif" /></a></td>
+                  </tr>
+                  <tr>
+                    <th>mv</th>
+                    <td id="mv"><%= @conversion.mv %></td>
+                    <td class="copy_button last-child"><a href="#" onclick="copy_to_clipboard('mv')"><img src="/assets/btn_copy.gif" /></a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       <% elsif @conversion.conversion_category == "1" %>
-        <div id="tracking_tag">
-          Tracking tag
-          <table border="1">
-            <tr>
-              <td>Tracking tag</td>
-              <td id="tag">
-                <script type="text/javascript">
-                  var prot = document.location.protocol;
-                  document.write(unescape("%3Cscript type=\'text/javascript\' language=\'javascript\' src=\'"
-                    + prot + "//track.polaris-adm.com/js/conversion.js?" + (new Date().getTime()) + "\'%3E%3C/script%3E"));
-                </script>
+        <div id="fragment-2">
+          <div class="conversion_form">
+            <div class="tag">
+              <p>▼ 計測タグ</p>
+              <table border="0" class="setting_info">
+                <tbody>
+                  <tr>
+                    <th>計測タグ</th>
+                    <td id="img">
+                      <script type="text/javascript">
+                        var prot = document.location.protocol;
+                        document.write(unescape("%3Cscript type=\'text/javascript\' language=\'javascript\' src=\'"
+                          + prot + "//track.polaris-adm.com/js/conversion.js?" + (new Date().getTime()) + "\'%3E%3C/script%3E"));
+                      </script>
 
-                <script type="text/javascript">
-                  var plrs_pid = <%= @conversion.promotion_id %>;
-                  var plrs_mv = <%= @conversion.mv %>;
+                      <script type="text/javascript">
+                        var plrs_pid = <%= @conversion.promotion_id %>;
+                        var plrs_mv = <%= @conversion.mv %>;
 
-                /* 
-                  // #custom parameter
-                  var plrs_suid = "";
-                  var plrs_verify = "";
-                  var plrs_sales = "";
-                  var plrs_profit = "";
-                  var plrs_volume = "";
-                  var plrs_others = "";
-                */
+                      /* 
+                        // #custom parameter
+                        var plrs_suid = "";
+                        var plrs_verify = "";
+                        var plrs_sales = "";
+                        var plrs_profit = "";
+                        var plrs_volume = "";
+                        var plrs_others = "";
+                      */
 
-                　var polaris = getTrack();
-                  polaris.main();
-                </script>
-              </td>
-              <td><button onclick="copy_to_clipboard('tag')">Copy</button></td>
-            </tr>
-          </table>
+                      　var polaris = getTrack();
+                        polaris.main();
+                      </script>
+                    </td>
+                    <td class="copy_button last-child"><a href="#" onclick="copy_to_clipboard('img')"><img src="/assets/btn_copy.gif" /></a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       <% end %>
     </div>

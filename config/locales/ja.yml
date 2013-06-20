@@ -838,6 +838,12 @@ ja:
     flash_messages:
       success: " ユーザー登録が完了しました"
       update: " ユーザー編集が完了しました"
+    user_table: 
+      username: "ユーザー名"
+      roman_name: "ユーザー名(英語)"
+      email: "メールアドレス"
+      role: "権限"
+      company_name: "会社名"
   media_categories: [" リスティング", "ディスプレイ", "アフィリエイト"]   
   log_track_type: ["Install", "アプリ内アクション (Action in app)"]
   log_repeat_flg: ["新規 (new)", "リピート (repeat)"]

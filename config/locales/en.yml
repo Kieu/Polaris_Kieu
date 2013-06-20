@@ -818,6 +818,12 @@ en:
     flash_messages:
       success: " User is created successful en"
       update: " User is updated successful en"
+    user_table:
+      username: "User name"
+      roman_name: "Roman name"
+      email: "Email address"
+      role: "Role"
+      company_name: "Conpany name"
   media_categories: ["Listing ad", "Display ad", "affiliate"]
   log_track_type: ["Install", "アプリ内アクション (Action in app)"]
   log_repeat_flg: ["新規 (new)", "リピート (repeat)"]

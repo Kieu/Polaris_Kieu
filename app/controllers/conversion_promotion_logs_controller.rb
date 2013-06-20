@@ -29,8 +29,8 @@ def index
 end
 
 def get_conversion_logs_list
-  start_date = params[:start_date]
-  end_date = params[:end_date]
+  start_date = params[:start_date].strip
+  end_date = params[:end_date].strip
   promotion_id = params[:query]
   @conversion_logs = ConversionLog.get_all_logs(promotion_id, params[:page], params[:rp],params[:cv_id], params[:media_category_id],
                      params[:account_id], start_date, end_date, cookies[:ser],  params[:sortname], params[:sortorder])
@@ -47,13 +47,12 @@ def download_csv
        promotion_id: params[:promotion_id].to_i,
        conversion_id: params[:conversion_id],
        media_category_id: params[:media_category_id],
-       account_id: params[:account_id], start_date: params[:start_date],
-       end_date: params[:end_date], show_error: cookies[:ser],
+       account_id: params[:account_id], start_date: params[:start_date].strip,
+       end_date: params[:end_date].strip, show_error: cookies[:ser],
        bgj_id: background_job.id)
        
     background_job.job_id = job_id
     background_job.save!
-    
     render text: "processing"
 end
 
@@ -68,7 +67,7 @@ def get_rows conversion_logs
   os = [I18n.t("conversion.conversion_category.app.os.android"), I18n.t("conversion.conversion_category.app.os.ios")]
   rows = Array.new
   conversion_logs.each do |conversion_log|
-    rows << {id: conversion_log.id, cell:{conversion_utime: conversion_log.conversion_utime,
+    rows << {id: conversion_log.id, cell:{conversion_utime: Time.at(conversion_log.conversion_utime).strftime("%Y/%m/%d %H:%M:%S"),
                                           conversion_id: conversions.find_by_id(conversion_log.conversion_id).conversion_name,
                                           conversion_category: conversion_categories[conversion_log.conversion_category.to_i-1],
                                           tracking_type: I18n.t("log_track_type")[conversion_log.track_type.to_i-1],
@@ -79,7 +78,7 @@ def get_rows conversion_logs
                                           campaign_id: campaigns.find_by_id(conversion_log.campaign_id).name,
                                           group_id: ad_groups.find_by_id(conversion_log.group_id).name, 
                                           unit_id: ads.find_by_id(conversion_log.unit_id).name,
-                                          click_utime: Time.at(conversion_log.click_utime),
+                                          click_utime: Time.at(conversion_log.click_utime).strftime("%Y/%m/%d %H:%M:%S"),
                                           sales: conversion_log.sales,
                                           verify: conversion_log.verify,
                                           suid: conversion_log.suid,
