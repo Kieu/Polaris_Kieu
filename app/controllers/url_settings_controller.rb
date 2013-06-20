@@ -29,7 +29,6 @@ class UrlSettingsController < ApplicationController
     @media_result = Media.where(id: @media_id).select('media_name, media_category_id')
     @media_name = @media_result.first['media_name']
     @media_category_id = @media_result.first['media_category_id']
-    #render 'test'
 	end
   
   def get_urls_list
