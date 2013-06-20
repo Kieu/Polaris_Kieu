@@ -77,7 +77,7 @@ $(document).ready(function () {
     <div class="span6 offset3">
       <%= form_tag(resend_password_sessions_path, method: :post) do %>
           <%= label_tag I18n.t("login.email") %>
-          <%= text_field_tag "email", nil, maxlength: 255, style: "width: 200px", tabindex: 6 %><br>
+          <%= text_field_tag "email", @email, maxlength: 255, style: "width: 200px", tabindex: 6 %><br>
           <%= label_tag I18n.t("login.captcha") %>
           <%= recaptcha_tags display: {lang: "#{I18n.locale}"} %>
           <input type="image" id="Send" src="/assets/btn_submit.gif" tabindex="8">

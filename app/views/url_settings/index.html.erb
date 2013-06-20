@@ -16,15 +16,16 @@
     padding: 2px 0;
   }
  </style>
-<div class="date">今日<br />
-  <input id="datepick" type="text" readonly="readonly" value="<%= cookies[:url_setting_start_date] + " - " + cookies[:url_setting_end_date] %>" name="datepick">&#9660;
+<div class="date"><%= I18n.t("log.today_text") %><br />
+  <input id="datepick" type="text" readonly="readonly" value="<%= cookies[:url_setting_start_date] + " ~ " + cookies[:url_setting_end_date] %>" name="datepick">&#9660;
   <a class="fancybox mt-10 fl-l" rel="gallery" href="javascript:void(0)" id="show_option"><img src="/assets/btn_dl_option.gif" /></a>
   <a href="#" class="mt-10 fl-r" id="download_csv"><img src="/assets/btn_dl_csv.gif" /></a>
 </div>
+
 <script type="text/javascript">
 $(document).ready(function() {
     var term = $('#datepick').val();
-    var d = term.split(' - ');
+    var d = term.split(' ~ ');
     start_date = d[0];
     end_date = d[1];
     $(".newTable04").flexigrid({
@@ -36,16 +37,17 @@ $(document).ready(function() {
         resizable : false,
         striped : true,
         colModel : [
-            {display: 'Edit', name : 'edit_button', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][0] == "0" ? 1 : 0 %>},
-            {display: 'Ad Id', name : 'ad_id', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][1] == "0" ? 1 : 0 %>},
-            {display: 'Campaign name', name : 'campaign_name', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][2] == "0" ? 1 : 0 %>},
-            {display: 'Group name', name : 'group_name', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][3] == "0" ? 1 : 0 %>},
-            {display: 'Ad name', name : 'ad_name', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][4] == "0" ? 1 : 0 %>},
-            {display: 'Creative', name : 'creative', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][5] == "0" ? 1 : 0 %>},
-            {display: 'URL', name : 'url', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][6] == "0" ? 1 : 0 %>},
-            {display: 'Note', name : 'note', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][7] == "0" ? 1 : 0 %>},
-            {display: 'Last Modified', name : 'last_modified', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][7] == "0" ? 1 : 0 %>},
-            {display: 'Delete', name : 'delete_check', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][9] == "0" ? 1 : 0 %>}
+            {display: '<%= I18n.t("url.edit") %>', name : 'edit_button', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][0] == "0" ? 1 : 0 %>},
+            {display: '<%= I18n.t("url.ad_id") %>', name : 'ad_id', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][1] == "0" ? 1 : 0 %>},
+            {display: '<%= I18n.t("url.campaign_name") %>', name : 'campaign_name', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][2] == "0" ? 1 : 0 %>},
+            {display: '<%= I18n.t("url.group_name") %>', name : 'group_name', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][3] == "0" ? 1 : 0 %>},
+            {display: '<%= I18n.t("url.ad_name") %>', name : 'ad_name', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][4] == "0" ? 1 : 0 %>},
+            {display: '<%= I18n.t("url.creative") %>', name : 'creative', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][5] == "0" ? 1 : 0 %>},
+            {display: '<%= I18n.t("url.url") %>', name : 'url', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][6] == "0" ? 1 : 0 %>},
+            {display: '<%= I18n.t("url.note") %>', name : 'note', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][7] == "0" ? 1 : 0 %>},
+            {display: '<%= I18n.t("url.click_price") %>', name : 'click_price', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][7] == "0" ? 1 : 0 %>},
+            {display: '<%= I18n.t("url.last_modified") %>', name : 'last_modified', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][7] == "0" ? 1 : 0 %>},
+            {display: '<%= I18n.t("url.delete") %>', name : 'delete_check', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][9] == "0" ? 1 : 0 %>}
             ],
         usepager: true,
         title: 'Url List',
@@ -75,7 +77,7 @@ $(function() {
 	}
 	$('#download_csv').click(function(){
       var term = $('#datepick').val();
-      var d = term.split(' - ');
+      var d = term.split(' ~ ');
       start_date = d[0];
       end_date = d[1];
 	  $.ajax({
@@ -101,9 +103,10 @@ $(function() {
 	}
 	
 	$('#datepick').daterangepicker({
+      rangeSplitter: ' ~ ',
 	    onDone: function() {
 	        var term = $('#datepick').val();
-	        var d = term.split(' - ');
+	        var d = term.split(' ~ ');
 	        var f = (d[0]).split('/');
 	        var t = (d[1]).split('/');
 	        $.cookie("url_setting_start_date", formatDate(f[0], f[1], f[2]), {
@@ -114,9 +117,10 @@ $(function() {
 	        });
 	
           var term = $('#datepick').val();
-          var d = term.split(' - ');
+          var d = term.split(' ~ ');
           start_date = d[0];
           end_date = d[1];
+          $("#datepick").text(start_date + " ~ " + end_date + "▼");
 	        reloadFlex1(".newTable04", "<%= get_urls_list_url_settings_path %>?promotion_id=" + $("#promotion_id").val() + "&account_id=" + $("#account_id").val() + "&media_id=" + $("#media_id").val() + "&start_date=" + start_date + "&end_date=" + end_date);
 	    }
 	});
@@ -131,7 +135,7 @@ $(function() {
 	}
 	$(document).on('click', "#change_cookie", function(){
     var term = $('#datepick').val();
-    var d = term.split(' - ');
+    var d = term.split(' ~ ');
     start_date = d[0];
     end_date = d[1];
 		$.cookie("url_setting",cookies_options);
@@ -214,9 +218,9 @@ $(window).resize(function() {
                       </a>
                   </td>
                   <td><input type="radio" name="type" value="insert" checked="checked" />
-                      追加（新規）</td>
+                      <%= I18n.t("url.upload_type.insert") %></td>
                   <td><input type="radio" name="type" value="update"/>
-                      更新（既存）</td>
+                      <%= I18n.t("url.upload_type.update") %></td>
                 </tr>
                 <tr>
                   <td colspan="2" style="display:none">
@@ -231,10 +235,17 @@ $(window).resize(function() {
             </table>
             <p style="cursor: pointer;">
             	<small>
-                  <a class="dl" href="<%= download_template_url_settings_path %>?account_id=<%= @account_id%>">アップロードファイルフォーマットのダウンロード</a>
+                  <a class="dl" href="<%= download_template_url_settings_path %>?account_id=<%= @account_id%>"><%= I18n.t("url.download_template") %></a>
                 </small>
             </p>
-            <p class="bold"><%= flash[:error] %></p>
+              <% if (flash[:csv_error]) && (flash[:csv_error].count > 0) %>
+                <% flash[:csv_error].each do |error_message| %>
+                  <p class="bold" style="color:red"><%= error_message %></p>
+                <% end %>
+              <% else %>
+                <p class="bold"><%= flash[:error] %></p>
+              <% end %>
+
           <% end %>
         </div>
         <!-- #uploadArea -->

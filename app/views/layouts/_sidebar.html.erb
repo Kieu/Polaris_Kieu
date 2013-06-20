@@ -22,12 +22,12 @@
                   <% if params[:action] == "index" %>
                       <% if (params[:client_id] && client.id == params[:client_id].to_i) || (!params[:client_id] && index == 0) %>
                           <td><%= link_to short_ja_name(client.client_name), "javascript:void(0)", class: "client_name current", id: "#{client.id}", onclick: "reloadFlex('.newTable06', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{client.id}', '.client_name', '#client_name', #{Settings.MAX_EN_LENGTH_NAME})" %>
-                          	<%= link_to client.client_name, "javascript:void(0)", class: "client_name_search", id: "search#{client.id}" %>
+                          	<%= link_to short_ja_name(client.client_name), "javascript:void(0)", class: "client_name_search", id: "search#{client.id}" %>
                           	
                           </td>
                       <% else %>
                           <td><%= link_to short_ja_name(client.client_name), "javascript:void(0)", class: "client_name", id: "#{client.id}", onclick: "reloadFlex('.newTable06', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{client.id}', '.client_name', '#client_name', #{Settings.MAX_EN_LENGTH_NAME})" %>
-                              <%= link_to client.client_name, "javascript:void(0)", class: "client_name_search", id: "search#{client.id}" %>
+                              <%= link_to short_ja_name(client.client_name), "javascript:void(0)", class: "client_name_search", id: "search#{client.id}" %>
                           		
                           </td>
                       <% end %>

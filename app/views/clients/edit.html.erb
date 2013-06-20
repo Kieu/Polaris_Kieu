@@ -37,8 +37,8 @@ $(function(){
         </tr>
         <tr>
           <th><%= f.label t("client.contract_flg.label") %></th>
-          <td><%= f.radio_button :contract_flg, 0, class: "prevent_change" %> <%= I18n.t("client.contract_type.unrecovered") %></td>
-          <td><%= f.radio_button :contract_flg, 1, class: "prevent_change" %> <%= I18n.t("client.contract_type.been_recovered") %></td>
+          <td style="width: 150px;"><%= f.radio_button :contract_flg, 0, class: "prevent_change" %> <%= I18n.t("client.contract_type.unrecovered") %></td>
+          <td style="width: 150px;"><%= f.radio_button :contract_flg, 1, class: "prevent_change" %> <%= I18n.t("client.contract_type.been_recovered") %></td>
         </tr>
         <tr>
           <th><%= f.label t("client.contract_type.label") %></th>
@@ -57,7 +57,7 @@ $(function(){
           <th width="170">&nbsp;</th>
           <th width="240">&nbsp;</th>
           <th width="80">&nbsp;</th>
-          <th width="70">
+          <th style="width: 70px;">
             <small><%= I18n.t("client.delete") %></small>
           </th>
         </tr>
