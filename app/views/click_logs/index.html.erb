@@ -11,11 +11,13 @@
 <%= render partial: "layouts/option_log_page" %>
 
 <ul class="contentNavi">
+  <div class = "crumb_logs">
 	<li class="pre"><%= link_to @promotion.client.client_name, clients_path(client_id: @promotion.client.id) %> </li>
 	<li>&gt;</li>
 	<li><%= link_to @promotion.promotion_name, promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %></li>
 	<li>&gt;</li>
 	<li><%= I18n.t("log.crumb_click")%></li>
+  </div>
 </ul>
 
 <div>
