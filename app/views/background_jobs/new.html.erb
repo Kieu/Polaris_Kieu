@@ -7,7 +7,7 @@
               <table class="entrydate_table">
                 <tr>
                   <td class="file_name"><%= job.filename %></td>
-                  <td class="capacity"><%= File.stat(job.filepath).size %></td>
+                  <td class="capacity"><%= job.size %></td>
                   <td class="daily"><%= job.created_at %></td>
                   <td class="c_black">完了</td>
                 </tr>
