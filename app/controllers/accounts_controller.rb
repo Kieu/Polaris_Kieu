@@ -42,8 +42,6 @@ class AccountsController < ApplicationController
           @margin.margin_rate = @account.margin
           @margin.create_user_id = current_user.id
           @margin.update_user_id = current_user.id
-          @margin.create_time = time
-          @margin.update_time = time
           if !@margin.save        
             flash[:error] = I18n.t("account.flash_messages.success_error")
             raise ActiveRecord::Rollback
@@ -83,8 +81,6 @@ class AccountsController < ApplicationController
           @margin.account_id = @account.id
           @margin.margin_rate = @account.margin
           @margin.create_user_id = current_user.id
-          @margin.create_time = time
-          @margin.update_time = time
           if !@margin.save        
             flash[:error] = I18n.t("account.flash_messages.success_error")
             raise ActiveRecord::Rollback
