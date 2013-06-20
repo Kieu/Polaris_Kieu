@@ -24,7 +24,7 @@ a.bread_scrumb_link {
 	<li><%= short_ja_name(@promotion_name) %></li>
 </ul>
 <div class="date">今日<br />
-<input id="datepick" type="text" readonly="readonly" value="<%= @start_date + " - " + @end_date %>" name="datepick">&#9660;
+<input id="datepick" type="text" readonly="readonly" value="<%= @start_date + " ~ " + @end_date %>" name="datepick">&#9660;
 </div>
 <div class="clear"></div>
 <div id="graph">
@@ -399,10 +399,10 @@ a.bread_scrumb_link {
 		}
     
     $('#datepick').daterangepicker({
-		lang: $('#lang').val(),
+		rangeSplitter: " ~ ",
             onDone: function() {
                 var term = $('#datepick').val();
-                var d = term.split(' - ');
+                var d = term.split(' ~ ');
                 start_date = d[0];
                 end_date = d[1];
                 $("#dvloader").css('display','');
