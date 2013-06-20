@@ -1,5 +1,5 @@
 class DailySummaryAccount < ActiveRecord::Base
-  establish_connection :"log_db_#{Rails.env}"
+  establish_connection "log_db_#{Rails.env}"
   attr_accessible :promotion_id, :media_category_id, :cost_per_click,
     :account_id, :media_id, :imp_count, :click_count, :cost_sum,
     :click_through_ratio, :report_ymd, :create_time, :cost_per_mille
