@@ -69,6 +69,7 @@ class UrlSettingsController < ApplicationController
       delete_check = '<input type="checkbox" name="del_url_#{redirect_url_id}" id="#{redirect_url_id}" />'
       image = url['creative']
       comment = url['comment']
+      click_price = url['click_unit']
       submit_url = "<div align='left' id='url_#{url['redirect_url_id']}'>" + Settings.DOMAIN_SUBMIT_URL + "mpv=#{url['mpv']}" + "&cid=#{client_id}&pid=#{promotion_id} </div>"
       submit_url += "<div align='right'><a href='#' onClick='ClipBoard(url_#{url['redirect_url_id']});'><img src='/assets/btn_copy2.gif' /></a></div>"
       if url['creative_type'] == '1'
@@ -79,7 +80,7 @@ class UrlSettingsController < ApplicationController
       
       rows << { id: url['redirect_url_id'], cell: {edit_button: edit_button, ad_id: url['ad_id'], campaign_name: url['campaign_name'],
                group_name: url['group_name'], ad_name: url['ad_name'], creative: creative, url: submit_url,
-               delete_check: delete_check, note: comment, last_modified: url['last_modified'] }}
+               delete_check: delete_check, note: comment, click_price: click_price, last_modified: url['last_modified'] }}
     end
 
     rows
@@ -93,10 +94,13 @@ class UrlSettingsController < ApplicationController
     account_id = params[:account_id]
     media_id = params[:media_id]
     
+    array_header_csv = ["#{t("url.ad_id")}", "#{t("url.campaign_name")}", "#{t("url.group_name")}",
+               "#{t("url.ad_name")}", "#{t("url.creative")}", "#{t("url.url")}", "#{t("url.note")}",
+               "#{t("url.click_price")}", "#{t("url.last_modified")}"]
     background_job = BackgroundJob.create
     job_id = ExportUrlData.create(start_date: start_date, end_date: end_date,
       user_id: user_id, promotion_id: promotion_id, account_id: account_id,
-      media_id: media_id, bgj_id: background_job.id)
+      media_id: media_id, bgj_id: background_job.id, array_header_csv: array_header_csv)
     background_job.job_id = job_id
     background_job.save!
     

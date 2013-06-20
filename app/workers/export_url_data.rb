@@ -34,7 +34,7 @@ class ExportUrlData
         csv << ["Time range: #{options['start_date']} - #{options['end_date']}"]
         csv << [""]
         csv << [""]
-        csv << ["Ad Id", "Campaign name", "Group name", "Ad name", "Creative", "URL", "Note", "Last modified"]
+        csv << options['array_header_csv']
         url_data.each do |url|
           array_date_csv = Array.new
           array_date_csv << url['ad_id']
@@ -44,6 +44,7 @@ class ExportUrlData
           array_date_csv << url['creative_text']
           array_date_csv << url['url']
           array_date_csv << url['comment']
+          array_date_csv << url['click_unit']
           array_date_csv << url['last_modified']
           csv << array_date_csv
         end
