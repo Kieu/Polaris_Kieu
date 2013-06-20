@@ -147,12 +147,19 @@ p.h2{
 	float:left;
 	color:#3e5869;
 	font-size:12px;
+    margin: 0px 0px 0px 0px;
 	/*padding:  0 0 20px 0;*/
 	letter-spacing: 0.1em;
 }
 
 .contentNavi li.pre{
 	color: #F63;
+}
+.crumb {
+    margin: -20px 0px 0px 275px;
+}
+.crumb_logs {
+    margin: -10px 0px 0px 0px;
 }
 
 /* ==========================================================================

@@ -15,6 +15,7 @@ a.bread_scrumb_link {
 </style>
 <% if @array_promotion.count > 0 %>
 <ul class="contentNavi">
+  <div class = "crumb_logs">
 	<% if current_user.super? %>
 		<li class="pre"><a class="bread_scrumb_link" href="/clients?client_id=<%=@client_id%>"><%= short_ja_name(@client_name) %></a></li>
 	<% else %>
@@ -22,6 +23,7 @@ a.bread_scrumb_link {
 	<% end %>
 	<li>&gt;</li>
 	<li><%= short_ja_name(@promotion_name) %></li>
+  </div>
 </ul>
 <div class="date">今日<br />
 <div id="datepicker">
