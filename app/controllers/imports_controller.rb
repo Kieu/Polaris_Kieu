@@ -1,5 +1,3 @@
-require 'csv'
-
 class ImportsController < ApplicationController
   def create
     @import = Import.new(params[:import])
