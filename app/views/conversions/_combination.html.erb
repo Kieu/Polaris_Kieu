@@ -1,4 +1,14 @@
 <script type="text/javascript">
+    $(function() {
+    $(".btn_details").droppy();
+    $('div.check-group input').each(function(){
+        if ($(this).attr('checked') == 'checked') {
+            $(this).next().addClass('checked');
+
+        }
+    });
+    });
+
 	function add_category() {
 		$("#cv_num").val(parseInt($("#cv_num").val()) + 1);
 		$("#cv_category").append("<tr><td><select name='op[]'  class='ta-c mcdropdown_spacing'>"+
@@ -18,7 +28,65 @@
 		$('#kind_box').html($('#cv_box'+id).html());
 	}
 </script>
-
+<ul class="btn_details" id="">
+  <li> <a href="#"> <p><span>■</span><span id="chart_left">ご利用金額</span> ▼</p> </a>
+    <ul>
+      <li> <a href="javascript:void(0)">掲載結果</a>
+        <ul>
+          <li><a href="javascript:void(0)" class="metric_click_left">imp</a></li>
+          <li><a href="javascript:void(0)" class="metric_click_left">click</a></li>
+          <li><a href="javascript:void(0)" class="metric_click_left">CTR</a></li>
+          <li><a href="javascript:void(0)" class="metric_click_left">COST</a></li>
+          <li><a href="javascript:void(0)" class="metric_click_left">CPM</a></li>
+          <li><a href="javascript:void(0)" class="metric_click_left">CPC</a></li>
+        </ul>
+      </li>
+      <li><a href="javascript:void(0)">成果</a>
+        <ul>
+          <% @conversions.each do |conversion| %>
+              <li><a href="javascript:void(0)"><%= short_ja_name(conversion.conversion_name) %></a>
+                <ul>
+                  <% Settings.conversions_graph.each do |option| %>
+                      <li><a href="javascript:void(0)" class="result_click_left" id="conversion_left_<%= conversion.id %>"><%= option %></a></li>
+                  <% end %>
+                </ul>
+              <li>
+          <% end %>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<p> vs </p>
+<ul class="btn_details" id="">
+  <li> <a href="#"><p><span>■</span><span id="chart_right">クリック数</span> ▼</p></a>
+    <ul>
+      <li> <a href="#">掲載結果</a>
+        <ul>
+          <li><a href="javascript:void(0)" class="metric_click_right">imp</a></li>
+          <li><a href="javascript:void(0)" class="metric_click_right">click</a></li>
+          <li><a href="javascript:void(0)" class="metric_click_right">CTR</a></li>
+          <li><a href="javascript:void(0)" class="metric_click_right">COST</a></li>
+          <li><a href="javascript:void(0)" class="metric_click_right">CPM</a></li>
+          <li><a href="javascript:void(0)" class="metric_click_right">CPC</a></li>
+        </ul>
+      </li>
+      <li><a href="javascript:void(0)">成果</a>
+        <ul>
+          <% @conversions.each do |conversion| %>
+              <li><a href="javascript:void(0)"><%= short_ja_name(conversion.conversion_name) %></a>
+                <ul>
+                  <% Settings.conversions_graph.each do |option| %>
+                      <li><a href="javascript:void(0)" class="result_click_right" id="conversion_right_<%= conversion.id %>"><%= option %></a></li>
+                  <% end %>
+                </ul>
+              <li>
+          <% end %>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
 <div style='display:none'>
 	<div id="inline_logs">
 		<div id="page1">
