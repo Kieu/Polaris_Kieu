@@ -21,19 +21,19 @@ class SessionsController < ApplicationController
           end
         else
           user.update_login_fail
-          @errors << "Invalid email/password combination"
+          @errors << I18n.t("login.unsuccessfull")
           render :new
         end
       else
         if user.status == Settings.user.deactive 
-          @errors << "You are deactive"
+          @errors << I18n.t("login.deactive")
         else
-          @errors << "You are blocked for 5 minutes. Please try again later"
+          @errors << I18n.t("login.block")
         end
         render :new
       end
     else
-      @errors << "Invalid email/password combination"
+      @errors << I18n.t("login.unsuccessfull")
       render :new
     end
   end
@@ -47,6 +47,7 @@ class SessionsController < ApplicationController
     @press_release = PressRelease.all
     @form_errors = Array.new
     user = User.find_by_email(params[:email])
+    @email = params[:email]
     if verify_recaptcha
       if user
         user.password = SecureRandom.urlsafe_base64(6)

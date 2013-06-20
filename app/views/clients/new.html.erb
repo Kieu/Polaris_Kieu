@@ -47,8 +47,8 @@ $(function(){
         <tr>
           <th>
             <%= f.label t("client.contract_flg.label") %> </th>
-          <td><%= f.radio_button :contract_flg, 0, class: "prevent_change" %> <%= I18n.t("client.contract_type.unrecovered") %></td>
-          <td> <%= f.radio_button :contract_flg, 1, {checked: true, class: "prevent_change"} %> <%= I18n.t("client.contract_type.been_recovered") %>
+          <td style="width: 150px;"><%= f.radio_button :contract_flg, 0, class: "prevent_change" %> <%= I18n.t("client.contract_type.unrecovered") %></td>
+          <td style="width: 150px;"> <%= f.radio_button :contract_flg, 1, {checked: true, class: "prevent_change"} %> <%= I18n.t("client.contract_type.been_recovered") %>
           </td>
         </tr>
         <tr>
