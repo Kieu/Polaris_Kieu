@@ -19,6 +19,7 @@ class AccountsController < ApplicationController
     @promotion_id = params[:promotion_id]
     @promotion = Promotion.find_by_id(@promotion_id)
     @client_id = @promotion.client.id
+    @account_id = params[:id]
   end
   def update
     @prevent = "1"
