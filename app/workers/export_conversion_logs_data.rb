@@ -64,7 +64,7 @@ class ExportConversionLogsData
             promotion.promotion_name, medias.find(row.media_id).media_name,
             accounts.find(row.account_id).account_name, display_campaigns.find(row.campaign_id).name,
             display_groups.find(row.group_id).name, display_ads.find(row.unit_id).name,
-            row.redirect_url, row.click_time, row.click_referrer, row.sales,
+            row.redirect_url, row.click_utime, row.click_referrer, row.sales,
             row.volume, row.others, row.verify, row.suid,row.session_id,
             os[row.device_category.to_i-1], row.repeat_proccessed_flg, row.log_state,
             row.user_agent, row.remote_ip, row.referrer, row.media_session_id,
