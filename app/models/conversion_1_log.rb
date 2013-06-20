@@ -1,5 +1,5 @@
 class Conversion_1_Log < ActiveRecord::Base
-  establish_connection :log_db_development
+  establish_connection :"log_db_#{Rails.env}"
   attr_accessible :media_category_id, :media_id, :account_id, 
   :campaign_id, :group_id, :unit_id, :conversion_id, :redirect_infomation_id, 
   :mpv, :redirect_url_id, :redirect_url, :creative_id, :session_id, :verify, :suid, :request_uri,

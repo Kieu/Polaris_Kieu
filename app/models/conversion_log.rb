@@ -1,5 +1,5 @@
 class ConversionLog < ActiveRecord::Base
-  establish_connection :log_db_development
+  establish_connection :"log_db_#{Rails.env}"
 
     FIELD = "media_category_id, conversion_utime, conversion_id, conversion_category, track_type, repeat_flg,
               approval_status, media_id,account_id, campaign_id,group_id, unit_id, click_utime, verify,
