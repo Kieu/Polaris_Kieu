@@ -30,8 +30,7 @@
 		</ul>
 	</div>
 	<div class="date"><%= I18n.t("log.today_text")%><br />
-		<div id="datepicker">
-		<%= @start_date %>~<%= @end_date %>&#9660;</div>
+		<input id="datepicker" type="text" readonly="readonly" value="<%= @start_date +" ~ "+ @end_date %>" name="datepicker">&#9660;
 	</div>
 </div>
 <div class="clear"></div>
@@ -70,12 +69,12 @@
 </div>
 <script type="text/javascript">
 	var term = $('#datepicker').val();
-    var d = term.split(' - ');
-    if (d[0])
+    var d = term.split(' ~ ');
+    if (d[0].length > 1)
     	start_date = d[0];
     else
     	start_date = <%= @start_date %>
-    if (d[1])
+    if (d[1].length > 1)
     	end_date = d[1];
     else
     	end_date = <%= @end_date %>
@@ -100,10 +99,10 @@
     })
 	jQuery(document).ready(function($) {
 		$(".newTable06").flexigrid({
-			url: "<%= get_logs_list_click_logs_path %>" + "?start_date=#{@start_date}" + "&end_date=#{@end_date}",
+			url: "<%= get_logs_list_click_logs_path %>" + "?start_date=<%= @start_date%>" + "&end_date=<%=@end_date%>",
 			dataType: 'json',
 			colModel : [
-				{display: '<%= I18n.t("click_logs.click_time")%>', name : 'click_utime', sortable : true, with:'auto',align: 'center', hide: <%= cookies[:coptions][0] == "0" ? 1 : 0 %>},
+				{display: '<%= I18n.t("click_logs.click_utime")%>', name : 'click_utime', sortable : true, with:'auto',align: 'center', hide: <%= cookies[:coptions][0] == "0" ? 1 : 0 %>},
 				{display: '<%= I18n.t("click_logs.media_name")%>', name : 'media_id', sortable : false,  with:'auto',align: 'center', hide: <%= cookies[:coptions][1] == "0" ? 1 : 0 %>},
 				{display: '<%= I18n.t("click_logs.account_name")%>', name : 'account_id', sortable : false,  with:'auto',align: 'center', hide: <%= cookies[:coptions][2] == "0" ? 1 : 0 %>},
 				{display: '<%= I18n.t("click_logs.campaign_name")%>', name : 'campaign_id', sortable : false,  with:'auto',align: 'center', hide: <%= cookies[:coptions][3] == "0" ? 1 : 0 %>},
@@ -167,15 +166,22 @@
 		 return year + month + day;
 		}
 		$('#datepicker').daterangepicker({
-    		lang: $('#lang').val(),
+    		rangeSplitter: ' ~ ',
             onDone: function() {
                 var term = $('#datepicker').val();
-                var d = term.split(' - ');
+                var d = term.split(' ~ ');
                 start_date = d[0];
                 end_date = d[1];
                 
-                $("#datepicker").text(start_date + "~" + end_date + "▼");
-                reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?cid=" + $("#media_category_id").val() + "&account_id=" + $("#account_id").val() + "&start_date=" + start_date + "&end_date=" + end_date);
+                $("#datepicker").text(start_date + " ~ " + end_date + "▼");
+                //reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?cid=" + $("#media_category_id").val() + "&account_id=" + $("#account_id").val() + "&start_date=" + start_date + "&end_date=" + end_date);
+                
+                $("#clicklogs").flexOptions({
+			        url: "<%= get_logs_list_click_logs_path %>",
+			        newp: 1,
+			        params:[{name: 'start_date', value: start_date}, {name: 'end_date', value: end_date}]
+		    	}).flexReload();
+    	
             }
         });		
 		
@@ -234,7 +240,14 @@
 	    } else {
 	    	$.cookie("cser",0);
 	    }
-	    reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?cid=" + $("#media_category_id").val() + "&account_id=" + $("#account_id").val() + "&start_date=" + start_date + "&end_date=" + end_date);
+	    //reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?cid=" + $("#media_category_id").val() + "&account_id=" + $("#account_id").val() + "&start_date=" + start_date + "&end_date=" + end_date);
+	    
+	    $("#clicklogs").flexOptions({
+	        url: "<%= get_logs_list_click_logs_path %>",
+	        newp: 1,
+	        params:[{name: 'start_date', value: start_date}, {name: 'end_date', value: end_date}]
+    	}).flexReload();
+    	
 		$("#clicklogs").colorbox.close();
 	});
 	$("#not_change_cookie").click(function(){

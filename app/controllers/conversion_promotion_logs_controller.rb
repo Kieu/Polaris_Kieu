@@ -29,8 +29,8 @@ def index
 end
 
 def get_conversion_logs_list
-  start_date = params[:start_date]
-  end_date = params[:end_date]
+  start_date = params[:start_date].strip
+  end_date = params[:end_date].strip
   promotion_id = params[:query]
   @conversion_logs = ConversionLog.get_all_logs(promotion_id, params[:page], params[:rp],params[:cv_id], params[:media_category_id],
                      params[:account_id], start_date, end_date, cookies[:ser],  params[:sortname], params[:sortorder])
