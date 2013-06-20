@@ -29,7 +29,7 @@ class RedirectUrl < ActiveRecord::Base
               ,creative.display_type as creative_type
               ,DATE_FORMAT(r_url.updated_at, '%Y/%m/%d %h:%i:%s') as last_modified
             FROM  redirect_urls as r_url
-              inner join redirect_infomations as r_info
+              inner join redirect_informations as r_info
                    on r_info.mpv = r_url.mpv
               inner join display_campaigns as camp on camp.id = r_info.campaign_id
               inner join display_groups as d_group on d_group.id = r_info.group_id
