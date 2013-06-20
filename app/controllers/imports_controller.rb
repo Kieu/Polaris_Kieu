@@ -11,33 +11,6 @@ class ImportsController < ApplicationController
       background_job.status = Settings.job_status.PROCESSING
       background_job.save!
 
-      data_file = @import.csv.url
-      if !File.exists?(data_file)
-          flash[:error] = t.("error_message_url_import.unexpected_error")
-          background_job = BackgroundJob.find(options['bgj_id'])
-
-          # false case
-          background_job.status = Settings.job_status.WRONG
-          background_job.filename = header_error_file + Time.now.strftime("%Y%m%d") + Settings.file_type.TXT
-          background_job.save!
-          
-          return
-      end
-
-      row_number = CSV.readlines(data_file).size
-
-      if row_number > Settings.MAX_LINE_URL_IMPORT_FILE
-        flash[:error] = t.("error_message_url_import.over_row")
-        background_job = BackgroundJob.find(options['bgj_id'])
-
-        # false case
-        background_job.status = Settings.job_status.WRONG
-        background_job.filename = header_error_file + Time.now.strftime("%Y%m%d") + Settings.file_type.TXT
-        background_job.save!
-        
-        return
-      end
-
       if params[:type] == 'insert'
         job_id = ImportUrlData.create(file: @import.csv.url,
                  bgj_id: background_job.id, type: params[:type], user_id: current_user.id,
