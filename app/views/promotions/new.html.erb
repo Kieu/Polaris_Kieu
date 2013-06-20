@@ -27,15 +27,15 @@ $(function(){
         <tbody>
         <tr>
           <th><%= f.label I18n.t("promotion.promotion_name") %></th>
-          <td><%= f.text_field :promotion_name, maxlength: 255, style: "width: 250px", class: "prevent_change" %></td>
+          <td colspan="2"><%= f.text_field :promotion_name, maxlength: 255, style: "width: 250px", class: "prevent_change" %></td>
         </tr>
         <tr>
-          <th><%= f.label I18n.t("promotion.roman_name") %></th>
-          <td><%= f.text_field :roman_name, maxlength: 255, style: "width: 250px", class: "prevent_change" %></td>
+          <th style="width: 170px;"><%= f.label I18n.t("promotion.roman_name") %></th>
+          <td colspan="2"><%= f.text_field :roman_name, maxlength: 255, style: "width: 270px", class: "prevent_change" %></td>
         </tr>
         <tr>
           <th><%= f.label I18n.t("promotion.category") %></th>
-          <td>
+          <td colspan="2">
             <%= f.select :promotion_category_id,
                          t(".category").each_with_index.map {|name, index| [name,index]}, {}, {class: "prevent_change"} %>
           </td>
