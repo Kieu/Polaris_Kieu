@@ -27,8 +27,8 @@ a:hover {
     color:#005ddc;
     text-decoration:underline;
 }
-ul a:hover {
-    background:red;
+.txtlist:hover {
+    background:gray;
 }
 
 .error {
@@ -77,10 +77,7 @@ h1 {
     padding: 10px;
     border-bottom: #dadada solid 1px;
 }
-ul.txtlist li:hover
-{
-    background: red !important;
-}
+
 #infobox ul.last-child {
     border-bottom-style: none;
 }
