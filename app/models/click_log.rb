@@ -64,6 +64,8 @@ class ClickLog < ActiveRecord::Base
                where DATE_FORMAT(created_at, '%Y/%m/%d') BETWEEN ? AND ? #{where_clause}
                ORDER BY media_category_id, click_utime"
     end
+    
+    
     @logs = ClickLog.find_by_sql([sql_str] + params)
   end         
   
