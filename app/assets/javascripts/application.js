@@ -13,6 +13,7 @@
 //= require jquery-1.8
 //= require jquery_ujs
 //= require_directory .
+//= require zeroclipboard
 $(function(){
     $('#clients_list').slimScroll({
         color: '#0087A9',

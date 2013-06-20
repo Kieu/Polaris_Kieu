@@ -139,7 +139,7 @@ class UpdateUrlData
                                 "
                # insert redirect infomation
                insert_redirect_info_str += "
-                                            update redirect_infomation set creative_id = #{row[CREATIVE_ID]},
+                                            update redirect_informations set creative_id = #{row[CREATIVE_ID]},
                                                                       comment = '#{row[COMMENT]}',
                                                                       click_unit = #{row[CLICK_UNIT]}
                                                               where mpv = '#{current_mpv}'
