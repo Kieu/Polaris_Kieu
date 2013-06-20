@@ -29,22 +29,6 @@ $(function(){
         size: '8px',
         alwaysVisible: false
     });
-
-    $('.entrydate_box').slimScroll({
-        color: '#0087A9',
-        size: '8px',
-        alwaysVisible: false
-    });
-    $('#inprogress').slimScroll({
-        color: '#0087A9',
-        size: '8px',
-        alwaysVisible: false
-    });
-    $('#upload').slimScroll({
-        color: '#0087A9',
-        size: '8px',
-        alwaysVisible: false
-    });
 });
 // var auto_refresh = setInterval(
     // function ()
