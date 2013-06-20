@@ -1,12 +1,12 @@
 class SessionsController < ApplicationController
   
   def new
-    @press_release = PressRelease.all
+    @press_release = PressRelease.order("id DESC").first(7)
   end
 
   def create
     @errors = Array.new
-    @press_release = PressRelease.all
+    @press_release = PressRelease.order("id DESC").first(7)
     user = User.find_by_email(params[:session][:email])
     if user
       if user.can_login?
@@ -44,7 +44,7 @@ class SessionsController < ApplicationController
   end
 
   def resend_password
-    @press_release = PressRelease.all
+    @press_release = PressRelease.order("id DESC").first(7)
     @form_errors = Array.new
     user = User.find_by_email(params[:email])
     @email = params[:email]

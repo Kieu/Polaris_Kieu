@@ -25,30 +25,30 @@ $(function(){
         <tbody>
         <tr>
           <th><%= f.label I18n.t("promotion.promotion_name") %></th>
-          <td colspan="2"><%= f.text_field :promotion_name, maxlength: 255, style: "width: 250px", class: "prevent_change" %></td>
+          <td colspan="2"><%= f.text_field :promotion_name, maxlength: 255, style: "width: 250px", class: "prevent_change", tabindex: 1 %></td>
         </tr>
         <tr>
-          <th style="width: 170px;"><%= f.label I18n.t("promotion.roman_name") %></th>
-          <td colspan="2"><%= f.text_field :roman_name, maxlength: 255, style: "width: 250px", class: "prevent_change" %></td>
+          <th style="width: 200px;"><%= f.label I18n.t("promotion.roman_name") %></th>
+          <td colspan="2"><%= f.text_field :roman_name, maxlength: 255, style: "width: 250px", class: "prevent_change", tabindex: 2 %></td>
         </tr>
         <tr>
           <th><%= f.label I18n.t("promotion.category") %></th>
           <td colspan="2">
             <%= f.select :promotion_category_id,
-				t(".category").each_with_index.map {|name, index| [name,index]}, {}, {class: "prevent_change", selected: @promotion.promotion_category_id} %>
+				t(".category").each_with_index.map {|name, index| [name,index]}, {}, {class: "prevent_change", selected: @promotion.promotion_category_id, tabindex: 3} %>
           </td>
         </tr>
         <tr style="vertical-align: top;">
           <th><%= f.label I18n.t("promotion.tracking_period.label") %></th>
-          <td style="width: 250px"><%= f.text_field :tracking_period, maxlength: 2, style: "width: 250px", class: "prevent_change" %> </td>
+          <td style="width: 250px"><%= f.text_field :tracking_period, maxlength: 2, style: "width: 250px", class: "prevent_change", tabindex: 4 %> </td>
           <td style="padding-left: 0"> <%= I18n.t("promotion.tracking_period.day") %></td>
         </tr>
         </tbody>
       </table>
       <div class="submit_area2">
-      	<%= image_submit_tag("/assets/btn_done.gif", id: "btn_done") %>
-        <p><%= link_to image_tag("/assets/btn_cancel.gif", align: "right", alt: "キャンセル"), promotions_path(promotion_id: @promotion.id, client_id: @client_id) %></p>
-        <p><button id="promotion_delete"><img align="right" alt="delete" src="/assets/btn_del.gif" ></button></p>
+      	<%= image_submit_tag("/assets/btn_done.gif", id: "btn_done", tabindex: 5) %>
+        <p><%= link_to image_tag("/assets/btn_cancel.gif", align: "right", alt: "キャンセル", tabindex: 7), promotions_path(promotion_id: @promotion.id, client_id: @client_id) %></p>
+        <p><button id="promotion_delete"><img align="right" alt="delete" src="/assets/btn_del.gif" tabindex = "6"></button></p>
          </div>
     </div><!-- /."regist_form end-->
     <input type="hidden" name="client_id" value="<%= @client_id %>" />

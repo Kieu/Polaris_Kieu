@@ -27,29 +27,29 @@ $(function(){
         <tbody>
         <tr>
           <th><%= f.label I18n.t("promotion.promotion_name") %></th>
-          <td colspan="2"><%= f.text_field :promotion_name, maxlength: 255, style: "width: 250px", class: "prevent_change" %></td>
+          <td colspan="2"><%= f.text_field :promotion_name, maxlength: 255, style: "width: 250px", class: "prevent_change",tabindex: 1 %></td>
         </tr>
         <tr>
-          <th style="width: 170px;"><%= f.label I18n.t("promotion.roman_name") %></th>
-          <td colspan="2"><%= f.text_field :roman_name, maxlength: 255, style: "width: 270px", class: "prevent_change" %></td>
+          <th style="width: 200px;"><%= f.label I18n.t("promotion.roman_name") %></th>
+          <td colspan="2"><%= f.text_field :roman_name, maxlength: 255, style: "width: 250px", class: "prevent_change", tabindex: 2%></td>
         </tr>
         <tr>
           <th><%= f.label I18n.t("promotion.category") %></th>
           <td colspan="2">
             <%= f.select :promotion_category_id,
-                         t(".category").each_with_index.map {|name, index| [name,index]}, {}, {class: "prevent_change"} %>
+                         t(".category").each_with_index.map {|name, index| [name,index]}, {}, {class: "prevent_change", tabindex: 3} %>
           </td>
         </tr>
         <tr>
           <th><%= f.label I18n.t("promotion.tracking_period.label") %></th>
-          <td style="width: 250px"><%= f.text_field :tracking_period, maxlength: 2, style: "width: 250px", class: "prevent_change" %></td>
+          <td style="width: 250px"><%= f.text_field :tracking_period, maxlength: 2, style: "width: 250px", class: "prevent_change", tabindex: 4 %></td>
           <td style="padding-left: 0"> <%= I18n.t("promotion.tracking_period.day") %></td>
         </tr>
         </tbody>
       </table>
       <div class="submit_area">
-        <input type="image" src="/assets/btn_done.gif" id="btn_done">
-        <p><%= link_to raw('<img align="right" alt="キャンセル" src="/assets/btn_cancel.gif">'), clients_path(client_id: @client_id) %></p>
+        <input type="image" src="/assets/btn_done.gif" id="btn_done"  tabindex = 5>
+        <p><%= link_to raw('<img align="right" alt="キャンセル" src="/assets/btn_cancel.gif" tabindex="6">'), promotions_path(promotion_id: @promotion.id, client_id: @client_id) %></p>
       </div>
     </div><!-- /."regist_form end-->
 <% end %>

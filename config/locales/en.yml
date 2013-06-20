@@ -595,7 +595,7 @@ en:
     block: "You are blocked for 5 minutes. Please try again later"
   client:
     user_search: "Search"
-    crumb_edit: "Client Edit"
+    crumb_edit: "Edit Client"
     crumb_add: "Add Client"
     crumb_list: "Client list"
     client_name: "Client name： "
@@ -619,8 +619,8 @@ en:
       success_error: " Can not create user for client"
       update_error: " Can not update user for client"
   agency:
-    crumb_edit: "Agency Edit"
-    crumb_add: "Agency Add"
+    crumb_edit: "Edit Agency"
+    crumb_add: "Add Agency"
     agency_name: "Agency name"
     roman_name: "Roman name"
     flash_messages:
@@ -628,7 +628,7 @@ en:
       update: " Agency is updated successful"
   account:
     crumb_add: "Add Account"
-    crumb_edit: "Account Edit"
+    crumb_edit: "Edit Account"
     media_category: "Media category: "
     media: "Media: "
     account_name: "Account name:"
@@ -781,8 +781,8 @@ en:
     error_message: Error Message
     error_log_view: Show error logs
   promotion:
-    crumb_edit: "Promotion edit"
-    crumb_add: "Promotion add"
+    crumb_edit: "Edit Promotion"
+    crumb_add: "Add Promotion"
     promotion_name: "Promotion name: "
     roman_name: "Roman Name: "
     category: "Category: "
@@ -795,7 +795,7 @@ en:
       update: " Promotion is updated successful"
   user:
     crumb_add: "Add User"
-    crumb_edit: "User edit"
+    crumb_edit: "Edit User"
     username: "User name: "
     roman_name: "Roman name: "
     email: "Email address: "
