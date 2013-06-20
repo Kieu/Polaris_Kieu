@@ -16,7 +16,7 @@ a.bread_scrumb_link {
 <% if @array_promotion.count > 0 %>
 <ul class="contentNavi">
   <div class = "crumb_logs">
-	<% if current_user.super? %>
+	<% unless current_user.client? %>
 		<li class="pre"><a class="bread_scrumb_link" href="/clients?client_id=<%=@client_id%>"><%= short_ja_name(@client_name) %></a></li>
 	<% else %>
 		<li class="pre"><%= short_ja_name(@client_name) %></li>
@@ -402,6 +402,7 @@ a.bread_scrumb_link {
     $('#datepick').daterangepicker({
 		rangeSplitter: " ~ ",
 		lang: $.cookie("locale") == "ja" ? 1 : 2,
+		dateFormat: 'yy/mm/dd',
             onDone: function() {
                 var term = $('#datepick').val();
                 var d = term.split(' ~ ');
@@ -452,6 +453,10 @@ a.bread_scrumb_link {
 </script>
 <% else %>
     <ul class="contentNavi">
-      <li class="pre"><a class="bread_scrumb_link" href="/clients?client_id=<%=@client_id%>"><%= short_ja_name(@client.client_name) %></a></li>
+    	<% unless current_user.client? %>
+      		<li class="pre"><a class="bread_scrumb_link" href="/clients?client_id=<%=@client_id%>"><%= short_ja_name(@client.client_name) %></a></li>
+      	<% else %>
+      		<li class="pre"><%= short_ja_name(@client.client_name) %></li>
+      	<% end %>
     </ul>
 <% end %>
