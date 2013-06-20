@@ -111,6 +111,6 @@ class UrlSettingsController < ApplicationController
     time = Time.new
     cookies[:url_setting_start_date] = Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d") if !cookies[:url_setting_start_date] 
     cookies[:url_setting_end_date] = Date.yesterday.strftime("%Y/%m/%d") if !cookies[:url_setting_end_date]
-    cookies[:url_setting] = "11111110011" if !cookies[:url_setting]
+    cookies[:url_setting] = "11111110001" if !cookies[:url_setting]
   end
 end

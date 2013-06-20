@@ -52,9 +52,9 @@ $(document).ready(function() {
             {display: '<%= I18n.t("url.creative") %>', name : 'creative', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][5] == "0" ? 1 : 0 %>},
             {display: '<%= I18n.t("url.url") %>', name : 'url', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][6] == "0" ? 1 : 0 %>},
             {display: '<%= I18n.t("url.note") %>', name : 'note', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][7] == "0" ? 1 : 0 %>},
-            {display: '<%= I18n.t("url.click_price") %>', name : 'click_price', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][7] == "0" ? 1 : 0 %>},
-            {display: '<%= I18n.t("url.last_modified") %>', name : 'last_modified', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][7] == "0" ? 1 : 0 %>},
-            {display: '<%= I18n.t("url.delete") %>', name : 'delete_check', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][9] == "0" ? 1 : 0 %>}
+            {display: '<%= I18n.t("url.click_price") %>', name : 'click_price', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][8] == "0" ? 1 : 0 %>},
+            {display: '<%= I18n.t("url.last_modified") %>', name : 'last_modified', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][9] == "0" ? 1 : 0 %>},
+            {display: '<%= I18n.t("url.delete") %>', name : 'delete_check', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][10] == "0" ? 1 : 0 %>}
             ],
         usepager: true,
         title: 'Url List',
@@ -192,6 +192,12 @@ $(window).resize(function() {
           $("#import_csv").click();
       });
   });
+
+  function check_all_option() {
+      cookies_options = "11111111111";
+      text = "<img src='/assets/btn_box_dl.gif' >";
+      $('.check_options a').html(text);
+    }
 </script>
         <div class="contentNavi">
             <ul>
@@ -253,17 +259,27 @@ $(window).resize(function() {
   <div style='display:none'>
     <div id='inline_cv_logs'>
       <div class="f_box2">
-        <p class="f_box_title2">テーブル</p>
-        <p class="f_category_title2">表示項目</p>
+        <p class="f_box_title2"><%= I18n.t("url.show_option.table")%></p>
+        <p class="f_category_title2"><%= I18n.t("url.show_option.display_item")%></p>
         <div class="box04">
           <!-- チェックボックス -->
-          <p class="box4_txt">全て追加する </p>
+          <p class="box4_txt" id="show_all"><a onclick="check_all_option();" class="bread_scrumb_link" href="javascript:void(0)"><%= I18n.t("url.show_option.select_all")%></a></p>
           <div class="check-group check-group2 clearfix">
             <table width='100%'>
-              <% Settings.url_options.each_with_index do |option, index|%>
+              <tr>
+                <td class="check_txt"><%= I18n.t("url.last_modified") %></td>
+                <td align='right' class="check_options">
+                  <%= link_to cookies[:url_setting][9] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('9',this)"%>
+                </td>
+              </tr>
+              <% Settings.url_options.each_with_index do |option, index|
+                  if option == "edit" || option == "ad_id" || option == "url" || option == "delete" || option == "last_modified"
+                     next
+                  end
+                 %>
                   <tr>
-                    <td class="check_txt"><%= option %></td>
-                    <td align='right'>
+                    <td class="check_txt"><%= I18n.t("url." + option) %></td>
+                    <td align='right' class="check_options">
                       <%= link_to cookies[:url_setting][index] == "0" ? image_tag("/assets/btn_box_add.gif") : image_tag("/assets/btn_box_dl.gif"), "javascript:void(0)", onclick: "update_cookie('#{index}',this)"%>
                     </td>
                   </tr>
