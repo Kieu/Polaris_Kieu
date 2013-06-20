@@ -11,6 +11,15 @@
  *= require_self
  *= require_directory .
  */
+#colorbox .ui-widget-content{border:none; background:none;}
+#colorbox .ui-widget-header{background:none; border:0;}
+#colorbox .ui-state-default, #colorbox .ui-widget-content #colorbox .ui-state-default, #colorbox .ui-widget-header .ui-state-default{border:none; border-radius:0;}
+#colorbox .ui-tabs .ui-tabs-nav li a{background:#D6D6D6 none !important; display:block; float:none; padding:0.6em 1em}
+#colorbox .ui-tabs .ui-tabs-nav{padding:1px 0 0 2px}
+#colorbox .ui-corner-all, #colorbox .ui-corner-bottom, #colorbox .ui-corner-right, #colorbox .ui-corner-br{border-radius:0; padding:0;}
+#colorbox .ui-tabs .ui-tabs-nav li{padding:0; margin:0; margin-right:2px; width:209px !important;}
+#colorbox .ui-tabs .ui-tabs-nav li.ui-tabs-active a, #colorbox .ui-tabs .ui-tabs-nav li.ui-state-disabled a, #colorbox .ui-tabs .ui-tabs-nav li.ui-tabs-loading a{background:#f1f1f1 none !important; color:#0087a9!important}
+#colorbox .entrydate_box{top:15px}
 .notice
 {
     position: absolute;
