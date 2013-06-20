@@ -1,7 +1,7 @@
 <script type="text/javascript">
   //ChiliBook.recipeFolder = "./lib/chili/";
   $(document).ready(function (){
-   // $("#current_rev").html("v"+$.mcDropdown.version);
+    $("#current_rev").html("v"+$.mcDropdown.version);
     //$("#category").mcDropdown("#categorymenu");
     //$("#category2").mcDropdown("#categorymenu2");
     function add_category() {
@@ -27,8 +27,10 @@
   <%= stylesheet_link_tag "css/common" %>
     <%= stylesheet_link_tag "css/conversion" %>
   <%= stylesheet_link_tag "css/ui.tabs" %>
+  <%= stylesheet_link_tag "css/jquery.mcdropdown.min" %>
     <%= javascript_include_tag "js/jquery.chili-2.2.js" %>
     <%= javascript_include_tag "js/jquery.bgiframe.js" %>
+    <%= javascript_include_tag "js/jquery.mcdropdown.min" %>
 <% end %>
 <%= javascript_include_tag "js/ui.core" %>
 <%= javascript_include_tag "js/ui.tabs" %>
@@ -56,9 +58,11 @@
     <div id="fragment-1">
       <%= form_for @conversion do |f| %>
       <script type="text/javascript">
-    //  ck = $("#conversion_track_method_3").attr('checked').val;
-    //  alert(ck);
-
+      ck = $("#conversion_track_method_3").attr('checked').val;
+      alert(ck);
+      if($("#conversion_track_method_3").is(':checked')) {
+              $("#url").removeAttr('disabled');
+            }
 		  function render_ios(){
 		    $('#method_area').html('<%=j render "app_install_ios", f: f %>');
 		  }
@@ -161,6 +165,7 @@
   </div>
 </div>
 <script type="text/javascript">
+    $(".btn_details").droppy();
 	<% if @conversion.errors[:url].count > 0%>
 	    $("#url").removeAttr('disabled');
 	  <% end %>
