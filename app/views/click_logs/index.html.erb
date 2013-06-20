@@ -96,7 +96,6 @@
 	    	end_date = d[1];
 	    else
 	    	end_date = <%= @end_date %>
-		console.log(start_date);
         $.ajax({
             url: "<%= download_csv_click_logs_path %>?promotion_id=<%= @promotion.id if @promotion %>&start_date=" + start_date + "&end_date=" + end_date + "&media_category_id=" + $("#media_category_id").val() + "&account_id=" + $("#account_id").val(),
             type: "post",
@@ -289,4 +288,10 @@
         tableResize();
     });
 </script>
+<style type="text/css">
+  	.flexigrid div.pDiv{
+	    margin-right: 148px;
+	    margin-top: 6px ;
+	}
+</style>
 <div style="clear:both"></div>

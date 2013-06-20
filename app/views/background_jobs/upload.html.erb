@@ -16,12 +16,12 @@
             <table class="entrydate_table">
               <tr>
                 <td class="file_name"><%=job.filename%></td>
-                <td class="capacity">298MB</td>
-                <td class="daily">05/10/12:50</td>
+                <td class="capacity"><%= job.size %></td>
+                <td class="daily"><%= job.created_at %></td>
                 <td class="c_orange"><% if job.status == '1' %>作成中<%end%></td>
               </tr>
               <tr>
-                <td colspan="4"> リクルート(ゼクシィ) > 本体プロモーション > Google Network / Google リマーケティング</td>
+                <td colspan="4"><%= job.breadcrumb %></td>
               </tr>
             </table>
             <p class="btn_cancel"><% if job.status == '2' %> <a href="/background_jobs/download_file?id=<%= job.id %>">show error </a><%else%>sucess<%end%></p>
