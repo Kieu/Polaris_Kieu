@@ -10,8 +10,8 @@ class ExportClickLogsData
     # file name fomat: {user_id}_export_click_logs_{current_date}.csv   Settings.EXPORT_CLICK_LOGS
     promotion = Promotion.find(options['promotion_id'])
     file_name = promotion.promotion_name + "_click_" +
-    Time.now.strftime("%Y%m%d") + Settings.file_type.CSV
-    path_file = Settings.export_click_logs_path + options['user_id'].to_s + "_" + file_name
+    Time.now.strftime("%Y%m%d_%H%M%S") + Settings.file_type.CSV
+    path_file = Settings.export_click_logs_path + file_name
     if File.exist?(path_file)
       return
     end
@@ -51,7 +51,7 @@ class ExportClickLogsData
         # make header for CSV file
         csv << header_col
         rows.each do |row|
-          csv << [row.click_utime, row.id, client_name, promotion.promotion_name,
+          csv << [Time.at(row.click_utime).strftime("%Y/%m/%d %H:%M:%S"), row.id, client_name, promotion.promotion_name,
                   medias.find(row.media_id).media_name, accounts.find(row.account_id).account_name,
                   display_campaigns.find(row.campaign_id).name, display_groups.find(row.group_id).name,
                   display_ads.find(row.unit_id).name, row.click_url, row.redirect_url,

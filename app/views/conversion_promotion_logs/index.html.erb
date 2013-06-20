@@ -31,7 +31,7 @@
 		</ul>
 	</div>
 	<div class="date"><%= I18n.t("log.today_text")%><br />
-		<div id="datepicker"><%= @start_date + " ~ " + @end_date %>&#9660;</div>
+		<input id="datepicker" type="text" readonly="readonly" value="<%= @start_date +" ~ "+ @end_date %>" name="datepicker">&#9660;
 	</div>
 </div>
 <div class="clear"></div>
@@ -81,6 +81,7 @@
 <script type="text/javascript">
 	var term = $('#datepicker').val();
     var d = term.split(' ~ ');
+    console.log(d);
     if (d[0])
     	start_date = d[0];
     else
@@ -317,7 +318,7 @@
 			rangeSplitter: ' ~ ', 
 	        onDone: function() {
 	            var term = $('#datepicker').val();
-	            var d = term.split('~');
+	            var d = term.split(' ~ ');
 	            start_date = d[0];
 	            end_date = d[1];
 	            

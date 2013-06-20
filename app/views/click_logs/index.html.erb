@@ -86,13 +86,19 @@
 	    $(tbl).flexToggleCol(colIndex, visible);
 	}
 	$('#download_csv').click(function(){
+        var term = $('#datepicker').val();
+	    var d = term.split(' ~ ');
+	    if (d[0].length > 1)
+	    	start_date = d[0];
+	    else
+	    	start_date = <%= @start_date %>
+	    if (d[1].length > 1)
+	    	end_date = d[1];
+	    else
+	    	end_date = <%= @end_date %>
+		console.log(start_date);
         $.ajax({
-            url: "<%= download_csv_click_logs_path %>",
-            data: {"promotion_id" : "<%= @promotion.id if @promotion %>",
-            	   "media_category_id": $("#media_category_id").val(),
-            	   "account_id": $("#account_id").val()},
-            	   "start_date": start_date,
-            	   "end_date": end_date,
+            url: "<%= download_csv_click_logs_path %>?promotion_id=<%= @promotion.id if @promotion %>&start_date=" + start_date + "&end_date=" + end_date + "&media_category_id=" + $("#media_category_id").val() + "&account_id=" + $("#account_id").val(),
             type: "post",
             success: function(data){
             }
