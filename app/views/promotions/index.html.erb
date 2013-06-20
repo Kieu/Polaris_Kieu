@@ -24,8 +24,7 @@ a.bread_scrumb_link {
 	<li><%= short_ja_name(@promotion_name) %></li>
 </ul>
 <div class="date">今日<br />
-<div id="datepicker">
-<%= @start_date %>~<%= @end_date %>&#9660;</div>
+<input id="datepick" type="text" readonly="readonly" value="<%= @start_date + " - " + @end_date %>" name="datepick">&#9660;
 </div>
 <div class="clear"></div>
 <div id="graph">
@@ -181,7 +180,7 @@ a.bread_scrumb_link {
 </div>
 <script type="text/javascript">
     $('#download_csv').click(function(){
-    	var term = $('#datepicker').val();
+    	var term = $('#datepick').val();
         var d = term.split(' - ');
         start_date = d[0];
         end_date = d[1];
@@ -399,10 +398,10 @@ a.bread_scrumb_link {
 		 return year + month + day;
 		}
     
-    $('#datepicker').daterangepicker({
+    $('#datepick').daterangepicker({
 		lang: $('#lang').val(),
             onDone: function() {
-                var term = $('#datepicker').val();
+                var term = $('#datepick').val();
                 var d = term.split(' - ');
                 start_date = d[0];
                 end_date = d[1];
@@ -435,7 +434,6 @@ a.bread_scrumb_link {
 						<% end %>
 						draw_chart(data[left], data[right], left, right, categories);
 						$("#promotion_tables").html(all_data["html"]);
-                      $("#datepicker").text(start_date + "~" + end_date + "▼");
 	            	}
 				})
 			}
