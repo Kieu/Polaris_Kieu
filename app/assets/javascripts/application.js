@@ -35,7 +35,12 @@ $(function(){
         size: '8px',
         alwaysVisible: false
     });
-    $('.inprogress').slimScroll({
+    $('#inprogress').slimScroll({
+        color: '#0087A9',
+        size: '8px',
+        alwaysVisible: false
+    });
+    $('#upload').slimScroll({
         color: '#0087A9',
         size: '8px',
         alwaysVisible: false
