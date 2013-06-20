@@ -42,7 +42,9 @@ table tr {
 table th {
     font-weight: bold;
     text-align: right;
-    width: 400px;
+    /*width: 400px;*/
+   	width: 100%;
+   	max-width: 400px;
 }
 table td {
     font-weight: bold;

@@ -111,6 +111,7 @@ $(function(){
         $("#tags").autocomplete({
             source: list_user,
             select: function (event, ui) {
+            	prevent_change = "1";
                 $("#tags").val("");
                 list_user.splice(list_user.indexOf(ui.item), 1);
                 data = ui.item;

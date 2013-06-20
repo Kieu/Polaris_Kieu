@@ -166,7 +166,7 @@ jQuery.fn.daterangepicker = function(settings){
 	   if (options.lang == 1){//JAPAN
 		   dateFormat = 'yy/mm/dd'
 	   } else if (options.lang == 2){//ENG
-		   dateFormat = 'mm/dd/yy';
+		   dateFormat = 'yy/mm/dd';
 	   }
 	   
 	   return jQuery.datepicker.formatDate( dateFormat, date ); 
