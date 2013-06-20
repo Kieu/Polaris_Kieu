@@ -399,9 +399,9 @@ a.bread_scrumb_link {
 		 if (day.length == 1) { day = "0" + parseInt(day); }
 		 return year + month + day;
 		}
-    
     $('#datepick').daterangepicker({
 		rangeSplitter: " ~ ",
+		lang: $.cookie("locale") == "ja" ? 1 : 2,
             onDone: function() {
                 var term = $('#datepick').val();
                 var d = term.split(' ~ ');

@@ -610,6 +610,9 @@ ja:
     captcha_email_not_found: "入力頂いたアドレスでアカウント開設した履歴がございません "
     captcha_error: "入力頂いた認証文字が異なります。お手数ですが再入力下さい"
     send_success: "メールアドレスにPWをお送りしましたのでご確認下さい"
+    unsuccessfull: "メールアドレスまたはパスワードが違います。"
+    deactive: "入力されたメールアドレスは無効です。"
+    block: "あなたが5分間ブロックされます。後でもう一度やり直してください。"
   client:
     user_search: "検索"
     crumb_edit: "クライアント編集"
@@ -802,7 +805,7 @@ ja:
     crumb_edit: "プロモーション編集"
     crumb_add: "プロモーション登録"
     promotion_name: "プロモーション名: "
-    roman_name: "プロジェクト名（英語）: "
+    roman_name: "プロモーション名（英語）: "
     category: "カテゴリ: "
     tracking_period:
       label: "計測期間: "
@@ -831,7 +834,7 @@ ja:
       not_notified: " 通知しない"
       to_notified: " 通知する"
     disabled:
-      label: "ユーザー無効化 "
+      label: "ユーザー無効化: "
       disable: "無効にする"
     flash_messages:
       success: " ユーザー登録が完了しました"
@@ -864,6 +867,6 @@ ja:
     flash_messages: 
       success: "入稿リクエストを受け付けました。"
     no_data: "※入稿された広告がありません。"
-  Promotion Name: "プロジェクト名"
+  Promotion Name: "プロモーション名"
   Page: "ページ"
   of: "の"

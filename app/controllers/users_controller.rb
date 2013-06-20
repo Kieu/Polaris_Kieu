@@ -84,7 +84,7 @@ class UsersController < ApplicationController
          "" : "<a href='users/#{user.id}/edit'>#{view_context.image_tag("/assets/img_edit.png")}</a>"
       rows << {id: user.id, cell: {
                link: link, roman_name: short_en_name(user.roman_name),
-               username: short_ja_name(user.username), company: short_en_name(company),
+               username: short_ja_name(user.username), company: short_ja_name(company),
                email: short_en_name(user.email), role: user.role.role_name}}
     end
     rows

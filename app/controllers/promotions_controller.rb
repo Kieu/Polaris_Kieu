@@ -153,7 +153,7 @@ class PromotionsController < ApplicationController
     if current_user.agency? && !@client.client_users.find_by_user_id(current_user.id)
       redirect_to clients_path
     end
-    @array_promotion = @client.promotions.active.order_by_promotion_name
+    @array_promotion = @client.promotions.active.order_by_roman_name
     #redirect_to clients_path if @array_promotion.length == 0 && current_user.super? 
     if @array_promotion.length > 0
       @promotion_id = params[:promotion_id].blank? ? @array_promotion.first[:id] :
