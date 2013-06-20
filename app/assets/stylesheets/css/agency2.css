@@ -87,5 +87,7 @@ form{
 #btn_submit:hover{
 	opacity:0.7;
 }
-
+.flexigrid div.hDiv th div {
+text-align: center !important;
+}
 
