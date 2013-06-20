@@ -19,7 +19,7 @@
 #colorbox .ui-corner-all, #colorbox .ui-corner-bottom, #colorbox .ui-corner-right, #colorbox .ui-corner-br{border-radius:0; padding:0;}
 #colorbox .ui-tabs .ui-tabs-nav li{padding:0; margin:0; margin-right:2px; width:209px !important;}
 #colorbox .ui-tabs .ui-tabs-nav li.ui-tabs-active a, #colorbox .ui-tabs .ui-tabs-nav li.ui-state-disabled a, #colorbox .ui-tabs .ui-tabs-nav li.ui-tabs-loading a{background:#f1f1f1 none !important; color:#0087a9!important}
-#colorbox .entrydate_box{top:15px}
+#colorbox .entrydate_box{}
 .notice
 {
     position: absolute;
