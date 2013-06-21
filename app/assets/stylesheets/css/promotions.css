@@ -462,6 +462,7 @@ div.check-group label.checked {
 td.table_header{
 	color: white;
 	background-color: #707070;
+	text-align: center;
 }
 td.header_total{
 	color: white;
@@ -479,6 +480,13 @@ div#promotions_list{
     overflow-y: scroll;
     max-height: 300px;
     overflow-x: hidden;
+}
+
+td.align_right{
+	text-align: right;
+}
+td.align_center{
+	text-align: center;
 }
 #promotion_tables {
      overflow: auto;
