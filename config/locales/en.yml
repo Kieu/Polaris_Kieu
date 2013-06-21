@@ -863,6 +863,10 @@ en:
     upload_type: 
       insert: "Append (new rules)"
       update: "Update (existing)"
+    show_option:
+      table: "Table"
+      display_item: "Display items"
+      select_all: "Select All"
   Promotion Name: "Promotion Name"
   Page: "Page"
   of: "of"
