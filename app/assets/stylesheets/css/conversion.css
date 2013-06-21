@@ -233,11 +233,57 @@ li.disabled {
     width: 40px !important;
 	
 	}
-.btn_details {
-    float: left;
-    width: 120px;
-}
 ul, li {
-    margin: 0;
-    padding: 0;
+    margin:0;
+    padding:0;
+}
+.btn_details {
+    width: 120px;
+    float:left;
+}
+.btn_details li {
+    list-style: none;
+    float: left;
+    position: relative;
+}
+.btn_details ul {
+    display: none;
+    position: absolute;
+    top: 29px;
+    left: 0;
+}
+* html .btn_details ul {
+    line-height: 0;
+}
+.btn_details ul li {
+    float: none;
+}
+.btn_details ul {
+    width: 140px;
+    border: 1px solid #bcbfc0;
+
+}
+.btn_details ul ul {
+    top: 0;
+    left: 141px;
+
+    border: 1px solid #bcbfc0;
+
+}
+.btn_details ul a {
+    display: block;
+    width: 128px;
+    background-color:#FFF;
+    padding: 6px;
+    color:#000;
+    zoom: 1;
+    line-height: 1;
+    text-decoration:none!important;
+}
+.btn_details ul a.hover {
+    background-color:#d6ecf1;
+    color:#0087a9;
+    opacity: 1!important;
+
+
 }
