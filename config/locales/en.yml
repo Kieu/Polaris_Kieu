@@ -798,6 +798,8 @@ en:
     flash_messages:
       success: " Promotion is created successful"
       update: " Promotion is updated successful"
+    Done: "Done"
+    Dashboard: "Dashboard"
   user:
     crumb_add: "Add User"
     crumb_edit: "Edit User"

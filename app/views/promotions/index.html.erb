@@ -49,7 +49,7 @@ a.bread_scrumb_link {
 							<li><a href="javascript:void(0)"><%= short_ja_name(conversion.conversion_name) %></a>
 								<ul>
 									<% Settings.conversions_graph.each do |option| %>
-										<li><a href="javascript:void(0)" class="result_click_left" id="conversion_left_<%= conversion.id %>"><%= option %></a></li>
+										<li><a href="javascript:void(0)" class="result_click_left" id="conversion_left_<%= conversion.id %>"><%= I18n.t(option) %></a></li>
 									<% end %>
 								</ul>
 							<li>
@@ -79,7 +79,7 @@ a.bread_scrumb_link {
 							<li><a href="javascript:void(0)"><%= short_ja_name(conversion.conversion_name) %></a>
 								<ul>
 									<% Settings.conversions_graph.each do |option| %>
-										<li><a href="javascript:void(0)" class="result_click_right" id="conversion_right_<%= conversion.id %>"><%= option %></a></li>
+										<li><a href="javascript:void(0)" class="result_click_right" id="conversion_right_<%= conversion.id %>"><%= I18n.t(option) %></a></li>
 									<% end %>
 								</ul>
 							<li>
@@ -102,7 +102,7 @@ a.bread_scrumb_link {
 <% if flash[:error] %>
     <div><%= flash[:error] %></div>
 <% end %>
-<p class="p-blue category_Dashboard">ダッシュボード</p>
+<p class="p-blue category_Dashboard"><%= I18n.t("promotion.Dashboard") %></p>
 <div id="promotion_tables">
 	<%= render template: "promotions/promotion_table" %>
 </div>
@@ -156,7 +156,7 @@ a.bread_scrumb_link {
 							<ul>
 								<% Settings.conversions_options.each_with_index do |option, index1|%>
 								<li>
-									<p class="check_txt"><%= option %></p>
+									<p class="check_txt"><%= I18n.t(option) %></p>
 									<div>
 										<% if cookies[('conversion' + conversion.id.to_s).to_sym][index1] == '0' %>
 											<input type="checkbox" value="c1" name="check" id="checbox<%= index+1 %>">
@@ -401,6 +401,7 @@ a.bread_scrumb_link {
 		}
     $('#datepick').daterangepicker({
 		rangeSplitter: "~",
+		doneButtonText: "<%= I18n.t("promotion.Done") %>",
 		lang: $.cookie("locale") == "ja" ? 1 : 2,
             onDone: function() {
                 var term = $('#datepick').val();
