@@ -103,8 +103,14 @@ a.bread_scrumb_link {
     <div><%= flash[:error] %></div>
 <% end %>
 <p class="p-blue category_Dashboard">ダッシュボード</p>
-<div id="promotion_tables">
+<div id="promotion_tables" class="box-wrap antiscroll-wrap">
+<div class="box">
+<div class="antiscroll-inner">
+<div class="box-inner">
 	<%= render template: "promotions/promotion_table" %>
+  </div>
+  </div>
+  </div>
 </div>
 <br/>
 <br/>
