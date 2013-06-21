@@ -1,5 +1,16 @@
+<style type="text/css">
+    #inprogress {
+        overflow: auto;
+        height: 200px;
+    }
+</style>
+<script>
+    $(function(){
+        $("#inprogress").niceScroll();
+    });
+</script>
 <div id="inprogress">
-  <ul class="entrydate_box">
+  <ul class="entrydate_box_notify">
   <% if @jobs %>
     <% @jobs.each_with_index do |job, index| %>
             <li>
