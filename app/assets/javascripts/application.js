@@ -20,6 +20,7 @@ $(function(){
         size: '8px',
         alwaysVisible: false
     });
+
     $('#promotions_list').slimScroll({
         color: '#0087A9',
         size: '8px',
@@ -28,6 +29,13 @@ $(function(){
     $('#conversions_list').slimScroll({
         color: '#0087A9',
         size: '8px',
+        alwaysVisible: false
+    });
+    $('#promotion_tables').slimScroll({
+        color: '#0087A9',
+        size: '8px',
+        width: '300px',
+        height: '500px',
         alwaysVisible: false
     });
 });
