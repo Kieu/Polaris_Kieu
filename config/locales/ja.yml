@@ -884,6 +884,10 @@ ja:
     upload_type: 
       insert: "追加（新規）"
       update: "更新（既存）"
-  Promotion Name: "プロジェクト名"
+    show_option:
+      table: "テーブル"
+      display_item: "表示項目"
+      select_all: "全て追加する"
+  Promotion Name: "プロモーション名"
   Page: "ページ"
   of: "の"
