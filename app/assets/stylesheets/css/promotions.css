@@ -480,3 +480,7 @@ div#promotions_list{
     max-height: 300px;
     overflow-x: hidden;
 }
+#promotion_tables {
+     overflow: auto;
+     height: 400px;
+ }

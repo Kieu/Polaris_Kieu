@@ -31,9 +31,7 @@ $(function(){
         size: '8px',
         alwaysVisible: false
     });
-    $('#promotion_tables').jScrollPane({showArrows: true});
-
-    //nice = $("html").niceScroll();
+    $("#promotion_tables").niceScroll();
 });
 // var auto_refresh = setInterval(
     // function ()

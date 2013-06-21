@@ -1,3 +1,15 @@
+<style type="text/css">
+    #download {
+        overflow: auto;
+        height: 200px;
+    }
+</style>
+<%= javascript_include_tag "application" %>
+<script>
+    $(function(){
+    $("#download").niceScroll();
+    });
+</script>
 <div id="download">
   <ul class="entrydate_box">
   <% if @jobs %>
