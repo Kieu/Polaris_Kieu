@@ -65,7 +65,7 @@ class ImportUrlData
     File.open(error_file, 'w') do |error|
       begin
         if !File.exists?(data_file)
-          error.write("Unexpected error: file uploading failed. Please try againg or contact the customer service. \n")
+          error.write("Unexpected error: file uploading failed. Please try againg or contact the customer service1. \n")
           background_job = BackgroundJob.find(options['bgj_id'])
 
           # false case
@@ -237,6 +237,7 @@ class ImportUrlData
               end
               
               if num == Settings.RECORD_NUM_PER_INSERT || (row_number == 0)
+                binding.pry
                 result = ActiveRecord::Base.connection.execute(insert_redirect_info_str)
                 result = ActiveRecord::Base.connection.execute(insert_redirect_url_str)
 
@@ -284,7 +285,7 @@ class ImportUrlData
         background_job.filename = header_error_file + Time.now.strftime("%Y%m%d") + Settings.file_type.TXT
         background_job.filepath = error_file
         background_job.save!
-        error.write("Unexpected error: file uploading failed. Please try againg or contact the customer service. \n")
+        error.write("Unexpected error: file uploading failed. Please try againg or contact the customer service2. \n")
       end
     end
     File.delete(data_file)
