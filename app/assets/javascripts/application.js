@@ -31,9 +31,9 @@ $(function(){
         size: '8px',
         alwaysVisible: false
     });
-    scroller = $('.box-wrap').antiscroll().data('antiscroll');
+    $("#promotion_tables").niceScroll("#promotion_tables",{cursorcolor:"#00F"});
 
-    //nice = $("html").niceScroll();
+    nice = $("html").niceScroll();
 });
 // var auto_refresh = setInterval(
     // function ()
