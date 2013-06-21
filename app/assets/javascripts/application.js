@@ -32,9 +32,6 @@ $(function(){
         alwaysVisible: false
     });
     $("#promotion_tables").niceScroll();
-
-
-    nice = $("html").niceScroll();
 });
 // var auto_refresh = setInterval(
     // function ()
