@@ -107,7 +107,12 @@ class UrlSettingsController < ApplicationController
     
     array_header_csv = ["#{t("url.ad_id")}", "#{t("url.campaign_name")}", "#{t("url.group_name")}",
                "#{t("url.ad_name")}", "#{t("url.creative")}", "#{t("url.url")}", "#{t("url.note")}",
-               "#{t("url.click_price")}", "#{t("url.last_modified")}"]
+               "#{t("url.click_price")}", "#{t("url.last_modified")}", "#{t("url.redirect_url1")}",
+               "#{t("url.name1")}", "#{t("url.rate1")}", "#{t("url.redirect_url2")}",
+               "#{t("url.name2")}", "#{t("url.rate2")}", "#{t("url.redirect_url3")}",
+               "#{t("url.name3")}", "#{t("url.rate3")}", "#{t("url.redirect_url4")}",
+               "#{t("url.name4")}", "#{t("url.rate4")}", "#{t("url.redirect_url5")}",
+               "#{t("url.name5")}", "#{t("url.rate5")}"]
     background_job = BackgroundJob.create
     job_id = ExportUrlData.create(start_date: start_date, end_date: end_date,
       user_id: user_id, promotion_id: promotion_id, account_id: account_id,

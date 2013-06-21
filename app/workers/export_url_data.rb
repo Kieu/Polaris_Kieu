@@ -8,7 +8,9 @@ class ExportUrlData
   def perform
     # make file name
     account_name = Account.where(id: options['account_id']).select("roman_name").first['roman_name']
-    promotion_name = Promotion.where(id: options['promotion_id']).select("roman_name").first['roman_name']
+    promotion_obj = Promotion.where(id: options['promotion_id']).select("roman_name, client_id")
+    promotion_name = promotion_obj.first['roman_name']
+    client_id = promotion_obj.first['client_id']
     # file name fomat: {account_romaji_name}_export_url_{current_date}.csv
     file_name = options['user_id'].to_s + "_" + Settings.EXPORT_URL +
       "_" + Time.now.strftime("%Y%m%d") + Settings.file_type.CSV
@@ -42,10 +44,20 @@ class ExportUrlData
           array_date_csv << url['group_name']
           array_date_csv << url['ad_name']
           array_date_csv << url['creative_id']
-          array_date_csv << url['url']
+          submit_url = Settings.DOMAIN_SUBMIT_URL + "mpv=#{url['mpv']}" + "&cid=#{client_id}&pid=#{options['promotion_id']}"
+          array_date_csv << submit_url
           array_date_csv << url['comment']
           array_date_csv << url['click_unit']
           array_date_csv << url['last_modified']
+
+          # get redirect URL
+          array_redirect_url = RedirectUrl.where(mpv: url['mpv']).select('url, name, rate')
+          array_redirect_url.each do |redirect_url|
+            array_date_csv << redirect_url.url
+            array_date_csv << redirect_url.name
+            array_date_csv << redirect_url.rate
+          end
+          
           csv << array_date_csv
         end
       end
