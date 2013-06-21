@@ -19,9 +19,9 @@ class UrlSettingsController < ApplicationController
 
     if current_user.role.id == Settings.role.AGENCY
       author_flg = false
-      array_client = ClientUser.where(id: @client_id).select('user_id')
-      array_client.each do |client_element|
-        if current_user.id == client_element.user_id
+      array_user = ClientUser.where(user_id: current_user.id).select('client_id')
+      array_user.each do |user_element|
+        if @client_id == user_element.client_id
           author_flg = true
           break
         end
@@ -31,7 +31,7 @@ class UrlSettingsController < ApplicationController
         render file: 'public/404.html', status: :not_found
         return
       end
-      
+
     end
     
     @account = Account.where(id: @account_id).select('media_id, account_name')
