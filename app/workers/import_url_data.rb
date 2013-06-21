@@ -195,6 +195,10 @@ class ImportUrlData
 
               "
               
+              if row[REDIRECT_URL2] != "" || row[REDIRECT_URL3] != "" || row[REDIRECT_URL4] != "" || row[REDIRECT_URL5] != ""
+                comma_sql = ""
+              end
+
               # insert url
               insert_redirect_url_str += "('#{current_mpv}', '#{row[REDIRECT_URL1]}', #{row[RATE1]}, '#{row[NAME1]}',
                                              '#{current_time}', #{user_id} ) #{comma_sql}
@@ -202,7 +206,7 @@ class ImportUrlData
               "
               if row[REDIRECT_URL2] != ""
                 insert_redirect_url_str += " , ('#{current_mpv}', '#{row[REDIRECT_URL2]}', #{row[RATE2]}, '#{row[NAME2]}',
-                                             '#{current_time}', #{user_id} ) #{comma_sql}
+                                             '#{current_time}', #{user_id} )
 
                 "
                 num += 1
@@ -210,7 +214,7 @@ class ImportUrlData
 
               if row[REDIRECT_URL3] != ""
                 insert_redirect_url_str += " , ('#{current_mpv}', '#{row[REDIRECT_URL3]}', #{row[RATE3]}, '#{row[NAME3]}',
-                                             '#{current_time}', #{user_id} ) #{comma_sql}
+                                             '#{current_time}', #{user_id} )
 
                 "
                 num += 1
@@ -218,7 +222,7 @@ class ImportUrlData
 
               if row[REDIRECT_URL4] != ""
                 insert_redirect_url_str += " , ('#{current_mpv}', '#{row[REDIRECT_URL4]}', #{row[RATE4]}, '#{row[NAME4]}',
-                                             '#{current_time}', #{user_id} ) #{comma_sql}
+                                             '#{current_time}', #{user_id} ) 
 
                 "
                 num += 1
@@ -226,7 +230,7 @@ class ImportUrlData
 
               if row[REDIRECT_URL5] != ""
                 insert_redirect_url_str += " , ('#{current_mpv}', '#{row[REDIRECT_URL5]}', #{row[RATE5]}, '#{row[NAME5]}',
-                                             '#{current_time}', #{user_id} ) #{comma_sql}
+                                             '#{current_time}', #{user_id} )
 
                 "
                 num += 1
