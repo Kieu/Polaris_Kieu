@@ -32,6 +32,10 @@
 	</div>
 	<div class="date"><%= I18n.t("log.today_text")%><br />
 		<input id="datepicker" type="text" readonly="readonly" value="<%= @start_date +" ~ "+ @end_date %>" name="datepicker">&#9660;
+      <div class="fl-r-log">
+        <p><a class='inline_cv_logs' href="#inline_cv_logs"><img src="/assets/btn_dl_option.gif"  /></a>
+        <a id="download_csv"><img src="/assets/btn_dl_report.gif"  /></a></p>
+      </div>
 	</div>
 </div>
 <div class="clear"></div>
@@ -52,10 +56,7 @@
 	<div id="ui-tab">
 		<div id="fragment-1" class="ui-tabs-panel">
 			<div id="graph">
-				<div class="fl-r">
-					<p><a class='inline_cv_logs' href="#inline_cv_logs"><img src="/assets/btn_dl_option.gif"  /></a></p>
-					<p><a id="download_csv"><img src="/assets/btn_dl_report.gif"  /></a></p>
-				</div>
+
 			</div>
 			
 			<div style='width: 2000px'><table id="cvlogs"class="newTable06 fixTable d-none" style="background: grey" ></table> </div>

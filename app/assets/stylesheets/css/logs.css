@@ -33,6 +33,12 @@
     min-height: 510px;
     width: 630px;
 }
+.fl-r-log
+{
+    float: left;
+    margin-top:20px;
+    width: 280px;
+}
 .regist_form table.client_info {
     width: 610px;
 }
@@ -111,7 +117,7 @@ table.user_add tbody td {
 	}
 .selectarea{
 	  float: left;
-    margin: -5px 0 0 155px;
+    margin-left: 100px;
     width: 285px;
 	}
 .selectarea li{
