@@ -17,6 +17,7 @@ PolarisManage::Application.routes.draw do
   resources :roles
   resources :conversions do
     get "get_tag", on: :member
+    post "change_current_id", on: :collection
   end
   resources :clients do
     post "del_client", to: "clients#del_client", on: :collection
