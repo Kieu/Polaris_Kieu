@@ -38,6 +38,7 @@ $(function(){
         height: '500px',
         alwaysVisible: false
     });
+    nice = $("html").niceScroll();
 });
 // var auto_refresh = setInterval(
     // function ()
