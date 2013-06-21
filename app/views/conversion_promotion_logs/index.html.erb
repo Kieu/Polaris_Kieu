@@ -9,9 +9,9 @@
 
 <ul class="contentNavi">
   <div class = "crumb_logs">
-	<li class="pre"><%= link_to @promotion.client.client_name, clients_path(client_id: @promotion.client.id) %> </li>
+	<li class="pre"><%= link_to short_ja_name(@promotion.client.client_name), clients_path(client_id: @promotion.client.id) %> </li>
 	<li>&gt;</li>
-	<li><%= link_to @promotion.promotion_name, promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %></li>
+	<li><%= link_to short_ja_name(@promotion.promotion_name), promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %></li>
 	<li>&gt;</li>
 	<li><%= I18n.t("log.crumb_cv_logs")%></li>
   </div>
@@ -40,12 +40,12 @@
 	<ul class="ui-tabs-nav">
 		<li class="ui-tabs-selected">
 			<%= link_to(conversion_promotion_logs_path(promotion_id: @promotion.id)) do %>
-			  <span>CVログ</span>
+			  <span><%= I18n.t("cv_logs.label")%></span>
 			<% end %>
 		</li>
 		<li class="">
 			<%= link_to(click_logs_path(promotion_id: @promotion.id)) do %>
-			  <span>clickログ</span>
+			  <span><%= I18n.t("click_logs.label")%></span>
 			<% end %>
 		</li>
 	</ul>
@@ -274,7 +274,7 @@
 <table id="paging" class="flexme4" style="display:none"></table>
 <style type="text/css">
   	.flexigrid div.pDiv{
-	    margin-right: 1000px;
+	    margin-right: 48%;
 	    margin-top: 6px ;
 	}
 </style>
