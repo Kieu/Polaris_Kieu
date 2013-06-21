@@ -18,20 +18,16 @@ class RedirectUrl < ActiveRecord::Base
               ,ad.id as ad_id
               ,camp.id as camp_id
               ,d_group.id as group_id
-              ,r_url.id as redirect_url_id
-              ,r_url.url as url
-              ,r_url.name as url_name
-              ,r_url.mpv as mpv
               ,r_info.comment as comment
               ,r_info.click_unit as click_unit
               ,creative.image as creative
               ,r_info.creative_id
+              ,r_info.mpv as mpv
+              ,r_info.id as redirect_url_id
               ,creative.content as creative_text
               ,creative.display_type as creative_type
-              ,DATE_FORMAT(r_url.updated_at, '%Y/%m/%d %h:%i:%s') as last_modified
-            FROM  redirect_urls as r_url
-              inner join redirect_informations as r_info
-                   on r_info.mpv = r_url.mpv
+              ,DATE_FORMAT(r_info.updated_at, '%Y/%m/%d %h:%i:%s') as last_modified
+            FROM redirect_informations as r_info
               inner join display_campaigns as camp on camp.id = r_info.campaign_id
               inner join display_groups as d_group on d_group.id = r_info.group_id
               inner join display_ads as ad on ad.id = r_info.unit_id
@@ -40,9 +36,9 @@ class RedirectUrl < ActiveRecord::Base
               r_info.promotion_id = #{promotion_id}
               and r_info.account_id = #{account_id}
               and r_info.media_id = #{media_id}
-              and DATE_FORMAT(r_url.created_at, '%Y/%m/%d') between DATE_FORMAT('#{start_date}', '%Y/%m/%d')
+              and DATE_FORMAT(r_info.created_at, '%Y/%m/%d') between DATE_FORMAT('#{start_date}', '%Y/%m/%d')
                                      and DATE_FORMAT('#{end_date}', '%Y/%m/%d')
-            GROUP BY r_url.url , camp.id, d_group.id, ad.id
+              and r_info.del_flg = 0
             ORDER BY ad.name, camp.name, d_group.name
 	"
   sql = sql + limit_string
