@@ -16,6 +16,8 @@ class ConversionLog < ActiveRecord::Base
     start = (page.to_i-1) * rp.to_i
     set_table_name "conversion_#{id}_logs"  
     where_clause = ""
+    start_date = Date.strptime(start_date, I18n.t("time_format")).strftime("%Y/%m/%d")
+    end_date = Date.strptime(end_date, I18n.t("time_format")).strftime("%Y/%m/%d")
     params = [start_date, end_date]
     params1 = [start_date, end_date]
     if(cv_id.present?)  
@@ -66,6 +68,8 @@ repeat_proccessed_flg,parent_conversion_id,sales,profit,volume,others,null as ap
     
     set_table_name "conversion_#{id}_logs"  
     where_clause = ""
+    start_date = Date.strptime(start_date, I18n.t("time_format")).strftime("%Y/%m/%d")
+    end_date = Date.strptime(end_date, I18n.t("time_format")).strftime("%Y/%m/%d")
     params = [start_date, end_date]
     params1 = [start_date, end_date]
 
@@ -106,6 +110,8 @@ repeat_proccessed_flg,parent_conversion_id,sales,profit,volume,others,null as ap
     
     set_table_name "conversion_#{id}_logs"  
     where_clause = ""
+    start_date = Date.strptime(start_date, I18n.t("time_format")).strftime("%Y/%m/%d")
+    end_date = Date.strptime(end_date, I18n.t("time_format")).strftime("%Y/%m/%d")
     params = [start_date, end_date]
     params1 = [start_date, end_date]
     if(cv_id.present?)  

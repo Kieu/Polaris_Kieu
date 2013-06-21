@@ -33,6 +33,12 @@
     min-height: 510px;
     width: 630px;
 }
+.fl-r-log
+{
+    float: left;
+    margin-top:20px;
+    width: 280px;
+}
 .regist_form table.client_info {
     width: 610px;
 }
@@ -111,7 +117,7 @@ table.user_add tbody td {
 	}
 .selectarea{
 	  float: left;
-    margin: -5px 0 0 155px;
+    margin-left: 100px;
     width: 285px;
 	}
 .selectarea li{
@@ -325,5 +331,5 @@ input#datepicker {
 	border: 0px;
 	font-size: 14px;
 	background-color: #F8F8F8;
-	max-width: 180px;
+	max-width: 190px;
 }

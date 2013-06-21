@@ -16,8 +16,8 @@ class ExportPromotionsData
 
     promotion_name = Promotion.where(id: options['promotion_id']).select("promotion_name").first['promotion_name']
 
-  	file_name = options['user_id'].to_s + "_" + promotion_name + 
-      "_" + Time.now.strftime("%Y%m%d_%H%M%S") + Settings.file_type.CSV
+    file_name = options['user_id'].to_s + "_" + promotion_name +
+        "_" + Time.now.strftime("%Y%m%d_%H%M%S") + Settings.file_type.CSV
     path_file = Settings.export_promotion_path + file_name
     file_name = promotion_name + "_" + Time.now.strftime("%Y%m%d_%H%M%S") + Settings.file_type.CSV
 
@@ -35,7 +35,7 @@ class ExportPromotionsData
     array_results = Hash.new
 
     begin
-      
+
       # get row data
       index_to_get_data_row = 0
       array_data_row = DailySummaryAccount.get_table_data(options['promotion_id'], start_date, end_date)
@@ -43,7 +43,7 @@ class ExportPromotionsData
                      "CPM", "CPC"]
 
       array_conversion = Conversion.where(promotion_id: options['promotion_id'])
-      
+
       # initial count num
       cnt = 1
 
@@ -75,7 +75,7 @@ class ExportPromotionsData
         media_list.each do |media|
           account_list = Account.where(" promotion_id = #{options['promotion_id']}
                                       and media_id = #{media.id}")
-                                .select(" id, account_name, media_id")
+          .select(" id, account_name, media_id")
 
           account_list.each do |account|
             array_medium = Array.new
@@ -100,7 +100,7 @@ class ExportPromotionsData
               array_medium << nil
               array_medium << nil
             end
-            
+
             array_conversion.each do |conversion|
               current_data_conversion = array_data_row[index_to_get_data_row]["account#{account.id}_conversion#{conversion.id}"]
               if current_data_conversion != nil
@@ -133,7 +133,7 @@ class ExportPromotionsData
                 array_medium << nil
               end
             end
-            
+
             csv << array_medium
           end
 

@@ -9,7 +9,8 @@ class ClickLog < ActiveRecord::Base
   def self.get_all_logs id, page, rp, sortname, sortorder, media_category_id, account_id, start_date, end_date, show_error
     set_table_name "click_#{id}_logs"
     start = (page.to_i-1) * rp.to_i
-    
+    start_date = Date.strptime(start_date, I18n.t("time_format")).strftime("%Y/%m/%d")
+    end_date = Date.strptime(end_date, I18n.t("time_format")).strftime("%Y/%m/%d")
     params = [start_date, end_date]
     where_clause = ""
     
@@ -39,7 +40,8 @@ class ClickLog < ActiveRecord::Base
   
   def self.get_logs id, media_category_id, account_id, start_date, end_date, show_error
     set_table_name "click_#{id}_logs"
-    
+    start_date = Date.strptime(start_date, I18n.t("time_format")).strftime("%Y/%m/%d")
+    end_date = Date.strptime(end_date, I18n.t("time_format")).strftime("%Y/%m/%d")
     params = [start_date, end_date]
     where_clause = ""
     
@@ -71,7 +73,8 @@ class ClickLog < ActiveRecord::Base
   
   
   def self.get_log_count id, media_category_id, account_id, start_date, end_date, show_error
-    
+    start_date = Date.strptime(start_date, I18n.t("time_format")).strftime("%Y/%m/%d")
+    end_date = Date.strptime(end_date, I18n.t("time_format")).strftime("%Y/%m/%d")
     params = [start_date, end_date]
     where_clause = ""
     
