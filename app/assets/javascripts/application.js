@@ -32,6 +32,7 @@ $(function(){
         alwaysVisible: false
     });
     $("#promotion_tables").niceScroll();
+    $("#download").niceScroll();
 
     nice = $("html").niceScroll();
 });
