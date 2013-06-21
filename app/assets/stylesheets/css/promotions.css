@@ -481,7 +481,6 @@ div#promotions_list{
     overflow-x: hidden;
 }
 .box, .box .antiscroll-inner {
-    max-width: 600px;
     height: 250px;
     font: 14px Helvetica, Arial;
 }
