@@ -134,6 +134,7 @@ class ImportUrlData
                 array_creative_id = validate_data_input num, error_num, row, error, array_identifer,
                                                         array_ad_id_insert, array_ad_name_insert,
                                                         array_creative_id, line_num, array_double_data
+            
             # start insert data to DB
             if error_num == 0
               current_time = Time.now.strftime("%Y-%m-%d %H:%M:%S")
@@ -186,19 +187,21 @@ class ImportUrlData
               end
 
               current_mpv = mpv + "." + ad_obj.id.to_s(36)
+              
               # insert redirect infomation
               insert_redirect_info_str += "('#{current_mpv}', #{client_id}, #{promotion_id}, #{media_category_id},
                                            #{media_id}, #{account_id}, #{campaign_obj.id}, #{group_obj.id}, #{ad_obj.id}, #{row[CREATIVE_ID]},
                                            #{row[CLICK_UNIT]}, '#{row[COMMENT]}', '#{current_time}', #{user_id} ) #{comma_sql}
 
               "
+              
               # insert url
               insert_redirect_url_str += "('#{current_mpv}', '#{row[REDIRECT_URL1]}', #{row[RATE1]}, '#{row[NAME1]}',
                                              '#{current_time}', #{user_id} ) #{comma_sql}
 
               "
               if row[REDIRECT_URL2] != ""
-                insert_redirect_url_str += "('#{current_mpv}', '#{row[REDIRECT_URL2]}', #{row[RATE2]}, '#{row[NAME2]}',
+                insert_redirect_url_str += " , ('#{current_mpv}', '#{row[REDIRECT_URL2]}', #{row[RATE2]}, '#{row[NAME2]}',
                                              '#{current_time}', #{user_id} ) #{comma_sql}
 
                 "
@@ -206,7 +209,7 @@ class ImportUrlData
               end
 
               if row[REDIRECT_URL3] != ""
-                insert_redirect_url_str += "('#{current_mpv}', '#{row[REDIRECT_URL3]}', #{row[RATE3]}, '#{row[NAME3]}',
+                insert_redirect_url_str += " , ('#{current_mpv}', '#{row[REDIRECT_URL3]}', #{row[RATE3]}, '#{row[NAME3]}',
                                              '#{current_time}', #{user_id} ) #{comma_sql}
 
                 "
@@ -214,7 +217,7 @@ class ImportUrlData
               end
 
               if row[REDIRECT_URL4] != ""
-                insert_redirect_url_str += "('#{current_mpv}', '#{row[REDIRECT_URL4]}', #{row[RATE4]}, '#{row[NAME4]}',
+                insert_redirect_url_str += " , ('#{current_mpv}', '#{row[REDIRECT_URL4]}', #{row[RATE4]}, '#{row[NAME4]}',
                                              '#{current_time}', #{user_id} ) #{comma_sql}
 
                 "
@@ -222,16 +225,17 @@ class ImportUrlData
               end
 
               if row[REDIRECT_URL5] != ""
-                insert_redirect_url_str += "('#{current_mpv}', '#{row[REDIRECT_URL5]}', #{row[RATE5]}, '#{row[NAME5]}',
+                insert_redirect_url_str += " , ('#{current_mpv}', '#{row[REDIRECT_URL5]}', #{row[RATE5]}, '#{row[NAME5]}',
                                              '#{current_time}', #{user_id} ) #{comma_sql}
 
                 "
                 num += 1
               end
-
+              
               if num == Settings.RECORD_NUM_PER_INSERT || (row_number == 0)
                 result = ActiveRecord::Base.connection.execute(insert_redirect_info_str)
                 result = ActiveRecord::Base.connection.execute(insert_redirect_url_str)
+
                 # make header insert string sql
                 insert_ad_str, insert_redirect_info_str,
                     insert_redirect_url_str, insert_campaign_str, insert_group_str = make_header_insert_sql type
