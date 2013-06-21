@@ -9,9 +9,9 @@ class PromotionsController < ApplicationController
     if @array_promotion.length > 0
       @promotion = @array_promotion.find(@promotion_id)
       @start_date = params[:start_date].present? ? params[:start_date] :
-        Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d")
+        Date.yesterday.at_beginning_of_month.strftime(I18n.t("time_format"))
       @end_date = params[:end_date].present? ? params[:end_date] :
-        Date.yesterday.strftime("%Y/%m/%d")
+        Date.yesterday.strftime(I18n.t("time_format"))
       cookies[:promotion] = "111111" unless cookies[:promotion].present?
       @conversions = @promotion.conversions.order_by_id
       @conversions.each do |conversion|
@@ -117,8 +117,8 @@ class PromotionsController < ApplicationController
     start_date = params[:start_date]
     end_date = params[:end_date]
     if  !start_date || !end_date
-      start_date = Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d")
-      end_date = Date.yesterday.strftime("%Y/%m/%d")
+      start_date = Date.yesterday.at_beginning_of_month.strftime(I18n.t("time_format"))
+      end_date = Date.yesterday.strftime(I18n.t("time_format"))
     end
 
     promotion_id = params[:promotion_id].to_i
