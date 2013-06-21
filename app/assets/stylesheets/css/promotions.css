@@ -480,18 +480,7 @@ div#promotions_list{
     max-height: 300px;
     overflow-x: hidden;
 }
-.box, .box .antiscroll-inner {
-    height: 250px;
-}
-
-.box-wrap {
-    margin: 20px 40px;
-    border: 1px solid #999;
-}
-
-.box-inner {
-    background: #eee;
-    padding: 10px;
-    color: #999;
-    text-shadow: 0 1px 0 #fff;
-}
+#promotion_tables {
+     overflow: auto;
+     height: 400px;
+ }
