@@ -31,13 +31,7 @@ $(function(){
         size: '8px',
         alwaysVisible: false
     });
-    $('#promotion_tables').slimScroll({
-        color: '#0087A9',
-        size: '8px',
-        width: '100%',
-        height: '500px',
-        alwaysVisible: false
-    });
+
     //nice = $("html").niceScroll();
 });
 // var auto_refresh = setInterval(
