@@ -81,7 +81,7 @@
             object.each_with_index do |conversion, index| %>
                 <tr>
                   <th class="edit"><%= link_to "", "#{edit_conversion_path(conversion)}?promotion_id=#{params[:promotion_id]}", class: "edit", id: "edit#{conversion.id}" if current_user.super? || current_user.agency? %></th>
-                  <% if (params[:conversion] && conversion.id == params[:conversion].to_i) || (!params[:conversion] && index == 0) %>
+                  <% if (params[:conversion_id] && conversion.id == params[:conversion_id].to_i) || (!params[:conversion_id] && index == 0) %>
                       <td><%= link_to short_ja_name(conversion.conversion_name), "#{edit_conversion_path(conversion)}?promotion_id=#{params[:promotion_id]}", class: "conversion_name current", id: "#{conversion.id}" %></td>
                   <% else %>
                       <td><%= link_to short_ja_name(conversion.conversion_name), "#{edit_conversion_path(conversion)}?promotion_id=#{params[:promotion_id]}", class: "conversion_name", id: "#{conversion.id}" %></td>
