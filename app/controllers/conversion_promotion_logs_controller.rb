@@ -88,7 +88,7 @@ def get_rows conversion_logs
                                           suid: conversion_log.suid,
                                           session_id: conversion_log.session_id,
                                           os: os[conversion_log.device_category.to_i-1],
-                                          repeat: conversion_log.repeat_proccessed_flg,
+                                          repeat: conversion_log.repeat_processed_flg,
                                           log_state: conversion_log.log_state,
                                           sales: conversion_log.sales,
                                           volume: conversion_log.volume,

@@ -66,7 +66,7 @@ class ExportConversionLogsData
             display_groups.find(row.group_id).name, display_ads.find(row.unit_id).name,
             row.redirect_url, Time.at(row.click_utime).strftime("%Y/%m/%d %H:%M:%S"), row.click_referrer, row.sales,
             row.volume, row.others, row.verify, row.suid,row.session_id,
-            os[row.device_category.to_i-1], row.repeat_proccessed_flg, row.log_state,
+            os[row.device_category.to_i-1], row.repeat_processed_flg, row.log_state,
             row.user_agent, row.remote_ip, row.referrer, row.media_session_id,
             row.mark, row.request_uri, row.send_url, Time.at(row.send_utime).strftime("%Y/%m/%d %H:%M:%S"), I18n.t("log_cv_error_messages")[row.error_code.to_i]]
         end
