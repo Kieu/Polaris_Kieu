@@ -77,7 +77,6 @@
 		  }
 		  function remove_fb_app_id() {
 		  	$('#fb_app_id').html('');
-		  	$('#judging_box').html('');
 		  }
 		  function check_track_method() {
           	if($("#conversion_track_method_3").is(':checked')) {
@@ -151,7 +150,6 @@
 	    $("#url").removeAttr('disabled');
 	  <% end %>
 	  <% if @conversion.conversion_mode.to_i == 2%>
-	  $('#judging_box').html('');
 	  $('#fb_app_id').html('');
 	  <% end %>
 </script>

@@ -20,18 +20,18 @@
     <%= link_to @promotion.promotion_name, promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %>
   </li>
   <li>&gt;</li>
-  <li>コンバージョン設定</li>
+  <li><%= I18n.t("conversion.conversion_setting") %></li>
 </ul>
 <div class="clear"></div>
 <div id="conversion_inner">
   <div id="ui-tab">
     <ul class="ui-tabs-nav">
-      <li><a href="#fragment-1"><span>コンバージョン設定</span></a></li>
-      <li class="disabled"><span>タグ取得</span></li>
+      <li><a href="#fragment-1"><span><%= I18n.t("conversion.conversion_setting") %></span></a></li>
+      <li class="disabled"><span><%= I18n.t("conversion.tag_acquisition") %></span></li>
     </ul>
     <div id="fragment-1">
       <div class="conversion_form">
-        <p>表示したいコンバージョンを選択してください。</p>
+        <p><%= I18n.t("conversion.conversion_message") %></p>
       </div>
     </div>
   </div>
