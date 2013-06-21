@@ -8,12 +8,12 @@ class ExportUrlData
   def perform
     # make file name
     account_name = Account.where(id: options['account_id']).select("roman_name").first['roman_name']
+    promotion_name = Promotion.where(id: options['promotion_id']).select("roman_name").first['roman_name']
     # file name fomat: {account_romaji_name}_export_url_{current_date}.csv
     file_name = options['user_id'].to_s + "_" + Settings.EXPORT_URL +
       "_" + Time.now.strftime("%Y%m%d") + Settings.file_type.CSV
     path_file = Settings.export_url_path + file_name
-    file_name = account_name.to_s + "_" + Settings.EXPORT_URL +
-      "_" + Time.now.strftime("%Y%m%d") + Settings.file_type.CSV
+    file_name = promotion_name.to_s + "_" + account_name.to_s + "_" + Time.now.strftime("%Y%m%d") + Settings.file_type.CSV
 
     # initial this task
     background_job = BackgroundJob.find(options['bgj_id'])
