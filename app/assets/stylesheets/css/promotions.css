@@ -482,7 +482,6 @@ div#promotions_list{
 }
 .box, .box .antiscroll-inner {
     height: 250px;
-    font: 14px Helvetica, Arial;
 }
 
 .box-wrap {
