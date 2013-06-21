@@ -57,7 +57,7 @@
 }
 
 .conversion_form table.client_info tbody td {
-	padding-left: 10px;
+	/*padding-left: 10px;*/
 	font-weight: bold;
 	width:110px;
 }
@@ -71,7 +71,7 @@
 }
 
 .conversion_form select{
-	width: 285px;
+	/*width: 285px;*/
 }
 
 .submit_area {
@@ -238,7 +238,7 @@ ul, li {
     padding:0;
 }
 .btn_details {
-    width: 120px;
+    width: 210px;
     float:left;
 }
 .btn_details li {
