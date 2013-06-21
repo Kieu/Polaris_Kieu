@@ -4,10 +4,14 @@ before_filter :signed_in_user
 before_filter :set_cookies
 
 def index
+  # @start_date = params[:start_date].present? ? params[:start_date] :
+  #     Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d")
+  # @end_date = params[:end_date].present? ? params[:end_date] :
+  #     Date.yesterday.strftime("%Y/%m/%d")
   @start_date = params[:start_date].present? ? params[:start_date] :
-      Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d")
-  @end_date = params[:end_date].present? ? params[:end_date] :
-      Date.yesterday.strftime("%Y/%m/%d")
+        Date.yesterday.at_beginning_of_month.strftime(I18n.t("time_format"))
+      @end_date = params[:end_date].present? ? params[:end_date] :
+        Date.yesterday.strftime(I18n.t("time_format"))
   @promotion_id = params[:promotion_id]
   @promotion = Promotion.find(@promotion_id)
   if current_user.client?
