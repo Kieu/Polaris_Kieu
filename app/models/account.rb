@@ -1,7 +1,7 @@
 class Account < ActiveRecord::Base
   VALID_NUMBER_REGEX = /^\d+$/
   VALID_FLOAT_REGEX = /^\d+\.\d+$/
-  VALID_ROMAN_NAME_REGEX = /^[A-Z_\~\!\@\#\$\%\^\&\*\(\)\_\-\+\=\<\,\>\.\;\:\"\'\{\}|\\\?\?\/a-z][A-Za-z__\~\!\@\#\$\%\^\&\*\(\)\_\-\+\=\<\,\>\.\;\:\"\'\{\}|\\\?\?\/\-0-9]*$/
+  VALID_ROMAN_NAME_REGEX = /^[A-Z_\ \~\!\@\#\$\%\^\&\*\(\)\_\-\+\=\<\,\>\.\;\:\"\'\{\}|\\\?\?\/a-z][A-Za-z_\ \~\!\@\#\$\%\^\&\*\(\)\_\-\+\=\<\,\>\.\;\:\"\'\{\}|\\\?\?\/\-0-9]*$/
   
   attr_accessible :margin, :create_user_id, :media_id, :promotion_id, :account_name, :roman_name,
                   :sync_account_id, :sync_account_pw, :sync_flg, :update_user_id, :media_category_id

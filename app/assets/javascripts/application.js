@@ -31,7 +31,7 @@ $(function(){
         size: '8px',
         alwaysVisible: false
     });
-    $("#promotion_tables").niceScroll();
+    $("#promotion_tables").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
 });
 // var auto_refresh = setInterval(
     // function ()
