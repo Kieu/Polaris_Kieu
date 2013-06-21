@@ -31,6 +31,7 @@ $(function(){
         size: '8px',
         alwaysVisible: false
     });
+    $('#promotion_tables').jScrollPane({showArrows: true});
 
     //nice = $("html").niceScroll();
 });
