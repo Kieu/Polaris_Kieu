@@ -109,7 +109,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <th><%= f.label I18n.t("conversion.conversion_category.label") %><%= @conversion.conversion_category%>sss</th>
+                  <th><%= f.label I18n.t("conversion.conversion_category.label") %></th>
                   <td><label>
                     <%= f.radio_button :conversion_category, 1, checked: true, disabled: (params[:action]=="edit" && @conversion.conversion_category.to_i!=1) ? true : false, onclick: "render_web();" %><%= I18n.t("conversion.conversion_category.web") %>
                   </label></td>
@@ -124,7 +124,6 @@
               </tbody>
             </table>
             <table class="client_info" id="category_area">
-            	<tr><td>
               <%= 
               case @conversion.conversion_category.to_i
               when 3
@@ -136,8 +135,6 @@
               end
                
               %>
-              </td>
-              </tr>
             </table>
             <div class="submit_area">
               <input type="image" src="/assets/btn_done.gif" id="btn_done">
