@@ -233,3 +233,7 @@ li.disabled {
     width: 40px !important;
 	
 	}
+.btn_details {
+    float: left;
+    width: 120px;
+}
