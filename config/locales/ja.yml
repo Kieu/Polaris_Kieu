@@ -818,6 +818,8 @@ ja:
     flash_messages:
       success: " プロモーション登録が完了しました"
       update: " プロモーション編集が完了しました"
+    Done: "完了"
+    Dashboard: "ダッシュボード"
   user:
     crumb_add: "ユーザー登録"
     crumb_edit: "ユーザー編集"
