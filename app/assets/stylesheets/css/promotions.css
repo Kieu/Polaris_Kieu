@@ -481,9 +481,14 @@ div#promotions_list{
     max-height: 300px;
     overflow-x: hidden;
 }
+
 td.align_right{
 	text-align: right;
 }
 td.align_center{
 	text-align: center;
 }
+#promotion_tables {
+     overflow: auto;
+     height: 400px;
+ }

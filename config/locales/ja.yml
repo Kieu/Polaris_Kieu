@@ -754,7 +754,7 @@ ja:
   cv_logs:
     label: "CVログ"
     cv_test: "CVテスト"
-    display_item: "表示項目"
+    display_item: "・表示項目"
     usually: "通常"
     show_all: "全て追加する"
     all: "すべて表示"
@@ -763,9 +763,9 @@ ja:
     affiliate: "アフィリエイト"
     conversion_time: "成果発生日時"
     conversion_name: "コンバージョン名"
-    conversion_category: "コンバージョン種別"
+    conversion_category: "成果カテゴリ"
     tracking_type: "計測タイプ"
-    cv_type: "CVタイプ"
+    cv_type: " 成果タイプ"
     media_approval: "媒体承認"
     media: "メディア"
     account: "アカウント名"
@@ -787,7 +787,7 @@ ja:
     error_log_view: "エラーログ表示"
   click_logs:
     label: Clickログ
-    display_item: 表示項目
+    display_item: "・表示項目"
     usually: 通常
     show_all: "全て追加する"
     all: "すべて表示"
@@ -886,7 +886,11 @@ ja:
     upload_type: 
       insert: "追加（新規）"
       update: "更新（既存）"
-  Promotion Name: "プロジェクト名"
+    show_option:
+      table: "テーブル"
+      display_item: "表示項目"
+      select_all: "全て追加する"
+  Promotion Name: "プロモーション名"
   Page: "ページ"
   of: "の"
   Listing: "リスティング"

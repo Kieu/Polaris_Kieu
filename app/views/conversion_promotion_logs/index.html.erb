@@ -9,9 +9,9 @@
 
 <ul class="contentNavi">
   <div class = "crumb_logs">
-	<li class="pre"><%= link_to @promotion.client.client_name, clients_path(client_id: @promotion.client.id) %> </li>
+	<li class="pre"><%= link_to short_ja_name(@promotion.client.client_name), clients_path(client_id: @promotion.client.id) %> </li>
 	<li>&gt;</li>
-	<li><%= link_to @promotion.promotion_name, promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %></li>
+	<li><%= link_to short_ja_name(@promotion.promotion_name), promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %></li>
 	<li>&gt;</li>
 	<li><%= I18n.t("log.crumb_cv_logs")%></li>
   </div>
@@ -32,6 +32,10 @@
 	</div>
 	<div class="date"><%= I18n.t("log.today_text")%><br />
 		<input id="datepicker" type="text" readonly="readonly" value="<%= @start_date +" ~ "+ @end_date %>" name="datepicker">&#9660;
+      <div class="fl-r-log">
+        <p><a class='inline_cv_logs' href="#inline_cv_logs"><img src="/assets/btn_dl_option.gif"  /></a>
+        <a id="download_csv"><img src="/assets/btn_dl_report.gif"  /></a></p>
+      </div>
 	</div>
 </div>
 <div class="clear"></div>
@@ -40,25 +44,22 @@
 	<ul class="ui-tabs-nav">
 		<li class="ui-tabs-selected">
 			<%= link_to(conversion_promotion_logs_path(promotion_id: @promotion.id)) do %>
-			  <span>CVログ</span>
+			  <span><%= I18n.t("cv_logs.label")%></span>
 			<% end %>
 		</li>
 		<li class="">
 			<%= link_to(click_logs_path(promotion_id: @promotion.id)) do %>
-			  <span>clickログ</span>
+			  <span><%= I18n.t("click_logs.label")%></span>
 			<% end %>
 		</li>
 	</ul>
 	<div id="ui-tab">
 		<div id="fragment-1" class="ui-tabs-panel">
 			<div id="graph">
-				<div class="fl-r">
-					<p><a class='inline_cv_logs' href="#inline_cv_logs"><img src="/assets/btn_dl_option.gif"  /></a></p>
-					<p><a id="download_csv"><img src="/assets/btn_dl_report.gif"  /></a></p>
-				</div>
+
 			</div>
 			
-			<div style='width: 2000px'><table id="cvlogs"class="newTable06 fixTable d-none" style="background: grey" ></table> </div>
+			<div style='width: 2500px'><table id="cvlogs"class="newTable06 fixTable d-none" style="background: grey" ></table> </div>
 			
 			
 		</div>
@@ -274,7 +275,7 @@
 <table id="paging" class="flexme4" style="display:none"></table>
 <style type="text/css">
   	.flexigrid div.pDiv{
-	    margin-right: 1000px;
+	    margin-right: 48%;
 	    margin-top: 6px ;
 	}
 </style>
@@ -318,6 +319,7 @@
 		}
 		$('#datepicker').daterangepicker({
 			rangeSplitter: ' ~ ', 
+			lang: $.cookie("locale") == "ja" ? 1 : 2,
 	        onDone: function() {
 	            var term = $('#datepicker').val();
 	            var d = term.split(' ~ ');

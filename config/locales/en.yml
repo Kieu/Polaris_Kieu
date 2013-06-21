@@ -729,7 +729,7 @@ en:
     media_category: "Media category"
     account_name: "Account name"
   cv_logs:
-    label: "CVLogs"
+    label: "CV Logs"
     cv_test: "CV test"
     display_item: "Display item"
     usually: "Usually"
@@ -763,7 +763,7 @@ en:
     error_message: "Error Message"
     error_log_view: "Show error logs"
   click_logs:
-    label: Clicks
+    label: Clicks Logs
     display_item: Display item
     usually: Usually
     show_all: "Show All"
@@ -865,6 +865,10 @@ en:
     upload_type: 
       insert: "Append (new rules)"
       update: "Update (existing)"
+    show_option:
+      table: "Table"
+      display_item: "Display items"
+      select_all: "Select All"
   Promotion Name: "Promotion Name"
   Page: "Page"
   of: "of"
