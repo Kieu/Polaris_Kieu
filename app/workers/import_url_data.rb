@@ -144,7 +144,6 @@ class ImportUrlData
                 comma_sql = ""
               end
 
-              binding.pry
               # insert campaign
               campaign_obj = DisplayCampaign.new
               campaign_obj.name = row[CAMPAIGN_NAME]
@@ -154,7 +153,7 @@ class ImportUrlData
               campaign_obj.create_user_id = current_time
               campaign_obj.created_at = user_id
               campaign_obj.save!
-binding.pry
+
               # insert group
               group_obj = DisplayGroup.new
               group_obj.name = row[GROUP_NAME]
@@ -165,13 +164,13 @@ binding.pry
               group_obj.create_user_id = current_time
               group_obj.created_at = user_id
               group_obj.save!
-binding.pry
+
               # insert group
               ad_obj = DisplayAd.new
               if row[AD_ID] != ""
                 ad_obj.identifier = row[AD_ID]
               end
-binding.pry
+
               ad_obj.name = row[AD_NAME]
               ad_obj.client_id = client_id
               ad_obj.promotion_id = promotion_id
@@ -195,7 +194,7 @@ binding.pry
                                            #{row[CLICK_UNIT]}, '#{row[COMMENT]}', '#{current_time}', #{user_id} ) #{comma_sql}
 
               "
-         binding.pry     
+              
               if row[REDIRECT_URL2] != "" || row[REDIRECT_URL3] != "" || row[REDIRECT_URL4] != "" || row[REDIRECT_URL5] != ""
                 comma_sql = ""
               end
@@ -240,9 +239,7 @@ binding.pry
               if num == Settings.RECORD_NUM_PER_INSERT || (row_number == 0)
                 binding.pry
                 result = ActiveRecord::Base.connection.execute(insert_redirect_info_str)
-                binding.pry
                 result = ActiveRecord::Base.connection.execute(insert_redirect_url_str)
-                binding.pry
 
                 # make header insert string sql
                 insert_ad_str, insert_redirect_info_str,
