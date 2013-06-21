@@ -20,6 +20,7 @@ $(function(){
         size: '8px',
         alwaysVisible: false
     });
+
     $('#promotions_list').slimScroll({
         color: '#0087A9',
         size: '8px',
@@ -30,6 +31,8 @@ $(function(){
         size: '8px',
         alwaysVisible: false
     });
+
+    //nice = $("html").niceScroll();
 });
 // var auto_refresh = setInterval(
     // function ()
