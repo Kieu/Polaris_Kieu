@@ -7,6 +7,8 @@ class DailySummaryAccount < ActiveRecord::Base
   def self.get_table_data promotion_id, start_date, end_date
     results = Hash.new
     array_result = Hash.new
+    start_date = Date.strptime(start_date, I18n.t("time_format")).strftime("%Y/%m/%d")
+    end_date = Date.strptime(end_date, I18n.t("time_format")).strftime("%Y/%m/%d")
     total_promotion_data = DailySummaryAccount.where(promotion_id: promotion_id)
       .where("DATE_FORMAT(report_ymd, '%Y/%m/%d') between '#{start_date}' and '#{end_date}'")
       .select("sum(imp_count) as imp_count")
@@ -72,6 +74,20 @@ class DailySummaryAccount < ActiveRecord::Base
         "profit, table4.report_ymd" +
         " from (#{total_promotion_data.to_sql}) as table3 join (#{total_conversions_data.to_sql}) as table4")
         
+      chart_conversions = connection.select_all("select table4.conversion_id, " +
+        "round(total_cv_count/click_count*100,1) as conversion_rate, " +
+        "round(cost_sum/total_cv_count,3) as click_per_action, " +
+        "round(sales/cost_sum*100,3) as roas, " +
+        "round((profit-cost_sum)/cost_sum*100,3) as roi, " +
+        "total_cv_count, " +
+        "first_cv_count, " +
+        "repeat_cv_count, " +
+        "assist_count, " +
+        "sales, " +
+        "profit, table4.report_ymd" +
+        " from (#{chart_promotion_data.to_sql}) as table3 join (#{total_conversions_data.group(:report_ymd).to_sql}) as table4 on table3.report_ymd=table4.report_ymd" +
+        " group by table4.report_ymd, table4.conversion_id")
+        
       promotion_conversions_data.each do |data|
         results["account"+data["account_id"].to_s+"_conversion" + data["conversion_id"].to_s] = data
       end
@@ -104,37 +120,51 @@ class DailySummaryAccount < ActiveRecord::Base
       Settings.promotions_options.each do |option|
         array_result[option] = Array.new  
       end
+      
+      total_conversions.each do |conversion|
+        Settings.conversions_graph.each do |option|
+          array_result["#{conversion["conversion_id"]}_#{option}"] = Array.new
+        end
+      end
+
       date_range.each do |datetime|
         if chart_promotion_data.length == 0
           Settings.promotions_options.each do |option|
             array_result[option] << 0  
           end
-        end
-        chart_promotion_data.each do |val|
-          if(val["report_ymd"] && val["report_ymd"].to_s.to_date.strftime("%Y/%m/%d") == datetime)
-            Settings.promotions_options.each_with_index do |option, index|
-              array_result[option] << val[Settings.promotions_sums[index]] ? val[Settings.promotions_sums[index]] : 0
-            end
-          else
-            Settings.promotions_options.each_with_index do |option, index|
-              array_result[option] << 0
+        else
+          count = 0
+          chart_promotion_data.each do |val|
+            if(val["report_ymd"] && val["report_ymd"].to_s.to_date.strftime("%Y/%m/%d") == datetime)
+              count += 1
+              Settings.promotions_options.each_with_index do |option, index|
+                array_result[option] << val[Settings.promotions_sums[index]] ? val[Settings.promotions_sums[index]] : 0
+              end
             end
           end
         end
-        total_conversions.each do |conversion|
-          conversion_id = conversion["conversion_id"]
-          
-          Settings.conversions_graph.each do |option|
-            array_result["#{conversion_id}_#{option}"] = Array.new unless array_result["#{conversion_id}_#{option}"]
+        if count == 0
+          Settings.promotions_options.each_with_index do |option, index|
+            array_result[option] << 0
           end
- 
-          if(conversion["report_ymd"] && conversion["report_ymd"].to_s.to_date.strftime("%Y/%m/%d") == datetime)
-            Settings.conversions_graph.each_with_index do |option, index|
-              array_result["#{conversion["conversion_id"]}_#{option}"] << conversion[Settings.conversions_sums[index]] ? conversion[Settings.conversions_sums[index]] : 0
+        end
+        
+        total_conversions.each do |conversion1|
+          conversion1_id = conversion1["conversion_id"]
+          count = 0
+          chart_conversions.each do |conversion|
+            conversion_id = conversion["conversion_id"]
+            next if conversion1_id != conversion_id
+            if(conversion["report_ymd"] && conversion["report_ymd"].to_s.to_date.strftime("%Y/%m/%d") == datetime)
+              count += 1
+              Settings.conversions_graph.each_with_index do |option, index|
+                array_result["#{conversion["conversion_id"]}_#{option}"] << conversion[Settings.conversions_sums[index]] ? conversion[Settings.conversions_sums[index]] : 0
+              end
             end
-          else
+          end
+          if count == 0
             Settings.conversions_graph.each_with_index do |option, index|
-              array_result["#{conversion["conversion_id"]}_#{option}"] << 0
+              array_result["#{conversion1["conversion_id"]}_#{option}"] << 0
             end
           end
         end

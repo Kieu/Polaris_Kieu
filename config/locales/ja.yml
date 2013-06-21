@@ -804,6 +804,8 @@ ja:
     error_message: エラーメッセージ
     error_log_view: エラーログ表示
   promotion:
+    media: "メディア"
+    account: "アカウント"
     crumb_edit: "プロモーション編集"
     crumb_add: "プロモーション登録"
     promotion_name: "プロモーション名: "
@@ -887,3 +889,17 @@ ja:
   Promotion Name: "プロジェクト名"
   Page: "ページ"
   of: "の"
+  Listing: "リスティング"
+  Display: "ディスプレイ"
+  Affiliate: "アフィリエイト"
+  CV(first): "CV（初回）"
+  CV(repeat): "CV（リピート）"
+  CV: "CV"
+  CVR: "CVR"
+  CPA: "CPA"
+  ASSIST: "ASSIST"
+  SALES: "SALES"
+  ROAS: "ROAS"
+  PROFIT: "PROFIT"
+  ROI: "ROI"
+  time_format: "%Y/%m/%d"

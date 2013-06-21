@@ -25,7 +25,7 @@ a.bread_scrumb_link {
 	<li><%= short_ja_name(@promotion_name) %></li>
   </div>
 </ul>
-<div class="date">今日<br />
+<div class="date"><%= I18n.t("log.today_text") %><br />
 <input id="datepick" type="text" readonly="readonly" value="<%= @start_date + " ~ " + @end_date %>" name="datepick">&#9660;
 </div>
 <div class="clear"></div>
@@ -402,7 +402,6 @@ a.bread_scrumb_link {
     $('#datepick').daterangepicker({
 		rangeSplitter: "~",
 		lang: $.cookie("locale") == "ja" ? 1 : 2,
-		dateFormat: 'yy/mm/dd',
             onDone: function() {
                 var term = $('#datepick').val();
                 var d = term.split(' ~ ');

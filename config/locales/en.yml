@@ -784,6 +784,8 @@ en:
     error_message: Error Message
     error_log_view: Show error logs
   promotion:
+    media: "Media"
+    account: "Account"
     crumb_edit: "Edit Promotion"
     crumb_add: "Add Promotion"
     promotion_name: "Promotion name: "
@@ -866,3 +868,17 @@ en:
   Promotion Name: "Promotion Name"
   Page: "Page"
   of: "of"
+  Listing: "Listing"
+  Display: "Display"
+  Affiliate: "Affiliate"
+  CV(first): "CV(first)"
+  CV(repeat): "CV(repeat)"
+  CV: "CV"
+  CVR: "CVR"
+  CPA: "CPA"
+  ASSIST: "ASSIST"
+  SALES: "SALES"
+  ROAS: "ROAS"
+  PROFIT: "PROFIT"
+  ROI: "ROI"
+  time_format: "%m/%d/%Y"

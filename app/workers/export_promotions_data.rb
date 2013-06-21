@@ -13,6 +13,8 @@ class ExportPromotionsData
     job_id = BackgroundJob.where(id: options['bgj_id']).select('job_id').first['job_id']
     start_date = options['start_date']
     end_date = options['end_date']
+    start_date = Date.strptime(start_date, I18n.t("time_format")).strftime("%Y/%m/%d")
+    end_date = Date.strptime(end_date, I18n.t("time_format")).strftime("%Y/%m/%d")
 
     promotion_name = Promotion.where(id: options['promotion_id']).select("promotion_name").first['promotion_name']
 
