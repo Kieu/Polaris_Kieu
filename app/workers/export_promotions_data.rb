@@ -11,6 +11,7 @@ class ExportPromotionsData
     # file name fomat: {job_id}_export_promotion_{current_date}.csv
     # get job_id
     job_id = BackgroundJob.where(id: options['bgj_id']).select('job_id').first['job_id']
+    lang = options['lang']
     start_date = options['start_date']
     end_date = options['end_date']
 
@@ -38,7 +39,7 @@ class ExportPromotionsData
 
       # get row data
       index_to_get_data_row = 0
-      array_data_row = DailySummaryAccount.get_table_data(options['promotion_id'], start_date, end_date)
+      array_data_row = DailySummaryAccount.get_table_data_export(options['promotion_id'], start_date, end_date, lang)
       account_col = ["Media", "Account name", "Imp", "Click", "CTR", "COST",
                      "CPM", "CPC"]
 
@@ -148,4 +149,7 @@ class ExportPromotionsData
       background_job.save!
     end
   end
+ 
+  private
+  
 end
