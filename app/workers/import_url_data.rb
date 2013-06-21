@@ -150,8 +150,8 @@ class ImportUrlData
               campaign_obj.client_id = client_id
               campaign_obj.promotion_id = promotion_id
               campaign_obj.account_id = account_id
-              campaign_obj.create_user_id = current_time
-              campaign_obj.created_at = user_id
+              campaign_obj.create_user_id = user_id
+              campaign_obj.created_at = current_time
               campaign_obj.save!
 
               # insert group
@@ -161,8 +161,8 @@ class ImportUrlData
               group_obj.promotion_id = promotion_id
               group_obj.account_id = account_id
               group_obj.display_campaign_id = campaign_obj.id
-              group_obj.create_user_id = current_time
-              group_obj.created_at = user_id
+              group_obj.create_user_id = user_id
+              group_obj.created_at = current_time
               group_obj.save!
 
               # insert group
@@ -177,8 +177,8 @@ class ImportUrlData
               ad_obj.account_id = account_id
               ad_obj.display_campaign_id = campaign_obj.id
               ad_obj.display_group_id = group_obj.id
-              ad_obj.create_user_id = current_time
-              ad_obj.created_at = user_id
+              ad_obj.create_user_id = user_id
+              ad_obj.created_at = current_time
               ad_obj.save!
 
               if row[AD_ID] == ""
