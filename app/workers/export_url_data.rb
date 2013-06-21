@@ -41,7 +41,7 @@ class ExportUrlData
           array_date_csv << url['campaign_name']
           array_date_csv << url['group_name']
           array_date_csv << url['ad_name']
-          array_date_csv << url['creative_text']
+          array_date_csv << url['creative_id']
           array_date_csv << url['url']
           array_date_csv << url['comment']
           array_date_csv << url['click_unit']

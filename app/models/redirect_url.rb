@@ -25,6 +25,7 @@ class RedirectUrl < ActiveRecord::Base
               ,r_info.comment as comment
               ,r_info.click_unit as click_unit
               ,creative.image as creative
+              ,r_info.creative_id
               ,creative.content as creative_text
               ,creative.display_type as creative_type
               ,DATE_FORMAT(r_url.updated_at, '%Y/%m/%d %h:%i:%s') as last_modified
