@@ -237,7 +237,6 @@ class ImportUrlData
               end
               
               if num == Settings.RECORD_NUM_PER_INSERT || (row_number == 0)
-                binding.pry
                 result = ActiveRecord::Base.connection.execute(insert_redirect_info_str)
                 result = ActiveRecord::Base.connection.execute(insert_redirect_url_str)
 
