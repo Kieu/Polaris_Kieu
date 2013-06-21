@@ -31,7 +31,7 @@ $(function(){
         size: '8px',
         alwaysVisible: false
     });
-    $("#promotion_tables").niceScroll("#promotion_tables",{cursorcolor:"#00F"});
+    $("#promotion_tables").niceScroll();
 
     nice = $("html").niceScroll();
 });
