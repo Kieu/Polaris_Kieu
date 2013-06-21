@@ -237,3 +237,7 @@ li.disabled {
     float: left;
     width: 120px;
 }
+ul, li {
+    margin: 0;
+    padding: 0;
+}
