@@ -30,6 +30,10 @@ class ClickLogsController < ApplicationController
   end  
   
   def download_csv
+    binding.pry
+    start_date = Date.strptime(params[:start_date].strip, I18n.t("time_format")).strftime("%Y%m%d")
+    end_date = Date.strptime(params[:end_date].strip, I18n.t("time_format")).strftime("%Y%m%d")
+    
     background_job = BackgroundJob.create
     job_id = ExportClickLogsData.create(user_id: current_user.id,
     promotion_id: params[:promotion_id].to_i,
