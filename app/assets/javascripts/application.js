@@ -34,7 +34,7 @@ $(function(){
     $('#promotion_tables').slimScroll({
         color: '#0087A9',
         size: '8px',
-        width: '300px',
+        width: '100%',
         height: '500px',
         alwaysVisible: false
     });
