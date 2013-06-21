@@ -14,15 +14,26 @@ class UrlSettingsController < ApplicationController
     @promotion = Promotion.where(id: @promotion_id).select('client_id, promotion_name')
     @promotion_name = @promotion.first['promotion_name']
     @client_id = @promotion.first['client_id']
-    @client = Client.where(id: @client_id).select('client_name, create_user_id')
+    @client = Client.where(id: @client_id).select('client_name')
     @client_name = @client.first['client_name']
-    create_user_id = @client.first['create_user_id']
 
-    if (current_user.id != create_user_id) && (current_user.role.id == Settings.role.AGENCY)
-      render file: 'public/404.html', status: :not_found
-      return
+    if current_user.role.id == Settings.role.AGENCY
+      author_flg = false
+      array_client = ClientUser.where(id: @client_id).select('user_id')
+      array_client.each do |client_element|
+        if current_user.id == client_element.user_id
+          author_flg = true
+          break
+        end
+      end
+
+      if !author_flg
+        render file: 'public/404.html', status: :not_found
+        return
+      end
+      
     end
-
+    
     @account = Account.where(id: @account_id).select('media_id, account_name')
     @account_name = @account.first['account_name']
     @media_id = @account.first['media_id']
