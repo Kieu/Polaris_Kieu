@@ -318,6 +318,7 @@
 		}
 		$('#datepicker').daterangepicker({
 			rangeSplitter: ' ~ ', 
+			lang: $.cookie("locale") == "ja" ? 1 : 2,
 	        onDone: function() {
 	            var term = $('#datepicker').val();
 	            var d = term.split(' ~ ');
