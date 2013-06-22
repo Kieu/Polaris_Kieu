@@ -2,19 +2,19 @@
 <script>
     $(document).ready(function () {
         <%if signed_in? %>
-        var auto_refresh = setInterval(
-                function ()
-                {
-                    $.ajax({
-                        url: "/background_jobs/notification",
-                        cache: false
-                    }).done(function( html ) {
-                                $(".notification").text(html);
-                    }).fail(function(jqXHR, textStatus){
+       // var auto_refresh = setInterval(
+              //  function ()
+             //   {
+               //     $.ajax({
+              //          url: "/background_jobs/notification",
+              //          cache: false
+              //      }).done(function( html ) {
+              //                  $(".notification").text(html);
+              //      }).fail(function(jqXHR, textStatus){
                                // $(".notification").text('0');
-                    });
+              //      });
                     // $('.notification').load('/background_jobs/notification').fadeIn("slow");
-                }, 5000); // refresh every 10000 milliseconds
+              //  }, 5000); // refresh every 10000 milliseconds
         <%end%>
     $(".inline").colorbox({inline: true, width: "635", height: "350" });
         $( "#tabs" ).tabs({
