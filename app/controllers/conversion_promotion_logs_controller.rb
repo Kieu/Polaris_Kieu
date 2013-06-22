@@ -33,7 +33,12 @@ def get_conversion_logs_list
   promotion_id = params[:query]
   @conversion_logs = ConversionLog.get_all_logs(promotion_id, params[:page], params[:rp],params[:cv_id], params[:media_category_id],
                      params[:account_id], start_date, end_date, cookies[:ser],  params[:sortname], params[:sortorder])
-  rows = get_rows(@conversion_logs) if @conversion_logs
+  
+  if @conversion_logs 
+    rows = get_rows(@conversion_logs) 
+  else
+    rows = Array.new
+  end
   count = ConversionLog.get_count(promotion_id,params[:cv_id], params[:media_category_id], params[:account_id],
                                   start_date, end_date, cookies[:ser])
   render json: {page: params[:page], total: count, rows: rows}
@@ -42,6 +47,8 @@ end
 
 def download_csv
     background_job = BackgroundJob.create
+      promotion = Promotion.find(params[:promotion_id].to_i)
+      breadcrumb = "#{promotion.client.client_name} >> #{promotion.promotion_name} >> CV Logs"
       start_date = Date.strptime(params[:start_date].strip, I18n.t("time_format")).strftime("%Y%m%d")
       end_date = Date.strptime(params[:end_date].strip, I18n.t("time_format")).strftime("%Y%m%d") 
       job_id = ExportConversionLogsData.create(user_id: current_user.id,
@@ -50,6 +57,7 @@ def download_csv
        media_category_id: params[:media_category_id],
        account_id: params[:account_id], start_date: start_date,
        end_date: end_date, show_error: cookies[:ser],
+       breadcrumb: breadcrumb,
        bgj_id: background_job.id)
        
     background_job.job_id = job_id
