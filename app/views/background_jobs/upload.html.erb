@@ -1,14 +1,16 @@
+<style type="text/css">
+    #upload {
+        overflow: auto;
+        height: 200px;
+    }
+</style>
 <script>
     $(function(){
-        $('#upload').slimScroll({
-            color: '#0087A9',
-            size: '8px',
-            alwaysVisible: false
-        });
+        $("#upload").niceScroll();
     });
 </script>
 <div id="upload">
-  <ul class="entrydate_box">
+  <ul class="entrydate_box_notify">
   <% if @jobs %>
     <% @jobs.each_with_index do |job, index| %>
 
