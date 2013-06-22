@@ -1,4 +1,3 @@
-
 <tbody>
   <tr>
     <th><%= f.label I18n.t("conversion.conversion_category.app.track_type.label") %></th>
@@ -10,13 +9,12 @@
     </label></td>
   </tr>
 </tbody>
-
 <tbody class="client_info" id="app_type_area">
 	<%= 
-	  if(@conversion.track_type.to_i==2)
+	  if @conversion.track_type.to_i==2
 	  	render "app_action_in_app", f: f 
 	  else	
 	  	render "app_install", f: f
 	  end
-	  %>
+	%>
 </tbody>

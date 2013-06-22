@@ -656,35 +656,37 @@ en:
   conversion:
     crumb_add: "Add Conversion"
     crumb_edit: "Edit Conversion"
-    tag_acquisition: Tag acquisition
+    tag_acquisition: "Tag acquisition"
+    conversion_setting: "Conversion setting"
+    conversion_message: "Please select the conversion you want to view."
     user_information: "User information"
     delete: "Delete"
-    conversion_name: "Conversion name "
-    roman_name: "Roman name "
+    conversion_name: "Conversion name: "
+    roman_name: "Roman name: "
     conversion_category:
-      label: "Conversion category"
+      label: "Conversion category: "
       web: " WEB"
       app:
         label: " APP"
         track_type:
-          label: "Track type"
-          install: " install"
+          label: "Track type: "
+          install: " Install"
           app_action: "App Action"
         os:
-          label:  "OS-Specific "
+          label:  "OS-Specific: "
           ios: " iOS"
           android: " Android"
         conversion_mode:
-          label:  "Conversion mode "
+          label:  "Conversion mode: "
           all: " All"
           facebook: " Only Facebook"
           other: " Other ads"
         duplicate:
-          label: "Duplicate "
+          label: "Duplicate: "
           label1: " Yes"
           label2: " No"
         track_method:
-          label: "Track method "
+          label: "Track method: "
           white: " White"
           welcome: " Welcome"
           custom: 
@@ -693,41 +695,40 @@ en:
           install_referrer: " Install Referrer"
         app_id:
           label: "App id "
-          facebook: "(Facebook) "
+          facebook: "(Facebook): "
         option:
           label: "<Option> "
-          judging: " Examination flag "
+          judging: " Examination flag: "
           configure: " Configure"
-        sale_unit_price: "Sales Unit Price "
+        sale_unit_price: "Sales Unit Price: "
         reward_form:
-          label: "Reward form "
+          label: "Reward form: "
           straight_line_type: " Straight-line type"
           declining_balance_type: " Declining-balance type"
         session:
-          label: "Session "
-          retention: "Retention "
+          label: "Session retention: "
           day: "Days"
       combination: " Combination"
     deduplicated:
-      label: "Deduplicated "
+      label: "Deduplicated: "
       label1: " Yes"
       label2: " No"
-    unique_definition: "Unique definition "
+    unique_definition: "Unique definition: "
     option1:
       label: "<Option①>　"
       starting_point_setting:
-        label: "Starting point setting "
+        label: "Starting point setting: "
         configure: " Configure"
         not_configure: " Not configure"
-      sale_unit_price: "Sale unit price "
+      sale_unit_price: "Sale unit price: "
     option2:
       label: "<Option②>"
       reward_format:
-        label: "Reward format "
+        label: "Reward format: "
         straight_line_type: " Straight line type"
         not_set: " Not set"
     combination:
-      pattern: "Pattern "
+      pattern: "Pattern: "
       add: "Add"
   log:
     today_text: "Today"

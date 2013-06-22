@@ -1,23 +1,21 @@
 <input type="hidden" id="current_id" value="<%= (@cv_list && @cv_list.count > 0) ? @cv_list.count : 1 %>" />
 <script type="text/javascript">
-    $(".btn_details").droppy();
+  $(".btn_details").droppy();
 	function add_category() {
 		$('#current_id').val(parseInt($('#current_id').val())+1);
 		var html = '<tr><td width="30px"><select name="op[]" width="30px"><option value="+">+</option><option value="-">-</option><option value="×">×</option><option value="÷">÷</option></select></td>';
 		html += '<td style="width: 165px; padding-bottom: 3px"><ul class="btn_details"><li><a href="#"><input type="text" class="chart_left" value="" id="category' + $('#current_id').val() + '" /></a><ul>';					
 		<% @conversions.each do |conversion| %>
-		html += '<li><a href="javascript:void(0)"><%= conversion.conversion_name%></a><ul>';
+		  html += '<li><a href="javascript:void(0)"><%= conversion.conversion_name%></a><ul>';
 	  	<% Settings.media_category.each_with_index.map {|name, index|  %>
 	  		html += '<li><a href="javascript:void(0)" onclick="set_value(\'<%= conversion.conversion_name + ":" + t(name[1]) %>\', <%= conversion.id%>, <%= index+1 %>, ' + $('#current_id').val() + ');" class="result_click_left" id="conversion_left_<%= conversion.id %>"><%= t(name[1]) %></a></li>';
 	  	<% } %>
-		html += '</ul></li>';
+		  html += '</ul></li>';
 		<% end %>
-		html +=	"</ul><input type='hidden' name='cv[]' id='cv" + $('#current_id').val() + "' value='' /><input type='hidden' name='cv_kind[]' id='cv_kind" + $('#current_id').val() + "' value='' /></td></tr>";
+      html +=	"</ul><input type='hidden' name='cv[]' id='cv" + $('#current_id').val() + "' value='' /><input type='hidden' name='cv_kind[]' id='cv_kind" + $('#current_id').val() + "' value='' /></li></ul></td></tr>";
 		$('#cv_category').append(html);
 		$(".btn_details").droppy();
-		
 	}
-	
 	function set_value(name, id, kind, current_id) {
 		$('#cv' + current_id).val(id);
 		$('#cv_kind' + current_id).val(kind);
@@ -32,111 +30,105 @@
   <tr>
     <td>
       <table id="cv_category1" style="width: 630px">
-      	
       	<tbody id="thirdBox">
-			<tr>
-				<th style="width: 30%; vertical-align: top; top: 5px;">パターン：</th>
-				<td style="vertical-align: top; width: 15%;"> 
-					<% if @cv_list && @cv_list.count > 0 %>
-					<ul class="btn_details" >
-						<li><a href="#"> <p><input type="text" class="chart_left" value="<%= @cv_list[0]['name'] + ":" + @cv_kind_list[0]['name'] %>" id="category1" /></p> </a>
-							<ul>
-							<% @conversions.each do |conversion| %>
-							<li><a href="javascript:void(0)"><%= conversion.conversion_name%></a>
-								<ul>
-							  	<% Settings.media_category.each_with_index.map {|name, index|  %>
-							  		<li><a href="javascript:void(0)" onclick="set_value('<%= conversion.conversion_name + ":" + t(name[1]) %>', <%= conversion.id%>, <%= index+1 %>, 1);" class="result_click_left" id="conversion_left_<%= conversion.id %>"><%= t(name[1]) %></a></li>
-							  	<% } %>
-								</ul>
-							</li>
-							<% end %>
-							</ul>
-							<input type='hidden' name='cv[]' id='cv1' value='<%= @cv_list[0]['id'] %>' />
-							<input type='hidden' name='cv_kind[]' id='cv_kind1' value='<%= @cv_kind_list[0]['id'] %>' /> 
-						</li>
-					</ul>
-					
-					<% else %>
-					<ul class="btn_details" >
-						<li><a href="#"> <p><input type="text" class="chart_left" value="" id="category1" /></p> </a>
-							<ul>
-							<% @conversions.each do |conversion| %>
-							<li><a href="javascript:void(0)"><%= conversion.conversion_name%></a>
-								<ul>
-							  	<% Settings.media_category.each_with_index.map {|name, index|  %>
-							  		<li><a href="javascript:void(0)" onclick="set_value('<%= conversion.conversion_name + ":" + t(name[1]) %>', <%= conversion.id%>, <%= index+1 %>, 1);" class="result_click_left" id="conversion_left_<%= conversion.id %>"><%= t(name[1]) %></a></li>
-							  	<% } %>
-								</ul>
-							</li>
-							<% end %>
-							</ul>
-							<input type='hidden' name='cv[]' id='cv1' value='' />
-							<input type='hidden' name='cv_kind[]' id='cv_kind1' value='' /> 
-						</li>
-					</ul>
-					<% end %>
-				</td>
-				<td style="width: 45%">
-					<table id="cv_category">
-						<% if !@cv_list %>
-						<script>
-							add_category();
-						</script>
-						<% end %>
-						<% 
-      					if @cv_list && @cv_list.count > 0 %>
-      					<tbody>
-	    				<%    	
-				      	@cv_list.each do |idx, cv|
-				      	if idx>0
-				      	%>
-				      	<tr>
-				      		<td width="30px">
-				      		<select name="op[]" width="30px" id="op#{idx}">
-						      <option value="+" <% if @op_list[idx-1] == '+'%> selected="selected" <% end %>>+</option>
-						      <option value="-" <% if @op_list[idx-1] == '-'%> selected="selected" <% end %>>-</option>
-						      <option value="×" <% if @op_list[idx-1] == '×'%> selected="selected" <% end %>>×</option>
-						      <option value="÷" <% if @op_list[idx-1] == '÷'%> selected="selected" <% end %>>÷</option>
-						    </select>
-						    </td>
-				      		<td style="width: 165px; padding-bottom: 3px">
-				      			<ul class="btn_details">
-				      			<li><a href="#"><input type="text" name="category<%= idx + 1 %>"  id="category<%= idx+1 %>" value="<%= cv['name'] + ":" + @cv_kind_list[idx]['name'] %>" /></a>
-				      				<ul>
-				      					<% @conversions.each do |conversion| %>
-				      						<li><a href="javascript:void(0)"><%= conversion.conversion_name%></a>
-				      						<ul>
-				      							<% Settings.media_category.each_with_index.map {|name, index|  %>
-				      							<li><a href="javascript:void(0)" onclick="set_value('<%= conversion.conversion_name + ":" + t(name[1]) %>', <%= conversion.id%>, <%= index+1 %>, <%= idx+1 %>);" class="result_click_left" id="conversion_left_<%= conversion.id %>"><%= t(name[1]) %></a></li>
-				      							<% } %>
-				      						</ul>
-				      					<% end %>
-				      				</ul>	
-				      			<input type="hidden" name="cv_kind[]" id="cv_kind<%= idx + 1 %>" value="<%= @cv_kind_list[idx]['id']%>" />
-				      			<input type="hidden" name="cv[]" value="<%= cv['id']%>" id="cv#{idx}" />
-				      		</td>
-				      	</tr>	
-		      		<%
-		      		end
-		      		end 
-		      		%>
-		      		<script type="text/javascript">
-				    $(".btn_details").droppy();
-				    </script>
-				    </tbody>
-		      		<%
-		      		end
-		      		%>
-					</table>
-				</td>
-			</tr>
-		</tbody>
-     </table>
-     <table>	
-      	<tr>
-      		<td colspan="2">
-      			<input type="button" value="Add" onclick="add_category();">
-      		</td>
+			    <tr>
+            <th style="width: 30%; vertical-align: top; top: 5px;"><%= I18n.t("conversion.combination.pattern") %></th>
+				    <td style="vertical-align: top; width: 15%;"> 
+					    <% if @cv_list && @cv_list.count > 0 %>
+					      <ul class="btn_details" >
+						      <li><a href="#"> <p><input type="text" class="chart_left" value="<%= @cv_list[0]['name'] + ":" + @cv_kind_list[0]['name'] %>" id="category1" /></p> </a>
+							      <ul>
+							        <% @conversions.each do |conversion| %>
+							          <li><a href="javascript:void(0)"><%= conversion.conversion_name%></a>
+								          <ul>
+							  	          <% Settings.media_category.each_with_index.map {|name, index|  %>
+							  		          <li><a href="javascript:void(0)" onclick="set_value('<%= conversion.conversion_name + ":" + t(name[1]) %>', <%= conversion.id%>, <%= index+1 %>, 1);" class="result_click_left" id="conversion_left_<%= conversion.id %>"><%= t(name[1]) %></a></li>
+							  	          <% } %>
+								          </ul>
+							          </li>
+							        <% end %>
+							      </ul>
+							      <input type='hidden' name='cv[]' id='cv1' value='<%= @cv_list[0]['id'] %>' />
+							      <input type='hidden' name='cv_kind[]' id='cv_kind1' value='<%= @cv_kind_list[0]['id'] %>' /> 
+						      </li>
+					      </ul>
+					    <% else %>
+					      <ul class="btn_details" >
+						      <li><a href="#"> <p><input type="text" class="chart_left" value="" id="category1" /></p> </a>
+							      <ul>
+							        <% @conversions.each do |conversion| %>
+							          <li><a href="javascript:void(0)"><%= conversion.conversion_name%></a>
+								          <ul>
+							  	          <% Settings.media_category.each_with_index.map {|name, index|  %>
+							  		          <li><a href="javascript:void(0)" onclick="set_value('<%= conversion.conversion_name + ":" + t(name[1]) %>', <%= conversion.id%>, <%= index+1 %>, 1);" class="result_click_left" id="conversion_left_<%= conversion.id %>"><%= t(name[1]) %></a></li>
+							  	          <% } %>
+								          </ul>
+							          </li>
+							        <% end %>
+							      </ul>
+							      <input type='hidden' name='cv[]' id='cv1' value='' />
+							      <input type='hidden' name='cv_kind[]' id='cv_kind1' value='' /> 
+						      </li>
+					      </ul>
+					    <% end %>
+				    </td>
+				    <td style="width: 45%">
+					    <table id="cv_category">
+						    <% if !@cv_list %>
+						      <script>
+							      add_category();
+						      </script>
+						    <% end %>
+						    <% if @cv_list && @cv_list.count > 0 %>
+      					  <tbody>
+                  <% @cv_list.each do |idx, cv| %>
+				      	    <% if idx > 0 %>
+				      	      <tr>
+				      		      <td width="30px">
+				      		        <select name="op[]" width="30px" id="op#{idx}">
+						                <option value="+" <% if @op_list[idx-1] == '+'%> selected="selected" <% end %>>+</option>
+						                <option value="-" <% if @op_list[idx-1] == '-'%> selected="selected" <% end %>>-</option>
+						                <option value="×" <% if @op_list[idx-1] == '×'%> selected="selected" <% end %>>×</option>
+						                <option value="÷" <% if @op_list[idx-1] == '÷'%> selected="selected" <% end %>>÷</option>
+						              </select>
+						            </td>
+				      		      <td style="width: 165px; padding-bottom: 3px">
+				      			      <ul class="btn_details">
+				      			        <li><a href="#"><input type="text" name="category<%= idx + 1 %>"  id="category<%= idx+1 %>" value="<%= cv['name'] + ":" + @cv_kind_list[idx]['name'] %>" /></a>
+				      				        <ul>
+				      					        <% @conversions.each do |conversion| %>
+				      						        <li><a href="javascript:void(0)"><%= conversion.conversion_name%></a>
+				      						          <ul>
+				      							          <% Settings.media_category.each_with_index.map {|name, index|  %>
+				      							            <li><a href="javascript:void(0)" onclick="set_value('<%= conversion.conversion_name + ":" + t(name[1]) %>', <%= conversion.id%>, <%= index+1 %>, <%= idx+1 %>);" class="result_click_left" id="conversion_left_<%= conversion.id %>"><%= t(name[1]) %></a></li>
+				      							          <% } %>
+				      						          </ul>
+				      					        <% end %>
+				      				        </ul>	
+				      			          <input type="hidden" name="cv_kind[]" id="cv_kind<%= idx + 1 %>" value="<%= @cv_kind_list[idx]['id']%>" />
+                              <input type="hidden" name="cv[]" value="<%= cv['id']%>" id="cv#{idx}" />
+                            </li>
+                          </ul>
+				      		      </td>
+				      	      </tr>	
+		      		      <% end %>
+		      		    <% end %>
+		      		    <script type="text/javascript">
+				            $(".btn_details").droppy();
+				          </script>
+				          </tbody>
+		      		  <% end %>
+					    </table>
+				    </td>
+			    </tr>
+    		</tbody>
+      </table>
+      <table>	
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+      		<td><input type="button" value="<%= I18n.t("conversion.combination.add") %>" onclick="add_category();"></td>
       	</tr>
       </table>
     </td>
