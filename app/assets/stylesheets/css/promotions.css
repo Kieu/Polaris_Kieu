@@ -203,7 +203,7 @@ ul, li {
 	padding:0;
 }
 .btn_details {
-	width: 120px;
+	width: auto;
 	float:left;
 }
 .btn_details li {
