@@ -65,7 +65,7 @@ class ClickLog < ActiveRecord::Base
       params += [account_id.to_i]
     end
     if (show_error == "1")
-      sql_str = "select *, null as error_code, 'OK' as state from click_#{id}_logs
+      sql_str = "select *, '0' as error_code, 'OK' as state from click_#{id}_logs
                  where DATE_FORMAT(click_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause} union all
                  select *, 'NG' as state from click_error_#{id}_logs
                  where DATE_FORMAT(click_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause}

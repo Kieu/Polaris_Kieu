@@ -16,9 +16,8 @@ def index
     @client_id =@promotion.client_id
   end
   @promotions = @client_id.blank? ? Array.new :
-      Promotion.active.get_by_client(@client_id).order_by_promotion_name
-
-  @array_conversion = Conversion.where(promotion_id: @promotion.id).order(:conversion_name).select("id")
+      Promotion.active.get_by_client(@client_id).order_by_roman_name
+  @array_conversion = Conversion.where(promotion_id: @promotion.id).order(:roman_name).select("id")
                            .select("CASE WHEN LENGTH(conversion_name) > #{Settings.MAX_JA_LENGTH_NAME}
                                    THEN SUBSTRING(conversion_name, 1, #{Settings.MAX_JA_LENGTH_NAME})
                                     ELSE  conversion_name END as conversion_name ")
@@ -43,12 +42,14 @@ end
 
 def download_csv
     background_job = BackgroundJob.create
-     job_id = ExportConversionLogsData.create(user_id: current_user.id,
+      start_date = Date.strptime(params[:start_date].strip, I18n.t("time_format")).strftime("%Y%m%d")
+      end_date = Date.strptime(params[:end_date].strip, I18n.t("time_format")).strftime("%Y%m%d") 
+      job_id = ExportConversionLogsData.create(user_id: current_user.id,
        promotion_id: params[:promotion_id].to_i,
        conversion_id: params[:conversion_id],
        media_category_id: params[:media_category_id],
-       account_id: params[:account_id], start_date: params[:start_date].strip,
-       end_date: params[:end_date].strip, show_error: cookies[:ser],
+       account_id: params[:account_id], start_date: start_date,
+       end_date: end_date, show_error: cookies[:ser],
        bgj_id: background_job.id)
        
     background_job.job_id = job_id
