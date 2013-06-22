@@ -333,3 +333,10 @@ input#datepicker {
 	background-color: #F8F8F8;
 	max-width: 190px;
 }
+.flexigrid div.hDiv th div {
+    text-align: center !important;
+}
+/* redefine style by name for _ALL_ flexigrid */
+.flexigrid div.hDiv th[abbr="sign"] div {
+    text-align: left !important;
+}
