@@ -1,4 +1,12 @@
 ja:
+  number:
+    human:
+      decimal_units:
+        format: "%n%u"
+        units:
+          unit: ""
+          thousand: KB
+          million: MB
   hello: "Hello world"
   recaptcha:
     errors:
@@ -879,7 +887,7 @@ ja:
     campaign_name: "キャンペーン名"
     group_name: "グループ名"
     ad_name: "広告名"
-    creative: "クリエイティブ"
+    creative: "クリエイティブID"
     url: "計測用URL"
     note: "備考"
     last_modified: "最終更新日時"

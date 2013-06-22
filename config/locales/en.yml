@@ -2,6 +2,14 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  number:
+    human:
+      decimal_units:
+        format: "%n%u"
+        units:
+          unit: ""
+          thousand: KB
+          million: MB
   hello: "Hello world"
   recaptcha:
     errors:
@@ -15,7 +23,7 @@ en:
     unique_definition: ["Only once", "Limitless", "Once a day", "Once every 7 days", "Once every 28 days", "Once a month"]
   error_message_url_import:
     not_input: "Please choose file upload."
-    volumn_over: "File's volumn must less than 300Mb."
+    volumn_over: "File's volumn must less than 300MB."
     not_format_csv: "File format is not CSV."
     unexpected_error: "Unexpected error: file uploading failed. Please try againg or contact the customer service.\n"
     differrent_format: "File format is different.\n"
@@ -858,12 +866,12 @@ en:
     campaign_name: "Campaign name"
     group_name: "Group name"
     ad_name: "Ad name"
-    creative: "Creative"
+    creative: "Creative ID"
     url: "URL"
-    note: "Note"
+    note: "Comment"
     last_modified: "Last Modified"
     delete: "Delete"
-    click_price: "Click unit price"
+    click_price: "Click unit"
     upload_type: 
       insert: "Append (new rules)"
       update: "Update (existing)"
