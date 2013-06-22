@@ -78,7 +78,7 @@ class ApplicationController < ActionController::Base
   def file_size_fomat volume
     if volume < 1024
       return "#{volume}bytes"
-    elsif volume = 1024
+    elsif volume == 1024
       return "1kB"
     elsif volume > 1024 && volume < (1024*1024)
       return (volume / 1024.0).round(2).to_s + "kB"

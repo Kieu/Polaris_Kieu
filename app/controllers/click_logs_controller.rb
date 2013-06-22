@@ -33,12 +33,15 @@ class ClickLogsController < ApplicationController
     
     start_date = Date.strptime(params[:start_date].strip, I18n.t("time_format")).strftime("%Y%m%d")
     end_date = Date.strptime(params[:end_date].strip, I18n.t("time_format")).strftime("%Y%m%d")
+    promotion = Promotion.find(params[:promotion_id].to_i)
+    breadcrumb = "#{promotion.client.client_name} >> #{promotion.promotion_name} >> CV Logs"
     background_job = BackgroundJob.create
     job_id = ExportClickLogsData.create(user_id: current_user.id,
     promotion_id: params[:promotion_id].to_i,
     media_category_id: params[:media_category_id],
     account_id: params[:account_id], start_date: start_date,
     end_date: end_date, show_error: cookies[:cser],
+    breadcrumb: breadcrumb,
     bgj_id: background_job.id)
     
     render text: "processing"

@@ -87,7 +87,11 @@ $(function() {
 	    url: "<%= download_csv_url_settings_path %>",
 	    data: {"promotion_id" : "<%= @promotion_id if @promotion_id %>",
 	           "account_id" : "<%= @account_id if @account_id %>",
-               "media_id" : "<%= @account_id if @media_id %>",
+             "media_id" : "<%= @account_id if @media_id %>",
+             "client_name" : "<%= @client_name %>",
+             "promotion_name" : "<%= @promotion_name %>",
+             "media_name" : "<%= @media_name %>",
+             "account_name" : "<%= @account_name %>",
 	           "start_date": start_date,
                "end_date": end_date
 	           },
