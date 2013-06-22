@@ -22,6 +22,7 @@ class ExportUrlData
     background_job.user_id = options['user_id']
     background_job.filename = file_name
     background_job.filepath = path_file
+    background_job.breadcrumb = options['breadcrumb']
     background_job.type_view = Settings.type_view.DOWNLOAD
     background_job.status = Settings.job_status.PROCESSING
     background_job.save!
@@ -63,12 +64,28 @@ class ExportUrlData
       end
       # success case
       background_job.status = Settings.job_status.SUCCESS
+      volume = File.size(path_file)
+      size_field = file_size_fomat volume
+      background_job.size = size_field
       background_job.save!
     rescue
       # false case
       background_job.status = Settings.job_status.WRONG
-      background_job.save!   
+      background_job.save!
     ensure
+    end
+  end
+
+  private
+  def file_size_fomat volume
+    if volume < 1024
+      return "#{volume}bytes"
+    elsif volume == 1024
+      return "1kB"
+    elsif volume > 1024 && volume < (1024*1024)
+      return (volume / 1024.0).round(2).to_s + "kB"
+    else
+      return (volume / (1024.0*1024.0)).round(2).to_s + "MB"
     end
   end
 end

@@ -7,7 +7,7 @@ class Import < ActiveRecord::Base
 
   validates_attachment_presence :csv, presence: true, message: I18n.t('error_message_url_import.not_input')
   #validates_attachment_content_type :csv, content_type: ['text/csv', 'application/csv'], message: I18n.t('error_message_url_import.not_format_csv')
-  validates_attachment_size :csv, less_than: 20.megabytes, message: I18n.t('error_message_url_import.volumn_over')
+  validates_attachment_size :csv, less_than: 300.megabytes, message: I18n.t('error_message_url_import.volumn_over')
 
   def change_file_name(user_id)
     extension = File.extname(csv_file_name).downcase
