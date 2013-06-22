@@ -74,4 +74,16 @@ class ApplicationController < ActionController::Base
     mpv = medisa_category_id + "." + promotion_id + "." + account_id + "." + redirect_infomation_id
     return mpv
   end
+
+  def file_size_fomat volume
+    if volume < 1024
+      return "#{volume}bytes"
+    elsif volume = 1024
+      return "1kB"
+    elsif volume > 1024 && volume < (1024*1024)
+      return (volume / 1024.0).round(2).to_s + "kB"
+    else
+      return (volume / (1024.0*1024.0)).round(2).to_s + "MB"
+    end
+  end
 end
