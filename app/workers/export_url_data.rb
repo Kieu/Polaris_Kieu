@@ -40,6 +40,7 @@ class ExportUrlData
         csv << options['array_header_csv']
         url_data.each do |url|
           array_date_csv = Array.new
+          array_date_csv << url['last_modified']
           array_date_csv << url['ad_id']
           array_date_csv << url['campaign_name']
           array_date_csv << url['group_name']
@@ -49,7 +50,6 @@ class ExportUrlData
           array_date_csv << submit_url
           array_date_csv << url['comment']
           array_date_csv << url['click_unit']
-          array_date_csv << url['last_modified']
 
           # get redirect URL
           array_redirect_url = RedirectUrl.where(mpv: url['mpv']).select('url, name, rate')

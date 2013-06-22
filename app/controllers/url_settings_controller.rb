@@ -107,9 +107,9 @@ class UrlSettingsController < ApplicationController
     breadcrumb = params[:client_name] + ">" + params[:promotion_name] + 
                                   ">" + params[:media_name] + ">" + params[:account_name]
     
-    array_header_csv = ["#{t("url.ad_id")}", "#{t("url.campaign_name")}", "#{t("url.group_name")}",
+    array_header_csv = ["#{t("url.last_modified")}", "#{t("url.ad_id")}", "#{t("url.campaign_name")}", "#{t("url.group_name")}",
                "#{t("url.ad_name")}", "#{t("url.creative")}", "#{t("url.url")}", "#{t("url.note")}",
-               "#{t("url.click_price")}", "#{t("url.last_modified")}", "#{t("url.redirect_url1")}",
+               "#{t("url.click_price")}", "#{t("url.redirect_url1")}",
                "#{t("url.name1")}", "#{t("url.rate1")}", "#{t("url.redirect_url2")}",
                "#{t("url.name2")}", "#{t("url.rate2")}", "#{t("url.redirect_url3")}",
                "#{t("url.name3")}", "#{t("url.rate3")}", "#{t("url.redirect_url4")}",
