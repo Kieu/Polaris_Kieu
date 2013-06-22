@@ -102,7 +102,7 @@ class ExportConversionLogsData
        background_job.save!
     rescue
       # false case
-       background_job.status = Settings.job_status.FALSE
+       background_job.status = Settings.job_status.WRONG
        background_job.save!   
     ensure
     end
