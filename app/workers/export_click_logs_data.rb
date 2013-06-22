@@ -43,6 +43,8 @@ class ExportClickLogsData
         select("id, name")
       display_campaigns = DisplayCampaign.where(promotion_id: options['promotion_id']).
         select("id, name")
+        
+      os = [ I18n.t("conversion.conversion_category.app.os.ios"), I18n.t("conversion.conversion_category.app.os.android")]
       CSV.open(path_file, "wb") do |csv|
         # make header for CSV file
         csv << header_col
@@ -51,16 +53,12 @@ class ExportClickLogsData
                   medias.find(row.media_id).media_name, accounts.find(row.account_id).account_name,
                   display_campaigns.find(row.campaign_id).name, display_groups.find(row.group_id).name,
                   display_ads.find(row.unit_id).name, row.click_url, row.redirect_url,
-                  row.session_id, row.media_session_id, row.device_category, row.user_agent,
+                  row.session_id, row.media_session_id, os[row.device_category.to_i-1], row.user_agent,
                   row.remote_ip, row.referrer, row.mark, row.state, I18n.t("log_error_messages")[row.error_code.to_i]]
         end
       end
 
       # success case
-       volume = File.size(path_file)
-       size_field = file_size_fomat volume
-       background_job.size = size_field
-       background_job.breadcrumb = options[:breadcrumb]
        background_job.status = Settings.job_status.SUCCESS
        background_job.save!
     rescue
@@ -68,18 +66,6 @@ class ExportClickLogsData
        background_job.status = Settings.job_status.WRONG
        background_job.save!   
     ensure  
-    end
-  end
-  private
-  def file_size_fomat volume
-    if volume < 1024
-      return "#{volume}bytes"
-    elsif volume == 1024
-      return "1kB"
-    elsif volume > 1024 && volume < (1024*1024)
-      return (volume / 1024.0).round(2).to_s + "kB"
-    else
-      return (volume / (1024.0*1024.0)).round(2).to_s + "MB"
     end
   end
 end
