@@ -9,7 +9,11 @@
 
 <ul class="contentNavi">
   <div class = "crumb_logs">
-	<li class="pre"><%= link_to short_ja_name(@promotion.client.client_name), clients_path(client_id: @promotion.client.id) %> </li>
+	<% unless current_user.client? %>
+		<li class="pre"><%= link_to short_ja_name(@promotion.client.client_name), clients_path(client_id: @promotion.client.id) %> </li>
+	<% else %>
+		<li class="pre"><%= short_ja_name(@promotion.client.client_name) %></li>
+	<% end %>
 	<li>&gt;</li>
 	<li><%= link_to short_ja_name(@promotion.promotion_name), promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %></li>
 	<li>&gt;</li>
