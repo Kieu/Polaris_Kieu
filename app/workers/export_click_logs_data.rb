@@ -8,13 +8,11 @@ class ExportClickLogsData
   def perform
     # make file name
     # file name fomat: {user_id}_export_click_logs_{current_date}.csv   Settings.EXPORT_CLICK_LOGS
+    #options = Hash.new('user_id' => '1', 'promotion_id' => 764, 'media_category_id' => '','start_date' => '06/01/2013','end_date' => '06/21/2013', 'account_id' => '', 'show_error' => '1')
     promotion = Promotion.find(options['promotion_id'])
-    file_name = promotion.promotion_name + "_click_" +
+    file_name = promotion.roman_name + "_click_" +
     Time.now.strftime("%Y%m%d_%H%M%S") + Settings.file_type.CSV
     path_file = Settings.export_click_logs_path + file_name
-    if File.exist?(path_file)
-      return
-    end
     # initial this task
      background_job = BackgroundJob.find(options['bgj_id'])
      background_job.user_id = options['user_id']
@@ -35,7 +33,6 @@ class ExportClickLogsData
       rows = ClickLog.get_logs(options['promotion_id'], options['media_category_id'],
         options['account_id'], options['start_date'], options['end_date'],
         options['show_error'])
-
       client_name = promotion.client.client_name
       medias = Media.select("id, media_name")
       accounts = Account.where(promotion_id: options['promotion_id']).
@@ -46,7 +43,6 @@ class ExportClickLogsData
         select("id, name")
       display_campaigns = DisplayCampaign.where(promotion_id: options['promotion_id']).
         select("id, name")
-      
       CSV.open(path_file, "wb") do |csv|
         # make header for CSV file
         csv << header_col
