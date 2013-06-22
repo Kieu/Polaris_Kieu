@@ -10,7 +10,7 @@ class ConversionsController < ApplicationController
 
   def new
     @conversion = Conversion.new
-    @conversions = Conversion.where(promotion_id: params[:promotion_id])
+    @conversions = Conversion.where(promotion_id: params[:promotion_id]).order(:roman_name).select('id, conversion_name')
     @conversion.session_period = Settings.conversion_session_period_default
     @promotion = Promotion.find(params[:promotion_id])
     @current_id = 1
@@ -64,7 +64,7 @@ class ConversionsController < ApplicationController
   end
 
   def edit
-    @conversions = Conversion.where(promotion_id: params[:promotion_id])
+    @conversions = Conversion.where(promotion_id: params[:promotion_id]).order(:roman_name).select('id, conversion_name')
     @conversion.session_period = Settings.conversion_session_period_default
     if (@conversion.conversion_combine.present?)
       combine = @conversion.conversion_combine.split('|')
