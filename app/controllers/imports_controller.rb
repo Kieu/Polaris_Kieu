@@ -1,12 +1,19 @@
 class ImportsController < ApplicationController
   def create
     @import = Import.new(params[:import])
+    origin_file_name = @import.csv_file_name
     @import.change_file_name(current_user.id) unless params[:import].nil?
     if @import.save
+      file_path = @import.csv.url
+      volume = File.size(file_path)
+      size_field = file_size_fomat volume
       background_job = BackgroundJob.new
       background_job.user_id = current_user.id
       background_job.type_view = Settings.type_view.UPLOAD
       background_job.status = Settings.job_status.PROCESSING
+      background_job.size = size_field
+      background_job.filename = origin_file_name
+      background_job.breadcrumb = params[:breadcrumb]
       background_job.save!
 
       if params[:type] == 'insert'

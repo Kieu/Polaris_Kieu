@@ -15,6 +15,9 @@
     text-decoration:none;
     padding: 2px 0;
   }
+
+  //.flexigrid div.hDiv th div {text-align: center !important;}
+  //.flexigrid div.hDiv th[axis="col0"] {width: 50px !important;}
  </style>
 <div class="date"><%= I18n.t("log.today_text") %><br />
   <input id="datepick" type="text" readonly="readonly" value="<%= cookies[:url_setting_start_date] + " ~ " + cookies[:url_setting_end_date] %>" name="datepick">&#9660;
@@ -44,7 +47,7 @@ $(document).ready(function() {
         resizable : false,
         striped : true,
         colModel : [
-            {display: '<%= I18n.t("url.edit") %>', name : 'edit_button', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][0] == "0" ? 1 : 0 %>},
+            {display: '<%= I18n.t("url.edit") %>', id : 'edit_button', name : 'edit_button', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][0] == "0" ? 1 : 0 %>},
             {display: '<%= I18n.t("url.ad_id") %>', name : 'ad_id', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][1] == "0" ? 1 : 0 %>},
             {display: '<%= I18n.t("url.campaign_name") %>', name : 'campaign_name', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][2] == "0" ? 1 : 0 %>},
             {display: '<%= I18n.t("url.group_name") %>', name : 'group_name', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][3] == "0" ? 1 : 0 %>},
@@ -171,12 +174,6 @@ $(function() {
 });
 </script>
 <script type="text/javascript">
-$(window).resize(function() {
-    tableResize();
-});
-
-</script>
-<script type="text/javascript">
   $(function(){
       $("#import_csv").change(function(){
           $("#upload_button").val($("#import_csv").val());
@@ -216,6 +213,7 @@ $(window).resize(function() {
             <input type="hidden" name="media_id" value="<%= @media_id %>"/>
             <input type="hidden" name="client_id" value="<%= @client_id %>"/>
             <input type="hidden" name="media_category_id" value="<%= @media_category_id %>"/>
+            <input type="hidden" name="breadcrumb" value="<%= @client_name + '>' + @promotion_name + '>' + @media_name + '>' + @account_name %>"/>
             <table class="file_upload">
                 <tr>
                   <td><a href="javascript:void(0)" id="upload_button"> 
