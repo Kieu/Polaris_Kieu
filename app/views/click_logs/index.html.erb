@@ -103,7 +103,7 @@
 	    else
 	    	end_date = <%= @end_date %>
         $.ajax({
-            url: "<%= download_csv_click_logs_path %>?promotion_id=<%= @promotion.id if @promotion %>&start_date=" + start_date + "&end_date=" + end_date + "&media_category_id=" + $("#media_category_id").val() + "&account_id=" + $("#account_id").val(),
+            url: "<%= download_csv_click_logs_path %>?promotion_id=<%= @promotion.id if @promotion %>&account_id=" + $("#account_id").val() + "&media_category_id=" + $("#media_category_id").val() + "&start_date=" + start_date + "&end_date=" + end_date + "&media_category_id=" + $("#media_category_id").val() + "&account_id=" + $("#account_id").val(),
             type: "post",
             success: function(data){
             }
