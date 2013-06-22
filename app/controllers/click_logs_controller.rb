@@ -43,7 +43,10 @@ class ClickLogsController < ApplicationController
     end_date: end_date, show_error: cookies[:cser],
     breadcrumb: breadcrumb,
     bgj_id: background_job.id)
-    
+    background_job.user_id =  current_user.id
+    background_job.breadcrumb =  breadcrumb
+    background_job.job_id = job_id
+    background_job.save!
     render text: "processing"
   end
   private
