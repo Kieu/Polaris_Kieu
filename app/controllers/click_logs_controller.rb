@@ -46,6 +46,8 @@ class ClickLogsController < ApplicationController
     background_job.user_id =  current_user.id
     background_job.breadcrumb =  breadcrumb
     background_job.job_id = job_id
+    background_job.type_view = Settings.type_view.DOWNLOAD
+    background_job.status = Settings.job_status.PROCESSING
     background_job.save!
     render text: "processing"
   end

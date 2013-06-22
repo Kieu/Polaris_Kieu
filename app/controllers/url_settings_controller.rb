@@ -121,6 +121,8 @@ class UrlSettingsController < ApplicationController
       media_id: media_id, bgj_id: background_job.id, array_header_csv: array_header_csv, breadcrumb: breadcrumb)
     background_job.user_id = current_user.id
     background_job.job_id = job_id
+    background_job.type_view = Settings.type_view.DOWNLOAD
+    background_job.status = Settings.job_status.PROCESSING
     background_job.save!
     
     render text: "processing"
