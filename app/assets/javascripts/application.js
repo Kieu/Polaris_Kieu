@@ -33,11 +33,17 @@ $(function(){
     });
     $("#promotion_tables").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
 });
-// var auto_refresh = setInterval(
-    // function ()
-    // {
+ var auto_refresh = setInterval(
+     function ()
+     {
+         $.ajax({
+             url: "/background_jobs/notification",
+             cache: false
+         }).done(function( html ) {
+                 $(".notification").text(html);
+             });
         // $('.notification').load('/background_jobs/notification').fadeIn("slow");
-    // }, 30000); // refresh every 10000 milliseconds
+     }, 5000); // refresh every 10000 milliseconds
 function index_of(haystack, needle) {
     for (var i = 0, l = haystack.length; i < l; ++i) {
         if( haystack[i].value === needle ) {
