@@ -71,7 +71,7 @@ function tableResize(){
 		}
 
 		tableWidth = parseInt($(getclassName).eq(i).innerWidth());
-		$(className).eq(i).find("table").css("width",tableWidth -18);
+		$(className).eq(i).find("table").css("width",'100%');
 
 	}
 }
