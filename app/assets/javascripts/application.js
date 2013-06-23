@@ -183,7 +183,8 @@ function draw_chart(data_left, data_right, left, right, categories){
 				this.x +': '+ this.y +' 度';
 			}
 		},
-		series: [{
+		series: [
+            {
 				name: left,
 				data: data_left,
 				color: "#32CF32"
@@ -191,6 +192,8 @@ function draw_chart(data_left, data_right, left, right, categories){
 				name: right,
 				data: data_right,
 				color: "#FF1493"
-			}]
+			}],
+         pointStart: Date.UTC(2010, 0, 1),
+        pointInterval: 3 * 24 * 3600 * 1000
 		});
 }
