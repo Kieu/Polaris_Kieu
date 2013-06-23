@@ -79,7 +79,16 @@ $(document).ready(function () {
           <%= label_tag I18n.t("login.email") %>
           <%= text_field_tag "email", @email, maxlength: 255, style: "width: 200px", tabindex: 6 %><br>
           <%= label_tag I18n.t("login.captcha") %>
-          <%= recaptcha_tags display: {lang: "#{I18n.locale}",theme: "custom"} %>
+          <%= recaptcha_tags display: {lang: "#{I18n.locale}",theme: "custom",custom_theme_widget: 'recaptcha_widget'} %>
+          <div id="recaptcha_widget" style="display:none">
+
+            <div id="recaptcha_image"></div>
+            <div class="recaptcha_only_if_incorrect_sol" style="color:red">Incorrect please try again</div>
+            <input type="text" id="recaptcha_response_field" name="recaptcha_response_field" />
+
+
+          </div>
+
           <input type="image" id="Send" src="/assets/btn_submit.gif" tabindex="8">
       <% end %>
       <% if @form_errors && @form_errors.count > 0 %>
