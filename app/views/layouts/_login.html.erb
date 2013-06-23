@@ -6,6 +6,16 @@ $(document).ready(function () {
     	$.cookie("locale", $(this).val());
     	location.href = "<%= signin_path %>"
     })
+    //hack google display captcha
+    $("#recaptcha_reload_btn").remove();
+    $("#recaptcha_switch_audio_btn").remove();
+    $("#recaptcha_switch_img_btn").remove();
+    $("#recaptcha_whatsthis_btn").remove();
+    $("#recaptcha_logo").remove();
+    $("#recaptcha_privacy").remove();
+    $("#recaptcha_table").attr("class","");
+
+    //end captcha google
 
     //----------------------------
     $('.accordion01').click(function () {
