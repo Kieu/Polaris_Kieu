@@ -44,10 +44,9 @@ select{
 }
 
 #user_form{
-	margin: auto;
+	margin: 0 auto;
 	width: 635px;
 	height: 580px;
-	margin-top: 55px;
 }
 
 form{
