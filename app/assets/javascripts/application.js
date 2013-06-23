@@ -152,7 +152,7 @@ function draw_chart(data_left, data_right, left, right, categories){
 		},
 		xAxis: { // x軸の値を指定
             startOnTick: true,
-            type: 'datetime'
+            type: 'datetime',
 			categories: categories
 			//dateTimeLabelFormats: {day: '%e. %b', month: '%e. %b'},
 			//labels:{
