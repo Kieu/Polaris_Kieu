@@ -289,7 +289,7 @@ table.sidebar tbody td {
     padding-left: 3px;
     vertical-align: middle;
     width: 400px;
-    display:block;
+    display:table-cell;
 }
 
 .ui-autocomplete {
