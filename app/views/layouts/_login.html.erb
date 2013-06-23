@@ -80,14 +80,14 @@ $(document).ready(function () {
 
   </div>
   <!-- /.loginbox end -->
-  <% if (@form_errors && @form_errors.count > 0) || flash[:send_success] || (@email_empty && @email_empty.count > 0) %>
+  <% if (@form_errors && @form_errors.count > 0) || flash[:send_success] || flash[:email_empty]) %>
       <div id="accordion01_inner" class="loginbox_more">
   <% else %>
       <div id="accordion01_inner" class="loginbox_more" style="display:none">
   <% end %>
   <p class="account_txt01"><%= I18n.t("login.notice") %></p>
-  <% if @email_empty && @email_empty.count > 0 %>
-      <div><span class="text-validationError"><%= I18n.t("login.email_empty") %></span></div>
+  <% if  flash[:email_empty] %>
+      <div><span class="text-validationError"><%= flash[:email_empty] %></span></div>
   <% end %>
   <div class="span6 offset3">
     <%= form_tag(resend_password_sessions_path, method: :post) do %>

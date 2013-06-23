@@ -47,7 +47,7 @@ class SessionsController < ApplicationController
     @press_release = PressRelease.order("id DESC").first(7)
     @form_errors = Array.new
     if params[:email].to_s.strip.length == 0
-      @email_empty << I18n.t("login.email_empty")
+      flash[:email_empty] << I18n.t("login.email_empty")
       render :new
     end
 
