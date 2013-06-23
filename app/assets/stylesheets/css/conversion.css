@@ -53,7 +53,10 @@
 .conversion_form table.client_info tbody th {
 	font-weight: bold;
     text-align: right;
-    width: 125px;
+    width: 135px;
+}
+.chart_left {
+    width:170px;
 }
 
 .conversion_form table.client_info tbody td {
