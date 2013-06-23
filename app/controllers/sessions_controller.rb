@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  
+
   def new
     @press_release = PressRelease.order("id DESC").first(7)
   end
@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
           render :new
         end
       else
-        if user.status == Settings.user.deactive 
+        if user.status == Settings.user.deactive
           @errors << I18n.t("login.deactive")
         else
           @errors << I18n.t("login.block")
