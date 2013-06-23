@@ -623,6 +623,7 @@ ja:
     unsuccessfull: "メールアドレスまたはパスワードが違います。"
     deactive: "入力されたメールアドレスは無効です。"
     block: "あなたが5分間ブロックされます。後でもう一度やり直してください。"
+    email_empty: "メールアドレスを入力してください"
   client:
     user_search: "検索"
     crumb_edit: "クライアント編集"

@@ -46,6 +46,11 @@ class SessionsController < ApplicationController
   def resend_password
     @press_release = PressRelease.order("id DESC").first(7)
     @form_errors = Array.new
+    if params[:email].to_s.length == 0
+      @email_empty << I18n.t("login.email_empty")
+      render :new
+    end
+
     user = User.find_by_email(params[:email])
     @email = params[:email]
     if verify_recaptcha

@@ -604,6 +604,7 @@ en:
     unsuccessfull: "Invalid email/password combination"
     deactive: "You are deactive"
     block: "You are blocked for 5 minutes. Please try again later"
+    email_empty: "Mail address is required"
   client:
     user_search: "Search"
     crumb_edit: "Edit Client"
