@@ -596,7 +596,7 @@ en:
     forgor_pw1: "Forgot Password"
     announcements: "Announcements"
     press_release: "Press release"
-    captcha: "Captcha: "
+    captcha: "Authentication"
     notice: "Please enter the email address of the account at the time of issuance, the authentication characters that are displayed. Issue a password, and raise the guide. "
     captcha_email_not_found: "There is no history that you have opened an account with the address "
     captcha_error: "Certification letters that you have typed are different. Please re-enter them"

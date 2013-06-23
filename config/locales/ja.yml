@@ -615,7 +615,7 @@ ja:
     forgor_pw1: "Passwordを入力してログインするならコチラ"
     announcements: "お知らせ"
     press_release: "プレスリリース"
-    captcha: "キャプチャ"
+    captcha: "認証文字"
     notice: "アカウント発行時のメールアドレスと、表示されている認証文字を入力してください。パスワードを発行し、ご案内さし上げます。"
     captcha_email_not_found: "入力頂いたアドレスでアカウント開設した履歴がございません "
     captcha_error: "入力頂いた認証文字が異なります。お手数ですが再入力下さい"
