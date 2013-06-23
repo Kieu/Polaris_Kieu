@@ -49,6 +49,7 @@ class SessionsController < ApplicationController
     if params[:email].to_s.strip.length == 0
       flash[:email_empty] = I18n.t("login.email_empty")
       render :new
+      return
     end
 
     user = User.find_by_email(params[:email])
