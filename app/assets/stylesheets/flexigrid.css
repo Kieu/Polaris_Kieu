@@ -416,7 +416,6 @@ div.colCopy {
     overflow: hidden;
     position: relative;
     white-space: nowrap;
-    width: 400px;
 }
 .flexigrid div.pDiv div.pDiv2 {
     /*float:left;
@@ -425,7 +424,6 @@ div.colCopy {
     margin: 3px;
     margin-left: -2px;
     float: left;
-    width: 1024px;
 }
 div.pGroup {
     float:left;
