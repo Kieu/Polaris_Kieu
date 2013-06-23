@@ -80,7 +80,7 @@ $(document).ready(function () {
 
   </div>
   <!-- /.loginbox end -->
-  <% if (@form_errors && @form_errors.count > 0) || flash[:send_success] || flash[:email_empty]) %>
+  <% if (@form_errors && @form_errors.count > 0) || flash[:send_success] || flash[:email_empty] %>
       <div id="accordion01_inner" class="loginbox_more">
   <% else %>
       <div id="accordion01_inner" class="loginbox_more" style="display:none">
