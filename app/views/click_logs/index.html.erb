@@ -168,10 +168,10 @@
 				$('tr#row-3 td:nth-child('+(1+'n-'+(11))+')').remove();
                 $('tr#row-4').after("<div class='group_header'>Affiliate</div>");
 			}
-            onError                : function(xhr,status,errorThrown){
+            onError: function(xhr,status,errorThrown){
                 console.log('xhrError: ');
                 console.dir(xhr);
-                $('#flexigrid').flexAddData({rows:[],page:1,total:0});
+                $('.newTable06').flexAddData({rows:[],page:1,total:0});
             }
 		});
 		
