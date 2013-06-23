@@ -32,6 +32,7 @@ $(function(){
         alwaysVisible: false
     });
     $("#promotion_tables").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
+    $("#conversion_scroll").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
 });
 
 function index_of(haystack, needle) {
@@ -153,7 +154,7 @@ function draw_chart(data_left, data_right, left, right, categories){
 		xAxis: { // x軸の値を指定
 
 			categories: categories,
-		//	dateTimeLabelFormats: {day: '%e. %b', month: '%e. %b'},
+			dateTimeLabelFormats: {day: '%e. %b', month: '%e. %b'},
 			labels:{
 				rotation: -45
 			}
