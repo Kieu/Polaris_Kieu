@@ -933,3 +933,10 @@ ja:
   PROFIT: "PROFIT"
   ROI: "ROI"
   time_format: "%Y/%m/%d"
+  footer:
+    privacy_policy: "プライバシーポリシー"
+    privacy_policy_link: "http://www.septeni.co.jp/privacy/index.html"
+    corporate_information: "企業情報"
+    corporate_information_link: "http://www.septeni.co.jp/company/outline.html"
+    terms_and_conditions: "利用規約"
+    terms_and_conditions_link: "http://www.septeni.co.jp/terms/index.html"
