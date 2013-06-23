@@ -151,8 +151,8 @@ function draw_chart(data_left, data_right, left, right, categories){
 			text:false
 		},
 		xAxis: { // x軸の値を指定
-			//categories: categories,
-			dateTimeLabelFormats: {month: '%e. %b'},
+			categories: categories,
+			dateTimeLabelFormats: {day: '%e. %b', month: '%e. %b'},
 			labels:{
 				rotation: -45
 			}
