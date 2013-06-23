@@ -1102,7 +1102,6 @@
         $(t).before(g.hDiv);
         g.hTable.cellPadding = 0;
         g.hTable.cellSpacing = 0;
-        $(g.hTable).css({'width':'100%'});
         $(g.hDiv).append('<div class="hDivBox"></div>');
         $('div', g.hDiv).append(g.hTable);
         var thead = $("thead:first", t).get(0);
