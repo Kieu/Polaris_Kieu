@@ -15,6 +15,7 @@ $(document).ready(function () {
     $("#recaptcha_privacy").remove();
     $("#recaptcha_table").attr("class","");
     $('<p class="bold"><%= I18n.t("login.captcha")%></p>').insertBefore("#recaptcha_response_field");
+    $("#recaptcha_area").attr("style","margin-left:-5px");
 
     //end captcha google
 
