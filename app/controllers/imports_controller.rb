@@ -1,8 +1,11 @@
+require 'csv'
+
 class ImportsController < ApplicationController
   def create
     @import = Import.new(params[:import])
     origin_file_name = @import.csv_file_name
     @import.change_file_name(current_user.id) unless params[:import].nil?
+    flash[:csv_error] = Array.new
     if @import.save
       file_path = @import.csv.url
       volume = File.size(file_path)
@@ -16,27 +19,64 @@ class ImportsController < ApplicationController
       background_job.breadcrumb = params[:breadcrumb]
       background_job.save!
 
-      if params[:type] == 'insert'
-        job_id = ImportUrlData.create(file: @import.csv.url,
-                 bgj_id: background_job.id, type: params[:type], user_id: current_user.id,
-                 promotion_id: params[:promotion_id], account_id: params[:account_id], 
-                 media_id: params[:media_id], client_id: params[:client_id], 
-                 media_category_id: params[:media_category_id])
+      flg_check_error, message = check_header_csv_file file_path
+      if flg_check_error
+        flash[:csv_error] << message
       else
-        job_id = UpdateUrlData.create(file: @import.csv.url,
-                 bgj_id: background_job.id, type: params[:type], user_id: current_user.id,
-                 promotion_id: params[:promotion_id], account_id: params[:account_id], 
-                 media_id: params[:media_id], client_id: params[:client_id], 
-                 media_category_id: params[:media_category_id])
+        if params[:type] == 'insert'
+          job_id = ImportUrlData.create(file: @import.csv.url,
+                   bgj_id: background_job.id, type: params[:type], user_id: current_user.id,
+                   promotion_id: params[:promotion_id], account_id: params[:account_id], 
+                   media_id: params[:media_id], client_id: params[:client_id], 
+                   media_category_id: params[:media_category_id])
+        else
+          job_id = UpdateUrlData.create(file: @import.csv.url,
+                   bgj_id: background_job.id, type: params[:type], user_id: current_user.id,
+                   promotion_id: params[:promotion_id], account_id: params[:account_id], 
+                   media_id: params[:media_id], client_id: params[:client_id], 
+                   media_category_id: params[:media_category_id])
+        end
+        
+        background_job.job_id = job_id
+        background_job.save!
+        flash[:error] = t("url.flash_messages.success")
       end
-      
-      background_job.job_id = job_id
-      background_job.save!
-      flash[:error] = t("url.flash_messages.success")
-      redirect_to url_settings_path(promotion_id: params[:promotion_id], account_id: params[:account_id])
+
     else
-      flash[:csv_error] = @import.errors.full_messages
-      redirect_to url_settings_path(promotion_id: params[:promotion_id], account_id: params[:account_id])
+      flash[:csv_error] << @import.errors.full_messages
     end
+    
+    redirect_to url_settings_path(promotion_id: params[:promotion_id], account_id: params[:account_id])
+  end
+
+  def check_header_csv_file file_path
+    flg_check_error = false
+    if !File.exists?(file_path)
+      message = t("error_message_url_import.unexpected_error_view")
+      flg_check_error = true
+    end
+
+    CSV.foreach(file_path) do |row|
+      if row[0].to_s.strip.downcase != t("url.last_modified_check") || row[1].to_s.strip.downcase != t("url.ad_id_check") || 
+         row[2].to_s.strip.downcase != t("url.campaign_name_check") || row[3].to_s.strip.downcase != t("url.group_name_check") || 
+         row[4].to_s.strip.downcase != t("url.ad_name_check") || row[5].to_s.strip.downcase != t("url.creative_check") || 
+         row[6].to_s.strip.downcase != t("url.note_check") || row[7].to_s.strip.downcase != t("url.click_price_check") || 
+         row[8].to_s.strip.downcase != t("url.url_check") || row[9].to_s.strip.downcase != t("url.redirect_url1") || 
+         row[10].to_s.strip.downcase != t("url.name1") || row[11].to_s.strip.downcase != t("url.rate1") || 
+         row[12].to_s.strip.downcase != t("url.redirect_url2") || row[13].to_s.strip.downcase != t("url.name2") || 
+         row[14].to_s.strip.downcase != t("url.rate2") || row[15].to_s.strip.downcase != t("url.redirect_url3") || 
+         row[16].to_s.strip.downcase != t("url.name3") || row[17].to_s.strip.downcase != t("url.rate3") || 
+         row[18].to_s.strip.downcase != t("url.redirect_url4") || row[19].to_s.strip.downcase != t("url.name4") || 
+         row[20].to_s.strip.downcase != t("url.rate4") || row[21].to_s.strip.downcase != t("url.redirect_url5") || 
+         row[22].to_s.strip.downcase != t("url.name5") || row[23].to_s.strip.downcase != t("url.rate5")
+
+        message = t("error_message_url_import.differrent_format")
+        flg_check_error = true
+      end
+
+      break
+    end
+
+    return flg_check_error, message
   end
 end
