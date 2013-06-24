@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'csv'
 require 'uri'
 
@@ -41,6 +42,9 @@ class ImportUrlData
     user_id = options['user_id']
     client_id = options['client_id'].to_i
 
+    I18n.locale = options['lang']
+    lang = options['lang']
+
     # file fomat: {user_id}_import_url_{current date}.csv
     data_file = options['file']
 
@@ -65,7 +69,7 @@ class ImportUrlData
     File.open(error_file, 'w') do |error|
       begin
         if !File.exists?(data_file)
-          error.write("Unexpected error: file uploading failed. Please try againg or contact the customer service. \n")
+          error.write(I18n.t("error_message_url_import.unexpected_error"))
           background_job = BackgroundJob.find(options['bgj_id'])
 
           # false case
@@ -80,7 +84,7 @@ class ImportUrlData
         row_number = CSV.readlines(data_file).size
 
         if row_number > Settings.MAX_LINE_URL_IMPORT_FILE
-          error.write("Maximum line is 1,000,000. \n")
+          error.write(I18n.t("error_message_url_import.over_row"))
           background_job = BackgroundJob.find(options['bgj_id'])
 
           # false case
@@ -133,7 +137,7 @@ class ImportUrlData
                 array_ad_id_insert, array_ad_name_insert,
                 array_creative_id = validate_data_input num, error_num, row, error, array_identifer,
                                                         array_ad_id_insert, array_ad_name_insert,
-                                                        array_creative_id, line_num, array_double_data
+                                                        array_creative_id, line_num, array_double_data, lang
             
             # start insert data to DB
             if error_num == 0
@@ -284,7 +288,7 @@ class ImportUrlData
         background_job.filename = header_error_file + Time.now.strftime("%Y%m%d") + Settings.file_type.TXT
         background_job.filepath = error_file
         background_job.save!
-        error.write("Unexpected error: file uploading failed. Please try againg or contact the customer service. \n")
+        error.write(I18n.t("error_message_url_import.unexpected_error"))
       end
     end
     File.delete(data_file)
@@ -353,32 +357,43 @@ class ImportUrlData
 
   def validate_data_input num, error_num, row, error,
       array_identifer, array_ad_id_insert,
-      array_ad_name_insert, array_creative_id, line_num, array_double_data
+      array_ad_name_insert, array_creative_id, line_num, array_double_data, lang
 
+    
     # LAST_MODIFIED field
     row[LAST_MODIFIED] = row[LAST_MODIFIED].to_s.strip
+
+    line_en = I18n.t("error_message_url_import.line")
+    line_jp = I18n.t("error_message_url_import.line")
+    enter_key = I18n.t("error_message_url_import.enter_key")
+
+    if lang == 'en'
+      line_jp = ""
+    else
+      line_en = ""
+    end
 
     # AD_ID field
     row[AD_ID] = row[AD_ID].to_s.strip
     if row[AD_ID] != ""
       if row[AD_ID].length > 255
         error_num += 1
-        error.write("Line #{line_num}: Ad ID needs to be less than 255 letters. \n")
+        error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.ad_too_long") + "#{enter_key}")
       end
 
       if array_identifer.include?(row[AD_ID])
         error_num += 1
-        error.write("Line #{line_num}: The Ad ID is already used. \n")
+        error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.ad_id_already_used") + "#{enter_key}")
       end
 
       if is_numeric? row[AD_ID] != true
         error_num += 1
-        error.write("Line #{line_num}: The Ad ID includes invalid letters. \n")
+        error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.ad_id_invalid") + "#{enter_key}")
       end
 
       if array_ad_id_insert.count > 0 && array_ad_id_insert.include?(row[AD_ID])
         error_num += 1
-        error.write("Line #{line_num}: The Ad ID is used in the same file. \n")
+        error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.ad_id_used_same_file") + "#{enter_key}")
       end
 
       array_ad_id_insert << row[AD_ID]
@@ -392,12 +407,12 @@ class ImportUrlData
     if row[CAMPAIGN_NAME] != ""
       if row[CAMPAIGN_NAME].length > 255
         error_num += 1
-        error.write("Line #{line_num}: Campaign needs to be less than 255 letters. \n")
+        error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.campaign_too_long") + "#{enter_key}")
       end
 
     else
       error_num += 1
-      error.write("Line #{line_num}: Campaign name is not typed. \n")
+      error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.campaign_name_not_type") + "#{enter_key}")
 
     end
 
@@ -406,11 +421,11 @@ class ImportUrlData
     if row[GROUP_NAME] != ""
       if row[GROUP_NAME].length > 255
         error_num += 1
-        error.write("Line #{line_num}: Group name needs to be less than 255 letters. \n")
+        error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.group_name_too_long") + "#{enter_key}")
       end
     else
       error_num += 1
-      error.write("Line #{line_num}: Group name is not typed. \n")
+      error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.group_name_not_type") + "#{enter_key}")
 
     end
 
@@ -419,18 +434,18 @@ class ImportUrlData
     if row[AD_NAME] != ""
       if row[AD_NAME].length > 255
         error_num += 1
-        error.write("Line #{line_num}: Ad name needs to be less than 255 letters. \n")
+        error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.ad_name_too_long") + "#{enter_key}")
       end
 
       if array_ad_name_insert.count > 0 && array_ad_name_insert.include?(row[AD_NAME])
         error_num += 1
-        error.write("Line #{line_num}: The Ad ID is already used. \n")
+        error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.ad_name_already_used") + "#{enter_key}")
       end
 
       array_ad_name_insert << row[AD_NAME]
     else
       error_num += 1
-      error.write("Line #{line_num}: Ad name is not typed. \n")
+      error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.ad_name_not_type") + "#{enter_key}")
 
     end
 
@@ -442,7 +457,7 @@ class ImportUrlData
     else
       array_double_data[key_str] += "," + line_num.to_s
       error_num += 1
-      error.write("Line #{array_double_data[key_str]}: Campaing name, Group name, and Ad name are overlapped. \n")
+      error.write("#{line_en} #{array_double_data[key_str]}#{line_jp}: " + I18n.t("error_message_url_import.name_overlapped") + "#{enter_key}")
     end
 
     # CREATIVE_ID field
@@ -450,17 +465,17 @@ class ImportUrlData
     if row[CREATIVE_ID] != ""
       if !is_numeric? row[CREATIVE_ID]
         error_num += 1
-        error.write("Line #{line_num}: Please type Creative ID with half-width characters. \n")
+        error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.creative_id_half_width") + "#{enter_key}")
       end
 
       if row[CREATIVE_ID].length > 20
         error_num += 1
-        error.write("Line #{line_num}: Creative ID needs to be less than 20 letters. \n")
+        error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.creative_id_too_long") + "#{enter_key}")
       end
 
       if !array_creative_id.include?(row[CREATIVE_ID].to_i)
         error_num += 1
-        error.write("Line #{line_num}: The Creative ID does not exist. \n")
+        error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.creative_id_not_exist") + "#{enter_key}")
       end
 
     end
@@ -473,7 +488,7 @@ class ImportUrlData
     if row[CLICK_UNIT] != ""
       if !is_numeric? row[CLICK_UNIT]
         error_num += 1
-        error.write("Line #{line_num}: Please type unit click price with half-width characters. \n")
+        error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.unit_click_price_half_width") + "#{enter_key}")
       end
     end
 
@@ -481,14 +496,14 @@ class ImportUrlData
     row[SUBMIT_URL] = row[SUBMIT_URL].to_s.strip
     if row[SUBMIT_URL] != ""
       error_num += 1
-      error.write("Line #{line_num}: Please leave the measuring URL column blank. \n")
+      error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.leave_url_column_blank") + "#{enter_key}")
     end
 
     # REDIRECT_URL1 ==============================================
     row[REDIRECT_URL1] = row[REDIRECT_URL1].to_s.strip
     if row[REDIRECT_URL1] == ""
       error_num += 1
-      error.write("Line #{line_num}: URL is not specified in 1 \n")
+      error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.url_not_specified") + "1#{enter_key}")
     end
 
     #NAME1
@@ -496,11 +511,19 @@ class ImportUrlData
     if row[NAME1] != ""
       if row[NAME1].length > 255
         error_num += 1
-        error.write("Line #{line_num}: Title 1 needs to be less than 255 letters. \n")
+        if lang == 'en'
+          error.write("Line #{line_num}: Title 1 needs to be less than 255 letters.\n")
+        else
+          error.write("#{line_num}#{line_jp}:タイトル1は文字数の上限255文字を超えています。\n")
+        end
       end
     else
       error_num += 1
-      error.write("Line #{line_num}: Title 1 is not typed. \n")
+      if lang == 'en'
+        error.write("Line #{line_num}: Title 1 is not typed.\n")
+      else
+        error.write("#{line_num}#{line_jp}:タイトル1が記入されておりません。\n")
+      end
     end
 
     #RATE1
@@ -508,11 +531,21 @@ class ImportUrlData
     if row[RATE1] != ""
       if !is_numeric? row[RATE1]
         error_num += 1
-        error.write("Line #{line_num}: Please type Transition rate1 with half-width characters. \n")
+        if lang == 'en'
+          error.write("Line #{line_num}: Please type Transition rate1 with half-width characters. \n")
+        else
+          error.write("#{line_num}#{line_jp}:遷移割合1は半角数字で入力してください。\n")
+        end
+        
       end
     else
       error_num += 1
-      error.write("Line #{line_num}: RATE 1 is not typed. \n")
+      if lang == 'en'
+        error.write("Line #{line_num}: RATE 1 is not typed.\n")
+      else
+        error.write("#{line_num}#{line_jp}:遷移割合1が記入されておりません。\n")
+      end
+      
     end
 
     # REDIRECT_URL2 ==============================================
@@ -523,7 +556,11 @@ class ImportUrlData
     if row[NAME2] != ""
       if row[NAME2].length > 255
         error_num += 1
-        error.write("Line #{line_num}: Title 2 needs to be less than 255 letters. \n")
+        if lang == 'en'
+          error.write("Line #{line_num}: Title 2 needs to be less than 255 letters.\n")
+        else
+          error.write("#{line_num}#{line_jp}:タイトル2は文字数の上限255文字を超えています。\n")
+        end
       end
     end
 
@@ -532,14 +569,23 @@ class ImportUrlData
     if row[RATE2] != ""
       if !is_numeric? row[RATE2]
         error_num += 1
-        error.write("Line #{line_num}: Please type Transition rate2 with half-width characters. \n")
+        if lang == 'en'
+          error.write("Line #{line_num}: Please type Transition rate2 with half-width characters.\n")
+        else
+          error.write("#{line_num}#{line_jp}:遷移割合2は半角数字で入力してください。\n")
+        end
       end
     end
 
     if !((row[REDIRECT_URL2] != "") && (row[NAME2] != "") && (row[RATE2] != "")) &&
         !((row[REDIRECT_URL2] == "") && (row[NAME2] == "") && (row[RATE2] == ""))
       error_num += 1
-      error.write("Line #{line_num}: REDIRECT_URL2, NAME2, RATE2 have typed together or blank together. \n")
+      if lang == 'en'
+        error.write("Line #{line_num}: REDIRECT_URL2, NAME2, RATE2 have typed together or blank together.\n")
+      else
+        error.write("#{line_num}#{line_jp}:リンク先２、タイトル２、遷移割合２は一緒に入力必須です。もしくは一緒に空欄にしてください。\n")
+      end
+      
     end
 
     # REDIRECT_URL3 ==============================================
@@ -550,7 +596,11 @@ class ImportUrlData
     if row[NAME3] != ""
       if row[NAME3].length > 255
         error_num += 1
-        error.write("Line #{line_num}: Title 3 needs to be less than 255 letters. \n")
+        if lang == 'en'
+          error.write("Line #{line_num}: Title 3 needs to be less than 255 letters.\n")
+        else
+          error.write("#{line_num}#{line_jp}:タイトル3は文字数の上限255文字を超えています。\n")
+        end
       end
     end
 
@@ -559,14 +609,23 @@ class ImportUrlData
     if row[RATE3] != ""
       if !is_numeric? row[RATE3]
         error_num += 1
-        error.write("Line #{line_num}: Please type Transition rate3 with half-width characters. \n")
+        if lang == 'en'
+          error.write("Line #{line_num}: Please type Transition rate3 with half-width characters.\n")
+        else
+          error.write("#{line_num}#{line_jp}:遷移割合3は半角数字で入力してください。\n")
+        end
       end
     end
 
     if !((row[REDIRECT_URL3] != "") && (row[NAME3] != "") && (row[RATE3] != "")) &&
         !((row[REDIRECT_URL3] == "") && (row[NAME3] == "") && (row[RATE3] == ""))
       error_num += 1
-      error.write("Line #{line_num}: REDIRECT_URL3, NAME3, RATE3 have typed together or blank together. \n")
+      if lang == 'en'
+        error.write("Line #{line_num}: REDIRECT_URL3, NAME3, RATE3 have typed together or blank together.\n")
+      else
+        error.write("#{line_num}#{line_jp}:リンク先3、タイトル3、遷移割合3は一緒に入力必須です。もしくは一緒に空欄にしてください。\n")
+      end
+      
     end
 
     # REDIRECT_URL4 ==============================================
@@ -577,7 +636,12 @@ class ImportUrlData
     if row[NAME4] != ""
       if row[NAME4].length > 255
         error_num += 1
-        error.write("Line #{line_num}: Title 4 needs to be less than 255 letters. \n")
+        if lang == 'en'
+          error.write("Line #{line_num}: Title 4 needs to be less than 255 letters.\n")
+        else
+          error.write("#{line_num}#{line_jp}:タイトル4は文字数の上限255文字を超えています。\n")
+        end
+        
       end
     end
 
@@ -586,14 +650,24 @@ class ImportUrlData
     if row[RATE4] != ""
       if !is_numeric? row[RATE4]
         error_num += 1
-        error.write("Line #{line_num}: Please type Transition rate4 with half-width characters. \n")
+        if lang == 'en'
+          error.write("Line #{line_num}: Please type Transition rate4 with half-width characters.\n")
+        else
+          error.write("#{line_num}#{line_jp}:遷移割合4は半角数字で入力してください。\n")
+        end
+        
       end
     end
 
     if !((row[REDIRECT_URL4] != "") && (row[NAME4] != "") && (row[RATE4] != "")) &&
         !((row[REDIRECT_URL4] == "") && (row[NAME4] == "") && (row[RATE4] == ""))
       error_num += 1
-      error.write("Line #{line_num}: REDIRECT_URL4, NAME4, RATE4 have typed together or blank together. \n")
+      if lang == 'en'
+        error.write("Line #{line_num}: REDIRECT_URL4, NAME4, RATE4 have typed together or blank together.\n")
+      else
+        error.write("#{line_num}#{line_jp}:リンク先4、タイトル4、遷移割合4は一緒に入力必須です。もしくは一緒に空欄にしてください。\n")
+      end
+      
     end
     # REDIRECT_URL5 ==============================================
     row[REDIRECT_URL5] = row[REDIRECT_URL5].to_s.strip
@@ -603,7 +677,12 @@ class ImportUrlData
     if row[NAME5] != ""
       if row[NAME5].length > 255
         error_num += 1
-        error.write("Line #{line_num}: Title 5 needs to be less than 255 letters. \n")
+        if lang == 'en'
+          error.write("Line #{line_num}: Title 5 needs to be less than 255 letters.\n")
+        else
+          error.write("#{line_num}#{line_jp}:タイトル5は文字数の上限255文字を超えています。\n")
+        end
+        
       end
     end
 
@@ -612,20 +691,30 @@ class ImportUrlData
     if row[RATE5] != ""
       if !is_numeric? row[RATE5]
         error_num += 1
-        error.write("Line #{line_num}: Please type Transition rate5 with half-width characters. \n")
+        if lang == 'en'
+          error.write("Line #{line_num}: Please type Transition rate5 with half-width characters.\n")
+        else
+          error.write("#{line_num}#{line_jp}:遷移割合5は半角数字で入力してください。\n")
+        end
+        
       end
     end
 
     if !((row[REDIRECT_URL5] != "") && (row[NAME5] != "") && (row[RATE5] != "")) &&
         !((row[REDIRECT_URL5] == "") && (row[NAME5] == "") && (row[RATE5] == ""))
       error_num += 1
-      error.write("Line #{line_num}: REDIRECT_URL5, NAME5, RATE5 have typed together or blank together. \n")
+      if lang == 'en'
+        error.write("Line #{line_num}: REDIRECT_URL5, NAME5, RATE5 have typed together or blank together.\n")
+      else
+        error.write("#{line_num}#{line_jp}:リンク先5、タイトル5、遷移割合5は一緒に入力必須です。もしくは一緒に空欄にしてください。\n")
+      end
+      
     end
 
     # check total rate is 100
     if (row[RATE5].to_i + row[RATE4].to_i + row[RATE3].to_i + row[RATE2].to_i + row[RATE1].to_i) != 100
       error_num += 1
-      error.write("Line #{line_num}: Transition rate needs to be 100 altogether. \n")
+      error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.transition_rake_altogether") + "#{enter_key}")
     end
 
     return row, error_num, array_identifer, array_ad_id_insert, array_ad_name_insert, array_creative_id
