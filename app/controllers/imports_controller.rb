@@ -23,19 +23,11 @@ class ImportsController < ApplicationController
       if flg_check_error
         flash[:csv_error] << message
       else
-        if params[:type] == 'insert'
-          job_id = ImportUrlData.create(file: @import.csv.url,
+        job_id = ImportUrlData.create(file: @import.csv.url,
                    bgj_id: background_job.id, type: params[:type], user_id: current_user.id,
                    promotion_id: params[:promotion_id], account_id: params[:account_id], 
                    media_id: params[:media_id], client_id: params[:client_id], 
-                   media_category_id: params[:media_category_id])
-        else
-          job_id = UpdateUrlData.create(file: @import.csv.url,
-                   bgj_id: background_job.id, type: params[:type], user_id: current_user.id,
-                   promotion_id: params[:promotion_id], account_id: params[:account_id], 
-                   media_id: params[:media_id], client_id: params[:client_id], 
-                   media_category_id: params[:media_category_id])
-        end
+                   media_category_id: params[:media_category_id], lang: cookies[:locale])
         
         background_job.job_id = job_id
         background_job.save!
