@@ -29,7 +29,7 @@
 	<div class="selectarea">
 		<ul>
 			<li> <%= I18n.t("log.media_category")%>
-				<%= select_tag 'media_category_id', "<option value = "">#{I18n.t("click_logs.all")}</option><option value = 1 >Listing ad</option><option value = 2 >Display ad</option><option value = 3 >Affiliate</option>".html_safe, class: "input-text" %>
+				<%= select_tag 'media_category_id', "<option value = "">#{I18n.t("click_logs.all")}</option><option value = 1 >#{I18n.t(Settings.media_category[1])}</option><option value = 2 >#{I18n.t(Settings.media_category[2])}</option><option value = 3 >#{I18n.t(Settings.media_category[3])}</option>".html_safe, class: "input-text" %>
 			</li>
 			<li> <%= I18n.t("log.account_name")%>
 				<%= select_tag 'account_id', content_tag(:option,I18n.t("click_logs.all"),:value=>"")+options_from_collection_for_select(@array_account, 'id', 'account_name'), class: "input-text" %> <br>
@@ -162,11 +162,11 @@
 			onSuccess: function() {
                 tableResize();
 				$('tr#row-1 td:nth-child('+(1+'n-'+(11))+')').remove();
-                $('tr#row-1').after("<div class='group_header'>Listing ad</div>");
+                $('tr#row-1').after("<div class='group_header'><%= I18n.t(Settings.media_category[1])%></div>");
 				$('tr#row-2 td:nth-child('+(1+'n-'+(11))+')').remove();
-                $('tr#row-2').after("<div class='group_header'>Display ad</div>");
+                $('tr#row-2').after("<div class='group_header'><%= I18n.t(Settings.media_category[3])%></div>");
 				$('tr#row-3 td:nth-child('+(1+'n-'+(11))+')').remove();
-                $('tr#row-4').after("<div class='group_header'>Affiliate</div>");
+                $('tr#row-3').after("<div class='group_header'><%= I18n.t(Settings.media_category[3])%></div>");
 			},
             onError: function(xhr,status,errorThrown){
                 console.log('xhrError: ');

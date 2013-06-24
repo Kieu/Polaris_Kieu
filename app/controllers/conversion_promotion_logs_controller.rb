@@ -48,6 +48,12 @@ class ConversionPromotionLogsController < ApplicationController
   def download_csv
     background_job = BackgroundJob.create
     promotion = Promotion.find(params[:promotion_id].to_i)
+    header_titles_csv = [I18n.t('export_conversion_logs.cv_date_time'), I18n.t('export_conversion_logs.cv_name'), I18n.t('export_conversion_logs.cv_category'), I18n.t('export_conversion_logs.tracking_type'), I18n.t('export_conversion_logs.cv_type'), I18n.t('export_conversion_logs.log_id'),
+                         I18n.t('export_conversion_logs.starting_log_id'), I18n.t('export_conversion_logs.media_approval'), I18n.t('export_conversion_logs.click_name'), I18n.t('export_conversion_logs.promotion'), I18n.t('export_conversion_logs.media'), I18n.t('export_conversion_logs.account'),
+                         I18n.t('export_conversion_logs.campaign'), I18n.t('export_conversion_logs.ad_group'), I18n.t('export_conversion_logs.ad_name'), I18n.t('export_conversion_logs.link_url'), I18n.t('export_conversion_logs.click_date_time'), I18n.t('export_conversion_logs.influx_original'),
+                         I18n.t('export_conversion_logs.sales'), I18n.t('export_conversion_logs.volume'), I18n.t('export_conversion_logs.other'), I18n.t('export_conversion_logs.verify'), I18n.t('export_conversion_logs.suid'), I18n.t('export_conversion_logs.log_id'),
+                         I18n.t('export_conversion_logs.cv_date_time'), I18n.t('export_conversion_logs.cv_name'), I18n.t('export_conversion_logs.cv_category'), I18n.t('export_conversion_logs.tracking_type'), I18n.t('export_conversion_logs.cv_type'), I18n.t('export_conversion_logs.log_id'),
+                         I18n.t('export_conversion_logs.cv_date_time'), I18n.t('export_conversion_logs.cv_name'), I18n.t('export_conversion_logs.cv_category'), I18n.t('export_conversion_logs.tracking_type'), I18n.t('export_conversion_logs.cv_type'), I18n.t('export_conversion_logs.log_id')]
     breadcrumb = "#{promotion.client.client_name} > #{promotion.promotion_name} > CV Logs"
     start_date = Date.strptime(params[:start_date].strip, I18n.t("time_format")).strftime("%Y%m%d")
     end_date = Date.strptime(params[:end_date].strip, I18n.t("time_format")).strftime("%Y%m%d")
@@ -76,7 +82,7 @@ class ConversionPromotionLogsController < ApplicationController
     ads = DisplayAd.select("id, name")
     conversions = Conversion.select("id, conversion_name")
     conversion_categories = [I18n.t("conversion.conversion_category.web"), I18n.t("conversion.conversion_category.app.label"), I18n.t("conversion.conversion_category.combination")]
-    os = [I18n.t("conversion.conversion_category.app.os.android"), I18n.t("conversion.conversion_category.app.os.ios")]
+    os = { 1 => I18n.t("conversion.conversion_category.app.os.ios"), 2 => I18n.t("conversion.conversion_category.app.os.android"), 9 => I18n.t("conversion.conversion_category.app.os.other")}
     rows = Array.new
     conversion_logs.each do |conversion_log|
       rows << {id: conversion_log.id, cell: {conversion_utime: Time.at(conversion_log.conversion_utime).strftime("%Y/%m/%d %H:%M:%S"),
@@ -95,7 +101,7 @@ class ConversionPromotionLogsController < ApplicationController
                                              verify: conversion_log.verify,
                                              suid: conversion_log.suid,
                                              session_id: conversion_log.session_id,
-                                             os: os[conversion_log.device_category.to_i-1],
+                                             os: os[conversion_log.device_category.to_i],
                                              repeat: conversion_log.repeat_processed_flg,
                                              log_state: conversion_log.log_state,
                                              sales: conversion_log.sales,
