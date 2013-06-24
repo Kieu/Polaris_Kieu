@@ -45,10 +45,10 @@ function reloadFlex(obj, urlAction, id, current_active, cname, maxlength) {
     var txt = '';
     if ($(id).text().length > maxlength)
     	txt = $(id).text().substring(0, maxlength) + '...';
-    else
+    else{
     	txt = $(id).text();
+    }
     $(cname).text(txt);
-    
 }
 function ajaxCommon(urlAction, id, current_active, cname,arr_inner) {
     //($this).preventDefault();
