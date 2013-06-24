@@ -21,21 +21,6 @@
 <tr><td>
 <table id="promotions_scroll">
 <tr>
-  <td rowspan="2" class="table_header"><div style="width: 150px;"></div></td>
-  <td rowspan="2" class="table_header"><div style="width: 200px;"></div></td>
-  <% Settings.promotions_options.each_with_index do |option, index|%>
-      <% if cookies[:promotion][index] == "1" %>
-          <%= content_tag(:td, rowspan: "2", class: "table_header") do %>
-              <% content_tag(:div, option, style: "width: 100px;") %>
-          <% end %>
-      <% end %>
-  <% end %>
-  <% @conversions.each do |conversion|%>
-      <% colspan = cal_col_cv(conversion.id) %>
-      <%= content_tag(:td, conversion.conversion_name, colspan: colspan, class: "table_header") if colspan > 0 %>
-  <% end %>
-</tr>
-<tr>
 	<% @conversions.each do |conversion|%>
 		<% colspan = cal_cv(conversion.id) %>
 		<% Settings.conversions_options.each_with_index do |option, index1|%>
