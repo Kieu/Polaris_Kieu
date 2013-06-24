@@ -1,15 +1,12 @@
 <% content_for :stylesheet_includes do %>
   <%= stylesheet_link_tag "css/common" %>
   <%= stylesheet_link_tag "css/conversion" %>
-  <%= stylesheet_link_tag "css/ui.tabs" %>
-  <%= stylesheet_link_tag "css/jquery.mcdropdown.min" %>
 <% end %>
 <%= javascript_include_tag "js/jquery.chili-2.2.js" %>
 <%= javascript_include_tag "js/jquery.bgiframe.js" %>
-<%= javascript_include_tag "js/jquery.mcdropdown.min" %>
 <%= javascript_include_tag "js/ui.core" %>
 <% content_for :sidebar do %>
-    <%= render partial: "layouts/sidebar", locals: {object: @conversions} %>
+  <%= render partial: "layouts/sidebar", locals: {object: @conversions} %>
 <% end %>
 <ul class="contentNavi">
   <li class="pre">
@@ -28,7 +25,7 @@
 <div id="conversion_inner">
   <div id="ui-tab">
     <ul class="ui-tabs-nav">
-      <li><a href="/conversions/<%= @conversion.id %>/edit?promotion_id=<%= @conversion.promotion_id %>"><span><%= I18n.t("conversion.crumb_edit")%></span></a></li>
+      <li class="disabled"><a href="/conversions/<%= @conversion.id %>/edit?promotion_id=<%= @conversion.promotion_id %>"><span><%= I18n.t("conversion.crumb_edit")%></span></a></li>
       <li><a href="#get_tag"><span><%= I18n.t("conversion.tag_acquisition")%></span></a></li>
     </ul>
     <div id="get_tag">
