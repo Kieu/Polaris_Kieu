@@ -11,7 +11,8 @@ class BackgroundJobsController < ApplicationController
       path = "#{Rails.root}/#{job.filepath}"
       csv_text = File.read(path)
       content = BOM + Iconv.conv("utf-16le", "utf-8", csv_text)
-      send_data(content, filename: job.filename)
+      File.save(content)
+      send_file(path, filename: job.filename, :encoding => 'utf-16', type: "text/csv; charset=utf-16")
     end
   end
   def download
