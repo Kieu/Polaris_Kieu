@@ -38,14 +38,14 @@ class ClickLog < ActiveRecord::Base
                  session_id,verify,request_uri,redirect_url,media_session_id,device_category,user_agent,referrer,click_utime,click_ymd,remote_ip,
                  mark,access_track_server,error_code, 'NG' as state,created_at,updated_at from click_error_#{id}_logs
                  where DATE_FORMAT(click_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause}
-               ORDER BY media_category_id, click_utime "
+               ORDER BY media_category_id, click_utime LIMIT #{start}, #{rp} "
       params += params
     else
       sql_str = "select id,media_category_id,media_id,account_id,campaign_id,group_id,unit_id,redirect_infomation_id,mpv,click_url,redirect_url_id,
                  creative_id,session_id,verify,request_uri,redirect_url,media_session_id,device_category,user_agent,referrer,click_utime,click_ymd,
                  remote_ip,mark,access_track_server, '0' as error_code, 'OK' as state,created_at,updated_at from click_#{id}_logs
                where DATE_FORMAT(click_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause}
-               ORDER BY media_category_id, click_utime"
+               ORDER BY media_category_id, click_utime LIMIT #{start}, #{rp}"
     end
     begin
       logs = ClickLog.find_by_sql([sql_str] + params)
@@ -74,18 +74,18 @@ class ClickLog < ActiveRecord::Base
     if (show_error == "1")
       sql_str = "select id,media_category_id,media_id,account_id,campaign_id,group_id,unit_id,redirect_infomation_id,mpv,click_url,redirect_url_id,
                  creative_id,session_id,verify,request_uri,redirect_url,media_session_id,device_category,user_agent,referrer,click_utime,click_ymd,
-                 remote_ip,mark,access_track_server, '0' as error_code, 'OK' as state,created_at,updated_at from click_#{id}_logs
+                 remote_ip,mark, '0' as error_code, 'OK' as state,created_at,updated_at from click_#{id}_logs
                  where DATE_FORMAT(click_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause} union all
                  select id,media_category_id,media_id,account_id,campaign_id,group_id,unit_id,redirect_infomation_id,mpv,click_url,redirect_url_id,creative_id,
                  session_id,verify,request_uri,redirect_url,media_session_id,device_category,user_agent,referrer,click_utime,click_ymd,remote_ip,
-                 mark,access_track_server,error_code, 'NG' as state,created_at,updated_at from click_error_#{id}_logs
+                 mark,error_code, 'NG' as state,created_at,updated_at from click_error_#{id}_logs
                  where DATE_FORMAT(click_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause}
                ORDER BY media_category_id, click_utime "
       params += params
     else
       sql_str = "select id,media_category_id,media_id,account_id,campaign_id,group_id,unit_id,redirect_infomation_id,mpv,click_url,redirect_url_id,
                  creative_id,session_id,verify,request_uri,redirect_url,media_session_id,device_category,user_agent,referrer,click_utime,click_ymd,
-                 remote_ip,mark,access_track_server, '0' as error_code, 'OK' as state,created_at,updated_at from click_#{id}_logs
+                 remote_ip,mark, '0' as error_code, 'OK' as state,created_at,updated_at from click_#{id}_logs
                where DATE_FORMAT(click_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause}
                ORDER BY media_category_id, click_utime"
     end
@@ -118,7 +118,7 @@ class ClickLog < ActiveRecord::Base
       sql_str = "select count(*) as cnt from (select id from click_#{id}_logs 
                where DATE_FORMAT(click_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause} union all
                select id from click_error_#{id}_logs 
-               where DATE_FORMAT(click_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause} group by id) as logs "
+               where DATE_FORMAT(click_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause} ) as logs "
       params += params
     else
       sql_str = "select count(id) as cnt from click_#{id}_logs 
