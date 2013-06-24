@@ -389,7 +389,7 @@ a.bread_scrumb_link {
     	if ($.cookie("locale") == "ja")
     	{
 	    	if ($(this).attr("col")=="CV"){
-	    		$("#chart_left").text($(this).attr("id").split("_")[2] + "_CV(total)");
+	    		$("#chart_left").text($(this).attr("id").split("_")[2] + "_totalCV");
 	    	}
 	    	if ($(this).attr("col")=="CV(first)"){
 	    		$("#chart_left").text($(this).attr("id").split("_")[2] + "_初回CV");
@@ -407,7 +407,7 @@ a.bread_scrumb_link {
     	if ($.cookie("locale") == "ja")
     	{
 	    	if ($(this).attr("col")=="CV"){
-	    		$("#chart_right").text($(this).attr("id").split("_")[2] + "_CV(total)");
+	    		$("#chart_right").text($(this).attr("id").split("_")[2] + "_totalCV");
 	    	}
 	    	if ($(this).attr("col")=="CV(first)"){
 	    		$("#chart_right").text($(this).attr("id").split("_")[2] + "_初回CV");

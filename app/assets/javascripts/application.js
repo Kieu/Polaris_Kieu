@@ -184,7 +184,7 @@ function draw_chart(data_left, data_right, left, right, categories){
 				if ($.cookie("locale") == "ja")
 		    	{
 			    	if (tmp[1] == "CV"){
-			    		name = tmp[0] + "_CV(total)";
+			    		name = tmp[0] + "_totalCV";
 			    	}
 			    	if (tmp[1] == "CV(first)"){
 			    		name = tmp[0] + "_初回CV";

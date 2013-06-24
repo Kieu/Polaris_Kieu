@@ -926,7 +926,7 @@ ja:
   Affiliate: "アフィリエイト"
   CV(first): "初回CV"
   CV(repeat): "リピートCV"
-  CV: "CV(total)"
+  CV: "totalCV"
   CVR: "CVR"
   CPA: "CPA"
   ASSIST: "ASSIST"
