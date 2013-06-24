@@ -50,10 +50,10 @@ class ConversionPromotionLogsController < ApplicationController
     promotion = Promotion.find(params[:promotion_id].to_i)
     header_titles_csv = [I18n.t('export_conversion_logs.cv_date_time'), I18n.t('export_conversion_logs.cv_name'), I18n.t('export_conversion_logs.cv_category'), I18n.t('export_conversion_logs.tracking_type'), I18n.t('export_conversion_logs.cv_type'), I18n.t('export_conversion_logs.log_id'),
                          I18n.t('export_conversion_logs.starting_log_id'), I18n.t('export_conversion_logs.media_approval'), I18n.t('export_conversion_logs.click_name'), I18n.t('export_conversion_logs.promotion'), I18n.t('export_conversion_logs.media'), I18n.t('export_conversion_logs.account'),
-                         I18n.t('export_conversion_logs.campaign'), I18n.t('export_conversion_logs.ad_group'), I18n.t('export_conversion_logs.ad_name'), I18n.t('export_conversion_logs.link_url'), I18n.t('export_conversion_logs.click_date_time'), I18n.t('export_conversion_logs.influx_original'),
-                         I18n.t('export_conversion_logs.sales'), I18n.t('export_conversion_logs.volume'), I18n.t('export_conversion_logs.other'), I18n.t('export_conversion_logs.verify'), I18n.t('export_conversion_logs.suid'), I18n.t('export_conversion_logs.log_id'),
-                         I18n.t('export_conversion_logs.cv_date_time'), I18n.t('export_conversion_logs.cv_name'), I18n.t('export_conversion_logs.cv_category'), I18n.t('export_conversion_logs.tracking_type'), I18n.t('export_conversion_logs.cv_type'), I18n.t('export_conversion_logs.log_id'),
-                         I18n.t('export_conversion_logs.cv_date_time'), I18n.t('export_conversion_logs.cv_name'), I18n.t('export_conversion_logs.cv_category'), I18n.t('export_conversion_logs.tracking_type'), I18n.t('export_conversion_logs.cv_type'), I18n.t('export_conversion_logs.log_id')]
+                         I18n.t('export_conversion_logs.campaign'), I18n.t('export_conversion_logs.ad_group'), I18n.t('export_conversion_logs.ad_name'), I18n.t('export_conversion_logs.click_utime'), I18n.t('export_conversion_logs.click_date_time'), I18n.t('export_conversion_logs.influx_original'),
+                         I18n.t('export_conversion_logs.sales'), I18n.t('export_conversion_logs.volume'), I18n.t('export_conversion_logs.other'), I18n.t('export_conversion_logs.verify'), I18n.t('export_conversion_logs.suid'), I18n.t('export_conversion_logs.sesid'),
+                         I18n.t('export_conversion_logs.os'), I18n.t('export_conversion_logs.repeat'), I18n.t('export_conversion_logs.log_state'), I18n.t('export_conversion_logs.user_agent'), I18n.t('export_conversion_logs.remote_ip'), I18n.t('export_conversion_logs.referrer'),
+                         I18n.t('export_conversion_logs.media_session_id'), I18n.t('export_conversion_logs.mark'), I18n.t('export_conversion_logs.reception_log'), I18n.t('export_conversion_logs.send_log'), I18n.t('export_conversion_logs.send_date_time'), I18n.t('export_conversion_logs.error_message')]
     breadcrumb = "#{promotion.client.client_name} > #{promotion.promotion_name} > CV Logs"
     start_date = Date.strptime(params[:start_date].strip, I18n.t("time_format")).strftime("%Y%m%d")
     end_date = Date.strptime(params[:end_date].strip, I18n.t("time_format")).strftime("%Y%m%d")
@@ -64,6 +64,7 @@ class ConversionPromotionLogsController < ApplicationController
                                              account_id: params[:account_id], start_date: start_date,
                                              end_date: end_date, show_error: cookies[:ser],
                                              breadcrumb: breadcrumb,
+                                             header_titles_csv: header_titles_csv,
                                              bgj_id: background_job.id)
     background_job.user_id = current_user.id
     background_job.breadcrumb = breadcrumb

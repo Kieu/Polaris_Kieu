@@ -81,7 +81,8 @@ class ExportConversionLogsData
       conversion_categories = [I18n.t("conversion.conversion_category.web"), I18n.t("conversion.conversion_category.app.label"), I18n.t("conversion.conversion_category.combination")]
       CSV.open(path_file, "wb") do |csv|
         # make header for CSV file
-        csv << header_col
+        #csv << header_col
+        csv << options['header_titles_csv']
         rows.each do |row|
          csv << [Time.at(row.conversion_utime).strftime("%Y/%m/%d %H:%M:%S"), conversions_list[row.conversion_id],
             conversion_categories[row.conversion_category.to_i-1],
