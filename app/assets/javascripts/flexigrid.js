@@ -190,7 +190,7 @@
                 });
                 $(g.bDiv).css('min-height','350px');
                 $(g.bDiv).css('max-height','351px');
-                $(".bDiv").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
+                $(".bDiv").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px",horizrailenabled:"false"});
             },
             dragStart: function (dragtype, e, obj) { //default drag function start
                 if (dragtype == 'colresize' && p.colResize === true) {//column resize

@@ -10,7 +10,7 @@ class ExportConversionLogsData
     # file name fomat: {user_id}_export_cv_logs_{current_date}.csv    Settings.EXPORT_CV_LOGS
     #options = Hash.new('promotion_id' => '1', 'user_id' => '1', 'conversion_id' => '', 'media_category_id' => '', 'account_id' => '', 'start_date' => '20130401', 'end_date' => '20130620', 'show_error' => '1')
     promotion = Promotion.find(options['promotion_id'])
-    file_name = promotion.promotion_name + "_CV_" +
+    file_name = promotion.roman_name + "_CV_" +
     Time.now.strftime("%Y%m%d_%H%M%S") + Settings.file_type.CSV
     path_file = Settings.export_conversion_logs_path + file_name
     if File.exist?(path_file)
@@ -77,11 +77,12 @@ class ExportConversionLogsData
       display_campaigns.each do | campaign |
         display_campaigns_list.store(campaign.id, campaign.name)
       end  
-      os = [ I18n.t("conversion.conversion_category.app.os.ios"), I18n.t("conversion.conversion_category.app.os.android")]
+      os = { 1 => I18n.t("conversion.conversion_category.app.os.ios"), 2 => I18n.t("conversion.conversion_category.app.os.android"), 9 => I18n.t("conversion.conversion_category.app.os.other")}
       conversion_categories = [I18n.t("conversion.conversion_category.web"), I18n.t("conversion.conversion_category.app.label"), I18n.t("conversion.conversion_category.combination")]
       CSV.open(path_file, "wb") do |csv|
         # make header for CSV file
-        csv << header_col
+        #csv << header_col
+        csv << options['header_titles_csv']
         rows.each do |row|
          csv << [Time.at(row.conversion_utime).strftime("%Y/%m/%d %H:%M:%S"), conversions_list[row.conversion_id],
             conversion_categories[row.conversion_category.to_i-1],
@@ -92,7 +93,7 @@ class ExportConversionLogsData
             display_groups_list[row.group_id], display_ads_list[row.unit_id],
             row.redirect_url, Time.at(row.click_utime).strftime("%Y/%m/%d %H:%M:%S"), row.click_referrer, row.sales,
             row.volume, row.others, row.verify, row.suid,row.session_id,
-            os[row.device_category.to_i-1], row.repeat_processed_flg, row.log_state,
+            os[row.device_category.to_i], row.repeat_processed_flg, row.log_state,
             row.user_agent, row.remote_ip, row.referrer, row.media_session_id,
             row.mark, row.request_uri, row.send_url, Time.at(row.send_utime).strftime("%Y/%m/%d %H:%M:%S"), I18n.t("log_cv_error_messages")[row.error_code.to_i]]
         end
@@ -102,7 +103,7 @@ class ExportConversionLogsData
        volume = File.size(path_file)
        size_field = file_size_fomat volume
        background_job.size = size_field
-       background_job.breadcrumb = options[:breadcrumb]
+       background_job.breadcrumb = options['breadcrumb']
        background_job.status = Settings.job_status.SUCCESS
        background_job.save!
     rescue

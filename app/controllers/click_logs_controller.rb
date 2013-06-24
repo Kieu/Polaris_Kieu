@@ -34,7 +34,13 @@ class ClickLogsController < ApplicationController
     start_date = Date.strptime(params[:start_date].strip, I18n.t("time_format")).strftime("%Y%m%d")
     end_date = Date.strptime(params[:end_date].strip, I18n.t("time_format")).strftime("%Y%m%d")
     promotion = Promotion.find(params[:promotion_id].to_i)
-    breadcrumb = "#{promotion.client.client_name} >> #{promotion.promotion_name} >> CV Logs"
+    
+    header_titles_csv = [I18n.t('export_click_logs.click_utime'), I18n.t('export_click_logs.click_id'), I18n.t('export_click_logs.client_name'), I18n.t('export_click_logs.promotion_name'), I18n.t('export_click_logs.media_name'), 
+                      I18n.t('export_click_logs.account_name'), I18n.t('export_click_logs.campaign_name'), I18n.t('export_click_logs.ad_group'), I18n.t('export_click_logs.ad_name'),
+                      I18n.t('export_click_logs.request_uri'), I18n.t('export_click_logs.redirect_url'), I18n.t('export_click_logs.session_id'), I18n.t('export_click_logs.media_session'), I18n.t('export_click_logs.os'),
+                      I18n.t('export_click_logs.remote_ip'), I18n.t('export_click_logs.referer'), I18n.t('export_click_logs.mark'), I18n.t('export_click_logs.ok_ng'), I18n.t('export_click_logs.error_code')]
+    
+    breadcrumb = "#{promotion.client.client_name} > #{promotion.promotion_name} > CV Logs"
     background_job = BackgroundJob.create
     job_id = ExportClickLogsData.create(user_id: current_user.id,
     promotion_id: params[:promotion_id].to_i,
@@ -42,6 +48,7 @@ class ClickLogsController < ApplicationController
     account_id: params[:account_id], start_date: start_date,
     end_date: end_date, show_error: cookies[:cser],
     breadcrumb: breadcrumb,
+    header_titles_csv: header_titles_csv,
     bgj_id: background_job.id)
     background_job.user_id =  current_user.id
     background_job.breadcrumb =  breadcrumb
@@ -59,7 +66,7 @@ class ClickLogsController < ApplicationController
     display_ads = DisplayAd.where(promotion_id: params[:query]).select("id, name")
     display_campaigns = DisplayCampaign.where(promotion_id: params[:query]).select("id, name")
     accounts = Account.where(promotion_id: params[:query]).select("id,account_name")
-    os = [ I18n.t("conversion.conversion_category.app.os.ios"), I18n.t("conversion.conversion_category.app.os.android")]
+    os = { 1 => I18n.t("conversion.conversion_category.app.os.ios"), 2 => I18n.t("conversion.conversion_category.app.os.android"), 9 => I18n.t("conversion.conversion_category.app.os.other")}
     
     rows = Array.new
       if click_logs && click_logs.count > 0
@@ -67,7 +74,7 @@ class ClickLogsController < ApplicationController
           rows << {id: log.id, cell: {click_utime: Time.at(log.click_utime.to_i).strftime("%Y/%m/%d %H:%M:%S"), media_id: medias.find(log.media_id).media_name, media_category_id: log.media_category_id,
                   account_id: accounts.find(log.account_id).account_name, campaign_id: display_campaigns.find(log.campaign_id).name, group_id: display_groups.find(log.group_id).name,
                   unit_id: display_ads.find(log.unit_id).name, redirect_url: log.redirect_url, session_id: log.session_id,
-                  device_category: os[log.device_category.to_i-1], state: log.state, error_code: I18n.t("log_error_messages")[log.error_code.to_i]}}
+                  device_category: os[log.device_category.to_i], state: log.state, error_code: I18n.t("log_error_messages")[log.error_code.to_i]}}
         end
       end
     rows

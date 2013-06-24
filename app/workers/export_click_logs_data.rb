@@ -43,17 +43,20 @@ class ExportClickLogsData
         select("id, name")
       display_campaigns = DisplayCampaign.where(promotion_id: options['promotion_id']).
         select("id, name")
-        
-      os = [ I18n.t("conversion.conversion_category.app.os.ios"), I18n.t("conversion.conversion_category.app.os.android")]
+      
+      I18n.locale = 'ja'
+      
+      os = { 1 => I18n.t("conversion.conversion_category.app.os.ios"), 2 => I18n.t("conversion.conversion_category.app.os.android"), 9 => I18n.t("conversion.conversion_category.app.os.other")}
       CSV.open(path_file, "wb") do |csv|
         # make header for CSV file
-        csv << header_col
+        #csv << header_col
+        csv << options['header_titles_csv']
         rows.each do |row|
           csv << [Time.at(row.click_utime).strftime("%Y/%m/%d %H:%M:%S"), row.id, client_name, promotion.promotion_name,
                   medias.find(row.media_id).media_name, accounts.find(row.account_id).account_name,
                   display_campaigns.find(row.campaign_id).name, display_groups.find(row.group_id).name,
                   display_ads.find(row.unit_id).name, row.click_url, row.redirect_url,
-                  row.session_id, row.media_session_id, os[row.device_category.to_i-1], row.user_agent,
+                  row.session_id, row.media_session_id, os[row.device_category.to_i], row.user_agent,
                   row.remote_ip, row.referrer, row.mark, row.state, I18n.t("log_error_messages")[row.error_code.to_i]]
         end
       end

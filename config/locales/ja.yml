@@ -699,6 +699,7 @@ ja:
           label:  "OS指定: "
           ios: " iOS"
           android: " Android"
+          other: "Other"
         conversion_mode:
           label:  "計測媒体: "
           all: " 全て"
@@ -770,8 +771,8 @@ ja:
     usually: "通常"
     show_all: "全て追加する"
     all: "すべて表示"
-    listing_ad: "リスティング"
-    display_ad: "ディスプレイ"
+    listing_ad: "リスティング広告"
+    display_ad: "ディスプレイ広告"
     affiliate: "アフィリエイト"
     conversion_time: "成果発生日時"
     conversion_name: "コンバージョン名"
@@ -873,7 +874,7 @@ ja:
   cv_kind2: "CV Kind 2"
   cv_kind3: "CV Kind 3"
   
-  log_error_messages: ["[リダイレクト情報なし]", "リダイレクト情報なし", "リクエストパラメータ不正", "DBエラー [*未使用]", "削除済みのリダイレクト情報"]
+  log_error_messages: ["[無し]", "リダイレクト情報なし", "リクエストパラメータ不正", "DBエラー [*未使用]", "削除済みのリダイレクト情報"]
   log_cv_error_messages: ["[無し]", "該当コンバージョン設定なし", "リクエストパラメータ不正", "DBエラー [*未使用]", "cookieセッション情報なし", "該当クリックなし", "重複排除", "ユニーク制約違反"]
   popup:
     ok: "Ok"
@@ -934,9 +935,9 @@ ja:
   Listing: "リスティング"
   Display: "ディスプレイ"
   Affiliate: "アフィリエイト"
-  CV(first): "CV（初回）"
-  CV(repeat): "CV（リピート）"
-  CV: "CV"
+  CV(first): "初回CV"
+  CV(repeat): "リピートCV"
+  CV: "totalCV"
   CVR: "CVR"
   CPA: "CPA"
   ASSIST: "ASSIST"
@@ -952,3 +953,62 @@ ja:
     corporate_information_link: "http://www.septeni.co.jp/company/outline.html"
     terms_and_conditions: "利用規約"
     terms_and_conditions_link: "http://www.septeni.co.jp/terms/index.html"
+  export_click_logs:
+    label: Export CLick log
+    click_utime: "クリック日時"
+    click_id: 'クリックID'
+    client_name: 'クライアント名'
+    promotion_name: 'プロモーション'
+    media_name: 'メディア'
+    account_name: 'アカウント名'
+    campaign_name: 'キャンペーン名'
+    ad_group: '広告グループ'
+    ad_name: '広告名'
+    request_uri: '広告用URL'
+    redirect_url: 'リンク先URL'
+    session_id: 'SESSIONID'
+    media_session: '媒体セッションID'
+    os: 'OS'
+    user_agent: 'User Agent'
+    remote_ip: 'リモートIP'
+    referer: 'リファラ'
+    mark: 'Mark'
+    ok_ng: 'OK/NG'
+    error_code: 'エラーコード'
+  export_conversion_logs:
+    cv_date_time: "成果発生日時"
+    cv_name: "コンバージョン名"
+    cv_category: "成果カテゴリ"
+    tracking_type: "計測タイプ"
+    cv_type: "成果タイプ"
+    log_id: "ログID"
+    starting_log_id: "起点ログID"
+    media_approval: "媒体承認"
+    click_name: "クライアント名"
+    promotion: "プロモーション"
+    media: "メディア"
+    account: "アカウント"
+    campaign: "キャンペーン"
+    ad_group: "広告グループ"
+    ad_name: "広告名"
+    link_url: "リンク先URL"
+    click_date_time: "クリック日時"
+    influx_original: "流入元"
+    sales: "売上単価"
+    volume: "個数"
+    other: "任意"
+    verify: "Verify"
+    suid: "SUID"
+    sesid: "sesid"
+    os: "OS"
+    repeat: "リピート"
+    log_state: "OK/NG"
+    user_agent: "User_Agent"
+    remote_ip: "リモートIP"
+    referrer: "リファラ"
+    media_session_id: "媒体セッションID"
+    mark: "mark"
+    reception_log: "受信ログ"
+    send_log: "送信ログ"
+    send_date_time: "送信日時"
+    error_message: "エラーメッセージ"

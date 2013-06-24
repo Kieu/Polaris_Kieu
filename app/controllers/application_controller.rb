@@ -37,6 +37,7 @@ class ApplicationController < ActionController::Base
   private
   def set_locale
     I18n.locale = cookies[:locale] || I18n.default_locale
+    cookies[:locale] = I18n.locale.to_s 
   end
 
 

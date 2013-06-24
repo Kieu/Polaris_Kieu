@@ -20,7 +20,7 @@
 	<li><%= I18n.t("log.crumb_cv_logs")%></li>
   </div>
 </ul>
-<div>
+<div  style='float:right'>
 	<div class="selectarea">
 		<ul>
 			<li> <%= I18n.t("log.conversion_name")%>
@@ -181,13 +181,13 @@
 		onSuccess: function() {
             tableResize();
 			$('tr#row-1 td:nth-child('+(1+'n-'+(24))+')').remove();
-            $('tr#row-1').after("<div class='group_header'>Listing ad</div>");
+            $('tr#row-1').after("<div class='group_header'><%= I18n.t(Settings.media_category[1])%></div>");
 
 			$('tr#row-2 td:nth-child('+(1+'n-'+(24))+')').remove();
-            $('tr#row-2').after("<div class='group_header'>Display ad</div>");
+            $('tr#row-2').after("<div class='group_header'><%= I18n.t(Settings.media_category[2])%></div>");
 
 			$('tr#row-3 td:nth-child('+(1+'n-'+(24))+')').remove();
-            $('tr#row-3').after("<div class='group_header'>Affiliate</div>");
+            $('tr#row-3').after("<div class='group_header'><%= I18n.t(Settings.media_category[3])%></div>");
 
 			$('tr#row-1000 td:nth-child('+(1+'n-'+(24))+')').remove();
             $('tr#row-1000').after("<div class='group_header'>Oganic</div>");

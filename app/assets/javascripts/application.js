@@ -179,8 +179,22 @@ function draw_chart(data_left, data_right, left, right, categories){
 		},
 		tooltip: { // マウスオーバーした際に表示する文書を指定
 			formatter: function() {
-				return '<b>'+ this.series.name +'</b><br/>'+
-				this.x +': '+ this.y +' 度';
+				name = this.series.name;
+				tmp = name.split("_");
+				if ($.cookie("locale") == "ja")
+		    	{
+			    	if (tmp[1] == "CV"){
+			    		name = tmp[0] + "_totalCV";
+			    	}
+			    	if (tmp[1] == "CV(first)"){
+			    		name = tmp[0] + "_初回CV";
+			    	}
+			    	if (tmp[1] == "CV(repeat)"){
+			    		name = tmp[0] + "_リピートCV";
+			    	}
+			    }
+				return '<b>'+ name +'</b><br/>'+
+				this.x +': '+ graphNumberFormat(this.y, this.series.name);
 			}
 		},
 		series: [{
@@ -193,4 +207,22 @@ function draw_chart(data_left, data_right, left, right, categories){
 				color: "#FF1493"
 			}]
 		});
+}
+function graphNumberFormat(val, name) {
+    var reportType = name;
+    if (reportType === 'CTR') {
+        return val + '%';
+    }
+    if (reportType === 'COST' || reportType === 'CPC') {
+		return '¥' + val;
+    }
+	reportType = reportType.split("_");
+	if (reportType[1] === "CVR" || reportType[1] === "ROAS" || reportType[1] === "ROI")
+		return val + '%';
+	
+	if (reportType[1] === 'CPA' || reportType[1] === 'SALES' || reportType[1] === "PROFIT") {
+		return '¥' + val;
+    }
+
+    return val;
 }
