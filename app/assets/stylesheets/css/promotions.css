@@ -471,16 +471,7 @@ td.header_total{
 td.category_header{
 	background-color: #BDD8E3;
 }
-div#clients_list{
-    overflow-y: scroll;
-    max-height: 300px;
-    overflow-x: hidden;
-}
-div#promotions_list{
-    overflow-y: scroll;
-    max-height: 300px;
-    overflow-x: hidden;
-}
+
 
 td.align_right{
 	text-align: right;
