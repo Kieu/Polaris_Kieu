@@ -119,7 +119,11 @@ class UrlSettingsController < ApplicationController
     job_id = ExportUrlData.create(start_date: start_date, end_date: end_date,
       user_id: user_id, promotion_id: promotion_id, account_id: account_id,
       media_id: media_id, bgj_id: background_job.id, array_header_csv: array_header_csv, breadcrumb: breadcrumb)
+    background_job.user_id = current_user.id
     background_job.job_id = job_id
+    background_job.breadcrumb =  breadcrumb
+    background_job.type_view = Settings.type_view.DOWNLOAD
+    background_job.status = Settings.job_status.PROCESSING
     background_job.save!
     
     render text: "processing"

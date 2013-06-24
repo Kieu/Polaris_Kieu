@@ -110,7 +110,8 @@ namespace :master do
   desc "Create Promotion"
   task create_promotion: :environment do
     (1..200).each do |num|
-      Promotion.create!(promotion_name: "Promotion#{num}", client_id: 1, tracking_period: 30, agency_id: 1, del_flg: 0, roman_name: "Promotion#{num}", update_user_id: 1, promotion_category_id: 1)
+      Promotion.create!({promotion_name: "Promotion#{num}", client_id: 1, tracking_period: 30, del_flg: 0, roman_name: "Promotion#{num}", update_user_id: 1, promotion_category_id: 1},
+                       without_protection: true)
     end
   end
   desc "Create Conversion logs "
@@ -177,7 +178,7 @@ namespace :master do
       Conversion.create!({id: num, conversion_name: "conversion_#{num}",
         roman_name: "conversion_#{num}", promotion_id: 1, conversion_category: 0,
         duplicate: 0, unique_def: 2, start_point: 0, sale_unit_price: 100,
-        reward_form: 0, create_user_id: 1, del_flg: 0}, without_protection: true)
+        reward_form: 0, create_user_id: 1}, without_protection: true)
     end
   end
 

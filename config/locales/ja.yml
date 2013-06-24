@@ -615,7 +615,7 @@ ja:
     forgor_pw1: "Passwordを入力してログインするならコチラ"
     announcements: "お知らせ"
     press_release: "プレスリリース"
-    captcha: "キャプチャ"
+    captcha: "認証文字"
     notice: "アカウント発行時のメールアドレスと、表示されている認証文字を入力してください。パスワードを発行し、ご案内さし上げます。"
     captcha_email_not_found: "入力頂いたアドレスでアカウント開設した履歴がございません "
     captcha_error: "入力頂いた認証文字が異なります。お手数ですが再入力下さい"
@@ -623,6 +623,7 @@ ja:
     unsuccessfull: "メールアドレスまたはパスワードが違います。"
     deactive: "入力されたメールアドレスは無効です。"
     block: "あなたが5分間ブロックされます。後でもう一度やり直してください。"
+    email_empty: "メールアドレスを入力してください"
   client:
     user_search: "検索"
     crumb_edit: "クライアント編集"
@@ -676,35 +677,37 @@ ja:
   conversion:
     crumb_add: "コンバージョン登録"
     crumb_edit: "コンバージョン編集"
-    tag_acquisition: タグ取得
+    tag_acquisition: "タグ取得"
+    conversion_setting: "コンバージョン設定"
+    conversion_message: "表示したいコンバージョンを選択してください。"
     user_information: "ユーザー情報"
     delete: "削除"
-    conversion_name: "コンバージョン名 "
-    roman_name: "コンバージョン名(英語) "
+    conversion_name: "コンバージョン名: "
+    roman_name: "コンバージョン名(英語): "
     conversion_category:
-      label: "成果カテゴリ "
+      label: "成果カテゴリ: "
       web: " WEB"
       app:
         label: " APP"
         track_type:
-          label: "計測タイプ "
+          label: "計測タイプ: "
           install: " Install"
           app_action: "アプリ内アクション"
         os:
-          label:  "OS指定 "
+          label:  "OS指定: "
           ios: " iOS"
           android: " Android"
         conversion_mode:
-          label:  "計測媒体 "
+          label:  "計測媒体: "
           all: " 全て"
           facebook: " Facebookのみ"
           other: " その他広告"
         duplicate:
-          label: "重複排除 "
+          label: "重複排除: "
           label1: " あり"
           label2: " なし"
         track_method:
-          label: "計測方法 "
+          label: "計測方法: "
           white: " White"
           welcome: " Welcome"
           custom: 
@@ -713,36 +716,35 @@ ja:
           install_referrer: " Install Referrer"
         app_id:
           label: "アプリID "
-          facebook: "(Facebook) "
+          facebook: "(Facebook): "
         option:
           label: "<オプション> "
-          judging: "審査フラグ "
+          judging: "審査フラグ: "
           configure: " 設定する"
-        sale_unit_price: "売上単価 "
+        sale_unit_price: "売上単価: "
         reward_form:
           label: "報酬型式: "
           straight_line_type: "  定額型"
           declining_balance_type: " 定率型"
         session:
-          label: "セッション "
-          retention: " 保持期間 "
+          label: "セッション保持期間: "
           day: "日"
       combination: " 組み合わせ"
     deduplicated:
-      label: "重複排除"
+      label: "重複排除: "
       label1: " あり"
       label2: " なし"
-    unique_definition: "ユニーク定義 "
+    unique_definition: "ユニーク定義: "
     flash_messages:
       success: " コンバージョン登録が完了しました"
       update: " コンバージョン編集が完了しました"
     option1:
       label: "<オプション①>　"
       starting_point_setting:
-        label: "起点設定"
+        label: "起点設定: "
         configure: " 設定する"
         not_configure: " 設定しない"
-      sale_unit_price: "売上単価"
+      sale_unit_price: "売上単価: "
     option2:
       label: "<オプション②>"
       reward_format:
@@ -750,7 +752,7 @@ ja:
         straight_line_type: " 定額型"
         not_set: " 設定しない"
     combination:
-      pattern: "パターン "
+      pattern: "パターン: "
       add: "Add"
   log:
     today_text: "今日"
@@ -869,7 +871,7 @@ ja:
   cv_kind2: "CV Kind 2"
   cv_kind3: "CV Kind 3"
   
-  log_error_messages: ["[無し]", "リダイレクト情報なし", "リクエストパラメータ不正", "DBエラー [*未使用]", "削除済みのリダイレクト情報"]
+  log_error_messages: ["[リダイレクト情報なし]", "リダイレクト情報なし", "リクエストパラメータ不正", "DBエラー [*未使用]", "削除済みのリダイレクト情報"]
   log_cv_error_messages: ["[無し]", "該当コンバージョン設定なし", "リクエストパラメータ不正", "DBエラー [*未使用]", "cookieセッション情報なし", "該当クリックなし", "重複排除", "ユニーク制約違反"]
   popup:
     ok: "Ok"
@@ -916,8 +918,8 @@ ja:
     name5: "タイトル5"
     rate5: "遷移割合5"
   Promotion Name: "プロモーション名"
-  Page: "ページ"
-  of: "の"
+  Page: "Page"
+  of: "of"
   Listing: "リスティング"
   Display: "ディスプレイ"
   Affiliate: "アフィリエイト"
@@ -932,3 +934,10 @@ ja:
   PROFIT: "PROFIT"
   ROI: "ROI"
   time_format: "%Y/%m/%d"
+  footer:
+    privacy_policy: "プライバシーポリシー"
+    privacy_policy_link: "http://www.septeni.co.jp/privacy/index.html"
+    corporate_information: "企業情報"
+    corporate_information_link: "http://www.septeni.co.jp/company/outline.html"
+    terms_and_conditions: "利用規約"
+    terms_and_conditions_link: "http://www.septeni.co.jp/terms/index.html"

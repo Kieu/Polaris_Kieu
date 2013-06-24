@@ -28,7 +28,7 @@ select{
 #container{
 	width: 95%;
 	margin: auto;
-	margin-top: 20px;
+	margin-top: 10px;
 	margin-bottom: 20px;
 	font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", sans-serif;
 }
@@ -44,10 +44,9 @@ select{
 }
 
 #user_form{
-	margin: auto;
+	margin: 0 auto;
 	width: 635px;
 	height: 580px;
-	margin-top: 55px;
 }
 
 form{

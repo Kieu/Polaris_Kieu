@@ -10,29 +10,28 @@ class ConversionsController < ApplicationController
 
   def new
     @conversion = Conversion.new
-    @conversions = Conversion.where(promotion_id: params[:promotion_id])
+    @conversions = Conversion.where(promotion_id: params[:promotion_id]).order(:roman_name).select('id, conversion_name')
     @conversion.session_period = Settings.conversion_session_period_default
     @promotion = Promotion.find(params[:promotion_id])
     @current_id = 1
   end
 
   def create
-    
     @conversion = Conversion.new(params[:conversion])
     @conversion.create_user_id = current_user.id
     @conversion.promotion_id = params[:promotion_id]
     conversion_combine = ''
     if params[:cv] && params[:cv].count > 0
       params[:cv].each_with_index do |op, idx|
-           if idx == 0
-             if params[:cv][idx].present?
-              conversion_combine << "#{params[:cv][idx]}_#{params[:cv_kind][idx]}"
-             end
-           else
-            if params[:cv][idx].present?
-              conversion_combine << "|#{params[:op][idx]}|#{params[:cv][idx]}_#{params[:cv_kind][idx]}"
-             end
-           end   
+       if idx == 0
+         if params[:cv][idx].present?
+          conversion_combine << "#{params[:cv][idx]}_#{params[:cv_kind][idx]}"
+         end
+       else
+        if params[:cv][idx].present?
+          conversion_combine << "|#{params[:op][idx - 1]}|#{params[:cv][idx]}_#{params[:cv_kind][idx]}"
+         end
+       end   
       end
     end
     @conversion.conversion_combine = conversion_combine
@@ -47,12 +46,12 @@ class ConversionsController < ApplicationController
         @op_list = Hash.new
         conversions = Conversion.where(promotion_id: params[:promotion_id]).select("id, conversion_name")
         if params[:cv].count > 0
-            idx=0
+            idx = 0
             params[:cv].each do | cv |
               if cv.to_i > 0 
                 @cv_list[idx] = {"id" => cv, "name" => conversions.find(cv.to_i).conversion_name}
                 @cv_kind_list[idx] = {"id" => params[:cv_kind][idx], "name" => I18n.t(Settings.conversion_kind[params[:cv_kind][idx].to_i])}
-                idx+=1
+                idx += 1
               end
             end
             @op_list = params[:op]
@@ -64,7 +63,7 @@ class ConversionsController < ApplicationController
   end
 
   def edit
-    @conversions = Conversion.where(promotion_id: params[:promotion_id])
+    @conversions = Conversion.where(promotion_id: params[:promotion_id]).order(:roman_name).select('id, conversion_name')
     @conversion.session_period = Settings.conversion_session_period_default
     if (@conversion.conversion_combine.present?)
       combine = @conversion.conversion_combine.split('|')
@@ -89,15 +88,15 @@ class ConversionsController < ApplicationController
     conversion_combine = ''
     if params[:cv] && params[:cv].count > 0
       params[:cv].each_with_index do |op, idx|
-           if idx == 0
-             if params[:cv][idx].present?
-              conversion_combine << "#{params[:cv][idx]}_#{params[:cv_kind][idx]}"
-             end
-           else
-            if params[:cv][idx].present?
-              conversion_combine << "|#{params[:op][idx]}|#{params[:cv][idx]}_#{params[:cv_kind][idx]}"
-             end
-           end   
+       if idx == 0
+         if params[:cv][idx].present?
+          conversion_combine << "#{params[:cv][idx]}_#{params[:cv_kind][idx]}"
+         end
+       else
+        if params[:cv][idx].present?
+          conversion_combine << "|#{params[:op][idx - 1]}|#{params[:cv][idx]}_#{params[:cv_kind][idx]}"
+         end
+       end   
       end
     end
     @conversion.conversion_combine = conversion_combine

@@ -7,7 +7,7 @@
                 {
                     $.ajax({
                         url: "/background_jobs/notification",
-                        cache: false
+                       cache: false
                     }).done(function( html ) {
                                 $(".notification").text(html);
                     }).fail(function(jqXHR, textStatus){
@@ -50,7 +50,7 @@
     <div id="personal">
       <ul>
         <li>
-          <div id="notification" style="display: inline;position: relative;top:5px">
+          <div id="notification" style="display: inline;position: relative;top:7px">
           <button class="fancybox mt-0 inline cboxElement" rel="gallery" href="#inline_content"><span class="notification"><%= @notify %></span></button>
 
           <div style='display:none'>

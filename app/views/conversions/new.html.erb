@@ -74,7 +74,6 @@
 		  }
 		  function remove_fb_app_id() {
 		  	$('#fb_app_id').html('');
-		  	$('#judging_box').html('');
 		  }
           function render_web(){
             $('#category_area').html('');
@@ -117,10 +116,8 @@
                   </td>
                 </tr>
                 <tr>
-                  <th>
-                    <%= f.label I18n.t("conversion.roman_name") %><br />
-                  </th>
-                  <td colspan="4"><br />
+                  <th><%= f.label I18n.t("conversion.roman_name") %></th>
+                  <td colspan="4">
                     <%= f.text_field :roman_name, maxlength: 255, id: "name_e", class: "input-text" %>
                   </td>
                 </tr>
@@ -141,15 +138,14 @@
             </table>
             <table class="client_info" id="category_area">
               <%= 
-              case @conversion.conversion_category.to_i
-              when 3
-              		render "combination", f: f
-              when 2
-              		render "app", f: f
-              else
-              		render "web", f: f
-              end
-               
+                case @conversion.conversion_category.to_i
+                when 3
+                  render "combination", f: f
+                when 2
+                  render "app", f: f
+                else
+                  render "web", f: f
+                end
               %>
             </table>
             <div class="submit_area">
@@ -164,10 +160,9 @@
 </div>
 <script type="text/javascript">
 	<% if @conversion.errors[:url].count > 0%>
-	    $("#url").removeAttr('disabled');
-	  <% end %>
-	  <% if @conversion.conversion_mode.to_i == 2%>
-	  $('#judging_box').html('');
+    $("#url").removeAttr('disabled');
+  <% end %>
+  <% if @conversion.conversion_mode.to_i == 2%>
 	  $('#fb_app_id').html('');
-	  <% end %>
+  <% end %>
 </script>

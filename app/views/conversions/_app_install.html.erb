@@ -9,15 +9,15 @@
 </tr>
 <tr>
   <th><%= f.label I18n.t("conversion.conversion_category.app.conversion_mode.label") %></th>
-  <td>
+  <td><label>
     <%= f.radio_button :conversion_mode, 0, checked: true, onclick: "render_fb_app_id();" %><%= I18n.t("conversion.conversion_category.app.conversion_mode.all") %>
-  </td>
-  <td>
+    </label></td>
+    <td><label>
     <%= f.radio_button :conversion_mode, 1, onclick: "render_fb_app_id();" %><%= I18n.t("conversion.conversion_category.app.conversion_mode.facebook")%>
- </td>
-  <td>
+    </label></td>
+    <td><label>
     <%= f.radio_button :conversion_mode, 2, onclick: "remove_fb_app_id();" %><%=I18n.t("conversion.conversion_category.app.conversion_mode.other")%>
- </td>
+    </label></td>
   <td>&nbsp;</td>
 </tr>
 <tr>
@@ -37,14 +37,14 @@
 	  else	
 	  	render "app_install_ios", f: f
 	  end
-	  %>
+  %>
 </tr>
 <tr id="fb_app_id">
   <%= 
 	  if(@conversion.conversion_mode.to_i!=2)
 	  	render "app_install_fb_app_id", f: f
 	  end
-	  %>
+  %>
 </tr>
 <tr>
   <th><%= f.label t("conversion.unique_definition") %></th>

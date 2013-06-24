@@ -32,6 +32,7 @@ $(function(){
         alwaysVisible: false
     });
     $("#promotion_tables").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
+    $("#conversion_scroll").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
 });
 
 function index_of(haystack, needle) {
@@ -134,7 +135,9 @@ function reloadFlex1(obj, urlAction) {
     }).flexReload();
 }
 function draw_chart(data_left, data_right, left, right, categories){
-	chart = new Highcharts.Chart({ // 以下、chartオブジェクトに渡す引数
+    var min = new Date().getTime();
+    var max = min + 50 * 500;
+    chart = new Highcharts.Chart({ // 以下、chartオブジェクトに渡す引数
 		chart: {
 			renderTo: 'sample-chart', // どの要素にグラフを描画するかを指定
 			type: 'line' // グラフの種類を指定
@@ -149,6 +152,7 @@ function draw_chart(data_left, data_right, left, right, categories){
 			text:false
 		},
 		xAxis: { // x軸の値を指定
+
 			categories: categories,
 			dateTimeLabelFormats: {day: '%e. %b', month: '%e. %b'},
 			labels:{

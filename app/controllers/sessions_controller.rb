@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  
+
   def new
     @press_release = PressRelease.order("id DESC").first(7)
   end
@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
           render :new
         end
       else
-        if user.status == Settings.user.deactive 
+        if user.status == Settings.user.deactive
           @errors << I18n.t("login.deactive")
         else
           @errors << I18n.t("login.block")
@@ -46,6 +46,12 @@ class SessionsController < ApplicationController
   def resend_password
     @press_release = PressRelease.order("id DESC").first(7)
     @form_errors = Array.new
+    if params[:email].to_s.strip.length == 0
+      flash[:email_empty] = I18n.t("login.email_empty")
+      render :new
+      return
+    end
+
     user = User.find_by_email(params[:email])
     @email = params[:email]
     if verify_recaptcha

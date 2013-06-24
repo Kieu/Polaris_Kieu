@@ -246,7 +246,7 @@
     border-top:0;
     background:#fff;
     overflow-x:hidden;
-    overflow-y:scroll;
+    overflow-y:hidden;
     position:relative
 }
 .flexigrid div.hGrip {
@@ -287,7 +287,7 @@
     text-align:left;
     border-right:1px solid #b5b5b5;
     overflow:hidden;
-    vertical-align:top!important;
+    vertical-align:middle!important;
     padding-left:0;
     padding-right:0
 }
@@ -416,7 +416,6 @@ div.colCopy {
     overflow: hidden;
     position: relative;
     white-space: nowrap;
-    width: 400px;
 }
 .flexigrid div.pDiv div.pDiv2 {
     /*float:left;
@@ -425,7 +424,6 @@ div.colCopy {
     margin: 3px;
     margin-left: -2px;
     float: left;
-    width: 1024px;
 }
 div.pGroup {
     float:left;

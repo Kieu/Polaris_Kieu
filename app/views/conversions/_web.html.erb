@@ -1,12 +1,14 @@
 <tbody>
   <tr>
     <th><a href="#"><img src="/assets/icon_help.gif" /></a><%= f.label I18n.t("conversion.deduplicated.label") %></th>
-    <td colspan="2"><label>
+    <td><label>
       <%= f.radio_button :duplicate, 0, checked: true %><%= I18n.t("conversion.deduplicated.label1") %>
-      </label></td>
-    <td colspan="2"><label>
+    </label></td>
+    <td>&nbsp;</td>
+    <td><label>
       <%= f.radio_button :duplicate, 1 %><%= I18n.t("conversion.deduplicated.label2")%>
     </label></td>
+    <td>&nbsp;</td>
   </tr>
   <tr>
     <th><%= f.label t("conversion.unique_definition") %></th>

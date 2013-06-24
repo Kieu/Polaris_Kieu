@@ -44,11 +44,11 @@
   </td>
 </tr>
 <tr>
-  <th><%= f.label I18n.t("conversion.conversion_category.app.session.label") %><br /><%= f.label I18n.t("conversion.conversion_category.app.session.retention") %></th>
-  <td colspan="3">
+  <th><%= f.label I18n.t("conversion.conversion_category.app.session.label") %></th>
+  <td>
     <%= f.text_field :session_period, maxlength: 2, class: "ta-r", value: @conversion.session_period %>
   </td>
-  <td id="percent" style="margin-left: -62px; position: absolute; margin-top: 13px;">
+  <td colspan="3" id="percent" style="margin-left: -62px; position: absolute; margin-top: 13px;">
   	<%= I18n.t("conversion.conversion_category.app.session.day")%>
   </td>
 </tr>
@@ -73,82 +73,3 @@
     <%= f.radio_button :reward_form, 1 %><%= I18n.t("conversion.conversion_category.app.reward_form.declining_balance_type")%>
   </label></td>
 </tr>
-
-
-<!--table>
-<tr>
-  <th class="disabled"><%= f.label "OS指定：" %></th>
-  <td colspan="2" class="disabled"><label>
-    <%= f.radio_button :os, 0, disabled: true %>iOS
-  </label></td>
-  <td colspan="2" class="disabled"><label>
-    <%= f.radio_button :os, 1, disabled: true %>Android
-  </label></td>
-</tr>
-<tr>
-  <th class="disabled"><%= f.label "計測媒体：" %></th>
-  <td class="disabled"><label>
-    <%= f.radio_button :conversion_mode, 0, disabled: true %>全て
-  </label></td>
-  <td class="disabled"><label>
-    <%= f.radio_button :conversion_mode, 1, disabled: true %>Facebookのみ
-  </label></td>
-  <td class="disabled"><label>
-    <%= f.radio_button :conversion_mode, 2, disabled: true %>その他広告
-  </label></td>
-  <td>&nbsp;</td>
-</tr>
-<tr>
-  <th class="disabled"><a href="#"><img src="/assets/icon_help.gif" /></a><%= f.label "重複排除：" %></th>
-  <td class="disabled"><label>
-    <%= f.radio_button :duplicate, 0, disabled: true %>あり
-  </label></td>
-  <td class="disabled"><label>
-    <%= f.radio_button :duplicate, 1, disabled: true %>なし
-  </label></td>
-  <td colspan="2">&nbsp;</td>
-</tr>
-<tr>
-  <th class="disabled"><%= f.label "計測方法：" %></th>
-  <td id="method_install_referrer" class="disabled"><label>
-    <%= f.radio_button :track_method, 0, disabled: true %>Install Referrer
-  </label></td>
-  <td class="disabled"><label>
-    <%= f.radio_button :track_method, 1, disabled: true %>White
-  </label></td>
-  <td class="disabled"><label>
-    <%= f.radio_button :track_method, 2, disabled: true %>Welcome
-  </label></td>
-  <td colspan="2" class="disabled"><label>
-    <%= f.radio_button :track_method, 3, disabled: true %>custom</label>
-    <%= f.text_field :url, id: "url", class: "urlBox", placeholder: "URL必須", disabled: true %>
-  </td>
-</tr>
-<tr>
-  <th><%= f.label "セッション" %><br /><%= f.label "保持期間：" %></th>
-  <td colspan="4">
-    <%= f.text_field :session_period, maxlength: 2, class: "ta-r", placeholder: "90" %>日
-  </td>
-</tr>
-<tr>
-  <th><%= f.label "ユニーク定義：" %></th>
-  <td colspan="4">
-    <%= f.select :unique_def, t("conversions.unique_definition").each_with_index.map {|name, index| [name, index]} %>
-  </td>
-</tr>
-<tr>
-  <th>&lt;オプション&gt;<br /><%= f.label "売上単価：" %></th>
-  <td colspan="4"><br />
-    <%= f.text_field :sale_unit_price, placeholder: "￥" %>
-  </td>
-</tr>
-<tr>
-  <th><%= f.label "報酬型式：" %></th>
-  <td colspan="2"><label>
-    <%= f.radio_button :reward_form, 0 %>定額型
-  </label></td>
-  <td colspan="2"><label>
-    <%= f.radio_button :reward_form, 1 %>定率型
-  </label></td>
-</tr>
-</table-->

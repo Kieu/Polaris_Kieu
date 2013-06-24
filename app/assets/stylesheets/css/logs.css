@@ -14,7 +14,7 @@
     position: relative;
 }
 #inner {
-      padding: 20px 0 20px 15px;
+      padding: 10px 0 20px 15px;
 }
 #inner p.client_name {
     color: #3E5869;
@@ -36,8 +36,8 @@
 .fl-r-log
 {
     float: left;
-    margin-top:20px;
-    width: 280px;
+    margin-top:10px;
+    width: 220px;
 }
 .regist_form table.client_info {
     width: 610px;
@@ -332,4 +332,11 @@ input#datepicker {
 	font-size: 14px;
 	background-color: #F8F8F8;
 	max-width: 190px;
+}
+.flexigrid div.hDiv th div {
+    text-align: center !important;
+}
+/* redefine style by name for _ALL_ flexigrid */
+.flexigrid div.hDiv th[abbr="sign"] div {
+    text-align: left !important;
 }

@@ -12,7 +12,12 @@
 
 <ul class="contentNavi">
   <div class = "crumb_logs">
-	<li class="pre"><%= link_to short_ja_name(@promotion.client.client_name), clients_path(client_id: @promotion.client.id) %> </li>
+  	<% unless current_user.client? %>
+		<li class="pre"><%= link_to short_ja_name(@promotion.client.client_name), clients_path(client_id: @promotion.client.id) %> </li>
+	<% else %>
+		<li class="pre"><%= short_ja_name(@promotion.client.client_name) %></li>
+	<% end %>
+	
 	<li>&gt;</li>
 	<li><%= link_to short_ja_name(@promotion.promotion_name), promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %></li>
 	<li>&gt;</li>
@@ -107,20 +112,20 @@
     })
 	jQuery(document).ready(function($) {
 		$(".newTable06").flexigrid({
-			url: "<%= get_logs_list_click_logs_path %>" + "?start_date=<%= @start_date%>" + "&end_date=<%=@end_date%>",
+			url: "<%= get_logs_list_click_logs_path %>" + "?start_date=<%= @start_date%>&account_id=" + $("#account_id").val() + "&media_category_id=" + $("#media_category_id").val() + "&end_date=<%=@end_date%>",
 			dataType: 'json',
 			colModel : [
-				{display: '<%= I18n.t("click_logs.click_utime")%>', name : 'click_utime', sortable : true, with:'auto',align: 'center', hide: <%= cookies[:coptions][0] == "0" ? 1 : 0 %>},
-				{display: '<%= I18n.t("click_logs.media_name")%>', name : 'media_id', sortable : false,  with:'auto',align: 'center', hide: <%= cookies[:coptions][1] == "0" ? 1 : 0 %>},
-				{display: '<%= I18n.t("click_logs.account_name")%>', name : 'account_id', sortable : false,  with:'auto',align: 'center', hide: <%= cookies[:coptions][2] == "0" ? 1 : 0 %>},
-				{display: '<%= I18n.t("click_logs.campaign_name")%>', name : 'campaign_id', sortable : false,  with:'auto',align: 'center', hide: <%= cookies[:coptions][3] == "0" ? 1 : 0 %>},
-				{display: '<%= I18n.t("click_logs.ad_group_name")%>', name : 'group_id', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][4] == "0" ? 1 : 0 %>},
-				{display: '<%= I18n.t("click_logs.ad_name")%>', name : 'unit_id', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][5] == "0" ? 1 : 0 %>},
-				{display: '<%= I18n.t("click_logs.url")%>', name : 'redirect_url', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][6] == "0" ? 1 : 0 %>},
-				{display: '<%= I18n.t("click_logs.sesid")%>', name : 'session_id', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][7] == "0" ? 1 : 0 %>},
-				{display: '<%= I18n.t("click_logs.os")%>', name : 'device_category', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][8] == "0" ? 1 : 0 %>},
-				{display: '<%= I18n.t("click_logs.log_state")%>', name : 'state', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][9] == "0" ? 1 : 0 %>},
-				{display: '<%= I18n.t("click_logs.error_message")%>', name : 'error_code', sortable : false, with:'auto', align: 'center', hide: <%= cookies[:coptions][10] == "0" ? 1 : 0 %>},
+				{display: '<%= I18n.t("click_logs.click_utime")%>', name : 'click_utime', sortable : true, with:'auto',align: 'left', hide: <%= cookies[:coptions][0] == "0" ? 1 : 0 %>},
+				{display: '<%= I18n.t("click_logs.media_name")%>', name : 'media_id', sortable : false,  with:'auto',align: 'left', hide: <%= cookies[:coptions][1] == "0" ? 1 : 0 %>},
+				{display: '<%= I18n.t("click_logs.account_name")%>', name : 'account_id', sortable : false,  with:'auto',align: 'left', hide: <%= cookies[:coptions][2] == "0" ? 1 : 0 %>},
+				{display: '<%= I18n.t("click_logs.campaign_name")%>', name : 'campaign_id', sortable : false,  with:'auto',align: 'left', hide: <%= cookies[:coptions][3] == "0" ? 1 : 0 %>},
+				{display: '<%= I18n.t("click_logs.ad_group_name")%>', name : 'group_id', sortable : false, with:'auto', align: 'left', hide: <%= cookies[:coptions][4] == "0" ? 1 : 0 %>},
+				{display: '<%= I18n.t("click_logs.ad_name")%>', name : 'unit_id', sortable : false, with:'auto', align: 'left', hide: <%= cookies[:coptions][5] == "0" ? 1 : 0 %>},
+				{display: '<%= I18n.t("click_logs.url")%>', name : 'redirect_url', sortable : false, with:'auto', align: 'left', hide: <%= cookies[:coptions][6] == "0" ? 1 : 0 %>},
+				{display: '<%= I18n.t("click_logs.sesid")%>', name : 'session_id', sortable : false, with:'auto', align: 'left', hide: <%= cookies[:coptions][7] == "0" ? 1 : 0 %>},
+				{display: '<%= I18n.t("click_logs.os")%>', name : 'device_category', sortable : false, with:'auto', align: 'left', hide: <%= cookies[:coptions][8] == "0" ? 1 : 0 %>},
+				{display: '<%= I18n.t("click_logs.log_state")%>', name : 'state', sortable : false, with:'auto', align: 'left', hide: <%= cookies[:coptions][9] == "0" ? 1 : 0 %>},
+				{display: '<%= I18n.t("click_logs.error_message")%>', name : 'error_code', sortable : false, with:'auto', align: 'left', hide: <%= cookies[:coptions][10] == "0" ? 1 : 0 %>},
 				],
 				preProcess : function (json) {
 	            var results = new Array();
@@ -162,7 +167,12 @@
                 $('tr#row-2').after("<div class='group_header'>Display ad</div>");
 				$('tr#row-3 td:nth-child('+(1+'n-'+(11))+')').remove();
                 $('tr#row-4').after("<div class='group_header'>Affiliate</div>");
-			}
+			},
+            onError: function(xhr,status,errorThrown){
+                console.log('xhrError: ');
+                console.dir(xhr);
+                $('.newTable06').flexAddData({rows:[],page:1,total:0});
+            }
 		});
 		
 	});
@@ -292,7 +302,6 @@
 </script>
 <style type="text/css">
   	.flexigrid div.pDiv{
-	    margin-right: 200px;
 	    margin-top: 6px ;
 	}
 </style>
