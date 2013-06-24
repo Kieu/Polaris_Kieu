@@ -32,7 +32,7 @@ $(function(){
         alwaysVisible: false
     });
     $("#promotion_tables").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
-    $("#conversion_scroll").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
+  //  $("#conversion_scroll").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
 });
 
 function index_of(haystack, needle) {
