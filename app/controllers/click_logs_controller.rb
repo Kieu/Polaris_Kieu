@@ -38,7 +38,7 @@ class ClickLogsController < ApplicationController
     header_titles_csv = [I18n.t('export_click_logs.click_utime'), I18n.t('export_click_logs.click_id'), I18n.t('export_click_logs.client_name'), I18n.t('export_click_logs.promotion_name'), I18n.t('export_click_logs.media_name'), 
                       I18n.t('export_click_logs.account_name'), I18n.t('export_click_logs.campaign_name'), I18n.t('export_click_logs.ad_group'), I18n.t('export_click_logs.ad_name'),
                       I18n.t('export_click_logs.request_uri'), I18n.t('export_click_logs.redirect_url'), I18n.t('export_click_logs.session_id'), I18n.t('export_click_logs.media_session'), I18n.t('export_click_logs.os'),
-                      I18n.t('export_click_logs.remote_ip'), I18n.t('export_click_logs.referer'), I18n.t('export_click_logs.mark'), I18n.t('export_click_logs.ok_ng'), I18n.t('export_click_logs.error_code')]
+                      I18n.t('export_click_logs.user_agent'),I18n.t('export_click_logs.remote_ip'), I18n.t('export_click_logs.referer'), I18n.t('export_click_logs.mark'), I18n.t('export_click_logs.ok_ng'), I18n.t('export_click_logs.error_code')]
     
     breadcrumb = "#{promotion.client.client_name} > #{promotion.promotion_name} > CV Logs"
     background_job = BackgroundJob.create

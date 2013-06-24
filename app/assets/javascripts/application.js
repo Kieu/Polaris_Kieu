@@ -15,24 +15,13 @@
 //= require_directory .
 //= require zeroclipboard
 $(function(){
-    $('#clients_list').slimScroll({
-        color: '#0087A9',
-        size: '8px',
-        alwaysVisible: false
-    });
+    $('#clients_list').niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
 
-    $('#promotions_list').slimScroll({
-        color: '#0087A9',
-        size: '8px',
-        alwaysVisible: false
-    });
-    $('#conversions_list').slimScroll({
-        color: '#0087A9',
-        size: '8px',
-        alwaysVisible: false
-    });
+    $('#promotions_list').niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
+    $('#conversions_list').niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
     $("#promotion_tables").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
     $("#conversion_scroll").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
+   // $("#promotions_scroll").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px",horizrailenabled:"false"});
 });
 
 function index_of(haystack, needle) {
@@ -56,10 +45,10 @@ function reloadFlex(obj, urlAction, id, current_active, cname, maxlength) {
     var txt = '';
     if ($(id).text().length > maxlength)
     	txt = $(id).text().substring(0, maxlength) + '...';
-    else
+    else{
     	txt = $(id).text();
+    }
     $(cname).text(txt);
-    
 }
 function ajaxCommon(urlAction, id, current_active, cname,arr_inner) {
     //($this).preventDefault();

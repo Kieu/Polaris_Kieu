@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  before_filter :prevent_double_login, only: [:new, :create]
 
   def new
     @press_release = PressRelease.order("id DESC").first(7)
@@ -69,5 +70,11 @@ class SessionsController < ApplicationController
       @form_errors << I18n.t("login.captcha_error")
       render :new
     end
+  end
+  
+  private
+  
+  def prevent_double_login
+    redirect_to root_path if current_user
   end
 end

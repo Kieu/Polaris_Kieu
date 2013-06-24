@@ -161,12 +161,18 @@
 			height: 200,
 			onSuccess: function() {
                 tableResize();
-				$('tr#row-1 td:nth-child('+(1+'n-'+(11))+')').remove();
-                $('tr#row-1').after("<div class='group_header'><%= I18n.t(Settings.media_category[1])%></div>");
-				$('tr#row-2 td:nth-child('+(1+'n-'+(11))+')').remove();
-                $('tr#row-2').after("<div class='group_header'><%= I18n.t(Settings.media_category[2])%></div>");
-				$('tr#row-3 td:nth-child('+(1+'n-'+(11))+')').remove();
-                $('tr#row-3').after("<div class='group_header'><%= I18n.t(Settings.media_category[3])%></div>");
+                if ($.cookie("coptions") == '00000000000') {
+                	$('tr#row-1 td:nth-child('+(1+'n-'+(11))+')').remove();
+                	$('tr#row-2 td:nth-child('+(1+'n-'+(11))+')').remove();
+                	$('tr#row-3 td:nth-child('+(1+'n-'+(11))+')').remove();
+                } else {
+					$('tr#row-1 td:nth-child('+(1+'n-'+(11))+')').remove();
+	                $('tr#row-1').after("<div class='group_header'><%= I18n.t(Settings.media_category[1])%></div>");
+					$('tr#row-2 td:nth-child('+(1+'n-'+(11))+')').remove();
+	                $('tr#row-2').after("<div class='group_header'><%= I18n.t(Settings.media_category[2])%></div>");
+					$('tr#row-3 td:nth-child('+(1+'n-'+(11))+')').remove();
+	                $('tr#row-3').after("<div class='group_header'><%= I18n.t(Settings.media_category[3])%></div>");
+	           }
 			},
             onError: function(xhr,status,errorThrown){
                 console.log('xhrError: ');
@@ -193,13 +199,9 @@
                 end_date = d[1];
                 
                 $("#datepicker").text(start_date + " ~ " + end_date + "▼");
-                //reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?media_category_id=" + $("#media_category_id").val() + "&account_id=" + $("#account_id").val() + "&start_date=" + start_date + "&end_date=" + end_date);
+                reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?media_category_id=" + $("#media_category_id").val() + "&account_id=" + $("#account_id").val() + "&start_date=" + start_date + "&end_date=" + end_date);
                 
-                $("#clicklogs").flexOptions({
-			        url: "<%= get_logs_list_click_logs_path %>",
-			        newp: 1,
-			        params:[{name: 'start_date', value: start_date}, {name: 'end_date', value: end_date}]
-		    	}).flexReload();
+                
     	
             }
         });		
@@ -259,13 +261,9 @@
 	    } else {
 	    	$.cookie("cser",0);
 	    }
-	    //reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?media_category_id=" + $("#media_category_id").val() + "&account_id=" + $("#account_id").val() + "&start_date=" + start_date + "&end_date=" + end_date);
+	    reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?media_category_id=" + $("#media_category_id").val() + "&account_id=" + $("#account_id").val() + "&start_date=" + start_date + "&end_date=" + end_date);
 	    
-	    $("#clicklogs").flexOptions({
-	        url: "<%= get_logs_list_click_logs_path %>",
-	        newp: 1,
-	        params:[{name: 'start_date', value: start_date}, {name: 'end_date', value: end_date}]
-    	}).flexReload();
+	    
     	
 		$("#clicklogs").colorbox.close();
 	});
