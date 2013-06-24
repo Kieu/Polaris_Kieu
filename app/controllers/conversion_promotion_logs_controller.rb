@@ -66,6 +66,7 @@ class ConversionPromotionLogsController < ApplicationController
                                              end_date: end_date, show_error: cookies[:ser],
                                              breadcrumb: breadcrumb,
                                              header_titles_csv: header_titles_csv,
+                                             lang: cookies[:locale],
                                              bgj_id: background_job.id)
     background_job.user_id = current_user.id
     background_job.breadcrumb = breadcrumb

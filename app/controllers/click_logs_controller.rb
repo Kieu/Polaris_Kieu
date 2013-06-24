@@ -48,6 +48,7 @@ class ClickLogsController < ApplicationController
     account_id: params[:account_id], start_date: start_date,
     end_date: end_date, show_error: cookies[:cser],
     breadcrumb: breadcrumb,
+    lang: cookies[:locale],
     header_titles_csv: header_titles_csv,
     bgj_id: background_job.id)
     background_job.user_id =  current_user.id
