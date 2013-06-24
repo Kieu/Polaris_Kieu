@@ -16,7 +16,7 @@
                     // $('.notification').load('/background_jobs/notification').fadeIn("slow");
                 }, 5000); // refresh every 10000 milliseconds
         <%end%>
-    $(".inline").colorbox({inline: true, width: "635", height: "350" });
+    $(".inline_notify").colorbox({inline: true, width: "635", height: "350" });
         $( "#tabs" ).tabs({
             beforeLoad: function( event, ui ) {
                 ui.jqXHR.error(function() {
@@ -51,7 +51,7 @@
       <ul>
         <li>
           <div id="notification" style="display: inline;position: relative;top:7px">
-          <button class="fancybox mt-0 inline cboxElement" rel="gallery" href="#inline_content"><span class="notification"><%= @notify %></span></button>
+          <button class="fancybox mt-0 inline_notify cboxElement" rel="gallery" href="#inline_content"><span class="notification"><%= @notify %></span></button>
 
           <div style='display:none'>
             <div id='inline_content'>

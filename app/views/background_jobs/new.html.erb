@@ -8,6 +8,9 @@
     $(function(){
     $("#download").niceScroll();
     });
+    $(document).on('click', "#close_notify", function(){
+        $(".inline_notify").colorbox.close();
+    })
 </script>
 <div id="download">
   <ul class="entrydate_box_notify">
@@ -35,5 +38,5 @@
 
 </div>
 <div>
-  <p class="submit_area"><a href="index.html"><img alt="キャンセル" src="/assets/btn_close.gif"></a></p>
+  <p style="margin-top:30px;margin-left:220px"><a href="#" id=""><img alt="キャンセル" src="/assets/btn_close.gif"></a></p>
 </div>
