@@ -102,11 +102,11 @@ $(function(){
                 $("#tags").val("");
                 list_user.splice(list_user.indexOf(ui.item), 1);
                 data = ui.item;
-                console.log(data);
                 $("#user_list").append("<tr><th>" + data.label + "(" + data.company + ")</th>" + "<td>" + data.email + "</td><td>" + data.role
                         + "</td><td><input type = 'hidden' name='users_id[]' value ='" + data.value +
                         "'><input type = 'checkbox' name='del_user_" + data.value + "'></td></tr>");
                 $('#delete_label').css("display", "block")
+                $(this).blur();
                 return false;
             },
             minLength: 0,
