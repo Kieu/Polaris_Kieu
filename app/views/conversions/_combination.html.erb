@@ -1,6 +1,6 @@
 <input type="hidden" id="current_id" value="<%= (@cv_list && @cv_list.count > 0) ? @cv_list.count : 1 %>" />
 <script type="text/javascript">
-  $(".btn_details").droppy();
+ // $(".btn_details").droppy();
 	function add_category() {
 		$('#current_id').val(parseInt($('#current_id').val())+1);
 		var html = '<tr><td width="30px"><select name="op[]" width="30px"><option value="+">+</option><option value="-">-</option><option value="×">×</option><option value="÷">÷</option></select></td>';
@@ -30,6 +30,84 @@
   <tr>
     <td>
       <table id="cv_category1" style="width: 630px">
+        <tbody id="thirdBox1">
+        <tr>
+          <th>パターン：</th>
+          <td> <input type="text" name="category" id="category" value="成果設定1" />
+            <ul id="categorymenu" class="mcdropdown_menu">
+              <li rel="1"> CV1アプリダウンロード
+                <ul>
+                  <li rel="2">CV</li>
+                  <li rel="5">CV（初回）</li>
+                  <li rel="6">CV（リピート）</li>
+                </ul>
+              </li>
+              <li rel="1"> CV2式場予約（APP）
+                <ul>
+                  <li rel="2">CV</li>
+                  <li rel="5">CV（初回）</li>
+                  <li rel="6">CV（リピート）</li>
+                </ul>
+              </li>
+              <li rel="1"> CV3式場予約（WEB）
+                <ul>
+                  <li rel="2">CV</li>
+                  <li rel="5">CV（初回）</li>
+                  <li rel="6">CV（リピート）</li>
+                </ul>
+              </li>
+              <li rel="1"> CV4資料請求（WEB）
+                <ul>
+                  <li rel="2">CV</li>
+                  <li rel="5">CV（初回）</li>
+                  <li rel="6">CV（リピート）</li>
+                </ul>
+              </li>
+            </ul>
+          </td>
+          <td><select  class="ta-c mcdropdown_spacing">
+            <option>&nbsp;</option>
+            <option>+</option>
+            <option>−</option>
+            <option>×</option>
+            <option>÷</option>
+          </select></td>
+          <td><input type="text" name="category" id="category2" value="成果設定2" />
+            <ul id="categorymenu2" class="mcdropdown_menu">
+              <li rel="1"> CV1アプリダウンロード
+                <ul>
+                  <li rel="2">CV</li>
+                  <li rel="5">CV（初回）</li>
+                  <li rel="6">CV（リピート）</li>
+                </ul>
+              </li>
+              <li rel="1"> CV2式場予約（APP）
+                <ul>
+                  <li rel="2">CV</li>
+                  <li rel="5">CV（初回）</li>
+                  <li rel="6">CV（リピート）</li>
+                </ul>
+              </li>
+              <li rel="1"> CV3式場予約（WEB）
+                <ul>
+                  <li rel="2">CV</li>
+                  <li rel="5">CV（初回）</li>
+                  <li rel="6">CV（リピート）</li>
+                </ul>
+              </li>
+              <li rel="1"> CV4資料請求（WEB）
+                <ul>
+                  <li rel="2">CV</li>
+                  <li rel="5">CV（初回）</li>
+                  <li rel="6">CV（リピート）</li>
+                </ul>
+              </li>
+            </ul></td>
+          <td></td>
+        </tr>
+        </tbody>
+
+
       	<tbody id="thirdBox">
 			    <tr>
             <th style="width: 30%; vertical-align: top; top: 5px;"><%= I18n.t("conversion.combination.pattern") %></th>
