@@ -3,8 +3,8 @@
   $(".btn_details").droppy();
 	function add_category() {
 		$('#current_id').val(parseInt($('#current_id').val())+1);
-		var html = '<tr><td width="30px"><select name="op[]" width="30px"><option value="+">+</option><option value="-">-</option><option value="×">×</option><option value="÷">÷</option></select></td>';
-		html += '<td style="width: 165px; padding-bottom: 3px"><ul class="btn_details"><li><a href="#"><input type="text" class="chart_left" value="" id="category' + $('#current_id').val() + '" /></a><ul>';					
+		var html = '<tr><td width="30px"><select name="op[]" width="30px" class="prevent_change"><option value="+">+</option><option value="-">-</option><option value="×">×</option><option value="÷">÷</option></select></td>';
+		html += '<td style="width: 165px; padding-bottom: 3px"><ul class="btn_details"><li><a href="#"><input type="text" class="chart_left prevent_change" value="" id="category' + $('#current_id').val() + '" /></a><ul>';
 		<% @conversions.each do |conversion| %>
 		  html += '<li><a href="javascript:void(0)"><%= conversion.conversion_name%></a><ul>';
 	  	<% Settings.media_category.each_with_index.map {|name, index|  %>
@@ -12,7 +12,7 @@
 	  	<% } %>
 		  html += '</ul></li>';
 		<% end %>
-      html +=	"</ul><input type='hidden' name='cv[]' id='cv" + $('#current_id').val() + "' value='' /><input type='hidden' name='cv_kind[]' id='cv_kind" + $('#current_id').val() + "' value='' /></li></ul></td></tr>";
+      html +=	"</ul><input type='hidden' name='cv[]' id='cv" + $('#current_id').val() + "' value='' class='prevent_change'/><input type='hidden' name='cv_kind[]' id='cv_kind" + $('#current_id').val() + "' value='' class='prevent_change'/></li></ul></td></tr>";
 		$('#cv_category').append(html);
 		$(".btn_details").droppy();
 	}
@@ -36,7 +36,7 @@
 				    <td style="vertical-align: top; width: 15%;"> 
 					    <% if @cv_list && @cv_list.count > 0 %>
 					      <ul class="btn_details" >
-						      <li><a href="#"> <p><input type="text" class="chart_left" value="<%= @cv_list[0]['name'] + ":" + @cv_kind_list[0]['name'] %>" id="category1" /></p> </a>
+						      <li><a href="#"> <p><input type="text" class="chart_left prevent_change" value="<%= @cv_list[0]['name'] + ":" + @cv_kind_list[0]['name'] %>" id="category1" /></p> </a>
 							      <ul>
 							        <% @conversions.each do |conversion| %>
 							          <li><a href="javascript:void(0)"><%= conversion.conversion_name%></a>
@@ -48,13 +48,13 @@
 							          </li>
 							        <% end %>
 							      </ul>
-							      <input type='hidden' name='cv[]' id='cv1' value='<%= @cv_list[0]['id'] %>' />
-							      <input type='hidden' name='cv_kind[]' id='cv_kind1' value='<%= @cv_kind_list[0]['id'] %>' /> 
+							      <input type='hidden' name='cv[]' id='cv1' value='<%= @cv_list[0]['id'] %>' class="prevent_change"/>
+							      <input type='hidden' name='cv_kind[]' id='cv_kind1' value='<%= @cv_kind_list[0]['id'] %>' class="prevent_change" /> 
 						      </li>
 					      </ul>
 					    <% else %>
 					      <ul class="btn_details" >
-						      <li><a href="#"> <p><input type="text" class="chart_left" value="" id="category1" /></p> </a>
+						      <li><a href="#"> <p><input type="text" class="chart_left prevent_change" value="" id="category1" /></p> </a>
 							      <ul>
 							        <% @conversions.each do |conversion| %>
 							          <li><a href="javascript:void(0)"><%= conversion.conversion_name%></a>
@@ -66,8 +66,8 @@
 							          </li>
 							        <% end %>
 							      </ul>
-							      <input type='hidden' name='cv[]' id='cv1' value='' />
-							      <input type='hidden' name='cv_kind[]' id='cv_kind1' value='' /> 
+							      <input type='hidden' name='cv[]' id='cv1' value='' class="prevent_change"/>
+							      <input type='hidden' name='cv_kind[]' id='cv_kind1' value='' class="prevent_change"/> 
 						      </li>
 					      </ul>
 					    <% end %>
@@ -85,7 +85,7 @@
 				      	    <% if idx > 0 %>
 				      	      <tr>
 				      		      <td width="30px">
-				      		        <select name="op[]" width="30px" id="op#{idx}">
+				      		        <select name="op[]" width="30px" id="op#{idx}" class="prevent_change">
 						                <option value="+" <% if @op_list[idx-1] == '+'%> selected="selected" <% end %>>+</option>
 						                <option value="-" <% if @op_list[idx-1] == '-'%> selected="selected" <% end %>>-</option>
 						                <option value="×" <% if @op_list[idx-1] == '×'%> selected="selected" <% end %>>×</option>
@@ -94,7 +94,7 @@
 						            </td>
 				      		      <td style="width: 165px; padding-bottom: 3px">
 				      			      <ul class="btn_details">
-				      			        <li><a href="#"><input type="text" name="category<%= idx + 1 %>"  id="category<%= idx+1 %>" value="<%= cv['name'] + ":" + @cv_kind_list[idx]['name'] %>" /></a>
+				      			        <li><a href="#"><input type="text" name="category<%= idx + 1 %>"  id="category<%= idx+1 %>" value="<%= cv['name'] + ":" + @cv_kind_list[idx]['name'] %>" class="prevent_change"/></a>
 				      				        <ul>
 				      					        <% @conversions.each do |conversion| %>
 				      						        <li><a href="javascript:void(0)"><%= conversion.conversion_name%></a>
@@ -105,8 +105,8 @@
 				      						          </ul>
 				      					        <% end %>
 				      				        </ul>	
-				      			          <input type="hidden" name="cv_kind[]" id="cv_kind<%= idx + 1 %>" value="<%= @cv_kind_list[idx]['id']%>" />
-                              <input type="hidden" name="cv[]" value="<%= cv['id']%>" id="cv#{idx}" />
+				      			          <input type="hidden" name="cv_kind[]" id="cv_kind<%= idx + 1 %>" value="<%= @cv_kind_list[idx]['id']%>" class="prevent_change"/>
+                              <input type="hidden" name="cv[]" value="<%= cv['id']%>" id="cv#{idx}" class="prevent_change"/>
                             </li>
                           </ul>
 				      		      </td>

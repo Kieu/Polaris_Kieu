@@ -1,4 +1,4 @@
-<th><%= f.label I18n.t("conversion.conversion_category.app.app_id.label") %><br /><%= f.label t("conversion.conversion_category.app.app_id.facebook") %></th>
+<th><%= f.label I18n.t("conversion.conversion_category.app.app_id.label") %><br /><%= f.label I18n.t("conversion.conversion_category.app.app_id.facebook") %></th>
 <td colspan="4"><br />
-  <%= f.text_field :facebook_app_id, maxlength: 19 %>
+  <%= f.text_field :facebook_app_id, maxlength: 19, class: "prevent_change" %>
 </td>
