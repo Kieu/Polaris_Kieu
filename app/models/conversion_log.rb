@@ -8,7 +8,7 @@ class ConversionLog < ActiveRecord::Base
               approval_status, media_id,account_id, campaign_id,group_id, unit_id, click_utime, verify,
               suid, session_id, device_category, null as repeat_processed_flg, 'NG' as log_state , sales, profit, volume, others, error_code, null as error_log_view"
 
-    FIELD_ORGANIC = "null as media_category_id, conversion_utime, conversion_id, conversion_category,null as track_type, null as repeat_flg,
+    FIELD_ORGANIC = "1000 as media_category_id, conversion_utime, conversion_id, conversion_category,null as track_type, null as repeat_flg,
               null as approval_status, null as media_id,null as account_id, null as campaign_id,null as group_id, null as unit_id, null as click_utime, verify,
               suid, null as session_id, null as device_category, null as repeat_processed_flg,'OGANIC' as log_state, sales, profit, volume, others, '0' as error_code, null as error_log_view"
 
@@ -25,35 +25,44 @@ class ConversionLog < ActiveRecord::Base
     end_date = Date.strptime(end_date, I18n.t("time_format")).strftime("%Y%m%d")
     params = [start_date, end_date]
     params1 = [start_date, end_date]
+    organic = 1
     if(cv_id.present?)  
       where_clause += " AND conversion_id = ?"
       params += [cv_id]
       params1 += [cv_id]
+      organic = 0
     end
     if(media_category_id.present?)  
       where_clause += " AND media_category_id = ?"
       params += [media_category_id]
       params1 += [media_category_id]
+      organic = 0
     end
     if(account_id.present?)  
       where_clause += " AND account_id = ?"
       params += [account_id]
       params1 += [account_id]
+      organic = 0
     end
+    sql_organic = ''
+    if organic == 1
+      sql_organic = " union all (select #{FIELD_ORGANIC} from conversion_organic_#{id}_logs) "
+    end
+    
     if show_error=="1"
       sql_str = "(select #{FIELD} from conversion_#{id}_logs  where DATE_FORMAT(conversion_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause}) union all
-                                       (select #{FIELD_ERROR} from conversion_error_#{id}_logs where DATE_FORMAT(conversion_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause}) union all
-                                       (select #{FIELD_ORGANIC} from conversion_organic_#{id}_logs)
-
+                                       (select #{FIELD_ERROR} from conversion_error_#{id}_logs where DATE_FORMAT(conversion_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause})
+                                       #{sql_organic}
                                        ORDER BY media_category_id, #{sortname} #{sortorder} LIMIT #{start}, #{rp} "
                                         
       params += params1
     else
-      sql_str = "(select #{FIELD} from conversion_#{id}_logs  where DATE_FORMAT(conversion_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause}) union all
-                                       (select #{FIELD_ORGANIC} from conversion_organic_#{id}_logs)
+      sql_str = "(select #{FIELD} from conversion_#{id}_logs  where DATE_FORMAT(conversion_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause})
+                                        #{sql_organic} 
                                        ORDER BY media_category_id, #{sortname} #{sortorder} LIMIT #{start}, #{rp} "
                                         
-    end          
+    end        
+      
     @logs = ConversionLog.find_by_sql([sql_str] + params)
   end
 
