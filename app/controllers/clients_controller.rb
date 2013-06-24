@@ -87,7 +87,7 @@ class ClientsController < ApplicationController
         render :edit
       else
         flash[:error] = I18n.t("client.flash_messages.update")
-        redirect_to clients_path
+        redirect_to clients_path(client_id: @client.id)
       end
     else
       render :edit

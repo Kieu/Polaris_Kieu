@@ -640,11 +640,11 @@ ja:
     person_charge: "ご担当者様： "
     person_sale: "担当営業： "
     contract_flg:
-      label: "ご契約プラン："
+      label: "利用規約："
       standard_plan: " スタンダードプラン"
       premium_plan: " プレミアムプラン(月額5万円)"
     contract_type:
-      label: "利用規約："
+      label: "ご契約プラン："
       unrecovered: " 未回収"
       been_recovered: " 回収済み"
     user_information: "ユーザー情報"

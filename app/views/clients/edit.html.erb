@@ -20,8 +20,8 @@ $(function(){
           <td colspan="2"><%= f.text_field :client_name, maxlength: 255, style: "width: 250px", class: "prevent_change" %></td>
         </tr>
         <tr>
-          <th><%= f.label t("client.roman_name") %></th>
-          <td colspan="2"><%= f.text_field :roman_name, maxlength: 255, style: "width: 250px", class: "prevent_change" %> </td>
+          <th><div style="width: 160px;"><%= f.label t("client.roman_name") %></div></th>
+          <td colspan="2"><%= f.text_field :roman_name, maxlength: 255, style: "width: 250px", class: "prevent_change" %></td>
         </tr>
         <tr>
           <th><%= f.label t("client.tel") %></th>
@@ -42,8 +42,8 @@ $(function(){
         </tr>
         <tr>
           <th><%= f.label t("client.contract_type.label") %></th>
-          <td><%= f.radio_button :contract_type, 0, class: "prevent_change" %> <%= I18n.t("client.contract_flg.standard_plan") %></td>
-          <td><%= f.radio_button :contract_type, 1, class: "prevent_change" %> <%= I18n.t("client.contract_flg.premium_plan") %></td>
+          <td><div style="width: 200px;"><%= f.radio_button :contract_type, 0, class: "prevent_change" %> <%= I18n.t("client.contract_flg.standard_plan") %></div></td>
+          <td><div style="width: 240px;"><%= f.radio_button :contract_type, 1, class: "prevent_change" %> <%= I18n.t("client.contract_flg.premium_plan") %></div></td>
         </tr>
       </table>
       <div class="user_info_add">
@@ -118,6 +118,7 @@ $(function(){
                 $("#user_list").append("<tr><th>" + data.label + "(" + data.company + ")</th>" + "<td>" + data.email + "</td><td>" + data.role
                         + "</td><td><input type = 'hidden' name='users_id[]' value ='" + data.value +
                         "'><input type = 'checkbox' name='del_user_" + data.value + "'></td></tr>");
+                $(this).blur();
                 return false;
             },
             minLength: 0,

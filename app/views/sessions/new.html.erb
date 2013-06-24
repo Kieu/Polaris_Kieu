@@ -22,8 +22,8 @@
         <p class="bold"><%= I18n.t("login.press_release")%></p>
       </div>
 
-      <% @press_release.each do |press| %>
-          <ul>
+      <% @press_release.each_with_index do |press, index| %>
+          <ul<% if index == 6 %> class="last-child"<% end %>>
             <li><span><%= press.release_time %></span></li>
             <li><%= press.content %> </li>
           </ul>

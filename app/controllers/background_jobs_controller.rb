@@ -1,4 +1,7 @@
+require 'iconv'
+
 class BackgroundJobsController < ApplicationController
+  BOM = "\377\376" #Byte Order Mark
   before_filter :signed_in_user
   layout false
   # Stream a file that has already been generated and stored on disk
@@ -6,7 +9,10 @@ class BackgroundJobsController < ApplicationController
     job = BackgroundJob.find(params[:id])
     if current_user.id == job.user_id
       path = "#{Rails.root}/#{job.filepath}"
-      send_file(path, filename: job.filename, type: "text/csv; charset=utf-8")
+      csv_text = File.read(path)
+      content = BOM + Iconv.conv("utf-16le", "utf-8", csv_text)
+      File.save(content)
+      send_file(path, filename: job.filename, :encoding => 'utf-16', type: "text/csv; charset=utf-16")
     end
   end
   def download

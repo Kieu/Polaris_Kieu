@@ -1,5 +1,5 @@
 require 'csv'
-
+# encoding: utf-8
 # export conversion data table from conversion log screen to csv file
 class ExportConversionLogsData
   include Resque::Plugins::Status
@@ -24,10 +24,10 @@ class ExportConversionLogsData
      background_job.type_view = Settings.type_view.DOWNLOAD
      background_job.status = Settings.job_status.PROCESSING
      background_job.save!
-    
+#     
     # store csv file on server
     # path: doc/conversion_logs_export
-
+    I18n.locale = options['lang']
     begin
       header_col = ["CV date time", "CV name", "CV category", "Tracking type",
                     "CV type", "Log ID", "Starting log ID", "Media approval",
@@ -79,23 +79,58 @@ class ExportConversionLogsData
       end  
       os = { 1 => I18n.t("conversion.conversion_category.app.os.ios"), 2 => I18n.t("conversion.conversion_category.app.os.android"), 9 => I18n.t("conversion.conversion_category.app.os.other")}
       conversion_categories = [I18n.t("conversion.conversion_category.web"), I18n.t("conversion.conversion_category.app.label"), I18n.t("conversion.conversion_category.combination")]
-      CSV.open(path_file, "wb") do |csv|
+      CSV.open(path_file, "wb:UTF-8") do |csv|
         # make header for CSV file
         #csv << header_col
         csv << options['header_titles_csv']
         rows.each do |row|
-         csv << [Time.at(row.conversion_utime).strftime("%Y/%m/%d %H:%M:%S"), conversions_list[row.conversion_id],
-            conversion_categories[row.conversion_category.to_i-1],
+          if row.conversion_category && row.conversion_category.to_i > 0
+            conversion_category = conversion_categories[row.conversion_category.to_i-1]
+          else
+            conversion_category = ''
+          end
+          if (row.group_id && row.group_id.to_i > 0)
+            display_group_name = display_groups_list[row.group_id.to_i]
+          else
+            display_group_name = ''
+          end
+          if (row.campaign_id && row.campaign_id.to_i)
+            display_campaign_name = display_campaigns_list[row.campaign_id.to_i]
+          else
+            display_campaign_name = ''
+          end
+          if row.media_id && row.media_id.to_i > 0
+            media_name = medias_list[row.media_id.to_i]
+          else
+            media_name = ''
+          end
+          if row.unit_id && row.unit_id.to_i > 0
+            display_ads_name = display_ads_list[row.unit_id.to_i]
+          else
+            display_ads_name = ''
+          end
+          if row.click_utime
+            click_utime = Time.at(row.click_utime).strftime("%Y/%m/%d %H:%M:%S")
+          else
+            click_utime = ''
+          end
+          if row.send_utime
+            send_utime = Time.at(row.send_utime).strftime("%Y/%m/%d %H:%M:%S")
+          else
+            send_utime = ''
+          end
+          csv << [Time.at(row.conversion_utime).strftime("%Y/%m/%d %H:%M:%S"), conversions_list[row.conversion_id],
+            conversion_category,
             I18n.t("log_track_type")[row.track_type.to_i-1], I18n.t("log_repeat_flg")[row.repeat_flg.to_i],
             row.id, row.parent_conversion_id, row.approval_status, client_name,
-            promotion.promotion_name, display_groups_list[row.media_id],
-            accounts_list[row.account_id], display_campaigns_list[row.campaign_id],
-            display_groups_list[row.group_id], display_ads_list[row.unit_id],
-            row.redirect_url, Time.at(row.click_utime).strftime("%Y/%m/%d %H:%M:%S"), row.click_referrer, row.sales,
+            promotion.promotion_name, media_name,
+            accounts_list[row.account_id], display_campaign_name,
+            display_group_name, display_ads_name,
+            row.redirect_url, click_utime, row.click_referrer, row.sales,
             row.volume, row.others, row.verify, row.suid,row.session_id,
             os[row.device_category.to_i], row.repeat_processed_flg, row.log_state,
             row.user_agent, row.remote_ip, row.referrer, row.media_session_id,
-            row.mark, row.request_uri, row.send_url, Time.at(row.send_utime).strftime("%Y/%m/%d %H:%M:%S"), I18n.t("log_cv_error_messages")[row.error_code.to_i]]
+            row.mark, row.request_uri, row.send_url, send_utime, I18n.t("log_cv_error_messages")[row.error_code.to_i]]
         end
       end
       #success case

@@ -48,6 +48,7 @@ class ClickLogsController < ApplicationController
     account_id: params[:account_id], start_date: start_date,
     end_date: end_date, show_error: cookies[:cser],
     breadcrumb: breadcrumb,
+    lang: cookies[:locale],
     header_titles_csv: header_titles_csv,
     bgj_id: background_job.id)
     background_job.user_id =  current_user.id
@@ -62,16 +63,41 @@ class ClickLogsController < ApplicationController
   def get_rows click_logs
     
     medias = Media.select("id, media_name")
+    medias_list = Hash.new 
+    medias.each do | media |
+      medias_list.store(media.id, media.media_name)
+    end
+    
     display_groups = DisplayGroup.where(promotion_id: params[:query]).select("id, name")
+    display_groups_list = Hash.new
+    display_groups.each do | group |
+      display_groups_list.store(group.id, group.name)
+    end
     display_ads = DisplayAd.where(promotion_id: params[:query]).select("id, name")
+    display_ads_list = Hash.new
+    display_ads.each do | ads |
+      display_ads_list.store(ads.id, ads.name)
+    end 
     display_campaigns = DisplayCampaign.where(promotion_id: params[:query]).select("id, name")
+    display_campaigns_list = Hash.new
+    display_campaigns.each do | campaign |
+      display_campaigns_list.store(campaign.id, campaign.name)
+    end 
+    
+    
     accounts = Account.where(promotion_id: params[:query]).select("id,account_name")
     os = { 1 => I18n.t("conversion.conversion_category.app.os.ios"), 2 => I18n.t("conversion.conversion_category.app.os.android"), 9 => I18n.t("conversion.conversion_category.app.os.other")}
     
     rows = Array.new
       if click_logs && click_logs.count > 0
         click_logs.each do |log|
-          rows << {id: log.id, cell: {click_utime: Time.at(log.click_utime.to_i).strftime("%Y/%m/%d %H:%M:%S"), media_id: medias.find(log.media_id).media_name, media_category_id: log.media_category_id,
+          if log.media_id && log.media_id.to_i > 0
+            media_name = medias_list[log.media_id]
+          else
+            media_name = ''
+          end
+            
+          rows << {id: log.id, cell: {click_utime: Time.at(log.click_utime.to_i).strftime("%Y/%m/%d %H:%M:%S"), media_id: media_name, media_category_id: log.media_category_id,
                   account_id: accounts.find(log.account_id).account_name, campaign_id: display_campaigns.find(log.campaign_id).name, group_id: display_groups.find(log.group_id).name,
                   unit_id: display_ads.find(log.unit_id).name, redirect_url: log.redirect_url, session_id: log.session_id,
                   device_category: os[log.device_category.to_i], state: log.state, error_code: I18n.t("log_error_messages")[log.error_code.to_i]}}

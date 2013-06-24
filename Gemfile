@@ -16,6 +16,7 @@ gem "redis"
 gem "resque", require: 'resque/server'
 gem "resque-status"
 gem 'json'
+gem 'iconv'
 gem "cocaine"
 gem "paperclip"
 gem 'gotcha'
