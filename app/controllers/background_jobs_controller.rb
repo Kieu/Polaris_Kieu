@@ -1,5 +1,3 @@
-require 'iconv'
-
 class BackgroundJobsController < ApplicationController
 
   before_filter :signed_in_user
@@ -9,11 +7,7 @@ class BackgroundJobsController < ApplicationController
     job = BackgroundJob.find(params[:id])
     if current_user.id == job.user_id
       path = "#{Rails.root}/#{job.filepath}"
-      bom = "\xFF\xFE".force_encoding("UTF-16LE")
-      content = File.open(path,'rb')
-      output = content.read
-      send_data(bom + output.encode("UTF-16LE"), :type => 'text/csv', :filename => job.filename)
-      #send_file(path, filename: job.filename, :type => "text/csv; charset=utf-16le", :disposition => "attachment")
+      send_file(path, filename: job.filename, :type => "text/csv; charset=utf-16le", :disposition => "attachment")
     end
   end
   def download
