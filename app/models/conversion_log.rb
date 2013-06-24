@@ -90,33 +90,41 @@ repeat_processed_flg,parent_conversion_id,sales,profit,volume,others,null as app
     #end_date = Date.strptime(end_date, I18n.t("time_format")).strftime("%Y%m%d")
     params = [start_date, end_date]
     params1 = [start_date, end_date]
-
+    organic = 1
     if(cv_id.present?)
       where_clause += " AND conversion_id = ?"
       params += [cv_id]
       params1 += [cv_id]
+      organic = 0
     end
     if(media_category_id.present?)
       where_clause += " AND media_category_id = ?"
       params += [media_category_id]
       params1 += [media_category_id]
+      organic = 0
     end
     if(account_id.present?)
       where_clause += " AND account_id = ?"
       params += [account_id]
       params1 += [account_id]
+      organic = 0
     end
+    
+    sql_organic = ''
+    if organic == 1
+      sql_organic = " union all (select #{field_organic} from conversion_organic_#{id}_logs) "
+    end
+    
     if show_error=="1"
       sql_str = "(select #{field} from conversion_#{id}_logs  where DATE_FORMAT(conversion_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause}) union all
-                                       (select #{field_error} from conversion_error_#{id}_logs where DATE_FORMAT(conversion_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause}) union all
-                                       (select #{field_organic} from conversion_organic_#{id}_logs)
-
+                                       (select #{field_error} from conversion_error_#{id}_logs where DATE_FORMAT(conversion_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause}) 
+                                       #{sql_organic} 
                                        ORDER BY media_category_id "
                                         
       params += params1
     else
-      sql_str = "(select #{field} from conversion_#{id}_logs  where DATE_FORMAT(conversion_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause}) union all
-                                       (select #{field_organic} from conversion_organic_#{id}_logs)
+      sql_str = "(select #{field} from conversion_#{id}_logs  where DATE_FORMAT(conversion_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause}) 
+                                       #{sql_organic}
                                        ORDER BY media_category_id "
                                         
     end             
@@ -134,30 +142,39 @@ repeat_processed_flg,parent_conversion_id,sales,profit,volume,others,null as app
     end_date = Date.strptime(end_date, I18n.t("time_format")).strftime("%Y%m%d")
     params = [start_date, end_date]
     params1 = [start_date, end_date]
+    organic = 1
     if(cv_id.present?)  
       where_clause += " AND conversion_id = ?"
       params += [cv_id]
       params1 += [cv_id]
+      organic = 0
     end
     if(media_category_id.present?)  
       where_clause += " AND media_category_id = ?"
       params += [media_category_id]
       params1 += [media_category_id]
+      organic = 0
     end
     if(account_id.present?)  
       where_clause += " AND account_id = ?"
       params += [account_id]
       params1 += [account_id]
+      organic = 0
     end
+    sql_organic = ''
+    if organic == 1
+      sql_organic = " union all select id from conversion_organic_#{id}_logs "
+    end
+    
     if show_error=="1"
       sql_str = "select count(*) as cnt from (select id from conversion_#{id}_logs  where DATE_FORMAT(conversion_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause} union all
-                 select id from conversion_error_#{id}_logs where DATE_FORMAT(conversion_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause} union all
-                 select id from conversion_organic_#{id}_logs group by id) as logs"
+                 select id from conversion_error_#{id}_logs where DATE_FORMAT(conversion_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause}
+                 #{sql_organic} group by id) as logs"
 
       params += params1
     else
-      sql_str = "select count(*) as cnt from (select id from conversion_#{id}_logs  where DATE_FORMAT(conversion_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause} union all
-                 select id from conversion_organic_#{id}_logs group by id) as logs"
+      sql_str = "select count(*) as cnt from (select id from conversion_#{id}_logs  where DATE_FORMAT(conversion_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause} 
+                #{sql_organic} group by id) as logs"
     end                            
     @count = ConversionLog.find_by_sql([sql_str] + params)
     @count[0]["cnt"]
