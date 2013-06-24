@@ -35,12 +35,12 @@ a.bread_scrumb_link {
 			<ul>
 				<li> <a href="javascript:void(0)">掲載結果</a>
 					<ul>
-						<li><a href="javascript:void(0)" class="metric_click_left">imp</a></li>
-						<li><a href="javascript:void(0)" class="metric_click_left">click</a></li>
-						<li><a href="javascript:void(0)" class="metric_click_left">CTR</a></li>
-						<li><a href="javascript:void(0)" class="metric_click_left">COST</a></li>
-						<li><a href="javascript:void(0)" class="metric_click_left">CPM</a></li>
-						<li><a href="javascript:void(0)" class="metric_click_left">CPC</a></li>
+						<li><a href="javascript:void(0)" class="metric_click_left" col="imp">imp</a></li>
+						<li><a href="javascript:void(0)" class="metric_click_left" col="click">click</a></li>
+						<li><a href="javascript:void(0)" class="metric_click_left" col="CTR">CTR</a></li>
+						<li><a href="javascript:void(0)" class="metric_click_left" col="COST">COST</a></li>
+						<li><a href="javascript:void(0)" class="metric_click_left" col="CPM">CPM</a></li>
+						<li><a href="javascript:void(0)" class="metric_click_left" col="CPC">CPC</a></li>
 					</ul>
 				</li>
 				<li><a href="javascript:void(0)">成果</a>
@@ -49,7 +49,7 @@ a.bread_scrumb_link {
 							<li><a href="javascript:void(0)"><%= short_ja_name(conversion.conversion_name) %></a>
 								<ul>
 									<% Settings.conversions_graph.each do |option| %>
-										<li><a href="javascript:void(0)" class="result_click_left" id="conversion_left_<%= conversion.id %>"><%= I18n.t(option) %></a></li>
+										<li><a href="javascript:void(0)" col="<%= option %>" class="result_click_left" id="conversion_left_<%= conversion.id %>"><%= I18n.t(option) %></a></li>
 									<% end %>
 								</ul>
 							<li>
@@ -65,12 +65,12 @@ a.bread_scrumb_link {
 			<ul>
 				<li> <a href="#">掲載結果</a>
 					<ul>
-						<li><a href="javascript:void(0)" class="metric_click_right">imp</a></li>
-						<li><a href="javascript:void(0)" class="metric_click_right">click</a></li>
-						<li><a href="javascript:void(0)" class="metric_click_right">CTR</a></li>
-						<li><a href="javascript:void(0)" class="metric_click_right">COST</a></li>
-						<li><a href="javascript:void(0)" class="metric_click_right">CPM</a></li>
-						<li><a href="javascript:void(0)" class="metric_click_right">CPC</a></li>
+						<li><a href="javascript:void(0)" class="metric_click_right" col="imp">imp</a></li>
+						<li><a href="javascript:void(0)" class="metric_click_right" col="click">click</a></li>
+						<li><a href="javascript:void(0)" class="metric_click_right" col="CTR">CTR</a></li>
+						<li><a href="javascript:void(0)" class="metric_click_right" col="COST">COST</a></li>
+						<li><a href="javascript:void(0)" class="metric_click_right" col="CPM">CPM</a></li>
+						<li><a href="javascript:void(0)" class="metric_click_right" col="CPC">CPC</a></li>
 					</ul>
 				</li>
 				<li><a href="javascript:void(0)">成果</a>
@@ -79,7 +79,7 @@ a.bread_scrumb_link {
 							<li><a href="javascript:void(0)"><%= short_ja_name(conversion.conversion_name) %></a>
 								<ul>
 									<% Settings.conversions_graph.each do |option| %>
-										<li><a href="javascript:void(0)" class="result_click_right" id="conversion_right_<%= conversion.id %>"><%= I18n.t(option) %></a></li>
+										<li><a href="javascript:void(0)" col="<%= option %>" class="result_click_right" id="conversion_right_<%= conversion.id %>"><%= I18n.t(option) %></a></li>
 									<% end %>
 								</ul>
 							<li>
@@ -374,23 +374,23 @@ a.bread_scrumb_link {
 	right = "<%= @select_right %>";
     draw_chart(data[left], data[right], left, right, categories)
     $(".metric_click_left").click(function(){
-    	left = $(this).text();
+    	left = $(this).attr("col");
     	$("#chart_left").text(left);
     	draw_chart(data[left], data[right], left,right, categories)
     });
     $(".metric_click_right").click(function(){
-    	right = $(this).text();
+    	right = $(this).attr("col");
     	$("#chart_right").text(right);
     	draw_chart(data[left], data[right], left,right, categories)
     });
     
     $(".result_click_left").click(function(){
-    	left = $(this).attr("id").split("_")[2] + "_" + $(this).text();
+    	left = $(this).attr("id").split("_")[2] + "_" + $(this).attr("col");;
     	$("#chart_left").text(left);
     	draw_chart(data[left], data[right], left,right, categories)
     });
     $(".result_click_right").click(function(){
-    	right = $(this).attr("id").split("_")[2] + "_" + $(this).text();
+    	right = $(this).attr("id").split("_")[2] + "_" + $(this).attr("col");;
     	$("#chart_right").text(right);
     	draw_chart(data[left], data[right], left,right, categories)
     });
