@@ -40,7 +40,7 @@ class ClickLogsController < ApplicationController
                       I18n.t('export_click_logs.request_uri'), I18n.t('export_click_logs.redirect_url'), I18n.t('export_click_logs.session_id'), I18n.t('export_click_logs.media_session'), I18n.t('export_click_logs.os'),
                       I18n.t('export_click_logs.remote_ip'), I18n.t('export_click_logs.referer'), I18n.t('export_click_logs.mark'), I18n.t('export_click_logs.ok_ng'), I18n.t('export_click_logs.error_code')]
     
-    breadcrumb = "#{promotion.client.client_name} >> #{promotion.promotion_name} >> CV Logs"
+    breadcrumb = "#{promotion.client.client_name} > #{promotion.promotion_name} > CV Logs"
     background_job = BackgroundJob.create
     job_id = ExportClickLogsData.create(user_id: current_user.id,
     promotion_id: params[:promotion_id].to_i,
