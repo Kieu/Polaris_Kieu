@@ -36,8 +36,10 @@ en:
     campaign_too_long: "Campaign needs to be less than 255 letters."
     campaign_name_not_type: "Campaign name is not typed."
     group_name_too_long: "Group name needs to be less than 255 letters."
-    group_name_not_type: "Group name is not type."
-    ad_name_not_type: "Ad name is not type."
+    group_name_not_type: "Group name is not typed."
+    ad_name_not_type: "Ad name is not typed."
+    ad_name_too_long: "Ad name needs to be less than 255 letters."
+    ad_name_already_used: "The Ad name is already used."
     name_overlapped: "Campaing name, Group name, and Ad name are overlapped."
     creative_id_half_width: "Please type Creative ID with half-width characters."
     creative_id_too_long: "Creative ID needs to be less than 20 letters."
@@ -52,6 +54,8 @@ en:
     transition_rake_altogether: "Transition rate needs to be 100 altogether."
     registering_complete: "Registering new URL complete."
     edit_url_complete: "Editing URL complete."
+    line: "Line"
+    enter_key: "\n"
   activerecord:
     attributes:
       client:
