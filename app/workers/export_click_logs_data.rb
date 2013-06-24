@@ -56,7 +56,7 @@ class ExportClickLogsData
                   medias.find(row.media_id).media_name, accounts.find(row.account_id).account_name,
                   display_campaigns.find(row.campaign_id).name, display_groups.find(row.group_id).name,
                   display_ads.find(row.unit_id).name, row.request_uri, row.redirect_url,
-                  row.session_id, row.media_session_id, os[row.device_category.to_i], row.user_agent, row.remote_ip, 
+                  row.session_id, row.media_session_id, os[row.device_category.to_i], row.user_agent.to_s, row.remote_ip, 
                   row.referrer, row.mark, row.state, I18n.t("log_error_messages")[row.error_code.to_i]]
         end
       end
