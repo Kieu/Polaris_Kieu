@@ -921,3 +921,25 @@ en:
     terms_and_conditions: "Terms And Conditions"
     terms_and_conditions_link: "http://www.septeni.co.jp/en/terms/index.html"
 
+  export_click_logs:
+    label: Export CLick log
+    click_utime: "Click date time"
+    click_id: 'Click ID'
+    client_name: 'Client name'
+    promotion_name: 'Promotion name'
+    media_name: 'Media name'
+    account_name: 'Account name'
+    campaign_name: 'Campaign name'
+    ad_group: 'Ad group'
+    ad_name: 'Ad name'
+    request_uri: 'request_uri'
+    redirect_url: 'redirect_url'
+    session_id: 'SESSIONID'
+    media_session: 'Media session'
+    os: 'OS'
+    user_agent: 'User agent'
+    remote_ip: 'Remote IP'
+    referer: 'Referer'
+    mark: 'Mark'
+    ok_ng: 'OK/NG'
+    error_code: 'Error code'
