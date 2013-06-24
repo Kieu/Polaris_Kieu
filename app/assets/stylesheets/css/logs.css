@@ -91,6 +91,8 @@ table.user_add tbody td {
     margin: 0;
     padding: 5px 0 0 5px;
     width: 205px;
+    margin-top:5px;
+    margin-left: 10px;
 	    border: 1px solid #3aa2bc;
 }
 
@@ -317,7 +319,7 @@ table.user_add tbody td {
    タブの切り替え
    ========================================================================== */
 #conversion_inner{
-	margin-top:10px;
+	margin-top:30px;
 	}
 
 	.contentNavi li.pre a{
