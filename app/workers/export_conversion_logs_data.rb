@@ -77,7 +77,7 @@ class ExportConversionLogsData
       display_campaigns.each do | campaign |
         display_campaigns_list.store(campaign.id, campaign.name)
       end  
-      os = [ I18n.t("conversion.conversion_category.app.os.ios"), I18n.t("conversion.conversion_category.app.os.android")]
+      os = { 1 => I18n.t("conversion.conversion_category.app.os.ios"), 2 => I18n.t("conversion.conversion_category.app.os.android"), 9 => I18n.t("conversion.conversion_category.app.os.other")}
       conversion_categories = [I18n.t("conversion.conversion_category.web"), I18n.t("conversion.conversion_category.app.label"), I18n.t("conversion.conversion_category.combination")]
       CSV.open(path_file, "wb") do |csv|
         # make header for CSV file
@@ -92,7 +92,7 @@ class ExportConversionLogsData
             display_groups_list[row.group_id], display_ads_list[row.unit_id],
             row.redirect_url, Time.at(row.click_utime).strftime("%Y/%m/%d %H:%M:%S"), row.click_referrer, row.sales,
             row.volume, row.others, row.verify, row.suid,row.session_id,
-            os[row.device_category.to_i-1], row.repeat_processed_flg, row.log_state,
+            os[row.device_category.to_i], row.repeat_processed_flg, row.log_state,
             row.user_agent, row.remote_ip, row.referrer, row.media_session_id,
             row.mark, row.request_uri, row.send_url, Time.at(row.send_utime).strftime("%Y/%m/%d %H:%M:%S"), I18n.t("log_cv_error_messages")[row.error_code.to_i]]
         end

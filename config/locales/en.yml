@@ -677,6 +677,7 @@ en:
           label:  "OS-Specific: "
           ios: " iOS"
           android: " Android"
+          other: "Other"
         conversion_mode:
           label:  "Conversion mode: "
           all: " All"
@@ -745,8 +746,8 @@ en:
     usually: "Usually"
     show_all: "Show All"
     all: "All"
-    listing_ad: "Listing ad"
-    display_ad: "Display ad"
+    listing_ad: "Listing ads"
+    display_ad: "Display ads"
     affiliate: "Affiliate"
     conversion_time: "Conversion Times"
     conversion_name: "Conversion Name"
