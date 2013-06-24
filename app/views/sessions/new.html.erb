@@ -24,7 +24,7 @@
 
       <% @press_release.each do |press,index| %>
           <ul<%if index == 6 %> class="last-child"<% end %>>
-            <li><span><%= press.release_time %>#{index}</span></li>
+            <li><span><%= press.release_time %>"#{index}"</span></li>
             <li><%= press.content %> </li>
           </ul>
       <% end %>
