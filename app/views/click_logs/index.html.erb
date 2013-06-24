@@ -208,7 +208,7 @@
 			reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?media_category_id=" + $(this).val() + "&account_id=" + $("#account_id").val()+ "&start_date=" + start_date + "&end_date=" + end_date);
 		});
 		$("#account_id").change(function(){
-			reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?media_category_id=" + $("#media_category_id").val() + "&account_id=" + $(this).val()+ "&=" + start_date + "&end_date=" + end_date);
+			reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?media_category_id=" + $("#media_category_id").val() + "&account_id=" + $(this).val()+ "&=start_date" + start_date + "&end_date=" + end_date);
 		});
 
 	//$('tr#row-g1 td:nth-child('+(11+'n-'+(11))+')').remove();

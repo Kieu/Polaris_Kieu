@@ -43,7 +43,9 @@ class ExportClickLogsData
         select("id, name")
       display_campaigns = DisplayCampaign.where(promotion_id: options['promotion_id']).
         select("id, name")
-        
+      
+      I18n.locale = 'ja'
+      
       os = { 1 => I18n.t("conversion.conversion_category.app.os.ios"), 2 => I18n.t("conversion.conversion_category.app.os.android"), 9 => I18n.t("conversion.conversion_category.app.os.other")}
       CSV.open(path_file, "wb") do |csv|
         # make header for CSV file
