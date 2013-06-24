@@ -12,9 +12,7 @@ class BackgroundJobsController < ApplicationController
       bom = "\xFF\xFE".force_encoding("UTF-16LE")
       content = File.open(path,'rb')
       output = content.read
-      send_data(bom + output.encode("UTF-16LE"),
-                :type => 'text/csv',
-                :filename => filename: job.filename)
+      send_data(bom + output.encode("UTF-16LE"), :type => 'text/csv', :filename => job.filename)
       #send_file(path, filename: job.filename, :type => "text/csv; charset=utf-16le", :disposition => "attachment")
     end
   end
