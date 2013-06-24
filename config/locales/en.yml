@@ -677,6 +677,7 @@ en:
           label:  "OS-Specific: "
           ios: " iOS"
           android: " Android"
+          other: "Other"
         conversion_mode:
           label:  "Conversion mode: "
           all: " All"

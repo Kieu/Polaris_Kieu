@@ -82,7 +82,7 @@ class ConversionPromotionLogsController < ApplicationController
     ads = DisplayAd.select("id, name")
     conversions = Conversion.select("id, conversion_name")
     conversion_categories = [I18n.t("conversion.conversion_category.web"), I18n.t("conversion.conversion_category.app.label"), I18n.t("conversion.conversion_category.combination")]
-    os = [I18n.t("conversion.conversion_category.app.os.android"), I18n.t("conversion.conversion_category.app.os.ios")]
+    os = { 1 => I18n.t("conversion.conversion_category.app.os.ios"), 2 => I18n.t("conversion.conversion_category.app.os.android"), 9 => I18n.t("conversion.conversion_category.app.os.other")}
     rows = Array.new
     conversion_logs.each do |conversion_log|
       rows << {id: conversion_log.id, cell: {conversion_utime: Time.at(conversion_log.conversion_utime).strftime("%Y/%m/%d %H:%M:%S"),
@@ -101,7 +101,7 @@ class ConversionPromotionLogsController < ApplicationController
                                              verify: conversion_log.verify,
                                              suid: conversion_log.suid,
                                              session_id: conversion_log.session_id,
-                                             os: os[conversion_log.device_category.to_i-1],
+                                             os: os[conversion_log.device_category.to_i],
                                              repeat: conversion_log.repeat_processed_flg,
                                              log_state: conversion_log.log_state,
                                              sales: conversion_log.sales,

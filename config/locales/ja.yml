@@ -697,6 +697,7 @@ ja:
           label:  "OS指定: "
           ios: " iOS"
           android: " Android"
+          other: "Other"
         conversion_mode:
           label:  "計測媒体: "
           all: " 全て"
