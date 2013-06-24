@@ -28,6 +28,7 @@ class ConversionPromotionLogsController < ApplicationController
   end
 
   def get_conversion_logs_list
+    
     start_date = params[:start_date].strip
     end_date = params[:end_date].strip
     promotion_id = params[:query]
@@ -76,28 +77,86 @@ class ConversionPromotionLogsController < ApplicationController
   end
 
   def get_rows conversion_logs
-    accounts = Account.select("id, account_name")
     medias = Media.select("id, media_name")
-    campaigns = DisplayCampaign.select("id, name")
-    ad_groups = DisplayGroup.select("id, name")
-    ads = DisplayAd.select("id, name")
+    medias_list = Hash.new 
+    medias.each do | media |
+      medias_list.store(media.id, media.media_name)
+    end
+    
+    display_groups = DisplayGroup.where(promotion_id: params[:query]).select("id, name")
+    display_groups_list = Hash.new
+    display_groups.each do | group |
+      display_groups_list.store(group.id, group.name)
+    end
+    display_ads = DisplayAd.where(promotion_id: params[:query]).select("id, name")
+    display_ads_list = Hash.new
+    display_ads.each do | ads |
+      display_ads_list.store(ads.id, ads.name)
+    end 
+    display_campaigns = DisplayCampaign.where(promotion_id: params[:query]).select("id, name")
+    display_campaigns_list = Hash.new
+    display_campaigns.each do | campaign |
+      display_campaigns_list.store(campaign.id, campaign.name)
+    end 
+    
+    accounts = Account.where(promotion_id: params[:query]).select("id,account_name")
+    accounts_list = Hash.new
+    accounts.each do |account| 
+      accounts_list.store(account.id, account.account_name)
+    end  
+    
     conversions = Conversion.select("id, conversion_name")
     conversion_categories = [I18n.t("conversion.conversion_category.web"), I18n.t("conversion.conversion_category.app.label"), I18n.t("conversion.conversion_category.combination")]
     os = { 1 => I18n.t("conversion.conversion_category.app.os.ios"), 2 => I18n.t("conversion.conversion_category.app.os.android"), 9 => I18n.t("conversion.conversion_category.app.os.other")}
     rows = Array.new
     conversion_logs.each do |conversion_log|
+      if conversion_log.media_id && conversion_log.media_id.to_i > 0
+        media_name = medias_list[conversion_log.media_id.to_i]
+      else
+        media_name = ''
+      end
+      
+      if conversion_log.account_id && conversion_log.account_id.to_i > 0
+        account_name = accounts_list[conversion_log.account_id.to_i]
+      else
+        account_name = ''
+      end
+      
+      if conversion_log.campaign_id && conversion_log.campaign_id.to_i > 0
+        campaign_name = display_campaigns_list[conversion_log.campaign_id.to_i]
+      else
+        campaign_name = ''
+      end
+      
+      if conversion_log.group_id && conversion_log.group_id.to_i > 0
+        group_name = display_groups_list[conversion_log.group_id.to_i]
+      else
+        group_name = ''
+      end
+      
+      if conversion_log.unit_id && conversion_log.unit_id.to_i > 0
+        ads_name = display_ads_list[conversion_log.unit_id.to_i]
+      else
+        ads_name = ''
+      end
+      if conversion_log.click_utime
+        click_utime = Time.at(conversion_log.click_utime).strftime("%Y/%m/%d %H:%M:%S")
+      else
+        click_utime = ''
+      end
+      
       rows << {id: conversion_log.id, cell: {conversion_utime: Time.at(conversion_log.conversion_utime).strftime("%Y/%m/%d %H:%M:%S"),
                                              conversion_id: conversions.find_by_id(conversion_log.conversion_id).conversion_name,
                                              conversion_category: conversion_categories[conversion_log.conversion_category.to_i-1],
                                              tracking_type: I18n.t("log_track_type")[conversion_log.track_type.to_i-1],
                                              cv_type: I18n.t("log_repeat_flg")[conversion_log.repeat_flg.to_i],
                                              approval_status: conversion_log.approval_status,
-                                             media_id: medias.find_by_id(conversion_log.media_id).media_name,
-                                             account_id: accounts.find_by_id(conversion_log.account_id).account_name,
-                                             campaign_id: campaigns.find_by_id(conversion_log.campaign_id).name,
-                                             group_id: ad_groups.find_by_id(conversion_log.group_id).name,
-                                             unit_id: ads.find_by_id(conversion_log.unit_id).name,
-                                             click_utime: Time.at(conversion_log.click_utime).strftime("%Y/%m/%d %H:%M:%S"),
+                                             media_id: media_name,
+                                             account_id: account_name,
+                                             campaign_id: campaign_name,
+                                             group_id: group_name,
+                                             unit_id: ads_name,
+                                             click_utime: click_utime,
                                              sales: conversion_log.sales,
                                              verify: conversion_log.verify,
                                              suid: conversion_log.suid,
