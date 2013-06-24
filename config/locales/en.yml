@@ -904,7 +904,7 @@ en:
   Affiliate: "Affiliate"
   CV(first): "CV(first)"
   CV(repeat): "CV(repeat)"
-  CV: "CV"
+  CV: "CV(total)"
   CVR: "CVR"
   CPA: "CPA"
   ASSIST: "ASSIST"

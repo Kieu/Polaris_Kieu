@@ -385,13 +385,39 @@ a.bread_scrumb_link {
     });
     
     $(".result_click_left").click(function(){
-    	left = $(this).attr("id").split("_")[2] + "_" + $(this).attr("col");;
-    	$("#chart_left").text(left);
+    	left = $(this).attr("id").split("_")[2] + "_" + $(this).attr("col");
+    	if ($.cookie("locale") == "ja")
+    	{
+	    	if ($(this).attr("col")=="CV"){
+	    		$("#chart_left").text($(this).attr("id").split("_")[2] + "_CV(total)");
+	    	}
+	    	if ($(this).attr("col")=="CV(first)"){
+	    		$("#chart_left").text($(this).attr("id").split("_")[2] + "_初回CV");
+	    	}
+	    	if ($(this).attr("col")=="CV(repeat)"){
+	    		$("#chart_left").text($(this).attr("id").split("_")[2] + "_リピートCV");
+	    	}
+	    }else{
+	    	$("#chart_left").text(left);
+	    }
     	draw_chart(data[left], data[right], left,right, categories)
     });
     $(".result_click_right").click(function(){
-    	right = $(this).attr("id").split("_")[2] + "_" + $(this).attr("col");;
-    	$("#chart_right").text(right);
+    	right = $(this).attr("id").split("_")[2] + "_" + $(this).attr("col");
+    	if ($.cookie("locale") == "ja")
+    	{
+	    	if ($(this).attr("col")=="CV"){
+	    		$("#chart_right").text($(this).attr("id").split("_")[2] + "_CV(total)");
+	    	}
+	    	if ($(this).attr("col")=="CV(first)"){
+	    		$("#chart_right").text($(this).attr("id").split("_")[2] + "_初回CV");
+	    	}
+	    	if ($(this).attr("col")=="CV(repeat)"){
+	    		$("#chart_right").text($(this).attr("id").split("_")[2] + "_リピートCV");
+	    	}
+	    }else{
+	    	$("#chart_right").text(right);
+	    }
     	draw_chart(data[left], data[right], left,right, categories)
     });
     
