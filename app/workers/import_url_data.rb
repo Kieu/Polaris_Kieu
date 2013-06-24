@@ -366,7 +366,7 @@ class ImportUrlData
         error.write("Line #{line_num}: Ad ID needs to be less than 255 letters. \n")
       end
 
-      if array_identifer.include?(row[AD_ID].to_i)
+      if array_identifer.include?(row[AD_ID])
         error_num += 1
         error.write("Line #{line_num}: The Ad ID is already used. \n")
       end
@@ -376,7 +376,7 @@ class ImportUrlData
         error.write("Line #{line_num}: The Ad ID includes invalid letters. \n")
       end
 
-      if array_ad_id_insert.count > 0 && array_ad_id_insert.include?(row[AD_ID].to_i)
+      if array_ad_id_insert.count > 0 && array_ad_id_insert.include?(row[AD_ID])
         error_num += 1
         error.write("Line #{line_num}: The Ad ID is used in the same file. \n")
       end
