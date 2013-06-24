@@ -43,7 +43,7 @@ $(function(){
         <tr>
           <th><%= f.label t("client.contract_type.label") %></th>
           <td><%= f.radio_button :contract_type, 0, class: "prevent_change" %> <%= I18n.t("client.contract_flg.standard_plan") %></td>
-          <td><%= f.radio_button :contract_type, 1, class: "prevent_change" %> <%= I18n.t("client.contract_flg.premium_plan") %></td>
+          <td><div style="width: 215px;"><%= f.radio_button :contract_type, 1, class: "prevent_change" %> <%= I18n.t("client.contract_flg.premium_plan") %></div></td>
         </tr>
       </table>
       <div class="user_info_add">
