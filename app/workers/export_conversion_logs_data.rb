@@ -10,7 +10,7 @@ class ExportConversionLogsData
     # file name fomat: {user_id}_export_cv_logs_{current_date}.csv    Settings.EXPORT_CV_LOGS
     #options = Hash.new('promotion_id' => '1', 'user_id' => '1', 'conversion_id' => '', 'media_category_id' => '', 'account_id' => '', 'start_date' => '20130401', 'end_date' => '20130620', 'show_error' => '1')
     promotion = Promotion.find(options['promotion_id'])
-    file_name = promotion.promotion_name + "_CV_" +
+    file_name = promotion.roman_name + "_CV_" +
     Time.now.strftime("%Y%m%d_%H%M%S") + Settings.file_type.CSV
     path_file = Settings.export_conversion_logs_path + file_name
     if File.exist?(path_file)
@@ -102,7 +102,7 @@ class ExportConversionLogsData
        volume = File.size(path_file)
        size_field = file_size_fomat volume
        background_job.size = size_field
-       background_job.breadcrumb = options[:breadcrumb]
+       background_job.breadcrumb = options['breadcrumb']
        background_job.status = Settings.job_status.SUCCESS
        background_job.save!
     rescue
