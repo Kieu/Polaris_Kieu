@@ -1,6 +1,6 @@
 <table border="1" bordercolor="#b5b5b5" cellpadding="0" class="promotion_table" id="promotion_table">
 <tr><td>
-<table>
+<table  border="1" bordercolor="#b5b5b5" cellpadding="0">
 <tr>
 	<td rowspan="2" class="table_header"><div style="width: 150px;"><%= I18n.t("promotion.media") %></div></td>
 	<td rowspan="2" class="table_header"><div style="width: 200px;"><%= I18n.t("promotion.account") %></td>
@@ -19,14 +19,14 @@
 </table>
 </td></tr>
 <tr><td>
-<table id="promotions_scroll">
+<table id="promotions_scroll"  border="1" bordercolor="#b5b5b5" cellpadding="0">
 <tr>
   <td rowspan="2" class="table_header"><div style="width: 150px;"></div></td>
   <td rowspan="2" class="table_header"><div style="width: 200px;"></div></td>
   <% Settings.promotions_options.each_with_index do |option, index|%>
       <% if cookies[:promotion][index] == "1" %>
           <%= content_tag(:td, rowspan: "2", class: "table_header") do %>
-              <% content_tag(:div, option, style: "width: 100px;") %>
+              <% content_tag(:div, "", style: "width: 100px;") %>
           <% end %>
       <% end %>
   <% end %>
