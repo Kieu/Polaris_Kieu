@@ -59,12 +59,14 @@ class PromotionsController < ApplicationController
     @prevent = "0"
     @promotion = @array_promotion.find(params[:id])
     params[:promotion_id] = params[:id]
+    @promotion_id = params[:id]
     @promotion_name = @promotion.promotion_name
   end
 
   def update
     @prevent = "1"
     @promotion = @array_promotion.find(params[:id])
+    @promotion_id = params[:id]
     params[:promotion_id] = params[:id]
     @promotion_name = params[:promotion_name]
     @promotion.update_user_id = current_user.id

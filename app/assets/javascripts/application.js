@@ -15,22 +15,10 @@
 //= require_directory .
 //= require zeroclipboard
 $(function(){
-    $('#clients_list').slimScroll({
-        color: '#0087A9',
-        size: '8px',
-        alwaysVisible: false
-    });
+    $('#clients_list').niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
 
-    $('#promotions_list').slimScroll({
-        color: '#0087A9',
-        size: '8px',
-        alwaysVisible: false
-    });
-    $('#conversions_list').slimScroll({
-        color: '#0087A9',
-        size: '8px',
-        alwaysVisible: false
-    });
+    $('#promotions_list').niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
+    $('#conversions_list').niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
     $("#promotion_tables").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
     $("#conversion_scroll").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
 });
