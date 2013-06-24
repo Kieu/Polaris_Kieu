@@ -250,6 +250,8 @@ h1,h2,p.tutInfo{
 .text-validationError
 {
     color:#FF0000;
+    font-size: 13px;
+    font-weight: normal;
 }
 /*
 input[type=text]{
