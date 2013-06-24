@@ -1,41 +1,21 @@
 <script type="text/javascript">
-  //ChiliBook.recipeFolder = "./lib/chili/";
-  $(document).ready(function (){
-    $("#current_rev").html("v"+$.mcDropdown.version);
-    //$("#category").mcDropdown("#categorymenu");
-    //$("#category2").mcDropdown("#categorymenu2");
-    function add_category() {
-		$("#cv_num").val(parseInt($("#cv_num").val()) + 1);
-		$("#cv_category").append("<tr><td><select name='op[]'  class='ta-c mcdropdown_spacing'>"+
-								 "<option value='+'>+</option><option value='-'>−</option><option value='x'>×</option><option value='÷'>÷</option></select></td>" +
-								 "<td><input type='hidden' name='cv[]' id='cv" + $("#cv_num").val() + "' value='' />" +
-								 "<input type='hidden' name='cv_kind[]' id='cv_kind" + $("#cv_num").val() + "' value='' />" + 
-	      						 "<input type='text' name='category"+ $("#cv_num").val() + "' id='category"+ $("#cv_num").val() + "' value='' onclick='get_category(" + $("#cv_num").val() + ");' /></td></tr>");
-	}
-	
-  });
-  
-  function get_category(id) {
-	$('#current_cv').val(id);
-	$.colorbox({width:"580px", inline:true, href:"#inline_logs"});
-  }
+  $(function(){
+    prevent_change = "<%= @prevent %>";
+    $(".prevent_change").change(function(){
+      prevent_change = "1"
+    })
+  })
 </script>
-
 <%= render "layouts/prevent_change_page_new" %>
-
 <% content_for :stylesheet_includes do %>
   <%= stylesheet_link_tag "css/common" %>
-    <%= stylesheet_link_tag "css/conversion" %>
-  <%= stylesheet_link_tag "css/ui.tabs" %>
-  <%= stylesheet_link_tag "css/jquery.mcdropdown.min" %>
-    <%= javascript_include_tag "js/jquery.chili-2.2.js" %>
-    <%= javascript_include_tag "js/jquery.bgiframe.js" %>
-    <%= javascript_include_tag "js/jquery.mcdropdown.min" %>
+  <%= stylesheet_link_tag "css/conversion" %>
 <% end %>
+<%= javascript_include_tag "js/jquery.chili-2.2.js" %>
+<%= javascript_include_tag "js/jquery.bgiframe.js" %>
 <%= javascript_include_tag "js/ui.core" %>
-<%= javascript_include_tag "js/ui.tabs" %>
 <% content_for :sidebar do %>
-    <%= render partial: "layouts/sidebar", locals: {object: @conversions} %>
+  <%= render partial: "layouts/sidebar", locals: {object: @conversions} %>
 <% end %>
 <ul class="contentNavi">
   <li class="pre">
@@ -58,51 +38,46 @@
     <div id="fragment-1">
       <%= form_for @conversion do |f| %>
       <script type="text/javascript">
-      if($("#conversion_track_method_3").is(':checked')) {
-              $("#url").removeAttr('disabled');
-            }
-		  function render_ios(){
-		    $('#method_area').html('<%=j render "app_install_ios", f: f %>');
-		  }
-		  function render_android(){
-			$('#method_area').html('<%=j render "app_install_android", f: f %>');
-		  }
-		  function render_fb_app_id(){
-		    $('#fb_app_id').html('');
-		    $('#fb_app_id').html('<%=j render "app_install_fb_app_id", f: f %>');
-		    $('#judging_box').html('<%=j render "app_install_judging", f: f %>');
-		  }
-		  function remove_fb_app_id() {
-		  	$('#fb_app_id').html('');
-		  }
-          function render_web(){
-            $('#category_area').html('');
-            $('#category_area').html('<%=j render "web", f: f %>');
+        if($("#conversion_track_method_4").is(':checked')) {
+          $("#url").removeAttr('disabled');
+        }
+        function render_ios(){
+          $('#method_area').html('<%=j render "app_install_ios", f: f %>');
+        }
+        function render_android(){
+          $('#method_area').html('<%=j render "app_install_android", f: f %>');
+        }
+        function render_fb_app_id(){
+          $('#fb_app_id').html('<%=j render "app_install_fb_app_id", f: f %>');
+          $('#judging_box').html('<%=j render "app_install_judging", f: f %>');
+        }
+        function remove_fb_app_id() {
+          $('#fb_app_id').html('');
+          $('#judging_box').html('');
+        }
+        function render_web(){
+          $('#category_area').html('<%=j render "web", f: f %>');
+        }
+        function render_app(){
+          $('#category_area').html('<%=j render "app", f: f %>');
+        }
+        function render_combination(){
+          $('#category_area').html('<%=j render "combination", f: f %>');
+        }
+        function check_track_method() {
+          if($("#conversion_track_method_4").is(':checked')) {
+            $("#url").removeAttr('disabled');
+          } else {
+            $("#url").attr('disabled','disabled');
           }
-          function render_app(){
-            $('#category_area').html('<%=j render "app", f: f %>');
-          }
-          function render_combination(){
-            $('#category_area').html('');
-            $('#category_area').html('<%=j render "combination", f: f %>');
-          }
-          function check_track_method() {
-          	if($("#conversion_track_method_3").is(':checked')) {
-          		$("#url").removeAttr('disabled');
-          	} else {
-          		$("#url").attr('disabled','disabled');
-          	}
-          }
-		  function render_install(){
-		    $('#app_type_area').html('');
-		    $('#app_type_area').html('<%=j render "app_install", f: f %>');
-		  }
-		  function render_action_in_app(){
-		    $('#app_type_area').html('');
-		    $('#app_type_area').html('<%=j render "app_action_in_app", f: f %>');
-		  }
-		  
-		</script>
+        }
+        function render_install(){
+          $('#app_type_area').html('<%=j render "app_install", f: f %>');
+        }
+        function render_action_in_app(){
+          $('#app_type_area').html('<%=j render "app_action_in_app", f: f %>');
+        }
+      </script>
         <form>
           <%= hidden_field_tag :promotion_id, params[:promotion_id] %>
           <div class="conversion_form">
@@ -112,25 +87,25 @@
                 <tr>
                   <th><%= f.label I18n.t("conversion.conversion_name") %></th>
                   <td colspan="4">
-                    <%= f.text_field :conversion_name, maxlength: 255, id: "name", class: "input-text" %>
+                    <%= f.text_field :conversion_name, maxlength: 255, id: "name", class: "input-text prevent_change" %>
                   </td>
                 </tr>
                 <tr>
                   <th><%= f.label I18n.t("conversion.roman_name") %></th>
                   <td colspan="4">
-                    <%= f.text_field :roman_name, maxlength: 255, id: "name_e", class: "input-text" %>
+                    <%= f.text_field :roman_name, maxlength: 255, id: "name_e", class: "input-text prevent_change" %>
                   </td>
                 </tr>
                 <tr>
                   <th><%= f.label I18n.t("conversion.conversion_category.label") %></th>
                   <td><label>
-                    <%= f.radio_button :conversion_category, 1, checked: true, onclick: "render_web();" %> <%= I18n.t("conversion.conversion_category.web") %>
+                    <%= f.radio_button :conversion_category, 1, checked: true, onclick: "render_web();", class: "prevent_change" %> <%= I18n.t("conversion.conversion_category.web") %>
                   </label></td>
                   <td><label>
-                    <%= f.radio_button :conversion_category, 2, onclick: "render_app();" %> <%= I18n.t("conversion.conversion_category.app.label") %>
+                    <%= f.radio_button :conversion_category, 2, onclick: "render_app();", class: "prevent_change" %> <%= I18n.t("conversion.conversion_category.app.label") %>
                   </label></td>
                   <td><label>
-                    <%= f.radio_button :conversion_category, 3, onclick: "render_combination();" %><%= I18n.t("conversion.conversion_category.combination") %>
+                    <%= f.radio_button :conversion_category, 3, onclick: "render_combination();", class: "prevent_change" %><%= I18n.t("conversion.conversion_category.combination") %>
                   </label></td>
                   <td>&nbsp;</td>
                 </tr>
@@ -159,10 +134,11 @@
   </div>
 </div>
 <script type="text/javascript">
-	<% if @conversion.errors[:url].count > 0%>
+	<% if @conversion.errors[:url].count > 0 %>
     $("#url").removeAttr('disabled');
   <% end %>
-  <% if @conversion.conversion_mode.to_i == 2%>
+  <% if @conversion.conversion_mode.to_i == 2 %>
 	  $('#fb_app_id').html('');
+	  $('#judging_box').html('');
   <% end %>
 </script>

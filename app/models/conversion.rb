@@ -12,22 +12,23 @@ class Conversion < ActiveRecord::Base
   validates :roman_name, presence: true, uniqueness: {scope: :promotion_id}
   validates :conversion_category, presence: true
   validates :track_type, presence: true, if: :check_app
-  validates_inclusion_of :session_period, :in => 1..90, if: :check_track_type1
+  validates_inclusion_of :session_period, in: 1..90, if: :check_track_type_2
   validates :unique_def, presence: true, if: :check_conversion_category
-  validates :os, presence: true, if: :check_track_type
-  validates :conversion_mode, presence: true, if: :check_track_type
-  validates :duplicate, presence: true, if: :check_track_type
-  validates :track_method, presence: true, if: :check_track_type
+  validates :os, presence: true, if: :check_track_type_1
+  validates :conversion_mode, presence: true, if: :check_track_type_1
+  validates :duplicate, presence: true, if: :check_track_type_1
+  validates :track_method, presence: true, if: :check_track_type_1
   validates :facebook_app_id, presence: true , if: :check_fb_id_valid
-  validates :facebook_app_id, :numericality => { :only_integer => true}, if: -> conversion {conversion.facebook_app_id.present?}
+  validates :facebook_app_id, format: {with: VALID_NUMBER_REGEX}, if: -> conversion {conversion.facebook_app_id.present?}
   validates :start_point, presence: true, if: :check_web
   validates :conversion_combine, presence: true, if: :check_combination
   validates :url, length: {maximum: 255}, presence: true, if: :check_track_method
-  validates :sale_unit_price, length: {maximum: 10}, :numericality => { :only_integer => true}, if: :check_sales?
-  # validates_inclusion_of :sale_unit_price, :in => 1..2147483647, if: :check_sales?, if: -> conversion { conversion.sale_unit_price.is_a? Integer)
-  scope :order_by_conversion_name, ->{order :conversion_name}
+  validates :sale_unit_price, length: {maximum: 11}, format: {with: VALID_NUMBER_REGEX}, if: :check_sales?
+
+  scope :order_by_roman_name, ->{order :roman_name}
   scope :order_by_id, ->{order :id}
   scope :get_by_promotion_id, lambda {|promotion_id| where(promotion_id: promotion_id)}
+
   def create_mv
     mv = ""
     if (client_id = self.promotion.client.id.to_s(36)).length < 8
@@ -61,16 +62,16 @@ class Conversion < ActiveRecord::Base
     conversion_category.to_i == 3
   end
 
-  def check_track_type
+  def check_track_type_1
     track_type.to_i == 1
   end
 
-  def check_track_type1
+  def check_track_type_2
     conversion_category.to_i == 2 && track_type.to_i == 2
   end
 
   def check_track_method
-    track_method.to_i == 3
+    track_method.to_i == 4
   end
 
   def check_conversion_mode
@@ -84,5 +85,4 @@ class Conversion < ActiveRecord::Base
   def check_sales?
     !sale_unit_price.blank? 
   end
-
 end

@@ -499,6 +499,8 @@ ja:
               too_short: ! 'Facebook app %{count}文字以上で入力してください。'
               wrong_length: ! 'Facebook app %{count}文字で入力してください。'
               acceptance: Facebook app チェックボックスを選択してください。
+            session_period:
+              inclusion: "計測期間は１日以降９０日以下で記入下さい。"
         promotion:
           attributes:
             promotion_name:
@@ -682,32 +684,32 @@ ja:
     conversion_message: "表示したいコンバージョンを選択してください。"
     user_information: "ユーザー情報"
     delete: "削除"
-    conversion_name: "コンバージョン名: "
-    roman_name: "コンバージョン名(英語): "
+    conversion_name: "コンバージョン名： "
+    roman_name: "コンバージョン名(英語)： "
     conversion_category:
-      label: "成果カテゴリ: "
+      label: "成果カテゴリ： "
       web: " WEB"
       app:
         label: " APP"
         track_type:
-          label: "計測タイプ: "
+          label: "計測タイプ： "
           install: " Install"
           app_action: "アプリ内アクション"
         os:
-          label:  "OS指定: "
+          label:  "OS指定： "
           ios: " iOS"
           android: " Android"
         conversion_mode:
-          label:  "計測媒体: "
+          label:  "計測媒体： "
           all: " 全て"
           facebook: " Facebookのみ"
           other: " その他広告"
         duplicate:
-          label: "重複排除: "
+          label: "重複排除： "
           label1: " あり"
           label2: " なし"
         track_method:
-          label: "計測方法: "
+          label: "計測方法： "
           white: " White"
           welcome: " Welcome"
           custom: 
@@ -716,43 +718,43 @@ ja:
           install_referrer: " Install Referrer"
         app_id:
           label: "アプリID "
-          facebook: "(Facebook): "
+          facebook: "(Facebook)： "
         option:
           label: "<オプション> "
-          judging: "審査フラグ: "
+          judging: "審査フラグ： "
           configure: " 設定する"
-        sale_unit_price: "売上単価: "
+        sale_unit_price: "売上単価： "
         reward_form:
-          label: "報酬型式: "
+          label: "報酬型式： "
           straight_line_type: "  定額型"
           declining_balance_type: " 定率型"
         session:
-          label: "セッション保持期間: "
+          label: "セッション保持期間： "
           day: "日"
       combination: " 組み合わせ"
     deduplicated:
-      label: "重複排除: "
+      label: "重複排除： "
       label1: " あり"
       label2: " なし"
-    unique_definition: "ユニーク定義: "
+    unique_definition: "ユニーク定義： "
     flash_messages:
       success: " コンバージョン登録が完了しました"
       update: " コンバージョン編集が完了しました"
     option1:
       label: "<オプション①>　"
       starting_point_setting:
-        label: "起点設定: "
+        label: "起点設定： "
         configure: " 設定する"
         not_configure: " 設定しない"
-      sale_unit_price: "売上単価: "
+      sale_unit_price: "売上単価： "
     option2:
       label: "<オプション②>"
       reward_format:
-        label: "報酬型式: "
+        label: "報酬型式： "
         straight_line_type: " 定額型"
         not_set: " 設定しない"
     combination:
-      pattern: "パターン: "
+      pattern: "パターン： "
       add: "Add"
   log:
     today_text: "今日"

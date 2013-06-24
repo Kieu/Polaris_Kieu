@@ -480,6 +480,8 @@ en:
               too_short: ! 'Facebook app is too short (minimum is %{count} characters)'
               wrong_length: ! 'Facebook app is the wrong length (should be %{count} characters)'
               acceptance: Facebook app must be accepted
+            session_period:
+              inclusion: "Session retention must be from 1 to 90 days"
         promotion:
           attributes:
             promotion_name:
@@ -655,8 +657,8 @@ en:
       success: " Account is created successful"
       update: " Account is updated successful"
   conversion:
-    crumb_add: "Add Conversion"
-    crumb_edit: "Edit Conversion"
+    crumb_add: "Conversion Registration"
+    crumb_edit: "Conversion Edit"
     tag_acquisition: "Tag acquisition"
     conversion_setting: "Conversion setting"
     conversion_message: "Please select the conversion you want to view."
@@ -715,6 +717,9 @@ en:
       label1: " Yes"
       label2: " No"
     unique_definition: "Unique definition: "
+    flash_messages:
+      success: "Conversion created"
+      update: "Conversion updated"
     option1:
       label: "<Option①>　"
       starting_point_setting:
