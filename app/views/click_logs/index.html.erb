@@ -199,13 +199,9 @@
                 end_date = d[1];
                 
                 $("#datepicker").text(start_date + " ~ " + end_date + "▼");
-                //reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?media_category_id=" + $("#media_category_id").val() + "&account_id=" + $("#account_id").val() + "&start_date=" + start_date + "&end_date=" + end_date);
+                reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?media_category_id=" + $("#media_category_id").val() + "&account_id=" + $("#account_id").val() + "&start_date=" + start_date + "&end_date=" + end_date);
                 
-                $("#clicklogs").flexOptions({
-			        url: "<%= get_logs_list_click_logs_path %>",
-			        newp: 1,
-			        params:[{name: 'start_date', value: start_date}, {name: 'end_date', value: end_date}]
-		    	}).flexReload();
+                
     	
             }
         });		
