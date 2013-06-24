@@ -1,5 +1,5 @@
 require 'csv'
-
+# encoding: utf-8
 # export conversion data table from conversion log screen to csv file
 class ExportConversionLogsData
   include Resque::Plugins::Status
@@ -79,7 +79,7 @@ class ExportConversionLogsData
       end  
       os = { 1 => I18n.t("conversion.conversion_category.app.os.ios"), 2 => I18n.t("conversion.conversion_category.app.os.android"), 9 => I18n.t("conversion.conversion_category.app.os.other")}
       conversion_categories = [I18n.t("conversion.conversion_category.web"), I18n.t("conversion.conversion_category.app.label"), I18n.t("conversion.conversion_category.combination")]
-      CSV.open(path_file, "wb") do |csv|
+      CSV.open(path_file, "wb:UTF-8") do |csv|
         # make header for CSV file
         #csv << header_col
         csv << options['header_titles_csv']
