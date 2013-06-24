@@ -14,6 +14,7 @@
 		<%= content_tag(:td, conversion.conversion_name, colspan: colspan, class: "table_header") if colspan > 0 %>
 	<% end %>
 </tr>
+<div id="promotions_scroll">
 <tr>
 	<% @conversions.each do |conversion|%>
 		<% colspan = cal_cv(conversion.id) %>
@@ -299,4 +300,5 @@
         <% end %>
     <% end %>
 <% end %>
+</div>
 </table>
