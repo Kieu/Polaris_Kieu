@@ -179,7 +179,21 @@ function draw_chart(data_left, data_right, left, right, categories){
 		},
 		tooltip: { // マウスオーバーした際に表示する文書を指定
 			formatter: function() {
-				return '<b>'+ this.series.name +'</b><br/>'+
+				name = this.series.name;
+				tmp = name.split("_");
+				if ($.cookie("locale") == "ja")
+		    	{
+			    	if (tmp[1] == "CV"){
+			    		name = tmp[0] + "_CV(total)";
+			    	}
+			    	if (tmp[1] == "CV(first)"){
+			    		name = tmp[0] + "_初回CV";
+			    	}
+			    	if (tmp[1] == "CV(repeat)"){
+			    		name = tmp[0] + "_リピートCV";
+			    	}
+			    }
+				return '<b>'+ name +'</b><br/>'+
 				this.x +': '+ graphNumberFormat(this.y, this.series.name);
 			}
 		},
