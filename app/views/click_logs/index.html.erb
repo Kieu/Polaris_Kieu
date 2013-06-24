@@ -193,7 +193,7 @@
                 end_date = d[1];
                 
                 $("#datepicker").text(start_date + " ~ " + end_date + "▼");
-                //reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?cid=" + $("#media_category_id").val() + "&account_id=" + $("#account_id").val() + "&start_date=" + start_date + "&end_date=" + end_date);
+                //reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?media_category_id=" + $("#media_category_id").val() + "&account_id=" + $("#account_id").val() + "&start_date=" + start_date + "&end_date=" + end_date);
                 
                 $("#clicklogs").flexOptions({
 			        url: "<%= get_logs_list_click_logs_path %>",
@@ -205,10 +205,10 @@
         });		
 		
 		$("#media_category_id").change(function(){
-			reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?cid=" + $(this).val() + "&account_id=" + $("#account_id").val()+ "&start_date=" + start_date + "&end_date=" + end_date);
+			reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?media_category_id=" + $(this).val() + "&account_id=" + $("#account_id").val()+ "&start_date=" + start_date + "&end_date=" + end_date);
 		});
 		$("#account_id").change(function(){
-			reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?cid=" + $("#media_category_id").val() + "&account_id=" + $(this).val()+ "&=" + start_date + "&end_date=" + end_date);
+			reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?media_category_id=" + $("#media_category_id").val() + "&account_id=" + $(this).val()+ "&=" + start_date + "&end_date=" + end_date);
 		});
 
 	//$('tr#row-g1 td:nth-child('+(11+'n-'+(11))+')').remove();
@@ -259,7 +259,7 @@
 	    } else {
 	    	$.cookie("cser",0);
 	    }
-	    //reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?cid=" + $("#media_category_id").val() + "&account_id=" + $("#account_id").val() + "&start_date=" + start_date + "&end_date=" + end_date);
+	    //reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?media_category_id=" + $("#media_category_id").val() + "&account_id=" + $("#account_id").val() + "&start_date=" + start_date + "&end_date=" + end_date);
 	    
 	    $("#clicklogs").flexOptions({
 	        url: "<%= get_logs_list_click_logs_path %>",
@@ -282,7 +282,7 @@
 		//$("#cv_logs_0").attr("src","/assets/btn_box_add.gif");
 		//location.href = location.href;
 		$('#page1').html($('#page12').html());
-		reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?cid=" + $("#media_category_id").val() + "&account_id=" + $("#account_id").val() + "&start_date=" + start_date + "&end_date=" + end_date);
+		reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?media_category_id=" + $("#media_category_id").val() + "&account_id=" + $("#account_id").val() + "&start_date=" + start_date + "&end_date=" + end_date);
 
 	})
 	$(document).on('click', "#redisplay_all", function(){
@@ -291,7 +291,7 @@
 		//$("#cv_logs_0").attr("src","/assets/btn_box_add.gif");
 		//location.href = location.href;
 		$('#current_box').html($('#checkall_box').html());
-		reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?cid=" + $("#media_category_id").val() + "&account_id=" + $("#account_id").val() + "&start_date=" + start_date + "&end_date=" + end_date);
+		reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?media_category_id=" + $("#media_category_id").val() + "&account_id=" + $("#account_id").val() + "&start_date=" + start_date + "&end_date=" + end_date);
 	})
 	
 </script>
