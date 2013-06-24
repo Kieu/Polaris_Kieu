@@ -19,7 +19,7 @@ function initialize() {
         var entry = result.feed.entries[i];
 				
 				var is_publicities = /publicities/.test(entry.link);
-				if (result.feed.entries.length == i-1)
+				if (result.feed.entries.length == i+1)
                     htmlstr += "<ul class=" + (is_publicities ? 'last-child' : 'last-child') + ">" + (is_publicities ? "" : "<a href='" + entry.link + "' target=_blank>");
                 else
                     htmlstr += "<ul class=" + (is_publicities ? 'txtlist2' : 'txtlist') + ">" + (is_publicities ? "" : "<a href='" + entry.link + "' target=_blank>");
