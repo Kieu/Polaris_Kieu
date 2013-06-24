@@ -77,7 +77,7 @@ en:
               not_an_integer: Client name is not a interger
               odd: Client name must be odd
               record_invalid: Client name バリデーションに失敗しました。 '%{errors}'
-              taken: Client name すでに登録されています。
+              taken: Client name has already been registered.
               too_long: ! 'Client name is too long (maximum is %{count} characters)'
               too_short: ! 'Client name is too short (minimum is %{count} characters)'
               wrong_length: ! 'Client name is the wrong length (should be %{count} characters)'
@@ -100,7 +100,7 @@ en:
               not_an_integer: Roman name is not a interger
               odd: Roman name must be odd
               record_invalid: Roman name バリデーションに失敗しました。 '%{errors}'
-              taken: Roman name すでに登録されています。
+              taken: Roman name has already been registered.
               too_long: ! 'Roman name is too long (maximum is %{count} characters)'
               too_short: ! 'Roman name is too short (minimum is %{count} characters)'
               wrong_length: ! 'Roman name is the wrong length (should be %{count} characters)'
@@ -136,7 +136,7 @@ en:
               not_an_integer: User name is not a interger
               odd: User name must be odd
               record_invalid: User name バリデーションに失敗しました。 '%{errors}'
-              taken: User name すでに登録されています。
+              taken: User name has already been registered.
               too_long: ! 'User name is too long (maximum is %{count} characters)'
               too_short: ! 'User name is too short (minimum is %{count} characters)'
               wrong_length: ! 'User name is the wrong length (should be %{count} characters)'
@@ -159,7 +159,7 @@ en:
               not_an_integer: Roman name is not a interger
               odd: Roman name must be odd
               record_invalid: Roman name バリデーションに失敗しました。 '%{errors}'
-              taken: Roman name すでに登録されています。
+              taken: Roman name has already been registered.
               too_long: ! 'Roman name is too long (maximum is %{count} characters)'
               too_short: ! 'Roman name is too short (minimum is %{count} characters)'
               wrong_length: ! 'Roman name is the wrong length (should be %{count} characters)'
@@ -167,7 +167,7 @@ en:
             email: 
               blank: "Email address can't be blank"
               invalid: Email address is invalid
-              taken: Email すでに登録されています。
+              taken: Email has already been registered.
             company_id:
               blank: "Person in charge can't be blank"
               too_long: ! 'Person in charge is too long (maximum is %{count} characters)'
@@ -196,7 +196,7 @@ en:
               not_an_integer: Agency name is not a interger
               odd: Agency name must be odd
               record_invalid: Agency name バリデーションに失敗しました。 '%{errors}'
-              taken: Agency name すでに登録されています。
+              taken: Agency name has already been registered.
               too_long: ! 'Agency name is too long (maximum is %{count} characters)'
               too_short: ! 'Agency name is too short (minimum is %{count} characters)'
               wrong_length: ! 'Agency name is the wrong length (should be %{count} characters)'
@@ -219,7 +219,7 @@ en:
               not_an_integer: Roman name is not a interger
               odd: Roman name must be odd
               record_invalid: Roman name バリデーションに失敗しました。 '%{errors}'
-              taken: Roman name すでに登録されています。
+              taken: Roman name has already been registered.
               too_long: ! 'Roman name is too long (maximum is %{count} characters)'
               too_short: ! 'Roman name is too short (minimum is %{count} characters)'
               wrong_length: ! 'Roman name is the wrong length (should be %{count} characters)'
@@ -244,7 +244,7 @@ en:
               not_an_integer: Account name is not a interger
               odd: Account name must be odd
               record_invalid: Account name バリデーションに失敗しました。 '%{errors}'
-              taken: Account name すでに登録されています。
+              taken: Account name has already been registered.
               too_long: ! 'Account name is too long (maximum is %{count} characters)'
               too_short: ! 'Account name is too short (minimum is %{count} characters)'
               wrong_length: ! 'Account name is the wrong length (should be %{count} characters)'
@@ -267,7 +267,7 @@ en:
               not_an_integer: Roman name is not a interger
               odd: Roman name must be odd
               record_invalid: Roman name バリデーションに失敗しました。 '%{errors}'
-              taken: Roman name すでに登録されています。
+              taken: Roman name has already been registered.
               too_long: ! 'Roman name is too long (maximum is %{count} characters)'
               too_short: ! 'Roman name is too short (minimum is %{count} characters)'
               wrong_length: ! 'Roman name is the wrong length (should be %{count} characters)'
@@ -290,7 +290,7 @@ en:
               not_an_integer: Media name is not a interger
               odd: Media name must be odd
               record_invalid: Media name バリデーションに失敗しました。 '%{errors}'
-              taken: Media すでに登録されています。
+              taken: Media has already been registered.
               too_long: ! 'Media name is too long (maximum is %{count} characters)'
               too_short: ! 'Media name is too short (minimum is %{count} characters)'
               wrong_length: ! 'Media name is the wrong length (should be %{count} characters)'
@@ -313,7 +313,7 @@ en:
               not_an_integer: Margin is not a interger
               odd: Margin must be odd
               record_invalid: Margin バリデーションに失敗しました。 '%{errors}'
-              taken: Margin すでに登録されています。
+              taken: Margin has already been registered.
               too_long: ! 'Margin is too long (maximum is %{count} characters)'
               too_short: ! 'Margin is too short (minimum is %{count} characters)'
               wrong_length: ! 'Margin is the wrong length (should be %{count} characters)'
@@ -336,7 +336,7 @@ en:
               not_an_integer: Sync account ID is not a interger
               odd: Sync account ID must be odd
               record_invalid: Sync account ID バリデーションに失敗しました。 '%{errors}'
-              taken: Sync account ID すでに登録されています。
+              taken: Sync account ID has already been registered.
               too_long: ! 'Sync account ID is too long (maximum is %{count} characters)'
               too_short: ! 'Sync account ID is too short (minimum is %{count} characters)'
               wrong_length: ! 'Sync account ID is the wrong length (should be %{count} characters)'
@@ -359,7 +359,7 @@ en:
               not_an_integer: Sync account password is not a interger
               odd: Sync account password must be odd
               record_invalid: Sync account password バリデーションに失敗しました。 '%{errors}'
-              taken: Sync account password すでに登録されています。
+              taken: Sync account password has already been registered.
               too_long: ! 'Sync account password is too long (maximum is %{count} characters)'
               too_short: ! 'Sync account password is too short (minimum is %{count} characters)'
               wrong_length: ! 'Sync account password is the wrong length (should be %{count} characters)'
@@ -384,7 +384,7 @@ en:
               not_an_integer: Conversion name is not a interger
               odd: Conversion name must be odd
               record_invalid: Conversion name バリデーションに失敗しました。 '%{errors}'
-              taken: Conversion name すでに登録されています。
+              taken: Conversion name has already been registered.
               too_long: ! 'Conversion name is too long (maximum is %{count} characters)'
               too_short: ! 'Conversion name is too short (minimum is %{count} characters)'
               wrong_length: ! 'Conversion name is the wrong length (should be %{count} characters)'
@@ -407,7 +407,7 @@ en:
               not_an_integer: Roman name is not a interger
               odd: Roman name must be odd
               record_invalid: Roman name バリデーションに失敗しました。 '%{errors}'
-              taken: Roman name すでに登録されています。
+              taken: Roman name has already been registered.
               too_long: ! 'Roman name is too long (maximum is %{count} characters)'
               too_short: ! 'Roman name is too short (minimum is %{count} characters)'
               wrong_length: ! 'Roman name is the wrong length (should be %{count} characters)'
@@ -430,7 +430,7 @@ en:
               not_an_integer: Sale unit price is not a interger
               odd: Sale unit price must be odd
               record_invalid: Sale unit price バリデーションに失敗しました。 '%{errors}'
-              taken: Sale unit price すでに登録されています。
+              taken: Sale unit price has already been registered.
               too_long: ! 'Sale unit price is too long (maximum is %{count} characters)'
               too_short: ! 'Sale unit price is too short (minimum is %{count} characters)'
               wrong_length: ! 'Sale unit price is the wrong length (should be %{count} characters)'
@@ -453,7 +453,7 @@ en:
               not_an_integer: URL is not a interger
               odd: URL must be odd
               record_invalid: URL バリデーションに失敗しました。 '%{errors}'
-              taken: URL すでに登録されています。
+              taken: URL has already been registered.
               too_long: ! 'URL is too long (maximum is %{count} characters)'
               too_short: ! 'URL is too short (minimum is %{count} characters)'
               wrong_length: ! 'URL is the wrong length (should be %{count} characters)'
@@ -476,7 +476,7 @@ en:
               not_an_integer: Facebook app is not a interger
               odd: Facebook app must be odd
               record_invalid: Facebook app バリデーションに失敗しました。 '%{errors}'
-              taken: Facebook app すでに登録されています。
+              taken: Facebook app has already been registered.
               too_long: ! 'Facebook app is too long (maximum is %{count} characters)'
               too_short: ! 'Facebook app is too short (minimum is %{count} characters)'
               wrong_length: ! 'Facebook app is the wrong length (should be %{count} characters)'
@@ -501,7 +501,7 @@ en:
               not_an_integer: Promotion name is not a interger
               odd: Promotion name must be odd
               record_invalid: Promotion name バリデーションに失敗しました。 '%{errors}'
-              taken: Promotion name すでに登録されています。
+              taken: Promotion name has already been registered.
               too_long: ! 'Promotion name is too long (maximum is %{count} characters)'
               too_short: ! 'Promotion name is too short (minimum is %{count} characters)'
               wrong_length: ! 'Promotion name is the wrong length (should be %{count} characters)'
@@ -524,7 +524,7 @@ en:
               not_an_integer: Roman name is not a interger
               odd: Roman name must be odd
               record_invalid: Roman name バリデーションに失敗しました。 '%{errors}'
-              taken: Roman name すでに登録されています。
+              taken: Roman name has already been registered.
               too_long: ! 'Roman name is too long (maximum is %{count} characters)'
               too_short: ! 'Roman name is too short (minimum is %{count} characters)'
               wrong_length: ! 'Roman name is the wrong length (should be %{count} characters)'
@@ -547,7 +547,7 @@ en:
               not_an_integer: Category is not a interger
               odd: Category must be odd
               record_invalid: Category バリデーションに失敗しました。 '%{errors}'
-              taken: Category すでに登録されています。
+              taken: Category has already been registered.
               too_long: ! 'Category is too long (maximum is %{count} characters)'
               too_short: ! 'Category is too short (minimum is %{count} characters)'
               wrong_length: ! 'Category is the wrong length (should be %{count} characters)'
@@ -570,7 +570,7 @@ en:
               not_an_integer: Tracking period is not a interger
               odd: Tracking period must be odd
               record_invalid: Tracking period バリデーションに失敗しました。 '%{errors}'
-              taken: Tracking period すでに登録されています。
+              taken: Tracking period has already been registered.
               too_long: ! 'Tracking period is too long (maximum is %{count} characters)'
               too_short: ! 'Tracking period is too short (minimum is %{count} characters)'
               wrong_length: ! 'Tracking period is the wrong length (should be %{count} characters)'
@@ -855,7 +855,7 @@ en:
   log_error_messages: ["[None]", "No redirect information", "Request parameters not correct", "DB error [*not yet use]", "Redirection information has been deleted"]
   log_cv_error_messages: ["[None]", "None conversion setting", "Request parameters not correct", "DB error [*not yet use]", "No session cookie information", "None click", "Deduplication", "Unique constraint violation"]
   popup:
-    ok: "Ok"
+    ok: "OK"
     cancel: "Cancel"
     disable: "Disable"
     delete: "Delete"
