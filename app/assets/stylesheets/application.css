@@ -397,16 +397,16 @@ ul.ui-autocomplete{
      max-width: 180px;
 }
  #clients_list  {
-    overflow: scroll;
-    height:310px;
+    /*overflow: scroll;*/
+    height:260px;
  }
 #promotions_list  {
-    overflow: scroll;
-    height:310px;
+    /*overflow: scroll;*/
+    height:260px;
 }
 #conversions_list {
-    overflow: scroll;
-    height:310px;
+    /*overflow: scroll;*/
+    height:260px;
 }
 .client_name_search {
 	display: none;
