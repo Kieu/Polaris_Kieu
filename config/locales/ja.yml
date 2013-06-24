@@ -769,8 +769,8 @@ ja:
     usually: "通常"
     show_all: "全て追加する"
     all: "すべて表示"
-    listing_ad: "リスティング"
-    display_ad: "ディスプレイ"
+    listing_ad: "リスティング広告"
+    display_ad: "ディスプレイ広告"
     affiliate: "アフィリエイト"
     conversion_time: "成果発生日時"
     conversion_name: "コンバージョン名"
@@ -872,7 +872,7 @@ ja:
   cv_kind2: "CV Kind 2"
   cv_kind3: "CV Kind 3"
   
-  log_error_messages: ["[リダイレクト情報なし]", "リダイレクト情報なし", "リクエストパラメータ不正", "DBエラー [*未使用]", "削除済みのリダイレクト情報"]
+  log_error_messages: ["[無し]", "リダイレクト情報なし", "リクエストパラメータ不正", "DBエラー [*未使用]", "削除済みのリダイレクト情報"]
   log_cv_error_messages: ["[無し]", "該当コンバージョン設定なし", "リクエストパラメータ不正", "DBエラー [*未使用]", "cookieセッション情報なし", "該当クリックなし", "重複排除", "ユニーク制約違反"]
   popup:
     ok: "Ok"
