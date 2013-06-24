@@ -4,8 +4,8 @@ FactoryGirl.define do
     media_id 1
     sync_account_id "1234567"
     sync_account_pw "123456789"
-    account_name "adfb001"
-    roman_name "adfb-001"
+    account_name "account_name"
+    roman_name "roman_name"
     sync_flg 1
     margin 100
     create_user_id 1
