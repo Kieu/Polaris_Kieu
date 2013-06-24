@@ -180,7 +180,7 @@ function draw_chart(data_left, data_right, left, right, categories){
 		tooltip: { // マウスオーバーした際に表示する文書を指定
 			formatter: function() {
 				return '<b>'+ this.series.name +'</b><br/>'+
-				this.x +': '+ this.y +' 度';
+				this.x +': '+ graphNumberFormat(this.y, this.series.name);
 			}
 		},
 		series: [{
@@ -193,4 +193,22 @@ function draw_chart(data_left, data_right, left, right, categories){
 				color: "#FF1493"
 			}]
 		});
+}
+function graphNumberFormat(val, name) {
+    var reportType = name;
+    if (reportType === 'CTR') {
+        return val + '%';
+    }
+    if (reportType === 'COST' || reportType === 'CPC') {
+		return '¥' + val;
+    }
+	reportType = reportType.split("_");
+	if (reportType[1] === "CVR" || reportType[1] === "ROAS" || reportType[1] === "ROI")
+		return val + '%';
+	
+	if (reportType[1] === 'CPA' || reportType[1] === 'SALES' || reportType[1] === "PROFIT") {
+		return '¥' + val;
+    }
+
+    return val;
 }

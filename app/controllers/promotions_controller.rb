@@ -107,7 +107,7 @@ class PromotionsController < ApplicationController
       results[:array_category] << date.to_date.strftime("%m/%d")
     end
     
-    results[:html] = render_to_string "promotions/promotion_table", :layout => false
+    results[:html] = render_to_string "promotions/promotion_table", layout: false
     respond_to do |format|
       format.json{render json: results}
     end
