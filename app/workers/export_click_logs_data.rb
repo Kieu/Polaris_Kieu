@@ -47,7 +47,8 @@ class ExportClickLogsData
       os = [ I18n.t("conversion.conversion_category.app.os.ios"), I18n.t("conversion.conversion_category.app.os.android")]
       CSV.open(path_file, "wb") do |csv|
         # make header for CSV file
-        csv << header_col
+        #csv << header_col
+        csv << options['header_titles_csv']
         rows.each do |row|
           csv << [Time.at(row.click_utime).strftime("%Y/%m/%d %H:%M:%S"), row.id, client_name, promotion.promotion_name,
                   medias.find(row.media_id).media_name, accounts.find(row.account_id).account_name,

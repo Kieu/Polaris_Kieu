@@ -34,6 +34,12 @@ class ClickLogsController < ApplicationController
     start_date = Date.strptime(params[:start_date].strip, I18n.t("time_format")).strftime("%Y%m%d")
     end_date = Date.strptime(params[:end_date].strip, I18n.t("time_format")).strftime("%Y%m%d")
     promotion = Promotion.find(params[:promotion_id].to_i)
+    
+    header_titles_csv = [I18n.t('export_click_logs.click_utime'), I18n.t('export_click_logs.click_id'), I18n.t('export_click_logs.client_name'), I18n.t('export_click_logs.promotion_name'), I18n.t('export_click_logs.media_name'), 
+                      I18n.t('export_click_logs.account_name'), I18n.t('export_click_logs.campaign_name'), I18n.t('export_click_logs.ad_group'), I18n.t('export_click_logs.ad_name'),
+                      I18n.t('export_click_logs.request_uri'), I18n.t('export_click_logs.redirect_url'), I18n.t('export_click_logs.session_id'), I18n.t('export_click_logs.media_session'), I18n.t('export_click_logs.os'),
+                      I18n.t('export_click_logs.remote_ip'), I18n.t('export_click_logs.referer'), I18n.t('export_click_logs.mark'), I18n.t('export_click_logs.ok_ng'), I18n.t('export_click_logs.error_code')]
+    
     breadcrumb = "#{promotion.client.client_name} >> #{promotion.promotion_name} >> CV Logs"
     background_job = BackgroundJob.create
     job_id = ExportClickLogsData.create(user_id: current_user.id,
@@ -42,6 +48,7 @@ class ClickLogsController < ApplicationController
     account_id: params[:account_id], start_date: start_date,
     end_date: end_date, show_error: cookies[:cser],
     breadcrumb: breadcrumb,
+    header_titles_csv: header_titles_csv,
     bgj_id: background_job.id)
     background_job.user_id =  current_user.id
     background_job.breadcrumb =  breadcrumb

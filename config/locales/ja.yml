@@ -941,3 +941,25 @@ ja:
     corporate_information_link: "http://www.septeni.co.jp/company/outline.html"
     terms_and_conditions: "利用規約"
     terms_and_conditions_link: "http://www.septeni.co.jp/terms/index.html"
+  export_click_logs:
+    label: Export CLick log
+    click_utime: "クリック日時"
+    click_id: 'クリックID'
+    client_name: 'クライアント名'
+    promotion_name: 'プロモーション'
+    media_name: 'メディア'
+    account_name: 'アカウント名'
+    campaign_name: 'キャンペーン名'
+    ad_group: '広告グループ'
+    ad_name: '広告名'
+    request_uri: '広告用URL'
+    redirect_url: 'リンク先URL'
+    session_id: 'SESSIONID'
+    media_session: '媒体セッションID'
+    os: 'OS'
+    user_agent: 'User Agent'
+    remote_ip: 'リモートIP'
+    referer: 'リファラ'
+    mark: 'Mark'
+    ok_ng: 'OK/NG'
+    error_code: 'エラーコード'
