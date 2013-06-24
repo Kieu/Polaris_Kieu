@@ -9,9 +9,10 @@ class BackgroundJobsController < ApplicationController
     job = BackgroundJob.find(params[:id])
     if current_user.id == job.user_id
       path = "#{Rails.root}/#{job.filepath}"
-      csv_text = File.read(path)
+      file = File.open(path, "wb")
+      content = file.read
       content = BOM + Iconv.conv("utf-16le", "utf-8", csv_text)
-      File.save(content)
+      File.save()
       send_file(path, filename: job.filename, :encoding => 'utf-16', type: "text/csv; charset=utf-16")
     end
   end
