@@ -67,7 +67,7 @@ class ExportPromotionsData
       end
 
       cnt = cnt - 1
-      CSV.open(path_file, "wb:bom|utf-8") do |csv|
+      CSV.open(path_file, "wb") do |csv|
        # io = File.open("#{Rails.root}/doc/bom_template.csv")
       #  bom = io.read(8)
         # make header for CSV file
