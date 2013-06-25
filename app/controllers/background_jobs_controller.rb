@@ -1,6 +1,6 @@
 class BackgroundJobsController < ApplicationController
 
-  before_filter :signed_in_user
+ # before_filter :signed_in_user
   layout false
   # Stream a file that has already been generated and stored on disk
   def download_file
