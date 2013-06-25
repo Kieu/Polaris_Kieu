@@ -175,7 +175,7 @@ class ConversionPromotionLogsController < ApplicationController
     rows
   end
 
-  def change_medias_list
+  def change_accounts_list
     if params[:cid].to_i > 0
       render json: Account.where(media_category_id: params[:cid])
     else
