@@ -1,7 +1,6 @@
 <% content_for :stylesheet_includes do %>
-  <%= stylesheet_link_tag "css/conversion" %>
   <%= stylesheet_link_tag "css/common" %>
-  <%= stylesheet_link_tag "css/ui.tabs" %>
+  <%= stylesheet_link_tag "css/conversion" %>
 <% end %>
 <%= javascript_include_tag "js/ui.core" %>
 <%= javascript_include_tag "js/ui.tabs" %>
@@ -13,11 +12,11 @@
 <% end %>
 <ul class="contentNavi">
   <li class="pre">
-    <%= link_to @promotion.client.client_name, clients_path(client_id: @promotion.client_id) %>
+    <%= link_to short_ja_name(@promotion.client.client_name), clients_path(client_id: @promotion.client_id) %>
   </li>
   <li>&gt;</li>
   <li class="pre">
-    <%= link_to @promotion.promotion_name, promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %>
+    <%= link_to short_ja_name(@promotion.promotion_name), promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %>
   </li>
   <li>&gt;</li>
   <li><%= I18n.t("conversion.conversion_setting") %></li>

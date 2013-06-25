@@ -96,7 +96,7 @@
 	opacity:0.7
 }
 
-#btn_submit:hover{
+#btn_done:hover{
 	opacity:0.7;
 }
 
@@ -110,10 +110,6 @@ table.user_add tbody th {
 
 table.user_add tbody td {
     padding-left: 5px;
-}
-
-disabled{
-	color: #999;
 }
 
 .disabled{
@@ -208,7 +204,8 @@ table.setting_info td.copy_button{
 }
 
 li.disabled {
-    margin: 1px 0 0; /* position: relative makes opacity fail for disabled tab in IE */
+    margin: 1px 0 0;
+/*  margin-left: 1px; /* position: relative makes opacity fail for disabled tab in IE */
     padding-left: 0;
     color: #474747;
     font-weight: bold;
@@ -217,25 +214,30 @@ li.disabled {
     text-decoration: none;
     white-space: nowrap; /* required in IE 6 */    
     outline: 0; /* prevent dotted border in Firefox */
-	/* add */
-	background-color: #f1f1f1;
-	padding-top: 10px;
-	/*padding: 10px 0 0 0;*/
-	width: 155px;
-	height: 31px;
+    /* add */
+    background-color: #f1f1f1;
+    padding-top: 10px;
+    /*padding: 10px 0 0 0;*/
+    width: 155px;
+    height: 31px;
 }
 
+.ui-tabs-nav .disabled a{
+  color: #474747;
+  background-color: #f1f1f1;
+}
+.ui-tabs-nav .disabled a span{
+  padding-top: 0px;
+}
 
 .urlBox{
 	width: 120px;
 }
 .mcdropdown_spacing{
-	
   margin: 0 0 0 100px !important;
     padding: 0 !important;
     width: 40px !important;
-	
-	}
+}
 ul, li {
     margin:0;
     padding:0;

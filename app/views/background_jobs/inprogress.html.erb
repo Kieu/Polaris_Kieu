@@ -21,7 +21,7 @@
                 <tr>
                   <td class="file_name"><%=job.filename%></td>
                   <td class="capacity"><%= job.size %></td>
-                  <td class="daily"><%= job.created_at %></td>
+                  <td class="daily"><%= job.created_at.strftime("%m/%d/%y") %></td>
                   <td class="c_orange">アップロード中</td>
                 </tr>
                 <tr>

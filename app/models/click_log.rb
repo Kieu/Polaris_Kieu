@@ -97,8 +97,7 @@ class ClickLog < ActiveRecord::Base
   def self.get_log_count id, media_category_id, account_id, start_date, end_date, show_error
     set_table_name "click_#{id}_logs"
     if !self.table_exists?
-      Array.new
-      return
+      return 0
     end
     
     start_date = Date.strptime(start_date, I18n.t("time_format")).strftime("%Y%m%d")

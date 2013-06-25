@@ -24,11 +24,11 @@
 <% end %>
 <ul class="contentNavi">
   <li class="pre">
-    <%= link_to @promotion.client.client_name, clients_path(client_id: @promotion.client_id) %>
+    <%= link_to short_ja_name(@promotion.client.client_name), clients_path(client_id: @promotion.client_id) %>
   </li>
   <li>&gt;</li>
   <li class="pre">
-    <%= link_to @promotion.promotion_name, promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %>
+    <%= link_to short_ja_name(@promotion.promotion_name), promotions_path(promotion_id: @promotion.id, client_id: @promotion.client.id) %>
   </li>
   <li>&gt;</li>
   <li><%= I18n.t("conversion.crumb_edit")%></li>
@@ -59,13 +59,24 @@
             $('#method_area').html('<%=j render "app_install_android", f: f %>');
           }
           function render_fb_app_id(){
-            $('#fb_app_id').html('');
             $('#fb_app_id').html('<%=j render "app_install_fb_app_id", f: f %>');
-            $('#judging_box').html('<%=j render "app_install_judging", f: f %>');
+            if($('#conversion_os_1').is(':checked')){
+              $('#method_area').html('<%=j render "app_install_ios", f: f %>');
+            } else {
+              $('#method_area').html('<%=j render "app_install_android", f: f %>');
+            }
           }
           function remove_fb_app_id() {
             $('#fb_app_id').html('');
-            $('#judging_box').html('');
+            if($('#conversion_os_1').is(':checked')){
+              $('#method_area').html('<%=j render "app_install_ios", f: f %>');
+            } else {
+              $('#method_area').html('<%=j render "app_install_android", f: f %>');
+            }
+          }
+          function remove_track_method() {
+            $('#fb_app_id').html('<%=j render "app_install_fb_app_id", f: f %>');
+            $('#method_area').html('');
           }
           function check_track_method() {
           	if($("#conversion_track_method_4").is(':checked')) {
