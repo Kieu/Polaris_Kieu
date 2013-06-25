@@ -975,6 +975,7 @@
         } // end if p.colmodel
         //init divs
         g.gDiv = document.createElement('div'); //create global container
+        g.scrollDiv = document.createElement('div'); //create scroll container
         g.mDiv = document.createElement('div'); //create title container
         g.hDiv = document.createElement('div'); //create header container
         g.bDiv = document.createElement('div'); //create body container
@@ -1292,8 +1293,9 @@
             }
             $(g.gDiv).append(g.rDiv);
         }
-        $('<div id="scroll_flexigrid"></div>').append('.hDiv');
-        $('<div id="scroll_flexigrid"></div>').append('.bDiv');
+        g.scrollDiv.innerHTML = '<div  id="scroll_flexigrid"></div>';
+        $(g.scrollDiv).append(g.hDiv);
+        $(g.scrollDiv).append(g.bDiv);
         // add pager
         if (p.usepager) {
             g.pDiv.className = 'pDiv';
