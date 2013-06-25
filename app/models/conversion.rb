@@ -22,7 +22,7 @@ class Conversion < ActiveRecord::Base
   validates :facebook_app_id, format: {with: VALID_NUMBER_REGEX}, if: -> conversion {conversion.facebook_app_id.present?}
   validates :start_point, presence: true, if: :check_web
   validates :conversion_combine, presence: true, if: :check_combination
-  validates :url, length: {maximum: 255}, presence: true, if: :check_track_method
+  validates :url, presence: true, if: :check_track_method
   validates :sale_unit_price, length: {maximum: 11}, format: {with: VALID_NUMBER_REGEX}, if: :check_sales?
 
   scope :order_by_roman_name, ->{order :roman_name}
