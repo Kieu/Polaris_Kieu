@@ -20,6 +20,7 @@ gem 'iconv'
 gem "cocaine"
 gem "paperclip"
 gem 'gotcha'
+gem "fastercsv", "~> 1.5.5"
 gem 'zeroclipboard-rails'
 
 # Gems used only for assets and not required
