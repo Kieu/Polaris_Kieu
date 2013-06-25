@@ -887,6 +887,10 @@ ja:
     disable: "無効にする"
     delete: "削除する"
     enable: "解除にする"
+    new_first: "このままページを移動しますと登録内容が保存されません。"
+    new_second: "問題なければOKをおして進んで下さい。"
+    edit_first: "このままページを移動しますと編集内容が保存されません。"
+    edit_second: "問題なければOKをおして進んで下さい。"
   url:
     flash_messages: 
       success: "入稿リクエストを受け付けました。"

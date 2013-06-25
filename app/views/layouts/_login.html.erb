@@ -9,6 +9,7 @@ $(document).ready(function () {
     //hack google display captcha
     $("#recaptcha_reload_btn").remove();
     $("#recaptcha_switch_audio_btn").remove();
+    $("#recaptcha_response_field").attr("style","width: 302px;");
     $("#recaptcha_switch_img_btn").remove();
     $("#recaptcha_whatsthis_btn").remove();
     $("#recaptcha_logo").remove();
@@ -92,7 +93,7 @@ $(document).ready(function () {
   <div class="span6 offset3">
     <%= form_tag(resend_password_sessions_path, method: :post) do %>
         <p class="bold"><%= label_tag I18n.t("login.email") %></p>
-        <%= text_field_tag "email", @email, maxlength: 255, style: "width: 100%", tabindex: 6 %>
+        <%= text_field_tag "email", @email, maxlength: 255, style: "width: 100%;", tabindex: 6 %>
         <%= recaptcha_tags display: {lang: "#{I18n.locale}", theme: "clean"} %>
         <input type="image" id="Send" src="/assets/btn_submit.gif" tabindex="8">
     <% end %>
