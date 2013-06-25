@@ -70,8 +70,8 @@ class ExportPromotionsData
       File.open(path_file, 'w:UTF-16LE:UTF-8') do |bom|
 
       end
-      end
       CSV.open(path_file, "wb") do |csv|
+
         # make header for CSV file
         csv << account_col
 
@@ -157,7 +157,7 @@ class ExportPromotionsData
       background_job.save!
     end
   end
- 
+
   private
   def file_size_fomat volume
     if volume < 1024
