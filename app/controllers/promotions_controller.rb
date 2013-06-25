@@ -153,7 +153,7 @@ class PromotionsController < ApplicationController
       @client_id = params[:client_id]
     end
     @client = Client.find(@client_id)    
-    if current_user.agency? && !@client.client_users.find_by_user_id(current_user.id)
+    if current_user.agency? && !@client.clients_users.find_by_user_id(current_user.id)
       redirect_to clients_path
     end
     @array_promotion = @client.promotions.active.order_by_roman_name
