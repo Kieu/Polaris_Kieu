@@ -66,7 +66,7 @@ class ExportPromotionsData
       end
 
       cnt = cnt - 1
-      CSV.open(path_file, "wb") do |csv|
+      CSV.open(path_file, "w:bom|utf-8") do |csv|
 
         # make header for CSV file
         csv << account_col
