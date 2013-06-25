@@ -16,19 +16,19 @@ $(function(){
       <table>
         <tbody>
         <tr>
-          <th><%= f.label t("user.username") %></th>
-          <td colspan="2"><%= f.text_field :username, maxlength: 255, style: "width: 200px",tabindex: 1, class: "prevent_change" %></td>
+          <th><div style="width: 190px;"><%= f.label t("user.username") %></div></th>
+          <td colspan="2"><%= f.text_field :username, maxlength: 255, style: "width: 280px",tabindex: 1, class: "prevent_change" %></td>
         </tr>
         <tr>
-          <th><%= f.label t("user.roman_name") %></th>
-          <td colspan="2"><%= f.text_field :roman_name, maxlength: 255, style: "width: 200px",tabindex: 2, class: "prevent_change" %></td>
+          <th><div style="width: 190px;"><%= f.label t("user.roman_name") %></div></th>
+          <td colspan="2"><%= f.text_field :roman_name, maxlength: 255, style: "width: 280px",tabindex: 2, class: "prevent_change" %></td>
         </tr>
         <tr>
-          <th> <%= f.label t("user.email") %></th>
-          <td colspan="2"><%= f.text_field :email, maxlength: 255, style: "width: 200px",tabindex: 3, class: "prevent_change" %></td>
+          <th><div style="width: 190px;"><%= f.label t("user.email") %></div></th>
+          <td colspan="2"><%= f.text_field :email, maxlength: 255, style: "width: 280px",tabindex: 3, class: "prevent_change" %></td>
         </tr>
         <tr>
-          <th> <%= f.label t("user.role.label") %></th>
+          <th><div style="width: 190px;"><%= f.label t("user.role.label") %></div></th>
           <td colspan="2">
           	<select class="input-text prevent_change" id="user_role_id" name="user[role_id]" tabindex="4" >
           		<option value=""><%= I18n.t("user.role.include_blank") %></option>
@@ -52,7 +52,7 @@ $(function(){
           </td>
         </tr> 
         <tr>
-          <th><%= f.label t("user.company_name") %></th>
+          <th><div style="width: 190px;"><%= f.label t("user.company_name") %></div></th>
           <td colspan="2">
           	<% if @user.role_id && !@user.client? %>
             	<%= f.collection_select :company_id, Agency.all, :id, :agency_name, {include_blank: t("user.company_id.include_blank")} , {:class => 'input-text prevent_change',tabindex: 5} %>
@@ -65,11 +65,11 @@ $(function(){
             	
         </tr>
         <tr>
-          <th><%= I18n.t("user.password.label") %></th>
+          <th><div style="width: 190px;"><%= I18n.t("user.password.label") %></div></th>
           <td colspan="2"><%= I18n.t("user.password.info") %></td>
         </tr>
         <tr>
-          <th><%= I18n.t("user.password_notification.label") %></th>
+          <th><div style="width: 190px;"><%= I18n.t("user.password_notification.label") %></div></th>
           <td style="width: 160px;"><%= f.radio_button :password_flg, "0", checked: true, tabindex: 6, class: "prevent_change" %> <%= I18n.t("user.password_notification.not_notified") %></td>
           <td style="width: 160px;"><%= f.radio_button :password_flg, "1", tabindex: 7, class: "prevent_change" %> <%= I18n.t("user.password_notification.to_notified") %></td>
         </tr>
