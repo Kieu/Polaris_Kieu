@@ -49,7 +49,11 @@ $(function(){
       </table>
       <div class="submit_area">
         <input type="image" src="/assets/btn_done.gif" id="btn_done"  tabindex = 5>
-        <p><%= link_to raw('<img align="right" alt="キャンセル" src="/assets/btn_cancel.gif" tabindex="6">'), promotions_path(promotion_id: @promotion.id, client_id: @client_id) %></p>
+        <% if @array_promotion.length > 0 %>
+        	<p><%= link_to raw('<img align="right" alt="キャンセル" src="/assets/btn_cancel.gif" tabindex="6">'), promotions_path(promotion_id: @promotion.id, client_id: @client_id) %></p>
+        <% else %>
+        	<p><%= link_to raw('<img align="right" alt="キャンセル" src="/assets/btn_cancel.gif" tabindex="6">'), clients_path(client_id: @client_id) %></p>
+        <% end %>
       </div>
     </div><!-- /."regist_form end-->
 <% end %>

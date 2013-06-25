@@ -288,6 +288,7 @@ table.sidebar tbody td {
     height: 28px;
     padding-left: 3px;
     vertical-align: middle;
+    overflow: hidden;
     width: 400px;
     display:table-cell;
 }
