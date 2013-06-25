@@ -143,7 +143,7 @@ class ExportPromotionsData
 
         end
       end
-      File.open(path_file, 'wb') do |bom|
+      File.open(path_file, 'wb+') do |bom|
         buffer = ['EF','BB','BF'].pack("H*H*H*")
         bom.seek(0,IO::SEEK_SET)
         bom.write(buffer)
