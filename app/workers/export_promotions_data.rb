@@ -68,7 +68,7 @@ class ExportPromotionsData
 
       cnt = cnt - 1
       File.open(path_file, 'w') do |bom|
-        bom.write([0xff, 0xfe].pack('C*'))
+        bom.write('\xEF\xBB\xBF')
       end
       return
       CSV.open(path_file, "wb") do |csv|
