@@ -16,43 +16,43 @@ $(function(){
       <table>
         <tbody>
         <tr>
-          <th><%= f.label I18n.t("user.username") %></th>
-          <td colspan="2"><%= f.text_field :username, maxlength: 255, style: "width: 200px",tabindex: 1, class: "prevent_change" %></td>
+          <th><div style="width: 190px;"><%= f.label I18n.t("user.username") %></div></th>
+          <td colspan="2"><%= f.text_field :username, maxlength: 255, style: "width: 280px",tabindex: 1, class: "prevent_change" %></td>
         </tr>
         <tr>
-          <th><%= f.label I18n.t("user.roman_name") %></th>
-          <td colspan="2"><%= f.text_field :roman_name, maxlength: 255, style: "width: 200px",tabindex: 2, class: "prevent_change" %></td>
+          <th><div style="width: 190px;"><%= f.label I18n.t("user.roman_name") %></div></th>
+          <td colspan="2"><%= f.text_field :roman_name, maxlength: 255, style: "width: 280px",tabindex: 2, class: "prevent_change" %></td>
         </tr>
         <tr>
-          <th> <%= f.label I18n.t("user.email") %></th>
-          <td colspan="2"><%= f.text_field :email, maxlength: 255, style: "width: 200px",tabindex: 3, class: "prevent_change" %></td>
+          <th><div style="width: 190px;"><%= f.label I18n.t("user.email") %></div></th>
+          <td colspan="2"><%= f.text_field :email, maxlength: 255, style: "width: 280px",tabindex: 3, class: "prevent_change" %></td>
         </tr>
         <tr>
-          <th> <%= f.label I18n.t("user.role.label") %></th>
+          <th><div style="width: 190px;"><%= f.label I18n.t("user.role.label") %></div></th>
           <td colspan="2">
-            <%= text_field_tag :role_id, @user.role.role_name, disabled: true %>
+            <%= text_field_tag :role_id, @user.role.role_name, disabled: true, style: "width: 280px;" %>
           </td>
         </tr>
         <tr>
-          <th><%= f.label I18n.t("user.company_name") %></th>
+          <th><div style="width: 190px;"><%= f.label I18n.t("user.company_name") %></div></th>
           <td colspan="2">
             <% if @user.client? %>
-                <%= text_field_tag :company_id, Client.find(@user.company_id).client_name, disabled: true %>
+                <%= text_field_tag :company_id, Client.find(@user.company_id).client_name, disabled: true, style: "width: 280px;" %>
             <% else %>
-                <%= text_field_tag :company_id, Agency.find(@user.company_id).agency_name, disabled: true %>
+                <%= text_field_tag :company_id, Agency.find(@user.company_id).agency_name, disabled: true, style: "width: 280px;" %>
             <% end %>
         </tr>
         <tr>
-          <th> <%= f.label I18n.t("user.password.label") %></th>
+          <th><div style="width: 190px;"><%= f.label I18n.t("user.password.label") %></div></th>
           <td colspan="2">*******************</td>
         </tr>
         <tr>
-          <th><%= f.label I18n.t("user.password_notification.label") %></th>
+          <th><div style="width: 190px;"><%= f.label I18n.t("user.password_notification.label") %></div></th>
           <td style="width: 220px;"><%= f.radio_button :password_flg, "0", disabled: true %> <%= f.label I18n.t("user.password_notification.not_notified") %></td>
           <td style="width: 160px;"><%= f.radio_button :password_flg, "1", disabled: true %> <%= f.label I18n.t("user.password_notification.to_notified") %></td>
         </tr>
         <tr>
-          <th><%= f.label I18n.t("user.disabled.label") %></th>
+          <th><div style="width: 190px;"><%= f.label I18n.t("user.disabled.label") %></div></th>
           <td>
               <% if @user.status == Settings.user.deactive %>
                   <input type="checkbox" id = "disable_button" checked="checked" name="deactive" tabindex= "4" class="prevent_change">
