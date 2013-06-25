@@ -67,8 +67,8 @@ class ExportPromotionsData
       end
 
       cnt = cnt - 1
-      File.open(path_file, 'w:UTF-16LE:UTF-8') do |bom|
-
+      File.open(path_file, 'wb:UTF-16LE:UTF-8') do |bom|
+        bom = 'ï»¿'
       end
       CSV.open(path_file, "wb") do |csv|
 
