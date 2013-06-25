@@ -159,6 +159,15 @@ describe AgenciesController do
             it {should render_template :edit}
           end
         end
+        describe "POST get_agencies_list" do
+        context "post get_agencies_list" do
+          agencies = Agency.order_by_roman_name.page(1).per(10)
+          it "render format :json" do
+            post :get_agencies_list, page: 1, rp: 10, format: :json
+            JSON.parse(response.body)["rows"].count.should eq agencies.length
+          end
+        end
+      end
       end
     end
   end
