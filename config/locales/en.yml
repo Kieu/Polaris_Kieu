@@ -600,7 +600,7 @@ en:
       ja: "Japanese"
       en: "English"
     forgor_pw: "Forgot Password"
-    forgor_pw1: "Forgot Password"
+    forgor_pw1: "Click here to login after enter Password"
     announcements: "Announcements"
     press_release: "Press release"
     captcha: "Authentication"
@@ -821,6 +821,10 @@ en:
       update: " Promotion is updated successful"
     Done: "Done"
     Dashboard: "Dashboard"
+    popup_table: "Table"
+    popup_metric: "Metric Results"
+    popup_result: "Results"
+    popup_showall: "Show All"
   user:
     crumb_add: "Add User"
     crumb_edit: "Edit User"
@@ -869,6 +873,10 @@ en:
     disable: "Disable"
     delete: "Delete"
     enable: "Enable"
+    new_first: "Screen will be transited and  contents which you inputed will lost."
+    new_second: "Click OK button to continue."
+    edit_first: "Screen will be transited and  contents which you edited will lost."
+    edit_second: "Click OK button to continue."
   url:
     flash_messages:
       success: "I have received a draft request."

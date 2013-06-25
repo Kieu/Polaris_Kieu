@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     if @user.valid?
       @user.save!
       if @user.client?
-        ClientUser.create(client_id: @user.company_id, user_id: @user.id)
+        ClientsUser.create(client_id: @user.company_id, user_id: @user.id)
       end
       flash[:success] = I18n.t("user.flash_messages.success")
       if @user.password_flg == "1"

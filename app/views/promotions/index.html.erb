@@ -111,12 +111,12 @@ a.bread_scrumb_link {
 <div id="popup" style="display: none">
 	<div id="list_options">
 		<div class="f_box">
-			<p class="f_box_title">テーブル</p>
-			<p class="f_category_title1">掲載結果</p>
-			<p class="f_category_title2">成果</p>
+			<p class="f_box_title"><%= I18n.t("promotion.popup_table")%></p>
+			<p class="f_category_title1"><%= I18n.t("promotion.popup_metric")%></p>
+			<p class="f_category_title2"><%= I18n.t("promotion.popup_result")%></p>
 
 			<div class="box01">
-				<p class="box01_txt" id="show_all">全て追加する </p>
+				<p class="box01_txt" id="show_all"><%= I18n.t("promotion.popup_showall")%></p>
 				<div class="check-group clearfix">
 					<ul>
 						<% Settings.promotions_options.each_with_index do |option, index|%>

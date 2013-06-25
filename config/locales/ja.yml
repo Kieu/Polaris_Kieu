@@ -838,6 +838,10 @@ ja:
       update: " プロモーション編集が完了しました"
     Done: "完了"
     Dashboard: "ダッシュボード"
+    popup_table: "テーブル"
+    popup_metric: "掲載結果"
+    popup_result: "成果"
+    popup_showall: "全て追加する"
   user:
     crumb_add: "ユーザー登録"
     crumb_edit: "ユーザー編集"
@@ -887,6 +891,10 @@ ja:
     disable: "無効にする"
     delete: "削除する"
     enable: "解除にする"
+    new_first: "このままページを移動しますと登録内容が保存されません。"
+    new_second: "問題なければOKをおして進んで下さい。"
+    edit_first: "このままページを移動しますと編集内容が保存されません。"
+    edit_second: "問題なければOKをおして進んで下さい。"
   url:
     flash_messages: 
       success: "入稿リクエストを受け付けました。"

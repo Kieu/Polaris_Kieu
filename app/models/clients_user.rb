@@ -1,5 +1,4 @@
-class ClientUser < ActiveRecord::Base
-  set_table_name "clients_users"
+class ClientsUser < ActiveRecord::Base
   attr_accessible :client_id, :user_id, :del_flg
   
   validates :client_id, presence: true

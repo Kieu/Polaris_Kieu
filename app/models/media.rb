@@ -1,5 +1,4 @@
 class Media < ActiveRecord::Base
-  set_table_name "medias"
   attr_accessible :media_category_id, :media_name, :del_flg
 
   has_many :accounts
