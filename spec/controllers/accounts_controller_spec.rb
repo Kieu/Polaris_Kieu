@@ -158,8 +158,8 @@ describe AccountsController do
           #let(:format) {:json}
           list_medias = Media.active.where(media_category_id: 1)
           it "render format :json" do
-            post :change_medias_list, media_category_id: 1, :format => :json
-            response.body.should_not eq list_medias.to_json
+            post :change_medias_list, cid: 1, format: :json
+            response.body.should eq list_medias.to_json
           end
         end
       end

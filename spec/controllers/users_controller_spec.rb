@@ -113,7 +113,7 @@ describe UsersController do
           end
 
           it "create new client_user" do
-            expect {action_create}.to change(ClientsUser, :count).by 1
+            expect {action_create}.to change(ClientUser, :count).by 1
           end
 
           it "redirect to action new" do
@@ -130,7 +130,7 @@ describe UsersController do
           end
 
           it "don't create new client_user" do
-            expect {action_create}.not_to change(ClientsUser, :count)
+            expect {action_create}.not_to change(ClientUser, :count)
           end
 
           it "render template new" do
