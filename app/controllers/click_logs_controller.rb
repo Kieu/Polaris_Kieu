@@ -24,7 +24,8 @@ class ClickLogsController < ApplicationController
   end
 
   def get_logs_list
-    rows = get_rows(ClickLog.get_all_logs(params[:query], params[:page], params[:rp], params[:sortname], params[:sortorder], params[:media_category_id], params[:account_id], params[:start_date].strip, params[:end_date].strip, cookies[:cser] ))
+    rows = get_rows(ClickLog.get_all_logs(params[:query], params[:page], params[:rp], params[:sortname], params[:sortorder],
+     params[:media_category_id], params[:account_id], params[:start_date].strip, params[:end_date].strip, cookies[:cser] ))
     render json: {page: params[:page], total: ClickLog.get_log_count(params[:query].to_i, params[:media_category_id], params[:account_id], params[:start_date].strip, params[:end_date].strip, cookies[:cser] ), rows: rows}
     
   end  
