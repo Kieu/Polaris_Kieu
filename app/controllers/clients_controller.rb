@@ -132,7 +132,7 @@ class ClientsController < ApplicationController
       @clients = Client.active.order_by_roman_name
     elsif current_user.agency?
       @clients = Array.new
-      array_client_user = current_user.clients_users.active
+      array_client_user = current_user.client_users.active
       array_client_user.each do |client_user|
         @clients << client_user.client
       end
