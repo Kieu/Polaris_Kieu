@@ -81,8 +81,7 @@ repeat_processed_flg,parent_conversion_id,sales,profit,volume,others,null as app
     
     set_table_name "conversion_#{id}_logs" 
     if !self.table_exists?
-      Array.new
-      return
+      return 0
     end
     
     where_clause = ""
@@ -90,29 +89,33 @@ repeat_processed_flg,parent_conversion_id,sales,profit,volume,others,null as app
     #end_date = Date.strptime(end_date, I18n.t("time_format")).strftime("%Y%m%d")
     params = [start_date, end_date]
     params1 = [start_date, end_date]
+    params_organic = [start_date, end_date]
     organic = 1
     if(cv_id.present?)
       where_clause += " AND conversion_id = ?"
       params += [cv_id]
       params1 += [cv_id]
       organic = 0
+      params_organic = Array.new
     end
     if(media_category_id.present?)
       where_clause += " AND media_category_id = ?"
       params += [media_category_id]
       params1 += [media_category_id]
       organic = 0
+      params_organic = Array.new
     end
     if(account_id.present?)
       where_clause += " AND account_id = ?"
       params += [account_id]
       params1 += [account_id]
       organic = 0
+      params_organic = Array.new
     end
     
     sql_organic = ''
     if organic == 1
-      sql_organic = " union all (select #{field_organic} from conversion_organic_#{id}_logs) "
+      sql_organic = " union all (select #{field_organic} from conversion_organic_#{id}_logs) where DATE_FORMAT(conversion_ymd, '%Y%m%d') BETWEEN ? AND ? "
     end
     
     if show_error=="1"
@@ -128,19 +131,20 @@ repeat_processed_flg,parent_conversion_id,sales,profit,volume,others,null as app
                                        ORDER BY media_category_id "
                                         
     end             
+    params += params_organic
     @logs = ConversionLog.find_by_sql([sql_str] + params)
   end
-
+  
   def self.get_count  id, cv_id, media_category_id, account_id, start_date, end_date, show_error
     set_table_name "conversion_#{id}_logs" 
     if !self.table_exists?
-      Array.new
-      return
+      return 0
     end
     where_clause = ""
     start_date = Date.strptime(start_date, I18n.t("time_format")).strftime("%Y%m%d")
     end_date = Date.strptime(end_date, I18n.t("time_format")).strftime("%Y%m%d")
     params = [start_date, end_date]
+    params_organic = [start_date, end_date]
     params1 = [start_date, end_date]
     organic = 1
     if(cv_id.present?)  
@@ -148,22 +152,25 @@ repeat_processed_flg,parent_conversion_id,sales,profit,volume,others,null as app
       params += [cv_id]
       params1 += [cv_id]
       organic = 0
+      params_organic = Array.new
     end
     if(media_category_id.present?)  
       where_clause += " AND media_category_id = ?"
       params += [media_category_id]
       params1 += [media_category_id]
       organic = 0
+      params_organic = Array.new
     end
     if(account_id.present?)  
       where_clause += " AND account_id = ?"
       params += [account_id]
       params1 += [account_id]
       organic = 0
+      params_organic = Array.new
     end
     sql_organic = ''
     if organic == 1
-      sql_organic = " union all select id from conversion_organic_#{id}_logs "
+      sql_organic = " union all select id from conversion_organic_#{id}_logs where DATE_FORMAT(conversion_ymd, '%Y%m%d') BETWEEN ? AND ? "
     end
     
     if show_error=="1"
@@ -175,7 +182,8 @@ repeat_processed_flg,parent_conversion_id,sales,profit,volume,others,null as app
     else
       sql_str = "select count(*) as cnt from (select id from conversion_#{id}_logs  where DATE_FORMAT(conversion_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause} 
                 #{sql_organic} group by id) as logs"
-    end                            
+    end                          
+    params += params_organic  
     @count = ConversionLog.find_by_sql([sql_str] + params)
     @count[0]["cnt"]
   end
