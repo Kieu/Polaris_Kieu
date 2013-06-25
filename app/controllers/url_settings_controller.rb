@@ -7,6 +7,11 @@ class UrlSettingsController < ApplicationController
   before_filter :must_super_agency
 
 	def index
+    if !params[:promotion_id] || !params[:account_id]
+      render file: 'public/404.html', status: :not_found
+      return
+    end
+
     cookies[:url_setting_start_date] = Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d")
     cookies[:url_setting_end_date] = Date.yesterday.strftime("%Y/%m/%d")
     @promotion_id = params[:promotion_id]
@@ -133,6 +138,6 @@ class UrlSettingsController < ApplicationController
     time = Time.new
     cookies[:url_setting_start_date] = Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d") if !cookies[:url_setting_start_date] 
     cookies[:url_setting_end_date] = Date.yesterday.strftime("%Y/%m/%d") if !cookies[:url_setting_end_date]
-    cookies[:url_setting] = "11111110001" if !cookies[:url_setting]
+    cookies[:url_setting] = "10111111001" if !cookies[:url_setting]
   end
 end

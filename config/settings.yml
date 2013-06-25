@@ -52,7 +52,7 @@ conversions_options: ["CV(first)", "CV(repeat)", "CV", "CVR", "CPA", "ASSIST", "
 promotions_sums: ["imp_count", "click_count", "click_through_ratio", "cost_sum", "cost_per_mille", "cost_per_click"]
 conversions_sums: ["first_cv_count", "repeat_cv_count", "total_cv_count", "conversion_rate", "click_per_action", "assist_count", "sales", "roas", "profit", "roi"]
 conversions_graph: ["CV(first)", "CV(repeat)", "CV", "CVR", "CPA", "ASSIST"]
-url_options: ["edit", "ad_id", "campaign_name", "group_name", "ad_name", "creative", "url", "note", "click_price", "last_modified", "delete"]
+url_options: ["edit","last_modified", "ad_id", "campaign_name", "group_name", "ad_name", "creative", "url", "note", "click_price", "delete"]
 cv_options_part1: ["conversion_time", "conversion_name", "conversion_category", "tracking_type", "cv_type", "media_approval", "media", "account", "campaign", "ad_group", "ad_name", "click_utime"]
 cv_options_part2: ["verify", "suid", "session_id","os", "repeat", "log_state", "sales", "profit", "volume", "others", "error_message"]
 click_options: ["click_utime", "media_name", "account_name","campaign_name", "ad_group_name", "ad_name", "url", "sesid", "os","log_state", "error_message"]
