@@ -24,7 +24,7 @@ class UrlSettingsController < ApplicationController
 
     if current_user.role.id == Settings.role.AGENCY
       author_flg = false
-      array_user = ClientUser.where(user_id: current_user.id).select('client_id')
+      array_user = ClientsUser.where(user_id: current_user.id).select('client_id')
       array_user.each do |user_element|
         if @client_id == user_element.client_id
           author_flg = true
