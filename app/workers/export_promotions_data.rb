@@ -44,7 +44,7 @@ class ExportPromotionsData
       account_col = ["Media", "Account name", "Imp", "Click", "CTR", "COST",
                      "CPM", "CPC"]
 
-      array_conversion = Conversion.where(promotion_id: options['promotion_id'])
+      array_conversion = Conversion.where(promotion_id: options['promotion_id']).order('id asc')
 
       # initial count num
       cnt = 1
