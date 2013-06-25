@@ -67,11 +67,12 @@ class ExportPromotionsData
       end
 
       cnt = cnt - 1
+      File.open(path_file, 'w:UTF-16LE:UTF-8') do |bom|
+
+      end
+      end
       CSV.open(path_file, "wb") do |csv|
-        bom = OfficeCSV.generate do |row|
-        end
         # make header for CSV file
-        csv << bom
         csv << account_col
 
         # start write content of promotion to file
