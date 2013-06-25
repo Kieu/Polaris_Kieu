@@ -230,7 +230,11 @@
 		<% @account_list["media"+media.id.to_s+"_account"].each_with_index do |account, index1| %>
 		<tr>
 			<%= content_tag(:td, media.media_name, rowspan: @account_list["media"+media.id.to_s+"_account"].count) if index1 == 0 %>
-            <td><%= link_to account.account_name, edit_account_path(account, promotion_id: @promotion_id) %></td>
+			<% unless current_user.client? %>
+            	<td><%= link_to account.account_name, edit_account_path(account, promotion_id: @promotion_id) %></td>
+            <% else %>
+            	<td><%= account.account_name %></td>
+            <% end %>
             <% val = @promotion_results["account"+account.id.to_s+"_promotion"] %>
             <% if val.nil? %>
             	<% Settings.promotions_sums.each_with_index do |option, index2|%>
