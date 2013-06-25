@@ -838,6 +838,10 @@ ja:
       update: " プロモーション編集が完了しました"
     Done: "完了"
     Dashboard: "ダッシュボード"
+    popup_table: "テーブル"
+    popup_metric: "掲載結果"
+    popup_result: "成果"
+    popup_showall: "全て追加する"
   user:
     crumb_add: "ユーザー登録"
     crumb_edit: "ユーザー編集"
