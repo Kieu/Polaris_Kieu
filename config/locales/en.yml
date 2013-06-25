@@ -703,7 +703,7 @@ en:
             url: "URL required"
           install_referrer: " Install Referrer"
         app_id:
-          label: "App id "
+          label: "App ID "
           facebook: "(Facebook): "
         option:
           label: "<Option> "
