@@ -62,6 +62,9 @@ class ExportClickLogsData
       end
 
       # success case
+       volume = File.size(path_file)
+       size_field = file_size_fomat volume
+       background_job.size = size_field
        background_job.status = Settings.job_status.SUCCESS
        background_job.save!
     rescue
