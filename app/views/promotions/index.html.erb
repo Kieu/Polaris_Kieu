@@ -208,9 +208,14 @@ a.bread_scrumb_link {
 	        init: function(){
 	            var tabs = this.setup.tabs;
 	            var pages = this.setup.pages;
-	
+	            $(".present").first().removeClass("present");
+				$("#tab li").first().addClass("present");
+				pages[0].style.display = 'block';
+	            
 	            for(i=0; i<pages.length; i++) {
-	                if(i !== 0) pages[i].style.display = 'none';
+	                if(i !== 0){
+	                	pages[i].style.display = 'none';
+	                }
 	                tabs[i].onclick = function(){ tab.showpage(this); return false; };
 	            }
 	        },
@@ -237,16 +242,7 @@ a.bread_scrumb_link {
 	        }
     	}
     // <![CDATA[
-    	pages = [];
-		<% @conversions.each_with_index do |conversion, index| %>
-			pages.push(document.getElementById('page' + "<%= index+1 %>"))
-		<% end %>
-    	tab.setup = {
-        	tabs: document.getElementById('tab').getElementsByTagName('li'),
-
-        	pages: pages
-    		} //オブジェクトをセット
-    	tab.init(); //起動！
+    	
     	default_list_options = $("#list_options").html();
         $("#show_option").click(function(){
             $.colorbox({
@@ -257,12 +253,17 @@ a.bread_scrumb_link {
                 href: "#list_options",
                 height:"525",
                 onComplete: function(){
-                	$('#tab').slimScroll({
-			             color: '#0087A9',
-			             size: '8px',
-			             alwaysVisible: false,
-			             height:'350px'
-			         });
+                	pages = [];
+					<% @conversions.each_with_index do |conversion, index| %>
+						pages.push(document.getElementById('page' + "<%= index+1 %>"))
+					<% end %>
+			    	tab.setup = {
+			        	tabs: document.getElementById('tab').getElementsByTagName('li'),
+			
+			        	pages: pages
+			    		} //オブジェクトをセット
+			    	tab.init(); //起動！
+                	$('#tab').niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
                 }
             });
         })
@@ -303,7 +304,7 @@ a.bread_scrumb_link {
 					$("#promotion_tables").html(html["html"]);
 	            }
 			})
-			$('#tab').slimscroll("destroy");
+			$('#tab').niceScroll().remove();
 			default_list_options = $("#list_options").html();
         });
         $(document).on('click', "#not_change_cookie", function(){
@@ -312,6 +313,7 @@ a.bread_scrumb_link {
 		        cookies_conversions["<%= conversion.id %>"] = $.cookie("conversion<%= conversion.id %>");
 	        <% end %>
             $('#list_options').colorbox.close();
+            $('#tab').niceScroll().remove();
             $("#list_options").html(default_list_options);
             pages = [];
 			<% @conversions.each_with_index do |conversion, index| %>
