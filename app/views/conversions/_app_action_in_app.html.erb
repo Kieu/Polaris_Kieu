@@ -46,7 +46,7 @@
 <tr>
   <th><%= f.label I18n.t("conversion.conversion_category.app.session.label") %></th>
   <td colspan="3">
-    <%= f.text_field :session_period, class: "ta-r prevent_change", value: @conversion.session_period %>
+    <%= f.text_field :session_period, maxlength: 2, style: "width: 80%;", class: "ta-r prevent_change", value: @conversion.session_period %>
   </td>
   <td id="percent" style="margin-left: -62px; position: absolute; margin-top: 13px;">
   	<%= I18n.t("conversion.conversion_category.app.session.day")%>
