@@ -821,6 +821,10 @@ en:
       update: " Promotion is updated successful"
     Done: "Done"
     Dashboard: "Dashboard"
+    popup_table: "Table"
+    popup_metric: "Metric Results"
+    popup_result: "Results"
+    popup_showall: "Show All"
   user:
     crumb_add: "Add User"
     crumb_edit: "Edit User"
