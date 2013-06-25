@@ -19,11 +19,14 @@ class Conversion < ActiveRecord::Base
   validates :duplicate, presence: true, if: :check_track_type_1
   validates :track_method, presence: true, if: :check_track_type_1
   validates :facebook_app_id, presence: true , if: :check_fb_id_valid
-  validates :facebook_app_id, format: {with: VALID_NUMBER_REGEX}, if: -> conversion {conversion.facebook_app_id.present?}
+  validates :facebook_app_id, format: {with: VALID_NUMBER_REGEX},
+    numericality: {only_integer: true},
+    if: -> conversion {conversion.facebook_app_id.present?}
   validates :start_point, presence: true, if: :check_web
   validates :conversion_combine, presence: true, if: :check_combination
   validates :url, presence: true, if: :check_track_method
-  validates :sale_unit_price, length: {maximum: 11}, format: {with: VALID_NUMBER_REGEX}, if: :check_sales?
+  validates :sale_unit_price, length: {maximum: 11}, format: {with: VALID_NUMBER_REGEX},
+    numericality: {only_integer: true}, if: :check_sales?
 
   scope :order_by_roman_name, ->{order :roman_name}
   scope :order_by_id, ->{order :id}

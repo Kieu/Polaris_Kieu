@@ -26,21 +26,20 @@
                   <th class="edit"><%= link_to "", "#{edit_client_path(client)}", class: "edit", id: "edit#{client.id}" if current_user.super? %></th>
                   <% if params[:action] == "index" %>
                       <% if (params[:client_id] && client.id == params[:client_id].to_i) || (!params[:client_id] && index == 0) %>
-                          <td><div style="overflow:hidden;"><%= link_to short_ja_name(client.client_name), "javascript:void(0)", class: "client_name current", id: "#{client.id}", onclick: "reloadFlex('.newTable06', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{client.id}', '.client_name', '#client_name', #{Settings.MAX_EN_LENGTH_NAME})" %>
-                          	<%= link_to short_ja_name(client.client_name), "javascript:void(0)", class: "client_name_search", id: "search#{client.id}" %></div>
-                          	
+                          <td><div style="width: 220px;"><%= link_to short_ja_name(client.client_name), "javascript:void(0)", class: "client_name current", title: "#{client.client_name}", id: "#{client.id}", onclick: "reloadFlex('.newTable06', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{client.id}', '.client_name', '#client_name', #{Settings.MAX_EN_LENGTH_NAME})" %>
+                         	<%= link_to short_ja_name(client.client_name), "javascript:void(0)", class: "client_name_search", id: "search#{client.id}" %></div>
                           </td>
                       <% else %>
-                          <td><div style="overflow:hidden;"><%= link_to short_ja_name(client.client_name), "javascript:void(0)", class: "client_name", id: "#{client.id}", onclick: "reloadFlex('.newTable06', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{client.id}', '.client_name', '#client_name', #{Settings.MAX_EN_LENGTH_NAME})" %>
-                              <%= link_to short_ja_name(client.client_name), "javascript:void(0)", class: "client_name_search", id: "search#{client.id}" %></div>
-                          		
+                          <td><div style="width: 220px;"><%= link_to short_ja_name(client.client_name), "javascript:void(0)", class: "client_name", title: "#{client.client_name}", id: "#{client.id}", onclick: "reloadFlex('.newTable06', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{client.id}', '.client_name', '#client_name', #{Settings.MAX_EN_LENGTH_NAME})" %>
+								<%= link_to short_ja_name(client.client_name), "javascript:void(0)", class: "client_name_search", id: "search#{client.id}" %></div>
                           </td>
                       <% end %>
                   <% else %>
                       <% if (params[:id] && client.id == params[:id].to_i) || (!params[:id] && index == 0) %>
-                          <td><div style="overflow:hidden;"><%= link_to short_ja_name(client.client_name), "#{clients_path(client_id: client.id)}", class: "client_name current", id: "#{client.id}" %></div></td>
+
+                          <td><div style="width: 220px;"><%= link_to short_ja_name(client.client_name), "#{clients_path(client_id: client.id)}", title: "#{client.client_name}", class: "client_name current", id: "#{client.id}" %></div></td>
                       <% else %>
-                          <td><div style="overflow:hidden;"><%= link_to short_ja_name(client.client_name), "#{clients_path(client_id: client.id)}", class: "client_name", id: "#{client.id}" %></div></td>
+                          <td><div style="width: 220px;"><%= link_to short_ja_name(client.client_name), "#{clients_path(client_id: client.id)}", title: "#{client.client_name}", class: "client_name", id: "#{client.id}" %></div></td>
                       <% end %>
                   <% end %>
                 </tr>
@@ -57,11 +56,11 @@
                   <% if (params[:promotion_id] && promotion.id == params[:promotion_id].to_i) || (!params[:promotion_id] && index == 0) %>
                       <td><div style="overflow:hidden;">
                         <% if params[:controller] == "click_logs" %>
-                            <%= link_to short_ja_name(promotion.promotion_name), "#{click_logs_path(promotion_id: promotion['id'])}", class: "promotion_name current", id: "#{promotion['id']}" %>
+                            <%= link_to short_ja_name(promotion.promotion_name), "#{click_logs_path(promotion_id: promotion['id'])}", title: "#{promotion.promotion_name}", class: "promotion_name current", id: "#{promotion['id']}" %>
                         <% elsif params[:controller] == "conversion_promotion_logs" %>
-                            <%= link_to short_ja_name(promotion.promotion_name), "#{conversion_promotion_logs_path(promotion_id: promotion.id)}", class: "promotion_name current", id: "#{promotion.id}" %>
+                            <%= link_to short_ja_name(promotion.promotion_name), "#{conversion_promotion_logs_path(promotion_id: promotion.id)}", title: "#{promotion.promotion_name}", class: "promotion_name current", id: "#{promotion.id}" %>
                         <% else %>
-                            <%= link_to short_ja_name(promotion.promotion_name), "#{promotions_path(promotion_id: promotion['id'], client_id: params[:client_id])}", class: "promotion_name current", id: "#{promotion['id']}" %>
+                            <%= link_to short_ja_name(promotion.promotion_name), "#{promotions_path(promotion_id: promotion['id'], client_id: params[:client_id])}", title: "#{promotion.promotion_name}", class: "promotion_name current", id: "#{promotion['id']}" %>
                         <% end %>
                         </div>
                       </td>
@@ -69,11 +68,11 @@
                       <td>
                       	<div style="overflow:hidden;">
                         <% if params[:controller] == "click_logs" %>
-                            <%= link_to short_ja_name(promotion.promotion_name), "#{click_logs_path(promotion_id: promotion['id'])}", class: "promotion_name", id: "#{promotion['id']}" %>
+                            <%= link_to short_ja_name(promotion.promotion_name), "#{click_logs_path(promotion_id: promotion['id'])}", title: "#{promotion.promotion_name}", class: "promotion_name", id: "#{promotion['id']}" %>
                         <% elsif params[:controller] == "conversion_promotion_logs" %>
-                            <%= link_to short_ja_name(promotion.promotion_name), "#{conversion_promotion_logs_path(promotion_id: promotion.id)}", class: "promotion_name", id: "#{promotion.id}" %>
+                            <%= link_to short_ja_name(promotion.promotion_name), "#{conversion_promotion_logs_path(promotion_id: promotion.id)}", title: "#{promotion.promotion_name}", class: "promotion_name", id: "#{promotion.id}" %>
                         <% else %>
-                            <%= link_to short_ja_name(promotion.promotion_name), "#{promotions_path(promotion_id: promotion['id'], client_id: params[:client_id])}", class: "promotion_name", id: "#{promotion['id']}" %>
+                            <%= link_to short_ja_name(promotion.promotion_name), "#{promotions_path(promotion_id: promotion['id'], client_id: params[:client_id])}", title: "#{promotion.promotion_name}", class: "promotion_name", id: "#{promotion['id']}" %>
                         <% end %></div></td>
                   <% end %>
                 </tr>
@@ -94,9 +93,10 @@
                 <tr>
                   <th class="edit"><%= link_to "", "#{edit_conversion_path(conversion)}?promotion_id=#{params[:promotion_id]}", class: "edit", id: "edit#{conversion.id}" if current_user.super? || current_user.agency? %></th>
                   <% if (params[:id] && conversion.id == params[:id].to_i) || (!params[:id] && index == 0) %>
-                      <td><div style="overflow:hidden;"><%= link_to short_ja_name(conversion.conversion_name), "#{edit_conversion_path(conversion)}?promotion_id=#{params[:promotion_id]}", class: "conversion_name current", id: "#{conversion.id}" %></div></td>
+
+                      <td><div style="width: 220px;"><%= link_to short_ja_name(conversion.conversion_name), "#{edit_conversion_path(conversion)}?promotion_id=#{params[:promotion_id]}", title: "#{conversion.conversion_name}", class: "conversion_name current", id: "#{conversion.id}" %></div></td>
                   <% else %>
-                      <td><div style="overflow:hidden;"><%= link_to short_ja_name(conversion.conversion_name), "#{edit_conversion_path(conversion)}?promotion_id=#{params[:promotion_id]}", class: "conversion_name", id: "#{conversion.id}" %></div></td>
+                      <td><div style="width: 220px;"><%= link_to short_ja_name(conversion.conversion_name), "#{edit_conversion_path(conversion)}?promotion_id=#{params[:promotion_id]}", title: "#{conversion.conversion_name}", class: "conversion_name", id: "#{conversion.id}" %></div></td>
                   <% end %>
                 </tr>
             <% end
