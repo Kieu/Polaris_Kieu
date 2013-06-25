@@ -68,7 +68,7 @@ class ExportPromotionsData
 
       cnt = cnt - 1
       File.open(path_file, 'w') do |bom|
-        buffer = [ 0xff, 0xfe ].pack("H")
+        buffer = [ 15711167 ].pack("H")
         bom.write(buffer)
       end
       return
