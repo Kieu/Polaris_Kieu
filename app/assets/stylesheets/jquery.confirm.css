@@ -41,7 +41,7 @@
 #confirmBox p.del_message{
     margin: auto;
     margin-bottom: 10px;
-    width: 420px;
+    max-width: 470px;
 }
 #confirmBox h1,
 #confirmBox p{
