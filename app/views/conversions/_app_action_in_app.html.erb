@@ -61,7 +61,7 @@
 <tr>
   <th><%= I18n.t("conversion.conversion_category.app.option.label")%><br /><%= f.label I18n.t("conversion.conversion_category.app.sale_unit_price") %></th>
   <td colspan="4"><br />
-    <%= f.text_field :sale_unit_price, maxlength: 255, placeholder: "￥", class: "prevent_change" %>
+    <%= f.text_field :sale_unit_price, maxlength: 11, placeholder: "￥", class: "prevent_change" %>
   </td>
 </tr>
 <tr>
