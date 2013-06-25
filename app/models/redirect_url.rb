@@ -38,7 +38,7 @@ class RedirectUrl < ActiveRecord::Base
               and r_info.media_id = #{media_id}
               and DATE_FORMAT(r_info.created_at, '%Y/%m/%d') between DATE_FORMAT('#{start_date}', '%Y/%m/%d')
                                      and DATE_FORMAT('#{end_date}', '%Y/%m/%d')
-              and r_info.del_flg = 0
+              and r_info.del_flg <> 1
             ORDER BY ad.name, camp.name, d_group.name
 	"
   sql = sql + limit_string
