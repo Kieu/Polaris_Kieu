@@ -67,10 +67,7 @@ class ExportPromotionsData
       end
 
       cnt = cnt - 1
-      File.open(path_file, 'wb') do |bom|
-        buffer = ['EF','BB','BF'].pack("H*H*H*")
-        bom.write(buffer)
-      end
+
       CSV.open(path_file, "wb") do |csv|
 
         # make header for CSV file
@@ -145,6 +142,11 @@ class ExportPromotionsData
           end
 
         end
+      end
+      File.open(path_file, 'wb') do |bom|
+        buffer = ['EF','BB','BF'].pack("H*H*H*")
+        bom.seek(0,IO::SEEK_SET)
+        bom.write(buffer)
       end
       # success case
       background_job.status = Settings.job_status.SUCCESS
