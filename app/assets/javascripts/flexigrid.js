@@ -1292,8 +1292,8 @@
             }
             $(g.gDiv).append(g.rDiv);
         }
-        $('<div id="scroll_flexigrid">').insertBefore('.hDiv');
-        $('</div>').insertAfter('.bDiv');
+        $('<div id="scroll_flexigrid"></div>').append('.hDiv');
+        $('<div id="scroll_flexigrid"></div>').append('.bDiv');
         // add pager
         if (p.usepager) {
             g.pDiv.className = 'pDiv';
