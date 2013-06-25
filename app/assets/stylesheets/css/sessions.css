@@ -42,7 +42,7 @@ a:hover {
     height: 50px;
     background-color: #f1f1f1;
 }
-.headerInner {
+#headerInner {
     margin: 0 auto;
     width: 95%;
 }
