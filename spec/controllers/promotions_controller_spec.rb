@@ -3,7 +3,7 @@ require 'spec_helper'
 describe PromotionsController do
   let!(:client) {FactoryGirl.create(:client)}
   let!(:user_super) {FactoryGirl.create(:user_super)}
-  let!(:user_client) {FactoryGirl.create(:user_client, company_id: client.id)}
+  let!(:user_client) {FactoryGirl.create(:users_client, company_id: client.id)}
   let!(:promotion) {FactoryGirl.create(:promotion, client_id: client.id)}
 
   let(:promotion_name) {"promotion01"}
