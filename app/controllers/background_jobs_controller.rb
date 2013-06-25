@@ -7,7 +7,7 @@ class BackgroundJobsController < ApplicationController
     job = BackgroundJob.find(params[:id])
     if current_user.id == job.user_id
       path = "#{Rails.root}/#{job.filepath}"
-      send_file(path, filename: job.filename, :type => "text/csv; charset=utf-16le", :disposition => "attachment")
+      send_file(path, filename: job.filename, :type => "text/csv; charset=utf-8")
     end
   end
   def download
