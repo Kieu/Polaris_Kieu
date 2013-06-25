@@ -62,6 +62,9 @@ class ExportClickLogsData
       end
 
       # success case
+       volume = File.size(path_file)
+       size_field = file_size_fomat volume
+       background_job.size = size_field
        background_job.status = Settings.job_status.SUCCESS
        background_job.save!
     rescue
@@ -69,6 +72,18 @@ class ExportClickLogsData
        background_job.status = Settings.job_status.WRONG
        background_job.save!   
     ensure  
+    end
+  end
+  private
+  def file_size_fomat volume
+    if volume < 1024
+      return "#{volume}bytes"
+    elsif volume == 1024
+      return "1kB"
+    elsif volume > 1024 && volume < (1024*1024)
+      return (volume / 1024.0).round(2).to_s + "kB"
+    else
+      return (volume / (1024.0*1024.0)).round(2).to_s + "MB"
     end
   end
 end
