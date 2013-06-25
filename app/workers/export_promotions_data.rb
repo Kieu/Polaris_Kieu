@@ -71,7 +71,6 @@ class ExportPromotionsData
         buffer = ['EF','BB','BF'].pack("H*H*H*")
         bom.write(buffer)
       end
-      return
       CSV.open(path_file, "wb") do |csv|
 
         # make header for CSV file
