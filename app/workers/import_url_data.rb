@@ -241,8 +241,8 @@ class ImportUrlData
               end
               
               if num == Settings.RECORD_NUM_PER_INSERT || (row_number == 0)
-                #result = ActiveRecord::Base.connection.execute(insert_redirect_info_str)
-                #result = ActiveRecord::Base.connection.execute(insert_redirect_url_str)
+                result = ActiveRecord::Base.connection.execute(insert_redirect_info_str)
+                result = ActiveRecord::Base.connection.execute(insert_redirect_url_str)
 
                 # make header insert string sql
                 insert_ad_str, insert_redirect_info_str,
