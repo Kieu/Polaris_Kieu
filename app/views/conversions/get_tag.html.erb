@@ -26,9 +26,9 @@
   <div id="ui-tab">
     <ul class="ui-tabs-nav">
       <li class="disabled"><a href="/conversions/<%= @conversion.id %>/edit?promotion_id=<%= @conversion.promotion_id %>"><span><%= I18n.t("conversion.crumb_edit")%></span></a></li>
-      <li><a href="#get_tag"><span><%= I18n.t("conversion.tag_acquisition")%></span></a></li>
+      <li><a href="#fragment-1"><span><%= I18n.t("conversion.tag_acquisition")%></span></a></li>
     </ul>
-    <div id="get_tag">
+    <div id="fragment-1">
       <% if @conversion.conversion_category == "2" %>
         <div id="fragment-2">
           <div class="conversion_form">
@@ -68,29 +68,6 @@
                   <tr>
                     <th>計測タグ</th>
                     <td id="img">
-                      <script type="text/javascript">
-                        var prot = document.location.protocol;
-                        document.write(unescape("%3Cscript type=\'text/javascript\' language=\'javascript\' src=\'"
-                          + prot + "//track.polaris-adm.com/js/conversion.js?" + (new Date().getTime()) + "\'%3E%3C/script%3E"));
-                      </script>
-
-                      <script type="text/javascript">
-                        var plrs_pid = <%= @conversion.promotion_id %>;
-                        var plrs_mv = <%= @conversion.mv %>;
-
-                      /* 
-                        // #custom parameter
-                        var plrs_suid = "";
-                        var plrs_verify = "";
-                        var plrs_sales = "";
-                        var plrs_profit = "";
-                        var plrs_volume = "";
-                        var plrs_others = "";
-                      */
-
-                      　var polaris = getTrack();
-                        polaris.main();
-                      </script>
                     </td>
                     <td class="copy_button last-child"><div class="copy" data-clipboard-target="img"><img src="/assets/btn_copy.gif" /></div></td>
                   </tr>
@@ -107,4 +84,23 @@
   $(document).ready(function() {
     var clip = new ZeroClipboard($(".copy"));
   });
+</script>
+<script type="text/javascript">
+  $('#img').html("pid: <%= @conversion.promotion_id%><br />mv: <%= @conversion.mv %>");
+  var prot = document.location.protocol;
+  document.write(unescape("%3Cscript type=\'text/javascript\' language=\'javascript\' src=\'"
+    + prot + "//track.polaris-adm.com/js/conversion.js?" + (new Date().getTime()) + "\'%3E%3C/script%3E"));
+  var plrs_pid = <%= @conversion.promotion_id %>;
+  var plrs_mv = <%= @conversion.mv %>;
+/* 
+  // #custom parameter
+  var plrs_suid = "";
+  var plrs_verify = "";
+  var plrs_sales = "";
+  var plrs_profit = "";
+  var plrs_volume = "";
+  var plrs_others = "";
+*/
+　var polaris = getTrack();
+  polaris.main();
 </script>
