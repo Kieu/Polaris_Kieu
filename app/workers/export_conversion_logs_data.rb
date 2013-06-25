@@ -79,7 +79,7 @@ class ExportConversionLogsData
       end  
       os = { 1 => I18n.t("conversion.conversion_category.app.os.ios"), 2 => I18n.t("conversion.conversion_category.app.os.android"), 9 => I18n.t("conversion.conversion_category.app.os.other")}
       conversion_categories = [I18n.t("conversion.conversion_category.web"), I18n.t("conversion.conversion_category.app.label"), I18n.t("conversion.conversion_category.combination")]
-      CSV.open(path_file, "w:bom|utf-8") do |csv|
+      CSV.open(path_file, "wb:bom|utf-8") do |csv|
         # make header for CSV file
         #csv << header_col
         csv << options['header_titles_csv']
