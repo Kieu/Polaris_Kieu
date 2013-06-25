@@ -1,6 +1,6 @@
 # encoding: utf-8
-require 'csv'
-require 'iconv'
+require 'fastercsv'
+require 'office_csv'
 
 # export promotion data table from promotion screen to csv file
 class ExportPromotionsData
@@ -68,8 +68,8 @@ class ExportPromotionsData
 
       cnt = cnt - 1
       CSV.open(path_file, "wb") do |csv|
-        io = File.open("#{Rails.root}/doc/bom_template.csv")
-        bom = io.read(8)
+        bom = OfficeCSV.generate do |row|
+        end
         # make header for CSV file
         csv << bom
         csv << account_col
