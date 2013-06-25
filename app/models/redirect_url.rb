@@ -15,7 +15,7 @@ class RedirectUrl < ActiveRecord::Base
               camp.name as campaign_name
               ,d_group.name as group_name
               ,ad.name as ad_name
-              ,ad.id as ad_id
+              ,ad.identifier as ad_id
               ,camp.id as camp_id
               ,d_group.id as group_id
               ,r_info.comment as comment
