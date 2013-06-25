@@ -12,8 +12,8 @@ class UrlSettingsController < ApplicationController
       return
     end
 
-    cookies[:url_setting_start_date] = Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d")
-    cookies[:url_setting_end_date] = Date.yesterday.strftime("%Y/%m/%d")
+    cookies[:url_setting_start_date] = Date.yesterday.at_beginning_of_month.strftime(I18n.t("time_format"))
+    cookies[:url_setting_end_date] = Date.yesterday.strftime(I18n.t("time_format"))
     @promotion_id = params[:promotion_id]
     @account_id = params[:account_id]
     @promotion = Promotion.where(id: @promotion_id).select('client_id, promotion_name')
@@ -53,6 +53,9 @@ class UrlSettingsController < ApplicationController
     if  !start_date || !end_date
       start_date = Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d")
       end_date = Date.yesterday.strftime("%Y/%m/%d")
+    else
+      start_date = Date.strptime(params[:start_date].strip, I18n.t("time_format")).strftime("%Y/%m/%d")
+      end_date = Date.strptime(params[:end_date].strip, I18n.t("time_format")).strftime("%Y/%m/%d")
     end
     
     url_data = Array.new
@@ -103,8 +106,8 @@ class UrlSettingsController < ApplicationController
   end
 
   def download_csv
-    start_date = params[:start_date]
-    end_date = params[:end_date]
+    start_date = Date.strptime(params[:start_date].strip, I18n.t("time_format")).strftime("%Y/%m/%d")
+    end_date = Date.strptime(params[:end_date].strip, I18n.t("time_format")).strftime("%Y/%m/%d")
     user_id = current_user.id
     promotion_id = params[:promotion_id]
     account_id = params[:account_id]
@@ -123,7 +126,8 @@ class UrlSettingsController < ApplicationController
     background_job = BackgroundJob.create
     job_id = ExportUrlData.create(start_date: start_date, end_date: end_date,
       user_id: user_id, promotion_id: promotion_id, account_id: account_id,
-      media_id: media_id, bgj_id: background_job.id, array_header_csv: array_header_csv, breadcrumb: breadcrumb)
+      media_id: media_id, bgj_id: background_job.id, array_header_csv: array_header_csv, 
+      breadcrumb: breadcrumb, lang: cookies[:locale])
     background_job.user_id = current_user.id
     background_job.job_id = job_id
     background_job.breadcrumb =  breadcrumb
@@ -136,8 +140,8 @@ class UrlSettingsController < ApplicationController
   private
   def set_cookies
     time = Time.new
-    cookies[:url_setting_start_date] = Date.yesterday.at_beginning_of_month.strftime("%Y/%m/%d") if !cookies[:url_setting_start_date] 
-    cookies[:url_setting_end_date] = Date.yesterday.strftime("%Y/%m/%d") if !cookies[:url_setting_end_date]
+    cookies[:url_setting_start_date] = Date.yesterday.at_beginning_of_month.strftime(I18n.t("time_format")) if !cookies[:url_setting_start_date] 
+    cookies[:url_setting_end_date] = Date.yesterday.strftime(I18n.t("time_format")) if !cookies[:url_setting_end_date]
     cookies[:url_setting] = "10111111001" if !cookies[:url_setting]
   end
 end
