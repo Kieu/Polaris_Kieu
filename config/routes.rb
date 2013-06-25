@@ -42,7 +42,7 @@ PolarisManage::Application.routes.draw do
   resources :conversion_promotion_logs, only: [:index] do
     post "get_conversion_logs_list", on: :collection 
     post "download_csv", on: :collection
-    post "change_medias_list", on: :collection
+    post "change_accounts_list", on: :collection
   end
   resources :url_settings do
     post "get_urls_list", on: :collection
