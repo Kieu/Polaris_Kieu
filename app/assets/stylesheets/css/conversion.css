@@ -208,7 +208,7 @@ table.setting_info td.copy_button{
 }
 
 li.disabled {
-    margin: 0px 0 0; /* position: relative makes opacity fail for disabled tab in IE */
+    margin-left: 1px; /* position: relative makes opacity fail for disabled tab in IE */
     padding-left: 0;
     color: #474747;
     font-weight: bold;
