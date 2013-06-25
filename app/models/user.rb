@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
     :password_flg
 
   belongs_to :role
-  has_many :client_users
+  has_many :clients_users
   has_one :block_login_user
 
   validates :username, presence: true, uniqueness: {case_sensitive: false},
