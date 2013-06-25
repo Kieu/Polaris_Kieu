@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'csv'
+require 'iconv'
 
 # export promotion data table from promotion screen to csv file
 class ExportPromotionsData
@@ -66,9 +67,10 @@ class ExportPromotionsData
       end
 
       cnt = cnt - 1
-      CSV.open(path_file, "w:bom|utf-8") do |csv|
-
+      CSV.open(path_file, "wb:bom|utf-8") do |csv|
+        BOM = "\377\376" + Iconv.conv('utf-16le', 'utf8', '')
         # make header for CSV file
+        csv << BOM
         csv << account_col
 
         # start write content of promotion to file
