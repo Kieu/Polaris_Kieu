@@ -6,7 +6,12 @@
     <%= render partial: "layouts/sidebar", locals: {object: @promotions} %>
 <% end %>
 <%= render partial: "layouts/option_cv_log_page" %>
-
+<style>
+    #scroll_flexigrid
+    {
+        width: 2500px;
+    }
+</style>
 <ul class="contentNavi">
   <div class = "crumb_logs">
 	<% unless current_user.client? %>
@@ -60,11 +65,8 @@
 	<div id="ui-tab">
 		<div id="fragment-1" class="ui-tabs-panel">
 			<div id="graph">
-
 			</div>
-			  <div id="conversion_scroll" style="width:100%">
-			<div style='width: 2500px'><table id="cvlogs"class="newTable06 fixTable d-none" style="background: grey" ></table> </div>
-          </div>
+			<table id="cvlogs"class="newTable06 fixTable d-none" style="background: grey" ></table>
 			
 		</div>
 		<div id="fragment-2" class="ui-tabs-panel ui-tabs-hide">
