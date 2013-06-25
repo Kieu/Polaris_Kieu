@@ -99,7 +99,7 @@ describe User do
 
   describe "#toggle_enabled" do
     let!(:client) {FactoryGirl.create(:client)}
-    let!(:client_user) {FactoryGirl.create(:clients_user,
+    let!(:client_user) {FactoryGirl.create(:client_user,
       client_id: client.id, user_id: user.id)}
     before {user.toggle_enabled}
 
