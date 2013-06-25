@@ -67,8 +67,12 @@ class ExportPromotionsData
       end
 
       cnt = cnt - 1
-
-      CSV.open(path_file, "wb") do |csv|
+      File.open(path_file, 'wb') do |bom|
+        buffer = ['EF','BB','BF'].pack("H*H*H*")
+        bom.seek(0,IO::SEEK_SET)
+        bom.write(buffer)
+      end
+      CSV.open(path_file, "w+") do |csv|
 
         # make header for CSV file
         csv << account_col
@@ -143,11 +147,7 @@ class ExportPromotionsData
 
         end
       end
-      File.open(path_file, 'wb+') do |bom|
-        buffer = ['EF','BB','BF'].pack("H*H*H*")
-        bom.seek(0,IO::SEEK_SET)
-        bom.write(buffer)
-      end
+
       # success case
       background_job.status = Settings.job_status.SUCCESS
       volume = File.size(path_file)
