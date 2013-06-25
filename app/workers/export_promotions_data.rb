@@ -70,6 +70,7 @@ class ExportPromotionsData
       File.open(path_file, 'w') do |bom|
         bom.write([0xff, 0xfe].pack('C*'))
       end
+      return
       CSV.open(path_file, "wb") do |csv|
 
         # make header for CSV file
