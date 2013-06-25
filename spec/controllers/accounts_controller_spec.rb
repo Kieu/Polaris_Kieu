@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe AccountsController do
   let!(:user_super) {FactoryGirl.create(:user_super)}
-  let!(:user_client) {FactoryGirl.create(:user_client)}
+  let!(:user_client) {FactoryGirl.create(:users_client)}
   let!(:client) {FactoryGirl.create(:client)}
   let!(:promotion) {FactoryGirl.create(:promotion, client_id: client.id)}
   let!(:account) {FactoryGirl.create(:account, promotion_id: promotion.id)}
