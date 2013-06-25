@@ -67,7 +67,7 @@ class ExportPromotionsData
       end
 
       cnt = cnt - 1
-      File.open(path_file, 'wb:utf-8') do |bom|
+      File.open(path_file, 'wb') do |bom|
         buffer = ['EF','BB','BF'].pack("H*H*H*")
         bom.write(buffer)
       end
