@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
     :password_flg
 
   belongs_to :role
-  has_many :client_users
+  has_many :clients_users
   has_one :block_login_user
 
   validates :username, presence: true, uniqueness: {case_sensitive: false},
@@ -92,7 +92,7 @@ class User < ActiveRecord::Base
   end
   
   def del_client_user
-    self.client_users.each do |client_user|
+    self.clients_users.each do |client_user|
       client_user.update_attributes!(del_flg: Settings.client_user.deleted)
     end
   end
