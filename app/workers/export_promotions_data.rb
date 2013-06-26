@@ -72,7 +72,7 @@ class ExportPromotionsData
         bom.seek(0,IO::SEEK_SET)
         bom.write(buffer)
       end
-      CSV.open(path_file, "w+") do |csv|
+      CSV.open(path_file, "a+") do |csv|
 
         # make header for CSV file
         csv << account_col
