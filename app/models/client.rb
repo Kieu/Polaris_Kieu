@@ -1,4 +1,5 @@
 class Client < ActiveRecord::Base
+  include ApplicationHelper
   VALID_PHONE_NUMBER_REGEX = /^\+{0,1}\d+[\d]+$/
   VALID_ROMAN_NAME_REGEX = /^[A-Z_\ \~\!\@\#\$\%\^\&\*\(\)\_\-\+\=\<\,\>\.\;\:\"\'\{\}|\\\?\?\/a-z][A-Za-z_\ \~\!\@\#\$\%\^\&\*\(\)\_\-\+\=\<\,\>\.\;\:\"\'\{\}|\\\?\?\/\-0-9]*$/
   attr_accessible :client_name, :roman_name, :tel, :department_name,
@@ -38,5 +39,9 @@ class Client < ActiveRecord::Base
         return false
       end
     end
+  end
+  
+  def name_with_initial
+    short_ja_name(self.client_name)
   end
 end
