@@ -14,6 +14,11 @@ en:
   recaptcha:
     errors:
       incorrect-captcha-sol: "Certification letters that you have typed are different. Please re-enter them"
+  promotion_export_csv:
+    media: "Media"
+    account_name: "Account name"
+    first: "first"
+    repeat: "repeat"
   promotions:
     new:
       category: ["IT/Media/App", "AV/Consumer electronics", "Food/Beverage/Consumer Goods", "Distribution/retail/mail order", "Finance", "Communication", "Real estate", "Human resources", "automobile", "Service", "Others"]
