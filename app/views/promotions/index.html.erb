@@ -473,8 +473,7 @@ a.bread_scrumb_link {
 			}
         });
     });
-    
-    $("#show_all").click(function(){
+    $(document).on('click', "#show_all", function(){
     	cookies_options = "111111";
     	$(".promotion_option").addClass("checked");
     	$(".promotion_option").each(function(){

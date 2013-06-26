@@ -54,7 +54,7 @@
                 <tr>
                   <th class="edit"><%= link_to "", "#{edit_promotion_path(promotion)}?client_id=#{@client_id}", class: "edit", id: "edit#{promotion['id']}" if current_user.super? || current_user.agency? %></th>
                   <% if (params[:promotion_id] && promotion.id == params[:promotion_id].to_i) || (!params[:promotion_id] && index == 0) %>
-                      <td><div style="overflow:hidden;">
+                      <td><div style="width: 220px;">
                         <% if params[:controller] == "click_logs" %>
                             <%= link_to short_ja_name(promotion.promotion_name), "#{click_logs_path(promotion_id: promotion['id'])}", title: "#{promotion.promotion_name}", class: "promotion_name current", id: "#{promotion['id']}" %>
                         <% elsif params[:controller] == "conversion_promotion_logs" %>
@@ -66,7 +66,7 @@
                       </td>
                   <% else %>
                       <td>
-                      	<div style="overflow:hidden;">
+                      	<div style="width: 220px;">
                         <% if params[:controller] == "click_logs" %>
                             <%= link_to short_ja_name(promotion.promotion_name), "#{click_logs_path(promotion_id: promotion['id'])}", title: "#{promotion.promotion_name}", class: "promotion_name", id: "#{promotion['id']}" %>
                         <% elsif params[:controller] == "conversion_promotion_logs" %>

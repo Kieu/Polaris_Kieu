@@ -134,7 +134,8 @@ function draw_chart(data_left, data_right, left, right, categories){
     chart = new Highcharts.Chart({ // 以下、chartオブジェクトに渡す引数
 		chart: {
 			renderTo: 'sample-chart', // どの要素にグラフを描画するかを指定
-			type: 'line' // グラフの種類を指定
+			type: 'line', // グラフの種類を指定
+            zoomType: 'xy'
 		},
 		credits: {//右下リンクの消去
             enabled: false
@@ -151,30 +152,29 @@ function draw_chart(data_left, data_right, left, right, categories){
                 rotation: -45
             },
           tickInterval: custom_tickInterval
-		//	categories: categories,
-		//	dateTimeLabelFormats: {day: '%e. %b', month: '%e. %b'},
-		//	labels:{
-		//		rotation: -45
-		//	}
 		},
-		yAxis: {
+		yAxis: [{
+			min: 0,
 			title: {
             	text: null
 			},
             labels: {
-				align: 'left',
-                x: 3,
-                y: 16,
+                formatter: function() {
+                	return Highcharts.numberFormat(this.value, 0);
+				}
+			}
+		},{
+			min: 0,
+			title: {
+            	text: null
+            },
+            labels: {
                 formatter: function() {
                 	return Highcharts.numberFormat(this.value, 0);
 				}
 			},
-			plotLines: [{
-				value: 0,
-				width: 1,
-				color: '#808080'
-			}]
-		},
+			opposite: true
+		}],
 		tooltip: { // マウスオーバーした際に表示する文書を指定
 			formatter: function() {
 				name = this.series.name;
@@ -202,6 +202,7 @@ function draw_chart(data_left, data_right, left, right, categories){
 			},{ // データ系列を指定
 				name: right,
 				data: data_right,
+				yAxis: 1,
 				color: "#FF1493"
 			}]
 		});
