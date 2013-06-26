@@ -93,12 +93,29 @@ class ExportPromotionsData
             if current_data_promotion != nil
               array_medium << current_data_promotion['imp_count'].to_s
               array_medium << current_data_promotion['click_count'].to_s
-              click_through_ratio = current_data_promotion['click_through_ratio'].to_s + "%"
+              if current_data_promotion['click_through_ratio'] == nil
+                click_through_ratio = nil
+              else
+                click_through_ratio = current_data_promotion['click_through_ratio'].to_s + "%"
+              end
+              
               array_medium << click_through_ratio
-              cost_sum = '¥' + (current_data_promotion['cost_sum'].to_s)
+
+              if current_data_promotion['cost_sum'] == nil
+                cost_sum = nil
+              else
+                cost_sum = '¥' + (current_data_promotion['cost_sum'].to_s)
+              end
+              
               array_medium << cost_sum
               array_medium << current_data_promotion['cost_per_mille'].to_s
-              cost_per_click = '¥' + (current_data_promotion['cost_per_click'].to_s)
+
+              if current_data_promotion['cost_per_click'] == nil
+                cost_per_click = nil
+              else
+                cost_per_click = '¥' + (current_data_promotion['cost_per_click'].to_s)
+              end
+
               array_medium << cost_per_click
             else
               array_medium << nil
@@ -115,18 +132,52 @@ class ExportPromotionsData
                 array_medium << current_data_conversion['total_cv_count'].to_s
                 array_medium << current_data_conversion['first_cv_count'].to_s
                 array_medium << current_data_conversion['repeat_cv_count'].to_s
-                conversion_rate = current_data_conversion['conversion_rate'].to_s + "%"
+
+                if current_data_conversion['conversion_rate'] == nil
+                  conversion_rate = nil
+                else
+                  conversion_rate = current_data_conversion['conversion_rate'].to_s + "%"
+                end
+
                 array_medium << conversion_rate
-                click_per_action = '¥' + (current_data_conversion['click_per_action'].to_s)
+
+                if current_data_conversion['click_per_action'] == nil
+                  click_per_action = nil
+                else
+                  click_per_action = '¥' + (current_data_conversion['click_per_action'].to_s)
+                end
+
                 array_medium << click_per_action
                 array_medium << current_data_conversion['assist_count'].to_s
-                sales = '¥' + (current_data_conversion['sales'].to_s)
+
+                if current_data_conversion['sales'] == nil
+                  sales = nil
+                else
+                  sales = '¥' + (current_data_conversion['sales'].to_s)
+                end
+
                 array_medium << sales
-                roas = current_data_conversion['roas'].to_s + "%"
+                if current_data_conversion['roas'] == nil
+                  roas = nil
+                else
+                  roas = current_data_conversion['roas'].to_s + "%"
+                end
+
                 array_medium << roas
-                profit = '¥' + (current_data_conversion['profit'].to_s)
+
+                if current_data_conversion['profit'] == nil
+                  profit = nil
+                else
+                  profit = '¥' + (current_data_conversion['profit'].to_s)
+                end
+
                 array_medium << profit
-                roi = (current_data_conversion['roi'].to_s) + "%"
+                if current_data_conversion['roi'] == nil
+                  roi = nil
+                else
+                  roi = (current_data_conversion['roi'].to_s) + "%"
+                end
+
                 array_medium << roi
               else
                 array_medium << nil
