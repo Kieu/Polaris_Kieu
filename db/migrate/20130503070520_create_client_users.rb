@@ -1,4 +1,4 @@
-class CreateClientsUsers < ActiveRecord::Migration
+class CreateClientUsers < ActiveRecord::Migration
   def change
     create_table :client_users do |t|
       t.integer :client_id, limit: 11

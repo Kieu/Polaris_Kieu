@@ -85,7 +85,7 @@ $(function(){
 <script type="text/javascript">
     $(document).ready(function () {
         list_user = [];
-        <% User.active.each do |user|%>
+        <% User.active.where('role_id != ?',1).each do |user|%>
         <%
         if user.client?
           company = Client.find(user.company_id).client_name
