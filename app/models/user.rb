@@ -92,7 +92,7 @@ class User < ActiveRecord::Base
   end
   
   def del_client_user
-    self.clients_users.each do |client_user|
+    self.client_users.each do |client_user|
       client_user.update_attributes!(del_flg: Settings.client_user.deleted)
     end
   end

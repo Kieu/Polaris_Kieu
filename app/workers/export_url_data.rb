@@ -32,7 +32,13 @@ class ExportUrlData
       url_data, total_row = RedirectUrl.get_url_data(options['promotion_id'], options['account_id'],
         options['media_id'], nil, nil, options['start_date'], options['end_date'], 'download')
       
-      CSV.open(path_file, "wb") do |csv|
+      File.open(path_file, 'wb') do |bom|
+        buffer = ['EF','BB','BF'].pack("H*H*H*")
+        bom.seek(0,IO::SEEK_SET)
+        bom.write(buffer)
+      end
+      
+      CSV.open(path_file, "a+") do |csv|
         csv << ["Export Url data"]
         csv << ["Time range: #{options['start_date']} - #{options['end_date']}"]
         csv << [""]

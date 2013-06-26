@@ -14,7 +14,7 @@ class ConversionLog < ActiveRecord::Base
 
     def self.get_all_logs id, page, rp, cv_id, media_category_id, account_id, start_date, end_date, show_error, sortname, sortorder
     start = (page.to_i-1) * rp.to_i
-    set_table_name "conversion_#{id}_logs" 
+    self.table_name = "conversion_#{id}_logs" 
     if !self.table_exists?
       Array.new
       return
@@ -79,7 +79,7 @@ conversion_utime,conversion_ymd,click_utime,remote_ip,mark,conversion_category,t
 conversion_utime,conversion_ymd,null as click_utime,remote_ip,null as mark,conversion_category,track_type,repeat_flg,
 repeat_processed_flg,parent_conversion_id,sales,profit,volume,others,null as approval_status,null as send_url,null as send_utime,access_track_server,'OGANIC' as log_state,null as error_code,created_at,updated_at"
     
-    set_table_name "conversion_#{id}_logs" 
+    self.table_name = "conversion_#{id}_logs" 
     if !self.table_exists?
       return 0
     end
@@ -136,7 +136,7 @@ repeat_processed_flg,parent_conversion_id,sales,profit,volume,others,null as app
   end
   
   def self.get_count  id, cv_id, media_category_id, account_id, start_date, end_date, show_error
-    set_table_name "conversion_#{id}_logs" 
+    self.table_name = "conversion_#{id}_logs" 
     if !self.table_exists?
       return 0
     end
