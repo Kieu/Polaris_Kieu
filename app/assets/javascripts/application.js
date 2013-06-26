@@ -151,30 +151,29 @@ function draw_chart(data_left, data_right, left, right, categories){
                 rotation: -45
             },
           tickInterval: custom_tickInterval
-		//	categories: categories,
-		//	dateTimeLabelFormats: {day: '%e. %b', month: '%e. %b'},
-		//	labels:{
-		//		rotation: -45
-		//	}
 		},
-		yAxis: {
+		yAxis: [{
+			min: 0,
 			title: {
-            	text: null
+            	text: null,
 			},
             labels: {
-				align: 'left',
-                x: 3,
-                y: 16,
                 formatter: function() {
                 	return Highcharts.numberFormat(this.value, 0);
 				}
 			},
-			plotLines: [{
-				value: 0,
-				width: 1,
-				color: '#808080'
-			}]
-		},
+		},{
+			min: 0,
+			title: {
+            	text: null,
+			},
+            labels: {
+                formatter: function() {
+                	return Highcharts.numberFormat(this.value, 0);
+				}
+			},
+			opposite: true
+		}],
 		tooltip: { // マウスオーバーした際に表示する文書を指定
 			formatter: function() {
 				name = this.series.name;
@@ -202,6 +201,7 @@ function draw_chart(data_left, data_right, left, right, categories){
 			},{ // データ系列を指定
 				name: right,
 				data: data_right,
+				yAxis: 1,
 				color: "#FF1493"
 			}]
 		});
