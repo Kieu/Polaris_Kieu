@@ -147,9 +147,16 @@ function draw_chart(data_left, data_right, left, right, categories){
 		},
 		xAxis: { // x軸の値を指定
             categories: categories,
-            dateTimeLabelFormats: {day: '%e. %b', month: '%e. %b'},
             labels: {
-                rotation: -45
+                rotation: -45,
+                style: {
+                    color: '#6D869F',
+                    font: '10px Helvetica'
+                },
+                align: 'right',
+                formatter: function() {
+                    return this.value.substring(5);
+                }
             }
         //    tickInterval: custom_tickInterval
 		//	categories: categories,
