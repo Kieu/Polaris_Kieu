@@ -117,9 +117,9 @@ en:
               too_long: ! 'Person in charge is too long (maximum is %{count} characters)'
               too_short: ! 'Person in charge is too short (minimum is %{count} characters)'
             person_sale:
-              blank: "Person in sales can't be blank"
-              too_long: ! 'Person in sales is too long (maximum is %{count} characters)'
-              too_short: ! 'Person in sales is too short (minimum is %{count} characters)'
+              blank: "Person sales can't be blank"
+              too_long: ! 'Person sales is too long (maximum is %{count} characters)'
+              too_short: ! 'Person sales is too short (minimum is %{count} characters)'
         user:
           attributes:
             username:
@@ -843,7 +843,7 @@ en:
     password_notification:
       label: "Password notification: "
       not_notified: " Not notified"
-      to_notified: " To notified"
+      to_notified: " Notified"
     disabled:
       label: "User disabled: "
       disable: " I want to disable"

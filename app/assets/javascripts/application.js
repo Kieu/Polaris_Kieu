@@ -215,3 +215,7 @@ function graphNumberFormat(val, name) {
 
     return val;
 }
+function sub_ja(str){
+	if (str.length > 14) return str.substring(0,13) + "..."
+	else return str;
+}

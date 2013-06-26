@@ -55,14 +55,13 @@ $(function(){
           <th><div style="width: 190px;"><%= f.label t("user.company_name") %></div></th>
           <td colspan="2">
           	<% if @user.role_id && !@user.client? %>
-            	<%= f.collection_select :company_id, Agency.all, :id, :agency_name, {include_blank: t("user.company_id.include_blank")} , {:class => 'input-text prevent_change',tabindex: 5} %>
+          		<%= f.select :company_id, Agency.all.map {|c| [c.name_with_initial, c.id, {'title' => c.agency_name}]}, {include_blank: t("user.company_id.include_blank")}, {:class => 'input-text prevent_change',tabindex: 5} %>
             <% elsif @user.role_id %>
-            	<%= f.collection_select :company_id, Client.active.all, :id, :client_name, {include_blank: t("user.company_id.include_blank")} , {:class => 'input-text prevent_change',tabindex: 5} %>
+            	<%= f.select :company_id, Client.active.all {|c| [c.name_with_initial, c.id, {'title' => c.client_name}]}, {include_blank: t("user.company_id.include_blank")}, {:class => 'input-text prevent_change',tabindex: 5} %>
             <% else %>
-            	<%= f.collection_select :company_id, Client.where(id: 0), :id, :client_name, {include_blank: t("user.company_id.include_blank")} , {:class => 'input-text prevent_change',tabindex: 5} %>
+            	<%= f.select :company_id, Client.where(id: 0) {|c| [c.name_with_initial, c.id, {'title' => c.client_name}]}, {include_blank: t("user.company_id.include_blank")}, {:class => 'input-text prevent_change',tabindex: 5} %>
             <% end %>
             </td>
-            	
         </tr>
         <tr>
           <th><div style="width: 190px;"><%= I18n.t("user.password.label") %></div></th>
@@ -111,7 +110,7 @@ $(function(){
                     $("#user_company_id").html("<option value><%= t('user.company_id.include_blank') %></option>");
                     for (var i = 0; i < data.length; i++) {
                         name = (name_data == "Client") ? data[i].client_name : data[i].agency_name;
-                        option = "<option value='" + data[i].id + "'>" + name + "</option>";
+                        option = "<option value='" + data[i].id + "' title='" + name + "'>" + sub_ja(name)  + "</option>";
                         $("#user_company_id").append(option);
                     }
                     $("#user_company_id").removeAttr("disabled");
