@@ -17,6 +17,9 @@
         striped : true,
 		dataType: 'json',
 		colModel : [
+            {
+                display : 'Number', name : 'num', sortable : false, align : 'left', hide : true
+            },
     {display: '', name : 'link', width : '20', sortable : false, align: 'center'},
     {display: '<%= I18n.t("user.user_table.roman_name")%>', name : 'roman_name', width : 'auto', sortable : false, align: 'left'},
 	  {display: '<%= I18n.t("user.user_table.username")%>', name : 'username', width : 'auto', sortable : false, align: 'left'},
