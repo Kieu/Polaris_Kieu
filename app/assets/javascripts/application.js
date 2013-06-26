@@ -127,10 +127,10 @@ function draw_chart(data_left, data_right, left, right, categories){
     var min = new Date().getTime();
     var max = min + 50 * 500;
     this.categories = categories;
-    if(categories.length > 32)
-      custom_tickInterval = Math.ceil(categories.length/32);
+    if(this.categories.length > 32)
+      custom_tickInterval = Math.ceil(this.categories.length/32);
     else
-        this.tickInterval = 1;
+        custom_tickInterval = 1;
     chart = new Highcharts.Chart({ // 以下、chartオブジェクトに渡す引数
 		chart: {
 			renderTo: 'sample-chart', // どの要素にグラフを描画するかを指定
@@ -146,7 +146,7 @@ function draw_chart(data_left, data_right, left, right, categories){
 			text:false
 		},
 		xAxis: { // x軸の値を指定
-            categories: categories,
+            categories: this.categories,
             labels: {
                 rotation: -45
             },
