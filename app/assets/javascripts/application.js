@@ -153,6 +153,11 @@ function draw_chart(data_left, data_right, left, right, categories){
             },
           tickInterval: custom_tickInterval
 		},
+        plotOptions: {
+            series: {
+                lineWidth: 1.5
+            }
+        },
 		legend: {
             labelFormatter: function(){
             	name = this.name;
