@@ -487,21 +487,21 @@ ja:
               wrong_length: ! 'URL %{count}文字で入力してください。'
               acceptance: URL チェックボックスを選択してください。
             facebook_app_id:
-              blank: "Facebook app を入力して下さい"
+              blank: "App ID (Facebook) を入力して下さい"
               accepted: Facebook app 受諾してください。 
               confirmation: Facebook app 確認の入力が一致しません。 
-              empty: Facebook app 入力してください。
+              empty: "App ID (Facebook) 入力してください。"
               equal_to: ! 'Facebook app %{count}にしてください。 ' 
               even: Facebook app 偶数にしてください。
               exclusion: Facebook app  予約されています。
               greater_than: ! 'Facebook app %{count}より大きい値にしてください。'
               greater_than_or_equal_to: ! 'Facebook app %{count}以上の値にしてください。'
               inclusion: Facebook app 正しい値が選択されていません。
-              invalid: Facebook app  正しく入力して下さい。
+              invalid: "App ID (Facebook) 正しく入力して下さい。"
               less_than: ! 'Facebook app %{count}より小さい値にしてください。'
               less_than_or_equal_to: ! 'Facebook app %{count}以下の値にしてください。'
-              not_a_number: Facebook app 数値で入力してください。
-              not_an_integer: Facebook app 整数で入力してください。
+              not_a_number: "App ID (Facebook) 数値で入力してください。"
+              not_an_integer: "App ID (Facebook) 整数で入力してください。"
               odd: Facebook app 奇数にしてください。
               record_invalid: Facebook app バリデーションに失敗しました。 '%{errors}'
               taken: Facebook app は既に登録されています
