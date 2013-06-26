@@ -674,8 +674,8 @@ en:
     margin: "Margin calculation: "
     input_data: "Input data"
     sync_account_id: "Sync account ID: "
-    synchronism: "Synchronism"
-    fractured: "Fractured"
+    synchronism: "Synchronize"
+    fractured: "Nonsynchronize"
     sync_account_pw: "Sync account PW: "
     flash_messages:
       success: " Account is created successful"
