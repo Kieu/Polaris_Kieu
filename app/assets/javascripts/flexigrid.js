@@ -192,6 +192,7 @@
                 $(g.bDiv).css('min-height','350px');
                 $(g.bDiv).css('max-height','351px');
                 $(g.bDiv).css('width', p.width_body);
+                $(g.hDiv).css('width', p.width_body);
                 $(".bDiv").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
             },
             dragStart: function (dragtype, e, obj) { //default drag function start
