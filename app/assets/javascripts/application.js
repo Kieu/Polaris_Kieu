@@ -149,7 +149,15 @@ function draw_chart(data_left, data_right, left, right, categories){
 		xAxis: { // x軸の値を指定
             categories: this.categories,
             labels: {
-                rotation: -45
+                rotation: -45,
+                style: {
+                    color: '#6D869F',
+                    font: '10px Helvetica'
+                },
+                align: 'right',
+                formatter: function() {
+                    return this.value.substring(5);
+                }
             },
           tickInterval: custom_tickInterval
 		},
