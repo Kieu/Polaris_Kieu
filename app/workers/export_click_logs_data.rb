@@ -47,7 +47,14 @@ class ExportClickLogsData
       I18n.locale = options['lang']
       
       os = { 1 => I18n.t("conversion.conversion_category.app.os.ios"), 2 => I18n.t("conversion.conversion_category.app.os.android"), 9 => I18n.t("conversion.conversion_category.app.os.other")}
-      CSV.open(path_file, "wb") do |csv|
+
+      File.open(path_file, 'wb') do |bom|
+        buffer = ['EF','BB','BF'].pack("H*H*H*")
+        bom.seek(0,IO::SEEK_SET)
+        bom.write(buffer)
+      end
+      
+      CSV.open(path_file, "a+") do |csv|
         # make header for CSV file
         #csv << header_col
         csv << options['header_titles_csv']
