@@ -63,7 +63,12 @@ class UsersController < ApplicationController
   end
 
   def change_company_list
-    render json: params[:model].constantize.all
+    model = params[:model].constantize
+    if model == Client
+      render json: model.active.all
+    else
+      render json: model.all
+    end
   end
 
   private

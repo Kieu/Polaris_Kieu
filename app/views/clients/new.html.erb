@@ -54,7 +54,7 @@ $(function(){
         <tr>
           <th><%= f.label t("client.contract_type.label") %></th>
           <td><div style="width: 200px;"><%= f.radio_button :contract_type, 0, {checked: true, class: "prevent_change"} %> <%= I18n.t("client.contract_flg.standard_plan") %></div></td>
-          <td><div style="width: 280px;"><%= f.radio_button :contract_type, 1, class: "prevent_change" %> <%= I18n.t("client.contract_flg.premium_plan") %></div>
+          <td><div style="width: 310px;"><%= f.radio_button :contract_type, 1, class: "prevent_change" %> <%= I18n.t("client.contract_flg.premium_plan") %></div>
           </td>
         </tr>
       </table>
