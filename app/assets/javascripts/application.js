@@ -154,7 +154,7 @@ function draw_chart(data_left, data_right, left, right, categories){
           tickInterval: custom_tickInterval
 		},
 		yAxis: [{
-			min: 0,
+
 			title: {
             	text: null
 			},
@@ -164,7 +164,7 @@ function draw_chart(data_left, data_right, left, right, categories){
 				}
 			}
 		},{
-			min: 0,
+
 			title: {
             	text: null
             },
