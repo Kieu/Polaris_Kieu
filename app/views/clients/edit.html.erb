@@ -59,7 +59,7 @@ $(function(){
           <th width="240">&nbsp;</th>
           <th width="80">&nbsp;</th>
           <th style="width: 70px;">
-            <small><%= I18n.t("client.delete") %></small>
+            <div style="width: 70px;"><small><%= I18n.t("client.delete") %></small></div>
           </th>
         </tr>
         </thead>
@@ -104,7 +104,7 @@ $(function(){
         	company = Agency.find(user.company_id).agency_name
         end
         %>
-        list_user.push({"label": "<%= short_ja_name(user.username) %>", "value": "<%= user.id %>", "email": "<%= short_en_name(user.email) %>", "role": "<%= user.role.role_name %>", "company": "<%= short_en_name(company) %>"});
+        list_user.push({"label": "<%= short_ja_name(user.username) %>", "value": "<%= user.id %>", "email": "<%= short_en_name(user.email) %>", "role": "<%= user.role.role_name %>", "company": "<%= short_ja_name(company) %>"});
         <% end %>
         $(list_ignore_user).each(function (i, data) {
             list_user.splice(index_of(list_user, data.value), 1);
