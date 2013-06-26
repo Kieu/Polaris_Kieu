@@ -134,7 +134,7 @@ class PromotionsController < ApplicationController
 
     job_id = ExportPromotionsData.create(user_id: user_id,
              promotion_id: promotion_id, breadScrumb: breadScrumb, bgj_id: background_job.id, start_date: start_date,
-             end_date: end_date, lang: I18n.t("time_format"))
+             end_date: end_date, lang: I18n.t("time_format"), language: cookies[:locale])
     
     background_job.job_id = job_id
     background_job.save!
