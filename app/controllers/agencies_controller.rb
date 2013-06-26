@@ -60,8 +60,9 @@ class AgenciesController < ApplicationController
                                   onclick: "ajaxCommon('#{edit_agency_path(agency)}', '', '', '','#inner')"
 
       )
-      rows << {id: agency.id, cell: {link: link, roman_name: short_en_name(agency.roman_name),
-        agency_name: short_ja_name(agency.agency_name)}}
+      rows << {id: agency.id, cell: {link: link,
+        roman_name: "<div title='#{agency.roman_name}'>" + short_en_name(agency.roman_name) + "</div>",
+        agency_name: "<div title='#{agency.agency_name}'>" + short_ja_name(agency.agency_name)+ "</div>"}}
     end
     rows
   end

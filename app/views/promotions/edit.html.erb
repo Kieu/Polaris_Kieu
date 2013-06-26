@@ -13,11 +13,11 @@ $(function(){
     <%= render partial: "layouts/sidebar", locals: {object: @array_promotion} %>
 <% end %>
   <ul class="contentNavi">
-    <li class="pre"><%= link_to short_ja_name(@promotion.client.client_name), clients_path(client_id: @promotion.client_id) %></li>
+    <li class="pre"><%= link_to short_ja_name(@promotion.client.client_name), clients_path(client_id: @promotion.client_id), title: "#{@promotion.client.client_name}" %></li>
     <li> &gt; </li>
     <li><%= I18n.t("promotion.crumb_edit")%></li>
     <li> / </li>
-    <li><%= short_ja_name(@promotion_name) %></li>
+    <li><div title="<%= @promotion_name %>"><%= short_ja_name(@promotion_name) %></div></li>
   </ul>
   <div class="clear"></div>
 <%= form_for(@promotion) do |f| %>
