@@ -126,7 +126,7 @@ function reloadFlex1(obj, urlAction) {
 function draw_chart(data_left, data_right, left, right, categories){
     var min = new Date().getTime();
     var max = min + 50 * 500;
-    this.categories = categories;
+    categories = this.categories;
     if(categories.length > 32)
     this.tickInterval = Math.ceil(categories.length/32);
     else
