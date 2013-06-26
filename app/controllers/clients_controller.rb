@@ -119,6 +119,7 @@ class ClientsController < ApplicationController
         "javascript:void(0)",
         class: "edit",
         id: "edit#{index}",
+        title: promotion.promotion_name,
         onclick: "ajaxCommon('#{promotions_path(promotion_id: promotion.id,
           client_id: client_id)}', '', '', '','#sidebar,#container')"
       )
