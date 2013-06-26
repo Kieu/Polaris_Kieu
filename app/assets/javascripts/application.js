@@ -130,7 +130,7 @@ function draw_chart(data_left, data_right, left, right, categories){
     if(categories.length>32)
     this.tickInterval = Math.ceil(categories.length/32);
     else
-        this.tickInterval = categories.length;
+        this.tickInterval = 1;
     chart = new Highcharts.Chart({ // 以下、chartオブジェクトに渡す引数
 		chart: {
 			renderTo: 'sample-chart', // どの要素にグラフを描画するかを指定
