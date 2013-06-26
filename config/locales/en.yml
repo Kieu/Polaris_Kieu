@@ -463,21 +463,21 @@ en:
               wrong_length: ! 'URL is the wrong length (should be %{count} characters)'
               acceptance: URL must be accepted
             facebook_app_id:
-              blank: "Facebook can't be blank"
+              blank: "App ID (Facebook) can't be blank"
               accepted: Facebook app must be accepted 
               confirmation: Facebook app doesn't match confirmation 
-              empty: Facebook app can't be empty
+              empty: "App ID (Facebook) can't be empty"
               equal_to: ! 'Facebook app must be equal to %{count} ' 
               even: Facebook app must be even
               exclusion: Facebook app  is reserved
               greater_than: ! 'Facebook app must be greater than %{count}'
               greater_than_or_equal_to: ! 'Facebook app must be greater than or equal to %{count}'
               inclusion: Facebook app is not included in the list
-              invalid: Facebook app  is invalid
+              invalid: "App ID (Facebook) is invalid"
               less_than: ! 'Facebook app must be less than %{count}'
               less_than_or_equal_to: ! 'Facebook app must be less than or equal to %{count}'
-              not_a_number: Facebook app is not a number
-              not_an_integer: Facebook app is not a interger
+              not_a_number: "App ID (Facebook) is not a number"
+              not_an_integer: "App ID (Facebook) is not a integer"
               odd: Facebook app must be odd
               record_invalid: Facebook app バリデーションに失敗しました。 '%{errors}'
               taken: Facebook app has already been registered.
