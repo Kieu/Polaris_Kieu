@@ -132,12 +132,15 @@ class ImportUrlData
               next
             end
 
+            insert_camp_flg = true
+
             # validate data input
             row, error_num, array_identifer,
                 array_ad_id_insert, array_ad_name_insert,
-                array_creative_id = validate_data_input num, error_num, row, error, array_identifer,
+                array_creative_id, insert_camp_flg, display_campaign_id, 
+                display_group_id = validate_data_input num, error_num, row, error, array_identifer,
                                                         array_ad_id_insert, array_ad_name_insert,
-                                                        array_creative_id, line_num, array_double_data, lang
+                                                        array_creative_id, line_num, array_double_data, lang, account_id
             
             # start insert data to DB
             if error_num == 0
@@ -148,27 +151,32 @@ class ImportUrlData
                 comma_sql = ""
               end
 
-              # insert campaign
-              campaign_obj = DisplayCampaign.new
-              campaign_obj.name = row[CAMPAIGN_NAME]
-              campaign_obj.client_id = client_id
-              campaign_obj.promotion_id = promotion_id
-              campaign_obj.account_id = account_id
-              campaign_obj.create_user_id = user_id
-              campaign_obj.created_at = current_time
-              campaign_obj.save!
+              if insert_camp_flg
+                # insert campaign
+                campaign_obj = DisplayCampaign.new
+                campaign_obj.name = row[CAMPAIGN_NAME]
+                campaign_obj.client_id = client_id
+                campaign_obj.promotion_id = promotion_id
+                campaign_obj.account_id = account_id
+                campaign_obj.create_user_id = user_id
+                campaign_obj.created_at = current_time
+                campaign_obj.save!
 
-              # insert group
-              group_obj = DisplayGroup.new
-              group_obj.name = row[GROUP_NAME]
-              group_obj.client_id = client_id
-              group_obj.promotion_id = promotion_id
-              group_obj.account_id = account_id
-              group_obj.display_campaign_id = campaign_obj.id
-              group_obj.create_user_id = user_id
-              group_obj.created_at = current_time
-              group_obj.save!
+                display_campaign_id = campaign_obj.id
+                # insert group
+                group_obj = DisplayGroup.new
+                group_obj.name = row[GROUP_NAME]
+                group_obj.client_id = client_id
+                group_obj.promotion_id = promotion_id
+                group_obj.account_id = account_id
+                group_obj.display_campaign_id = campaign_obj.id
+                group_obj.create_user_id = user_id
+                group_obj.created_at = current_time
+                group_obj.save!
 
+                display_group_id = group_obj.id
+              end
+              
               # insert group
               ad_obj = DisplayAd.new
               if row[AD_ID] != ""
@@ -181,8 +189,8 @@ class ImportUrlData
               ad_obj.client_id = client_id
               ad_obj.promotion_id = promotion_id
               ad_obj.account_id = account_id
-              ad_obj.display_campaign_id = campaign_obj.id
-              ad_obj.display_group_id = group_obj.id
+              ad_obj.display_campaign_id = display_campaign_id
+              ad_obj.display_group_id = display_group_id
               ad_obj.create_user_id = user_id
               ad_obj.created_at = current_time
               ad_obj.save!
@@ -196,7 +204,7 @@ class ImportUrlData
               
               # insert redirect infomation
               insert_redirect_info_str += "#{comma_sql} ('#{current_mpv}', #{client_id}, #{promotion_id}, #{media_category_id},
-                                           #{media_id}, #{account_id}, #{campaign_obj.id}, #{group_obj.id}, #{ad_obj.id}, #{row[CREATIVE_ID]},
+                                           #{media_id}, #{account_id}, #{display_campaign_id}, #{display_group_id}, #{ad_obj.id}, #{row[CREATIVE_ID]},
                                            #{row[CLICK_UNIT]}, '#{row[COMMENT]}', '#{current_time}', #{user_id} )
 
               "
@@ -345,9 +353,13 @@ class ImportUrlData
 
   def validate_data_input num, error_num, row, error,
       array_identifer, array_ad_id_insert,
-      array_ad_name_insert, array_creative_id, line_num, array_double_data, lang
+      array_ad_name_insert, array_creative_id, line_num, array_double_data, lang, account_id
 
-    
+    insert_camp_flg = true
+    insert_group_flg = true
+    display_campaign_id = false
+    display_group_id = false
+
     # LAST_MODIFIED field
     row[LAST_MODIFIED] = row[LAST_MODIFIED].to_s.strip
 
@@ -398,6 +410,11 @@ class ImportUrlData
         error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.campaign_too_long") + "#{enter_key}")
       end
 
+      array_campaigns = DisplayCampaign.where(" name = '#{row[CAMPAIGN_NAME]}' and account_id = #{account_id}").select('id')
+      if array_campaigns.count > 0
+        insert_camp_flg = false
+        display_campaign_id = array_campaigns.first['id']
+      end
     else
       error_num += 1
       error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.campaign_name_not_type") + "#{enter_key}")
@@ -410,6 +427,12 @@ class ImportUrlData
       if row[GROUP_NAME].length > 255
         error_num += 1
         error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.group_name_too_long") + "#{enter_key}")
+      end
+
+      if !insert_camp_flg
+        array_groups = DisplayGroup.where(" name = '#{row[GROUP_NAME]}' and display_campaign_id = #{display_campaign_id}").select('id')
+        insert_group_flg = false
+        display_group_id = array_groups.first['id']
       end
     else
       error_num += 1
@@ -428,6 +451,14 @@ class ImportUrlData
       if array_ad_name_insert.count > 0 && array_ad_name_insert.include?(row[AD_NAME])
         error_num += 1
         error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.ad_name_already_used") + "#{enter_key}")
+      end
+
+      if !insert_group_flg
+        array_ads = DisplayAd.where(" name = '#{row[AD_NAME]}' and display_group_id = #{display_group_id}").select('id')
+        if array_ads.count > 0
+          error_num += 1
+          error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.ad_name_already_used") + "#{enter_key}")
+        end
       end
 
       array_ad_name_insert << row[AD_NAME]
@@ -705,7 +736,7 @@ class ImportUrlData
       error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.transition_rake_altogether") + "#{enter_key}")
     end
 
-    return row, error_num, array_identifer, array_ad_id_insert, array_ad_name_insert, array_creative_id
+    return row, error_num, array_identifer, array_ad_id_insert, array_ad_name_insert, array_creative_id, insert_camp_flg, display_campaign_id, display_group_id
   end
 
 end
