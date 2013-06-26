@@ -134,7 +134,7 @@ function draw_chart(data_left, data_right, left, right, categories){
     chart = new Highcharts.Chart({ // 以下、chartオブジェクトに渡す引数
 		chart: {
 			renderTo: 'sample-chart', // どの要素にグラフを描画するかを指定
-			type: 'column', // グラフの種類を指定
+			type: 'line', // グラフの種類を指定
             zoomType: 'xy'
 		},
 		credits: {//右下リンクの消去
