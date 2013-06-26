@@ -1103,7 +1103,10 @@
             }
             $('.tDiv2').append(btnDiv);
         }
+        //add for nicescroll
 
+        $(t).before(g.scrollDiv);
+        $(g.scrollDiv).append(g.hDiv);
         $(t).before(g.hDiv);
         g.hTable.cellPadding = 0;
         g.hTable.cellSpacing = 0;
