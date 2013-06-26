@@ -176,6 +176,7 @@ function draw_chart(data_left, data_right, left, right, categories){
 			opposite: true
 		}],
 		tooltip: { // マウスオーバーした際に表示する文書を指定
+            share: true,
 			formatter: function() {
 				name = this.series.name;
 				tmp = name.split("_");
