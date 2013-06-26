@@ -137,6 +137,9 @@ function draw_chart(data_left, data_right, left, right, categories){
 			type: 'line', // グラフの種類を指定
             zoomType: 'xy'
 		},
+		credits: {//右下リンクの消去
+            enabled: false
+        },
 		title: {
 			text:false
 			},
