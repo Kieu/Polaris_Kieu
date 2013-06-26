@@ -1,6 +1,4 @@
 # encoding: utf-8
-require 'fastercsv'
-require 'office_csv'
 
 # export promotion data table from promotion screen to csv file
 class ExportPromotionsData
