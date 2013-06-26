@@ -1001,6 +1001,7 @@ ja:
     corporate_information_link: "http://www.septeni.co.jp/company/outline.html"
     terms_and_conditions: "利用規約"
     terms_and_conditions_link: "http://www.septeni.co.jp/terms/index.html"
+    corporate_link: "http://www.septeni.co.jp"
   export_click_logs:
     label: Export CLick log
     click_utime: "クリック日時"

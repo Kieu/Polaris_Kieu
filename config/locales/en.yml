@@ -983,6 +983,7 @@ en:
     corporate_information_link: "http://www.septeni.co.jp/en/company/outline.html"
     terms_and_conditions: "Terms And Conditions"
     terms_and_conditions_link: "http://www.septeni.co.jp/en/terms/index.html"
+    corporate_link: "http://www.septeni.co.jp/en"
   export_conversion_logs:
     cv_date_time: "CV date time"
     cv_name: "CV name"
