@@ -1,5 +1,5 @@
 <tr>
-  <th><%= f.label I18n.t('conversion.conversion_category.app.os.label') %></th>
+  <th><%= f.label "", I18n.t('conversion.conversion_category.app.os.label') %></th>
   <td colspan="2"><label>
     <%= f.radio_button :os, 1, checked: true, disabled: ((params[:action] == "edit" || params[:action] == "update") && @conversion.os.to_i!=1) ? true : false, onclick: "render_ios();", class: "prevent_change" %><%= I18n.t("conversion.conversion_category.app.os.ios")%>
   </label></td>
