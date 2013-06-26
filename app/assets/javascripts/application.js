@@ -149,6 +149,7 @@ function draw_chart(data_left, data_right, left, right, categories){
 		},
 		xAxis: { // x軸の値を指定
             categories: this.categories,
+            lineWidth:0,
             labels: {
                 rotation: -45
             },
@@ -159,7 +160,6 @@ function draw_chart(data_left, data_right, left, right, categories){
                 lineWidth: 1.5
             }
         },
-        lineWidth:0,
 		legend: {
             labelFormatter: function(){
             	name = this.name;
