@@ -29,6 +29,7 @@ $(function(){
 <%= form_for(@account) do |f| %>
     <div class="regist_form">
       <table class="account_info">
+        <tbody>
         <tr>
           <th> <%= f.label t("account.media_category") %></th>
           <td colspan="2">
@@ -44,7 +45,7 @@ $(function(){
         </tr>
         <tr>
           <th ><%= f.label t("account.account_name") %></th>
-          <td colspan="2"> <%= f.text_field :account_name, maxlength: 255, style: "width: 270px" %>  </td>
+          <td colspan="2"> <%= f.text_field :account_name, maxlength: 255, style: "width: 270px", class: "prevent_change" %>  </td>
         </tr>
         <tr>
           <th><%= f.label t("account.roman_name") %></th>
@@ -54,6 +55,8 @@ $(function(){
           <th><%= f.label I18n.t("account.margin") %></th>
           <td colspan="2"><%= I18n.t("account.input_data") %> &nbsp; × <%= f.text_field :margin, maxlength: 255, value: @account.margin, style: "width: 80px", class: "prevent_change" %></td><td id="percent" style="margin-left: -100px; position: absolute; margin-top: 13px;">%</td>
         </tr>
+      </tbody>
+      <tbody id="account_sync_box">
         <tr>
           <th><%= f.label t("account.sync_account_id") %></th>
           <td><%= f.radio_button :sync_flg, 1, checked: true, onclick: "active_sync_box();", class: "prevent_change" %> <%= I18n.t("account.synchronism") %></td>
@@ -70,6 +73,7 @@ $(function(){
         <td colspan="2">
         	<%= f.password_field :sync_account_pw, maxlength: 255, value: @account.sync_account_pw, style: "width: 270px", placeholder: " PW: ", class: "prevent_change" %>
         </tr> 
+        <tbody>
       </table>
       <div class="submit_area">
         <input type="image" id="btn_submit" src="/assets/btn_done.gif" >
@@ -116,7 +120,7 @@ if ($("#media_id").val() < 7) {
 } else {
 	$("#account_sync_box").html("");
 }
-if ($("#account_sync_flg_0").is(':checked')) {
+if ($("#account_sync_flg_1").is(':checked')) {
 		
 		$("#account_sync_account_id").attr('disabled','disabled');
 		$("#account_sync_account_pw").attr('disabled','disabled');
