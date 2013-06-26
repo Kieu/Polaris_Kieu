@@ -158,7 +158,7 @@ function draw_chart(data_left, data_right, left, right, categories){
 		//	categories: categories,
 		//	dateTimeLabelFormats: {day: '%e. %b', month: '%e. %b'},
 		//	labels:{
-				rotation: -45
+		//		rotation: -45
 		//	}
 		},
 		yAxis: {
