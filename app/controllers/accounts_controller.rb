@@ -35,6 +35,9 @@ class AccountsController < ApplicationController
     end
     if @account.valid?
       ActiveRecord::Base.transaction do
+        if @account.sync_account_pw != nil
+          @account.sync_account_pw = AESCrypt.encrypt("TOPSCERETPOLARIS", @account.sync_account_pw)
+        end
         if @account.save
           @margin = MarginManagement.new
           time = Time.new
@@ -72,6 +75,9 @@ class AccountsController < ApplicationController
     if @account.sync_flg.to_i == 1
       @account.sync_account_id = nil
       @account.sync_account_pw = nil
+    end
+    if @account.sync_account_pw != nil
+      @account.sync_account_pw = AESCrypt.encrypt("TOPSCERETPOLARIS", @account.sync_account_pw)
     end
     if @account.valid?
       ActiveRecord::Base.transaction do

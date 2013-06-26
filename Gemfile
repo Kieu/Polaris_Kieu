@@ -22,6 +22,7 @@ gem "cocaine"
 gem "paperclip"
 gem 'gotcha'
 gem 'zeroclipboard-rails'
+gem 'aescrypt'
 
 # Gems used only for assets and not required
 # in production environments by default.
