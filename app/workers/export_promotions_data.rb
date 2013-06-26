@@ -1,6 +1,4 @@
 # encoding: utf-8
-require 'fastercsv'
-require 'office_csv'
 
 # export promotion data table from promotion screen to csv file
 class ExportPromotionsData
@@ -8,6 +6,7 @@ class ExportPromotionsData
   @queue = :export_promotions
 
   def perform
+    I18n.locale = options['language']
     # make file name
     # file name fomat: {job_id}_export_promotion_{current_date}.csv
     # get job_id
@@ -42,8 +41,9 @@ class ExportPromotionsData
       # get row data
       index_to_get_data_row = 0
       array_data_row = DailySummaryAccount.get_table_data_export(options['promotion_id'], start_date, end_date, lang)
-      account_col = ["Media", "Account name", "Imp", "Click", "CTR", "COST",
-                     "CPM", "CPC"]
+      media = I18n.t("promotion_export_csv.media")
+      account_name = I18n.t("promotion_export_csv.account_name")
+      account_col = [media, account_name, "Imp", "Click", "CTR", "COST", "CPM", "CPC"]
 
       array_conversion = Conversion.where(promotion_id: options['promotion_id']).order('id asc')
 
@@ -53,8 +53,8 @@ class ExportPromotionsData
       # create csv header file
       array_conversion.each do |conversion_element|
         account_col << "CV#{cnt}"
-        account_col << "CV#{cnt}(first)"
-        account_col << "CV#{cnt}(repeat)"
+        account_col << "CV#{cnt}(#{I18n.t("promotion_export_csv.first")})"
+        account_col << "CV#{cnt}(#{I18n.t("promotion_export_csv.repeat")})"
         account_col << "CVR#{cnt}"
         account_col << "CPA#{cnt}"
         account_col << "ASSIST#{cnt}"

@@ -86,7 +86,7 @@ class UpdateUrlData
          array_ad_name_insert = Array.new
          array_double_data = Hash.new
          insert_redirect_info_str = " "
-         num = 1
+         num = 0
          error_num = 0
          line_num = 0
 
@@ -126,10 +126,10 @@ class UpdateUrlData
                                                      mpv, client_id, promotion_id
              # start insert data to DB
              if error_num == 0
+               num += 1
                current_time = Time.now.strftime("%Y-%m-%d %H:%M:%S")
                comma_sql = " , "
-               if num == Settings.RECORD_NUM_PER_INSERT || (row_number == 0)
-                 num = 0
+               if num == 1
                  comma_sql = ""
                end
               
@@ -147,19 +147,17 @@ class UpdateUrlData
 
                                             "
                # insert url
-               insert_redirect_url_str += "('#{current_mpv}', '#{row[REDIRECT_URL1]}', #{row[RATE1]}, '#{row[NAME1]}',
-                                             '#{current_time}', #{user_id} ) #{comma_sql}
+               insert_redirect_url_str += "#{comma_sql}('#{current_mpv}', '#{row[REDIRECT_URL1]}', #{row[RATE1]}, '#{row[NAME1]}',
+                                             '#{current_time}', #{user_id} )
 
                                             "
-               if row[REDIRECT_URL2] != "" || row[REDIRECT_URL3] != "" || row[REDIRECT_URL4] != "" || row[REDIRECT_URL5] != ""
-                 comma_sql = ""
-               end
                
                if row[REDIRECT_URL2] != ""
                  insert_redirect_url_str += " , ('#{current_mpv}', '#{row[REDIRECT_URL2]}', #{row[RATE2]}, '#{row[NAME2]}',
                                              '#{current_time}', #{user_id} )
 
                                             "
+                 num += 1
                end
 
                if row[REDIRECT_URL3] != ""
@@ -167,6 +165,7 @@ class UpdateUrlData
                                              '#{current_time}', #{user_id} )
 
                                             "
+                 num += 1
                end
 
                if row[REDIRECT_URL4] != ""
@@ -174,6 +173,7 @@ class UpdateUrlData
                                              '#{current_time}', #{user_id} )
 
                                             "
+                 num += 1
                end
 
                if row[REDIRECT_URL5] != ""
@@ -181,6 +181,7 @@ class UpdateUrlData
                                              '#{current_time}', #{user_id} )
 
                                             "
+                 num += 1
                end
 
                 
@@ -192,11 +193,12 @@ class UpdateUrlData
                  # make header insert string sql
                  insert_redirect_info_str = " "
                  insert_redirect_url_str, delete_url_sql =  make_header_insert_sql type
+
+                 num = 0
                end
 
              end
 
-             num += 1
            end
            
            if error_num > 0
