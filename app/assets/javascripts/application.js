@@ -153,6 +153,25 @@ function draw_chart(data_left, data_right, left, right, categories){
             },
           tickInterval: custom_tickInterval
 		},
+		legend: {
+            labelFormatter: function(){
+            	name = this.name;
+				tmp = name.split("_");
+				if ($.cookie("locale") == "ja")
+		    	{
+			    	if (tmp[1] == "CV"){
+			    		name = tmp[0] + "_totalCV";
+			    	}
+			    	if (tmp[1] == "CV(first)"){
+			    		name = tmp[0] + "_初回CV";
+			    	}
+			    	if (tmp[1] == "CV(repeat)"){
+			    		name = tmp[0] + "_リピートCV";
+			    	}
+			    }
+			    return name;
+            }
+		},
 		yAxis: [{
 			min: 0,
 			title: {
