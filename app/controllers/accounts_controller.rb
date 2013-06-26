@@ -29,9 +29,9 @@ class AccountsController < ApplicationController
     @client_id = @promotion.client.id
     @account.attributes = params[:account]
     @account.update_user_id = current_user.id
-    if @account.sync_flg == 0
-      @account.sync_account_id = ""
-      @account.sync_account_pw = ""
+    if @account.sync_flg.to_i == 0
+      @account.sync_account_id = nil
+      @account.sync_account_pw = nil
     end
     if @account.valid?
       ActiveRecord::Base.transaction do
@@ -70,8 +70,8 @@ class AccountsController < ApplicationController
     @client_id = @promotion.client_id
     @account.create_user_id = current_user.id
     if !@account.sync_flg
-      @account.sync_account_id = ""
-      @account.sync_account_pw = ""
+      @account.sync_account_id = nil
+      @account.sync_account_pw = nil
     end
     if @account.valid?
       ActiveRecord::Base.transaction do
