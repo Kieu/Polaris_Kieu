@@ -22,6 +22,7 @@ $(function(){
     $("#promotion_tables").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
     $("#scroll_flexigrid").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
    // $("#promotions_scroll").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px",horizrailenabled:"false"});
+
 });
 
 function index_of(haystack, needle) {
@@ -148,11 +149,17 @@ function draw_chart(data_left, data_right, left, right, categories){
 		},
 		xAxis: { // x軸の値を指定
             categories: this.categories,
+            lineWidth:0,
             labels: {
                 rotation: -45
             },
           tickInterval: custom_tickInterval
 		},
+        plotOptions: {
+            series: {
+                lineWidth: 1.5
+            }
+        },
 		legend: {
             labelFormatter: function(){
             	name = this.name;
