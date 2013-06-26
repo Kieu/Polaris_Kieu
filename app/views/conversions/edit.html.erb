@@ -166,12 +166,3 @@
     </div>
   </div>
 </div>
-<script type="text/javascript">
-	<% if @conversion.errors[:url].count > 0 %>
-    $("#url").removeAttr('disabled');
-  <% end %>
-  <% if @conversion.conversion_mode.to_i == 2 %>
-	  $('#fb_app_id').html('');
-    $('#judging_box').html('');
-  <% end %>
-</script>
