@@ -48,7 +48,7 @@ $(document).ready(function() {
         resizable : false,
         striped : true,
         colModel : [
-            {display: '<%= I18n.t("url.edit") %>', id : 'edit_button', name : 'edit_button', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][0] == "0" ? 1 : 0 %>},
+            {display: '<%= I18n.t("url.edit") %>', id : 'edit_button', name : 'edit_button', width : 60, sortable : false, align: 'center', hide: <%= cookies[:url_setting][0] == "0" ? 1 : 0 %>},
             {display: '<%= I18n.t("url.last_modified") %>', name : 'last_modified', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][1] == "0" ? 1 : 0 %>},
             {display: '<%= I18n.t("url.ad_id") %>', name : 'ad_id', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][2] == "0" ? 1 : 0 %>},
             {display: '<%= I18n.t("url.campaign_name") %>', name : 'campaign_name', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][3] == "0" ? 1 : 0 %>},
@@ -58,7 +58,7 @@ $(document).ready(function() {
             {display: '<%= I18n.t("url.url") %>', name : 'url', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][7] == "0" ? 1 : 0 %>},
             {display: '<%= I18n.t("url.note") %>', name : 'note', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][8] == "0" ? 1 : 0 %>},
             {display: '<%= I18n.t("url.click_price") %>', name : 'click_price', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][9] == "0" ? 1 : 0 %>},
-            {display: '<%= I18n.t("url.delete") %>', name : 'delete_check', width : 'auto', sortable : false, align: 'center', hide: <%= cookies[:url_setting][10] == "0" ? 1 : 0 %>}
+            {display: '<%= I18n.t("url.delete") %>', name : 'delete_check', width : 60, sortable : false, align: 'center', hide: <%= cookies[:url_setting][10] == "0" ? 1 : 0 %>}
             ],
         usepager: true,
         title: 'Url List',
