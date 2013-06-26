@@ -761,7 +761,7 @@ en:
       reward_format:
         label: "Reward format: "
         straight_line_type: " Straight line type"
-        not_set: " Not set"
+        declining_balance_type: " Declining-balance type"
     combination:
       pattern: "Pattern: "
       add: "Add"

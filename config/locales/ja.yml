@@ -781,7 +781,7 @@ ja:
       reward_format:
         label: "報酬型式： "
         straight_line_type: " 定額型"
-        not_set: " 設定しない"
+        declining_balance_type: " 定率型"
     combination:
       pattern: "パターン： "
       add: "Add"
