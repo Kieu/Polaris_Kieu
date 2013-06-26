@@ -151,7 +151,11 @@ function draw_chart(data_left, data_right, left, right, categories){
             categories: this.categories,
             lineWidth:0,
             labels: {
-                rotation: -45
+                rotation: -45,
+                formatter: function() {
+                	return this.value.substring(5);
+				},
+				align: 'right'
             },
           tickInterval: custom_tickInterval
 		},
@@ -218,8 +222,13 @@ function draw_chart(data_left, data_right, left, right, categories){
 			    		name = tmp[0] + "_リピートCV";
 			    	}
 			    }
+				date = this.x;
+				if ($.cookie("locale") == "en"){
+					text = date.substring(0,4);
+					date = date.substring(5) + "/" +text;
+				}
 				return '<b>'+ name +'</b><br/>'+
-				this.x +': '+ graphNumberFormat(this.y, this.series.name);
+				date +': '+ graphNumberFormat(this.y, this.series.name);
 			}
 		},
 		series: [{
