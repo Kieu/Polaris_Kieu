@@ -692,7 +692,7 @@ en:
       add: "Add Conversion"
     crumb_add: "Conversion Registration"
     crumb_edit: "Conversion Edit"
-    tag_acquisition: "Tag acquisition"
+    tag_acquisition: "Get Tag"
     conversion_setting: "Conversion setting"
     conversion_message: "Please select the conversion you want to view."
     user_information: "User information"
@@ -707,9 +707,9 @@ en:
         track_type:
           label: "Track type: "
           install: " Install"
-          app_action: "App Action"
+          app_action: " Action in App"
         os:
-          label:  "OS-Specific: "
+          label:  "OS specification: "
           ios: " iOS"
           android: " Android"
           other: "Other"
@@ -717,7 +717,7 @@ en:
           label:  "Conversion mode: "
           all: " All"
           facebook: " Only Facebook"
-          other: " Other ads"
+          other: " Other"
         duplicate:
           label: "Duplicate: "
           label1: " Yes"
@@ -735,13 +735,13 @@ en:
           facebook: "(Facebook): "
         option:
           label: "<Option> "
-          judging: " Examination flag: "
+          judging: " Judging: "
           configure: " Configure"
         sale_unit_price: "Sales Unit Price: "
         reward_form:
           label: "Reward form: "
-          straight_line_type: " Straight-line type"
-          declining_balance_type: " Declining-balance type"
+          straight_line_type: " Pay periodically"
+          declining_balance_type: " Pay per usage"
         session:
           label: "Session retention: "
           day: "Days"
@@ -765,8 +765,8 @@ en:
       label: "<Option②>"
       reward_format:
         label: "Reward format: "
-        straight_line_type: " Straight line type"
-        declining_balance_type: " Declining-balance type"
+        straight_line_type: " Pay periodically"
+        declining_balance_type: " Pay per usage"
     combination:
       pattern: "Pattern: "
       add: "Add"
