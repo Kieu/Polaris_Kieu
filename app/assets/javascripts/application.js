@@ -131,10 +131,9 @@ function draw_chart(data_left, data_right, left, right, categories){
       custom_tickInterval = Math.ceil(this.categories.length/32);
     else
         custom_tickInterval = 1;
-    highchartWrapper = this;
-    this.chart = new Highcharts.Chart({ // 以下、chartオブジェクトに渡す引数
+    chart = new Highcharts.Chart({ // 以下、chartオブジェクトに渡す引数
 		chart: {
-            renderTo: this.elementId, // どの要素にグラフを描画するかを指定
+			renderTo: 'promotion_charts', // どの要素にグラフを描画するかを指定
 			type: 'line', // グラフの種類を指定
             zoomType: 'xy'
 		},
