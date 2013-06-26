@@ -29,7 +29,7 @@ class AccountsController < ApplicationController
     @client_id = @promotion.client.id
     @account.attributes = params[:account]
     @account.update_user_id = current_user.id
-    if @account.sync_flg.to_i == 0
+    if @account.sync_flg.to_i == 1
       @account.sync_account_id = nil
       @account.sync_account_pw = nil
     end
@@ -69,7 +69,7 @@ class AccountsController < ApplicationController
     @promotion = Promotion.find_by_id(@promotion_id)
     @client_id = @promotion.client_id
     @account.create_user_id = current_user.id
-    if !@account.sync_flg
+    if @account.sync_flg.to_i == 1
       @account.sync_account_id = nil
       @account.sync_account_pw = nil
     end
