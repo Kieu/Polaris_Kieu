@@ -90,6 +90,7 @@ $(function(){
         })
         last_choice = $("#user_role_id").val();
         $("#user_role_id").change(function () {
+        	console.log(last_choice);
             id = $(this).val();
             if ((id == 1 && last_choice == 3) || (id == 3 && last_choice == 1)) {
                 last_choice = id;
@@ -97,6 +98,7 @@ $(function(){
             }
             if (id==""){
             	$("#user_company_id").html("<option value><%= t('user.company_id.include_blank') %></option>");
+            	last_choice = id;
             	return;
             }
             last_choice = id;
