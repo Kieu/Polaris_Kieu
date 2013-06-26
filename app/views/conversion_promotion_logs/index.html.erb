@@ -7,6 +7,11 @@
     <%= render partial: "layouts/sidebar", locals: {object: @promotions} %>
 <% end %>
 <%= render partial: "layouts/option_cv_log_page" %>
+<style>
+  .bDiv {
+      width: 2500px;
+  }
+</style>
 <ul class="contentNavi">
   <div class = "crumb_logs">
 	<% unless current_user.client? %>
