@@ -71,6 +71,7 @@
             height: 'auto', //default height
             width: 'auto', //auto width
             striped: true, //apply odd even stripes
+            width_body : 'auto',
             novstripe: false,
             minwidth: 30, //min width of columns
             minheight: 80, //min height of columns
@@ -190,7 +191,7 @@
                 });
                 $(g.bDiv).css('min-height','350px');
                 $(g.bDiv).css('max-height','351px');
-                $(g.bDiv).css('width','2500px');
+                $(g.bDiv).css('width',width_body);
                 $(".bDiv").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
             },
             dragStart: function (dragtype, e, obj) { //default drag function start
