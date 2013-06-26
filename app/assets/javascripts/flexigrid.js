@@ -969,6 +969,7 @@
                     th.innerHTML = "";
                     $(th).attr('width',30);
                 }
+                $(th).css('width', p.colModel[idx].width)
                 $(tr).append(th);
             }
             $(thead).append(tr);
