@@ -1108,7 +1108,7 @@
 
        // $(t).before(g.scrollDiv);
        // $(g.scrollDiv).append(g.hDiv);
-       // $(t).before(g.hDiv);
+        $(t).before(g.hDiv);
         g.hTable.cellPadding = 0;
         g.hTable.cellSpacing = 0;
         $(g.hDiv).append('<div class="hDivBox"></div>');
