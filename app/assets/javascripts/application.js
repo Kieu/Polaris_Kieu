@@ -179,6 +179,7 @@ function draw_chart(data_left, data_right, left, right, categories){
 		},
 		yAxis: [{
 			min: 0,
+            color:'red',
 			title: {
             	text: null
 			},
@@ -189,6 +190,7 @@ function draw_chart(data_left, data_right, left, right, categories){
 			}
 		},{
 			min: 0,
+            color:'red',
 			title: {
             	text: null
             },
