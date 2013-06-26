@@ -191,8 +191,8 @@ function draw_chart(data_left, data_right, left, right, categories){
                 formatter: function() {
                 	return Highcharts.numberFormat(this.value, 0);
 				}
-			}//,
-			//opposite: true
+			},
+			opposite: true
 		}],
 		tooltip: { // マウスオーバーした際に表示する文書を指定
             share: true,
