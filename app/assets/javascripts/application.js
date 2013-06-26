@@ -157,7 +157,7 @@ function draw_chart(data_left, data_right, left, right, categories){
                 formatter: function() {
                     return this.value.substring(5);
                 }
-            },
+            }
         //    tickInterval: this.tickInterval
 		//	categories: categories,
 		//	dateTimeLabelFormats: {day: '%e. %b', month: '%e. %b'},
