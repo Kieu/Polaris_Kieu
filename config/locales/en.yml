@@ -27,6 +27,11 @@ en:
   conversions:
     unique_definition: ["Only once", "Limitless", "Once a day", "Once every 7 days", "Once every 28 days", "Once a month"]
   error_message_url_import:
+    ad_name_must_exist: "Ad name has not existed."
+    group_name_must_exist: "Group name has not existed."
+    campaign_name_must_exist: "Campaign name has not existed."
+    camp_group_ad_must_match: "Campaign name, Group name, Ad name not match together."
+    camp_group_ad_submit_must_match: "Campaing name, Group name, Ad name, measuring URL cannot be changed."
     not_input: "Please choose file upload."
     volumn_over: "File's volumn must less than 300MB."
     not_format_csv: "File format is not CSV."
@@ -36,6 +41,7 @@ en:
     over_row: "Maximum line is 1,000,000.\n"
     ad_too_long: "Ad ID needs to be less than 255 letters."
     ad_id_already_used: "The Ad ID is already used."
+    ad_id_in_promotion: "The Ad ID has not registered."
     ad_id_invalid: "The Ad ID includes invalid letters."
     ad_id_used_same_file: "The Ad ID is used in the same file."
     campaign_too_long: "Campaign needs to be less than 255 letters."
@@ -55,7 +61,6 @@ en:
     title_too_long: "Title needs to be less than 255 letters."
     title_not_type: "Title is not typed."
     transition_rake_half_width: "Please type Transition rate with half-width characters."
-    ad_name_already_used: "Ad name already used."
     transition_rake_altogether: "Transition rate needs to be 100 altogether."
     registering_complete: "Registering new URL complete."
     edit_url_complete: "Editing URL complete."
