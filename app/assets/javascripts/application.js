@@ -126,6 +126,7 @@ function reloadFlex1(obj, urlAction) {
 function draw_chart(data_left, data_right, left, right, categories){
     var min = new Date().getTime();
     var max = min + 50 * 500;
+    this.tickInterval = Math.ceil(categories.length/32);
     chart = new Highcharts.Chart({ // 以下、chartオブジェクトに渡す引数
 		chart: {
 			renderTo: 'sample-chart', // どの要素にグラフを描画するかを指定
@@ -141,12 +142,24 @@ function draw_chart(data_left, data_right, left, right, categories){
 			text:false
 		},
 		xAxis: { // x軸の値を指定
-
-			categories: categories,
-			dateTimeLabelFormats: {day: '%e. %b', month: '%e. %b'},
-			labels:{
+            categories: categories,
+            labels: {
+                rotation: -45,
+                style: {
+                    color: '#6D869F',
+                    font: '10px Helvetica'
+                },
+                align: 'right',
+                formatter: function() {
+                    return this.value.substring(5);
+                }
+            },
+            tickInterval: this.tickInterval
+		//	categories: categories,
+		//	dateTimeLabelFormats: {day: '%e. %b', month: '%e. %b'},
+		//	labels:{
 				rotation: -45
-			}
+		//	}
 		},
 		yAxis: {
 			title: {
