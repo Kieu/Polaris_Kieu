@@ -597,6 +597,7 @@ en:
     privacy_policy: "Privacy Policy"
     porporate_information: "Porporate information"
   login:
+    title: "Login"
     split: "."
     email: "Email address"
     pw: "Password"
@@ -618,6 +619,11 @@ en:
     block: "You are blocked for 5 minutes. Please try again later"
     email_empty: "Mail address is required"
   client:
+    title:
+      show: "Client"
+      list: "Clients List"
+      edit: "Edit Client"
+      add: "Add Client"
     user_search: "Search"
     crumb_edit: "Edit Client"
     crumb_add: "Add Client"
@@ -643,6 +649,10 @@ en:
       success_error: " Can not create user for client"
       update_error: " Can not update user for client"
   agency:
+    title:
+      list: "Agencies List"
+      edit: "Edit Agency"
+      add: "Add Agency"
     crumb_edit: "Edit Agency"
     crumb_add: "Add Agency"
     agency_name: "Agency name"
@@ -651,6 +661,10 @@ en:
       success: " Agency is created successful"
       update: " Agency is updated successful"
   account:
+    title:
+      label: "Accounts List"
+      edit: "Edit Account"
+      add: "Add Account"
     crumb_add: "Add Account"
     crumb_edit: "Edit Account"
     media_category: "Media category: "
@@ -667,6 +681,10 @@ en:
       success: " Account is created successful"
       update: " Account is updated successful"
   conversion:
+    title:
+      list: "Conversions Setting"
+      edit: "Edit Conversion"
+      add: "Add Conversion"
     crumb_add: "Conversion Registration"
     crumb_edit: "Conversion Edit"
     tag_acquisition: "Tag acquisition"
@@ -748,6 +766,9 @@ en:
       pattern: "Pattern: "
       add: "Add"
   log:
+    title:
+      cv_logs: "Conversions Logs"
+      click_logs: "Click Logs"
     today_text: "Today"
     crumb_click: "Click_logs"
     crumb_cv_logs: "Conversion logs"
@@ -810,6 +831,10 @@ en:
     error_message: Error Message
     error_log_view: Show error logs
   promotion:
+    title:
+      list: "Promotions List"
+      edit: "Edit Promotion"
+      add: "Add Promotion"
     media: "Media"
     account: "Account"
     crumb_edit: "Edit Promotion"
@@ -831,6 +856,10 @@ en:
     popup_result: "Results"
     popup_showall: "Show All"
   user:
+    title:
+      list: "Users List"
+      edit: "Edit User"
+      add: "Add User"
     crumb_add: "Add User"
     crumb_edit: "Edit User"
     username: "User name: "
@@ -883,6 +912,7 @@ en:
     edit_first: "Screen will be transited and  contents which you edited will lost."
     edit_second: "Click OK button to continue."
   url:
+    title: "URL Setting"
     flash_messages:
       success: "I have received a draft request."
     no_data: "No data"

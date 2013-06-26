@@ -616,6 +616,7 @@ ja:
     privacy_policy: "プライバシーポリシー"
     porporate_information: "企業情報"
   login:
+    title: "ログイン"
     split: "。"
     email: "メールアドレス"
     pw: "パスワード"
@@ -637,6 +638,11 @@ ja:
     block: "あなたが5分間ブロックされます。後でもう一度やり直してください。"
     email_empty: "メールアドレスを入力してください"
   client:
+    title:
+      show: "クライアント"
+      list: "クライアントリスト"
+      edit: "クライアント編集"
+      add: "クライアント登録"
     user_search: "検索"
     crumb_edit: "クライアント編集"
     crumb_add: "クライアント登録"
@@ -662,6 +668,10 @@ ja:
       success_error: "Can not create user for client ja"
       update_error: "Can not update user for client ja"
   agency:
+    title:
+      list: "代理店リスト"
+      edit: "代理店編集"
+      add: "代理店登録"
     crumb_edit: "代理店編集"
     crumb_add: "代理店登録"
     crumb_list: ""
@@ -671,6 +681,10 @@ ja:
       success: " 代理店登録が完了しました"
       update: " 代理店編集が完了しました"
   account:
+    title:
+      list: "Accounts"
+      edit: "アカウント編集"
+      add: "アカウント登録"
     crumb_add: "アカウント登録"
     crumb_edit: "アカウント編集"
     media_category: "メディアカテゴリ: "
@@ -687,6 +701,10 @@ ja:
       success: " アカウント登録が完了しました"
       update: " アカウント編集が完了しました"
   conversion:
+    title:
+      list: "コンバージョン設定"
+      edit: "コンバージョン編集"
+      add: "コンバージョン登録"
     crumb_add: "コンバージョン登録"
     crumb_edit: "コンバージョン編集"
     tag_acquisition: "タグ取得"
@@ -768,6 +786,9 @@ ja:
       pattern: "パターン： "
       add: "Add"
   log:
+    title:
+      cv_logs: "CVログ"
+      click_logs: "Clickログ"
     today_text: "今日"
     crumb_click: "Clickログ"
     crumb_cv_logs: "CVログ"
@@ -827,6 +848,10 @@ ja:
     error_message: エラーメッセージ
     error_log_view: エラーログ表示
   promotion:
+    title:
+      list: "プロモーションリスト"
+      edit: "プロモーション編集"
+      add: "プロモーション登録"
     media: "メディア"
     account: "アカウント"
     crumb_edit: "プロモーション編集"
@@ -848,6 +873,10 @@ ja:
     popup_result: "成果"
     popup_showall: "全て追加する"
   user:
+    title:
+      list: "ユーザーリスト"
+      edit: "ユーザー編集"
+      add: "ユーザー登録"
     crumb_add: "ユーザー登録"
     crumb_edit: "ユーザー編集"
     username: "ユーザー名: "
@@ -901,6 +930,7 @@ ja:
     edit_first: "このままページを移動しますと編集内容が保存されません。"
     edit_second: "問題なければOKをおして進んで下さい。"
   url:
+    title: "URL設定"
     flash_messages: 
       success: "入稿リクエストを受け付けました。"
     no_data: "※入稿された広告がありません。"

@@ -472,7 +472,7 @@
                                 if( offs >0 ) {
                                     $(td).css('background', text.substr(offs+7,7) );
                                 }
-
+                                $(td).css('width', p.colModel[idx].width);
                                 $(td).attr('abbr', $(this).attr('abbr'));
                                 $(tr).append(td);
                                 td = null;
@@ -494,14 +494,15 @@
                         $(tbody).append(tr);
                         tr = null;
                     });
-                } else if (p.dataType == 'xml') {
+                } else if (p.dataType != 'xml') {
+                } else {
                     var i = 1;
                     $("rows row", data).each(function () {
                         i++;
                         var tr = document.createElement('tr');
                         if ($(this).attr('name')) tr.name = $(this).attr('name');
                         if ($(this).attr('color')) {
-                            $(tr).css('background',$(this).attr('id'));
+                            $(tr).css('background', $(this).attr('id'));
                         } else {
                             if (i % 2 && p.striped) tr.className = 'erow';
                         }
@@ -509,12 +510,12 @@
                         //title‚Æ•¶ŽšF
                         var title = $(this).attr('title');
                         if (title) {
-                            $(tr).css('background',title);
+                            $(tr).css('background', title);
                         }
 
                         var fontColor = $(this).attr('fontColor');
                         if (fontColor) {
-                            $(tr).css('color',fontColor);
+                            $(tr).css('color', fontColor);
                         }
 
                         var nid = $(this).attr('id');
@@ -529,12 +530,12 @@
                             td.align = this.align;
 
                             var text = $("cell:eq(" + idx + ")", robj).text();
-                            var offs = text.indexOf( '<BGCOLOR=' );
-                            if( offs >0 ) {
-                                $(td).css('background',	 text.substr(offs+7,7) );
+                            var offs = text.indexOf('<BGCOLOR=');
+                            if (offs > 0) {
+                                $(td).css('background', text.substr(offs + 7, 7));
                             }
 
-                            $(td).css('width',p.colModel[idx].width);
+                            $(td).css('width', p.colModel[idx].width);
 
                             td.innerHTML = p.__mw.datacol(p, $(this).attr('abbr'), text); //use middleware datacol to format cols
                             $(td).attr('abbr', $(this).attr('abbr'));
@@ -968,6 +969,7 @@
                     th.innerHTML = "";
                     $(th).attr('width',30);
                 }
+                $(th).css('width', cm.width)
                 $(tr).append(th);
             }
             $(thead).append(tr);

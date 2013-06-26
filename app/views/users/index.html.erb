@@ -1,3 +1,4 @@
+<% provide(:title, I18n.t("user.title.list")) %>
 <%= stylesheet_link_tag "css/user2", :media => "all" %>
 <%= stylesheet_link_tag "css/common", :media => "all" %>
 <% if flash[:success] %>
@@ -8,15 +9,18 @@
 <script type="text/javascript">
 	$(".newTable04").flexigrid({
 		url: "<%= get_users_list_users_path %>",
-        optionGet : "6",
+        optionGet : "7",
         editOption : true,
         deleteOption : true,
-        onSuccess : function(){tableResize();},
+
         resizable : false,
         striped : true,
 		dataType: 'json',
 		colModel : [
-    {display: '', name : 'link', width : 20, sortable : false, align: 'center'},
+            {
+                display : 'Number', name : 'num', sortable : false, align : 'left', hide : true
+            },
+    {display: '', name : 'link', width : '60', sortable : false, align: 'center'},
     {display: '<%= I18n.t("user.user_table.roman_name")%>', name : 'roman_name', width : 'auto', sortable : false, align: 'left'},
 	  {display: '<%= I18n.t("user.user_table.username")%>', name : 'username', width : 'auto', sortable : false, align: 'left'},
     {display: '<%= I18n.t("user.user_table.email")%>', name : 'email', width : 'auto', sortable : false, align: 'left'},
