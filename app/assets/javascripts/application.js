@@ -137,9 +137,6 @@ function draw_chart(data_left, data_right, left, right, categories){
 			type: 'line', // グラフの種類を指定
             zoomType: 'xy'
 		},
-		credits: {//右下リンクの消去
-            enabled: false
-        },
 		title: {
 			text:false
 			},
@@ -191,8 +188,8 @@ function draw_chart(data_left, data_right, left, right, categories){
                 formatter: function() {
                 	return Highcharts.numberFormat(this.value, 0);
 				}
-			},
-			opposite: true
+			}//,
+			//opposite: true
 		}],
 		tooltip: { // マウスオーバーした際に表示する文書を指定
             share: true,
