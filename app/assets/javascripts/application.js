@@ -155,18 +155,18 @@ function draw_chart(data_left, data_right, left, right, categories){
 		yAxis: [{
 			min: 0,
 			title: {
-            	text: null,
+            	text: null
 			},
             labels: {
                 formatter: function() {
                 	return Highcharts.numberFormat(this.value, 0);
 				}
-			},
+			}
 		},{
 			min: 0,
 			title: {
-            	text: null,
-			},
+            	text: null
+            },
             labels: {
                 formatter: function() {
                 	return Highcharts.numberFormat(this.value, 0);
