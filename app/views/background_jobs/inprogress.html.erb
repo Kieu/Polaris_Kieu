@@ -6,7 +6,11 @@
 </style>
 <script>
     $(function(){
-        
+
+            $("#inprogress .entrydate_box_notify > li > a").click(function()
+            {
+                $(this).parent().parent().remove();
+            });
     });
     $(document).on('click', "#close_notify", function(){
         $(".inline_notify").colorbox.close();
