@@ -17,7 +17,7 @@ class ClickLogsController < ApplicationController
     @promotions = @client_id.blank? ? Array.new :
         Promotion.active.get_by_client(@client_id).order_by_promotion_name
 
-    @array_account = Account.where(promotion_id: params[:promotion_id]).order(:account_name).select("id")
+    @array_account = Account.where(promotion_id: params[:promotion_id]).order(:roman_name).select("id")
                            .select("CASE WHEN LENGTH(account_name) > #{Settings.MAX_JA_LENGTH_NAME}
                                    THEN SUBSTRING(account_name, 1, #{Settings.MAX_JA_LENGTH_NAME})
                                     ELSE  account_name END as account_name ")
@@ -88,7 +88,6 @@ class ClickLogsController < ApplicationController
     
     accounts = Account.where(promotion_id: params[:query]).select("id,account_name")
     os = { 1 => I18n.t("conversion.conversion_category.app.os.ios"), 2 => I18n.t("conversion.conversion_category.app.os.android"), 9 => I18n.t("conversion.conversion_category.app.os.other")}
-    
     rows = Array.new
       if click_logs && click_logs.count > 0
         click_logs.each do |log|
@@ -98,10 +97,20 @@ class ClickLogsController < ApplicationController
             media_name = ''
           end
             
-          rows << {id: log.id, cell: {click_utime: Time.at(log.click_utime.to_i).strftime("%Y/%m/%d %H:%M:%S"), media_id: media_name, media_category_id: log.media_category_id,
-                  account_id: accounts.find(log.account_id).account_name, campaign_id: display_campaigns.find(log.campaign_id).name, group_id: display_groups.find(log.group_id).name,
-                  unit_id: display_ads.find(log.unit_id).name, redirect_url: log.redirect_url, session_id: log.session_id,
-                  device_category: os[log.device_category.to_i], state: log.state, error_code: I18n.t("log_error_messages")[log.error_code.to_i]}}
+          rows << {id: log.id, cell: {
+                  click_utime: Time.at(log.click_utime.to_i).strftime("%Y/%m/%d %H:%M:%S"),
+                  media_id: "<div title='#{media_name}'>" + media_name + "</div>", 
+                  media_category_id: log.media_category_id,
+                  account_id: "<div title='#{accounts.find(log.account_id).account_name}'>" + accounts.find(log.account_id).account_name + "</div>", 
+                  campaign_id: "<div title='#{display_campaigns.find(log.campaign_id).name}'>" + display_campaigns.find(log.campaign_id).name + "</div>", 
+                  group_id: "<div title='#{display_groups.find(log.group_id).name}'>" + display_groups.find(log.group_id).name + "</div>", 
+                  unit_id: "<div title='#{display_ads.find(log.unit_id).name}'>" + display_ads.find(log.unit_id).name + "</div>", 
+                  redirect_url: "<div title='#{log.redirect_url}'>" + log.redirect_url + "</div>", 
+                  session_id: "<div title='#{log.session_id}'>" + log.session_id + "</div>", 
+                  device_category: "<div title='#{os[log.device_category.to_i]}'>" + os[log.device_category.to_i] + "</div>", 
+                  state: "<div title='#{log.state}'>" + log.state + "</div>", 
+                  error_code: "<div title='#{I18n.t("log_error_messages")[log.error_code.to_i]}'>" + I18n.t("log_error_messages")[log.error_code.to_i] + "</div>", 
+                  }}
         end
       end
     rows

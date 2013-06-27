@@ -26,7 +26,7 @@
 						<% @conversions.each do |conversion| %>
 							html += '<li rel="1"><%= conversion.conversion_name%><ul>';
 							<% Settings.conversion_kind.each_with_index.map {|name, index|  %>
-						  		html += '<li rel="' + <%=index+3%>+ '"><a href="javascript:void(0)" onclick="set_value(\'<%= conversion.conversion_name + ":" + t(name[1]) %>\', <%= conversion.id%>, <%= index+1 %>, ' + $('#current_id').val() + ');" class="result_click_left" id="conversion_left_<%= conversion.id %>"><%= t(name[1]) %></a></li>';
+						  		html += '<a href="javascript:void(0)" onclick="set_value(\'<%= conversion.conversion_name + ":" + t(name[1]) %>\', <%= conversion.id%>, <%= index+1 %>, ' + $('#current_id').val() + ');" class="result_click_left" id="conversion_left_<%= conversion.id %>"><li rel="' + <%=index+3%>+ '"><%= t(name[1]) %></li></a>';
 						  		
 						  	<% } %>
 						  	html += '</ul></li>';
@@ -51,10 +51,11 @@
 							<%= conversion.conversion_name%>
 							<ul>
 								<% Settings.conversion_kind.each_with_index.map {|name, index|  %>
-								<li rel="<%=index+3%>"><a href="javascript:void(0)" onclick="set_value('<%= conversion.conversion_name + ":" + t(name[1]) %>', <%= conversion.id%>, <%= index+1 %>, 1);" class="result_click_left" id="conversion_left_<%= conversion.id %>">
+								<a href="javascript:void(0)" onclick="set_value('<%= conversion.conversion_name + ":" + t(name[1]) %>', <%= conversion.id%>, <%= index+1 %>, 1);" class="result_click_left" id="conversion_left_<%= conversion.id %>"><li rel="<%=index+3%>">
 									<%= t(name[1]) %>
-									</a>
+									
 								</li>
+								</a>
 								<% } %>
 							</ul>
 						</li>
@@ -75,9 +76,9 @@
 								<%= conversion.conversion_name%>
 								<ul>
 									<% Settings.conversion_kind.each_with_index.map {|name, index|  %>
-									<li rel="' + <%=index+3%>+ '"><a href="javascript:void(0)" onclick="set_value('<%= conversion.conversion_name + ":" + t(name[1]) %>', <%= conversion.id%>, <%= index+1 %>, 2);" class="result_click_left" id="conversion_left_<%= conversion.id %>">
-										<%= t(name[1]) %>
-									</li>
+									<a href="javascript:void(0)" onclick="set_value('<%= conversion.conversion_name + ":" + t(name[1]) %>', <%= conversion.id%>, <%= index+1 %>, 2);" class="result_click_left" id="conversion_left_<%= conversion.id %>">
+										<li rel="' + <%=index+3%>+ '"><%= t(name[1]) %>
+									</li></a>
 									<% } %>
 								</ul>
 							</li>
