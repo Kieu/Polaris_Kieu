@@ -61,7 +61,7 @@
               <th><%= short_ja_name(user.username) %>(<%= short_en_name(company) %>)</th>
               <td><%= short_en_name(user.email) %></td>
               <td><%= user.role.role_name %></td>
-              <td><input type="checkbox" name="del_user_<%= user.id %>">
+              <td><input class='del_user' type="checkbox" name="del_user_<%= user.id %>">
                 <input type="hidden" name="users_id[]" value="<%= user.id %>"></td>
             </tr>
         <% end %>

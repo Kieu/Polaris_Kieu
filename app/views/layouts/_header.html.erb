@@ -2,6 +2,8 @@
 <script>
     $(document).ready(function () {
         <%if signed_in? %>
+        var first_time = true;
+        order = 0;
         var auto_refresh = setInterval(
                 function ()
                 {
@@ -16,7 +18,35 @@
                     // $('.notification').load('/background_jobs/notification').fadeIn("slow");
                 }, 5000); // refresh every 10000 milliseconds
         <%end%>
-    $(".inline_notify").colorbox({inline: true, width: "635", height: "350" });
+    $(".inline_notify").colorbox({inline: true, width: "635", height: "350",
+    onComplete: function(){
+    	if (first_time){
+    		$("#inprogress").niceScroll();
+    		order = 1;
+    		first_time = false;
+    	}
+    	if (order == 1){
+			$("#inprogress").niceScroll();
+		}
+        if (order == 2){
+        	$("#download").niceScroll();
+		}
+        if (order == 3){
+        	$("#upload").niceScroll();
+		}
+    },
+    onClosed: function(){
+    	if (order == 1){
+			$("#inprogress").niceScroll().remove();
+		}
+        if (order == 2){
+        	$("#download").niceScroll().remove();
+		}
+        if (order == 3){
+        	$("#upload").niceScroll().remove();
+		}
+    }
+     });
         $( "#tabs" ).tabs({
             beforeLoad: function( event, ui ) {
                 ui.jqXHR.error(function() {
@@ -24,6 +54,35 @@
                             "Couldn't load this tab. We'll try to fix this as soon as possible. " +
                                     "If this wouldn't be a demo." );
                 });
+                
+            },
+            load: function(event,ui){
+            	if (!first_time){
+            	if (ui.panel.selector == "#ui-tabs-1"){
+            		$("#inprogress").niceScroll();
+            		order = 1;
+            	}
+            	}
+            	if (ui.panel.selector == "#ui-tabs-2"){
+            		$("#download").niceScroll();
+            		order = 2;
+            	}
+            	if (ui.panel.selector == "#ui-tabs-3"){
+            		$("#upload").niceScroll();
+            		order = 3;
+            	}
+            },
+            activate: function( event, ui ) {
+            	
+            	if (ui.oldPanel.selector == "#ui-tabs-1"){
+            		$("#inprogress").niceScroll().remove();
+            	}
+            	if (ui.oldPanel.selector == "#ui-tabs-2"){
+            		$("#download").niceScroll().remove();
+            	}
+            	if (ui.oldPanel.selector == "#ui-tabs-3"){
+            		$("#upload").niceScroll().remove();
+            	}
             }
         });
         $('#promotion_table').each(function() {
