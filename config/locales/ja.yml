@@ -1074,6 +1074,7 @@ ja:
     upload: 'アップロードリスト'
     download: 'ダウンロードリスト'
     uploading: 'アップロード中'
+    creating: '作成中'
     inpreparation: '準備中'
     completed: '完了'
     waiting_upload: 'アップロード待機'
