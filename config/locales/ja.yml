@@ -459,7 +459,7 @@ ja:
               inclusion: 売上単価 正しい値が選択されていません。
               invalid: 売上単価  正しく入力して下さい。
               less_than: ! '売上単価 %{count}より小さい値にしてください。'
-              less_than_or_equal_to: ! '売上単価 %{count}以下の値にしてください。'
+              less_than_or_equal_to: ! '入力した値が不正です'
               not_a_number: 売上単価 数値で入力してください。
               not_an_integer: 売上単価 整数で入力してください。
               odd: 売上単価 奇数にしてください。
@@ -505,7 +505,7 @@ ja:
               inclusion: Facebook app 正しい値が選択されていません。
               invalid: "アプリID (Facebook) 正しく入力して下さい。"
               less_than: ! 'Facebook app %{count}より小さい値にしてください。'
-              less_than_or_equal_to: ! 'Facebook app %{count}以下の値にしてください。'
+              less_than_or_equal_to: ! '入力した値が不正です'
               not_a_number: "アプリID (Facebook) 数値で入力してください。"
               not_an_integer: "アプリID (Facebook) 整数で入力してください。"
               odd: Facebook app 奇数にしてください。
