@@ -73,7 +73,7 @@
 	background-color: #0087a9;
 }
 .ui-tabs-nav a, .ui-tabs-nav .ui-tabs-disabled a:hover, .ui-tabs-nav .ui-tabs-disabled a:focus, .ui-tabs-nav .ui-tabs-disabled a:active {
-	background-color: #e0e0e0;
+	background-color: #828282;
 }
 .ui-tabs-nav .ui-tabs-selected a span, .ui-tabs-nav a:hover span, .ui-tabs-nav a:focus span, .ui-tabs-nav a:active span {
     background-position: 0 -50px;
