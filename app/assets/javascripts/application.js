@@ -15,6 +15,12 @@
 //= require_directory .
 //= require zeroclipboard
 $(function(){
+
+    $("#inprogress .entrydate_box_notify > li > a").click(function()
+    {
+        $(this).parent().remove();
+    });
+
     $('#clients_list').niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
 
     $('#promotions_list').niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
