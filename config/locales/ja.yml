@@ -920,9 +920,9 @@ ja:
   Listing: "リスティング 広告"
   Display: "ディスプレイ 広告"
   Affiliate: "アフィリエイト" 
-  cv_kind1: "CV Kind 1"
-  cv_kind2: "CV Kind 2"
-  cv_kind3: "CV Kind 3"
+  cv_kind1: "CV"
+  cv_kind2: "CV（初回）"
+  cv_kind3: "CV（リピート）"
   
   log_error_messages: ["[無し]", "リダイレクト情報なし", "リクエストパラメータ不正", "DBエラー [*未使用]", "削除済みのリダイレクト情報"]
   log_cv_error_messages: ["[無し]", "該当コンバージョン設定なし", "リクエストパラメータ不正", "DBエラー [*未使用]", "cookieセッション情報なし", "該当クリックなし", "重複排除", "ユニーク制約違反"]
