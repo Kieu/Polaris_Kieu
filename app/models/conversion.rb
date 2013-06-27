@@ -1,5 +1,6 @@
 class Conversion < ActiveRecord::Base
   VALID_NUMBER_REGEX = /^\d+$/
+  VALID_ROMAN_NAME_REGEX = /^[\s!-~]+$/
   
   attr_accessible :conversion_category, :conversion_combine, :conversion_mode,
     :conversion_name, :duplicate, :facebook_app_id, :judging, :os, :reward_form,
@@ -12,6 +13,7 @@ class Conversion < ActiveRecord::Base
     presence: true, uniqueness: {scope: :promotion_id}
   validates :roman_name, length: {maximum: 255},
     presence: true, uniqueness: {scope: :promotion_id}
+  validates :roman_name, format: {with: VALID_ROMAN_NAME_REGEX}, if: -> conversion {conversion.roman_name.present?}
   validates :conversion_category, presence: true
   validates :track_type, presence: true, if: :check_app
   validates_inclusion_of :session_period, in: 1..90, if: :check_track_type_2
