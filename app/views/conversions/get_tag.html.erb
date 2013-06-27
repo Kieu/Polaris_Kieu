@@ -10,7 +10,7 @@
 <% end %>
 <ul class="contentNavi">
   <li class="pre">
-    <%= link_to short_ja_name(@promotion.client.client_name), client_path(client_id: @promotion.client_id) %>
+    <%= link_to short_ja_name(@promotion.client.client_name), clients_path(client_id: @promotion.client_id) %>
   </li>
   <li>&gt;</li>
   <li class="pre">
@@ -67,7 +67,30 @@
                 <tbody>
                   <tr>
                     <th>計測タグ</th>
-                    <td id="img">
+                    <td>
+                    <textarea rows="10" cols="50" disabled="disabled" style="background-color: white; color: black" id="img"><script type="text/javascript">
+  var prot = document.location.protocol;
+  document.write(unescape("%3Cscript type=\'text/javascript\' language=\'javascript\' src=\'" +
+    prot + "//track.polaris-adm.com/js/conversion.js?" + (new Date().getTime()) + "\'%3E%3C/script%3E"));
+</script>');
+
+<script type="text/javascript">
+  var plrs_pid = <%= @conversion.promotion_id %>;
+  var plrs_mv = <%= @conversion.mv %>;
+  
+  /*
+    // #custom parameter
+    var plrs_suid = "";
+    var plrs_verify = "";
+    var plrs_sales = "";
+    var plrs_profit = "";
+    var plrs_volume = "";
+    var plrs_others = "";
+  */
+  
+  var polaris = getTrack();
+  polaris.main();
+</script></textarea>
                     </td>
                     <td class="copy_button last-child"><div class="copy" data-clipboard-target="img"><img src="/assets/btn_copy.gif" /></div></td>
                   </tr>
@@ -83,24 +106,5 @@
 <script type="text/javascript">
   $(document).ready(function() {
     var clip = new ZeroClipboard($(".copy"));
-    $('#img').html("pid: <%= @conversion.promotion_id %><br />mv: <%= @conversion.mv %>");
   });
-</script>
-<script type="text/javascript">
-  var prot = document.location.protocol;
-  document.write(unescape("%3Cscript type=\'text/javascript\' language=\'javascript\' src=\'"
-    + prot + "//track.polaris-adm.com/js/conversion.js?" + (new Date().getTime()) + "\'%3E%3C/script%3E"));
-  var plrs_pid = <%= @conversion.promotion_id %>;
-  var plrs_mv = <%= @conversion.mv %>;
-/* 
-  // #custom parameter
-  var plrs_suid = "";
-  var plrs_verify = "";
-  var plrs_sales = "";
-  var plrs_profit = "";
-  var plrs_volume = "";
-  var plrs_others = "";
-*/
-　var polaris = getTrack();
-  polaris.main();
 </script>

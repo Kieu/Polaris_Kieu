@@ -19,10 +19,10 @@
   <tr>
     <th><%= I18n.t("conversion.option1.label") %><br /><%= f.label I18n.t("conversion.option1.starting_point_setting.label") %></th>
     <td colspan="2"><br /><label>
-      <%= f.radio_button :start_point, 1, checked: true, class: "prevent_change" %><%= f.label I18n.t("conversion.option1.starting_point_setting.configure") %>
+      <%= f.radio_button :start_point, 1, checked: true, class: "prevent_change" %><%= f.label "", I18n.t("conversion.option1.starting_point_setting.configure") %>
     </label></td>
     <td colspan="2"><br /><label>
-      <%= f.radio_button :start_point, 0, class: "prevent_change" %><%= f.label I18n.t("conversion.option1.starting_point_setting.not_configure") %>
+      <%= f.radio_button :start_point, 0, class: "prevent_change" %><%= f.label "", I18n.t("conversion.option1.starting_point_setting.not_configure") %>
     </label></td>
   </tr>
   <tr>

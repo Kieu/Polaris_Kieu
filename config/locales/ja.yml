@@ -24,6 +24,11 @@ ja:
   conversions:
     unique_definition: ["１回のみ", "無制限", "１日１回", "７日１回", "２８日１回", "月内１回"]
   error_message_url_import:
+    ad_name_must_exist: "広告名は存在しない。"
+    group_name_must_exist: "グループ名は存在しない。"
+    campaign_name_must_exist: "キャンペーン名は存在しない。"
+    camp_group_ad_must_match: "キャンペーン名、グループ名、広告名は繋がっていない。"
+    camp_group_ad_submit_must_match: "キャンペーン、グループ名、広告名、計測用URLのいずれも変更することは出来ません。"
     not_input: "アップロードするファイルを選択してください。"
     volumn_over: "File's volumn must less than 20Mb."
     not_format_csv: "ファイル形式がCSVではありません。"
@@ -33,6 +38,7 @@ ja:
     over_row: "データの行数は1,000,000行以内として下さい。\n"
     ad_too_long: "広告IDは文字数の上限255文字を超えています。"
     ad_id_already_used: "指定の広告IDは既に使われています。"
+    ad_id_in_promotion: "指定の広告IDは登録されておりません。"
     ad_id_invalid: "指定の広告IDに不正な文字が入っています。"
     ad_id_used_same_file: "指定の広告IDが同ファイル内で使われています。"
     campaign_too_long: "キャンペーンは文字数の上限255文字を超えています。"
@@ -487,21 +493,21 @@ ja:
               wrong_length: ! 'URL %{count}文字で入力してください。'
               acceptance: URL チェックボックスを選択してください。
             facebook_app_id:
-              blank: "App ID (Facebook) を入力して下さい"
+              blank: "アプリID (Facebook) を入力して下さい"
               accepted: Facebook app 受諾してください。 
               confirmation: Facebook app 確認の入力が一致しません。 
-              empty: "App ID (Facebook) 入力してください。"
+              empty: "アプリID (Facebook) 入力してください。"
               equal_to: ! 'Facebook app %{count}にしてください。 ' 
               even: Facebook app 偶数にしてください。
               exclusion: Facebook app  予約されています。
               greater_than: ! 'Facebook app %{count}より大きい値にしてください。'
               greater_than_or_equal_to: ! 'Facebook app %{count}以上の値にしてください。'
               inclusion: Facebook app 正しい値が選択されていません。
-              invalid: "App ID (Facebook) 正しく入力して下さい。"
+              invalid: "アプリID (Facebook) 正しく入力して下さい。"
               less_than: ! 'Facebook app %{count}より小さい値にしてください。'
               less_than_or_equal_to: ! 'Facebook app %{count}以下の値にしてください。'
-              not_a_number: "App ID (Facebook) 数値で入力してください。"
-              not_an_integer: "App ID (Facebook) 整数で入力してください。"
+              not_a_number: "アプリID (Facebook) 数値で入力してください。"
+              not_an_integer: "アプリID (Facebook) 整数で入力してください。"
               odd: Facebook app 奇数にしてください。
               record_invalid: Facebook app バリデーションに失敗しました。 '%{errors}'
               taken: Facebook app は既に登録されています
