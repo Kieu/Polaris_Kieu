@@ -12,9 +12,9 @@ $(function(){
 <%= stylesheet_link_tag "css/accounts" %>
 <ul class="contentNavi">
   <div class = "crumb">
-    <li class="pre"><%= link_to short_ja_name(@promotion.client.client_name), clients_path(client_id: @promotion.client.id ) %></li>
+    <li class="pre"><%= link_to short_ja_name(@promotion.client.client_name), clients_path(client_id: @promotion.client.id ), title: @promotion.client.client_name %></li>
     <li>&gt;</li>
-    <li class="pre"><%= link_to short_ja_name(@promotion.promotion_name), promotions_path(client_id: @promotion.client.id, promotion_id: @promotion.id) %>
+    <li class="pre"><%= link_to short_ja_name(@promotion.promotion_name), promotions_path(client_id: @promotion.client.id, promotion_id: @promotion.id), title: @promotion.promotion_name %>
       <input type="hidden" name="promotion_id" value="<%= @promotion.id %>">
     </li>
     <li>&gt;</li>
