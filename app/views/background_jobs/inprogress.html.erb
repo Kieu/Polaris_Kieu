@@ -35,7 +35,7 @@
                   <td colspan="4"><%= job.breadcrumb %></td>
                 </tr>
               </table>
-              <p class="btn_cancel"><a href='/background_jobs/kill_job?id=<%= job.id %>'><img src="/assets/btn_cancel_notify.gif"/></a></p>
+              <p class="btn_cancel"><a href="javascript:void(0)" onclick="remove(<%= job.id %>)"><img src="/assets/btn_cancel_notify.gif"/></a></p>
             </li>
     <% end %>
 <% end %>
