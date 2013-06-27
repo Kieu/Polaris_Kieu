@@ -7,7 +7,7 @@ class UrlSettingsController < ApplicationController
   before_filter :must_super_agency
 
 	def index
-    if !params[:promotion_id] || !params[:account_id]
+    if !params[:promotion_id] || !params[:account_id] || (current_user.role.id == Settings.role.CLIENT)
       render file: 'public/404.html', status: :not_found
       return
     end
