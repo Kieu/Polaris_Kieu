@@ -45,6 +45,6 @@ class Account < ActiveRecord::Base
 
   private
   def check_sync
-    sync_flg.to_i == 0 ? true : false
+    sync_flg.to_i == 0 && media_category_id != 3
   end
 end
