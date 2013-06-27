@@ -204,11 +204,11 @@ $(function() {
 </script>
         <div class="contentNavi">
             <ul>
-                <li class="pre"><a class="bread_scrumb_link" href="<%= clients_path%>?client_id=<%= @client_id%>"><%= @client_name %></a></li>
+                <li class="pre"><a class="bread_scrumb_link" href="<%= clients_path%>?client_id=<%= @client_id%>"><%= short_ja_name(@client_name) %></a></li>
                 <li>&gt;</li>
-                <li class="pre"><a class="bread_scrumb_link" href="<%= promotions_path%>?client_id=<%= @client_id%>&promotion_id=<%= @promotion_id %>"><%= @promotion_name %></a></li>
+                <li class="pre"><a class="bread_scrumb_link" href="<%= promotions_path%>?client_id=<%= @client_id%>&promotion_id=<%= @promotion_id %>"><%= short_ja_name(@promotion_name) %></a></li>
                 <li>&gt;</li>
-                <li>URL Setting/<%= @media_name %>/<%= @account_name%></li>
+                <li>URL Setting/<%= short_ja_name(@media_name) %>/<%= short_ja_name(@account_name) %></li>
             </ul>
         </div>
         <div class="clear"></div>
