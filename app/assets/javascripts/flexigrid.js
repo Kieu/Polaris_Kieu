@@ -194,6 +194,7 @@
                 $(g.bDiv).css('width', p.width_body);
                 $(g.hDiv).css('width', p.width_body);
                 $(".bDiv").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
+                $(".hDiv").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
             },
             dragStart: function (dragtype, e, obj) { //default drag function start
                 if (dragtype == 'colresize' && p.colResize === true) {//column resize
