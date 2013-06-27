@@ -24,7 +24,7 @@
 						html += '<td><input type="text" class="prevent_change" id="cv_'+current_category+'" name="'+current_category+'"><ul id="' + current_menu + '" class="mcdropdown_menu">';
 						
 						<% @conversions.each do |conversion| %>
-							html += '<li rel="1"><%= conversion.conversion_name%><ul>';
+							html += '<li rel="1"><%= short_ja_name(conversion.conversion_name)%><ul>';
 							<% Settings.conversion_kind.each_with_index.map {|name, index|  %>
 						  		html += '<a href="javascript:void(0)" onclick="set_value(\'<%= conversion.conversion_name + ":" + t(name[1]) %>\', <%= conversion.id%>, <%= index+1 %>, ' + $('#current_id').val() + ');" class="result_click_left" id="conversion_left_<%= conversion.id %>"><li rel="' + <%=index+3%>+ '"><%= t(name[1]) %></li></a>';
 						  		
@@ -48,7 +48,7 @@
 					<ul id="categorymenu1" class="mcdropdown_menu">
 						<% @conversions.each do |conversion| %>
 						<li rel="1">
-							<%= conversion.conversion_name%>
+							<%= short_ja_name(conversion.conversion_name)%>
 							<ul>
 								<% Settings.conversion_kind.each_with_index.map {|name, index|  %>
 								<a href="javascript:void(0)" onclick="set_value('<%= conversion.conversion_name + ":" + t(name[1]) %>', <%= conversion.id%>, <%= index+1 %>, 1);" class="result_click_left" id="conversion_left_<%= conversion.id %>"><li rel="<%=index+3%>">
@@ -73,7 +73,7 @@
 						<ul id="categorymenu2" class="mcdropdown_menu">
 							<% @conversions.each do |conversion| %>
 							<li rel="1">
-								<%= conversion.conversion_name%>
+								<%= short_ja_name(conversion.conversion_name)%>
 								<ul>
 									<% Settings.conversion_kind.each_with_index.map {|name, index|  %>
 									<a href="javascript:void(0)" onclick="set_value('<%= conversion.conversion_name + ":" + t(name[1]) %>', <%= conversion.id%>, <%= index+1 %>, 2);" class="result_click_left" id="conversion_left_<%= conversion.id %>">
@@ -116,7 +116,7 @@
 					<ul id="categorymenu<%= idx + 1 %>" class="mcdropdown_menu">
 						<% @conversions.each do |conversion| %>
 						<li rel="1">
-							<%= conversion.conversion_name%>
+							<%= short_ja_name(conversion.conversion_name)%>
 							<ul class="submenu">
 								<% Settings.conversion_kind.each_with_index.map {|name, index|  %>
 								<li rel="' + <%=index+3%>+ '"><a href="javascript:void(0)" onclick="set_value('<%= conversion.conversion_name + ":" + t(name[1]) %>', <%= conversion.id%>, <%= index+1 %>, <%= idx + 1 %>);" class="result_click_left" id="conversion_left_<%= conversion.id %>">
