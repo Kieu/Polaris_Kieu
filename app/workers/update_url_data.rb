@@ -150,11 +150,6 @@ class UpdateUrlData
                  comma_sql = ""
                end
               
-              updated_time = current_time
-              if row[LAST_MODIFIED] != "" 
-                updated_time = row[LAST_MODIFIED]
-              end
-
               delete_url_sql += "
                                 and mpv = '#{current_mpv}' 
 

@@ -17,8 +17,7 @@
     padding: 2px 0;
   }
 
-  //.flexigrid div.hDiv th div {text-align: center !important;}
-  //.flexigrid div.hDiv th[axis="col0"] {width: 50px !important;}
+  .flexigrid div.hDiv th div {text-align: center !important;} 
  </style>
 <div class="date"><%= I18n.t("log.today_text") %><br />
   <input id="datepick" type="text" readonly="readonly" value="<%= cookies[:url_setting_start_date] + " ~ " + cookies[:url_setting_end_date] %>" name="datepick">&#9660;

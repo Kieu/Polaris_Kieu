@@ -940,7 +940,8 @@ ja:
   url:
     title: "URL設定"
     flash_messages: 
-      success: "入稿リクエストを受け付けました。"
+      success: "URLの新規登録を受付ました。"
+      success_update: "URLの編集を受け付けました。"
     no_data: "※入稿された広告がありません。"
     download_template: "アップロードファイルフォーマットのダウンロード"
     edit: "編集"

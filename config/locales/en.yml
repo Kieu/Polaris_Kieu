@@ -921,7 +921,8 @@ en:
   url:
     title: "URL Setting"
     flash_messages:
-      success: "I have received a draft request."
+      success: "Your edit URL requests was accepted."
+      success_update: "Your update URL requests was accepted."
     no_data: "No data"
     download_template: "Click to download the fomat of upload file"
     edit: "Edit"
