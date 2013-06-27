@@ -10,8 +10,9 @@ class ApplicationController < ActionController::Base
   end
   include SessionsHelper
 
-  
+
   before_filter :set_locale
+  before_filter :set_notify
 
   def signed_in_user
     redirect_to signin_url, notice: "Please sign in." unless signed_in?
