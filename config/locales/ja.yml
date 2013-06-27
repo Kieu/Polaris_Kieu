@@ -317,7 +317,7 @@ ja:
               greater_than: ! 'メディアカテゴリ %{count}より大きい値にしてください。'
               greater_than_or_equal_to: ! 'メディアカテゴリ %{count}以上の値にしてください。'
               inclusion: メディアカテゴリ 正しい値が選択されていません。
-              invalid: メディアカテゴリ  正しく入力して下さい。
+              invalid: メディアカテゴリの入力内容が無効です
               less_than: ! 'メディアカテゴリ %{count}より小さい値にしてください。'
               less_than_or_equal_to: ! 'メディアカテゴリ %{count}以下の値にしてください。'
               not_a_number: メディアカテゴリ 数値で入力してください。
@@ -340,7 +340,7 @@ ja:
               greater_than: ! 'コスト計算 %{count}より大きい値にしてください。'
               greater_than_or_equal_to: ! 'コスト計算 %{count}以上の値にしてください。'
               inclusion: コスト計算 正しい値が選択されていません。
-              invalid: コスト計算  正しく入力して下さい。
+              invalid: コスト計算の入力内容が無効です
               less_than: ! 'コスト計算 %{count}より小さい値にしてください。'
               less_than_or_equal_to: ! 'コスト計算 %{count}以下の値にしてください。'
               not_a_number: コスト計算を数値で入力してください
