@@ -14,7 +14,7 @@
                 data = ui.item;
                 $("#user_list").append("<tr><th>" + data.label + "(" + data.company + ")</th>" + "<td>" + data.email + "</td><td>" + data.role
                         + "</td><td><input type = 'hidden' name='users_id[]' value ='" + data.value +
-                        "'><input type = 'checkbox' name='del_user_" + data.value + "'></td></tr>");
+                        "'><input class= 'del_user' type = 'checkbox' name='del_user_" + data.value + "'></td></tr>");
 				user_list_html = $("#user_list_form").html();
                 $(this).blur();
                 return false;
