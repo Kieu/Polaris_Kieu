@@ -55,36 +55,57 @@
           function render_combination(){
             $('#category_area').html('<%=j render "combination", f: f %>');
           }
-          
+          function render_install(){
+            $('#app_type_area').html('<%=j render "app_install", f: f %>');
+          }
+          function render_action_in_app(){
+            $('#app_type_area').html('<%=j render "app_action_in_app", f: f %>');
+          }
+          function render_ios(){
+            $('#method_area').remove();
+            if(!$('#conversion_conversion_mode_1').is(':checked')){
+              $('#app_duplicate').after('<%=j render "app_install_ios", f: f %>');
+            }
+            $("#judging_box").remove();
+            $('#app_option').after("<%=j render 'app_install_judging', f: f %>");
+          }
           function render_android(){
-            $('#method_area').html('<%=j render "app_install_android", f: f %>');
+            $('#method_area').remove();
+            if(!$('#conversion_conversion_mode_1').is(':checked')){
+              $('#app_duplicate').after('<%=j render "app_install_android", f: f %>');
+            }
+            $("#judging_box").remove();
           }
           function render_fb_app_id(){
-            $('#fb_app_id').html('<%=j render "app_install_fb_app_id", f: f %>');
+            $('#method_area').remove();
+            $('#fb_app_id').remove();
             if($('#conversion_os_1').is(':checked')){
-              $('#method_area').html('<%=j render "app_install_ios", f: f %>');
+              $('#app_duplicate').after('<%=j render "app_install_ios", f: f %>');
             } else {
-              $('#method_area').html('<%=j render "app_install_android", f: f %>');
+              $('#app_duplicate').after('<%=j render "app_install_android", f: f %>');
             }
+            $('#method_area').after('<%=j render "app_install_fb_app_id", f: f %>');
           }
           function remove_fb_app_id() {
-            $('#fb_app_id').html('');
+            $('#method_area').remove();
+            $('#fb_app_id').remove();
             if($('#conversion_os_1').is(':checked')){
-              $('#method_area').html('<%=j render "app_install_ios", f: f %>');
+              $('#app_duplicate').after('<%=j render "app_install_ios", f: f %>');
             } else {
-              $('#method_area').html('<%=j render "app_install_android", f: f %>');
+              $('#app_duplicate').after('<%=j render "app_install_android", f: f %>');
             }
           }
           function remove_track_method() {
-            $('#fb_app_id').html('<%=j render "app_install_fb_app_id", f: f %>');
-            $('#method_area').html('');
+            $('#method_area').remove();
+            $('#fb_app_id').remove();
+            $('#app_duplicate').after('<%=j render "app_install_fb_app_id", f: f %>');
           }
           function check_track_method() {
-          	if($("#conversion_track_method_4").is(':checked')) {
-          		$("#url").removeAttr('disabled');
-          	} else {
-          		$("#url").attr('disabled','disabled');
-          	}
+            if($("#conversion_track_method_4").is(':checked')) {
+              $("#url").removeAttr('disabled');
+            } else {
+              $("#url").attr('disabled','disabled');
+            }
           }
         </script>
         <form>
@@ -145,12 +166,3 @@
     </div>
   </div>
 </div>
-<script type="text/javascript">
-	<% if @conversion.errors[:url].count > 0 %>
-    $("#url").removeAttr('disabled');
-  <% end %>
-  <% if @conversion.conversion_mode.to_i == 2 %>
-	  $('#fb_app_id').html('');
-    $('#judging_box').html('');
-  <% end %>
-</script>

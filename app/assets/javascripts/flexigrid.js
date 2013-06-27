@@ -71,6 +71,7 @@
             height: 'auto', //default height
             width: 'auto', //auto width
             striped: true, //apply odd even stripes
+            width_body : 'auto',
             novstripe: false,
             minwidth: 30, //min width of columns
             minheight: 80, //min height of columns
@@ -190,7 +191,10 @@
                 });
                 $(g.bDiv).css('min-height','350px');
                 $(g.bDiv).css('max-height','351px');
-                $(".bDiv").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px",horizrailenabled:"false"});
+                $(g.bDiv).css('width', p.width_body);
+                $(g.hDiv).css('width', p.width_body);
+                $(".bDiv").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
+                $(".hDiv").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
             },
             dragStart: function (dragtype, e, obj) { //default drag function start
                 if (dragtype == 'colresize' && p.colResize === true) {//column resize
@@ -1103,7 +1107,10 @@
             }
             $('.tDiv2').append(btnDiv);
         }
+        //add for nicescroll
 
+       // $(t).before(g.scrollDiv);
+       // $(g.scrollDiv).append(g.hDiv);
         $(t).before(g.hDiv);
         g.hTable.cellPadding = 0;
         g.hTable.cellSpacing = 0;

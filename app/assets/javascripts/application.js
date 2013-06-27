@@ -22,6 +22,7 @@ $(function(){
     $("#promotion_tables").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
     $("#scroll_flexigrid").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
    // $("#promotions_scroll").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px",horizrailenabled:"false"});
+
 });
 
 function index_of(haystack, needle) {
@@ -49,6 +50,7 @@ function reloadFlex(obj, urlAction, id, current_active, cname, maxlength) {
     	txt = $(id).text();
     }
     $(cname).text(txt);
+    $(cname).parent("div").attr("title",$(id).attr("title"));
 }
 function ajaxCommon(urlAction, id, current_active, cname,arr_inner) {
     //($this).preventDefault();
@@ -148,10 +150,39 @@ function draw_chart(data_left, data_right, left, right, categories){
 		},
 		xAxis: { // x軸の値を指定
             categories: this.categories,
+            lineWidth:0,
             labels: {
-                rotation: -45
+                rotation: -45,
+                formatter: function() {
+                	return this.value.substring(5);
+				},
+				align: 'right'
             },
           tickInterval: custom_tickInterval
+		},
+        plotOptions: {
+            series: {
+                lineWidth: 1.5
+            }
+        },
+		legend: {
+            labelFormatter: function(){
+            	name = this.name;
+				tmp = name.split("_");
+				if ($.cookie("locale") == "ja")
+		    	{
+			    	if (tmp[1] == "CV"){
+			    		name = tmp[0] + "_totalCV";
+			    	}
+			    	if (tmp[1] == "CV(first)"){
+			    		name = tmp[0] + "_初回CV";
+			    	}
+			    	if (tmp[1] == "CV(repeat)"){
+			    		name = tmp[0] + "_リピートCV";
+			    	}
+			    }
+			    return name;
+            }
 		},
 		yAxis: [{
 			min: 0,
@@ -176,6 +207,7 @@ function draw_chart(data_left, data_right, left, right, categories){
 			opposite: true
 		}],
 		tooltip: { // マウスオーバーした際に表示する文書を指定
+            share: true,
 			formatter: function() {
 				name = this.series.name;
 				tmp = name.split("_");
@@ -191,8 +223,13 @@ function draw_chart(data_left, data_right, left, right, categories){
 			    		name = tmp[0] + "_リピートCV";
 			    	}
 			    }
+				date = this.x;
+				if ($.cookie("locale") == "en"){
+					text = date.substring(0,4);
+					date = date.substring(5) + "/" +text;
+				}
 				return '<b>'+ name +'</b><br/>'+
-				this.x +': '+ graphNumberFormat(this.y, this.series.name);
+				date +': '+ graphNumberFormat(this.y, this.series.name);
 			}
 		},
 		series: [{

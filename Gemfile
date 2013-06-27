@@ -10,6 +10,7 @@ gem "mysql2"
 gem "bcrypt-ruby"
 gem "feedzirra"
 gem "curb", "0.8.4"
+gem "highcharts-rails",   "~> 3.0.2"
 gem "recaptcha", :require => "recaptcha/rails"
 gem "kaminari"
 gem "redis"
@@ -21,6 +22,7 @@ gem "cocaine"
 gem "paperclip"
 gem 'gotcha'
 gem 'zeroclipboard-rails'
+gem 'aescrypt'
 
 # Gems used only for assets and not required
 # in production environments by default.

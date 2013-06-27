@@ -8,8 +8,10 @@ class Conversion < ActiveRecord::Base
 
   belongs_to :promotion
 
-  validates :conversion_name, presence: true, uniqueness: {scope: :promotion_id}
-  validates :roman_name, presence: true, uniqueness: {scope: :promotion_id}
+  validates :conversion_name, length: {maximum: 255},
+    presence: true, uniqueness: {scope: :promotion_id}
+  validates :roman_name, length: {maximum: 255},
+    presence: true, uniqueness: {scope: :promotion_id}
   validates :conversion_category, presence: true
   validates :track_type, presence: true, if: :check_app
   validates_inclusion_of :session_period, in: 1..90, if: :check_track_type_2
@@ -17,16 +19,15 @@ class Conversion < ActiveRecord::Base
   validates :os, presence: true, if: :check_track_type_1
   validates :conversion_mode, presence: true, if: :check_track_type_1
   validates :duplicate, presence: true, if: :check_track_type_1
-  validates :track_method, presence: true, if: :check_track_type_1
+  validates :track_method, presence: true, if: :check_conversion_mode_1
   validates :facebook_app_id, presence: true , if: :check_fb_id_valid
-  validates :facebook_app_id, format: {with: VALID_NUMBER_REGEX},
-    numericality: {only_integer: true},
+  validates :facebook_app_id, length: {maximum: 20}, format: {with: VALID_NUMBER_REGEX},
     if: -> conversion {conversion.facebook_app_id.present?}
   validates :start_point, presence: true, if: :check_web
   validates :conversion_combine, presence: true, if: :check_combination
   validates :url, presence: true, if: :check_track_method
-  validates :sale_unit_price, length: {maximum: 11}, format: {with: VALID_NUMBER_REGEX},
-    numericality: {only_integer: true}, if: :check_sales?
+  validates :sale_unit_price, length: {maximum: 10}, format: {with: VALID_NUMBER_REGEX},
+    numericality: {only_integer: true, less_than_or_equal_to: 2147483647}, if: :check_sales?
 
   scope :order_by_roman_name, ->{order :roman_name}
   scope :order_by_id, ->{order :id}
@@ -79,6 +80,10 @@ class Conversion < ActiveRecord::Base
 
   def check_conversion_mode
     conversion_mode.to_i == 2
+  end
+  
+  def check_conversion_mode_1
+    track_type.to_i == 1 && conversion_mode.to_i != 1
   end
   
   def check_fb_id_valid

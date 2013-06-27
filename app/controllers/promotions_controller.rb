@@ -24,13 +24,9 @@ class PromotionsController < ApplicationController
       @media_list = Media.get_media_list
       @account_list = Account.get_account_list(@promotion_id, @media_list)
         
-      @promotion_results, @promotion_data, date_arrange = DailySummaryAccount
+      @promotion_results, @promotion_data, @array_category = DailySummaryAccount
         .get_table_data(@promotion_id, @start_date, @end_date)
   
-      @array_category = Array.new
-      date_arrange.each do |date|
-        @array_category << date.to_date.strftime("%m/%d")
-      end
       @select_left = params[:left].present? ? params[:left] : "COST"
       @select_right = params[:right].present? ? params[:right] : "click"
     end
@@ -104,10 +100,7 @@ class PromotionsController < ApplicationController
     
     results[:promotion_data] = @promotion_data
     
-    results[:array_category] = Array.new
-    date_arrange.each do |date|
-      results[:array_category] << date.to_date.strftime("%m/%d")
-    end
+    results[:array_category] = date_arrange
     
     results[:html] = render_to_string "promotions/promotion_table", layout: false
     respond_to do |format|
