@@ -145,13 +145,18 @@ class ConversionPromotionLogsController < ApplicationController
       else
         click_utime = ''
       end
+      if conversion_log.device_category && conversion_log.device_category.to_i > 0
+        os_name = os[conversion_log.device_category.to_i-1]
+      else
+        os_name = ''
+      end
       rows << {id: conversion_log.id, cell: 
         {conversion_utime: "<div title='#{Time.at(conversion_log.conversion_utime).strftime("%Y/%m/%d %H:%M:%S")}'>" + Time.at(conversion_log.conversion_utime).strftime("%Y/%m/%d %H:%M:%S") + "</div>",
          conversion_id: "<div title='#{conversions.find_by_id(conversion_log.conversion_id).conversion_name}'>" + conversions.find_by_id(conversion_log.conversion_id).conversion_name + "</div>",
          conversion_category: "<div title='#{conversion_categories[conversion_log.conversion_category.to_i-1]}'>" + conversion_categories[conversion_log.conversion_category.to_i-1] + "</div>",
          tracking_type: "<div title='#{I18n.t("log_track_type")[conversion_log.track_type.to_i-1]}'>" + I18n.t("log_track_type")[conversion_log.track_type.to_i-1] + "</div>",
          cv_type: "<div title='#{I18n.t("log_repeat_flg")[conversion_log.repeat_flg.to_i]}'>" + I18n.t("log_repeat_flg")[conversion_log.repeat_flg.to_i] + "</div>",
-         approval_status: "<div title='#{conversion_log.approval_status}'>" + conversion_log.approval_status + "</div>",
+         approval_status: "<div title=''></div>",
          media_id: "<div title='#{media_name}'>" + media_name + "</div>",
          account_id: "<div title='#{account_name}'>" + account_name + "</div>",
          campaign_id: "<div title='#{campaign_name}'>" + campaign_name + "</div>",
@@ -160,13 +165,13 @@ class ConversionPromotionLogsController < ApplicationController
          click_utime: "<div title='#{click_utime}'>" + click_utime + "</div>",
          verify: "<div title='#{conversion_log.verify}'>" + conversion_log.verify + "</div>",
          suid: "<div title='#{conversion_log.suid}'>" + conversion_log.suid + "</div>",
-         session_id: "<div title='#{conversion_log.session_id}'>" + conversion_log.session_id + "</div>",
-         os: "<div title='#{os[conversion_log.device_category.to_i]}'>" + os[conversion_log.device_category.to_i] + "</div>",
+         session_id: (conversion_log.session_id) ? "<div title='#{conversion_log.session_id}'>" + conversion_log.session_id + "</div>" : '',
+         os: os_name,
          repeat: conversion_log.repeat_processed_flg,
          log_state: "<div title='#{conversion_log.log_state}'>" + conversion_log.log_state + "</div>",
          sales: conversion_log.sales,
          volume: conversion_log.volume,
-         others: "<div title='#{conversion_log.others}'>" + conversion_log.others + "</div>",
+         others: (conversion_log.others) ? "<div title='#{conversion_log.others}'>" + conversion_log.others + "</div>" : '',
          error_code: "<div title='#{I18n.t("log_cv_error_messages")[conversion_log.error_code.to_i]}'>" + I18n.t("log_cv_error_messages")[conversion_log.error_code.to_i] + "</div>",
          media_category_id: conversion_log.media_category_id,
          profit: conversion_log.profit
