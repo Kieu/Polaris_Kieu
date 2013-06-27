@@ -1,12 +1,19 @@
 <% provide(:title, I18n.t("conversion.title.add")) %>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<%= stylesheet_link_tag "css/jquery.mcdropdown.min" %>
 <script type="text/javascript">
-  $(function(){
-    prevent_change = "<%= @prevent %>";
-    $(".prevent_change").change(function(){
-      prevent_change = "1"
-    })
-  })
+	var jQueryTemp = jQuery.noConflict(true);
+	var jQueryOriginal = jQuery || jQueryTemp;
+	window.jQuery = window.$ = jQueryTemp;
+	console.log('Script using second: ', jQuery.fn.jquery);
 </script>
+<%= javascript_include_tag 'js/jquery.chili-2.2'%>
+<%= javascript_include_tag 'js/jquery.bgiframe'%>	
+<%= javascript_include_tag 'js/jquery.mcdropdown.min'%>	
+<script type="text/javascript">
+   window.jQuery = window.$ = jQueryOriginal;
+</script>
+
 <%= render "layouts/prevent_change_page_new" %>
 <% content_for :stylesheet_includes do %>
   <%= stylesheet_link_tag "css/common" %>
@@ -14,7 +21,6 @@
 <% end %>
 <%= javascript_include_tag "js/jquery.chili-2.2.js" %>
 <%= javascript_include_tag "js/jquery.bgiframe.js" %>
-<%= javascript_include_tag "js/ui.core" %>
 <% content_for :sidebar do %>
   <%= render partial: "layouts/sidebar", locals: {object: @conversions} %>
 <% end %>
@@ -128,7 +134,7 @@
                     <%= f.radio_button :conversion_category, 2, onclick: "render_app();", class: "prevent_change" %><%= I18n.t("conversion.conversion_category.app.label") %>
                   </label></td>
                   <td><label>
-                    <%= f.radio_button :conversion_category, 3, onclick: "render_combination();", class: "prevent_change" %><%= I18n.t("conversion.conversion_category.combination") %>
+                    <%= f.radio_button :conversion_category, 3, class: "prevent_change" %><%= I18n.t("conversion.conversion_category.combination") %>
                   </label></td>
                   <td>&nbsp;</td>
                 </tr>
@@ -156,3 +162,17 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+
+$(document).on('click', "#conversion_conversion_category_3", function(){
+	render_combination();
+	
+});
+	<% if @conversion.errors[:url].count > 0 %>
+    $("#url").removeAttr('disabled');
+  <% end %>
+  <% if @conversion.conversion_mode.to_i == 2 %>
+	  $('#fb_app_id').html('');
+	  $('#judging_box').html('');
+  <% end %>
+</script>

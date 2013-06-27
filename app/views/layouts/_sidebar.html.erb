@@ -12,11 +12,14 @@
     </dl>
     <div style="border-top:1px solid #c1c1c1;"></div>
     <% if params[:controller] == "clients" %>
-    	<script type="text/javascript">
-    	$(function() {
-    		$("#clients_list").scrollTo("#<%= @client.id if @client%>");
-    	});
-    	</script>
+    	<% if @client.id %>
+	    	<script type="text/javascript">
+	    	$(function() {
+	    		$("#clients_list").scrollTo("#<%= @client.id if @client%>");
+	    		
+	    	});
+	    	</script>
+	    <% end %>
         <div id="clients_list">
           <table class="sidebar">
             <%
@@ -79,11 +82,13 @@
             <% end %>
           </table>
         </div>
+        <% unless (@promotion_id.blank? ? params[:promotion_id] : @promotion_id).blank? %>
         <script type="text/javascript">
     	$(function() {
     		$("#promotions_list").scrollTo("#<%= @promotion_id.blank? ? params[:promotion_id] : @promotion_id %>");
     	});
     	</script>
+    	<% end %>
     <% elsif params[:controller] == "conversions" %>
         <div id="conversions_list">
           <table class="sidebar">
@@ -103,11 +108,13 @@
             end%>
           </table>
         </div>
-        <script type="text/javascript">
-    	$(function() {
-    		$("#conversions_list").scrollTo("#<%= params[:id] %>");
-    	});
-    	</script>
+        <% unless params[:promotion_id].blank? %>
+	        <script type="text/javascript">
+	    	$(function() {
+	    		$("#conversions_list").scrollTo("#<%= params[:promotion_id] %>");
+	    	});
+	    	</script>
+	    <% end %>
     <% end %>
   </div>
   <% if params[:controller] == "clients" && current_user.super? %>

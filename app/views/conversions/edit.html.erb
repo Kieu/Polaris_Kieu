@@ -1,9 +1,27 @@
 <% provide(:title, I18n.t("conversion.title.edit")) %>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<%= stylesheet_link_tag "css/jquery.mcdropdown.min" %>
+<script type="text/javascript">
+	var jQueryTemp = jQuery.noConflict(true);
+	var jQueryOriginal = jQuery || jQueryTemp;
+	window.jQuery = window.$ = jQueryTemp;
+	console.log('Script using second: ', jQuery.fn.jquery);
+</script>
+<%= javascript_include_tag 'js/jquery.chili-2.2'%>
+<%= javascript_include_tag 'js/jquery.bgiframe'%>	
+<%= javascript_include_tag 'js/jquery.mcdropdown.min'%>	
+<script type="text/javascript">
+   window.jQuery = window.$ = jQueryOriginal;
+    $(document).ready(function (){
+		
+	});
+</script>
+
 <script type="text/javascript">
   $(function(){
     prevent_change = "<%= @prevent %>";
     $(".prevent_change").change(function(){
-      prevent_change = "1"
+      prevent_change = "1";
     })
   })
   if($("#conversion_track_method_4").is(':checked')) {
@@ -17,9 +35,6 @@
   <%= stylesheet_link_tag "css/common" %>
   <%= stylesheet_link_tag "css/conversion" %>
 <% end %>
-<%= javascript_include_tag "js/jquery.chili-2.2.js" %>
-<%= javascript_include_tag "js/jquery.bgiframe.js" %>
-<%= javascript_include_tag "js/ui.core" %>
 <% content_for :sidebar do %>
   <%= render partial: "layouts/sidebar", locals: {object: @conversions} %>
 <% end %>
