@@ -887,8 +887,8 @@ en:
       label: "User disabled: "
       disable: " I want to disable"
     flash_messages:
-      success: " User is created successful en"
-      update: " User is updated successful en"
+      success: " User is created successfully"
+      update: " User is updated successfully"
     user_table:
       username: "User name"
       roman_name: "Roman name"
