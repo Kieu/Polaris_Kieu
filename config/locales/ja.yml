@@ -711,6 +711,7 @@ ja:
       list: "コンバージョン設定"
       edit: "コンバージョン編集"
       add: "コンバージョン登録"
+      get_tag: "タグ取得"
     crumb_add: "コンバージョン登録"
     crumb_edit: "コンバージョン編集"
     tag_acquisition: "タグ取得"
