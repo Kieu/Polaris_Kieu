@@ -213,8 +213,8 @@
                   </li>
                 <% end %>
             <%elsif params[:controller] == "url_settings" || (params[:controller] == "accounts" && params[:action] == "edit") || (params[:controller] == "accounts" && params[:action] == "update") %>
-                <li <%if params[:controller] == "accounts"%>class="current"<% end %>><%= link_to raw('<img src="/assets/nav/nav_01_account_current.gif" alt="ユーザーリスト" />'), "#{accounts_path}/new?promotion_id=#{params[:promotion_id]}", class: "account_class_header" %></li>
-                <li <%if params[:controller] == "url_settings"%>class="current"<% end %>><%= link_to raw('<img src="/assets/nav/nav_02_url_off.gif" alt="代理店リスト" />'),  "#{url_settings_path}/?promotion_id=#{params[:promotion_id]}&account_id=#{params[:id]}", class: "settings_class_header" %></li>            
+                <li <%if params[:controller] == "accounts"%>class="current"<% end %>><%= link_to raw('<img src="/assets/nav/nav_01_account_off.gif" alt="ユーザーリスト" />'), "#{accounts_path}/#{@account_id}/edit?promotion_id=#{params[:promotion_id]}", class: "account_class_header" %></li>
+                <li <%if params[:controller] == "url_settings"%>class="current"<% end %>><%= link_to raw('<img src="/assets/nav/nav_02_url_off.gif" alt="代理店リスト" />'),  "#{url_settings_path}/?promotion_id=#{params[:promotion_id]}&account_id=#{params[:id]}", class: "settings_class_header" %></li>         
             <% end %>
         <% end %>
       </ul>
