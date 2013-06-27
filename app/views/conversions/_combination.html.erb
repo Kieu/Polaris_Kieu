@@ -86,6 +86,7 @@
 						</ul></td>
 					<td></td>
 				</tr>
+				
 				<% if @cv_list && @cv_list.count > 0 %>
 				<%
 					script_input_values = Hash.new
@@ -138,7 +139,22 @@
 				<% end %>
 				<% end %>
 				<% end %>
-				
+				<% if @conversion.errors['conversion_combine'].count > 0%>
+				<tr>
+					<th></th>
+					<td colspan="4">
+					<span class="text-validationError"><%=@conversion.errors['conversion_combine'][0] %></span>
+					</td>
+				</tr>
+				<% end %>
+				<% if flash[:combine_error]%>
+				<tr>
+					<th></th>
+					<td colspan="4">
+					<span class="text-validationError"><%= flash[:combine_error] %></span>
+					</td>
+				</tr>
+				<% end %>
 			</tbody>
 			<tbody>
 				<tr>
