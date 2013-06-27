@@ -22,7 +22,10 @@
                   <td class="file_name"><%=job.filename%></td>
                   <td class="capacity"><%= job.size %></td>
                   <td class="daily"><%= job.created_at.strftime("%m/%d/%y") %></td>
-                  <td class="c_orange">アップロード中</td>
+                  <td class="c_orange">
+                    <% if job.type == 'upload' %><%= I18n.t('notification.uploading') %><%end%>
+                    <% if job.type == 'download' %><%= I18n.t('notification.inpreparation') %><%end%>
+                  </td>
                 </tr>
                 <tr>
                   <td colspan="4"><%= job.breadcrumb %></td>
