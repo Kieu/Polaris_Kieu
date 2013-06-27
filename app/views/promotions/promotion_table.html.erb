@@ -229,11 +229,15 @@
     <% @media_list[category[1].to_s+"_media"].each_with_index do |media, index| %>
 		<% @account_list["media"+media.id.to_s+"_account"].each_with_index do |account, index1| %>
 		<tr>
-			<%= content_tag(:td, media.media_name, rowspan: @account_list["media"+media.id.to_s+"_account"].count) if index1 == 0 %>
+			<% if index1 == 0 %>
+				<%= content_tag(:td, rowspan: @account_list["media"+media.id.to_s+"_account"].count) do %>
+					<% content_tag(:div, short_ja_name(media.media_name), title: media.media_name) %>
+				<% end %>
+			<% end %>
 			<% unless current_user.client? %>
-            	<td><%= link_to account.account_name, edit_account_path(account, promotion_id: @promotion_id) %></td>
+            	<td><div title="<%= account.account_name %>"><%= link_to short_ja_name(account.account_name), edit_account_path(account, promotion_id: @promotion_id) %></div></td>
             <% else %>
-            	<td><%= account.account_name %></td>
+            	<td><div title="<%= account.account_name %>"><%= short_ja_name(account.account_name) %></div></td>
             <% end %>
             <% val = @promotion_results["account"+account.id.to_s+"_promotion"] %>
             <% if val.nil? %>
