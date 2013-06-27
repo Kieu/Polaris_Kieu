@@ -346,7 +346,7 @@
 	            
 	            $("#datepicker").text(start_date + " ~ " + end_date + "▼");
 	            
-	            reloadFlex1("#cvlogs", "<%= get_conversion_logs_list_conversion_promotion_logs_path %>?cv_id=" + $("#media_category_id").val() + "&account_id=" + $("#account_id").val() + "&media_category_id=" + $("#media_category_id").val() + "&start_date=" + start_date + "&end_date=" + end_date);
+	            reloadFlex1("#cvlogs", "<%= get_conversion_logs_list_conversion_promotion_logs_path %>?cv_id=" + $("#conversion_id").val() + "&account_id=" + $("#account_id").val() + "&media_category_id=" + $("#media_category_id").val() + "&start_date=" + start_date + "&end_date=" + end_date);
 	        }
 	    });
 	 });

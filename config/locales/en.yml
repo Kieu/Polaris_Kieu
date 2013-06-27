@@ -498,6 +498,8 @@ en:
               acceptance: Facebook app must be accepted
             session_period:
               inclusion: "Session retention must be from 1 to 90 days"
+            conversion_combine:
+              blank: "Conversion combine can't be blank"
         promotion:
           attributes:
             promotion_name:
@@ -756,6 +758,7 @@ en:
     flash_messages:
       success: "Conversion created"
       update: "Conversion updated"
+      existed: "Conversion combine must not be the same"
     option1:
       label: "<Option①>　"
       starting_point_setting:

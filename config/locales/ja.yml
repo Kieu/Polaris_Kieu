@@ -518,6 +518,10 @@ ja:
               acceptance: Facebook app チェックボックスを選択してください。
             session_period:
               inclusion: "計測期間は１日以降９０日以下で記入下さい。"
+            conversion_combine:
+              blank: "パターン を選択してください"
+              
+              acceptance: コンバージョン名 チェックボックスを選択してください。
         promotion:
           attributes:
             promotion_name:
@@ -687,6 +691,7 @@ ja:
     flash_messages:
       success: " 代理店登録が完了しました"
       update: " 代理店編集が完了しました"
+      existed: "掲載結果または成果を別に選択してください。"
   account:
     title:
       list: "Accounts"
