@@ -96,10 +96,23 @@ class UrlSettingsController < ApplicationController
       else
         creative = url['creative_text']
       end
-      
-      rows << { id: url['redirect_url_id'], cell: {edit_button: edit_button, ad_id: url['ad_id'], campaign_name: url['campaign_name'],
-               group_name: url['group_name'], ad_name: url['ad_name'], creative: creative, url: submit_url,
-               delete_check: delete_check, note: comment, click_price: click_price, last_modified: url['last_modified'] }}
+      ad_id = url['ad_id']
+      ad_id = "<div title='#{ad_id}'>" + short_ja_name(ad_id) + "</div>"
+      campaign_name = url['campaign_name']
+      campaign_name = "<div title='#{campaign_name}'>" + short_ja_name(campaign_name) + "</div>"
+      group_name = url['group_name']
+      group_name = "<div title='#{group_name}'>" + short_ja_name(group_name) + "</div>"
+      ad_name = url['ad_name']
+      ad_name = "<div title='#{ad_name}'>" + short_ja_name(ad_name) + "</div>"
+      last_modified = url['last_modified']
+      comment = "<div title='#{comment}'>" + short_ja_name(comment.to_s) + "</div>"
+      click_price = "<div title='#{click_price}'>" + short_ja_name(click_price.to_s) + "</div>"
+      rows << { id: url['redirect_url_id'], cell: {edit_button: edit_button,
+        ad_id: ad_id, campaign_name: campaign_name,
+        group_name: group_name, ad_name: ad_name,
+        creative: creative, url: submit_url,
+        delete_check: delete_check, note: comment,
+        click_price: click_price, last_modified: last_modified}}
     end
 
     rows
