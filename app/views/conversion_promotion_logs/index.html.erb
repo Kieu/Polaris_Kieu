@@ -12,24 +12,6 @@
       width: 2500px;
   }
 </style>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<%= stylesheet_link_tag "css/jquery.mcdropdown.min" %>
-	<script type="text/javascript">
-		var jQueryTemp = jQuery.noConflict(true);
-		window.jQuery = window.$ = jQueryTemp;
-	</script>
-	<%= javascript_include_tag 'js/jquery.chili-2.2'%>
-	<%= javascript_include_tag 'js/jquery.bgiframe'%>	
-	<%= javascript_include_tag 'js/jquery.mcdropdown.min'%>	
-	<script type="text/javascript">
-	    $(document).ready(function (){
-			$("#category").mcDropdown("#categorymenu");
-		});
-		
-		console.log('Script using second: ', jQuery.fn.jquery);
-	</script>
-	
-
 <ul class="contentNavi">
   <div class = "crumb_logs">
 	<% unless current_user.client? %>
@@ -376,81 +358,5 @@
 </script>
 
 <table>
-<tbody id="thirdBox">
-				<tr>
-				<th>パターン：aaa</th>
-					<td> <input type="text" name="category" id="category" value="成果設定1" />
-						<ul id="categorymenu" class="mcdropdown_menu">
-							<li rel="1"> CV1アプリダウンロード
-								<ul>
-									<li rel="2">CV</li>
-									<li rel="5">CV（初回）</li>
-									<li rel="6">CV（リピート）</li>
-								</ul>
-							</li>
-							<li rel="1"> CV2式場予約（APP）
-								<ul>
-									<li rel="2">CV</li>
-									<li rel="5">CV（初回）</li>
-									<li rel="6">CV（リピート）</li>
-								</ul>
-							</li>
-							<li rel="1"> CV3式場予約（WEB）
-								<ul>
-									<li rel="2">CV</li>
-									<li rel="5">CV（初回）</li>
-									<li rel="6">CV（リピート）</li>
-								</ul>
-							</li>
-							<li rel="1"> CV4資料請求（WEB）
-								<ul>
-									<li rel="2">CV</li>
-									<li rel="5">CV（初回）</li>
-									<li rel="6">CV（リピート）</li>
-								</ul>
-							</li>
-						</ul>
-						</td>
-					<td><select  class="ta-c mcdropdown_spacing">
-							<option>&nbsp;</option>
-							<option>+</option>
-							<option>−</option>
-							<option>×</option>
-							<option>÷</option>
-						</select></td>
-					<td><input type="text" name="category" id="category2" value="成果設定2" />
-						<ul id="categorymenu2" class="mcdropdown_menu">
-							<li rel="1"> CV1アプリダウンロード
-								<ul>
-									<li rel="2">CV</li>
-									<li rel="5">CV（初回）</li>
-									<li rel="6">CV（リピート）</li>
-								</ul>
-							</li>
-							<li rel="1"> CV2式場予約（APP）
-								<ul>
-									<li rel="2">CV</li>
-									<li rel="5">CV（初回）</li>
-									<li rel="6">CV（リピート）</li>
-								</ul>
-							</li>
-							<li rel="1"> CV3式場予約（WEB）
-								<ul>
-									<li rel="2">CV</li>
-									<li rel="5">CV（初回）</li>
-									<li rel="6">CV（リピート）</li>
-								</ul>
-							</li>
-							<li rel="1"> CV4資料請求（WEB）
-								<ul>
-									<li rel="2">CV</li>
-									<li rel="5">CV（初回）</li>
-									<li rel="6">CV（リピート）</li>
-								</ul>
-							</li>
-						</ul></td>
-					<td></td>
-				</tr>
-			</tbody>
 </table>
 

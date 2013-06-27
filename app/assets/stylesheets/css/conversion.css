@@ -60,9 +60,9 @@
 }
 
 .conversion_form table.client_info tbody td {
-	padding-left: 10px;
+	padding-left: 5px;
 	font-weight: bold;
-	width:130px;
+	width:140px;
 }
 
 .conversion_form input{
