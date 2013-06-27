@@ -46,7 +46,7 @@
 <tr>
   <th><%= f.label I18n.t("conversion.conversion_category.app.session.label") %></th>
   <td colspan="3">
-    <%= f.text_field :session_period, maxlength: 2, style: "width: 80%;", class: "ta-r prevent_change", value: @conversion.session_period %>
+    <%= f.text_field :session_period, maxlength: 2, class: "input-text ta-r prevent_change" %>
   </td>
   <td id="percent" style="margin-left: -62px; position: absolute; margin-top: 13px;">
   	<%= I18n.t("conversion.conversion_category.app.session.day")%>
@@ -61,7 +61,7 @@
 <tr>
   <th><%= I18n.t("conversion.conversion_category.app.option.label")%><br /><%= f.label I18n.t("conversion.conversion_category.app.sale_unit_price") %></th>
   <td colspan="4"><br />
-    <%= f.text_field :sale_unit_price, maxlength: 10, placeholder: "￥", class: "prevent_change" %>
+    <%= f.text_field :sale_unit_price, maxlength: 10, placeholder: "￥", class: "input-text ta-r prevent_change" %>
   </td>
 </tr>
 <tr>

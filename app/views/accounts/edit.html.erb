@@ -71,7 +71,7 @@ $(function(){
         <tr>
         <th></th>
         <td colspan="2">
-        	<%= f.password_field :sync_account_pw, maxlength: 255, value: @account.sync_account_pw, style: "width: 270px", placeholder: " PW: ", class: "prevent_change" %>
+        	<%= f.password_field :sync_account_pw, maxlength: 255, value: @account.sync_account_pw, style: "width: 270px", placeholder: " PW: ", class: "prevent_change", autocomplete: "off" %>
         </tr> 
         <tbody>
       </table>

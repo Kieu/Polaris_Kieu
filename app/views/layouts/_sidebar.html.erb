@@ -108,10 +108,10 @@
             end%>
           </table>
         </div>
-        <% unless params[:id].blank? %>
+        <% unless params[:promotion_id].blank? %>
 	        <script type="text/javascript">
 	    	$(function() {
-	    		$("#conversions_list").scrollTo("#<%= params[:id] %>");
+	    		$("#conversions_list").scrollTo("#<%= params[:promotion_id] %>");
 	    	});
 	    	</script>
 	    <% end %>
