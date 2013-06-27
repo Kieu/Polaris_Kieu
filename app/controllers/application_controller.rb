@@ -32,6 +32,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_notify
+    return unless current_user
     @notify = BackgroundJob.where(:user_id => current_user.id,:status => '0').size
   end
 
