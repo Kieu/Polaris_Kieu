@@ -12,13 +12,13 @@ $(function(){
 <%= stylesheet_link_tag "css/accounts" %>
 <ul class="contentNavi">
   <div class = "crumb">
-    <li class="pre"><%= link_to short_ja_name(@promotion.client.client_name), clients_path(client_id: @promotion.client.id) %></li>
+    <li class="pre"><%= link_to short_ja_name(@promotion.client.client_name), clients_path(client_id: @promotion.client.id), title: @promotion.client.client_name %></li>
     <li>&gt;</li>
-    <li class="pre"><%= link_to short_ja_name(@promotion.promotion_name), promotions_path(client_id: @promotion.client.id, promotion_id: @promotion.id) %>
+    <li class="pre"><%= link_to short_ja_name(@promotion.promotion_name), promotions_path(client_id: @promotion.client.id, promotion_id: @promotion.id), title: @promotion.promotion_name %>
     <li>&gt;</li>
     <li><%= I18n.t("account.crumb_edit") %>/<%= @account.media.media_name%> </li>
     <li>&gt;</li>
-    <li><%= short_ja_name(@account_name)%> </li>
+    <li><div title= "<%=@account_name%>"><%= short_ja_name(@account_name)%></div></li>
   </div>
 </ul>
         
