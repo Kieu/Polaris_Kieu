@@ -50,6 +50,7 @@ function reloadFlex(obj, urlAction, id, current_active, cname, maxlength) {
     	txt = $(id).text();
     }
     $(cname).text(txt);
+    $(cname).parent("div").attr("title",$(id).attr("title"));
 }
 function ajaxCommon(urlAction, id, current_active, cname,arr_inner) {
     //($this).preventDefault();
