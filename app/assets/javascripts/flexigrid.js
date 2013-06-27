@@ -193,8 +193,9 @@
                 $(g.bDiv).css('max-height','351px');
                 $(g.bDiv).css('width', p.width_body);
                 $(g.hDiv).css('width', p.width_body);
-                $(".bDiv").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px",horizrailenabled:false});
+               $(".bDiv").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px",horizrailenabled:false});
                // $(".hDiv").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
+                $(".flexigrid").css('width',p.width_body);
             },
             dragStart: function (dragtype, e, obj) { //default drag function start
                 if (dragtype == 'colresize' && p.colResize === true) {//column resize
