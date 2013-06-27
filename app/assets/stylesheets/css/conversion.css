@@ -60,7 +60,7 @@
 }
 
 .conversion_form table.client_info tbody td {
-	padding-left: 0px;
+	padding-left: 5px;
 	font-weight: bold;
 	width:140px;
 }
