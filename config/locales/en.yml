@@ -440,7 +440,7 @@ en:
               inclusion: Sale unit price is not included in the list
               invalid: Sale unit price  is invalid
               less_than: ! 'Sale unit price must be less than %{count}'
-              less_than_or_equal_to: ! 'Sale unit price must be less than or equal to %{count}'
+              less_than_or_equal_to: ! 'Sale unit price is invalid'
               not_a_number: Sale unit price is not a number
               not_an_integer: Sale unit price is not a interger
               odd: Sale unit price must be odd
@@ -486,7 +486,7 @@ en:
               inclusion: Facebook app is not included in the list
               invalid: "App ID (Facebook) is invalid"
               less_than: ! 'Facebook app must be less than %{count}'
-              less_than_or_equal_to: ! 'Facebook app must be less than or equal to %{count}'
+              less_than_or_equal_to: ! 'App ID (Facebook) is invalid'
               not_a_number: "App ID (Facebook) is not a number"
               not_an_integer: "App ID (Facebook) is not a integer"
               odd: Facebook app must be odd

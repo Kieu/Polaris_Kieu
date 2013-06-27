@@ -22,6 +22,7 @@ class Conversion < ActiveRecord::Base
   validates :track_method, presence: true, if: :check_conversion_mode_1
   validates :facebook_app_id, presence: true , if: :check_fb_id_valid
   validates :facebook_app_id, length: {maximum: 20}, format: {with: VALID_NUMBER_REGEX},
+    numericality: {only_integer: true, less_than_or_equal_to: 18446744073709551615},
     if: -> conversion {conversion.facebook_app_id.present?}
   validates :start_point, presence: true, if: :check_web
   validates :conversion_combine, presence: true, if: :check_combination
@@ -35,7 +36,7 @@ class Conversion < ActiveRecord::Base
 
   def create_mv
     mv = ""
-    if (client_id = self.promotion.client.id.to_s(36)).length < 8
+    if (client_id = self.promotion.client_id.to_s(36)).length < 8
       mv << "0" * (8 - client_id.length) << client_id
     end
     if (promotion_id = self.promotion.id.to_s(36)).length < 8
