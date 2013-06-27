@@ -119,7 +119,7 @@
 		url: "<%= get_conversion_logs_list_conversion_promotion_logs_path %>?media_category_id=" + $('#media_category_id').val() + "&account_id=" + $('#media_category_id').val() + "&media_id=" + $('#media_id').val() + "&start_date=<%= @start_date %>"  + "&end_date=<%= @end_date %>",
 		dataType: 'json',
 		colModel : [ 
-	{display: '<%= I18n.t("cv_logs.conversion_time")%>', name : 'conversion_utime', width : '200', sortable : true, align: 'left',hide: ($.cookie("cv_options")[0] == "1") ? false : true,  attribute: {title:"add"}},
+	{display: '<%= I18n.t("cv_logs.conversion_time")%>', name : 'conversion_utime', width : 'auto', sortable : true, align: 'left',hide: ($.cookie("cv_options")[0] == "1") ? false : true,  attribute: {title:"add"}},
 	{display: '<%= I18n.t("cv_logs.conversion_name")%>', name : 'conversion_id', width : 'auto', sortable : true, align: 'left',hide: ($.cookie("cv_options")[1] == "1") ? false : true},
     {display: '<%= I18n.t("cv_logs.conversion_category")%>', name : 'conversion_category', width : 'auto', sortable : true, align: 'left', hide: ($.cookie("cv_options")[2] == "1") ? false : true},
     {display: '<%= I18n.t("cv_logs.tracking_type")%>', name : 'tracking_type', width : 'auto', sortable : true, align: 'left',hide: ($.cookie("cv_options")[3] == "1") ? false : true},
@@ -210,10 +210,7 @@
 	           }
 	           
 			
-		},
-    	onError: function(xhr,status,errorThrown){
-            $('.newTable06').flexAddData({rows:[],page:1,total:0});
-        }
+		}
 	});
 	var colums = ["conversion_utime", "conversion_id", "conversion_category","tracking_type",
 	 "cv_type", "approval_status", "media_id", "account_id", "campaign_id", "group_id", "unit_id", "click_time", "verify", "suid", "session_id", "os", "repeat", "log_state", "sales", "profit", "volume", "others", "error_message"]
