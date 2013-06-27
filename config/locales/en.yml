@@ -1051,3 +1051,12 @@ en:
     mark: 'Mark'
     ok_ng: 'OK/NG'
     error_code: 'Error code'
+  notification:
+    inprogress: 'Inprogress'
+    upload: 'Upload List'
+    download: 'Download List'
+    uploading: 'Uploading'
+    inpreparation: 'In preparation'
+    completed: 'Completed'
+    waiting_upload: 'Waiting upload'
+

@@ -1069,3 +1069,11 @@ ja:
     send_log: "送信ログ"
     send_date_time: "送信日時"
     error_message: "エラーメッセージ"
+  notification:
+    inprogress: '実行中'
+    upload: 'アップロードリスト'
+    download: 'ダウンロードリスト'
+    uploading: 'アップロード中'
+    inpreparation: '準備中'
+    completed: '完了'
+    waiting_upload: 'アップロード待機'
