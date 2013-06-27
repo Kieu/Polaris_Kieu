@@ -90,7 +90,7 @@ class UrlSettingsController < ApplicationController
       comment = url['comment']
       click_price = url['click_unit']
       submit_url = "<div align='left' id='url_#{url['redirect_url_id']}'>" + Settings.DOMAIN_SUBMIT_URL + "mpv=#{url['mpv']}" + "&cid=#{client_id}&pid=#{promotion_id} </div>"
-      submit_url += "<div align='right'><a href='#' data-clipboard-target='url_#{url['redirect_url_id']}' class='copy_button' ><img src='/assets/btn_copy2.gif' /></a></div>"
+      submit_url += "<div align='right'><a href='javascript:void(0)'><img src='/assets/btn_copy2.gif' data-clipboard-target='url_#{url['redirect_url_id']}' class='copy_button' /></a></div>"
       if url['creative_type'] == '1'
         creative = '<img src=' + "/assets/creative/#{image}" + ' width="150" height="40" />'
       else
