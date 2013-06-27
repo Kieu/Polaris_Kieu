@@ -622,7 +622,7 @@ ja:
     privacy_policy: "プライバシーポリシー"
     porporate_information: "企業情報"
   login:
-    title: "ログイン"
+    title: "ログインページ"
     split: "。"
     email: "メールアドレス"
     pw: "パスワード"
@@ -855,7 +855,7 @@ ja:
     error_log_view: エラーログ表示
   promotion:
     title:
-      list: "プロモーションリスト"
+      list: "プロモーション"
       edit: "プロモーション編集"
       add: "プロモーション登録"
     media: "メディア"
