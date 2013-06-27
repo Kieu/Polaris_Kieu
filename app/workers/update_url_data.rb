@@ -170,13 +170,13 @@ class UpdateUrlData
 
                # insert url
                insert_redirect_url_str += "#{comma_sql}('#{current_mpv}', '#{row[REDIRECT_URL1]}', #{row[RATE1]}, '#{row[NAME1]}',
-                                            #{user_id}, '#{current_time}', #{user_id} )
+                                            #{user_id}, '#{current_time}', '#{current_time}', #{user_id} )
 
                                             "
                
                if row[REDIRECT_URL2] != ""
                  insert_redirect_url_str += " , ('#{current_mpv}', '#{row[REDIRECT_URL2]}', #{row[RATE2]}, '#{row[NAME2]}',
-                                             #{user_id}, '#{current_time}', #{user_id} )
+                                             #{user_id}, '#{current_time}', '#{current_time}', #{user_id} )
 
                                             "
                  num += 1
@@ -184,7 +184,7 @@ class UpdateUrlData
 
                if row[REDIRECT_URL3] != ""
                  insert_redirect_url_str += " , ('#{current_mpv}', '#{row[REDIRECT_URL3]}', #{row[RATE3]}, '#{row[NAME3]}',
-                                             #{user_id}, '#{current_time}', #{user_id} )
+                                             #{user_id}, '#{current_time}', '#{current_time}', #{user_id} )
 
                                             "
                  num += 1
@@ -192,7 +192,7 @@ class UpdateUrlData
 
                if row[REDIRECT_URL4] != ""
                  insert_redirect_url_str += " , ('#{current_mpv}', '#{row[REDIRECT_URL4]}', #{row[RATE4]}, '#{row[NAME4]}',
-                                             #{user_id}, '#{current_time}', #{user_id} )
+                                             #{user_id}, '#{current_time}', '#{current_time}', #{user_id} )
 
                                             "
                  num += 1
@@ -200,7 +200,7 @@ class UpdateUrlData
 
                if row[REDIRECT_URL5] != ""
                  insert_redirect_url_str += " , ('#{current_mpv}', '#{row[REDIRECT_URL5]}', #{row[RATE5]}, '#{row[NAME5]}',
-                                             '#{current_time}', #{user_id} )
+                                             '#{current_time}', '#{current_time}', #{user_id} )
 
                                             "
                  num += 1
@@ -275,7 +275,7 @@ class UpdateUrlData
   end
 
   def make_header_insert_sql type
-    update_str = " , updated_at, update_user_id "
+    update_str = " , updated_at, created_at, update_user_id "
     insert_redirect_url_str = "
                   insert into redirect_urls 
                    (mpv, url, rate, name, create_user_id #{update_str} )
