@@ -373,12 +373,12 @@ class UpdateUrlData
      if row[AD_NAME] != ""
         # check ad existed or not
         if array_campaigns.count > 0 && array_groups.count > 0
-          array_ads = DisplayAd.where(" name = '#{row[AD_NAME]}' and display_group_id = #{display_group_id}").select('id')
+          array_ads = DisplayAd.where(" name = '#{row[AD_NAME]}' and display_group_id = #{display_group_id}").select('id, ad_id_identifier')
           if array_ads.count == 0
             error_num += 1
             error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.camp_group_ad_must_match") + "#{enter_key}")
           else
-            ad_id_identifier = array_ads.first['id'].to_s
+            ad_id_identifier = array_ads.first['ad_id_identifier'].to_s
           end
         end
         

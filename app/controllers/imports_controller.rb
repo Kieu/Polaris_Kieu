@@ -61,6 +61,7 @@ class ImportsController < ApplicationController
       flg_check_error = true
     end
 
+    current_lang = cookies[:locale]
     CSV.foreach(file_path) do |row|
       if !(row[0].to_s.strip.downcase.include? t("url.last_modified_check")) || row[1].to_s.strip.downcase != t("url.ad_id_check") || 
          row[2].to_s.strip.downcase != t("url.campaign_name_check") || row[3].to_s.strip.downcase != t("url.group_name_check") || 
@@ -75,9 +76,32 @@ class ImportsController < ApplicationController
          row[20].to_s.strip.downcase != t("url.rate4") || row[21].to_s.strip.downcase != t("url.redirect_url5") || 
          row[22].to_s.strip.downcase != t("url.name5") || row[23].to_s.strip.downcase != t("url.rate5")
 
-        message = t("error_message_url_import.differrent_format")
-        flg_check_error = true
+         if current_lang == "en"
+           I18n.locale = "ja"
+         else
+           I18n.locale = "en"
+         end
+         
+         if !(row[0].to_s.strip.downcase.include? t("url.last_modified_check")) || row[1].to_s.strip.downcase != t("url.ad_id_check") || 
+           row[2].to_s.strip.downcase != t("url.campaign_name_check") || row[3].to_s.strip.downcase != t("url.group_name_check") || 
+           row[4].to_s.strip.downcase != t("url.ad_name_check") || row[5].to_s.strip.downcase != t("url.creative_check") || 
+           row[6].to_s.strip.downcase != t("url.note_check") || row[7].to_s.strip.downcase != t("url.click_price_check") || 
+           row[8].to_s.strip.downcase != t("url.url_check") || row[9].to_s.strip.downcase != t("url.redirect_url1") || 
+           row[10].to_s.strip.downcase != t("url.name1") || row[11].to_s.strip.downcase != t("url.rate1") || 
+           row[12].to_s.strip.downcase != t("url.redirect_url2") || row[13].to_s.strip.downcase != t("url.name2") || 
+           row[14].to_s.strip.downcase != t("url.rate2") || row[15].to_s.strip.downcase != t("url.redirect_url3") || 
+           row[16].to_s.strip.downcase != t("url.name3") || row[17].to_s.strip.downcase != t("url.rate3") || 
+           row[18].to_s.strip.downcase != t("url.redirect_url4") || row[19].to_s.strip.downcase != t("url.name4") || 
+           row[20].to_s.strip.downcase != t("url.rate4") || row[21].to_s.strip.downcase != t("url.redirect_url5") || 
+           row[22].to_s.strip.downcase != t("url.name5") || row[23].to_s.strip.downcase != t("url.rate5")
+
+           message = t("error_message_url_import.differrent_format")
+           flg_check_error = true
+         end
+
       end
+
+      I18n.locale = current_lang
 
       break
     end
