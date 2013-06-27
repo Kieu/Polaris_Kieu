@@ -248,9 +248,14 @@ $(function() {
             </p>
               <% if (flash[:csv_error]) && (flash[:csv_error].count > 0) %>
                 <% flash[:csv_error].each do |error_message| %>
-                  <p class="bold" style="color:red"><%= error_message %></p>
+                  <% if error_message.kind_of?(Array) %>
+                    <p class="bold" style="color:red"><%= error_message[0] %></p>
+                  <% else %>
+                    <p class="bold" style="color:red"><%= error_message %></p>
+                  <% end %>
                 <% end %>
               <% else %>
+
                 <p class="bold"><%= flash[:error] %></p>
               <% end %>
 
