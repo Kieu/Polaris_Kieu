@@ -968,6 +968,8 @@ ja:
       table: "テーブル"
       display_item: "表示項目"
       select_all: "全て追加する"
+      complete_alt: "完成"
+      cancel_alt: "キャンセル"
     redirect_url1: "リンク先1"
     name1: "タイトル1"
     rate1: "遷移割合1"

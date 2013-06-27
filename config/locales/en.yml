@@ -943,12 +943,14 @@ en:
     last_modified_check: "last modified"
     click_price_check: "click unit"
     upload_type: 
-      insert: "Append (new rules)"
+      insert: " Add (new)"
       update: "Update (existing)"
     show_option:
       table: "Table"
       display_item: "Display items"
       select_all: "Select All"
+      complete_alt: "OK"
+      cancel_alt: "Cancel"
     redirect_url1: "redirect url 1"
     name1: "name 1"
     rate1: "rate 1"
