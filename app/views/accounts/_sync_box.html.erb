@@ -11,7 +11,7 @@
 </tr>
 <tr>
 <th></th>
-<td><%= f.password_field :sync_account_pw, maxlength: 255, value: @account.sync_account_pw, style: "width: 270px", placeholder: " PW: ", class: "prevent_change" %>
+<td><%= f.password_field :sync_account_pw, maxlength: 255, value: @account.sync_account_pw, style: "width: 270px", placeholder: " PW: ", class: "prevent_change", autocomplete: "off" %>
 <script type="text/javascript">
 $(function(){
 	prevent_change = "<%= @prevent %>";

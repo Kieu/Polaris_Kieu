@@ -32,28 +32,28 @@
 .conversion_form {
     background-color: #F1F1F1;
     border: 1px solid #B6B6B6;
-    border-top: 3px solid #828282;
+	border-top: 3px solid #828282;
     min-height: 510px;
-    width: 700px;
-    padding-left: 10px;
+    width: 630px;
+	padding-left: 10px;
 }
 .conversion_form table.client_info {
-    width: 700px;
+    width: 630px;
 }
 
 .conversion_form table.client_info tbody {
 	font-size: 13px;
-    width: 700px;
+    width: 630px;
 }
 
 .conversion_form table.client_info tbody tr {
-    height:45px;
+	height:45px;
     border-bottom-style: none;
 }
 .conversion_form table.client_info tbody th {
-    font-weight: bold;
+	font-weight: bold;
     text-align: right;
-    width: 170px;
+    width: 135px;
 }
 .chart_left {
     width:170px;
@@ -62,7 +62,7 @@
 .conversion_form table.client_info tbody td {
 	padding-left: 10px;
 	font-weight: bold;
-	width:130px;
+	/*width:110px;*/
 }
 
 .conversion_form input{
@@ -234,7 +234,8 @@ li.disabled {
 	width: 120px;
 }
 .mcdropdown_spacing{
-  margin: 0 0 0 100px !important;
+  	/*margin: 0 0 0 100px !important;*/
+  	margin: 0 0 0 0 !important;
     padding: 0 !important;
     width: 40px !important;
 }

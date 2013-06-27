@@ -70,7 +70,7 @@ $(function(){
         <tr>
         <th></th>
         <td colspan="2">
-        	<%= f.password_field :sync_account_pw, maxlength: 255, style: "width: 270px", placeholder: " PW: ", class: "prevent_change" %>
+        	<%= f.password_field :sync_account_pw, maxlength: 255, style: "width: 270px", placeholder: " PW: ", class: "prevent_change", autocomplete: "off" %>
         </tr> 
       </tbody>
       </table>
@@ -135,6 +135,11 @@ jQuery(document).ready(function($) {
     } else {
     	$("#account_sync_box").html("");
     }
+    if ($("#account_sync_flg_1").is(':checked')) {
+    
+    $("#account_sync_account_id").attr('disabled','disabled');
+    $("#account_sync_account_pw").attr('disabled','disabled');
+  } 
 });
 
 	

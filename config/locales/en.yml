@@ -689,9 +689,10 @@ en:
   conversion:
     title:
       list: "Conversions Setting"
-      edit: "Edit Conversion"
-      add: "Add Conversion"
-    crumb_add: "Conversion Registration"
+      edit: "Conversion Edit"
+      add: "Conversion Add"
+      get_tag: "Conversion Get Tag"
+    crumb_add: "Conversion Add"
     crumb_edit: "Conversion Edit"
     tag_acquisition: "Get Tag"
     conversion_setting: "Conversion setting"
@@ -718,7 +719,7 @@ en:
           label:  "Conversion mode: "
           all: " All"
           facebook: " Only Facebook"
-          other: " Other"
+          other: " Others"
         duplicate:
           label: "Duplicate: "
           label1: " Yes"
@@ -888,8 +889,8 @@ en:
       label: "User disabled: "
       disable: " I want to disable"
     flash_messages:
-      success: " User is created successful en"
-      update: " User is updated successful en"
+      success: " User is created successfully"
+      update: " User is updated successfully"
     user_table:
       username: "User name"
       roman_name: "Roman name"
@@ -1051,3 +1052,13 @@ en:
     mark: 'Mark'
     ok_ng: 'OK/NG'
     error_code: 'Error code'
+  notification:
+    inprogress: 'Inprogress'
+    upload: 'Upload List'
+    download: 'Download List'
+    uploading: 'Uploading'
+    creating: 'Creating'
+    inpreparation: 'In preparation'
+    completed: 'Completed'
+    waiting_upload: 'Waiting upload'
+

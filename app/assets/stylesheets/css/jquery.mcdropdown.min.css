@@ -22,7 +22,7 @@ div.mcdropdown a {
 	position:absolute;
 	right:1px;
 	top:1px;
-	background:transparent url(../images/icon_select_button_sprite.gif) no-repeat top left;
+	background:transparent url(/assets/icon_select_button_sprite.gif) no-repeat top left;
 	display:-moz-inline-block;
 	display:inline-block;
 	height:16px;
@@ -136,7 +136,7 @@ ul.mcdropdown_menu>li:hover+li:not(.mc_firstrow) {
 }
 ul.mcdropdown_menu li.mc_parent {
 	padding-right:20px!important;
-	background:url(../images/icon_normal.gif) no-repeat 100% 50%;
+	background:url(/assets/icon_normal.gif) no-repeat 100% 50%;
 }
 ul.mcdropdown_menu li:hover.mc_parent {
 	background-color: #D6ECF1!important;
@@ -183,7 +183,7 @@ div.mcdropdown_shadow {
 html>body div.mcdropdown_shadow {
 	margin:5px 0 0 5px;
 	padding:5px 0 0 5px;
-	background:transparent url(../images/shadow.png) right bottom no-repeat!important;
+	background:transparent url(/assets/shadow.png) right bottom no-repeat!important;
 	filter:none;
 }
 ul.mcdropdown_autocomplete {
@@ -225,7 +225,7 @@ ul.mcdropdown_autocomplete li.mc_endcol {
 }
 ul.mcdropdown_autocomplete li.mc_parent {
 	padding-right:20px!important;
-	background:url(../images/icon_normal.gif) no-repeat 100% 50%;
+	background:url(/assets/icon_normal.gif) no-repeat 100% 50%;
 	
 }
 ul.mcdropdown_autocomplete li.mc_hover {
@@ -234,6 +234,6 @@ ul.mcdropdown_autocomplete li.mc_hover {
 	color:#fff;
 }
 ul.mcdropdown_autocomplete li.mc_hover_parent {
-	background:#999 url(../images/icon_hover.gif) no-repeat 100% 50%!important;
+	background:#999 url(/assets/icon_hover.gif) no-repeat 100% 50%!important;
 	color:#fff!important;
 }

@@ -76,10 +76,11 @@ class AccountsController < ApplicationController
       @account.sync_account_id = nil
       @account.sync_account_pw = nil
     end
-    if @account.sync_account_pw != nil
-      @account.sync_account_pw = AESCrypt.encrypt("TOPSCERETPOLARIS", @account.sync_account_pw)
-    end
+    
     if @account.valid?
+      if @account.sync_account_pw != nil
+        @account.sync_account_pw = AESCrypt.encrypt("TOPSCERETPOLARIS", @account.sync_account_pw)
+      end
       ActiveRecord::Base.transaction do
         if @account.save
           @margin = MarginManagement.new
@@ -102,7 +103,6 @@ class AccountsController < ApplicationController
         redirect_to promotions_path(promotion_id: @promotion_id, client_id: @promotion.client_id)
       end
     else
-
       render "new", promotion_id: @promotion_id
     end
   end

@@ -43,25 +43,22 @@ class ClientsController < ApplicationController
     @client = Client.new(params[:client])
     @prevent = "1"
     @client.create_user_id = current_user.id
-
     if @client.valid?
       ActiveRecord::Base.transaction do
         @client.save!
         if params[:users_id]
           if !@client.update_client_users(params)
-            flash[:error] = I18n.t("client.flash_messages.success_error")
+            @error = I18n.t("client.flash_messages.success_error")
             raise ActiveRecord::Rollback
           end
         end
       end
-      if flash[:error]
-        render :new
-      else
-        flash[:error] = I18n.t("client.flash_messages.success")
-        redirect_to new_client_path
+      unless @error
+        @error = I18n.t("client.flash_messages.success")
       end
-    else
-      render :new
+    end
+    respond_to do |format|
+      format.js
     end
   end
 
@@ -78,19 +75,17 @@ class ClientsController < ApplicationController
         @client.save!
         if params[:users_id]
           if !@client.update_client_users(params)
-            flash[:error] = I18n.t("client.flash_messages.update_error")
+            @error = I18n.t("client.flash_messages.update_error")
             raise ActiveRecord::Rollback
           end
         end
       end
-      if flash[:error]
-        render :edit
-      else
-        flash[:error] = I18n.t("client.flash_messages.update")
-        redirect_to clients_path(client_id: @client.id)
+      unless @error
+        @error = I18n.t("client.flash_messages.update")
       end
-    else
-      render :edit
+    end
+    respond_to do |format|
+      format.js
     end
   end
 

@@ -50,9 +50,14 @@ class ConversionsController < ApplicationController
           params[:cv].each do | cv |
             if cv.to_i > 0 
               @cv_list[idx] = {"id" => cv, "name" => conversions.find(cv.to_i).conversion_name}
-              @cv_kind_list[idx] = {"id" => params[:cv_kind][idx], "name" => I18n.t(Settings.conversion_kind[params[:cv_kind][idx].to_i])}
-              idx += 1
+              
+              @cv_kind_list[idx] = {"id" => params[:cv_kind][idx], "name" => t(Settings.conversion_kind[params[:cv_kind][idx].to_i])}
+            else
+              @cv_list[idx] = {"id" => '', "name" => ''}
+              
+              @cv_kind_list[idx] = {"id" => '', "name" => ''}
             end
+            idx += 1
           end
           @op_list = params[:op]
         end 
