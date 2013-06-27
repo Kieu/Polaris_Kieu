@@ -1,7 +1,8 @@
 class Client < ActiveRecord::Base
   include ApplicationHelper
-  VALID_PHONE_NUMBER_REGEX = /^[0-9\-+\(\)]{,15}$/
-  VALID_ROMAN_NAME_REGEX = /^[A-Z_\ \~\!\@\#\$\%\^\&\*\(\)\_\-\+\=\<\,\>\.\;\:\"\'\{\}|\\\?\?\/a-z][A-Za-z_\ \~\!\@\#\$\%\^\&\*\(\)\_\-\+\=\<\,\>\.\;\:\"\'\{\}|\\\?\?\/\-0-9]*$/
+  VALID_PHONE_NUMBER_REGEX = /^\+?[0-9]{,15}$/
+  # VALID_ROMAN_NAME_REGEX = /^[A-Z_\ \~\!\@\#\$\%\^\&\*\(\)\_\-\+\=\<\,\>\.\;\:\"\'\{\}|\\\?\?\/a-z][A-Za-z_\ \~\!\@\#\$\%\^\&\*\(\)\_\-\+\=\<\,\>\.\;\:\"\'\{\}|\\\?\?\/\-0-9]*$/
+  VALID_ROMAN_NAME_REGEX = /^[\s!-~]+$/
   attr_accessible :client_name, :roman_name, :tel, :department_name,
     :contract_flg, :contract_type, :person_charge, :person_sale,
     :create_user_id, :update_user_id, :del_flg

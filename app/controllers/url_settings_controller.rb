@@ -7,7 +7,7 @@ class UrlSettingsController < ApplicationController
   before_filter :must_super_agency
 
 	def index
-    if !params[:promotion_id] || !params[:account_id]
+    if !params[:promotion_id] || !params[:account_id] || (current_user.role.id == Settings.role.CLIENT)
       render file: 'public/404.html', status: :not_found
       return
     end
@@ -90,16 +90,29 @@ class UrlSettingsController < ApplicationController
       comment = url['comment']
       click_price = url['click_unit']
       submit_url = "<div align='left' id='url_#{url['redirect_url_id']}'>" + Settings.DOMAIN_SUBMIT_URL + "mpv=#{url['mpv']}" + "&cid=#{client_id}&pid=#{promotion_id} </div>"
-      submit_url += "<div align='right'><a href='#' data-clipboard-target='url_#{url['redirect_url_id']}' class='copy_button' ><img src='/assets/btn_copy2.gif' /></a></div>"
+      submit_url += "<div align='right'><a href='javascript:void(0)'><img src='/assets/btn_copy2.gif' data-clipboard-target='url_#{url['redirect_url_id']}' class='copy_button' /></a></div>"
       if url['creative_type'] == '1'
         creative = '<img src=' + "/assets/creative/#{image}" + ' width="150" height="40" />'
       else
         creative = url['creative_text']
       end
-      
-      rows << { id: url['redirect_url_id'], cell: {edit_button: edit_button, ad_id: url['ad_id'], campaign_name: url['campaign_name'],
-               group_name: url['group_name'], ad_name: url['ad_name'], creative: creative, url: submit_url,
-               delete_check: delete_check, note: comment, click_price: click_price, last_modified: url['last_modified'] }}
+      ad_id = url['ad_id']
+      ad_id = "<div title='#{ad_id}'>" + short_ja_name(ad_id) + "</div>"
+      campaign_name = url['campaign_name']
+      campaign_name = "<div title='#{campaign_name}'>" + short_ja_name(campaign_name) + "</div>"
+      group_name = url['group_name']
+      group_name = "<div title='#{group_name}'>" + short_ja_name(group_name) + "</div>"
+      ad_name = url['ad_name']
+      ad_name = "<div title='#{ad_name}'>" + short_ja_name(ad_name) + "</div>"
+      last_modified = url['last_modified']
+      comment = "<div title='#{comment}'>" + short_ja_name(comment.to_s) + "</div>"
+      click_price = "<div title='#{click_price}'>" + short_ja_name(click_price.to_s) + "</div>"
+      rows << { id: url['redirect_url_id'], cell: {edit_button: edit_button,
+        ad_id: ad_id, campaign_name: campaign_name,
+        group_name: group_name, ad_name: ad_name,
+        creative: creative, url: submit_url,
+        delete_check: delete_check, note: comment,
+        click_price: click_price, last_modified: last_modified}}
     end
 
     rows

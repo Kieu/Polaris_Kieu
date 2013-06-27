@@ -1,6 +1,6 @@
 <tr>
   <th><%= f.label t("account.sync_account_id") %></th>
-  <td style="width:270px;"><%= f.radio_button :sync_flg, 0, checked: true, onclick: "active_sync_box();", class: "prevent_change" %> <%= I18n.t("account.synchronism") %>
+  <td style="width:330px;"><%= f.radio_button :sync_flg, 0, checked: true, onclick: "active_sync_box();", class: "prevent_change" %> <%= I18n.t("account.synchronism") %>
 				            <%= f.radio_button :sync_flg, 1, onclick: "disable_sync_box();", class: "prevent_change" %> <%= I18n.t("account.fractured") %></td>
 </tr>
 <tr>
@@ -11,7 +11,7 @@
 </tr>
 <tr>
 <th></th>
-<td><%= f.password_field :sync_account_pw, maxlength: 255, value: @account.sync_account_pw, style: "width: 270px", placeholder: " PW: ", class: "prevent_change" %>
+<td><%= f.password_field :sync_account_pw, maxlength: 255, value: @account.sync_account_pw, style: "width: 270px", placeholder: " PW: ", class: "prevent_change", autocomplete: "off" %>
 <script type="text/javascript">
 $(function(){
 	prevent_change = "<%= @prevent %>";

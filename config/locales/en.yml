@@ -688,9 +688,10 @@ en:
   conversion:
     title:
       list: "Conversions Setting"
-      edit: "Edit Conversion"
-      add: "Add Conversion"
-    crumb_add: "Conversion Registration"
+      edit: "Conversion Edit"
+      add: "Conversion Add"
+      get_tag: "Conversion Get Tag"
+    crumb_add: "Conversion Add"
     crumb_edit: "Conversion Edit"
     tag_acquisition: "Get Tag"
     conversion_setting: "Conversion setting"
@@ -717,7 +718,7 @@ en:
           label:  "Conversion mode: "
           all: " All"
           facebook: " Only Facebook"
-          other: " Other"
+          other: " Others"
         duplicate:
           label: "Duplicate: "
           label1: " Yes"
@@ -943,12 +944,14 @@ en:
     last_modified_check: "last modified"
     click_price_check: "click unit"
     upload_type: 
-      insert: "Append (new rules)"
+      insert: " Add (new)"
       update: "Update (existing)"
     show_option:
       table: "Table"
       display_item: "Display items"
       select_all: "Select All"
+      complete_alt: "OK"
+      cancel_alt: "Cancel"
     redirect_url1: "redirect url 1"
     name1: "name 1"
     rate1: "rate 1"

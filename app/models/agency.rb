@@ -2,8 +2,8 @@ class Agency < ActiveRecord::Base
   attr_accessible :agency_name, :roman_name
   include ApplicationHelper
 
-  VALID_ROMAN_NAME_REGEX = /^[A-Z_\ \~\!\@\#\$\%\^\&\*\(\)\_\-\+\=\<\,\>\.\;\:\"\'\{\}|\\\?\?\/a-z][A-Za-z_\ \~\!\@\#\$\%\^\&\*\(\)\_\-\+\=\<\,\>\.\;\:\"\'\{\}|\\\?\?\/\-0-9]*$/
-  
+  # VALID_ROMAN_NAME_REGEX = /^[A-Z_\ \~\!\@\#\$\%\^\&\*\(\)\_\-\+\=\<\,\>\.\;\:\"\'\{\}|\\\?\?\/a-z][A-Za-z_\ \~\!\@\#\$\%\^\&\*\(\)\_\-\+\=\<\,\>\.\;\:\"\'\{\}|\\\?\?\/\-0-9]*$/
+  VALID_ROMAN_NAME_REGEX = /^[\s!-~]+$/
   has_many :promotions
 
   validates :agency_name, presence: true, uniqueness: {case_sensitive: false},

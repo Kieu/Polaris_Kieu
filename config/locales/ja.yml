@@ -622,7 +622,7 @@ ja:
     privacy_policy: "プライバシーポリシー"
     porporate_information: "企業情報"
   login:
-    title: "ログイン"
+    title: "ログインページ"
     split: "。"
     email: "メールアドレス"
     pw: "パスワード"
@@ -855,7 +855,7 @@ ja:
     error_log_view: エラーログ表示
   promotion:
     title:
-      list: "プロモーションリスト"
+      list: "プロモーション"
       edit: "プロモーション編集"
       add: "プロモーション登録"
     media: "メディア"
@@ -968,6 +968,8 @@ ja:
       table: "テーブル"
       display_item: "表示項目"
       select_all: "全て追加する"
+      complete_alt: "完成"
+      cancel_alt: "キャンセル"
     redirect_url1: "リンク先1"
     name1: "タイトル1"
     rate1: "遷移割合1"

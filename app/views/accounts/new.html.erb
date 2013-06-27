@@ -12,9 +12,9 @@ $(function(){
 <%= stylesheet_link_tag "css/accounts" %>
 <ul class="contentNavi">
   <div class = "crumb">
-    <li class="pre"><%= link_to short_ja_name(@promotion.client.client_name), clients_path(client_id: @promotion.client.id ) %></li>
+    <li class="pre"><%= link_to short_ja_name(@promotion.client.client_name), clients_path(client_id: @promotion.client.id ), title: @promotion.client.client_name %></li>
     <li>&gt;</li>
-    <li class="pre"><%= link_to short_ja_name(@promotion.promotion_name), promotions_path(client_id: @promotion.client.id, promotion_id: @promotion.id) %>
+    <li class="pre"><%= link_to short_ja_name(@promotion.promotion_name), promotions_path(client_id: @promotion.client.id, promotion_id: @promotion.id), title: @promotion.promotion_name %>
       <input type="hidden" name="promotion_id" value="<%= @promotion.id %>">
     </li>
     <li>&gt;</li>
@@ -70,7 +70,7 @@ $(function(){
         <tr>
         <th></th>
         <td colspan="2">
-        	<%= f.password_field :sync_account_pw, maxlength: 255, style: "width: 270px", placeholder: " PW: ", class: "prevent_change" %>
+        	<%= f.password_field :sync_account_pw, maxlength: 255, style: "width: 270px", placeholder: " PW: ", class: "prevent_change", autocomplete: "off" %>
         </tr> 
       </tbody>
       </table>
@@ -135,6 +135,11 @@ jQuery(document).ready(function($) {
     } else {
     	$("#account_sync_box").html("");
     }
+    if ($("#account_sync_flg_1").is(':checked')) {
+    
+    $("#account_sync_account_id").attr('disabled','disabled');
+    $("#account_sync_account_pw").attr('disabled','disabled');
+  } 
 });
 
 	
