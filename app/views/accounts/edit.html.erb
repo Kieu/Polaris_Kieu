@@ -45,11 +45,11 @@ $(function(){
         </tr>
         <tr>
           <th ><%= f.label t("account.account_name") %></th>
-          <td colspan="2"> <%= f.text_field :account_name, maxlength: 255, style: "width: 270px", class: "prevent_change" %>  </td>
+          <td colspan="2"> <%= f.text_field :account_name, maxlength: 255, style: "width: 280px", class: "prevent_change" %>  </td>
         </tr>
         <tr>
           <th><%= f.label t("account.roman_name") %></th>
-          <td colspan="2"><%= f.text_field :roman_name, maxlength: 255, style: "width: 270px", class: "prevent_change" %></td>
+          <td colspan="2"><%= f.text_field :roman_name, maxlength: 255, style: "width: 280px", class: "prevent_change" %></td>
         </tr>
         <tr>
           <th><%= f.label I18n.t("account.margin") %></th>
@@ -65,13 +65,13 @@ $(function(){
         <tr>
           <th></th>
           <td colspan="2" >
-            <%= f.text_field :sync_account_id, maxlength: 255, style: "width: 270px", placeholder: " ID: ", class: "prevent_change" %>
+            <%= f.text_field :sync_account_id, maxlength: 255, style: "width: 280px", placeholder: " ID: ", class: "prevent_change" %>
           </td>
         </tr>
         <tr>
         <th></th>
         <td colspan="2">
-        	<%= f.password_field :sync_account_pw, maxlength: 255, value: @account.sync_account_pw, style: "width: 270px", placeholder: " PW: ", class: "prevent_change", autocomplete: "off" %>
+        	<%= f.password_field :sync_account_pw, maxlength: 255, value: @account.sync_account_pw, style: "width: 280px", placeholder: " PW: ", class: "prevent_change", autocomplete: "off" %>
         </tr> 
         <tbody>
       </table>
