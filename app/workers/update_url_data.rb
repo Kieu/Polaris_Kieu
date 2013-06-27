@@ -140,6 +140,7 @@ class UpdateUrlData
                                                      array_ad_id_insert, array_ad_name_insert, 
                                                      array_creative_id, line_num, array_double_data,
                                                      mpv, client_id, promotion_id, lang, account_id
+
              # start insert data to DB
              if error_num == 0
                num += 1
@@ -158,16 +159,20 @@ class UpdateUrlData
                                 and mpv = '#{current_mpv}' 
 
                                 "
+
                # insert redirect infomation
-               insert_redirect_info_str += "
+               insert_redirect_info_str = "
                                             update redirect_informations set creative_id = #{row[CREATIVE_ID]},
                                                                       comment = '#{row[COMMENT]}',
                                                                       click_unit = #{row[CLICK_UNIT]},
-                                                                      updated_at = #{updated_time}
+                                                                      updated_at = '#{updated_time}'
                                                               where mpv = '#{current_mpv}'
                                                                       ;
 
                                             "
+
+               result = ActiveRecord::Base.connection.execute(insert_redirect_info_str)
+
                # insert url
                insert_redirect_url_str += "#{comma_sql}('#{current_mpv}', '#{row[REDIRECT_URL1]}', #{row[RATE1]}, '#{row[NAME1]}',
                                              '#{current_time}', #{user_id} )
@@ -208,7 +213,6 @@ class UpdateUrlData
 
                 
                if num == Settings.RECORD_NUM_PER_INSERT || (row_number == 0)
-                 result = ActiveRecord::Base.connection.execute(insert_redirect_info_str)
                  # delete all redirect URL before insert
                  result = ActiveRecord::Base.connection.execute(delete_url_sql)
                  result = ActiveRecord::Base.connection.execute(insert_redirect_url_str)
@@ -277,7 +281,7 @@ class UpdateUrlData
   end
 
   def make_header_insert_sql type
-    update_str = " , update_at, update_user_id "
+    update_str = " , updated_at, update_user_id "
     insert_redirect_url_str = "
                   insert into redirect_urls 
                    (mpv, url, rate, name #{update_str} )
@@ -286,7 +290,7 @@ class UpdateUrlData
                   "
     
     delete_url_sql = "
-                     delete * from redirect_urls where
+                     delete from redirect_urls where
                      1 = 1
                      "
     return insert_redirect_url_str, delete_url_sql
@@ -369,19 +373,17 @@ class UpdateUrlData
      end
 
      # AD_NAME
+     ad_id_identifier = ""
      row[AD_NAME] = row[AD_NAME].to_s.strip
      if row[AD_NAME] != ""
-        if array_ad_name_insert.count > 0 && array_ad_name_insert.include?(row[AD_NAME])
-          error_num += 1
-          error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.ad_name_already_used") + "#{enter_key}")
-        end
-
         # check ad existed or not
         if array_campaigns.count > 0 && array_groups.count > 0
           array_ads = DisplayAd.where(" name = '#{row[AD_NAME]}' and display_group_id = #{display_group_id}").select('id')
           if array_ads.count == 0
             error_num += 1
             error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.camp_group_ad_must_match") + "#{enter_key}")
+          else
+            ad_id_identifier = array_ads.first['id'].to_s
           end
         end
         
@@ -394,17 +396,24 @@ class UpdateUrlData
 
      # check submit URL
      # make current_mpv
-     current_ad_id = DisplayAd.where(identifier: row[AD_ID]).select('id').first['id']
-     current_mpv = mpv + "." + current_ad_id.to_s(36)
+     if ad_id_identifier != ""
+       if row[AD_ID] == ""
+         current_ad_id = DisplayAd.where(identifier: ad_id_identifier).select('id').first['id']
+         current_mpv = mpv + "." + current_ad_id.to_s(36)
 
-     # make current submit_url
-     current_submit_url = Settings.DOMAIN_SUBMIT_URL + "mpv=#{current_mpv}&plrs_cid=#{client_id}&plrs_pid=#{promotion_id}"
-     row[SUBMIT_URL] = row[SUBMIT_URL].to_s.strip
-     if (row[SUBMIT_URL] != "") && (row[SUBMIT_URL] != current_submit_url)
-       error_num += 1
-       error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.camp_group_ad_submit_must_match") + "#{enter_key}")
+         # make current submit_url
+         current_submit_url = Settings.DOMAIN_SUBMIT_URL + "mpv=#{current_mpv}&plrs_cid=#{client_id}&plrs_pid=#{promotion_id}"
+         row[SUBMIT_URL] = row[SUBMIT_URL].to_s.strip
+         if (row[SUBMIT_URL] != "") && (row[SUBMIT_URL] != current_submit_url)
+           error_num += 1
+           error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.camp_group_ad_submit_must_match") + "#{enter_key}")
+         end
+       elsif row[AD_ID] != "" && row[AD_ID] != ad_id_identifier
+         error_num += 1
+         error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.ad_identifier_must_match") + "#{enter_key}")
+       end
      end
-
+     
      # check double [Campaign name] [group name] [ad name]
      key_str = "#{row[CAMPAIGN_NAME]}_#{row[GROUP_NAME]}_#{row[AD_NAME]}"
      
