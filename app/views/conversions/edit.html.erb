@@ -6,6 +6,12 @@
 	var jQueryOriginal = jQuery || jQueryTemp;
 	window.jQuery = window.$ = jQueryTemp;
 	console.log('Script using second: ', jQuery.fn.jquery);
+  $(function(){
+    prevent_change = "<%= @prevent %>";
+    $(".prevent_change").change(function(){
+      prevent_change = "1"
+    })
+  })
 </script>
 <%= javascript_include_tag 'js/jquery.chili-2.2'%>
 <%= javascript_include_tag 'js/jquery.bgiframe'%>	
