@@ -160,12 +160,12 @@ class UpdateUrlData
                                             update redirect_informations set creative_id = #{row[CREATIVE_ID]},
                                                                       comment = '#{row[COMMENT]}',
                                                                       click_unit = #{row[CLICK_UNIT]},
-                                                                      updated_at = '#{updated_time}'
+                                                                      updated_at = '#{current_time}'
                                                               where mpv = '#{current_mpv}'
                                                                       ;
 
                                             "
-
+               
                result = ActiveRecord::Base.connection.execute(insert_redirect_info_str)
 
                # insert url
@@ -392,10 +392,9 @@ class UpdateUrlData
      # check submit URL
      # make current_mpv
      if ad_id_identifier != ""
+       current_ad_id = DisplayAd.where(identifier: ad_id_identifier).select('id').first['id']
+       current_mpv = mpv + "." + current_ad_id.to_s(36)
        if row[AD_ID] == ""
-         current_ad_id = DisplayAd.where(identifier: ad_id_identifier).select('id').first['id']
-         current_mpv = mpv + "." + current_ad_id.to_s(36)
-
          # make current submit_url
          current_submit_url = Settings.DOMAIN_SUBMIT_URL + "mpv=#{current_mpv}&plrs_cid=#{client_id}&plrs_pid=#{promotion_id}"
          row[SUBMIT_URL] = row[SUBMIT_URL].to_s.strip
