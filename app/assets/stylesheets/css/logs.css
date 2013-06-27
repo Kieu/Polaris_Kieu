@@ -326,7 +326,7 @@ table.user_add tbody td {
 		color: #F63;
 	}
 .w_box {
-	min-width: 1200px;
+	/*min-width: 1200px;*/
 }	
 
 input#datepicker {
