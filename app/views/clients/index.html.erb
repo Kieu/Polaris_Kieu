@@ -13,7 +13,7 @@
     <% content_for :sidebar do %>
         <%= render partial: "layouts/sidebar", locals: {object: @clients} %>
     <% end %>
-    <p class="h2" id="client_name"><%= short_ja_name(@client.client_name) %></p>
+    <div title="<%= @client.client_name %>"><p class="h2" id="client_name"><%= short_ja_name(@client.client_name) %></p></div>
     <% if current_user.super? %>
         <img id='create_promotion' src="/assets/btn_promotion_regist.gif" onclick="create()" style="display: none">
     <% end %>
