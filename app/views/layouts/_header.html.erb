@@ -3,7 +3,7 @@
     $(document).ready(function () {
         <%if signed_in? %>
 
-        $("#inprogress .entrydate_box_notify > li > a").live(function()
+        $("#inprogress .entrydate_box_notify > li > a").live('click',function()
         {
             $(this).parent().remove();
         });
