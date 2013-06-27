@@ -21,7 +21,7 @@ $(function(){
     $('#conversions_list').niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
     $("#promotion_tables").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
     $("#scroll_flexigrid").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
-    $("#cvlogs").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
+
    // $("#promotions_scroll").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px",horizrailenabled:"false"});
 
 });

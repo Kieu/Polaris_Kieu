@@ -39,7 +39,7 @@
 .ui-tabs-nav a {
     margin: 1px 0 0; /* position: relative makes opacity fail for disabled tab in IE */
     padding-left: 0;
-    color: #929292;
+    color: white;
     font-weight: bold;
     line-height: 1.2;
     text-align: center;
