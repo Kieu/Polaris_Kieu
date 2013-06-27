@@ -28,10 +28,10 @@ en:
     unique_definition: ["Only once", "Limitless", "Once a day", "Once every 7 days", "Once every 28 days", "Once a month"]
   error_message_url_import:
     ad_name_must_exist: "Ad name has not existed."
-    ad_identifier_must_match: "Ad Id and Ad name not match together."
+    ad_identifier_must_match: "Ad Id and Ad name are not matched."
     group_name_must_exist: "Group name has not existed."
     campaign_name_must_exist: "Campaign name has not existed."
-    camp_group_ad_must_match: "Campaign name, Group name, Ad name not match together."
+    camp_group_ad_must_match: "Campaign name, Group name, Ad name are not matched."
     camp_group_ad_submit_must_match: "Campaing name, Group name, Ad name, measuring URL cannot be changed."
     not_input: "Please choose file upload."
     volumn_over: "File's volumn must less than 300MB."
