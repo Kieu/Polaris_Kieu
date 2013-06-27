@@ -28,6 +28,7 @@ en:
     unique_definition: ["Only once", "Limitless", "Once a day", "Once every 7 days", "Once every 28 days", "Once a month"]
   error_message_url_import:
     ad_name_must_exist: "Ad name has not existed."
+    ad_identifier_must_match: "Ad Id and Ad name not match together."
     group_name_must_exist: "Group name has not existed."
     campaign_name_must_exist: "Campaign name has not existed."
     camp_group_ad_must_match: "Campaign name, Group name, Ad name not match together."

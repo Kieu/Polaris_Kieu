@@ -448,11 +448,6 @@ class ImportUrlData
         error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.ad_name_too_long") + "#{enter_key}")
       end
 
-      if array_ad_name_insert.count > 0 && array_ad_name_insert.include?(row[AD_NAME])
-        error_num += 1
-        error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.ad_name_already_used") + "#{enter_key}")
-      end
-
       if !insert_group_flg
         array_ads = DisplayAd.where(" name = '#{row[AD_NAME]}' and display_group_id = #{display_group_id}").select('id')
         if array_ads.count > 0
