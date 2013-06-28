@@ -15,7 +15,7 @@
     $(document).on('click', "#inprogress a",function()
     {
         alert('test');
-        $(this).parent().remove();
+        $(this).parent().parent().remove();
     });
 
     $(document).on('click', "#close_notify", function(){
