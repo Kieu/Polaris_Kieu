@@ -199,7 +199,10 @@ class ConversionPromotionLogsController < ApplicationController
                                    THEN SUBSTRING(account_name, 1, #{Settings.MAX_JA_LENGTH_NAME})
                                     ELSE  account_name END as account_name ")
     else
-      render json: Account.all
+      render json: Account.where(promotion_id: params[:promotion_id]).order(:roman_name).select("id")
+    .select("CASE WHEN LENGTH(account_name) > #{Settings.MAX_JA_LENGTH_NAME}
+                                   THEN SUBSTRING(account_name, 1, #{Settings.MAX_JA_LENGTH_NAME})
+                                    ELSE  account_name END as account_name ")
     end
 
   end
