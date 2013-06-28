@@ -3,11 +3,6 @@
     $(document).ready(function () {
         <%if signed_in? %>
 
-        $(document).on('click', "#inprogress > li > a",function()
-        {
-            alert('test');
-            $(this).parent().remove();
-        });
 
         var first_time = true;
         order = 0;
