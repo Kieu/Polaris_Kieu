@@ -1058,7 +1058,7 @@ en:
     referer: 'Referer'
     mark: 'Mark'
     ok_ng: 'OK/NG'
-    error_code: 'Error code'
+    error_code: 'Error messages'
   notification:
     inprogress: 'Inprogress'
     upload: 'Upload List'
