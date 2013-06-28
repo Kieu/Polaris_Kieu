@@ -2,11 +2,19 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
   protect_from_forgery
   unless  Rails.application.config.consider_all_requests_local
-    rescue_from Exception, with: :render_500
-    rescue_from ActionController::RoutingError, with: :render_404
-    rescue_from ActionController::UnknownController, with: :render_404
-    rescue_from ActionController::UnknownAction, with: :render_404
-    rescue_from ActiveRecord::RecordNotFound, with: :render_404
+    if ActionController::RoutingError 
+      rescue_from ActionController::RoutingError, with: :render_404
+    elsif ActionController::UnknownController
+      rescue_from ActionController::UnknownController, with: :render_404
+    elsif ActionController::UnknownAction
+      rescue_from ActionController::UnknownAction, with: :render_404
+    elsif ActiveRecord::RecordNotFound
+      rescue_from ActiveRecord::RecordNotFound, with: :render_404
+    else ActionView::MissingTemplate
+      rescue_from ActionView::MissingTemplate, with: :render_404
+    # else
+    #    # rescue_from Exception, with: :render_500
+    # end
   end
   include SessionsHelper
 
