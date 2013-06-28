@@ -127,8 +127,8 @@ describe PromotionsController do
       
       describe "post download csv" do
         before {download_csv}
-        subject {response}
-        it {should render_text "processing"}
+        subject {response.body}
+        it {should == "processing"}
       end
 
       describe "POST create" do
