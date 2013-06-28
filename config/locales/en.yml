@@ -901,7 +901,7 @@ en:
       role: "Role"
       company_name: "Company name"
   media_categories: ["Listing ad", "Display ad", "affiliate"]
-  log_track_type: ["Install", "アプリ内アクション (Action in app)"]
+  log_track_type: ["Install", "Action in app"]
   log_repeat_flg: ["New", "Repeat"]
   Listing: "Listing ads"
   Display: "Display ads"
