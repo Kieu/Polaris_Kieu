@@ -1088,3 +1088,4 @@ ja:
     inpreparation: '準備中'
     completed: '完了'
     waiting_upload: 'アップロード待機'
+    show_error: 'エラーログ'
