@@ -48,7 +48,7 @@ class ImportsController < ApplicationController
       end
 
     else
-      flash[:csv_error] << @import.errors.full_messages
+      flash[:csv_error] << @import.errors.messages[:csv]
     end
     
     redirect_to url_settings_path(promotion_id: params[:promotion_id], account_id: params[:account_id])

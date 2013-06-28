@@ -839,7 +839,7 @@ ja:
     repeat: "リピート"
     log_state: "OK/NG"
     sales: "Sales"
-    profit: "Profit"
+    profit: "利益"
     volume: "Volume"
     others: "Others"
     error_message: "エラーメッセージ"
@@ -1080,6 +1080,7 @@ ja:
     send_log: "送信ログ"
     send_date_time: "送信日時"
     error_message: "エラーメッセージ"
+    profit: "利益"
   notification:
     inprogress: '実行中'
     upload: 'アップロードリスト'

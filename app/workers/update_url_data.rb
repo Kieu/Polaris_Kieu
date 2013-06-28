@@ -161,6 +161,7 @@ class UpdateUrlData
                                                                       comment = '#{row[COMMENT]}',
                                                                       click_unit = #{row[CLICK_UNIT]},
                                                                       updated_at = NOW()
+                                                                      update_user_id = #{user_id}
                                                               where mpv = '#{current_mpv}'
                                                                       ;
 
@@ -453,7 +454,11 @@ class UpdateUrlData
     row[REDIRECT_URL1] = row[REDIRECT_URL1].to_s.strip
     if row[REDIRECT_URL1] == ""
       error_num += 1
-      error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.url_not_specified") + "1#{enter_key}")
+      if lang == 'en'
+        error.write("Line #{line_num}: URL is not specified in 1.\n")
+      else
+        error.write(" #{line_num}#{line_jp}:リンク先1にURLが指定されていません。\n")
+      end
     end
 
     #NAME1

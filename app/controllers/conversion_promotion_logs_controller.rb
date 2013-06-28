@@ -50,9 +50,10 @@ class ConversionPromotionLogsController < ApplicationController
     header_titles_csv = [I18n.t('export_conversion_logs.cv_date_time'), I18n.t('export_conversion_logs.cv_name'), I18n.t('export_conversion_logs.cv_category'), I18n.t('export_conversion_logs.tracking_type'), I18n.t('export_conversion_logs.cv_type'), I18n.t('export_conversion_logs.log_id'),
                          I18n.t('export_conversion_logs.starting_log_id'), I18n.t('export_conversion_logs.media_approval'), I18n.t('export_conversion_logs.click_name'), I18n.t('export_conversion_logs.promotion'), I18n.t('export_conversion_logs.media'), I18n.t('export_conversion_logs.account'),
                          I18n.t('export_conversion_logs.campaign'), I18n.t('export_conversion_logs.ad_group'), I18n.t('export_conversion_logs.ad_name'), I18n.t('export_conversion_logs.click_utime'), I18n.t('export_conversion_logs.click_date_time'), I18n.t('export_conversion_logs.influx_original'),
-                         I18n.t('export_conversion_logs.sales'), I18n.t('export_conversion_logs.volume'), I18n.t('export_conversion_logs.other'), I18n.t('export_conversion_logs.verify'), I18n.t('export_conversion_logs.suid'), I18n.t('export_conversion_logs.sesid'),
+                         I18n.t('export_conversion_logs.sales'),I18n.t('export_conversion_logs.profit'), I18n.t('export_conversion_logs.volume'), I18n.t('export_conversion_logs.other'), I18n.t('export_conversion_logs.verify'), I18n.t('export_conversion_logs.suid'), I18n.t('export_conversion_logs.sesid'),
                          I18n.t('export_conversion_logs.os'), I18n.t('export_conversion_logs.repeat'), I18n.t('export_conversion_logs.log_state'), I18n.t('export_conversion_logs.user_agent'), I18n.t('export_conversion_logs.remote_ip'), I18n.t('export_conversion_logs.referrer'),
                          I18n.t('export_conversion_logs.media_session_id'), I18n.t('export_conversion_logs.mark'), I18n.t('export_conversion_logs.reception_log'), I18n.t('export_conversion_logs.send_log'), I18n.t('export_conversion_logs.send_date_time'), I18n.t('export_conversion_logs.error_message')]
+    
     breadcrumb = "#{promotion.client.client_name} > #{promotion.promotion_name} > CV Logs"
     start_date = Date.strptime(params[:start_date].strip, I18n.t("time_format")).strftime("%Y%m%d")
     end_date = Date.strptime(params[:end_date].strip, I18n.t("time_format")).strftime("%Y%m%d")
@@ -163,6 +164,11 @@ class ConversionPromotionLogsController < ApplicationController
       else
         sales_unit = ""
       end 
+      if conversion_log.profit && conversion_log.profit.to_i > 0
+        profit = number_to_currency conversion_log.profit, unit: I18n.t("cv_logs.currency"), seperator: ",", delimiter: ""
+      else
+        profit = ""
+      end 
       rows << {id: conversion_log.id, cell: 
         {conversion_utime: "<div title='#{Time.at(conversion_log.conversion_utime).strftime("%Y/%m/%d %H:%M:%S")}'>" + Time.at(conversion_log.conversion_utime).strftime("%Y/%m/%d %H:%M:%S") + "</div>",
          conversion_id: "<div title='#{conversions.find_by_id(conversion_log.conversion_id).conversion_name}'>" + conversions.find_by_id(conversion_log.conversion_id).conversion_name + "</div>",
@@ -186,7 +192,7 @@ class ConversionPromotionLogsController < ApplicationController
          others: (conversion_log.others) ? "<div title='#{conversion_log.others}'>" + conversion_log.others + "</div>" : '',
          error_code: "<div title='#{I18n.t("log_cv_error_messages")[conversion_log.error_code.to_i]}'>" + I18n.t("log_cv_error_messages")[conversion_log.error_code.to_i] + "</div>",
          media_category_id: conversion_log.media_category_id,
-         profit: conversion_log.profit
+         profit: profit
       }}
     end
     rows
