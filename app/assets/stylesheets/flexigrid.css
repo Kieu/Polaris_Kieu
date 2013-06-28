@@ -245,8 +245,6 @@
     border:1px solid #ccc;
     border-top:0;
     background:#fff;
-    overflow-x:hidden;
-    overflow-y:hidden;
     position:relative
 }
 .flexigrid div.hGrip {
