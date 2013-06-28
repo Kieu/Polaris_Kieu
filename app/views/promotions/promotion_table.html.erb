@@ -11,7 +11,7 @@
 	<% end %>
 	<% @conversions.each do |conversion|%>
 		<% colspan = cal_col_cv(conversion.id) %>
-		<%= content_tag(:td, conversion.conversion_name, colspan: colspan, class: "table_header") if colspan > 0 %>
+		<%= content_tag(:td, short_ja_name(conversion.conversion_name), colspan: colspan, class: "table_header") if colspan > 0 %>
 	<% end %>
 </tr>
 <tr>
