@@ -386,7 +386,7 @@ class ImportUrlData
         error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.ad_id_already_used") + "#{enter_key}")
       end
 
-      if is_numeric? row[AD_ID] != true
+      if !is_numeric? row[AD_ID]
         error_num += 1
         error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.ad_id_invalid") + "#{enter_key}")
       end
