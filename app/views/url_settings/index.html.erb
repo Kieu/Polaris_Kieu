@@ -87,11 +87,11 @@ $(function() {
 	    url: "<%= download_csv_url_settings_path %>",
 	    data: {"promotion_id" : "<%= @promotion_id if @promotion_id %>",
 	           "account_id" : "<%= @account_id if @account_id %>",
-             "media_id" : "<%= @account_id if @media_id %>",
-             "client_name" : "<%= @client_name %>",
-             "promotion_name" : "<%= @promotion_name %>",
-             "media_name" : "<%= @media_name %>",
-             "account_name" : "<%= @account_name %>",
+             "media_id" : "<%= @media_id if @media_id %>",
+             "client_name" : "<%= short_ja_name(@client_name) %>",
+             "promotion_name" : "<%= short_ja_name(@promotion_name) %>",
+             "media_name" : "<%= short_ja_name(@media_name) %>",
+             "account_name" : "<%= short_ja_name(@account_name) %>",
 	           "start_date": start_date,
                "end_date": end_date
 	           },
@@ -218,7 +218,7 @@ $(function() {
             <input type="hidden" name="media_id" value="<%= @media_id %>"/>
             <input type="hidden" name="client_id" value="<%= @client_id %>"/>
             <input type="hidden" name="media_category_id" value="<%= @media_category_id %>"/>
-            <input type="hidden" name="breadcrumb" value="<%= @client_name + '>' + @promotion_name + '>' + @media_name + '>' + @account_name %>"/>
+            <input type="hidden" name="breadcrumb" value="<%= short_ja_name(@client_name) + '>' + short_ja_name(@promotion_name) + '>' + short_ja_name(@media_name) + '>' + short_ja_name(@account_name) %>"/>
             <table class="file_upload">
                 <tr>
                   <td><a href="javascript:void(0)" id="upload_button"> 

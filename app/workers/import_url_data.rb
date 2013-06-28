@@ -159,7 +159,6 @@ class ImportUrlData
                 campaign_obj.promotion_id = promotion_id
                 campaign_obj.account_id = account_id
                 campaign_obj.create_user_id = user_id
-                campaign_obj.created_at = current_time
                 campaign_obj.save!
 
                 display_campaign_id = campaign_obj.id
@@ -171,7 +170,6 @@ class ImportUrlData
                 group_obj.account_id = account_id
                 group_obj.display_campaign_id = campaign_obj.id
                 group_obj.create_user_id = user_id
-                group_obj.created_at = current_time
                 group_obj.save!
 
                 display_group_id = group_obj.id
@@ -192,7 +190,6 @@ class ImportUrlData
               ad_obj.display_campaign_id = display_campaign_id
               ad_obj.display_group_id = display_group_id
               ad_obj.create_user_id = user_id
-              ad_obj.created_at = current_time
               ad_obj.save!
 
               if row[AD_ID] == ""
@@ -205,34 +202,34 @@ class ImportUrlData
               # insert redirect infomation
               insert_redirect_info_str += "#{comma_sql} ('#{current_mpv}', #{client_id}, #{promotion_id}, #{media_category_id},
                                            #{media_id}, #{account_id}, #{display_campaign_id}, #{display_group_id}, #{ad_obj.id}, #{row[CREATIVE_ID]},
-                                           #{row[CLICK_UNIT]}, '#{row[COMMENT]}', '#{current_time}', #{user_id} )
+                                           #{row[CLICK_UNIT]}, '#{row[COMMENT]}', NOW(), #{user_id} )
 
               "
 
               # insert url
               insert_redirect_url_str += "#{comma_sql}('#{current_mpv}', '#{row[REDIRECT_URL1]}', #{row[RATE1]}, '#{row[NAME1]}',
-                                             '#{current_time}', #{user_id} ) "
+                                             NOW(), #{user_id} ) "
               if row[REDIRECT_URL2] != ""
                 insert_redirect_url_str += " , ('#{current_mpv}', '#{row[REDIRECT_URL2]}', #{row[RATE2]}, '#{row[NAME2]}',
-                                             '#{current_time}', #{user_id} ) "
+                                             NOW(), #{user_id} ) "
                 num += 1
               end
 
               if row[REDIRECT_URL3] != ""
                 insert_redirect_url_str += " , ('#{current_mpv}', '#{row[REDIRECT_URL3]}', #{row[RATE3]}, '#{row[NAME3]}',
-                                             '#{current_time}', #{user_id} ) "
+                                             NOW(), #{user_id} ) "
                 num += 1
               end
 
               if row[REDIRECT_URL4] != ""
                 insert_redirect_url_str += " , ('#{current_mpv}', '#{row[REDIRECT_URL4]}', #{row[RATE4]}, '#{row[NAME4]}',
-                                             '#{current_time}', #{user_id} )  "
+                                             NOW(), #{user_id} )  "
                 num += 1
               end
 
               if row[REDIRECT_URL5] != ""
                 insert_redirect_url_str += " , ('#{current_mpv}', '#{row[REDIRECT_URL5]}', #{row[RATE5]}, '#{row[NAME5]}',
-                                             '#{current_time}', #{user_id} ) "
+                                             NOW(), #{user_id} ) "
                 num += 1
               end
               
@@ -386,7 +383,7 @@ class ImportUrlData
         error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.ad_id_already_used") + "#{enter_key}")
       end
 
-      if is_numeric? row[AD_ID] != true
+      if !is_numeric? row[AD_ID]
         error_num += 1
         error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.ad_id_invalid") + "#{enter_key}")
       end
@@ -528,7 +525,7 @@ class ImportUrlData
         if lang == 'en'
           error.write("Line #{line_num}: Title 1 needs to be less than 255 letters.\n")
         else
-          error.write("#{line_num}#{line_jp}:タイトル1は文字数の上限255文字を超えています。\n")
+          error.write(" #{line_num}#{line_jp}:タイトル1は文字数の上限255文字を超えています。\n")
         end
       end
     else
@@ -536,7 +533,7 @@ class ImportUrlData
       if lang == 'en'
         error.write("Line #{line_num}: Title 1 is not typed.\n")
       else
-        error.write("#{line_num}#{line_jp}:タイトル1が記入されておりません。\n")
+        error.write(" #{line_num}#{line_jp}:タイトル1が記入されておりません。\n")
       end
     end
 
@@ -548,7 +545,7 @@ class ImportUrlData
         if lang == 'en'
           error.write("Line #{line_num}: Please type Transition rate1 with half-width characters. \n")
         else
-          error.write("#{line_num}#{line_jp}:遷移割合1は半角数字で入力してください。\n")
+          error.write(" #{line_num}#{line_jp}:遷移割合1は半角数字で入力してください。\n")
         end
         
       end
@@ -557,7 +554,7 @@ class ImportUrlData
       if lang == 'en'
         error.write("Line #{line_num}: RATE 1 is not typed.\n")
       else
-        error.write("#{line_num}#{line_jp}:遷移割合1が記入されておりません。\n")
+        error.write(" #{line_num}#{line_jp}:遷移割合1が記入されておりません。\n")
       end
       
     end
@@ -573,7 +570,7 @@ class ImportUrlData
         if lang == 'en'
           error.write("Line #{line_num}: Title 2 needs to be less than 255 letters.\n")
         else
-          error.write("#{line_num}#{line_jp}:タイトル2は文字数の上限255文字を超えています。\n")
+          error.write(" #{line_num}#{line_jp}:タイトル2は文字数の上限255文字を超えています。\n")
         end
       end
     end
@@ -586,7 +583,7 @@ class ImportUrlData
         if lang == 'en'
           error.write("Line #{line_num}: Please type Transition rate2 with half-width characters.\n")
         else
-          error.write("#{line_num}#{line_jp}:遷移割合2は半角数字で入力してください。\n")
+          error.write(" #{line_num}#{line_jp}:遷移割合2は半角数字で入力してください。\n")
         end
       end
     end
@@ -597,7 +594,7 @@ class ImportUrlData
       if lang == 'en'
         error.write("Line #{line_num}: REDIRECT_URL2, NAME2, RATE2 have typed together or blank together.\n")
       else
-        error.write("#{line_num}#{line_jp}:リンク先２、タイトル２、遷移割合２は一緒に入力必須です。もしくは一緒に空欄にしてください。\n")
+        error.write(" #{line_num}#{line_jp}:リンク先２、タイトル２、遷移割合２は一緒に入力必須です。もしくは一緒に空欄にしてください。\n")
       end
       
     end
@@ -613,7 +610,7 @@ class ImportUrlData
         if lang == 'en'
           error.write("Line #{line_num}: Title 3 needs to be less than 255 letters.\n")
         else
-          error.write("#{line_num}#{line_jp}:タイトル3は文字数の上限255文字を超えています。\n")
+          error.write(" #{line_num}#{line_jp}:タイトル3は文字数の上限255文字を超えています。\n")
         end
       end
     end
@@ -626,7 +623,7 @@ class ImportUrlData
         if lang == 'en'
           error.write("Line #{line_num}: Please type Transition rate3 with half-width characters.\n")
         else
-          error.write("#{line_num}#{line_jp}:遷移割合3は半角数字で入力してください。\n")
+          error.write(" #{line_num}#{line_jp}:遷移割合3は半角数字で入力してください。\n")
         end
       end
     end
@@ -637,7 +634,7 @@ class ImportUrlData
       if lang == 'en'
         error.write("Line #{line_num}: REDIRECT_URL3, NAME3, RATE3 have typed together or blank together.\n")
       else
-        error.write("#{line_num}#{line_jp}:リンク先3、タイトル3、遷移割合3は一緒に入力必須です。もしくは一緒に空欄にしてください。\n")
+        error.write(" #{line_num}#{line_jp}:リンク先3、タイトル3、遷移割合3は一緒に入力必須です。もしくは一緒に空欄にしてください。\n")
       end
       
     end
@@ -653,7 +650,7 @@ class ImportUrlData
         if lang == 'en'
           error.write("Line #{line_num}: Title 4 needs to be less than 255 letters.\n")
         else
-          error.write("#{line_num}#{line_jp}:タイトル4は文字数の上限255文字を超えています。\n")
+          error.write(" #{line_num}#{line_jp}:タイトル4は文字数の上限255文字を超えています。\n")
         end
         
       end
@@ -667,7 +664,7 @@ class ImportUrlData
         if lang == 'en'
           error.write("Line #{line_num}: Please type Transition rate4 with half-width characters.\n")
         else
-          error.write("#{line_num}#{line_jp}:遷移割合4は半角数字で入力してください。\n")
+          error.write(" #{line_num}#{line_jp}:遷移割合4は半角数字で入力してください。\n")
         end
         
       end
@@ -679,7 +676,7 @@ class ImportUrlData
       if lang == 'en'
         error.write("Line #{line_num}: REDIRECT_URL4, NAME4, RATE4 have typed together or blank together.\n")
       else
-        error.write("#{line_num}#{line_jp}:リンク先4、タイトル4、遷移割合4は一緒に入力必須です。もしくは一緒に空欄にしてください。\n")
+        error.write(" #{line_num}#{line_jp}:リンク先4、タイトル4、遷移割合4は一緒に入力必須です。もしくは一緒に空欄にしてください。\n")
       end
       
     end
@@ -694,7 +691,7 @@ class ImportUrlData
         if lang == 'en'
           error.write("Line #{line_num}: Title 5 needs to be less than 255 letters.\n")
         else
-          error.write("#{line_num}#{line_jp}:タイトル5は文字数の上限255文字を超えています。\n")
+          error.write(" #{line_num}#{line_jp}:タイトル5は文字数の上限255文字を超えています。\n")
         end
         
       end
@@ -708,7 +705,7 @@ class ImportUrlData
         if lang == 'en'
           error.write("Line #{line_num}: Please type Transition rate5 with half-width characters.\n")
         else
-          error.write("#{line_num}#{line_jp}:遷移割合5は半角数字で入力してください。\n")
+          error.write(" #{line_num}#{line_jp}:遷移割合5は半角数字で入力してください。\n")
         end
         
       end
@@ -720,7 +717,7 @@ class ImportUrlData
       if lang == 'en'
         error.write("Line #{line_num}: REDIRECT_URL5, NAME5, RATE5 have typed together or blank together.\n")
       else
-        error.write("#{line_num}#{line_jp}:リンク先5、タイトル5、遷移割合5は一緒に入力必須です。もしくは一緒に空欄にしてください。\n")
+        error.write(" #{line_num}#{line_jp}:リンク先5、タイトル5、遷移割合5は一緒に入力必須です。もしくは一緒に空欄にしてください。\n")
       end
       
     end
@@ -728,7 +725,7 @@ class ImportUrlData
     # check total rate is 100
     if (row[RATE5].to_i + row[RATE4].to_i + row[RATE3].to_i + row[RATE2].to_i + row[RATE1].to_i) != 100
       error_num += 1
-      error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.transition_rake_altogether") + "#{enter_key}")
+      error.write(" #{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.transition_rake_altogether") + "#{enter_key}")
     end
 
     return row, error_num, array_identifer, array_ad_id_insert, array_ad_name_insert, array_creative_id, insert_camp_flg, display_campaign_id, display_group_id
