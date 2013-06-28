@@ -3,11 +3,6 @@
     $(document).ready(function () {
         <%if signed_in? %>
 
-        $(document).on('click', "#inprogress > li > a",function()
-        {
-            alert('test');
-            $(this).parent().remove();
-        });
 
         var first_time = true;
         order = 0;
@@ -56,21 +51,9 @@
     }
      });
         $( "#tabs" ).tabs({
-            select: function() {
-                $(this).tabs("option", { ajaxOptions: { data: html } });
-            },
                 ajaxOptions:{
-                    type: 'post'
-
+                    type: 'POST'
                 },
-            beforeLoad: function( event, ui ) {
-                ui.jqXHR.error(function() {
-                    ui.panel.html(
-                            "Couldn't load this tab. We'll try to fix this as soon as possible. " +
-                                    "If this wouldn't be a demo." );
-                });
-                
-            },
             load: function(event,ui){
             	if (!first_time){
             	if (ui.panel.selector == "#ui-tabs-1"){
@@ -132,9 +115,9 @@
               <div class="f_box">
                 <div id="tabs" class="ui-tabs">
                   <ul class="ui-tabs-nav">
-                    <li style="width: 200px"><a href="/background_jobs/inprogress"><%= I18n.t('notification.inprogress') %></a></li>
-                    <li style="width: 200px"><a href="/background_jobs/download"><%= I18n.t('notification.download') %></a></li>
-                    <li style="width: 200px"><a href="/background_jobs/upload"><%= I18n.t('notification.upload') %></a></li>
+                    <li style="width: 200px"><a href="/background_jobs/inprogress#ui-tabs-1"><%= I18n.t('notification.inprogress') %></a></li>
+                    <li style="width: 200px"><a href="/background_jobs/download#ui-tabs-2"><%= I18n.t('notification.download') %></a></li>
+                    <li style="width: 200px"><a href="/background_jobs/upload#ui-tabs-3"><%= I18n.t('notification.upload') %></a></li>
                   </ul>
                 </div>
               </div>

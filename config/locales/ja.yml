@@ -844,6 +844,7 @@ ja:
     others: "Others"
     error_message: "エラーメッセージ"
     error_log_view: "エラーログ表示"
+    currency: "￥"
   click_logs:
     label: Clickログ
     display_item: "・表示項目"
@@ -923,8 +924,8 @@ ja:
       role: "権限"
       company_name: "会社名"
   media_categories: [" リスティング", "ディスプレイ", "アフィリエイト"]   
-  log_track_type: ["Install", "アプリ内アクション (Action in app)"]
-  log_repeat_flg: ["新規 (new)", "リピート (repeat)"]
+  log_track_type: ["インストール", "アプリ内アクション "]
+  log_repeat_flg: ["新規", "リピート "]
   Listing: "リスティング 広告"
   Display: "ディスプレイ 広告"
   Affiliate: "アフィリエイト" 
@@ -1088,3 +1089,4 @@ ja:
     inpreparation: '準備中'
     completed: '完了'
     waiting_upload: 'アップロード待機'
+    show_error: 'エラーログ'

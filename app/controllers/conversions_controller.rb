@@ -1,10 +1,11 @@
 class ConversionsController < ApplicationController
+  
   before_filter :signed_in_user
   before_filter :must_super_agency
   before_filter :get_promotion, only: [:index, :new, :create, :edit, :update, :get_tag]
   before_filter :get_conversion, only: [:edit, :update, :get_tag]
   before_filter :get_list_conversions
-
+  
   def index
   end
 
@@ -43,13 +44,20 @@ class ConversionsController < ApplicationController
       end
     end
     @conversion.conversion_combine = conversion_combine
+    has_error = 0
     if @conversion.valid?
       if @conversion.save
         @conversion.create_mv
         flash[:error] = t("conversion.flash_messages.success")
         redirect_to conversions_path(promotion_id: params[:promotion_id])
       else
-        if @conversion.conversion_combine.present?
+        has_error = 1
+      end
+    else
+      has_error = 1
+    end
+    if has_error
+      if @conversion.conversion_combine.present?
           @cv_list = Hash.new
           @cv_kind_list = Hash.new
           @op_list = Hash.new
@@ -70,12 +78,10 @@ class ConversionsController < ApplicationController
             end
             @op_list = params[:op]
           end 
-        end
-        render :new
       end
-    else
       render :new
     end
+    
   end
 
   def edit

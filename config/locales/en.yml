@@ -819,6 +819,7 @@ en:
     others: "Others"
     error_message: "Error Message"
     error_log_view: "Show error logs"
+    currency: "￥"
   click_logs:
     label: Clicks Logs
     display_item: Display item
@@ -901,8 +902,8 @@ en:
       role: "Role"
       company_name: "Company name"
   media_categories: ["Listing ad", "Display ad", "affiliate"]
-  log_track_type: ["Install", "アプリ内アクション (Action in app)"]
-  log_repeat_flg: ["新規 (new)", "リピート (repeat)"]
+  log_track_type: ["Install", "Action in app"]
+  log_repeat_flg: ["New", "Repeat"]
   Listing: "Listing ads"
   Display: "Display ads"
   Affiliate: "Affiliate" 
@@ -1055,7 +1056,7 @@ en:
     referer: 'Referer'
     mark: 'Mark'
     ok_ng: 'OK/NG'
-    error_code: 'Error Messages'
+    error_code: 'Error code'
   notification:
     inprogress: 'Inprogress'
     upload: 'Upload List'
@@ -1065,4 +1066,5 @@ en:
     inpreparation: 'In preparation'
     completed: 'Completed'
     waiting_upload: 'Waiting upload'
+    show_error: 'Show error'
 

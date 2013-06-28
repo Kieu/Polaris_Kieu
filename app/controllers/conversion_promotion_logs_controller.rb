@@ -2,7 +2,7 @@ require "resque"
 class ConversionPromotionLogsController < ApplicationController
   before_filter :signed_in_user
   before_filter :set_cookies
-
+  include ActionView::Helpers::NumberHelper
   def index
     @start_date = params[:start_date].present? ? params[:start_date] :
         Date.yesterday.at_beginning_of_month.strftime(I18n.t("time_format"))
@@ -158,6 +158,11 @@ class ConversionPromotionLogsController < ApplicationController
       else
         os_name = ""
       end
+      if conversion_log.sales && conversion_log.sales.to_i > 0
+        sales_unit = number_to_currency conversion_log.sales, unit: I18n.t("cv_logs.currency"), seperator: ",", delimiter: ""
+      else
+        sales_unit = ""
+      end 
       rows << {id: conversion_log.id, cell: 
         {conversion_utime: "<div title='#{Time.at(conversion_log.conversion_utime).strftime("%Y/%m/%d %H:%M:%S")}'>" + Time.at(conversion_log.conversion_utime).strftime("%Y/%m/%d %H:%M:%S") + "</div>",
          conversion_id: "<div title='#{conversions.find_by_id(conversion_log.conversion_id).conversion_name}'>" + conversions.find_by_id(conversion_log.conversion_id).conversion_name + "</div>",
@@ -176,7 +181,7 @@ class ConversionPromotionLogsController < ApplicationController
          session_id: conversion_log.session_id ,
          os: "<div title='#{os_name}'>" + os_name + "</div>",
          log_state: "<div title='#{conversion_log.log_state}'>" + conversion_log.log_state + "</div>",
-         sales: conversion_log.sales,
+         sales: sales_unit,
          volume: conversion_log.volume,
          others: (conversion_log.others) ? "<div title='#{conversion_log.others}'>" + conversion_log.others + "</div>" : '',
          error_code: "<div title='#{I18n.t("log_cv_error_messages")[conversion_log.error_code.to_i]}'>" + I18n.t("log_cv_error_messages")[conversion_log.error_code.to_i] + "</div>",
@@ -188,13 +193,16 @@ class ConversionPromotionLogsController < ApplicationController
   end
 
   def change_accounts_list
-    if params[:cid].to_i > 0
-      render json: Account.where(media_category_id: params[:cid]).where(promotion_id: @promotion.id).order(:roman_name).select("id")
+    if params[:cid] && params[:cid].to_i > 0
+      render json: Account.where(media_category_id: params[:cid]).where(promotion_id: params[:promotion_id]).order(:roman_name).select("id")
     .select("CASE WHEN LENGTH(account_name) > #{Settings.MAX_JA_LENGTH_NAME}
                                    THEN SUBSTRING(account_name, 1, #{Settings.MAX_JA_LENGTH_NAME})
                                     ELSE  account_name END as account_name ")
     else
-      render json: Account.all
+      render json: Account.where(promotion_id: params[:promotion_id]).order(:roman_name).select("id")
+    .select("CASE WHEN LENGTH(account_name) > #{Settings.MAX_JA_LENGTH_NAME}
+                                   THEN SUBSTRING(account_name, 1, #{Settings.MAX_JA_LENGTH_NAME})
+                                    ELSE  account_name END as account_name ")
     end
 
   end

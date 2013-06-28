@@ -12,6 +12,12 @@
     {
 
     }
+    $(document).on('click', "#inprogress a",function()
+    {
+        alert('test');
+        $(this).parent().parent().remove();
+    });
+
     $(document).on('click', "#close_notify", function(){
         $(".inline_notify").colorbox.close();
     })
@@ -28,7 +34,7 @@
                   <td class="daily"><%= job.created_at.strftime("%m/%d/%y") %></td>
                   <td class="c_orange">
                     <% if job.type_view == "upload" %><%= I18n.t('notification.uploading') %><%end%>
-                    <% if job.type_view == "download" %><%= I18n.t('notification.inpreparation') %><%end%>
+                    <% if job.type_view == "download" %><%= I18n.t('notification.creating') %><%end%>
                   </td>
                 </tr>
                 <tr>
@@ -42,7 +48,7 @@
   </ul>
 </div>
 <div>
-  <p style="margin-top:30px;margin-left:220px"><a href="#" id="close_notify"><img alt="キャンセル" src="/assets/btn_close.gif"></a></p>
+  <p style="margin-top:30px;margin-left:220px"><a href="javascript:void(0)" id="close_notify"><img alt="キャンセル" src="/assets/btn_close.gif"></a></p>
 </div>
 
 
