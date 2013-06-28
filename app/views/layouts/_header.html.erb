@@ -56,8 +56,12 @@
     }
      });
         $( "#tabs" ).tabs({
+            select: function() {
+                $(this).tabs("option", { ajaxOptions: { data: html } });
+            },
                 ajaxOptions:{
                     type: 'post'
+
                 },
             beforeLoad: function( event, ui ) {
                 ui.jqXHR.error(function() {
