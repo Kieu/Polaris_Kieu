@@ -184,13 +184,13 @@ en:
               invalid: Email address is invalid
               taken: Email has already been registered.
             company_id:
-              blank: "Person in charge can't be blank"
-              too_long: ! 'Person in charge is too long (maximum is %{count} characters)'
-              too_short: ! 'Person in charge is too short (minimum is %{count} characters)'
+              blank: "Company id can't be blank"
+              too_long: ! 'Company id is too long (maximum is %{count} characters)'
+              too_short: ! 'Company id is too short (minimum is %{count} characters)'
             role_id:
-              blank: "Person in sales can't be blank"
-              too_long: ! 'Person in sales is too long (maximum is %{count} characters)'
-              too_short: ! 'Person in sales is too short (minimum is %{count} characters)'
+              blank: "Role id can't be blank"
+              too_long: ! 'Role id  is too long (maximum is %{count} characters)'
+              too_short: ! 'Role id  is too short (minimum is %{count} characters)'
         agency:
           attributes:
             agency_name:
