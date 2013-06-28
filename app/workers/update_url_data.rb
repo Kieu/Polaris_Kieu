@@ -316,17 +316,17 @@ class UpdateUrlData
      if row[AD_ID] != ""
        if array_identifer.include?(row[AD_ID].to_i)
          error_num += 1
-         error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.ad_id_already_used") + "#{enter_key}")
+         error.write("#{line_en}#{line_num}#{line_jp}: " + I18n.t("error_message_url_import.ad_id_already_used") + "#{enter_key}")
        end
 
        if is_numeric? row[AD_ID] != true
          error_num += 1
-         error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.ad_id_invalid") + "#{enter_key}")
+         error.write("#{line_en}#{line_num}#{line_jp}: " + I18n.t("error_message_url_import.ad_id_invalid") + "#{enter_key}")
        end
 
        if array_ad_id_insert.count > 0 && array_ad_id_insert.include?(row[AD_ID].to_i)
          error_num += 1
-         error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.ad_id_used_same_file") + "#{enter_key}")
+         error.write("#{line_en}#{line_num}#{line_jp}: " + I18n.t("error_message_url_import.ad_id_used_same_file") + "#{enter_key}")
        end
 
        array_ad_id_insert << row[AD_ID]
@@ -336,13 +336,13 @@ class UpdateUrlData
      row[CAMPAIGN_NAME] = row[CAMPAIGN_NAME].to_s.strip
      if row[CAMPAIGN_NAME] == ""
         error_num += 1
-        error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.campaign_name_not_type") + "#{enter_key}")
+        error.write("#{line_en}#{line_num}#{line_jp}: " + I18n.t("error_message_url_import.campaign_name_not_type") + "#{enter_key}")
      else
        # check campaign existed or not
        array_campaigns = DisplayCampaign.where(" name = '#{row[CAMPAIGN_NAME]}' and account_id = #{account_id}").select('id')
        if array_campaigns.count == 0
          error_num += 1
-         error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.campaign_name_must_exist") + "#{enter_key}")
+         error.write("#{line_en}#{line_num}#{line_jp}: " + I18n.t("error_message_url_import.campaign_name_must_exist") + "#{enter_key}")
        end
      end
      
@@ -350,7 +350,7 @@ class UpdateUrlData
      row[GROUP_NAME] = row[GROUP_NAME].to_s.strip
      if row[GROUP_NAME] == ""
         error_num += 1
-        error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.group_name_not_type") + "#{enter_key}")
+        error.write("#{line_en}#{line_num}#{line_jp}: " + I18n.t("error_message_url_import.group_name_not_type") + "#{enter_key}")
      else
         # check group existed or not
         if array_campaigns.count > 0
@@ -358,7 +358,7 @@ class UpdateUrlData
           array_groups = DisplayGroup.where(" name = '#{row[GROUP_NAME]}' and display_campaign_id = #{display_campaign_id}").select('id')
           if array_groups.count == 0
             error_num += 1
-            error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.group_name_must_exist") + "#{enter_key}")
+            error.write("#{line_en}#{line_num}#{line_jp}: " + I18n.t("error_message_url_import.group_name_must_exist") + "#{enter_key}")
           else
             display_group_id = array_groups.first['id']
           end
@@ -375,7 +375,7 @@ class UpdateUrlData
           array_ads = DisplayAd.where(" name = '#{row[AD_NAME]}' and display_group_id = #{display_group_id}").select('id, identifier')
           if array_ads.count == 0
             error_num += 1
-            error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.camp_group_ad_must_match") + "#{enter_key}")
+            error.write("#{line_en}#{line_num}#{line_jp}: " + I18n.t("error_message_url_import.camp_group_ad_must_match") + "#{enter_key}")
           else
             ad_id_identifier = array_ads.first['identifier'].to_s
           end
@@ -384,7 +384,7 @@ class UpdateUrlData
         array_ad_name_insert << row[AD_NAME]
      else
         error_num += 1
-        error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.ad_name_not_type") + "#{enter_key}")
+        error.write("#{line_en}#{line_num}#{line_jp}: " + I18n.t("error_message_url_import.ad_name_not_type") + "#{enter_key}")
 
      end
 
@@ -399,11 +399,11 @@ class UpdateUrlData
          row[SUBMIT_URL] = row[SUBMIT_URL].to_s.strip
          if (row[SUBMIT_URL] != "") && (row[SUBMIT_URL] != current_submit_url)
            error_num += 1
-           error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.camp_group_ad_submit_must_match") + "#{enter_key}")
+           error.write("#{line_en}#{line_num}#{line_jp}: " + I18n.t("error_message_url_import.camp_group_ad_submit_must_match") + "#{enter_key}")
          end
        elsif row[AD_ID] != "" && row[AD_ID] != ad_id_identifier
          error_num += 1
-         error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.ad_identifier_must_match") + "#{enter_key}")
+         error.write("#{line_en}#{line_num}#{line_jp}: " + I18n.t("error_message_url_import.ad_identifier_must_match") + "#{enter_key}")
        end
      end
      
@@ -415,7 +415,7 @@ class UpdateUrlData
      else
        array_double_data[key_str] += "," + line_num.to_s
        error_num += 1
-       error.write("#{line_en} #{array_double_data[key_str]}#{line_jp}: " + I18n.t("error_message_url_import.name_overlapped") + "#{enter_key}")
+       error.write("#{line_en}#{array_double_data[key_str]}#{line_jp}: " + I18n.t("error_message_url_import.name_overlapped") + "#{enter_key}")
      end
 
      # CREATIVE_ID field
@@ -423,17 +423,17 @@ class UpdateUrlData
      if row[CREATIVE_ID] != ""
        if !is_numeric? row[CREATIVE_ID]
          error_num += 1
-         error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.creative_id_half_width") + "#{enter_key}")
+         error.write("#{line_en}#{line_num}#{line_jp}: " + I18n.t("error_message_url_import.creative_id_half_width") + "#{enter_key}")
        end
        
        if row[CREATIVE_ID].length > 20
           error_num += 1
-          error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.creative_id_too_long") + "#{enter_key}")
+          error.write("#{line_en}#{line_num}#{line_jp}: " + I18n.t("error_message_url_import.creative_id_too_long") + "#{enter_key}")
        end
 
        if !array_creative_id.include?(row[CREATIVE_ID].to_i)
          error_num += 1
-         error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.creative_id_not_exist") + "#{enter_key}")
+         error.write("#{line_en}#{line_num}#{line_jp}: " + I18n.t("error_message_url_import.creative_id_not_exist") + "#{enter_key}")
        end
        
      end
@@ -446,7 +446,7 @@ class UpdateUrlData
      if row[CLICK_UNIT] != ""
        if !is_numeric? row[CLICK_UNIT]
          error_num += 1
-         error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.unit_click_price_half_width") + "#{enter_key}")
+         error.write("#{line_en}#{line_num}#{line_jp}: " + I18n.t("error_message_url_import.unit_click_price_half_width") + "#{enter_key}")
        end
      end
 
@@ -457,7 +457,7 @@ class UpdateUrlData
       if lang == 'en'
         error.write("Line #{line_num}: URL is not specified in 1.\n")
       else
-        error.write(" #{line_num}#{line_jp}:リンク先1にURLが指定されていません。\n")
+        error.write("#{line_num}#{line_jp}:リンク先1にURLが指定されていません。\n")
       end
     end
 
@@ -467,7 +467,7 @@ class UpdateUrlData
       if row[NAME1].length > 255
         error_num += 1
         if lang == 'en'
-          error.write("Line #{line_num}: Title 1 needs to be less than 255 letters.\n")
+          error.write("Line#{line_num}: Title 1 needs to be less than 255 letters.\n")
         else
           error.write("#{line_num}#{line_jp}:タイトル1は文字数の上限255文字を超えています。\n")
         end
@@ -475,7 +475,7 @@ class UpdateUrlData
     else
       error_num += 1
       if lang == 'en'
-        error.write("Line #{line_num}: Title 1 is not typed.\n")
+        error.write("Line#{line_num}: Title 1 is not typed.\n")
       else
         error.write("#{line_num}#{line_jp}:タイトル1が記入されておりません。\n")
       end
@@ -487,7 +487,7 @@ class UpdateUrlData
       if !is_numeric? row[RATE1]
         error_num += 1
         if lang == 'en'
-          error.write("Line #{line_num}: Please type Transition rate1 with half-width characters. \n")
+          error.write("Line#{line_num}: Please type Transition rate1 with half-width characters. \n")
         else
           error.write("#{line_num}#{line_jp}:遷移割合1は半角数字で入力してください。\n")
         end
@@ -512,7 +512,7 @@ class UpdateUrlData
       if row[NAME2].length > 255
         error_num += 1
         if lang == 'en'
-          error.write("Line #{line_num}: Title 2 needs to be less than 255 letters.\n")
+          error.write("Line#{line_num}: Title 2 needs to be less than 255 letters.\n")
         else
           error.write("#{line_num}#{line_jp}:タイトル2は文字数の上限255文字を超えています。\n")
         end
@@ -525,7 +525,7 @@ class UpdateUrlData
       if !is_numeric? row[RATE2]
         error_num += 1
         if lang == 'en'
-          error.write("Line #{line_num}: Please type Transition rate2 with half-width characters.\n")
+          error.write("Line#{line_num}: Please type Transition rate2 with half-width characters.\n")
         else
           error.write("#{line_num}#{line_jp}:遷移割合2は半角数字で入力してください。\n")
         end
@@ -536,7 +536,7 @@ class UpdateUrlData
         !((row[REDIRECT_URL2] == "") && (row[NAME2] == "") && (row[RATE2] == ""))
       error_num += 1
       if lang == 'en'
-        error.write("Line #{line_num}: REDIRECT_URL2, NAME2, RATE2 have typed together or blank together.\n")
+        error.write("Line#{line_num}: REDIRECT_URL2, NAME2, RATE2 have typed together or blank together.\n")
       else
         error.write("#{line_num}#{line_jp}:リンク先２、タイトル２、遷移割合２は一緒に入力必須です。もしくは一緒に空欄にしてください。\n")
       end
@@ -552,7 +552,7 @@ class UpdateUrlData
       if row[NAME3].length > 255
         error_num += 1
         if lang == 'en'
-          error.write("Line #{line_num}: Title 3 needs to be less than 255 letters.\n")
+          error.write("Line#{line_num}: Title 3 needs to be less than 255 letters.\n")
         else
           error.write("#{line_num}#{line_jp}:タイトル3は文字数の上限255文字を超えています。\n")
         end
@@ -565,7 +565,7 @@ class UpdateUrlData
       if !is_numeric? row[RATE3]
         error_num += 1
         if lang == 'en'
-          error.write("Line #{line_num}: Please type Transition rate3 with half-width characters.\n")
+          error.write("Line#{line_num}: Please type Transition rate3 with half-width characters.\n")
         else
           error.write("#{line_num}#{line_jp}:遷移割合3は半角数字で入力してください。\n")
         end
@@ -576,7 +576,7 @@ class UpdateUrlData
         !((row[REDIRECT_URL3] == "") && (row[NAME3] == "") && (row[RATE3] == ""))
       error_num += 1
       if lang == 'en'
-        error.write("Line #{line_num}: REDIRECT_URL3, NAME3, RATE3 have typed together or blank together.\n")
+        error.write("Line#{line_num}: REDIRECT_URL3, NAME3, RATE3 have typed together or blank together.\n")
       else
         error.write("#{line_num}#{line_jp}:リンク先3、タイトル3、遷移割合3は一緒に入力必須です。もしくは一緒に空欄にしてください。\n")
       end
@@ -592,7 +592,7 @@ class UpdateUrlData
       if row[NAME4].length > 255
         error_num += 1
         if lang == 'en'
-          error.write("Line #{line_num}: Title 4 needs to be less than 255 letters.\n")
+          error.write("Line#{line_num}: Title 4 needs to be less than 255 letters.\n")
         else
           error.write("#{line_num}#{line_jp}:タイトル4は文字数の上限255文字を超えています。\n")
         end
@@ -606,7 +606,7 @@ class UpdateUrlData
       if !is_numeric? row[RATE4]
         error_num += 1
         if lang == 'en'
-          error.write("Line #{line_num}: Please type Transition rate4 with half-width characters.\n")
+          error.write("Line#{line_num}: Please type Transition rate4 with half-width characters.\n")
         else
           error.write("#{line_num}#{line_jp}:遷移割合4は半角数字で入力してください。\n")
         end
@@ -618,7 +618,7 @@ class UpdateUrlData
         !((row[REDIRECT_URL4] == "") && (row[NAME4] == "") && (row[RATE4] == ""))
       error_num += 1
       if lang == 'en'
-        error.write("Line #{line_num}: REDIRECT_URL4, NAME4, RATE4 have typed together or blank together.\n")
+        error.write("Line#{line_num}: REDIRECT_URL4, NAME4, RATE4 have typed together or blank together.\n")
       else
         error.write("#{line_num}#{line_jp}:リンク先4、タイトル4、遷移割合4は一緒に入力必須です。もしくは一緒に空欄にしてください。\n")
       end
@@ -633,7 +633,7 @@ class UpdateUrlData
       if row[NAME5].length > 255
         error_num += 1
         if lang == 'en'
-          error.write("Line #{line_num}: Title 5 needs to be less than 255 letters.\n")
+          error.write("Line#{line_num}: Title 5 needs to be less than 255 letters.\n")
         else
           error.write("#{line_num}#{line_jp}:タイトル5は文字数の上限255文字を超えています。\n")
         end
@@ -647,7 +647,7 @@ class UpdateUrlData
       if !is_numeric? row[RATE5]
         error_num += 1
         if lang == 'en'
-          error.write("Line #{line_num}: Please type Transition rate5 with half-width characters.\n")
+          error.write("Line#{line_num}: Please type Transition rate5 with half-width characters.\n")
         else
           error.write("#{line_num}#{line_jp}:遷移割合5は半角数字で入力してください。\n")
         end
@@ -659,7 +659,7 @@ class UpdateUrlData
         !((row[REDIRECT_URL5] == "") && (row[NAME5] == "") && (row[RATE5] == ""))
       error_num += 1
       if lang == 'en'
-        error.write("Line #{line_num}: REDIRECT_URL5, NAME5, RATE5 have typed together or blank together.\n")
+        error.write("Line#{line_num}: REDIRECT_URL5, NAME5, RATE5 have typed together or blank together.\n")
       else
         error.write("#{line_num}#{line_jp}:リンク先5、タイトル5、遷移割合5は一緒に入力必須です。もしくは一緒に空欄にしてください。\n")
       end
@@ -669,7 +669,7 @@ class UpdateUrlData
     # check total rate is 100
     if (row[RATE5].to_i + row[RATE4].to_i + row[RATE3].to_i + row[RATE2].to_i + row[RATE1].to_i) != 100
       error_num += 1
-      error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.transition_rake_altogether") + "#{enter_key}")
+      error.write("#{line_en}#{line_num}#{line_jp}: " + I18n.t("error_message_url_import.transition_rake_altogether") + "#{enter_key}")
     end
 
     return row, error_num, array_identifer, array_ad_id_insert, array_ad_name_insert, array_creative_id, current_mpv
