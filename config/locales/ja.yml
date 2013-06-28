@@ -31,7 +31,7 @@ ja:
     camp_group_ad_must_match: "キャンペーン名、グループ名、広告名は繋がっていない。"
     camp_group_ad_submit_must_match: "キャンペーン、グループ名、広告名、計測用URLのいずれも変更することは出来ません。"
     not_input: "アップロードするファイルを選択してください。"
-    volumn_over: "File's volumn must less than 20Mb."
+    volumn_over: "ファイル サイズ上限は 300MB です。"
     not_format_csv: "ファイル形式がCSVではありません。"
     unexpected_error: "予期せぬエラーにより、アップロードが実行出来ませんでした。再度お試し頂くか、事務局へお問い合わせ下さい。\n"
     unexpected_error_view: "予期せぬエラーにより、アップロードが実行出来ませんでした。再度お試し頂くか、事務局へお問い合わせ下さい。"
@@ -46,7 +46,7 @@ ja:
     campaign_name_not_type: "キャンペーン名が入力されておりません。"
     group_name_too_long: "グループ名は文字数の上限255文字を超えています。"
     group_name_not_type: "グループ名が入力されておりません。"
-    ad_name_not_type: "広告名は文字数の上限255文字を超えています。"
+    ad_name_not_type: "広告名が入力されておりません。"
     ad_name_too_long: "広告名は文字数の上限255文字を超えています。"
     name_overlapped: "キャンペーン名、グループ名、広告名が重複しています。"
     creative_id_half_width: "クリエイティブIDは半角数字で入力してください。"
@@ -54,10 +54,10 @@ ja:
     creative_id_not_exist: "指定のクリエイティブIDが存在しません。"
     unit_click_price_half_width: "クリック単価は半角数字で入力してください。"
     leave_url_column_blank: "計測用URL欄は空欄にして下さい。"
-    url_not_specified: "リンク先★にURLが指定されていません。"
-    title_too_long: "タイトル★は文字数の上限255文字を超えています。"
-    title_not_type: "タイトル★が記入されておりません。"
-    transition_rake_half_width: "遷移割合★は半角数字で入力してください。"
+    url_not_specified: "リンク先にURLが指定されていません。"
+    title_too_long: "タイトルは文字数の上限255文字を超えています。"
+    title_not_type: "タイトルが記入されておりません。"
+    transition_rake_half_width: "遷移割合は半角数字で入力してください。"
     ad_name_already_used: "指定の広告名は既に使われています。"
     transition_rake_altogether: "遷移割合の合計は１００となるようにして下さい。"
     registering_complete: "URLの新規登録を受付ました。"
@@ -798,6 +798,8 @@ ja:
     combination:
       pattern: "パターン： "
       add: "Add"
+    flash_messages:
+      existed: "別のコンバージョンを選択してください"
   log:
     title:
       cv_logs: "CVログ"
@@ -837,11 +839,12 @@ ja:
     repeat: "リピート"
     log_state: "OK/NG"
     sales: "Sales"
-    profit: "Profit"
+    profit: "利益"
     volume: "Volume"
     others: "Others"
     error_message: "エラーメッセージ"
     error_log_view: "エラーログ表示"
+    currency: "￥"
   click_logs:
     label: Clickログ
     display_item: "・表示項目"
@@ -921,8 +924,8 @@ ja:
       role: "権限"
       company_name: "会社名"
   media_categories: [" リスティング", "ディスプレイ", "アフィリエイト"]   
-  log_track_type: ["Install", "アプリ内アクション (Action in app)"]
-  log_repeat_flg: ["新規 (new)", "リピート (repeat)"]
+  log_track_type: ["インストール", "アプリ内アクション "]
+  log_repeat_flg: ["新規", "リピート "]
   Listing: "リスティング 広告"
   Display: "ディスプレイ 広告"
   Affiliate: "アフィリエイト" 
@@ -1077,6 +1080,7 @@ ja:
     send_log: "送信ログ"
     send_date_time: "送信日時"
     error_message: "エラーメッセージ"
+    profit: "利益"
   notification:
     inprogress: '実行中'
     upload: 'アップロードリスト'
@@ -1086,3 +1090,4 @@ ja:
     inpreparation: '準備中'
     completed: '完了'
     waiting_upload: 'アップロード待機'
+    show_error: 'エラーログ'

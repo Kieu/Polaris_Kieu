@@ -1,10 +1,11 @@
 class ConversionsController < ApplicationController
+  
   before_filter :signed_in_user
   before_filter :must_super_agency
   before_filter :get_promotion, only: [:index, :new, :create, :edit, :update, :get_tag]
   before_filter :get_conversion, only: [:edit, :update, :get_tag]
   before_filter :get_list_conversions
-
+  
   def index
   end
 
@@ -24,30 +25,39 @@ class ConversionsController < ApplicationController
     if params[:cv] && params[:cv].count > 0
       check_valid = Hash.new 
       params[:cv].each_with_index do |op, idx|
-        if check_valid[params[:cv][idx]]
-          flash[:combine_error] = t("conversion.flash_messages.existed")
-        else
-          check_valid.store(params[:cv][idx], '1')
-        end
-        if idx == 0
-          if params[:cv][idx].present?
-            conversion_combine << "#{params[:cv][idx]}_#{params[:cv_kind][idx]}"
+        if params[:cv][idx].to_i > 0
+          if check_valid[params[:cv][idx]]
+            flash[:combine_error] = t("conversion.flash_messages.existed")
+          else
+            check_valid.store(params[:cv][idx], '1')
           end
-        else
-          if params[:cv][idx].present?
-            conversion_combine << "|#{params[:op][idx - 1]}|#{params[:cv][idx]}_#{params[:cv_kind][idx]}"
+          if idx == 0
+            if params[:cv][idx].present?
+              conversion_combine << "#{params[:cv][idx]}_#{params[:cv_kind][idx]}"
+            end
+          else
+            if params[:cv][idx].present?
+              conversion_combine << "|#{params[:op][idx - 1]}|#{params[:cv][idx]}_#{params[:cv_kind][idx]}"
+            end
           end
-        end   
+         end   
       end
     end
     @conversion.conversion_combine = conversion_combine
+    has_error = 0
     if @conversion.valid?
       if @conversion.save
         @conversion.create_mv
         flash[:error] = t("conversion.flash_messages.success")
         redirect_to conversions_path(promotion_id: params[:promotion_id])
       else
-        if @conversion.conversion_combine.present?
+        has_error = 1
+      end
+    else
+      has_error = 1
+    end
+    if has_error
+      if @conversion.conversion_combine.present?
           @cv_list = Hash.new
           @cv_kind_list = Hash.new
           @op_list = Hash.new
@@ -68,12 +78,10 @@ class ConversionsController < ApplicationController
             end
             @op_list = params[:op]
           end 
-        end
-        render :new
       end
-    else
       render :new
     end
+    
   end
 
   def edit

@@ -2,7 +2,7 @@ require "resque"
 class ConversionPromotionLogsController < ApplicationController
   before_filter :signed_in_user
   before_filter :set_cookies
-
+  include ActionView::Helpers::NumberHelper
   def index
     @start_date = params[:start_date].present? ? params[:start_date] :
         Date.yesterday.at_beginning_of_month.strftime(I18n.t("time_format"))
@@ -28,7 +28,6 @@ class ConversionPromotionLogsController < ApplicationController
   end
 
   def get_conversion_logs_list
-    
     start_date = params[:start_date].strip
     end_date = params[:end_date].strip
     promotion_id = params[:query]
@@ -51,9 +50,10 @@ class ConversionPromotionLogsController < ApplicationController
     header_titles_csv = [I18n.t('export_conversion_logs.cv_date_time'), I18n.t('export_conversion_logs.cv_name'), I18n.t('export_conversion_logs.cv_category'), I18n.t('export_conversion_logs.tracking_type'), I18n.t('export_conversion_logs.cv_type'), I18n.t('export_conversion_logs.log_id'),
                          I18n.t('export_conversion_logs.starting_log_id'), I18n.t('export_conversion_logs.media_approval'), I18n.t('export_conversion_logs.click_name'), I18n.t('export_conversion_logs.promotion'), I18n.t('export_conversion_logs.media'), I18n.t('export_conversion_logs.account'),
                          I18n.t('export_conversion_logs.campaign'), I18n.t('export_conversion_logs.ad_group'), I18n.t('export_conversion_logs.ad_name'), I18n.t('export_conversion_logs.click_utime'), I18n.t('export_conversion_logs.click_date_time'), I18n.t('export_conversion_logs.influx_original'),
-                         I18n.t('export_conversion_logs.sales'), I18n.t('export_conversion_logs.volume'), I18n.t('export_conversion_logs.other'), I18n.t('export_conversion_logs.verify'), I18n.t('export_conversion_logs.suid'), I18n.t('export_conversion_logs.sesid'),
+                         I18n.t('export_conversion_logs.sales'),I18n.t('export_conversion_logs.profit'), I18n.t('export_conversion_logs.volume'), I18n.t('export_conversion_logs.other'), I18n.t('export_conversion_logs.verify'), I18n.t('export_conversion_logs.suid'), I18n.t('export_conversion_logs.sesid'),
                          I18n.t('export_conversion_logs.os'), I18n.t('export_conversion_logs.repeat'), I18n.t('export_conversion_logs.log_state'), I18n.t('export_conversion_logs.user_agent'), I18n.t('export_conversion_logs.remote_ip'), I18n.t('export_conversion_logs.referrer'),
                          I18n.t('export_conversion_logs.media_session_id'), I18n.t('export_conversion_logs.mark'), I18n.t('export_conversion_logs.reception_log'), I18n.t('export_conversion_logs.send_log'), I18n.t('export_conversion_logs.send_date_time'), I18n.t('export_conversion_logs.error_message')]
+    
     breadcrumb = "#{promotion.client.client_name} > #{promotion.promotion_name} > CV Logs"
     start_date = Date.strptime(params[:start_date].strip, I18n.t("time_format")).strftime("%Y%m%d")
     end_date = Date.strptime(params[:end_date].strip, I18n.t("time_format")).strftime("%Y%m%d")
@@ -113,42 +113,62 @@ class ConversionPromotionLogsController < ApplicationController
       if conversion_log.media_id && conversion_log.media_id.to_i > 0
         media_name = medias_list[conversion_log.media_id.to_i]
       else
-        media_name = ''
+        media_name = ""
       end
       
       if conversion_log.account_id && conversion_log.account_id.to_i > 0
         account_name = accounts_list[conversion_log.account_id.to_i]
       else
-        account_name = ''
+        account_name = ""
       end
       
       if conversion_log.campaign_id && conversion_log.campaign_id.to_i > 0
         campaign_name = display_campaigns_list[conversion_log.campaign_id.to_i]
       else
-        campaign_name = ''
+        campaign_name = ""
       end
       
       if conversion_log.group_id && conversion_log.group_id.to_i > 0
         group_name = display_groups_list[conversion_log.group_id.to_i]
       else
-        group_name = ''
+        group_name = ""
       end
       
       if conversion_log.unit_id && conversion_log.unit_id.to_i > 0
         ads_name = display_ads_list[conversion_log.unit_id.to_i]
       else
-        ads_name = ''
+        ads_name = ""
       end
       if conversion_log.click_utime
         click_utime = Time.at(conversion_log.click_utime).strftime("%Y/%m/%d %H:%M:%S")
       else
-        click_utime = ''
+        click_utime = ""
       end
       if conversion_log.device_category && conversion_log.device_category.to_i > 0
         os_name = os[conversion_log.device_category.to_i-1]
       else
-        os_name = ''
+        os_name = ""
       end
+      if conversion_log.conversion_id && conversion_log.conversion_id.to_i > 0
+        conversion_name = conversions.find_by_id(conversion_log.conversion_id).conversion_name
+      else
+        conversion_name = ""
+      end
+      if conversion_log.device_category && os[conversion_log.device_category.to_i]
+        os_name = os[conversion_log.device_category.to_i]
+      else
+        os_name = ""
+      end
+      if conversion_log.sales && conversion_log.sales.to_i > 0
+        sales_unit = number_to_currency conversion_log.sales, unit: I18n.t("cv_logs.currency"), seperator: ",", delimiter: ""
+      else
+        sales_unit = ""
+      end 
+      if conversion_log.profit && conversion_log.profit.to_i > 0
+        profit = number_to_currency conversion_log.profit, unit: I18n.t("cv_logs.currency"), seperator: ",", delimiter: ""
+      else
+        profit = ""
+      end 
       rows << {id: conversion_log.id, cell: 
         {conversion_utime: "<div title='#{Time.at(conversion_log.conversion_utime).strftime("%Y/%m/%d %H:%M:%S")}'>" + Time.at(conversion_log.conversion_utime).strftime("%Y/%m/%d %H:%M:%S") + "</div>",
          conversion_id: "<div title='#{conversions.find_by_id(conversion_log.conversion_id).conversion_name}'>" + conversions.find_by_id(conversion_log.conversion_id).conversion_name + "</div>",
@@ -164,25 +184,31 @@ class ConversionPromotionLogsController < ApplicationController
          click_utime: "<div title='#{click_utime}'>" + click_utime + "</div>",
          verify: "<div title='#{conversion_log.verify}'>" + conversion_log.verify + "</div>",
          suid: "<div title='#{conversion_log.suid}'>" + conversion_log.suid + "</div>",
-         session_id: "<div title='#{conversion_log.session_id}'>" + conversion_log.session_id + "</div>",
-         os: "<div title='#{os[conversion_log.device_category.to_i]}'>" + os[conversion_log.device_category.to_i] + "</div>",
+         session_id: conversion_log.session_id ,
+         os: "<div title='#{os_name}'>" + os_name + "</div>",
          log_state: "<div title='#{conversion_log.log_state}'>" + conversion_log.log_state + "</div>",
-         sales: conversion_log.sales,
+         sales: sales_unit,
          volume: conversion_log.volume,
          others: (conversion_log.others) ? "<div title='#{conversion_log.others}'>" + conversion_log.others + "</div>" : '',
          error_code: "<div title='#{I18n.t("log_cv_error_messages")[conversion_log.error_code.to_i]}'>" + I18n.t("log_cv_error_messages")[conversion_log.error_code.to_i] + "</div>",
          media_category_id: conversion_log.media_category_id,
-         profit: conversion_log.profit
+         profit: profit
       }}
     end
     rows
   end
 
   def change_accounts_list
-    if params[:cid].to_i > 0
-      render json: Account.where(media_category_id: params[:cid])
+    if params[:cid] && params[:cid].to_i > 0
+      render json: Account.where(media_category_id: params[:cid]).where(promotion_id: params[:promotion_id]).order(:roman_name).select("id")
+    .select("CASE WHEN LENGTH(account_name) > #{Settings.MAX_JA_LENGTH_NAME}
+                                   THEN SUBSTRING(account_name, 1, #{Settings.MAX_JA_LENGTH_NAME})
+                                    ELSE  account_name END as account_name ")
     else
-      render json: Account.all
+      render json: Account.where(promotion_id: params[:promotion_id]).order(:roman_name).select("id")
+    .select("CASE WHEN LENGTH(account_name) > #{Settings.MAX_JA_LENGTH_NAME}
+                                   THEN SUBSTRING(account_name, 1, #{Settings.MAX_JA_LENGTH_NAME})
+                                    ELSE  account_name END as account_name ")
     end
 
   end

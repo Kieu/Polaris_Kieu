@@ -29,12 +29,12 @@
                   <th class="edit"><%= link_to "", "#{edit_client_path(client)}", class: "edit", id: "edit#{client.id}" if current_user.super? %></th>
                   <% if params[:action] == "index" %>
                       <% if (params[:client_id] && client.id == params[:client_id].to_i) || (!params[:client_id] && index == 0) %>
-                          <td><div style="width: 220px;"><%= link_to short_ja_name(client.client_name), "javascript:void(0)", class: "client_name current", title: "#{client.client_name}", id: "#{client.id}", onclick: "reloadFlex('.newTable06', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{client.id}', '.client_name', '#client_name', #{Settings.MAX_EN_LENGTH_NAME})" %>
-                         	<%= link_to short_ja_name(client.client_name), "javascript:void(0)", class: "client_name_search", id: "search#{client.id}" %></div>
+                          <td><div style="width: 220px;"><%= link_to short_ja_name(client.client_name), "#{clients_path(client_id: client.id)}", class: "client_name current", title: "#{client.client_name}", id: "#{client.id}" %>
+                         	<%= link_to short_ja_name(client.client_name), "#{clients_path(client_id: client.id)}", class: "client_name_search", id: "search#{client.id}" %></div>
                           </td>
                       <% else %>
-                          <td><div style="width: 220px;"><%= link_to short_ja_name(client.client_name), "javascript:void(0)", class: "client_name", title: "#{client.client_name}", id: "#{client.id}", onclick: "reloadFlex('.newTable06', '#{get_promotions_list_clients_path}?id=#{client.id}', '##{client.id}', '.client_name', '#client_name', #{Settings.MAX_EN_LENGTH_NAME})" %>
-								<%= link_to short_ja_name(client.client_name), "javascript:void(0)", class: "client_name_search", id: "search#{client.id}" %></div>
+                          <td><div style="width: 220px;"><%= link_to short_ja_name(client.client_name), "#{clients_path(client_id: client.id)}", class: "client_name", title: "#{client.client_name}", id: "#{client.id}" %>
+								<%= link_to short_ja_name(client.client_name), "#{clients_path(client_id: client.id)}", class: "client_name_search", id: "search#{client.id}" %></div>
                           </td>
                       <% end %>
                   <% else %>

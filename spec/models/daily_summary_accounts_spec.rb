@@ -3,7 +3,7 @@ require 'spec_helper'
 describe DailySummaryAccount do
   let!(:client){FactoryGirl.create(:client, id: "1")}
   let!(:account){ FactoryGirl.create(:account, id: "1")}
-  let!(:medium){ FactoryGirl.create(:medium)}
+  let!(:media){ FactoryGirl.create(:media)}
   let!(:promotion) {FactoryGirl.create(:promotion, id: "1")}
   
   describe "#get_table_data promotion" do

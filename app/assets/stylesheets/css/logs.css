@@ -158,36 +158,6 @@ table.user_add tbody td {
 	#content li.lc {
 		padding: 0;
 	}
-	
-	/* 隠しコンテンツのCSS */
-	.f_box {
-		position: relative;
-
-		width: 725px;/* 隠しコンテンツの横幅 */
-		 height: 630px;/* 隠しコンテンツの高さ */
-		background-color:#efefef;
-				font-weight:bold;
-	font-size:14px;
-	text-decoration:none;
-	color:#404040;
-	}
-	.f_box2 {
-    background-color: #EFEFEF;
-    color: #404040;
-    font-size: 14px;
-    font-weight: bold;
-    height: 650px;
-    position: relative;
-    text-decoration: none;
-    width: 515px;
-	}
-
-	
-.f_box a:link { color: #404040; }
-.f_box a:visited { color: #404040; }
-.f_box a:hover { color: #404040; }
-.f_box a:active { color: #404040; }
-	
 
 	.f_box_title2 {
   background-color: #545454;
