@@ -160,7 +160,8 @@ class UpdateUrlData
                                             update redirect_informations set creative_id = #{row[CREATIVE_ID]},
                                                                       comment = '#{row[COMMENT]}',
                                                                       click_unit = #{row[CLICK_UNIT]},
-                                                                      updated_at = '#{current_time}'
+                                                                      updated_at = NOW()
+                                                                      update_user_id = #{user_id}
                                                               where mpv = '#{current_mpv}'
                                                                       ;
 
@@ -170,13 +171,13 @@ class UpdateUrlData
 
                # insert url
                insert_redirect_url_str += "#{comma_sql}('#{current_mpv}', '#{row[REDIRECT_URL1]}', #{row[RATE1]}, '#{row[NAME1]}',
-                                            #{user_id}, '#{current_time}', '#{current_time}', #{user_id} )
+                                            #{user_id}, NOW(), NOW(), #{user_id} )
 
                                             "
                
                if row[REDIRECT_URL2] != ""
                  insert_redirect_url_str += " , ('#{current_mpv}', '#{row[REDIRECT_URL2]}', #{row[RATE2]}, '#{row[NAME2]}',
-                                             #{user_id}, '#{current_time}', '#{current_time}', #{user_id} )
+                                             #{user_id}, NOW(), NOW(), #{user_id} )
 
                                             "
                  num += 1
@@ -184,7 +185,7 @@ class UpdateUrlData
 
                if row[REDIRECT_URL3] != ""
                  insert_redirect_url_str += " , ('#{current_mpv}', '#{row[REDIRECT_URL3]}', #{row[RATE3]}, '#{row[NAME3]}',
-                                             #{user_id}, '#{current_time}', '#{current_time}', #{user_id} )
+                                             #{user_id}, NOW(), NOW(), #{user_id} )
 
                                             "
                  num += 1
@@ -192,7 +193,7 @@ class UpdateUrlData
 
                if row[REDIRECT_URL4] != ""
                  insert_redirect_url_str += " , ('#{current_mpv}', '#{row[REDIRECT_URL4]}', #{row[RATE4]}, '#{row[NAME4]}',
-                                             #{user_id}, '#{current_time}', '#{current_time}', #{user_id} )
+                                             #{user_id}, NOW(), NOW(), #{user_id} )
 
                                             "
                  num += 1
@@ -200,8 +201,7 @@ class UpdateUrlData
 
                if row[REDIRECT_URL5] != ""
                  insert_redirect_url_str += " , ('#{current_mpv}', '#{row[REDIRECT_URL5]}', #{row[RATE5]}, '#{row[NAME5]}',
-                                             '#{current_time}', '#{current_time}', #{user_id} )
-
+                                             NOW(), NOW(), #{user_id} )
                                             "
                  num += 1
                end
@@ -454,7 +454,11 @@ class UpdateUrlData
     row[REDIRECT_URL1] = row[REDIRECT_URL1].to_s.strip
     if row[REDIRECT_URL1] == ""
       error_num += 1
-      error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.url_not_specified") + "1#{enter_key}")
+      if lang == 'en'
+        error.write("Line #{line_num}: URL is not specified in 1.\n")
+      else
+        error.write(" #{line_num}#{line_jp}:リンク先1にURLが指定されていません。\n")
+      end
     end
 
     #NAME1

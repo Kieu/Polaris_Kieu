@@ -113,7 +113,7 @@ describe ClientsController do
 
           it "redirect to new action" do
             action_create
-            response.should redirect_to action: :new
+            response.should render_template js: "create"
           end
         end
 
@@ -126,7 +126,7 @@ describe ClientsController do
 
           it "render new action" do
             action_create
-            response.should render_template :new
+            response.should render_template js: "create"
           end
         end
       end
@@ -148,7 +148,7 @@ describe ClientsController do
 
           describe "redirect to action index" do
             subject {response}
-         #   it {should redirect_to action: :index, client_id: client.id}
+            it {should render_template js: "update"}
           end
         end
 
@@ -163,7 +163,7 @@ describe ClientsController do
 
           describe "render template edit" do
             subject {response}
-            it {should render_template :edit}
+            it {should render_template js: "update"}
           end
         end
       end

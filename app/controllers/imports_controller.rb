@@ -48,7 +48,7 @@ class ImportsController < ApplicationController
       end
 
     else
-      flash[:csv_error] << @import.errors.full_messages
+      flash[:csv_error] << @import.errors.messages[:csv]
     end
     
     redirect_to url_settings_path(promotion_id: params[:promotion_id], account_id: params[:account_id])
@@ -95,7 +95,8 @@ class ImportsController < ApplicationController
            row[20].to_s.strip.downcase != t("url.rate4") || row[21].to_s.strip.downcase != t("url.redirect_url5") || 
            row[22].to_s.strip.downcase != t("url.name5") || row[23].to_s.strip.downcase != t("url.rate5")
 
-           message = t("error_message_url_import.differrent_format")
+           I18n.locale = current_lang
+           message = I18n.t("error_message_url_import.differrent_format")
            flg_check_error = true
          end
 
