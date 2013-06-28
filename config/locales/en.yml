@@ -819,6 +819,7 @@ en:
     others: "Others"
     error_message: "Error Message"
     error_log_view: "Show error logs"
+    currency: "￥"
   click_logs:
     label: Clicks Logs
     display_item: Display item

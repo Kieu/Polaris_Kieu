@@ -844,6 +844,7 @@ ja:
     others: "Others"
     error_message: "エラーメッセージ"
     error_log_view: "エラーログ表示"
+    currency: "￥"
   click_logs:
     label: Clickログ
     display_item: "・表示項目"
