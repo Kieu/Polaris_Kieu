@@ -5,7 +5,7 @@ $(function(){
 	$("a").click(function(event){
 		if (typeof(prevent_change) !="undefined" && prevent_change == "1"){
 	       var href = ($(this).attr('href'));
-	       if (href!='' && href !='#') {
+	       if (href!='' && href !='#' && href != 'javascript:void(0)') {
 		        event.preventDefault();
 		        $.confirm({
 		            'message'	: '<%= render partial: "layouts/popup_new" %>',

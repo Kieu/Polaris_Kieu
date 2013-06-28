@@ -24,20 +24,22 @@ class ConversionsController < ApplicationController
     if params[:cv] && params[:cv].count > 0
       check_valid = Hash.new 
       params[:cv].each_with_index do |op, idx|
-        if check_valid[params[:cv][idx]]
-          flash[:combine_error] = t("conversion.flash_messages.existed")
-        else
-          check_valid.store(params[:cv][idx], '1')
-        end
-        if idx == 0
-          if params[:cv][idx].present?
-            conversion_combine << "#{params[:cv][idx]}_#{params[:cv_kind][idx]}"
+        if params[:cv][idx].to_i > 0
+          if check_valid[params[:cv][idx]]
+            flash[:combine_error] = t("conversion.flash_messages.existed")
+          else
+            check_valid.store(params[:cv][idx], '1')
           end
-        else
-          if params[:cv][idx].present?
-            conversion_combine << "|#{params[:op][idx - 1]}|#{params[:cv][idx]}_#{params[:cv_kind][idx]}"
+          if idx == 0
+            if params[:cv][idx].present?
+              conversion_combine << "#{params[:cv][idx]}_#{params[:cv_kind][idx]}"
+            end
+          else
+            if params[:cv][idx].present?
+              conversion_combine << "|#{params[:op][idx - 1]}|#{params[:cv][idx]}_#{params[:cv_kind][idx]}"
+            end
           end
-        end   
+         end   
       end
     end
     @conversion.conversion_combine = conversion_combine
