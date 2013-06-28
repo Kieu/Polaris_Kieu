@@ -1,4 +1,9 @@
 require 'spec_helper'
 describe Media do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:medium){ FactoryGirl.create(:medium)}
+  describe "#get_media_list" do
+    before { medium }
+    subject {Media.get_media_list.count}
+    it {should == 3}
+  end
 end

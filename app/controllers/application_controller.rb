@@ -42,22 +42,6 @@ class ApplicationController < ActionController::Base
     cookies[:locale] = I18n.locale.to_s 
   end
 
-
-  JS_ESCAPE_MAP = {
-                    '\\'    => '\\\\',
-                    '</'    => '<\/',
-                    "\r\n"  => '\n',
-                    "\n"    => '\n',
-                    "\r"    => '\n',
-                    '"'     => '\\"',
-                    "'"     => "\\'" }
-
-  def escape_javascript(str)
-    return str if str.blank?
-    str.gsub!(/(\\|<\/|\r\n|[\n\r"'])/) { JS_ESCAPE_MAP[$1] }
-    str
-  end
-
   def render_404
     render file: 'public/404.html', status: :not_found
   end

@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe User do
   let!(:user) {FactoryGirl.create(:user_super)}
+  let!(:user_agency) {FactoryGirl.create(:user_agency)}
+  let!(:user_client) {FactoryGirl.create(:user_client)}
   it {should respond_to(:username)}
   it {should respond_to(:roman_name)}
   it {should respond_to(:email)}
@@ -65,6 +67,25 @@ describe User do
     it { should_not be_valid }
   end
   
+  describe "valid attribute" do
+    subject {user.valid_attribute?(:email)}
+    it {should == true}
+  end
+  
+  describe "update_login_fail" do
+    before do
+      BlockLoginUser.create(user_id: user.id, login_fail_num: 1)
+      user.update_login_fail
+    end
+    subject {user.block_login_user}
+    it {should_not nil}
+  end
+  
+  describe "update_login_fail with none block" do
+    subject {user.update_login_fail}
+    it {should == BlockLoginUser.last}
+  end
+  
   describe "#can_login?" do
     context "when user can login" do
       it "should return true value" do
@@ -112,5 +133,20 @@ describe User do
       subject {client_user.reload.del_flg}
       it {should eq Settings.client_user.deleted}
     end
+  end
+  
+  describe "#super?" do
+    subject {user.super?}
+    it {should == true}
+  end
+  
+  describe "#agency?" do
+    subject {user_agency.agency?}
+    it {should == true}
+  end
+  
+  describe "#client?" do
+    subject {user_client.client?}
+    it {should == true}
   end
 end
