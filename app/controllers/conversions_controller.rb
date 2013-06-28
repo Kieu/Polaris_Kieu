@@ -46,14 +46,11 @@ class ConversionsController < ApplicationController
       end
     end
     @conversion.conversion_combine = conversion_combine
-    if has_error == 0
-      if @conversion.save
-        @conversion.create_mv
-        flash[:error] = t("conversion.flash_messages.success")
-        redirect_to conversions_path(promotion_id: params[:promotion_id])
-      else
-        has_error = 1
-      end
+    if @conversion.save
+      @conversion.create_mv
+      flash[:error] = t("conversion.flash_messages.success")
+    else
+      has_error = 1
     end
     if has_error == 1
       if @conversion.conversion_combine.present?
@@ -79,6 +76,8 @@ class ConversionsController < ApplicationController
           end 
       end
       render :new
+    else
+      redirect_to conversions_path(promotion_id: params[:promotion_id])
     end
   end
 
