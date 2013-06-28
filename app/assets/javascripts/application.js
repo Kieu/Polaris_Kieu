@@ -15,6 +15,9 @@
 //= require_directory .
 //= require zeroclipboard
 $(function(){
+
+
+
     $('#clients_list').niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
 
     $('#promotions_list').niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});

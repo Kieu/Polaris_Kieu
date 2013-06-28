@@ -22,46 +22,58 @@ class ConversionsController < ApplicationController
     conversion_combine = ''
     @prevent = "1"
     if params[:cv] && params[:cv].count > 0
+      check_valid = Hash.new 
       params[:cv].each_with_index do |op, idx|
-        if idx == 0
-          if params[:cv][idx].present?
-            conversion_combine << "#{params[:cv][idx]}_#{params[:cv_kind][idx]}"
+        if params[:cv][idx].to_i > 0
+          if check_valid[params[:cv][idx]]
+            flash[:combine_error] = t("conversion.flash_messages.existed")
+          else
+            check_valid.store(params[:cv][idx], '1')
           end
-        else
-          if params[:cv][idx].present?
-            conversion_combine << "|#{params[:op][idx - 1]}|#{params[:cv][idx]}_#{params[:cv_kind][idx]}"
+          if idx == 0
+            if params[:cv][idx].present?
+              conversion_combine << "#{params[:cv][idx]}_#{params[:cv_kind][idx]}"
+            end
+          else
+            if params[:cv][idx].present?
+              conversion_combine << "|#{params[:op][idx - 1]}|#{params[:cv][idx]}_#{params[:cv_kind][idx]}"
+            end
           end
-        end   
+         end   
       end
     end
     @conversion.conversion_combine = conversion_combine
-    if @conversion.save
-      @conversion.create_mv
-      flash[:error] = t("conversion.flash_messages.success")
-      redirect_to conversions_path(promotion_id: params[:promotion_id])
-    else
-      if @conversion.conversion_combine.present?
-        @cv_list = Hash.new
-        @cv_kind_list = Hash.new
-        @op_list = Hash.new
-        conversions = Conversion.where(promotion_id: params[:promotion_id]).select("id, conversion_name")
-        if params[:cv].count > 0
-          idx = 0
-          params[:cv].each do | cv |
-            if cv.to_i > 0 
-              @cv_list[idx] = {"id" => cv, "name" => conversions.find(cv.to_i).conversion_name}
-              
-              @cv_kind_list[idx] = {"id" => params[:cv_kind][idx], "name" => t(Settings.conversion_kind[params[:cv_kind][idx].to_i])}
-            else
-              @cv_list[idx] = {"id" => '', "name" => ''}
-              
-              @cv_kind_list[idx] = {"id" => '', "name" => ''}
+    if @conversion.valid?
+      if @conversion.save
+        @conversion.create_mv
+        flash[:error] = t("conversion.flash_messages.success")
+        redirect_to conversions_path(promotion_id: params[:promotion_id])
+      else
+        if @conversion.conversion_combine.present?
+          @cv_list = Hash.new
+          @cv_kind_list = Hash.new
+          @op_list = Hash.new
+          conversions = Conversion.where(promotion_id: params[:promotion_id]).select("id, conversion_name")
+          if params[:cv].count > 0
+            idx = 0
+            params[:cv].each do | cv |
+              if cv.to_i > 0 
+                @cv_list[idx] = {"id" => cv, "name" => conversions.find(cv.to_i).conversion_name}
+                
+                @cv_kind_list[idx] = {"id" => params[:cv_kind][idx], "name" => t(Settings.conversion_kind[params[:cv_kind][idx].to_i])}
+              else
+                @cv_list[idx] = {"id" => '', "name" => ''}
+                
+                @cv_kind_list[idx] = {"id" => '', "name" => ''}
+              end
+              idx += 1
             end
-            idx += 1
-          end
-          @op_list = params[:op]
-        end 
+            @op_list = params[:op]
+          end 
+        end
+        render :new
       end
+    else
       render :new
     end
   end

@@ -2,6 +2,12 @@
 <script>
     $(document).ready(function () {
         <%if signed_in? %>
+
+        $("#inprogress .entrydate_box_notify > li > a").on('click',function()
+        {
+            $(this).parent().remove();
+        });
+
         var first_time = true;
         order = 0;
         var auto_refresh = setInterval(

@@ -13,19 +13,6 @@
     min-height: 500px;
     position: relative;
 }
-#inner {
-      padding: 10px 0 20px 15px;
-}
-#inner p.client_name {
-    color: #3E5869;
-    font-size: 16px;
-    font-weight: bold;
-}
-#inner p.regist {
-    color: #3E5869;
-    font-size: 16px;
-    font-weight: bold;
-}
 .regist_form {
     background-color: #F1F1F1;
     border: 1px solid #B6B6B6;
@@ -159,35 +146,7 @@ table.user_add tbody td {
 		padding: 0;
 	}
 	
-	/* 隠しコンテンツのCSS */
-	.f_box {
-		position: relative;
-
-		width: 725px;/* 隠しコンテンツの横幅 */
-		 height: 630px;/* 隠しコンテンツの高さ */
-		background-color:#efefef;
-				font-weight:bold;
-	font-size:14px;
-	text-decoration:none;
-	color:#404040;
-	}
-	.f_box2 {
-    background-color: #EFEFEF;
-    color: #404040;
-    font-size: 14px;
-    font-weight: bold;
-    height: 650px;
-    position: relative;
-    text-decoration: none;
-    width: 515px;
-	}
-
-	
-.f_box a:link { color: #404040; }
-.f_box a:visited { color: #404040; }
-.f_box a:hover { color: #404040; }
-.f_box a:active { color: #404040; }
-	
+	/
 
 	.f_box_title2 {
   background-color: #545454;
@@ -314,20 +273,6 @@ table.user_add tbody td {
     color: #E76813;
     padding: 5px 0 0 160px;
 		}	
-		
-/* ==========================================================================
-   タブの切り替え
-   ========================================================================== */
-#conversion_inner{
-	margin-top:30px;
-	}
-
-	.contentNavi li.pre a{
-		color: #F63;
-	}
-.w_box {
-	/*min-width: 1200px;*/
-}	
 
 input#datepicker {
 	border: 0px;

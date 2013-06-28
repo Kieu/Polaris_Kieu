@@ -62,7 +62,6 @@ class ConversionLog < ActiveRecord::Base
                                        ORDER BY media_category_id, #{sortname} #{sortorder} LIMIT #{start}, #{rp} "
                                         
     end        
-      
     @logs = ConversionLog.find_by_sql([sql_str] + params)
   end
 

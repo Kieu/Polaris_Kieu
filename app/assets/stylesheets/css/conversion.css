@@ -1,5 +1,3 @@
-
-@charset "UTF-8";
 #wrapper {
     margin: 0 auto;
     width: 100%;
@@ -234,7 +232,7 @@ li.disabled {
 	width: 120px;
 }
 .mcdropdown_spacing{
-  margin: 0 0 0 100px !important;
+  margin: 0 0 0 90px !important;
     padding: 0 !important;
     width: 40px !important;
 }

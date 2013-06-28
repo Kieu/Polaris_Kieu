@@ -20,7 +20,7 @@
 						var current_category = "category" + $('#current_id').val();
 						console.log(current_category);
 						var current_menu = "categorymenu" + $('#current_id').val();
-						var html = '<tr><th></th><td></td><td><select name="op[]" width="30px"  class="ta-c mcdropdown_spacing prevent_change" ><option value="+">+</option><option value="-">-</option><option value="×">×</option><option value="÷">÷</option></select></td>';
+						var html = '<tr><th></th><td></td><td><select width="40px" name="op[]" width="30px"  class="ta-c mcdropdown_spacing prevent_change" ><option value="+">+</option><option value="-">-</option><option value="×">×</option><option value="÷">÷</option></select></td>';
 						html += '<td><input type="text" class="prevent_change" id="cv_'+current_category+'" name="'+current_category+'"><ul id="' + current_menu + '" class="mcdropdown_menu">';
 						
 						<% @conversions.each do |conversion| %>
@@ -61,7 +61,7 @@
 						</li>
 						<% end %>
 					</ul></td>
-					<td width="40px"><select name="op[]" class="ta-c mcdropdown_spacing">
+					<td width="40px"><select width="40px" name="op[]" class="ta-c mcdropdown_spacing">
 						<option value="+" <% if @op_list && @op_list[0] == '+'%> selected="selected" <% end %>>+</option>
 		                <option value="-" <% if @op_list && @op_list[0] == '-'%> selected="selected" <% end %>>-</option>
 		                <option value="×" <% if @op_list && @op_list[0] == '×'%> selected="selected" <% end %>>×</option>
@@ -86,6 +86,7 @@
 						</ul></td>
 					<td></td>
 				</tr>
+				
 				<% if @cv_list && @cv_list.count > 0 %>
 				<%
 					script_input_values = Hash.new
@@ -96,7 +97,7 @@
 				<tr>
 				<th></th>
 				<td></td>
-				<td><select name="op[]" class="ta-c mcdropdown_spacing">
+				<td><select width="40px" name="op[]" class="ta-c mcdropdown_spacing">
 						<option value="+" <% if @op_list[idx-1] == '+'%> selected="selected" <% end %>>+</option>
 		                <option value="-" <% if @op_list[idx-1] == '-'%> selected="selected" <% end %>>-</option>
 		                <option value="×" <% if @op_list[idx-1] == '×'%> selected="selected" <% end %>>×</option>
@@ -138,7 +139,22 @@
 				<% end %>
 				<% end %>
 				<% end %>
-				
+				<% if @conversion.errors['conversion_combine'].count > 0%>
+				<tr>
+					<th></th>
+					<td colspan="4">
+					<span class="text-validationError"><%=@conversion.errors['conversion_combine'][0] %></span>
+					</td>
+				</tr>
+				<% end %>
+				<% if flash[:combine_error]%>
+				<tr>
+					<th></th>
+					<td colspan="4">
+					<span class="text-validationError"><%= flash[:combine_error] %></span>
+					</td>
+				</tr>
+				<% end %>
 			</tbody>
 			<tbody>
 				<tr>
