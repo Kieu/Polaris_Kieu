@@ -22,7 +22,7 @@
                 <td class="file_name"><%=job.filename%></td>
                 <td class="capacity"><%= job.size %></td>
                 <td class="daily"><%= job.created_at.strftime("%m/%d/%y") %></td>
-                <td class="c_orange"><% if job.status == '1' %><%= I18n.t('notification.creating') %><%end%></td>
+                <td class="c_orange"><% if job.status == '1' %><%end%></td>
               </tr>
               <tr>
                 <td colspan="4"><%= job.breadcrumb %></td>
@@ -36,5 +36,5 @@
   </ul>
 </div>
 <div>
-  <p style="margin-top:30px;margin-left:220px"><a href="#" id="close_notify"><img alt="キャンセル" src="/assets/btn_close.gif"></a></p>
+  <p style="margin-top:30px;margin-left:220px"><a href="javascript:void(0)" id="close_notify"><img alt="キャンセル" src="/assets/btn_close.gif"></a></p>
 </div>
