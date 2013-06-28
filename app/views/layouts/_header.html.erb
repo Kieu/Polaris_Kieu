@@ -15,6 +15,7 @@
                 function ()
                 {
                     $.ajax({
+                        type: 'post',
                         url: "/background_jobs/notification",
                        cache: false
                     }).done(function( html ) {
