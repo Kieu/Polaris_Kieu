@@ -21,7 +21,7 @@
               <tr>
                 <td class="file_name"><%=job.filename%></td>
                 <td class="capacity"><%= job.size %></td>
-                <td class="daily"><%= job.created_at.strftime("%m/%d/%y %H:%m:%s") %></td>
+                <td class="daily"><%= job.created_at.strftime("%m/%d/%y %H:%m") %></td>
                 <td class="c_orange"><% if job.status == '1' %><%end%></td>
               </tr>
               <tr>
