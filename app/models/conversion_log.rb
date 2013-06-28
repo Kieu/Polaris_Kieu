@@ -114,20 +114,20 @@ repeat_processed_flg,parent_conversion_id,sales,profit,volume,others,null as app
     
     sql_organic = ''
     if organic == 1
-      sql_organic = " union all (select #{field_organic} from conversion_organic_#{id}_logs) where DATE_FORMAT(conversion_ymd, '%Y%m%d') BETWEEN ? AND ? "
+      sql_organic = " union all (select #{field_organic} from conversion_organic_#{id}_logs where DATE_FORMAT(conversion_ymd, '%Y%m%d') BETWEEN ? AND ?) "
     end
     
     if show_error=="1"
       sql_str = "(select #{field} from conversion_#{id}_logs  where DATE_FORMAT(conversion_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause}) union all
                                        (select #{field_error} from conversion_error_#{id}_logs where DATE_FORMAT(conversion_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause}) 
-                                       #{sql_organic} 
-                                       ORDER BY media_category_id "
+                                       #{sql_organic}
+                                       ORDER BY conversion_ymd "
                                         
       params += params1
     else
       sql_str = "(select #{field} from conversion_#{id}_logs  where DATE_FORMAT(conversion_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause}) 
                                        #{sql_organic}
-                                       ORDER BY media_category_id "
+                                       ORDER BY conversion_ymd "
                                         
     end             
     params += params_organic
