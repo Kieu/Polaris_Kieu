@@ -15,6 +15,12 @@ class UsersController < ApplicationController
   end
   
   def create
+    role = Role.find(params[:user][:role_id])
+    if role.id == "2"
+      company = Client.find(params[:user][:company_id])
+    else
+      company = Agency.find(params[:user][:company_id])
+    end
     @user = User.new(params[:user])
     @prevent = "1"
     @user.password = SecureRandom.urlsafe_base64(6)
