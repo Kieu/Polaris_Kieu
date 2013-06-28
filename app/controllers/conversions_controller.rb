@@ -22,12 +22,14 @@ class ConversionsController < ApplicationController
     @conversion.promotion_id = params[:promotion_id]
     conversion_combine = ''
     @prevent = "1"
+    has_error = 0
     if params[:cv] && params[:cv].count > 0
       check_valid = Hash.new 
       params[:cv].each_with_index do |op, idx|
         if params[:cv][idx].to_i > 0
           if check_valid[params[:cv][idx]]
             flash[:combine_error] = t("conversion.flash_messages.existed")
+            has_error = 1
           else
             check_valid.store(params[:cv][idx], '1')
           end
@@ -44,13 +46,14 @@ class ConversionsController < ApplicationController
       end
     end
     @conversion.conversion_combine = conversion_combine
-    has_error = 0
-    if @conversion.save
-      @conversion.create_mv
-      flash[:error] = t("conversion.flash_messages.success")
-      redirect_to conversions_path(promotion_id: params[:promotion_id])
-    else
-      has_error = 1
+    if has_error == 0
+      if @conversion.save
+        @conversion.create_mv
+        flash[:error] = t("conversion.flash_messages.success")
+        redirect_to conversions_path(promotion_id: params[:promotion_id])
+      else
+        has_error = 1
+      end
     end
     if has_error == 1
       if @conversion.conversion_combine.present?
