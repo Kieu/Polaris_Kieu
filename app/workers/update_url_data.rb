@@ -161,6 +161,7 @@ class UpdateUrlData
                                                                       comment = '#{row[COMMENT]}',
                                                                       click_unit = #{row[CLICK_UNIT]},
                                                                       updated_at = NOW()
+                                                                      update_user_id = #{user_id}
                                                               where mpv = '#{current_mpv}'
                                                                       ;
 
