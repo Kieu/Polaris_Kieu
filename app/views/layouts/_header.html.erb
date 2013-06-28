@@ -3,8 +3,9 @@
     $(document).ready(function () {
         <%if signed_in? %>
 
-        $("#inprogress .entrydate_box_notify > li > a").on('click',function()
+        $(document).on('click', "#inprogress > li > a",function()
         {
+            alert('test');
             $(this).parent().remove();
         });
 
@@ -14,6 +15,7 @@
                 function ()
                 {
                     $.ajax({
+                        type: 'post',
                         url: "/background_jobs/notification",
                        cache: false
                     }).done(function( html ) {
@@ -54,6 +56,13 @@
     }
      });
         $( "#tabs" ).tabs({
+            select: function() {
+                $(this).tabs("option", { ajaxOptions: { data: html } });
+            },
+                ajaxOptions:{
+                    type: 'post'
+
+                },
             beforeLoad: function( event, ui ) {
                 ui.jqXHR.error(function() {
                     ui.panel.html(
