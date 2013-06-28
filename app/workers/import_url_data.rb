@@ -159,7 +159,6 @@ class ImportUrlData
                 campaign_obj.promotion_id = promotion_id
                 campaign_obj.account_id = account_id
                 campaign_obj.create_user_id = user_id
-                campaign_obj.created_at = current_time
                 campaign_obj.save!
 
                 display_campaign_id = campaign_obj.id
@@ -171,7 +170,6 @@ class ImportUrlData
                 group_obj.account_id = account_id
                 group_obj.display_campaign_id = campaign_obj.id
                 group_obj.create_user_id = user_id
-                group_obj.created_at = current_time
                 group_obj.save!
 
                 display_group_id = group_obj.id
@@ -192,7 +190,6 @@ class ImportUrlData
               ad_obj.display_campaign_id = display_campaign_id
               ad_obj.display_group_id = display_group_id
               ad_obj.create_user_id = user_id
-              ad_obj.created_at = current_time
               ad_obj.save!
 
               if row[AD_ID] == ""
@@ -205,34 +202,34 @@ class ImportUrlData
               # insert redirect infomation
               insert_redirect_info_str += "#{comma_sql} ('#{current_mpv}', #{client_id}, #{promotion_id}, #{media_category_id},
                                            #{media_id}, #{account_id}, #{display_campaign_id}, #{display_group_id}, #{ad_obj.id}, #{row[CREATIVE_ID]},
-                                           #{row[CLICK_UNIT]}, '#{row[COMMENT]}', '#{current_time}', #{user_id} )
+                                           #{row[CLICK_UNIT]}, '#{row[COMMENT]}', NOW(), #{user_id} )
 
               "
 
               # insert url
               insert_redirect_url_str += "#{comma_sql}('#{current_mpv}', '#{row[REDIRECT_URL1]}', #{row[RATE1]}, '#{row[NAME1]}',
-                                             '#{current_time}', #{user_id} ) "
+                                             NOW(), #{user_id} ) "
               if row[REDIRECT_URL2] != ""
                 insert_redirect_url_str += " , ('#{current_mpv}', '#{row[REDIRECT_URL2]}', #{row[RATE2]}, '#{row[NAME2]}',
-                                             '#{current_time}', #{user_id} ) "
+                                             NOW(), #{user_id} ) "
                 num += 1
               end
 
               if row[REDIRECT_URL3] != ""
                 insert_redirect_url_str += " , ('#{current_mpv}', '#{row[REDIRECT_URL3]}', #{row[RATE3]}, '#{row[NAME3]}',
-                                             '#{current_time}', #{user_id} ) "
+                                             NOW(), #{user_id} ) "
                 num += 1
               end
 
               if row[REDIRECT_URL4] != ""
                 insert_redirect_url_str += " , ('#{current_mpv}', '#{row[REDIRECT_URL4]}', #{row[RATE4]}, '#{row[NAME4]}',
-                                             '#{current_time}', #{user_id} )  "
+                                             NOW(), #{user_id} )  "
                 num += 1
               end
 
               if row[REDIRECT_URL5] != ""
                 insert_redirect_url_str += " , ('#{current_mpv}', '#{row[REDIRECT_URL5]}', #{row[RATE5]}, '#{row[NAME5]}',
-                                             '#{current_time}', #{user_id} ) "
+                                             NOW(), #{user_id} ) "
                 num += 1
               end
               
