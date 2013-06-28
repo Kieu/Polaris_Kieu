@@ -839,7 +839,7 @@ ja:
     repeat: "リピート"
     log_state: "OK/NG"
     sales: "Sales"
-    profit: "Profit"
+    profit: "利益"
     volume: "Volume"
     others: "Others"
     error_message: "エラーメッセージ"
