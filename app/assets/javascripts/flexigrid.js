@@ -1438,9 +1438,9 @@
             width: g.bDiv.style.width,
             height: gh,
             background: 'white',
-            position: 'relative',
+            position: 'none',
             marginBottom: (gh * -1),
-            zIndex: 1,
+            zIndex: 0,
             top: gtop,
             left: '0px'
         });
