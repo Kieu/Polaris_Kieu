@@ -798,6 +798,8 @@ ja:
     combination:
       pattern: "パターン： "
       add: "Add"
+    flash_messages:
+      existed: "別のコンバージョンを選択してください"
   log:
     title:
       cv_logs: "CVログ"
