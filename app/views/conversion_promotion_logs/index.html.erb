@@ -138,7 +138,7 @@
     {display: '<%= I18n.t("cv_logs.log_state")%>', name : 'log_state', width : 'auto', sortable : true, align: 'left',hide: ($.cookie("cv_options")[17] == "1") ? false : true},
     {display: '<%= I18n.t("cv_logs.sales")%>', name : 'sales', width : 'auto', sortable : true, align: 'right',hide: ($.cookie("cv_options")[18] == "1") ? false : true},
     {display: '<%= I18n.t("cv_logs.profit")%>', name : 'profit', width : 'auto', sortable : true, align: 'right',hide: ($.cookie("cv_options")[19] == "1") ? false : true},
-    {display: '<%= I18n.t("cv_logs.volume")%>', name : 'volume', width : 'auto', sortable : true, align: 'left',hide: ($.cookie("cv_options")[20] == "1") ? false : true},
+    {display: '<%= I18n.t("cv_logs.volume")%>', name : 'volume', width : 'auto', sortable : true, align: 'right',hide: ($.cookie("cv_options")[20] == "1") ? false : true},
     {display: '<%= I18n.t("cv_logs.others")%>', name : 'others', width : 'auto', sortable : true, align: 'left',hide: ($.cookie("cv_options")[21] == "1") ? false : true},
     {display: '<%= I18n.t("cv_logs.error_message")%>', name : 'error_code', width : 'auto', sortable : true, align: 'left',hide: ($.cookie("cv_options")[22] == "1") ? false : true}
 			],
@@ -306,7 +306,7 @@
 	$("#media_category_id").change(function(){
 		$.ajax({
 	        type: "POST",
-	        url: "<%= change_accounts_list_conversion_promotion_logs_path %>",
+	        url: "<%= change_accounts_list_conversion_promotion_logs_path %>?cid=" + $(this).val() + "&promotion_id=<%= @promotion.id%>",
 	        data: "cid=" + $(this).val(),
 	        success: function (data) {
 	            $("#account_id").html("");
