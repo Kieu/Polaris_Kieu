@@ -134,7 +134,7 @@ class ExportConversionLogsData
             accounts_list[row.account_id], display_campaign_name,
             display_group_name, display_ads_name,
             row.redirect_url, click_utime, row.click_referrer, row.sales,
-            row.profit,row.volume, row.others, row.verify, row.suid,row.session_id,
+            row.profit, row.volume, row.others, row.verify, row.suid,row.session_id,
             os[row.device_category.to_i], row.repeat_processed_flg, row.log_state,
             row.user_agent, row.remote_ip, row.referrer, row.media_session_id,
             row.mark, row.request_uri, row.send_url, send_utime, I18n.t("log_cv_error_messages")[row.error_code.to_i]]
