@@ -1431,7 +1431,7 @@
         g.cdropright = document.createElement('span');
         g.cdropright.className = 'cdropright';
         //add block
-        g.block.className = 'gBlock';
+        g.block.className = 'gBlock1';
         var gh = $(g.bDiv).height();
         var gtop = g.bDiv.offsetTop;
         $(g.block).css({

@@ -125,7 +125,7 @@
 				{display: '<%= I18n.t("click_logs.url")%>', name : 'redirect_url', sortable : false, width:'200', align: 'left', hide: <%= cookies[:coptions][6] == "0" ? 1 : 0 %>},
 				{display: '<%= I18n.t("click_logs.sesid")%>', name : 'session_id', sortable : false, width:'200', align: 'left', hide: <%= cookies[:coptions][7] == "0" ? 1 : 0 %>},
 				{display: '<%= I18n.t("click_logs.os")%>', name : 'device_category', sortable : false, width:'200', align: 'left', hide: <%= cookies[:coptions][8] == "0" ? 1 : 0 %>},
-				{display: '<%= I18n.t("click_logs.log_state")%>', name : 'state', sortable : false, width:'200', align: 'left', hide: <%= cookies[:coptions][9] == "0" ? 1 : 0 %>},
+				{display: '<%= I18n.t("click_logs.log_state")%>', name : 'state', sortable : false, width:'200', align: 'center', hide: <%= cookies[:coptions][9] == "0" ? 1 : 0 %>},
 				{display: '<%= I18n.t("click_logs.error_message")%>', name : 'error_code', sortable : false, width:'200', align: 'left', hide: <%= cookies[:coptions][10] == "0" ? 1 : 0 %>},
 				],
 				preProcess : function (json) {
