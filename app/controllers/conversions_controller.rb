@@ -1,10 +1,11 @@
 class ConversionsController < ApplicationController
+  
   before_filter :signed_in_user
   before_filter :must_super_agency
   before_filter :get_promotion, only: [:index, :new, :create, :edit, :update, :get_tag]
   before_filter :get_conversion, only: [:edit, :update, :get_tag]
   before_filter :get_list_conversions
-
+  
   def index
   end
 
