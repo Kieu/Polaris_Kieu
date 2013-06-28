@@ -76,7 +76,7 @@ conversion_utime,conversion_ymd,click_utime,remote_ip,mark,conversion_category,t
 
     field_organic = "id,null as media_category_id,null as media_id,null as account_id,null as campaign_id,null as group_id,null as unit_id,conversion_id,null as redirect_infomation_id,null as mpv,null as redirect_url_id,null as creative_id,null as session_id,verify,suid,request_uri,null as redirect_url,null as media_session_id,device_category,user_agent,referrer,null as click_referrer,
 conversion_utime,conversion_ymd,null as click_utime,remote_ip,null as mark,conversion_category,track_type,repeat_flg,
-repeat_processed_flg,parent_conversion_id,sales,profit,volume,others,null as approval_status,null as send_url,null as send_utime,access_track_server,'OGANIC' as log_state,null as error_code,created_at,updated_at"
+repeat_processed_flg,parent_conversion_id,sales,profit,volume,others,null as approval_status,null as send_url,null as send_utime,access_track_server,'organic' as log_state,null as error_code,created_at,updated_at"
     
     self.table_name = "conversion_#{id}_logs" 
     if !self.table_exists?
@@ -121,13 +121,13 @@ repeat_processed_flg,parent_conversion_id,sales,profit,volume,others,null as app
       sql_str = "(select #{field} from conversion_#{id}_logs  where DATE_FORMAT(conversion_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause}) union all
                                        (select #{field_error} from conversion_error_#{id}_logs where DATE_FORMAT(conversion_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause}) 
                                        #{sql_organic}
-                                       ORDER BY conversion_ymd "
+                                       ORDER BY conversion_ymd DESC "
                                         
       params += params1
     else
       sql_str = "(select #{field} from conversion_#{id}_logs  where DATE_FORMAT(conversion_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause}) 
                                        #{sql_organic}
-                                       ORDER BY conversion_ymd "
+                                       ORDER BY conversion_ymd DESC "
                                         
     end             
     params += params_organic
