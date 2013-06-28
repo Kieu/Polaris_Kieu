@@ -402,7 +402,7 @@ ja:
         conversion:
           attributes:
             conversion_name:
-              blank: "コンバージョン名 を選択してください"
+              blank: "コンバージョン名を入力して下さい"
               accepted: コンバージョン名 受諾してください。 
               confirmation: コンバージョン名 確認の入力が一致しません。 
               empty: コンバージョン名 入力してください。
@@ -435,7 +435,7 @@ ja:
               greater_than: ! 'コンバージョン名(英語) %{count}より大きい値にしてください。'
               greater_than_or_equal_to: ! 'コンバージョン名(英語) %{count}以上の値にしてください。'
               inclusion: コンバージョン名(英語) 正しい値が選択されていません。
-              invalid: コンバージョン名(英語) は英数字で記載して下さい
+              invalid: "コンバージョン名(英語) の入力内容が無効です"
               less_than: ! 'コンバージョン名(英語) %{count}より小さい値にしてください。'
               less_than_or_equal_to: ! 'コンバージョン名(英語) %{count}以下の値にしてください。'
               not_a_number: コンバージョン名(英語) 数値で入力してください。
@@ -517,7 +517,7 @@ ja:
               wrong_length: ! 'Facebook app %{count}文字で入力してください。'
               acceptance: Facebook app チェックボックスを選択してください。
             session_period:
-              inclusion: "計測期間は１日以降９０日以下で記入下さい。"
+              inclusion: "セッション保持期間は１日以降９０日以下で記入下さい。"
             conversion_combine:
               blank: "パターン を選択してください"
               
@@ -838,10 +838,10 @@ ja:
     os: "OS"
     repeat: "リピート"
     log_state: "OK/NG"
-    sales: "Sales"
+    sales: "売上単価"
     profit: "利益"
-    volume: "Volume"
-    others: "Others"
+    volume: "個数"
+    others: "任意"
     error_message: "エラーメッセージ"
     error_log_view: "エラーログ表示"
     currency: "￥"

@@ -60,6 +60,20 @@ class ClickLogsController < ApplicationController
     background_job.save!
     render text: "processing"
   end
+  def change_accounts_list
+    if params[:cid] && params[:cid].to_i > 0
+      render json: Account.where(media_category_id: params[:cid]).where(promotion_id: params[:promotion_id]).order(:roman_name).select("id")
+    .select("CASE WHEN LENGTH(account_name) > #{Settings.MAX_JA_LENGTH_NAME}
+                                   THEN SUBSTRING(account_name, 1, #{Settings.MAX_JA_LENGTH_NAME})
+                                    ELSE  account_name END as account_name ")
+    else
+      
+      render json: Account.where(promotion_id: params[:promotion_id]).order(:roman_name).select("id")
+    .select("CASE WHEN LENGTH(account_name) > #{Settings.MAX_JA_LENGTH_NAME}
+                                   THEN SUBSTRING(account_name, 1, #{Settings.MAX_JA_LENGTH_NAME})
+                                    ELSE  account_name END as account_name ")
+    end
+  end
   private
   def get_rows click_logs
     
