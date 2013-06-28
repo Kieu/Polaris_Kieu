@@ -306,7 +306,7 @@
 	$("#media_category_id").change(function(){
 		$.ajax({
 	        type: "POST",
-	        url: "<%= change_accounts_list_conversion_promotion_logs_path %>",
+	        url: "<%= change_accounts_list_conversion_promotion_logs_path %>?cid=" + $(this).val() + "&promotion_id=<%= @promotion.id%>",
 	        data: "cid=" + $(this).val(),
 	        success: function (data) {
 	            $("#account_id").html("");
