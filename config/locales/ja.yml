@@ -924,7 +924,7 @@ ja:
       company_name: "会社名"
   media_categories: [" リスティング", "ディスプレイ", "アフィリエイト"]   
   log_track_type: ["Install", "アプリ内アクション (Action in app)"]
-  log_repeat_flg: ["新規 (new)", "リピート (repeat)"]
+  log_repeat_flg: ["新規", "リピート "]
   Listing: "リスティング 広告"
   Display: "ディスプレイ 広告"
   Affiliate: "アフィリエイト" 
