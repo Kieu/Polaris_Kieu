@@ -33,4 +33,15 @@ describe Promotion do
       it {should_not be_valid}
     end
   end
+  
+  context "delete" do
+    before {promotion.delete}
+    subject {promotion.del_flg}
+    it {should == Settings.promotion.deleted}
+  end
+  
+  context "deleted?" do
+    subject {promotion.deleted?}
+    it {should == false}
+  end
 end
