@@ -525,7 +525,7 @@ class ImportUrlData
         if lang == 'en'
           error.write("Line #{line_num}: Title 1 needs to be less than 255 letters.\n")
         else
-          error.write("#{line_num}#{line_jp}:タイトル1は文字数の上限255文字を超えています。\n")
+          error.write(" #{line_num}#{line_jp}:タイトル1は文字数の上限255文字を超えています。\n")
         end
       end
     else
@@ -533,7 +533,7 @@ class ImportUrlData
       if lang == 'en'
         error.write("Line #{line_num}: Title 1 is not typed.\n")
       else
-        error.write("#{line_num}#{line_jp}:タイトル1が記入されておりません。\n")
+        error.write(" #{line_num}#{line_jp}:タイトル1が記入されておりません。\n")
       end
     end
 
@@ -545,7 +545,7 @@ class ImportUrlData
         if lang == 'en'
           error.write("Line #{line_num}: Please type Transition rate1 with half-width characters. \n")
         else
-          error.write("#{line_num}#{line_jp}:遷移割合1は半角数字で入力してください。\n")
+          error.write(" #{line_num}#{line_jp}:遷移割合1は半角数字で入力してください。\n")
         end
         
       end
@@ -554,7 +554,7 @@ class ImportUrlData
       if lang == 'en'
         error.write("Line #{line_num}: RATE 1 is not typed.\n")
       else
-        error.write("#{line_num}#{line_jp}:遷移割合1が記入されておりません。\n")
+        error.write(" #{line_num}#{line_jp}:遷移割合1が記入されておりません。\n")
       end
       
     end
@@ -570,7 +570,7 @@ class ImportUrlData
         if lang == 'en'
           error.write("Line #{line_num}: Title 2 needs to be less than 255 letters.\n")
         else
-          error.write("#{line_num}#{line_jp}:タイトル2は文字数の上限255文字を超えています。\n")
+          error.write(" #{line_num}#{line_jp}:タイトル2は文字数の上限255文字を超えています。\n")
         end
       end
     end
@@ -583,7 +583,7 @@ class ImportUrlData
         if lang == 'en'
           error.write("Line #{line_num}: Please type Transition rate2 with half-width characters.\n")
         else
-          error.write("#{line_num}#{line_jp}:遷移割合2は半角数字で入力してください。\n")
+          error.write(" #{line_num}#{line_jp}:遷移割合2は半角数字で入力してください。\n")
         end
       end
     end
@@ -594,7 +594,7 @@ class ImportUrlData
       if lang == 'en'
         error.write("Line #{line_num}: REDIRECT_URL2, NAME2, RATE2 have typed together or blank together.\n")
       else
-        error.write("#{line_num}#{line_jp}:リンク先２、タイトル２、遷移割合２は一緒に入力必須です。もしくは一緒に空欄にしてください。\n")
+        error.write(" #{line_num}#{line_jp}:リンク先２、タイトル２、遷移割合２は一緒に入力必須です。もしくは一緒に空欄にしてください。\n")
       end
       
     end
@@ -610,7 +610,7 @@ class ImportUrlData
         if lang == 'en'
           error.write("Line #{line_num}: Title 3 needs to be less than 255 letters.\n")
         else
-          error.write("#{line_num}#{line_jp}:タイトル3は文字数の上限255文字を超えています。\n")
+          error.write(" #{line_num}#{line_jp}:タイトル3は文字数の上限255文字を超えています。\n")
         end
       end
     end
@@ -623,7 +623,7 @@ class ImportUrlData
         if lang == 'en'
           error.write("Line #{line_num}: Please type Transition rate3 with half-width characters.\n")
         else
-          error.write("#{line_num}#{line_jp}:遷移割合3は半角数字で入力してください。\n")
+          error.write(" #{line_num}#{line_jp}:遷移割合3は半角数字で入力してください。\n")
         end
       end
     end
@@ -634,7 +634,7 @@ class ImportUrlData
       if lang == 'en'
         error.write("Line #{line_num}: REDIRECT_URL3, NAME3, RATE3 have typed together or blank together.\n")
       else
-        error.write("#{line_num}#{line_jp}:リンク先3、タイトル3、遷移割合3は一緒に入力必須です。もしくは一緒に空欄にしてください。\n")
+        error.write(" #{line_num}#{line_jp}:リンク先3、タイトル3、遷移割合3は一緒に入力必須です。もしくは一緒に空欄にしてください。\n")
       end
       
     end
@@ -650,7 +650,7 @@ class ImportUrlData
         if lang == 'en'
           error.write("Line #{line_num}: Title 4 needs to be less than 255 letters.\n")
         else
-          error.write("#{line_num}#{line_jp}:タイトル4は文字数の上限255文字を超えています。\n")
+          error.write(" #{line_num}#{line_jp}:タイトル4は文字数の上限255文字を超えています。\n")
         end
         
       end
@@ -664,7 +664,7 @@ class ImportUrlData
         if lang == 'en'
           error.write("Line #{line_num}: Please type Transition rate4 with half-width characters.\n")
         else
-          error.write("#{line_num}#{line_jp}:遷移割合4は半角数字で入力してください。\n")
+          error.write(" #{line_num}#{line_jp}:遷移割合4は半角数字で入力してください。\n")
         end
         
       end
@@ -676,7 +676,7 @@ class ImportUrlData
       if lang == 'en'
         error.write("Line #{line_num}: REDIRECT_URL4, NAME4, RATE4 have typed together or blank together.\n")
       else
-        error.write("#{line_num}#{line_jp}:リンク先4、タイトル4、遷移割合4は一緒に入力必須です。もしくは一緒に空欄にしてください。\n")
+        error.write(" #{line_num}#{line_jp}:リンク先4、タイトル4、遷移割合4は一緒に入力必須です。もしくは一緒に空欄にしてください。\n")
       end
       
     end
@@ -691,7 +691,7 @@ class ImportUrlData
         if lang == 'en'
           error.write("Line #{line_num}: Title 5 needs to be less than 255 letters.\n")
         else
-          error.write("#{line_num}#{line_jp}:タイトル5は文字数の上限255文字を超えています。\n")
+          error.write(" #{line_num}#{line_jp}:タイトル5は文字数の上限255文字を超えています。\n")
         end
         
       end
@@ -705,7 +705,7 @@ class ImportUrlData
         if lang == 'en'
           error.write("Line #{line_num}: Please type Transition rate5 with half-width characters.\n")
         else
-          error.write("#{line_num}#{line_jp}:遷移割合5は半角数字で入力してください。\n")
+          error.write(" #{line_num}#{line_jp}:遷移割合5は半角数字で入力してください。\n")
         end
         
       end
@@ -717,7 +717,7 @@ class ImportUrlData
       if lang == 'en'
         error.write("Line #{line_num}: REDIRECT_URL5, NAME5, RATE5 have typed together or blank together.\n")
       else
-        error.write("#{line_num}#{line_jp}:リンク先5、タイトル5、遷移割合5は一緒に入力必須です。もしくは一緒に空欄にしてください。\n")
+        error.write(" #{line_num}#{line_jp}:リンク先5、タイトル5、遷移割合5は一緒に入力必須です。もしくは一緒に空欄にしてください。\n")
       end
       
     end
@@ -725,7 +725,7 @@ class ImportUrlData
     # check total rate is 100
     if (row[RATE5].to_i + row[RATE4].to_i + row[RATE3].to_i + row[RATE2].to_i + row[RATE1].to_i) != 100
       error_num += 1
-      error.write("#{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.transition_rake_altogether") + "#{enter_key}")
+      error.write(" #{line_en} #{line_num}#{line_jp}: " + I18n.t("error_message_url_import.transition_rake_altogether") + "#{enter_key}")
     end
 
     return row, error_num, array_identifer, array_ad_id_insert, array_ad_name_insert, array_creative_id, insert_camp_flg, display_campaign_id, display_group_id
