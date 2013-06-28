@@ -142,7 +142,6 @@ class ConversionsController < ApplicationController
       @current_id+=1
     end
   end
-
   private
   def get_promotion
     @promotion = Promotion.find(params[:promotion_id])

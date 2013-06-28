@@ -38,6 +38,7 @@ PolarisManage::Application.routes.draw do
   resources :click_logs, only: [:index] do
     post "get_logs_list", on: :collection
     post "download_csv", on: :collection
+    post "change_accounts_list", on: :collection
   end
   resources :conversion_promotion_logs, only: [:index] do
     post "get_conversion_logs_list", on: :collection 

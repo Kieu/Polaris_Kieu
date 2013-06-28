@@ -163,7 +163,7 @@ ul.mcdropdown_menu ul li.mc_endcol {
 	border-bottom:1px solid #fff;
 }
 ul.mcdropdown_menu ul li:hover {
-	background-color: #FFF;
+	background-color: #dedede;
 	/*border-top:1px solid #dedede;*/
 	color:#666;
 }
