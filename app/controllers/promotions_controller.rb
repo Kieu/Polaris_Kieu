@@ -120,6 +120,7 @@ class PromotionsController < ApplicationController
     promotion_id = params[:promotion_id].to_i
     user_id = current_user.id
     background_job = BackgroundJob.create
+    background_job.user_id = user_id 
     background_job.type_view = Settings.type_view.DOWNLOAD
     background_job.status = Settings.job_status.PROCESSING
     background_job.breadcrumb = breadScrumb
