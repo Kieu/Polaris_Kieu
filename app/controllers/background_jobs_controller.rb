@@ -34,9 +34,10 @@ class BackgroundJobsController < ApplicationController
     job = BackgroundJob.find(params[:id])
     if current_user.id==job.user_id
       #send signed for job
+      BackgroundJob.destroy(params[:id])
      @raise_error = Resque::Plugins::Status::Hash.kill(job.job_id)
 
-      BackgroundJob.destroy(params[:id])
+
 
      render :text => @raise_error
     end
