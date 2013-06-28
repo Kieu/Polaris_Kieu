@@ -2,7 +2,7 @@
 	<% flash[:error] = @error %>
 	location.href = "<%= clients_path(client_id: @client.id) %>";
 <% else %>
-	prevent_change = "1"
+	prevent_change = "1";
 	$("#client_info").html("<%=j render 'client_info_form'%>");
 	$("#user_list_form").html(user_list_html);
 	$("#tags").autocomplete({

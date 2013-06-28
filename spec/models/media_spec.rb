@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Media do
-  let(:media) {FactoryGirl.create(:media)}
+  let!(:media) {FactoryGirl.create(:media)}
 
   subject {media}
 
