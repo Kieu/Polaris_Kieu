@@ -3,8 +3,9 @@
     $(document).ready(function () {
         <%if signed_in? %>
 
-        $("#inprogress .entrydate_box_notify > li > a").on('click',function()
+        $("#inprogress > li > a").on('click',function()
         {
+            alert('test');
             $(this).parent().remove();
         });
 
@@ -54,6 +55,9 @@
     }
      });
         $( "#tabs" ).tabs({
+                ajaxOptions:{
+                    type: 'post'
+                },
             beforeLoad: function( event, ui ) {
                 ui.jqXHR.error(function() {
                     ui.panel.html(
