@@ -121,13 +121,13 @@ repeat_processed_flg,parent_conversion_id,sales,profit,volume,others,null as app
       sql_str = "(select #{field} from conversion_#{id}_logs  where DATE_FORMAT(conversion_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause}) union all
                                        (select #{field_error} from conversion_error_#{id}_logs where DATE_FORMAT(conversion_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause}) 
                                        #{sql_organic}
-                                       ORDER BY conversion_ymd "
+                                       ORDER BY conversion_ymd DESC "
                                         
       params += params1
     else
       sql_str = "(select #{field} from conversion_#{id}_logs  where DATE_FORMAT(conversion_ymd, '%Y%m%d') BETWEEN ? AND ? #{where_clause}) 
                                        #{sql_organic}
-                                       ORDER BY conversion_ymd "
+                                       ORDER BY conversion_ymd DESC "
                                         
     end             
     params += params_organic

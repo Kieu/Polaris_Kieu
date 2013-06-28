@@ -164,6 +164,11 @@ class ConversionPromotionLogsController < ApplicationController
       else
         sales_unit = ""
       end 
+      if conversion_log.profit && conversion_log.profit.to_i > 0
+        profit = number_to_currency conversion_log.profit, unit: I18n.t("cv_logs.currency"), seperator: ",", delimiter: ""
+      else
+        profit = ""
+      end 
       rows << {id: conversion_log.id, cell: 
         {conversion_utime: "<div title='#{Time.at(conversion_log.conversion_utime).strftime("%Y/%m/%d %H:%M:%S")}'>" + Time.at(conversion_log.conversion_utime).strftime("%Y/%m/%d %H:%M:%S") + "</div>",
          conversion_id: "<div title='#{conversions.find_by_id(conversion_log.conversion_id).conversion_name}'>" + conversions.find_by_id(conversion_log.conversion_id).conversion_name + "</div>",
@@ -187,7 +192,7 @@ class ConversionPromotionLogsController < ApplicationController
          others: (conversion_log.others) ? "<div title='#{conversion_log.others}'>" + conversion_log.others + "</div>" : '',
          error_code: "<div title='#{I18n.t("log_cv_error_messages")[conversion_log.error_code.to_i]}'>" + I18n.t("log_cv_error_messages")[conversion_log.error_code.to_i] + "</div>",
          media_category_id: conversion_log.media_category_id,
-         profit: conversion_log.profit
+         profit: profit
       }}
     end
     rows
