@@ -1,4 +1,12 @@
 require 'spec_helper'
+
 describe Media do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:media) {FactoryGirl.create(:media)}
+
+  subject {media}
+
+  it {should respond_to(:media_name)}
+  it {should respond_to(:media_category_id)}
+  it {should respond_to(:del_flg)}
+  it {should be_valid}
 end
