@@ -189,7 +189,10 @@ class ConversionPromotionLogsController < ApplicationController
 
   def change_accounts_list
     if params[:cid].to_i > 0
-      render json: Account.where(media_category_id: params[:cid])
+      render json: Account.where(media_category_id: params[:cid]).where(promotion_id: @promotion.id).order(:roman_name).select("id")
+    .select("CASE WHEN LENGTH(account_name) > #{Settings.MAX_JA_LENGTH_NAME}
+                                   THEN SUBSTRING(account_name, 1, #{Settings.MAX_JA_LENGTH_NAME})
+                                    ELSE  account_name END as account_name ")
     else
       render json: Account.all
     end
