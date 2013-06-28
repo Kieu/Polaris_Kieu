@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     @user.create_user_id = current_user.id
     if @user.valid?
       role = Role.find(params[:user][:role_id])
-      if role.id == "2"
+      if role.id == 2
         company = Client.find(params[:user][:company_id])
       else
         company = Agency.find(params[:user][:company_id])

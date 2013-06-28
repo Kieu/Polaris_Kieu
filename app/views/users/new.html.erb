@@ -58,7 +58,7 @@ $(function(){
           	<% if @user.role_id && !@user.client? %>
           		<%= f.select :company_id, Agency.all.map {|c| [c.name_with_initial, c.id, {'title' => c.agency_name}]}, {include_blank: t("user.company_id.include_blank")}, {:class => 'input-text prevent_change',tabindex: 5} %>
             <% elsif @user.role_id %>
-            	<%= f.select :company_id, Client.active.all {|c| [c.name_with_initial, c.id, {'title' => c.client_name}]}, {include_blank: t("user.company_id.include_blank")}, {:class => 'input-text prevent_change',tabindex: 5} %>
+            	<%= f.select :company_id, Client.active.all.map {|c| [c.name_with_initial, c.id, {'title' => c.client_name}]}, {include_blank: t("user.company_id.include_blank")}, {:class => 'input-text prevent_change',tabindex: 5} %>
             <% else %>
             	<%= f.select :company_id, Client.where(id: 0) {|c| [c.name_with_initial, c.id, {'title' => c.client_name}]}, {include_blank: t("user.company_id.include_blank")}, {:class => 'input-text prevent_change',tabindex: 5} %>
             <% end %>
@@ -91,7 +91,6 @@ $(function(){
         })
         last_choice = $("#user_role_id").val();
         $("#user_role_id").change(function () {
-        	console.log(last_choice);
             id = $(this).val();
             if ((id == 1 && last_choice == 3) || (id == 3 && last_choice == 1)) {
                 last_choice = id;
