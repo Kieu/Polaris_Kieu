@@ -38,7 +38,7 @@
                 <tr>
                   <td class="file_name"><%=job.filename%></td>
                   <td class="capacity"><%= job.size %></td>
-                  <td class="daily"><%= job.created_at.strftime("%m/%d/%y") %></td>
+                  <td class="daily"><%= job.created_at.strftime("%m/%d/%y %h:%s") %></td>
                   <td class="c_orange">
                     <% if job.type_view == "upload" %><%= I18n.t('notification.uploading') %><%end%>
                     <% if job.type_view == "download" %><%= I18n.t('notification.creating') %><%end%>
