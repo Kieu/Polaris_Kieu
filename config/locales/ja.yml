@@ -782,6 +782,7 @@ ja:
     flash_messages:
       success: " コンバージョン登録が完了しました"
       update: " コンバージョン編集が完了しました"
+      existed: "別のコンバージョンを選択してください"
     option1:
       label: "<オプション①>　"
       starting_point_setting:
@@ -798,8 +799,6 @@ ja:
     combination:
       pattern: "パターン： "
       add: "Add"
-    flash_messages:
-      existed: "別のコンバージョンを選択してください"
   log:
     title:
       cv_logs: "CVログ"
