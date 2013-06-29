@@ -491,6 +491,12 @@ table.fixTable, .hDivBox table {
 // min-width:1400px!important;
     table-layout:fixed;
 }
+
+table.fixcolumn div.hDivBox th, div.colCopy {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
 table.fixTable tr td div {
     width:auto!important;
 }
