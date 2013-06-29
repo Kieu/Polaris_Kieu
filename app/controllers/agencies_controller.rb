@@ -64,6 +64,6 @@ class AgenciesController < ApplicationController
         roman_name: "<div title='#{agency.roman_name}'>" + agency.roman_name + "</div>",
         agency_name: "<div title='#{agency.agency_name}'>" + agency.agency_name+ "</div>"}}
     end
-    rows = json_escape(rows)
+    rows
   end
 end
