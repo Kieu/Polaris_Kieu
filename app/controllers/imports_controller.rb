@@ -2,60 +2,72 @@ require 'csv'
 
 class ImportsController < ApplicationController
   def create
-    @import = Import.new(params[:import])
-    origin_file_name = @import.csv_file_name
-    @import.change_file_name(current_user.id) unless params[:import].nil?
+    error_flg = true
     flash[:csv_error] = Array.new
-    if @import.save
-      file_path = @import.csv.url
-      volume = File.size(file_path)
-      size_field = file_size_fomat volume
-      background_job = BackgroundJob.new
-      background_job.user_id = current_user.id
-      background_job.type_view = Settings.type_view.UPLOAD
-      background_job.status = Settings.job_status.PROCESSING
-      background_job.size = size_field
-      background_job.filename = origin_file_name
-      background_job.breadcrumb = params[:breadcrumb]
-      background_job.save!
+    if params[:import] != nil
+      content_type_file = params[:import]['csv'].content_type.strip
+      array_content_type = ['text/csv','text/comma-separated-values','text/csv','application/csv','application/excel','application/vnd.ms-excel','application/vnd.msexcel','text/anytext','text/plain']
+      if !array_content_type.include?(content_type_file)
+        flash[:csv_error] << I18n.t('error_message_url_import.not_format_csv')
+        error_flg = false
+      end
+    end
+    
+    if error_flg
+      @import = Import.new(params[:import])
+      origin_file_name = @import.csv_file_name
+      @import.change_file_name(current_user.id) unless params[:import].nil?
+      if @import.save
+        file_path = @import.csv.url
+        volume = File.size(file_path)
+        size_field = file_size_fomat volume
+        background_job = BackgroundJob.new
+        background_job.user_id = current_user.id
+        background_job.type_view = Settings.type_view.UPLOAD
+        background_job.status = Settings.job_status.PROCESSING
+        background_job.size = size_field
+        background_job.filename = origin_file_name
+        background_job.breadcrumb = params[:breadcrumb]
+        background_job.save!
 
-      flg_check_error, message = check_header_csv_file file_path
-      if flg_check_error
-        flash[:csv_error] << message
-      else
-        if params[:type] == 'insert'
-          job_id = ImportUrlData.create(file: @import.csv.url,
-                   bgj_id: background_job.id, type: params[:type], user_id: current_user.id,
-                   promotion_id: params[:promotion_id], account_id: params[:account_id], 
-                   media_id: params[:media_id], client_id: params[:client_id], 
-                   media_category_id: params[:media_category_id], lang: cookies[:locale])
-
-          background_job.job_id = job_id
-          background_job.save!
-          flash[:error] = t("url.flash_messages.success")
+        flg_check_error, message = check_header_csv_file file_path
+        if flg_check_error
+          flash[:csv_error] << message
         else
-          job_id = UpdateUrlData.create(file: @import.csv.url,
-                   bgj_id: background_job.id, type: params[:type], user_id: current_user.id,
-                   promotion_id: params[:promotion_id], account_id: params[:account_id], 
-                   media_id: params[:media_id], client_id: params[:client_id], 
-                   media_category_id: params[:media_category_id], lang: cookies[:locale])
+          if params[:type] == 'insert'
+            job_id = ImportUrlData.create(file: @import.csv.url,
+                     bgj_id: background_job.id, type: params[:type], user_id: current_user.id,
+                     promotion_id: params[:promotion_id], account_id: params[:account_id], 
+                     media_id: params[:media_id], client_id: params[:client_id], 
+                     media_category_id: params[:media_category_id], lang: cookies[:locale])
 
-         background_job.job_id = job_id
-         background_job.save!
-         flash[:error] = t("url.flash_messages.success_update")
+            background_job.job_id = job_id
+            background_job.save!
+            flash[:error] = t("url.flash_messages.success")
+          else
+            job_id = UpdateUrlData.create(file: @import.csv.url,
+                     bgj_id: background_job.id, type: params[:type], user_id: current_user.id,
+                     promotion_id: params[:promotion_id], account_id: params[:account_id], 
+                     media_id: params[:media_id], client_id: params[:client_id], 
+                     media_category_id: params[:media_category_id], lang: cookies[:locale])
+
+           background_job.job_id = job_id
+           background_job.save!
+           flash[:error] = t("url.flash_messages.success_update")
+          end
+
         end
 
-      end
+      else
+        if @import.errors.messages[:csv]
+          flash[:csv_error] << @import.errors.messages[:csv]
+        end
 
-    else
-      if @import.errors.messages[:csv]
-        flash[:csv_error] << @import.errors.messages[:csv]
+        if @import.errors.messages[:csv_content_type]
+          flash[:csv_error] << @import.errors.messages[:csv_content_type]
+        end
+        
       end
-
-      if @import.errors.messages[:csv_content_type]
-        flash[:csv_error] << @import.errors.messages[:csv_content_type]
-      end
-      
     end
     
     redirect_to url_settings_path(promotion_id: params[:promotion_id], account_id: params[:account_id])
