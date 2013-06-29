@@ -1,6 +1,7 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
-  factory :medium, :class => 'Media' do
+  factory :media, class: Media do
+    media_name "media_test"
+    media_category_id 1
+    del_flg 0
   end
 end

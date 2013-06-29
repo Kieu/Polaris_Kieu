@@ -20,6 +20,16 @@ describe PromotionsController do
   let(:action_update) do
     put :update, client_id: promotion.client_id, id: promotion.id, promotion: {promotion_name: name_to_change}
   end
+  let(:post_change_data) do
+    post :change_data, client_id: client.id, promotion_id: promotion.id,
+      start_date: "05/01/2013", end_date: "05/25/2013"
+  end
+  
+  let(:download_csv) do
+    post :download_csv, client_name: "test", promotion_id: promotion.id,
+      promotion_name: "test",
+      start_date: "05/01/2013", end_date: "05/25/2013"
+  end
 
   context "when user don't login" do
     describe "GET index" do
@@ -107,6 +117,18 @@ describe PromotionsController do
         before {get :new, client_id: client.id}
         subject {response}
         it {should render_template :new}
+      end
+      
+      describe "post change data" do
+        before {post_change_data}
+        subject {response}
+        it {should render_template "promotions/promotion_table"}
+      end
+      
+      describe "post download csv" do
+        before {download_csv}
+        subject {response.body}
+        it {should == "processing"}
       end
 
       describe "POST create" do

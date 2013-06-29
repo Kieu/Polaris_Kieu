@@ -193,7 +193,7 @@
                 $(g.bDiv).css('max-height','351px');
                 $(g.bDiv).css('width', p.width_body);
                 $(g.hDiv).css('width', p.width_body);
-               $(".bDiv").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px",horizrailenabled:false});
+               $(".bDiv").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
                // $(".hDiv").niceScroll({cursorcolor:"#0087A9",cursorwidth:"8px"});
                 $(".flexigrid").css('width',p.width_body);
             },
@@ -1431,16 +1431,16 @@
         g.cdropright = document.createElement('span');
         g.cdropright.className = 'cdropright';
         //add block
-        g.block.className = 'gBlock';
+        g.block.className = 'gBlock1';
         var gh = $(g.bDiv).height();
         var gtop = g.bDiv.offsetTop;
         $(g.block).css({
             width: g.bDiv.style.width,
             height: gh,
             background: 'white',
-            position: 'relative',
+            position: 'none',
             marginBottom: (gh * -1),
-            zIndex: 1,
+            zIndex: 0,
             top: gtop,
             left: '0px'
         });

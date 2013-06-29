@@ -184,13 +184,13 @@ en:
               invalid: Email address is invalid
               taken: Email has already been registered.
             company_id:
-              blank: "Person in charge can't be blank"
-              too_long: ! 'Person in charge is too long (maximum is %{count} characters)'
-              too_short: ! 'Person in charge is too short (minimum is %{count} characters)'
+              blank: "Company id can't be blank"
+              too_long: ! 'Company id is too long (maximum is %{count} characters)'
+              too_short: ! 'Company id is too short (minimum is %{count} characters)'
             role_id:
-              blank: "Person in sales can't be blank"
-              too_long: ! 'Person in sales is too long (maximum is %{count} characters)'
-              too_short: ! 'Person in sales is too short (minimum is %{count} characters)'
+              blank: "Role id can't be blank"
+              too_long: ! 'Role id  is too long (maximum is %{count} characters)'
+              too_short: ! 'Role id  is too short (minimum is %{count} characters)'
         agency:
           attributes:
             agency_name:
@@ -691,13 +691,13 @@ en:
   conversion:
     title:
       list: "Conversions Setting"
-      edit: "Conversion Edit"
-      add: "Conversion Add"
-      get_tag: "Conversion Get Tag"
-    crumb_add: "Conversion Add"
-    crumb_edit: "Conversion Edit"
+      edit: "Edit Conversion"
+      add: "Add Conversion"
+      get_tag: "Get Tag"
+    crumb_add: "Add Conversion"
+    crumb_edit: "Edit Conversion"
     tag_acquisition: "Get Tag"
-    conversion_setting: "Conversion setting"
+    conversion_setting: "Conversions setting"
     conversion_message: "Please select the conversion you want to view."
     user_information: "User information"
     delete: "Delete"
@@ -759,6 +759,7 @@ en:
       success: "Conversion created"
       update: "Conversion updated"
       existed: "Conversion combine must not be the same"
+      
     option1:
       label: "<Option①>　"
       starting_point_setting:
@@ -1035,6 +1036,8 @@ en:
     send_log: "Send log"
     send_date_time: "Send date time"
     error_message: "Error message"
+    profit: "Profit"
+    click_utime: "Click date time"
   export_click_logs:
     label: Export CLick log
     click_utime: "Click date time"
@@ -1056,7 +1059,7 @@ en:
     referer: 'Referer'
     mark: 'Mark'
     ok_ng: 'OK/NG'
-    error_code: 'Error code'
+    error_code: 'Error messages'
   notification:
     inprogress: 'Inprogress'
     upload: 'Upload List'

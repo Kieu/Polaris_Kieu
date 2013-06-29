@@ -21,7 +21,7 @@
                 <tr>
                   <td class="file_name"><%= job.filename %></td>
                   <td class="capacity"><%= job.size %></td>
-                  <td class="daily"><%= job.created_at.strftime("%m/%d/%y") %></td>
+                  <td class="daily"><%= job.created_at.strftime("%m/%d/%y %H:%m") %></td>
                   <td class="c_black"><%= I18n.t('notification.completed') %></td>
                 </tr>
                 <tr>

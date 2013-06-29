@@ -2,11 +2,19 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
   protect_from_forgery
   unless  Rails.application.config.consider_all_requests_local
-    rescue_from Exception, with: :render_500
-    rescue_from ActionController::RoutingError, with: :render_404
-    rescue_from ActionController::UnknownController, with: :render_404
-    rescue_from ActionController::UnknownAction, with: :render_404
-    rescue_from ActiveRecord::RecordNotFound, with: :render_404
+    if ActionController::RoutingError 
+      rescue_from ActionController::RoutingError, with: :render_404
+    elsif ActionController::UnknownController
+      rescue_from ActionController::UnknownController, with: :render_404
+    elsif ActionController::UnknownAction
+      rescue_from ActionController::UnknownAction, with: :render_404
+    elsif ActiveRecord::RecordNotFound
+      rescue_from ActiveRecord::RecordNotFound, with: :render_404
+    else ActionView::MissingTemplate
+      rescue_from ActionView::MissingTemplate, with: :render_404
+    #else
+        # rescue_from Exception, with: :render_500
+     end
   end
   include SessionsHelper
 
@@ -40,22 +48,6 @@ class ApplicationController < ActionController::Base
   def set_locale
     I18n.locale = cookies[:locale] || I18n.default_locale
     cookies[:locale] = I18n.locale.to_s 
-  end
-
-
-  JS_ESCAPE_MAP = {
-                    '\\'    => '\\\\',
-                    '</'    => '<\/',
-                    "\r\n"  => '\n',
-                    "\n"    => '\n',
-                    "\r"    => '\n',
-                    '"'     => '\\"',
-                    "'"     => "\\'" }
-
-  def escape_javascript(str)
-    return str if str.blank?
-    str.gsub!(/(\\|<\/|\r\n|[\n\r"'])/) { JS_ESCAPE_MAP[$1] }
-    str
   end
 
   def render_404

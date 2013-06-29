@@ -10,11 +10,18 @@
     });
     function remove(i)
     {
+        $.ajax({
+            type: 'post',
+            url: "/background_jobs/kill_job?id="+i,
+        }).done(function(data){
 
+                }).fail(function(data){
+
+                });
     }
     $(document).on('click', "#inprogress a",function()
     {
-        alert('test');
+
         $(this).parent().parent().remove();
     });
 
@@ -31,7 +38,7 @@
                 <tr>
                   <td class="file_name"><%=job.filename%></td>
                   <td class="capacity"><%= job.size %></td>
-                  <td class="daily"><%= job.created_at.strftime("%m/%d/%y") %></td>
+                  <td class="daily"><%= job.created_at.strftime("%m/%d/%y %H:%m") %></td>
                   <td class="c_orange">
                     <% if job.type_view == "upload" %><%= I18n.t('notification.uploading') %><%end%>
                     <% if job.type_view == "download" %><%= I18n.t('notification.creating') %><%end%>
@@ -41,7 +48,7 @@
                   <td colspan="4"><%= job.breadcrumb %></td>
                 </tr>
               </table>
-              <p class="btn_cancel"><a href="javascript:void(0)"><img src="/assets/btn_cancel_notify.gif"/></a></p>
+              <p class="btn_cancel"><a href="javascript:void(0)" onclick="remove(<%= job.id %>)"><img src="/assets/btn_cancel_notify.gif"/></a></p>
             </li>
     <% end %>
 <% end %>

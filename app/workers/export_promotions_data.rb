@@ -40,7 +40,7 @@ class ExportPromotionsData
 
       # get row data
       index_to_get_data_row = 0
-      array_data_row = DailySummaryAccount.get_table_data_export(options['promotion_id'], start_date, end_date, lang)
+      array_data_row = DailySummaryAccount.get_table_data(options['promotion_id'], start_date, end_date, lang)
       media = I18n.t("promotion_export_csv.media")
       account_name = I18n.t("promotion_export_csv.account_name")
       account_col = [media, account_name, "Imp", "Click", "CTR", "COST", "CPM", "CPC"]

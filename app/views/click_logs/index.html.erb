@@ -3,6 +3,7 @@
 <%= stylesheet_link_tag "css/colorbox" %>
 <%= stylesheet_link_tag "css/common" %>
 <%= stylesheet_link_tag "css/box_inner_log" %>
+
 <% if flash[:error] %>
 	<div><%= flash[:error] %></div>
 <% end %>
@@ -125,7 +126,7 @@
 				{display: '<%= I18n.t("click_logs.url")%>', name : 'redirect_url', sortable : false, width:'200', align: 'left', hide: <%= cookies[:coptions][6] == "0" ? 1 : 0 %>},
 				{display: '<%= I18n.t("click_logs.sesid")%>', name : 'session_id', sortable : false, width:'200', align: 'left', hide: <%= cookies[:coptions][7] == "0" ? 1 : 0 %>},
 				{display: '<%= I18n.t("click_logs.os")%>', name : 'device_category', sortable : false, width:'200', align: 'left', hide: <%= cookies[:coptions][8] == "0" ? 1 : 0 %>},
-				{display: '<%= I18n.t("click_logs.log_state")%>', name : 'state', sortable : false, width:'200', align: 'left', hide: <%= cookies[:coptions][9] == "0" ? 1 : 0 %>},
+				{display: '<%= I18n.t("click_logs.log_state")%>', name : 'state', sortable : false, width:'200', align: 'center', hide: <%= cookies[:coptions][9] == "0" ? 1 : 0 %>},
 				{display: '<%= I18n.t("click_logs.error_message")%>', name : 'error_code', sortable : false, width:'200', align: 'left', hide: <%= cookies[:coptions][10] == "0" ? 1 : 0 %>},
 				],
 				preProcess : function (json) {
@@ -208,6 +209,20 @@
         });		
 		
 		$("#media_category_id").change(function(){
+			$.ajax({
+		        type: "POST",
+		        url: "<%= change_accounts_list_click_logs_path %>?cid=" + $(this).val() + "&promotion_id=<%= @promotion.id%>",
+		        data: "cid=" + $(this).val(),
+		        success: function (data) {
+		            $("#account_id").html("");
+	            	option = "<option value=''><%= I18n.t("click_logs.all") %></option>";
+	                $("#account_id").append(option);
+		            for (var i = 0; i < data.length; i++) {
+		                option = "<option value='" + data[i].id + "'>" + data[i].account_name + "</option>";
+		                $("#account_id").append(option);
+		            }
+		        }
+		    });
 			reloadFlex1("#clicklogs", "<%= get_logs_list_click_logs_path %>?media_category_id=" + $(this).val() + "&account_id=" + $("#account_id").val()+ "&start_date=" + start_date + "&end_date=" + end_date);
 		});
 		$("#account_id").change(function(){

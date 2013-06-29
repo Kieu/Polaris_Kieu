@@ -20,6 +20,12 @@ class UsersController < ApplicationController
     @user.password = SecureRandom.urlsafe_base64(6)
     @user.create_user_id = current_user.id
     if @user.valid?
+      role = Role.find(params[:user][:role_id])
+      if role.id == 2
+        company = Client.find(params[:user][:company_id])
+      else
+        company = Agency.find(params[:user][:company_id])
+      end
       @user.save!
       if @user.client?
         ClientUser.create(client_id: @user.company_id, user_id: @user.id)
