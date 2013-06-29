@@ -239,6 +239,11 @@ en:
               too_short: ! 'Roman name is too short (minimum is %{count} characters)'
               wrong_length: ! 'Roman name is the wrong length (should be %{count} characters)'
               acceptance: Roman name must be accepted
+        import:
+          attributes:
+            csv:
+              blank: "Please choose file upload."
+              size: "File's volumn must less than 300MB."
         account:
           attributes:
             account_name:
