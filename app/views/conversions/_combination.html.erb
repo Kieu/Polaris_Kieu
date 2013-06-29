@@ -44,7 +44,7 @@
 
 					</th>
 				<td width="205px">
-					<input type="text" name="cv_category1" class="cv" id="cv_category1" value="" />
+					<input type="text" name="cv_category1" class="prevent_change" id="cv_category1" value="" />
 					<input type="hidden" name="cv_kind[]" id="cv_kind1" value="<%= (@cv_kind_list && @cv_kind_list[0]['id']) ? @cv_kind_list[0]['id'] : '' %>" class="prevent_change"/>
                     <input type="hidden" name="cv[]" value="<%= (@cv_list && @cv_list[0]['id']) ? @cv_list[0]['id'] : '' %>" id="cv1" class="prevent_change"/>
 					<ul id="categorymenu1" class="mcdropdown_menu">
@@ -65,13 +65,13 @@
 						<% end %>
 						<% end %>
 					</ul></td>
-					<td width="40px"><select width="40px" name="op[]" class="ta-c mcdropdown_spacing">
+					<td width="40px"><select width="40px" name="op[]" class="ta-c mcdropdown_spacing prevent_change">
 						<option value="+" <% if @op_list && @op_list[0] == '+'%> selected="selected" <% end %>>+</option>
 		                <option value="-" <% if @op_list && @op_list[0] == '-'%> selected="selected" <% end %>>-</option>
 		                <option value="×" <% if @op_list && @op_list[0] == '×'%> selected="selected" <% end %>>×</option>
 		                <option value="÷" <% if @op_list && @op_list[0] == '÷'%> selected="selected" <% end %>>÷</option>
 						</select></td>
-					<td width="200px"><input type="text" name="cv_category2" class="cv" id="cv_category2" value="" />
+					<td width="200px"><input type="text" name="cv_category2" class="prevent_change" id="cv_category2" value="" />
 						<input type="hidden" name="cv_kind[]" id="cv_kind2" value="<%= (@cv_kind_list && @cv_kind_list[1]) ? @cv_kind_list[1]['id'] : '' %>" />
                     <input type="hidden" name="cv[]" value="<%= (@cv_list && @cv_list[1]) ? @cv_list[1]['id'] : '' %>" id="cv2" />
 						<ul id="categorymenu2" class="mcdropdown_menu">
@@ -103,7 +103,7 @@
 				<tr>
 				<th></th>
 				<td></td>
-				<td><select width="40px" name="op[]" class="ta-c mcdropdown_spacing">
+				<td><select width="40px" name="op[]" class="ta-c mcdropdown_spacing prevent_change" >
 						<option value="+" <% if @op_list[idx-1] == '+'%> selected="selected" <% end %>>+</option>
 		                <option value="-" <% if @op_list[idx-1] == '-'%> selected="selected" <% end %>>-</option>
 		                <option value="×" <% if @op_list[idx-1] == '×'%> selected="selected" <% end %>>×</option>
