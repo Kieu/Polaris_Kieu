@@ -391,8 +391,9 @@ ul.ui-autocomplete{
 .group_header {
 	background-color: grey;
 	font-weight: bold;
-    width: 500px;
+    width: auto;
     padding: 5px;
+
 }
  input#datepick {
     border: 0px;
