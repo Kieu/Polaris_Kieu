@@ -77,7 +77,7 @@
 
 			</div>
 			<div class="w_box">
-			<table id="clicklogs" class="fixcolumn" style="background: grey" ></table>
+			<table id="clicklogs" class="newTable06 fixcolumn" style="background: grey" ></table>
 			</div>
 			
 		</div>
@@ -169,7 +169,6 @@
 			query: <%=params[:promotion_id]%>,
 			showTableToggleBtn: true,
 			onSuccess: function() {
-
                 if ($.cookie("coptions") == '00000000000') {
                 	$('tr#row-1 td:nth-child('+(1+'n-'+(11))+')').remove();
                 	$('tr#row-2 td:nth-child('+(1+'n-'+(11))+')').remove();
