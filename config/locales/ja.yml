@@ -236,6 +236,12 @@ ja:
               too_short: ! '代理店名(英語) %{count}文字以上で入力してください。'
               wrong_length: ! '代理店名(英語) %{count}文字で入力してください。'
               acceptance: 代理店名(英語) チェックボックスを選択してください。
+        import:
+          attributes:
+            csv:
+              blank: "アップロードするファイルを選択してください。"
+              content_type: "ファイル形式がCSVではありません。"
+              size: "ファイル サイズ上限は 300MB です。"
         account:
           attributes:
             account_name:
