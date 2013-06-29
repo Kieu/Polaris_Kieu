@@ -12,9 +12,9 @@ class ApplicationController < ActionController::Base
       rescue_from ActiveRecord::RecordNotFound, with: :render_404
     else ActionView::MissingTemplate
       rescue_from ActionView::MissingTemplate, with: :render_404
-    # else
-    #    # rescue_from Exception, with: :render_500
-    # end
+    #else
+        # rescue_from Exception, with: :render_500
+     end
   end
   include SessionsHelper
 
