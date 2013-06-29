@@ -405,6 +405,7 @@
                 this.rePosDrag();
             },
             addData: function (data) { //parse data
+                data = data.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
                 if (p.dataType == 'json') {
                     data = $.extend({rows: [], page: 0, total: 0}, data);
                 }
