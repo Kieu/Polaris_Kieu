@@ -8,7 +8,7 @@ class AgenciesController < ApplicationController
 
   def get_agencies_list
     rows = get_rows(Agency.order_by_roman_name.page(params[:page]).per(params[:rp]))
-    render json: {page: params[:page], total: Agency.count, rows: rows}
+    render :json => {page: params[:page], total: Agency.count, rows: rows}
   end
   
   def edit
