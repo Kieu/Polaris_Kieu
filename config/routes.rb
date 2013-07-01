@@ -53,7 +53,7 @@ PolarisManage::Application.routes.draw do
   resources :background_jobs do
     post "upload", on: :collection
     post "download", on: :collection
-    post "inprogress", on: :collection
+    get "inprogress", on: :collection
     post "notification", on: :collection
     post "download_file", on: :collection
     post "kill_job", to: "background_jobs#kill_job", on: :collection
