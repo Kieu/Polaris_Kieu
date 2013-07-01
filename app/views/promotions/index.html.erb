@@ -26,7 +26,7 @@ a.bread_scrumb_link {
 	<li><div title="<%= @promotion_name %>"><%= short_ja_name(@promotion_name) %></div></li>
   </div>
 </ul>
-<div class="date"><%= I18n.t("log.today_text") %><br />
+<div class="date" id="date_area"><%= I18n.t("log.today_text") %><br />
 <input id="datepick" type="text" readonly="readonly" value="<%= @start_date + " ~ " + @end_date %>" name="datepick">&#9660;
 </div>
 <div class="clear"></div>
@@ -182,6 +182,9 @@ a.bread_scrumb_link {
   	</div>
 </div>
 <script type="text/javascript">
+    $("#date_area").click(function(){
+    	$("#datepick").click();
+	})
     $('#download_csv').click(function(){
     	var term = $('#datepick').val();
         var d = term.split(' ~ ');

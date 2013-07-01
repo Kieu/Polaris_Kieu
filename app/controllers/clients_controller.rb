@@ -1,4 +1,7 @@
+require 'action_view'
 class ClientsController < ApplicationController
+  include ActionView::Helpers::SanitizeHelper
+  
   before_filter :signed_in_user
   before_filter :must_super_agency, only: [:index, :show]
   before_filter :must_super, only: [:new, :create, :edit, :update, :destroy,
@@ -110,7 +113,7 @@ class ClientsController < ApplicationController
   def get_rows(promotions, client_id)
     rows = Array.new
     promotions.each do |promotion|
-      promotion_name = view_context.link_to(promotion.promotion_name,
+      promotion_name = view_context.link_to(sanitize(promotion.promotion_name),
         "javascript:void(0)",
         class: "edit",
         id: "edit#{index}",
