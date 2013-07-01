@@ -28,7 +28,7 @@
                 <td colspan="4"><%= job.breadcrumb %></td>
               </tr>
             </table>
-            <p class="btn_cancel"><% if job.status == '2' %> <a href="/background_jobs/download_file?id=<%= job.id %>">show error </a><%else%><%= I18n.t('notification.completed') %><%end%></p>
+            <p class="btn_cancel"><% if job.status == '2' %> <a href="/background_jobs/download_file?id=<%= job.id %>"><%= I18n.t('notification.show_error') %></a><%else%><%= I18n.t('notification.completed') %><%end%></p>
           </li>
 
     <% end %>
