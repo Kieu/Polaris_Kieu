@@ -8,7 +8,7 @@ class AgenciesController < ApplicationController
 
   def get_agencies_list
     rows = get_rows(Agency.order_by_roman_name.page(params[:page]).per(params[:rp]))
-    render :json => {page: params[:page], total: Agency.count, rows: rows}
+    render json: {page: params[:page], total: Agency.count, rows: rows}
   end
   
   def edit
@@ -60,9 +60,10 @@ class AgenciesController < ApplicationController
                                   onclick: "ajaxCommon('#{edit_agency_path(agency)}', '', '', '','#inner')"
 
       )
+
       rows << {id: agency.id, cell: {link: link,
-        roman_name: "<div title='#{agency.roman_name}'>" + agency.roman_name + "</div>",
-        agency_name: "<div title='#{agency.agency_name}'>" + agency.agency_name+ "</div>"}}
+        roman_name: "<div title='#{agency.roman_name.html_safe}'>" + agency.roman_name.html_safe + "</div>",
+        agency_name: "<div title='#{agency.agency_name.html_safe}'>" + agency.agency_name.html_safe+ "</div>"}}
     end
     rows
   end
