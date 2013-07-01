@@ -39,7 +39,7 @@
                   <td colspan="4"><%= job.breadcrumb %></td>
                 </tr>
               </table>
-              <p class="btn_download"><a href="javascript:void(0)" onclick="download(<%= job.id %>)"><img src="/assets/btn_download.gif"/></a></p>
+              <p class="btn_download"><a href="/background_jobs/download_file?id=<%= job.id %>"><img src="/assets/btn_download.gif"/></a></p>
             </li>
 
       <% end %>
