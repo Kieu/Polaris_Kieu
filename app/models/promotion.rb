@@ -4,6 +4,7 @@ class Promotion < ActiveRecord::Base
 
   # VALID_ROMAN_NAME_REGEX = /^[A-Z_\ \~\!\@\#\$\%\^\&\*\(\)\_\-\+\=\<\,\>\.\;\:\"\'\{\}|\\\?\?\/a-z][A-Za-z_\ \~\!\@\#\$\%\^\&\*\(\)\_\-\+\=\<\,\>\.\;\:\"\'\{\}|\\\?\?\/\-0-9]*$/
   VALID_ROMAN_NAME_REGEX = /^[\s!-~]+$/
+  VALID_NUMBER_REGEX = /^\d+$/
 
   belongs_to :client
   belongs_to :agency
@@ -15,8 +16,9 @@ class Promotion < ActiveRecord::Base
   validates :roman_name, format: {with: VALID_ROMAN_NAME_REGEX}, if: -> promotion { promotion.roman_name.present?}
   validates :promotion_category_id, presence: true
   validates :tracking_period, presence: true
-  validates :tracking_period, numericality: {only_integer: true}, if: -> promotion { promotion.tracking_period.present?}
-  validates :tracking_period, inclusion: {in: 1..90}, if: -> promotion { promotion.tracking_period.present?}
+  validates :tracking_period,
+    numericality: {only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 90},
+    if: -> promotion {promotion.tracking_period.present?}
   validates :client_id, presence: true
 
   scope :order_by_promotion_name, ->{order :promotion_name}
