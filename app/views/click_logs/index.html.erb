@@ -46,7 +46,7 @@
 			</li>
 		</ul>
 	</div>
-	<div class="date"><%= I18n.t("log.today_text")%><br />
+	<div class="date" id="date_area"><%= I18n.t("log.today_text")%><br />
 		<input id="datepicker" type="text" readonly="readonly" value="<%= @start_date +" ~ "+ @end_date %>" name="datepicker">&#9660;
       <div class="fl-r-log">
         <p><a class="inline_logs" href="#inline_logs"><img src="/assets/btn_dl_option.gif"  /></a>
@@ -86,6 +86,7 @@
 	<!--/タブ切り替え-->
 </div>
 <script type="text/javascript">
+	
 	var term = $('#datepicker').val();
     var d = term.split(' ~ ');
     if (d[0].length > 1)
@@ -213,7 +214,9 @@
     	
             }
         });		
-		
+		$("#date_area").click(function(){
+	    	$("#datepicker").click();
+		})
 		$("#media_category_id").change(function(){
 			$.ajax({
 		        type: "POST",

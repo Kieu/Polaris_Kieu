@@ -438,8 +438,8 @@ jQuery.fn.daterangepicker = function(settings){
 	
 	jQuery(document).click(function(){
 		if (rp.is(':visible')) {
-			hideRP();
-                        revertDate(options.lang);
+			//hideRP();
+                        //revertDate(options.lang);
 		}
 	}); 
 

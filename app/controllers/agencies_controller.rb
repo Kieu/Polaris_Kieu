@@ -1,4 +1,6 @@
+require 'action_view'
 class AgenciesController < ApplicationController
+  include ActionView::Helpers::SanitizeHelper
   before_filter :signed_in_user
   before_filter :must_super
   before_filter :get_agency, only: [:edit, :update]
@@ -61,8 +63,8 @@ class AgenciesController < ApplicationController
 
       )
       rows << {id: agency.id, cell: {link: link,
-        roman_name: "<div title='#{agency.roman_name}'>" + agency.roman_name + "</div>",
-        agency_name: "<div title='#{agency.agency_name}'>" + agency.agency_name+ "</div>"}}
+        roman_name: "<div title='#{sanitize(agency.roman_name)}'>" + sanitize(agency.roman_name) + "</div>",
+        agency_name: "<div title='#{sanitize(agency.agency_name)}'>" + sanitize(agency.agency_name) + "</div>"}}
     end
     rows
   end
