@@ -19,7 +19,7 @@
 
   .flexigrid div.hDiv th div {text-align: center !important;} 
  </style>
-<div class="date"><%= I18n.t("log.today_text") %><br />
+<div class="date" id="date_area"><%= I18n.t("log.today_text") %><br />
   <input id="datepick" type="text" readonly="readonly" value="<%= cookies[:url_setting_start_date] + " ~ " + cookies[:url_setting_end_date] %>" name="datepick">&#9660;
   <a class="fancybox mt-10 fl-l" rel="gallery" href="javascript:void(0)" id="show_option"><img src="/assets/btn_dl_option.gif" /></a>
   <a href="#" class="mt-10 fl-r" id="download_csv"><img src="/assets/btn_dl_csv.gif" /></a>
@@ -71,6 +71,9 @@ $(document).ready(function() {
 })
 </script>
 <script type="text/javascript">
+$("#date_area").click(function(){
+	$("#datepick").click();
+})
 $(function() {
 	var colums = ["edit_button", "ad_id", "campaign_name","group_name", "ad_name", "creative", "url", "copy", "delete_check", "last_modified"];
 	default_url_options = $("#inline_cv_logs").html();
