@@ -1,12 +1,22 @@
 <%= stylesheet_link_tag "css/colorbox", :media => "all" %>
 <script>
+   function notify_header_post(url)
+    {
+        $.ajax({
+            type: 'post',
+            url: url,
+            cache: false
+        }).done(function( html ) {
+                 //   $(".notification").text(html);
+                }).fail(function(jqXHR, textStatus){
+                    // $(".notification").text('0');
+                });
+    }
     $(document).ready(function () {
         <%if signed_in? %>
-
-
         var first_time = true;
         order = 0;
-       var auto_refresh = setInterval(
+        var auto_refresh = setInterval(
                 function ()
                 {
                     $.ajax({
@@ -19,7 +29,7 @@
                                // $(".notification").text('0');
                     });
                     // $('.notification').load('/background_jobs/notification').fadeIn("slow");
-                }, 5000); // refresh every 10000 milliseconds
+                }, 8000); // refresh every 10000 milliseconds
 
         <%end%>
     $(".inline_notify").colorbox({inline: true, width: "635", height: "350",
@@ -116,9 +126,9 @@
               <div class="f_box">
                 <div id="tabs" class="ui-tabs">
                   <ul class="ui-tabs-nav">
-                    <li style="width: 200px"><a href="/background_jobs/inprogress#ui-tabs-1"><%= I18n.t('notification.inprogress') %></a></li>
-                    <li style="width: 200px"><a href="/background_jobs/download#ui-tabs-2"><%= I18n.t('notification.download') %></a></li>
-                    <li style="width: 200px"><a href="/background_jobs/upload#ui-tabs-3"><%= I18n.t('notification.upload') %></a></li>
+                    <li style="width: 200px"><a href="javascript:void(0)" onclick="notify_header_post('/background_jobs/inprogress')"><%= I18n.t('notification.inprogress') %></a></li>
+                    <li style="width: 200px"><a href="javascript:void(0)" onclick="notify_header_post('/background_jobs/download')"><%= I18n.t('notification.download') %></a></li>
+                    <li style="width: 200px"><a href="javascript:void(0)" onclick="notify_header_post('/background_jobs/upload')"><%= I18n.t('notification.upload') %></a></li>
                   </ul>
                 </div>
               </div>
