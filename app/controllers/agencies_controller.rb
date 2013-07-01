@@ -62,8 +62,8 @@ class AgenciesController < ApplicationController
       )
 
       rows << {id: agency.id, cell: {link: link,
-        roman_name: "<div title='#{agency.roman_name.html_safe}'>" + agency.roman_name.html_safe + "</div>",
-        agency_name: "<div title='#{agency.agency_name.html_safe}'>" + agency.agency_name.html_safe+ "</div>"}}
+        roman_name: "<div title='#{agency.roman_name}'>" + agency.roman_name + "</div>",
+        agency_name: "<div title='#{agency.agency_name}'>" + agency.agency_name+ "</div>"}}
     end
     rows
   end
