@@ -89,18 +89,6 @@ class ClientsController < ApplicationController
     end
   end
 
-  def destroy
-    @client.destroy
-    redirect_to clients_path
-  end
-
-  def del_client
-    @client = Client.find_by_id(params[:client_id])
-    @client.del_flg = 1
-    @client.save
-    render text: "ok"
-  end
-
   private
   def must_deleteable
     @client = Client.find(params[:id])

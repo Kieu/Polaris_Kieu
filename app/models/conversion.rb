@@ -81,10 +81,6 @@ class Conversion < ActiveRecord::Base
     track_method.to_i == 4
   end
 
-  def check_conversion_mode
-    conversion_mode.to_i == 2
-  end
-  
   def check_conversion_mode_1
     track_type.to_i == 1 && conversion_mode.to_i != 1
   end
