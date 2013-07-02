@@ -1,5 +1,7 @@
 require "resque"
+require 'action_view'
 class PromotionsController < ApplicationController
+  include ActionView::Helpers::SanitizeHelper
   before_filter :signed_in_user
   before_filter :must_super_agency, except: [:index, :change_data, :download_csv]
   before_filter :must_right_object, only: [:edit, :update, :delete_promotion,
@@ -38,6 +40,8 @@ class PromotionsController < ApplicationController
   end
 
   def create
+    params[:promotion][:roman_name] = sanitize(params[:promotion][:roman_name])
+    params[:promotion][:promotion_name] = sanitize(params[:promotion][:promotion_name])
     @promotion = Promotion.new(params[:promotion])
     @prevent = "1"
     @promotion.create_user_id = current_user.id
@@ -64,6 +68,8 @@ class PromotionsController < ApplicationController
     @promotion = @array_promotion.find(params[:id])
     @promotion_id = params[:id]
     params[:promotion_id] = params[:id]
+    params[:promotion][:roman_name] = sanitize(params[:promotion][:roman_name])
+    params[:promotion][:promotion_name] = sanitize(params[:promotion][:promotion_name])
     @promotion_name = params[:promotion_name]
     @promotion.update_user_id = current_user.id
     if @promotion.update_attributes(params[:promotion])

@@ -43,6 +43,10 @@ class ClientsController < ApplicationController
   end
 
   def create
+    params[:client][:roman_name] = sanitize(params[:client][:roman_name])
+    params[:client][:client_name] = sanitize(params[:client][:client_name])
+    params[:client][:person_charge] = sanitize(params[:client][:person_charge])
+    params[:client][:person_sale] = sanitize(params[:client][:person_sale])
     @client = Client.new(params[:client])
     @prevent = "1"
     @client.create_user_id = current_user.id
@@ -70,6 +74,10 @@ class ClientsController < ApplicationController
   end
 
   def update
+    params[:client][:roman_name] = sanitize(params[:client][:roman_name])
+    params[:client][:client_name] = sanitize(params[:client][:client_name])
+    params[:client][:person_charge] = sanitize(params[:client][:person_charge])
+    params[:client][:person_sale] = sanitize(params[:client][:person_sale])
     @client.attributes = params[:client]
     @prevent = "1"
     @client.update_user_id = current_user.id
@@ -113,7 +121,7 @@ class ClientsController < ApplicationController
   def get_rows(promotions, client_id)
     rows = Array.new
     promotions.each do |promotion|
-      promotion_name = view_context.link_to(sanitize(promotion.promotion_name),
+      promotion_name = view_context.link_to(promotion.promotion_name,
         "javascript:void(0)",
         class: "edit",
         id: "edit#{index}",

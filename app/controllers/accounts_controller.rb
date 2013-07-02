@@ -1,4 +1,6 @@
+require 'action_view'
 class AccountsController < ApplicationController
+  include ActionView::Helpers::SanitizeHelper
   before_filter :signed_in_user
   before_filter :must_super_agency
   before_filter :must_right_object, only: [:edit, :update]
@@ -26,10 +28,12 @@ class AccountsController < ApplicationController
     @account = Account.find(params[:id])
     @promotion_id = params[:promotion_id]
     @promotion = Promotion.find_by_id(@promotion_id)
-    @client_id = @promotion.client.id
+    @client_id = @promotion.client_id
+    params[:account][:roman_name] = sanitize(params[:account][:roman_name])
+    params[:account][:account_name] = sanitize(params[:account][:account_name])
     @account.attributes = params[:account]
     @account.update_user_id = current_user.id
-    if @account.sync_flg.to_i == 1
+    if @account.sync_flg == Settings.account.sync_flg_active
       @account.sync_account_id = nil
       @account.sync_account_pw = nil
     end
@@ -65,6 +69,8 @@ class AccountsController < ApplicationController
   end
   def create
     @prevent = "1"
+    params[:account][:roman_name] = sanitize(params[:account][:roman_name])
+    params[:account][:account_name] = sanitize(params[:account][:account_name])
     @account = Account.new(params[:account])
     @medias = Media.active.where(media_category_id: @account.media_category_id)
     @promotion_id = params[:promotion_id]
