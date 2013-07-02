@@ -21,4 +21,10 @@ describe Agency do
       it {should_not be_valid}
     end
   end
+
+  describe "#name_with_initial" do
+    before {agency.agency_name = "a" * 50}
+    subject {agency.name_with_initial}
+    it {should eq "a" * Settings.MAX_JA_LENGTH_NAME + "..."}
+  end
 end

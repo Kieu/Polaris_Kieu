@@ -150,6 +150,7 @@ class UrlSettingsController < ApplicationController
     
     render text: "processing"
   end
+
   private
   def set_cookies
     time = Time.new

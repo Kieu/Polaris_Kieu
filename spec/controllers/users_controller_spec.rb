@@ -1,21 +1,21 @@
 require 'spec_helper'
 
 describe UsersController do
-  let!(:role_super) {FactoryGirl.create(:role_super)}
-  let!(:role_client) {FactoryGirl.create(:role_client)}
-  let!(:role_agency) {FactoryGirl.create(:role_agency)}
+# let!(:role_super) {FactoryGirl.create(:role_super)}
+# let!(:role_client) {FactoryGirl.create(:role_client)}
+# let!(:role_agency) {FactoryGirl.create(:role_agency)}
   let!(:user_super) {FactoryGirl.create(:user_super)}
   let!(:user_agency) {FactoryGirl.create(:user_agency)}
+  let!(:user_client) {FactoryGirl.create(:user_client)}
   let!(:client) {FactoryGirl.create(:client)}
   let!(:agency) {FactoryGirl.create(:agency)}
-  let!(:user_client) {FactoryGirl.create(:user_client)}
   let!(:client_user) {FactoryGirl.create(:client_user,
     client_id: client.id, user_id: user_client.id)}
 
   let(:username) {"username"}
   let(:roman_name) {"roman_name"}
   let(:email) {"email@example.com"}
-  let(:company_id) {agency.id}
+  let(:company_id) {client.id}
   let(:role_id) {Settings.role.CLIENT}
   let(:password_flg) {0}
   let(:name_to_change) {"change"}

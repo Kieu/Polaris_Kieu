@@ -63,4 +63,9 @@ describe Client do
 
   end
 
+  describe "#name_with_initial" do
+    before {client.client_name = "a" * 50}
+    subject {client.name_with_initial}
+    it {should eq "a" * Settings.MAX_JA_LENGTH_NAME + "..."}
+  end
 end

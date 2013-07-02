@@ -2,7 +2,6 @@ class User < ActiveRecord::Base
   has_secure_password
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]{2,}+\z/i
-  # VALID_ROMAN_NAME_REGEX = /^[A-Z_\ \~\!\@\#\$\%\^\&\*\(\)\_\-\+\=\<\,\>\.\;\:\"\'\{\}|\\\?\?\/a-z][A-Za-z_\ \~\!\@\#\$\%\^\&\*\(\)\_\-\+\=\<\,\>\.\;\:\"\'\{\}|\\\?\?\/\-0-9]*$/
   VALID_ROMAN_NAME_REGEX = /^[\s!-~]+$/
 
   attr_accessible :username, :roman_name, :email, :company_id, :role_id,
@@ -14,19 +13,22 @@ class User < ActiveRecord::Base
 
   validates :username, presence: true, uniqueness: {case_sensitive: false},
     length: {maximum: 255}
-  validates :roman_name, presence: true, length: {maximum: 255}, uniqueness: {case_sensitive: false}
-  validates :roman_name, format: {with: VALID_ROMAN_NAME_REGEX}, if: -> user { user.roman_name.present?}
+  validates :roman_name, presence: true, uniqueness: {case_sensitive: false},
+    length: {maximum: 255}
+  validates :roman_name, format: {with: VALID_ROMAN_NAME_REGEX},
+    if: -> user {user.roman_name.present?}
   validates :email, presence: true, uniqueness: {case_sensitive: false}
-  validates :email, format: {with: VALID_EMAIL_REGEX}, length: {maximum: 255}, if: -> user { user.email.present?}
+  validates :email, format: {with: VALID_EMAIL_REGEX}, length: {maximum: 255},
+    if: -> user {user.email.present?}
   validates :company_id, presence: true
   validates :role_id, presence: true
   validates :password_flg, presence: true
-  
+ 
   scope :order_by_roman_name, ->{order :roman_name}
   scope :active, where(status: Settings.user.active)
 
   before_save {|user| user.email = email.downcase}
-  
+ 
   def can_login?
     return false if self.status == Settings.user.deactive
     if self.block_login_user && self.block_login_user.login_fail_num >=
@@ -40,7 +42,7 @@ class User < ActiveRecord::Base
       return true
     end
   end
-  
+ 
   def update_login_fail
     block = self.block_login_user
     if block
@@ -60,13 +62,13 @@ class User < ActiveRecord::Base
     self.del_client_user if self.deactive?
     self.save!
   end
-  
+ 
   def remove_block_login
     self.block_login_user.login_fail_num = 0
     self.block_login_user.block_at_time = nil
     self.block_login_user.save
   end
-  
+ 
   def valid_attribute?(attribute_name)
     self.valid?
     self.errors[attribute_name].blank?
@@ -79,19 +81,19 @@ class User < ActiveRecord::Base
   def deactive?
     self.status == Settings.user.deactive
   end
-  
+ 
   def super?
     self.role_id == Settings.role.SUPER
   end
-  
+ 
   def client?
     self.role_id == Settings.role.CLIENT
   end
-  
+ 
   def agency?
     self.role_id == Settings.role.AGENCY
   end
-  
+ 
   def del_client_user
     self.client_users.each do |client_user|
       client_user.update_attributes!(del_flg: Settings.client_user.deleted)
