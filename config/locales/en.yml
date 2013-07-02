@@ -131,6 +131,8 @@ en:
               blank: "Person sales can't be blank"
               too_long: ! 'Person sales is too long (maximum is %{count} characters)'
               too_short: ! 'Person sales is too short (minimum is %{count} characters)'
+            time_zone:
+              blank: "Please select a time zone"
         user:
           attributes:
             username:
@@ -656,6 +658,8 @@ en:
       been_recovered: " Been recovered"
     user_information: "User information"
     delete: "Delete"
+    time_zones: "Time zone: "
+    time_zone_default: "Please select a time zone"
     flash_messages:
       success: " Client is created successful"
       update: " Client is updated successful"

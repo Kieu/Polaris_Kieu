@@ -128,6 +128,8 @@ ja:
               blank: "担当営業 を入力して下さい"
               too_long: ! '担当営業 %{count}の文字数をオーバーしています'
               too_short: ! '担当営業 %{count}文字以上で入力してください。'
+            time_zone:
+              blank: "タイムゾーンを選択して下さい"
         user:
           attributes:
             username:
@@ -679,6 +681,8 @@ ja:
       been_recovered: " 回収済み"
     user_information: "ユーザー情報"
     delete: "削除"
+    time_zones: "タイムゾーン"
+    time_zone_default: "タイムゾーン:"
     flash_messages:
       success: " クライアント登録が完了しました"
       update: " クライアント編集が完了しました"
