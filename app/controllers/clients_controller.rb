@@ -8,6 +8,7 @@ class ClientsController < ApplicationController
                                     :del_client]
   before_filter :must_deleteable, only: [:show, :edit, :update, :destroy]
   before_filter :load_list_clients, except: [:destroy, :del_client]
+  before_filter :get_time_zones, only: [:new, :create, :edit, :update]
 
   #get all clients sorted by romaji name
   def index
@@ -120,6 +121,20 @@ class ClientsController < ApplicationController
       rows << {id: promotion.id, cell: {promotion_name: promotion_name}}
     end
     rows
+  end
+
+  def get_time_zones
+    @time_zones = Array.new
+    time_zones_list = ActiveSupport::TimeZone.all
+    @time_zones[0] = time_zones_list[121]
+    idx = 1
+    time_zones_list.each_with_index do |tz, index|
+      if index != 121
+        @time_zones[idx] = tz
+        idx+=1
+      end
+    end
+    @time_zones
   end
 
   def load_list_clients

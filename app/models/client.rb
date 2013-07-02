@@ -5,7 +5,7 @@ class Client < ActiveRecord::Base
   VALID_ROMAN_NAME_REGEX = /^[\s!-~]+$/
   attr_accessible :client_name, :roman_name, :tel, :department_name,
     :contract_flg, :contract_type, :person_charge, :person_sale,
-    :create_user_id, :update_user_id, :del_flg
+    :create_user_id, :update_user_id, :del_flg, :time_zone
 
   has_many :client_users
   has_many :promotions
@@ -21,6 +21,7 @@ class Client < ActiveRecord::Base
   validates :contract_type, presence: true
   validates :person_charge, presence: true, length: {maximum: 255}
   validates :person_sale, presence: true, length: {maximum: 255}
+  validates :time_zone, presence: true, length: {maximum: 3}
   
   scope :active, where(del_flg: "0")
   scope :order_by_roman_name, ->{order :roman_name}

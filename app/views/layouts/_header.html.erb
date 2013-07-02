@@ -157,7 +157,7 @@
                   <li class="current"><%= link_to raw('<img src="/assets/nav/nav_01_promotion_off.gif" alt="代理店リスト" />'),  "#{promotions_path}?promotion_id=#{@promotion_id}&client_id=#{@client_id}", class: "promotion_class_header" %>
                   </li>
 
-                  <li> <% if @promotion_id %> <%= link_to raw('<img src="/assets/nav/nav_02_account_off.gif", alt="ユーザーリスト" />'), "#{accounts_path}/new?promotion_id=#{@promotion_id}", class: "account_class_header" %><% end %></li>
+                  <li> <% if @promotion_id %> <%= link_to raw('<img src="/assets/nav/nav_02_account_off.gif", alt="ユーザーリスト" />'), "#{accounts_path}/new?promotion_id=#{@promotion_id}&client_id=#{@client_id}", class: "account_class_header" %><% end %></li>
 
                   <li> <% if @promotion_id %><%= link_to raw('<img src="/assets/nav/nav_03_conversion_off.gif" alt="代理店リスト" />'),  "#{conversions_path}?promotion_id=#{@promotion_id}", class: "conversion_class_header" %> <% end %>
                   </li>
@@ -170,7 +170,7 @@
                   <li><%= link_to raw('<img src="/assets/nav/nav_01_promotion_off.gif" alt="代理店リスト" />'),  "#{promotions_path}?promotion_id=#{@promotion_id}&client_id=#{Promotion.find(@promotion_id).client.id}", class: "promotion_class_header" %>
                   </li>
 
-                  <li class="current"> <%= link_to raw('<img src="/assets/nav/nav_02_account_off.gif", alt="ユーザーリスト" />'), "#{accounts_path}/new?promotion_id=#{params[:promotion_id]}", class: "account_class_header" %></li>
+                  <li class="current"> <%= link_to raw('<img src="/assets/nav/nav_02_account_off.gif", alt="ユーザーリスト" />'), "#{accounts_path}/new?promotion_id=#{params[:promotion_id]}&client_id=#{@client_id}", class: "account_class_header" %></li>
 
                   <li> <%= link_to raw('<img src="/assets/nav/nav_03_conversion_off.gif" alt="代理店リスト" />'),  "#{conversions_path}?promotion_id=#{params[:promotion_id]}", class: "conversion_class_header" %>
                   </li>
@@ -183,7 +183,7 @@
                   <li><%= link_to raw('<img src="/assets/nav/nav_01_promotion_off.gif" alt="代理店リスト" />'),  "#{promotions_path}?promotion_id=#{@promotion_id}&client_id=#{Promotion.find(params[:promotion_id]).client.id if params[:promotion_id] }", class: "promotion_class_header" %>
                   </li>
 
-                  <li> <%= link_to raw('<img src="/assets/nav/nav_02_account_off.gif", alt="ユーザーリスト" />'), "#{accounts_path}/new?promotion_id=#{params[:promotion_id]}", class: "account_class_header" %></li>
+                  <li> <%= link_to raw('<img src="/assets/nav/nav_02_account_off.gif", alt="ユーザーリスト" />'), "#{accounts_path}/new?promotion_id=#{params[:promotion_id]}&client_id=#{@client_id}", class: "account_class_header" %></li>
 
                   <li class="current"> <%= link_to raw('<img src="/assets/nav/nav_03_conversion_off.gif" alt="代理店リスト" />'),  "#{conversions_path}?promotion_id=#{params[:promotion_id]}", class: "conversion_class_header" %>
                   </li>
@@ -196,7 +196,7 @@
                   <li><%= link_to raw('<img src="/assets/nav/nav_01_promotion_off.gif" alt="代理店リスト" />'),  "#{promotions_path}?promotion_id=#{@promotion_id}&client_id=#{@client_id}", class: "promotion_class_header" %>
                   </li>
 
-                  <li> <%= link_to raw('<img src="/assets/nav/nav_02_account_off.gif", alt="ユーザーリスト" />'), "#{accounts_path}/new?promotion_id=#{params[:promotion_id]}", class: "account_class_header" %></li>
+                  <li> <%= link_to raw('<img src="/assets/nav/nav_02_account_off.gif", alt="ユーザーリスト" />'), "#{accounts_path}/new?promotion_id=#{params[:promotion_id]}&client_id=#{@client_id}", class: "account_class_header" %></li>
 
                   <li> <%= link_to raw('<img src="/assets/nav/nav_03_conversion_off.gif" alt="代理店リスト" />'),  "#{conversions_path}?promotion_id=#{params[:promotion_id]}", class: "conversion_class_header" %>
                   </li>
@@ -234,7 +234,7 @@
                   <li class="current"><%= link_to raw('<img src="/assets/nav/nav_01_promotion_off.gif" alt="代理店リスト" />'),  "#{promotions_path}?promotion_id=#{@promotion_id}&client_id=#{@client_id}", class: "promotion_class_header" %>
                   </li>
 
-                  <li> <% if @promotion_id %> <%= link_to raw('<img src="/assets/nav/nav_02_account_off.gif", alt="ユーザーリスト" />'), "#{accounts_path}/new?promotion_id=#{@promotion_id}", class: "account_class_header" %><% end %></li>
+                  <li> <% if @promotion_id %> <%= link_to raw('<img src="/assets/nav/nav_02_account_off.gif", alt="ユーザーリスト" />'), "#{accounts_path}/new?promotion_id=#{@promotion_id}&client_id=#{@client_id}", class: "account_class_header" %><% end %></li>
 
                   <li> <% if @promotion_id %><%= link_to raw('<img src="/assets/nav/nav_03_conversion_off.gif" alt="代理店リスト" />'),  "#{conversions_path}?promotion_id=#{@promotion_id}", class: "conversion_class_header" %> <% end %>
                   </li>
@@ -247,7 +247,7 @@
                   <li><%= link_to raw('<img src="/assets/nav/nav_01_promotion_off.gif" alt="代理店リスト" />'),  "#{promotions_path}?promotion_id=#{@promotion_id}&client_id=#{Promotion.find(@promotion_id).client.id}", class: "promotion_class_header" %>
                   </li>
 
-                  <li class="current"> <%= link_to raw('<img src="/assets/nav/nav_02_account_off.gif", alt="ユーザーリスト" />'), "#{accounts_path}/new?promotion_id=#{params[:promotion_id]}", class: "account_class_header" %></li>
+                  <li class="current"> <%= link_to raw('<img src="/assets/nav/nav_02_account_off.gif", alt="ユーザーリスト" />'), "#{accounts_path}/new?promotion_id=#{params[:promotion_id]}&client_id=#{@client_id}", class: "account_class_header" %></li>
 
                   <li> <%= link_to raw('<img src="/assets/nav/nav_03_conversion_off.gif" alt="代理店リスト" />'),  "#{conversions_path}?promotion_id=#{params[:promotion_id]}", class: "conversion_class_header" %>
                   </li>
@@ -260,7 +260,7 @@
                   <li><%= link_to raw('<img src="/assets/nav/nav_01_promotion_off.gif" alt="代理店リスト" />'),  "#{promotions_path}?promotion_id=#{@promotion_id}&client_id=#{Promotion.find(params[:promotion_id]).client.id if params[:promotion_id] }", class: "promotion_class_header" %>
                   </li>
 
-                  <li> <%= link_to raw('<img src="/assets/nav/nav_02_account_off.gif", alt="ユーザーリスト" />'), "#{accounts_path}/new?promotion_id=#{params[:promotion_id]}", class: "account_class_header" %></li>
+                  <li> <%= link_to raw('<img src="/assets/nav/nav_02_account_off.gif", alt="ユーザーリスト" />'), "#{accounts_path}/new?promotion_id=#{params[:promotion_id]}&client_id=#{@client_id}", class: "account_class_header" %></li>
 
                   <li class="current"> <%= link_to raw('<img src="/assets/nav/nav_03_conversion_off.gif" alt="代理店リスト" />'),  "#{conversions_path}?promotion_id=#{params[:promotion_id]}", class: "conversion_class_header" %>
                   </li>
@@ -273,7 +273,7 @@
                   <li><%= link_to raw('<img src="/assets/nav/nav_01_promotion_off.gif" alt="代理店リスト" />'),  "#{promotions_path}?promotion_id=#{@promotion_id}&client_id=#{@client_id}", class: "promotion_class_header" %>
                   </li>
 
-                  <li> <%= link_to raw('<img src="/assets/nav/nav_02_account_off.gif", alt="ユーザーリスト" />'), "#{accounts_path}/new?promotion_id=#{params[:promotion_id]}", class: "account_class_header" %></li>
+                  <li> <%= link_to raw('<img src="/assets/nav/nav_02_account_off.gif", alt="ユーザーリスト" />'), "#{accounts_path}/new?promotion_id=#{params[:promotion_id]}&client_id=#{@client_id}", class: "account_class_header" %></li>
 
                   <li> <%= link_to raw('<img src="/assets/nav/nav_03_conversion_off.gif" alt="代理店リスト" />'),  "#{conversions_path}?promotion_id=#{params[:promotion_id]}", class: "conversion_class_header" %>
                   </li>
