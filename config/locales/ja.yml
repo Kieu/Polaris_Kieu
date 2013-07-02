@@ -608,13 +608,13 @@ ja:
               even: 計測期間 偶数にしてください。
               exclusion: 計測期間  予約されています。
               greater_than: ! '計測期間 %{count}より大きい値にしてください。'
-              greater_than_or_equal_to: ! '計測期間 %{count}以上の値にしてください。'
+              greater_than_or_equal_to: 計測期間は１日以降９０日以下で記入下さい
               inclusion: 計測期間 正しい値が選択されていません。
-              invalid: 計測期間  正しく入力して下さい。
+              invalid: 計測期間は１日以降９０日以下で記入下さい
               less_than: ! '計測期間 %{count}１日以降９０日以下で記入下さい'
-              less_than_or_equal_to: ! '計測期間 %{count}１日以降９０日以下で記入下さい'
-              not_a_number: 計測期間 数値で入力してください。
-              not_an_integer: 計測期間 整数で入力してください。
+              less_than_or_equal_to: 計測期間は１日以降９０日以下で記入下さい
+              not_a_number: 計測期間は１日以降９０日以下で記入下さい
+              not_an_integer: 計測期間は１日以降９０日以下で記入下さい
               odd: 計測期間 奇数にしてください。
               record_invalid: 計測期間 バリデーションに失敗しました。 '%{errors}'
               taken: 計測期間 は既に登録されています
