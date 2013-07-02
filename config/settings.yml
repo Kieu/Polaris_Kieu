@@ -74,3 +74,9 @@ account:
   sync_flg_active: "1"
 daily_summary:
   report_type_default: "0"
+language:
+  enghlish: "en"
+  japanese: "ja"
+import_url:
+  insert: "insert"
+  update: "update"

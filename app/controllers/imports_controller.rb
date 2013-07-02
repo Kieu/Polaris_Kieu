@@ -4,7 +4,7 @@ class ImportsController < ApplicationController
   def create
     error_flg = true
     flash[:csv_error] = Array.new
-    if params[:import] != nil
+    if params[:import].present?
       content_type_file = params[:import]['csv'].content_type.strip
       array_content_type = ['text/csv','text/comma-separated-values','text/csv','application/csv']
       if !array_content_type.include?(content_type_file)
@@ -16,7 +16,7 @@ class ImportsController < ApplicationController
     if error_flg
       @import = Import.new(params[:import])
       origin_file_name = @import.csv_file_name
-      @import.change_file_name(current_user.id) unless params[:import].nil?
+      @import.change_file_name(current_user.id) unless params[:import].blank?
       if @import.save
         file_path = @import.csv.url
         flg_check_error, message = check_header_csv_file file_path
@@ -35,7 +35,7 @@ class ImportsController < ApplicationController
           background_job.breadcrumb = params[:breadcrumb]
           background_job.save!
 
-          if params[:type] == 'insert'
+          if params[:type] == Settings.import_url.insert
             job_id = ImportUrlData.create(file: @import.csv.url,
                      bgj_id: background_job.id, type: params[:type], user_id: current_user.id,
                      promotion_id: params[:promotion_id], account_id: params[:account_id], 
@@ -81,7 +81,6 @@ class ImportsController < ApplicationController
       flg_check_error = true
     end
 
-    current_lang = cookies[:locale]
     begin
       CSV.foreach(file_path) do |row|
         if !(row[0].to_s.strip.downcase.include? t("url.last_modified_check")) || row[1].to_s.strip.downcase != t("url.ad_id_check") || 
@@ -97,10 +96,10 @@ class ImportsController < ApplicationController
            row[20].to_s.strip.downcase != t("url.rate4") || row[21].to_s.strip.downcase != t("url.redirect_url5") || 
            row[22].to_s.strip.downcase != t("url.name5") || row[23].to_s.strip.downcase != t("url.rate5")
 
-           if current_lang == "en"
-             I18n.locale = "ja"
+           if cookies[:locale] == Settings.language.enghlish
+             I18n.locale = Settings.language.japanese
            else
-             I18n.locale = "en"
+             I18n.locale = Settings.language.enghlish
            end
            
            if !(row[0].to_s.strip.downcase.include? t("url.last_modified_check")) || row[1].to_s.strip.downcase != t("url.ad_id_check") || 
@@ -116,14 +115,14 @@ class ImportsController < ApplicationController
              row[20].to_s.strip.downcase != t("url.rate4") || row[21].to_s.strip.downcase != t("url.redirect_url5") || 
              row[22].to_s.strip.downcase != t("url.name5") || row[23].to_s.strip.downcase != t("url.rate5")
 
-             I18n.locale = current_lang
+             I18n.locale = cookies[:locale]
              message = I18n.t("error_message_url_import.differrent_format")
              flg_check_error = true
            end
 
         end
 
-        I18n.locale = current_lang
+        I18n.locale = cookies[:locale]
         break
       end
     rescue
