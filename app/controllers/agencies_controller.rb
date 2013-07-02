@@ -20,6 +20,8 @@ class AgenciesController < ApplicationController
   def update
     @prevent = "1"
     @agency.update_user_id = current_user.id
+    params[:agency][:roman_name] = sanitize(params[:agency][:roman_name])
+    params[:agency][:agency_name] = sanitize(params[:agency][:agency_name])
     if @agency.update_attributes(params[:agency])
       flash[:error] = I18n.t("agency.flash_messages.update")
       redirect_to agencies_path
@@ -35,6 +37,8 @@ class AgenciesController < ApplicationController
 
   def create
     @prevent = "1"
+    params[:agency][:roman_name] = sanitize(params[:agency][:roman_name])
+    params[:agency][:agency_name] = sanitize(params[:agency][:agency_name])
     @agency = Agency.new(params[:agency])
     @agency.create_user_id = current_user.id
     @add_flg = 0
@@ -64,8 +68,8 @@ class AgenciesController < ApplicationController
       )
 
       rows << {id: agency.id, cell: {link: link,
-        roman_name: "<div title='#{sanitize(agency.roman_name)}'>" + sanitize(agency.roman_name) + "</div>",
-        agency_name: "<div title='#{sanitize(agency.agency_name)}'>" + sanitize(agency.agency_name) + "</div>"}}
+        roman_name: "<div title='#{agency.roman_name}'>" + agency.roman_name + "</div>",
+        agency_name: "<div title='#{agency.agency_name}'>" + agency.agency_name + "</div>"}}
     end
     rows
   end

@@ -68,3 +68,5 @@ URL_TEMPLATE_FILE:
 DOMAIN_SUBMIT_URL: 'http://track.polaris-adm.com/click/?'
 cookie_click_log_default: '11111101010'
 cookie_cv_log_default: '11111111111111100100000'
+account:
+  sync_flg_active: "1"

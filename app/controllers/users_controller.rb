@@ -17,6 +17,8 @@ class UsersController < ApplicationController
   end
   
   def create
+    params[:user][:roman_name] = sanitize(params[:user][:roman_name])
+    params[:user][:username] = sanitize(params[:user][:username])
     @user = User.new(params[:user])
     @prevent = "1"
     @user.password = SecureRandom.urlsafe_base64(6)
@@ -51,6 +53,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @prevent = "1"
     @user.update_user_id = current_user.id
+    params[:user][:roman_name] = sanitize(params[:user][:roman_name])
+    params[:user][:username] = sanitize(params[:user][:username])
     @user.attributes = params[:user]
     if @user.valid?
       if (@user.active? && params[:deactive] == "on") || (!@user.active? && !params[:deactive])
@@ -73,21 +77,10 @@ class UsersController < ApplicationController
   def change_company_list
     model = params[:model].constantize
     if model == Client
-      #render json: model.active.all
-      obj_list = model.active.all
-      obj_list.each_with_index do | obj, idx |
-        obj[:client_name] = sanitize(obj[:client_name])
-        obj_list[idx] = obj
-      end
+      render json: model.active.all
     else
-      #render json: model.all
-      obj_list = model.all
-      obj_list.each_with_index do | obj, idx |
-        obj[:agency_name] = sanitize(obj[:agency_name])
-        obj_list[idx] = obj
-      end
+      render json: model.all
     end
-    render json: obj_list
   end
 
   private
@@ -97,18 +90,18 @@ class UsersController < ApplicationController
       company = ""
       if user.client?
         if client = Client.find_by_id(user.company_id)
-          company = sanitize(client.client_name)
+          company = client.client_name
         end
       else
         if agency = Agency.find_by_id(user.company_id)
-          company = sanitize(agency.agency_name)
+          company = agency.agency_name
         end
       end
       link = user.id == current_user.id ?
          "" : "<a href='users/#{user.id}/edit'>#{view_context.image_tag("/assets/img_edit.png")}</a>"
       rows << {id: user.id, cell: {
-               link: link, roman_name: "<div title='#{sanitize(user.roman_name)}'>" + sanitize(user.roman_name) + "</div>",
-               username: "<div title='#{sanitize(user.username)}'>" + sanitize(user.username) + "</div>",
+               link: link, roman_name: "<div title='#{user.roman_name}'>" + user.roman_name + "</div>",
+               username: "<div title='#{user.username}'>" + user.username + "</div>",
                company: "<div title='#{company}'>" + company,
                email: "<div title='#{user.email}'>" + user.email + "</div>",
                role: "<div title='#{user.role.role_name}'>" + user.role.role_name + "</div>"}}
