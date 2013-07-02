@@ -49,11 +49,13 @@ class ConversionsController < ApplicationController
       end
     end
     @conversion.conversion_combine = conversion_combine
-    if @conversion.save
-      @conversion.create_mv
-      flash[:error] = t("conversion.flash_messages.success")
-    else
-      has_error = 1
+    if has_error == 0 
+      if @conversion.save
+        @conversion.create_mv
+        flash[:error] = t("conversion.flash_messages.success")
+      else
+        has_error = 1
+      end
     end
     if has_error == 1
       if @conversion.conversion_combine.present?
