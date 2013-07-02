@@ -1,5 +1,6 @@
+require 'action_view'
 class ConversionsController < ApplicationController
-  
+  include ActionView::Helpers::SanitizeHelper
   before_filter :signed_in_user
   before_filter :must_super_agency
   before_filter :get_promotion, only: [:index, :new, :create, :edit, :update, :get_tag]
@@ -17,6 +18,8 @@ class ConversionsController < ApplicationController
   end
 
   def create
+    params[:conversion][:roman_name] = sanitize(params[:conversion][:roman_name])
+    params[:conversion][:conversion_name] = sanitize(params[:conversion][:conversion_name])
     @conversion = Conversion.new(params[:conversion])
     @conversion.create_user_id = current_user.id
     @conversion.promotion_id = params[:promotion_id]
@@ -119,6 +122,8 @@ class ConversionsController < ApplicationController
     end
     @conversion.conversion_combine = conversion_combine
     @conversion.update_user_id = current_user.id
+    params[:conversion][:roman_name] = sanitize(params[:conversion][:roman_name])
+    params[:conversion][:conversion_name] = sanitize(params[:conversion][:conversion_name])
     @conversion.attributes = params[:conversion]
     
     if @conversion.save
