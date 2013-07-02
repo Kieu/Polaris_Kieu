@@ -75,7 +75,7 @@ account:
 daily_summary:
   report_type_default: "0"
 language:
-  enghlish: "en"
+  english: "en"
   japanese: "ja"
 import_url:
   insert: "insert"

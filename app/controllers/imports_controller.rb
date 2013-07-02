@@ -96,7 +96,7 @@ class ImportsController < ApplicationController
            row[20].to_s.strip.downcase != t("url.rate4") || row[21].to_s.strip.downcase != t("url.redirect_url5") || 
            row[22].to_s.strip.downcase != t("url.name5") || row[23].to_s.strip.downcase != t("url.rate5")
 
-           if cookies[:locale] == Settings.language.enghlish
+           if cookies[:locale] == Settings.language.english
              I18n.locale = Settings.language.japanese
            else
              I18n.locale = Settings.language.enghlish
