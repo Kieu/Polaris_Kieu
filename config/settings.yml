@@ -65,6 +65,8 @@ account_cost_default: 100
 URL_TEMPLATE_FILE: 
    EN: 'doc/url/template_import_url/template_import_url_en.csv'
    JP: 'doc/url/template_import_url/template_import_url_jp.csv'
+   name_en: template_import_url_en.csv
+   name_jp: template_import_url_jp.csv
 DOMAIN_SUBMIT_URL: 'http://track.polaris-adm.com/click/?'
 cookie_click_log_default: '11111101010'
 cookie_cv_log_default: '11111111111111100100000'

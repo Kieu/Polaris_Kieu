@@ -70,12 +70,12 @@ class UrlSettingsController < ApplicationController
   def download_template
     if cookies[:locale] == 'ja'
       path_to_file = "#{Rails.root}/" + Settings.URL_TEMPLATE_FILE.JP
+      file_name = Settings.URL_TEMPLATE_FILE.name_jp
     else
       path_to_file = "#{Rails.root}/" + Settings.URL_TEMPLATE_FILE.EN
+      file_name = Settings.URL_TEMPLATE_FILE.name_en
     end
     
-    account_name = Account.where(id: params[:account_id]).select('roman_name').first['roman_name']
-    file_name = account_name + "_URL_" + Time.now.strftime("%Y%m%d") + Settings.file_type.CSV
     send_file(path_to_file, filename: file_name, type: "text/csv; charset=utf-8")
   end
 
