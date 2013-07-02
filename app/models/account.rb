@@ -1,6 +1,7 @@
 class Account < ActiveRecord::Base
   VALID_NUMBER_REGEX = /^\d+$/
   VALID_FLOAT_REGEX = /^\d+\.\d+$/
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]{2,}+\z/i
   # VALID_ROMAN_NAME_REGEX = /[A-Z_\ \~\!\@\#\$\%\^\&\*\(\)\_\-\+\=\<\,\>\.\;\:\"\'\{\}0-9|\\\?\?\/a-z][A-Za-z_\ \~\!\@\#\$\%\^\&\*\(\)\_\-\+\=\<\,\>\.\;\:\"\'\{\}|\\\?\?\/\-0-9]*/
   VALID_ROMAN_NAME_REGEX = /^[\s!-~]+$/
   attr_accessible :margin, :create_user_id, :media_id, :promotion_id, :account_name, :roman_name,
@@ -19,7 +20,7 @@ class Account < ActiveRecord::Base
   validates :roman_name, presence: true, length: {maximum: 255}, uniqueness: {case_sensitive: false, scope: :promotion_id}
   validates :roman_name, format: {with: VALID_ROMAN_NAME_REGEX}, if: -> account { account.roman_name.present?}
   validates :sync_account_id, presence: true, length: {maximum: 255}, if: :check_sync
-  validates :sync_account_id, format: {with: VALID_ROMAN_NAME_REGEX},if: :check_sync, if: -> account { account.sync_account_id.present?}
+  validates :sync_account_id, format: {with: VALID_EMAIL_REGEX},if: :check_sync, if: -> account { account.sync_account_id.present?}
   validates :sync_account_pw, presence: true, length: {maximum: 255}, if: :check_sync
   validates :sync_account_pw, format: {with: VALID_ROMAN_NAME_REGEX}, if: :check_sync, if: -> account { account.sync_account_pw.present?}
   
