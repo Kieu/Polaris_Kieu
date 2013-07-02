@@ -70,3 +70,5 @@ cookie_click_log_default: '11111101010'
 cookie_cv_log_default: '11111111111111100100000'
 account:
   sync_flg_active: "1"
+daily_summary:
+  report_type_default: "0"

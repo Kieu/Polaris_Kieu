@@ -9,15 +9,16 @@ class DailySummaryAccount < ActiveRecord::Base
     array_result = Hash.new
     start_date = Date.strptime(start_date, language).strftime("%Y/%m/%d")
     end_date = Date.strptime(end_date, language).strftime("%Y/%m/%d")
-    total_promotion_data = DailySummaryAccount.where(promotion_id: promotion_id)
-      .where("DATE_FORMAT(report_ymd, '%Y/%m/%d') between '#{start_date}' and '#{end_date}'")
-      .select("sum(imp_count) as imp_count")
-      .select("sum(click_count) as click_count")
-      .select("round(sum(click_count)/sum(imp_count)*100,3) as click_through_ratio")
-      .select("sum(cost_sum) as cost_sum")
-      .select("round(sum(cost_sum)/sum(click_count),3) as cost_per_click")
-      .select("round(sum(cost_sum)/sum(imp_count)*1000,3) as cost_per_mille")
-      .select(:media_category_id)
+    total_promotion_data = DailySummaryAccount.where(promotion_id: promotion_id).
+      where(report_type: Settings.daily_summary.report_type_default).
+      where("DATE_FORMAT(report_ymd, '%Y/%m/%d') between '#{start_date}' and '#{end_date}'").
+      select("sum(imp_count) as imp_count").
+      select("sum(click_count) as click_count").
+      select("round(sum(click_count)/sum(imp_count)*100,3) as click_through_ratio").
+      select("sum(cost_sum) as cost_sum").
+      select("round(sum(cost_sum)/sum(click_count),3) as cost_per_click").
+      select("round(sum(cost_sum)/sum(imp_count)*1000,3) as cost_per_mille").
+      select(:media_category_id)
       
     category_promotion_data = total_promotion_data.group(:media_category_id)
     
@@ -25,16 +26,18 @@ class DailySummaryAccount < ActiveRecord::Base
     
     chart_promotion_data = total_promotion_data.select(:report_ymd).group(:report_ymd) 
     
-    total_conversions_data = DailySummaryAccConversion.where(promotion_id: promotion_id)
-      .group(:conversion_id).select("sum(total_cv_count) as total_cv_count")
-      .select("sum(first_cv_count) as first_cv_count")
-      .select("sum(repeat_cv_count) as repeat_cv_count")
-      .select("sum(assist_count) as assist_count")
-      .select("sum(sales) as sales")
-      .select("sum(profit) as profit")
-      .select(:conversion_id)
-      .where("DATE_FORMAT(daily_summary_acc_conversions.report_ymd, '%Y/%m/%d') between '#{start_date}' and '#{end_date}'")
-      .select(:report_ymd)
+    total_conversions_data = DailySummaryAccConversion.
+       where(report_type: Settings.daily_summary.report_type_default).
+       where(promotion_id: promotion_id).
+       group(:conversion_id).select("sum(total_cv_count) as total_cv_count").
+       select("sum(first_cv_count) as first_cv_count").
+       select("sum(repeat_cv_count) as repeat_cv_count").
+       select("sum(assist_count) as assist_count").
+       select("sum(sales) as sales").
+       select("sum(profit) as profit").
+       select(:conversion_id).
+       where("DATE_FORMAT(daily_summary_acc_conversions.report_ymd, '%Y/%m/%d') between '#{start_date}' and '#{end_date}'").
+       select(:report_ymd)
       
     conversions_data = total_conversions_data.group(:account_id).select(:account_id)
     

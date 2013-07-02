@@ -46,8 +46,10 @@
 			</li>
 		</ul>
 	</div>
-	<div class="date" id="date_area"><%= I18n.t("log.today_text")%><br />
+	<div class="date"><%= I18n.t("log.today_text")%><br />
+		<div id="date_area">
 		<input id="datepicker" type="text" readonly="readonly" value="<%= @start_date +" ~ "+ @end_date %>" name="datepicker">&#9660;
+		</div>
       <div class="fl-r-log">
         <p><a class="inline_logs" href="#inline_logs"><img src="/assets/btn_dl_option.gif"  /></a>
           <a id="download_csv"><img src="/assets/btn_dl_report.gif"  /></a></p>
