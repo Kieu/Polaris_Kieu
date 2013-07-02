@@ -2,22 +2,14 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
   protect_from_forgery
   unless  Rails.application.config.consider_all_requests_local
-    if ActionController::RoutingError 
-      rescue_from ActionController::RoutingError, with: :render_404
-    elsif ActionController::UnknownController
-      rescue_from ActionController::UnknownController, with: :render_404
-    elsif ActionController::UnknownAction
-      rescue_from ActionController::UnknownAction, with: :render_404
-    elsif ActiveRecord::RecordNotFound
-      rescue_from ActiveRecord::RecordNotFound, with: :render_404
-    else ActionView::MissingTemplate
-      rescue_from ActionView::MissingTemplate, with: :render_404
-    #else
-        # rescue_from Exception, with: :render_500
-     end
+    rescue_from ActionController::RoutingError, with: :redirect_to_404
+    rescue_from ActionController::UnknownController, with: :redirect_to_404
+    rescue_from ActionController::UnknownAction, with: :redirect_to_404
+    rescue_from ActiveRecord::RecordNotFound, with: :redirect_to_404
+    rescue_from ActionView::MissingTemplate, with: :redirect_to_404
+    rescue_from Mysql2::Error, with: :render_500
   end
   include SessionsHelper
-
 
   before_filter :set_locale
   before_filter :set_notify
@@ -34,14 +26,9 @@ class ApplicationController < ActionController::Base
     redirect_to promotions_path if current_user.client?
   end
   
-  def record_not_found
-    #render :text => "404 Not Found", :status => 404
-    render 'public/404', :status => :not_found
-  end
-
   def set_notify
     return unless current_user
-    @notify = BackgroundJob.where(:user_id => current_user.id,:status => '0').size
+    @notify = BackgroundJob.where(user_id: current_user.id, status: '0').size
   end
 
   private
@@ -50,8 +37,8 @@ class ApplicationController < ActionController::Base
     cookies[:locale] = I18n.locale.to_s 
   end
 
-  def render_404
-    render file: 'public/404.html', status: :not_found
+  def redirect_to_404
+    redirect_to '/public/404.html', status: '302'
   end
 
   def render_500
